@@ -2356,13 +2356,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	
 	//Sport
-	fastball: {
+	fourseamfastball: {
 		num: 709,
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Fastball",
+		name: "Four-seam Fastball",
 		pp: 20,
 		priority: 1,
 		flags: {bullet: 1, protect: 1, mirror: 1},
