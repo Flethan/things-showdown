@@ -239,6 +239,7 @@ export class Pokemon {
 	duringMove: boolean;
 
 	weighthg: number;
+	heightdm: number;
 	speed: number;
 	abilityOrder: number;
 
@@ -427,6 +428,7 @@ export class Pokemon {
 		this.duringMove = false;
 
 		this.weighthg = 1;
+		this.heightdm = 1;
 		this.speed = 0;
 		/**
 		 * Determines the order in which redirect abilities like Lightning Rod
@@ -514,6 +516,7 @@ export class Pokemon {
 		const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
 		if (boost > 6) boost = 6;
 		if (boost < -6) boost = -6;
+		if (statName === 'spe' && this.battle.field.isWeather(['windy'])) boost = 0;
 		if (boost >= 0) {
 			stat = Math.floor(stat * boostTable[boost]);
 		} else {
@@ -543,7 +546,7 @@ export class Pokemon {
 		}
 
 		// stat boosts
-		if (!unboosted) {
+		if (!unboosted && !(statName === 'spe' && this.battle.field.isWeather(['windy']))) {
 			const boosts = this.battle.runEvent('ModifyBoost', this, null, null, {...this.boosts});
 			let boost = boosts[statName];
 			const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
@@ -592,6 +595,11 @@ export class Pokemon {
 	getWeight() {
 		const weighthg = this.battle.runEvent('ModifyWeight', this, null, null, this.weighthg);
 		return Math.max(1, weighthg);
+	}
+	
+	getHeight() {
+		const heightdm = this.battle.runEvent('ModifyHeight', this, null, null, this.heightdm);
+		return Math.max(1, heightdm);
 	}
 
 	getMoveData(move: string | Move) {
@@ -1134,6 +1142,7 @@ export class Pokemon {
 
 		this.transformed = true;
 		this.weighthg = pokemon.weighthg;
+		this.heightdm = pokemon.heightdm;
 
 		const types = pokemon.getTypes(true);
 		this.setType(pokemon.volatiles['roost'] ? pokemon.volatiles['roost'].typeWas : types, true);
@@ -1226,6 +1235,7 @@ export class Pokemon {
 		this.addedType = species.addedType || '';
 		this.knownType = true;
 		this.weighthg = species.weighthg;
+		this.heightdm = species.heightdm;
 
 		const stats = this.battle.spreadModify(this.species.baseStats, this.set);
 		if (this.species.maxHP) stats.hp = this.species.maxHP;
@@ -1479,7 +1489,31 @@ export class Pokemon {
 	/** Unlike clearStatus, gives cure message */
 	cureStatus(silent = false) {
 		if (!this.hp || !this.status) return false;
+		if (this.hasAbility('blind')) {
+			this.battle.add('-immune', this, '[from] ability: Blind');
+			return false;
+		}
 		this.battle.add('-curestatus', this, this.status, silent ? '[silent]' : '[msg]');
+		if (this.status === 'prone') {
+			this.removeVolatile('prone');
+			this.battle.add('-end', this, 'prone');
+		}
+		if (this.status === 'banished') {
+			this.removeVolatile('banished');
+			this.battle.add('-end', this, 'banished');
+		}
+		if (this.status === 'blinded' && !this.hasAbility('blind')) {
+			this.removeVolatile('blinded');
+			this.battle.add('-end', this, 'blinded');
+		}
+		if (this.status === 'pressurized') {
+			this.removeVolatile('pressurized');
+			this.battle.add('-end', this, 'pressurized');
+		}
+		if (this.status === 'fluctuant') {
+			this.removeVolatile('fluctuant');
+			this.battle.add('-end', this, 'fluctuant');
+		}
 		if (this.status === 'slp' && !this.hasAbility('comatose') && this.removeVolatile('nightmare')) {
 			this.battle.add('-end', this, 'Nightmare', '[silent]');
 		}
@@ -1557,6 +1591,9 @@ export class Pokemon {
 	 * Unlike cureStatus, does not give cure message
 	 */
 	clearStatus() {
+		if (this.hasAbility('blind')) {
+			return false;
+		}
 		return this.setStatus('');
 	}
 

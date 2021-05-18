@@ -167,6 +167,14 @@ export const DefaultText: {[k: string]: DefaultText} = {
 	},
 
 	// statuses
+	prone: {
+		start: "  [POKEMON] was knocked prone!",
+		startFromItem: "  [POKEMON] fell over from the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already knocked prone!",
+		end: "  [POKEMON] got back up!",
+		endFromItem: "  [POKEMON]'s [ITEM] helped it back up!",
+		reduced: "  [POKEMON] can't get back up!",
+	},
 	brn: {
 		start: "  [POKEMON] was burned!",
 		startFromItem: "  [POKEMON] was burned by the [ITEM]!",

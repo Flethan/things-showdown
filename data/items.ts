@@ -1,4 +1,592 @@
 export const Items: {[itemid: string]: ItemData} = {
+// NEW STUFF
+	
+	jellytreat: {
+		name: "Jelly Treat",
+		spritenum: 770,
+		fling: {
+			basePower: 10,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Arthropod') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -219,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	extradirtydirt: {
+		name: "Extra Dirty Dirt",
+		spritenum: 771,
+		fling: {
+			basePower: 10,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Dirt') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -220,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	fishscale: {
+		name: "Fish Scale",
+		spritenum: 772,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Fish') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -221,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	greens: {
+		name: "Greens",
+		spritenum: 773,
+		fling: {
+			basePower: 10,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Green') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -222,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	hdictionary: {
+		name: "H Dictionary",
+		spritenum: 774,
+		fling: {
+			basePower: 40,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'H') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -223,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	hairbrush: {
+		name: "Hairbrush",
+		spritenum: 775,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Hair') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -224,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	machineoil: {
+		name: "Machine Oil",
+		spritenum: 776,
+		fling: {
+			basePower: 30,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Industrial') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -225,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	spraybottle: {
+		name: "Spray Bottle",
+		spritenum: 777,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Liquid') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -226,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	tuningfork: {
+		name: "Tuning Fork",
+		spritenum: 778,
+		fling: {
+			basePower: 30,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Music') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -227,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	littleshadow: {
+		name: "Little Shadow",
+		spritenum: 779,
+		fling: {
+			basePower: 10,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Night') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -228,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	nothing: {
+		name: "Nothing",
+		spritenum: 780,
+		fling: {
+			basePower: 0,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'No') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -229,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	beaker: {
+		name: "Beaker",
+		spritenum: 781,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Science') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -230,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	rubberball: {
+		name: "Rubber Ball",
+		spritenum: 782,
+		fling: {
+			basePower: 30,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Sport') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -231,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	sharpsword: {
+		name: "Sharp Sword",
+		spritenum: 783,
+		fling: {
+			basePower: 50,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Sword') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -232,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	thermometer: {
+		name: "Thermometer",
+		spritenum: 784,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Temperature') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -233,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	pocketwatch: {
+		name: "Pocket Watch",
+		spritenum: 785,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Time') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -234,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	barometer: {
+		name: "Barometer",
+		spritenum: 786,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Weather') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -235,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	yellowstuff: {
+		name: "Yellow Stuff",
+		spritenum: 787,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Yellow') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -236,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	
+	environmentalaccord: {
+		name: "Environmental Accord",
+		spritenum: 788,
+		fling: {
+			basePower: 10,
+		},
+		num: -237,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	blindfold: {
+		name: "Blindfold",
+		spritenum: 790,
+		fling: {
+			basePower: 10,
+		},
+		onStart (pokemon) {
+			pokemon.trySetStatus('blinded', pokemon);
+		},
+		num: -239,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	nonslipshoes: {
+		name: "Non-Slip Shoes",
+		spritenum: 791,
+		fling: {
+			basePower: 10,
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status === 'prone') {
+				pokemon.cureStatus();
+				pokemon.useItem();
+			}
+		},
+		num: -240,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	yellowsafetyvest: {
+		name: "Yellow Safety Vest",
+		spritenum: 792,
+		fling: {
+			basePower: 20,
+		},
+		num: -241,
+		gen: 8,
+		// Hazard Immunity implemented in moves.js
+		isNonstandard: "Thing",
+	},
+	dimensionaltether: {
+		name: "Dimensional Tether",
+		spritenum: 793,
+		fling: {
+			basePower: 80,
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status === 'banished') {
+				pokemon.cureStatus();
+				pokemon.useItem();
+			}
+		},
+		num: -242,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	
+	infinityiumz: {
+		name: "Infinityium Z",
+		spritenum: 751,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Infinity",
+		forcedForme: "Arceus-Water",
+		num: -200,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	arthropodiumz: {
+		name: "Arthropodium Z",
+		spritenum: 752,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Arthropod",
+		forcedForme: "Arceus-Water",
+		num: -201,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	dirtiumz: {
+		name: "Dirtium Z",
+		spritenum: 753,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Dirt",
+		forcedForme: "Arceus-Water",
+		num: -202,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	fishiumz: {
+		name: "Fishium Z",
+		spritenum: 754,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Fish",
+		forcedForme: "Arceus-Water",
+		num: -203,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	greeniumz: {
+		name: "Greenium Z",
+		spritenum: 755,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Green",
+		forcedForme: "Arceus-Water",
+		num: -204,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	hiumz: {
+		name: "Hium Z",
+		spritenum: 756,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "H",
+		forcedForme: "Arceus-Water",
+		num: -205,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	hairiumz: {
+		name: "Hairium Z",
+		spritenum: 757,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Hair",
+		forcedForme: "Arceus-Water",
+		num: -206,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	industrialiumz: {
+		name: "Industrialium Z",
+		spritenum: 758,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Industrial",
+		forcedForme: "Arceus-Water",
+		num: -207,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	liquidiumz: {
+		name: "Liquidium Z",
+		spritenum: 759,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Liquid",
+		forcedForme: "Arceus-Water",
+		num: -208,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	musiciumz: {
+		name: "Musicium Z",
+		spritenum: 760,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Music",
+		forcedForme: "Arceus-Water",
+		num: -209,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	nightiumz: {
+		name: "Nightium Z",
+		spritenum: 761,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Night",
+		forcedForme: "Arceus-Water",
+		num: -210,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	noiumz: {
+		name: "Noium Z",
+		spritenum: 762,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "No",
+		forcedForme: "Arceus-Water",
+		num: -211,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	scienceiumz: {
+		name: "Scienceium Z",
+		spritenum: 763,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Science",
+		forcedForme: "Arceus-Water",
+		num: -212,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	sportiumz: {
+		name: "Sportium Z",
+		spritenum: 764,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Sport",
+		forcedForme: "Arceus-Water",
+		num: -213,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	swordiumz: {
+		name: "Swordium Z",
+		spritenum: 765,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Sword",
+		forcedForme: "Arceus-Water",
+		num: -214,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	temperatureiumz: {
+		name: "Temperatureium Z",
+		spritenum: 766,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Temperature",
+		forcedForme: "Arceus-Water",
+		num: -215,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	timeiumz: {
+		name: "Timeium Z",
+		spritenum: 767,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Time",
+		forcedForme: "Arceus-Water",
+		num: -216,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	weatheriumz: {
+		name: "Weatherium Z",
+		spritenum: 768,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Weather",
+		forcedForme: "Arceus-Water",
+		num: -217,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	yellowiumz: {
+		name: "yellowium Z",
+		spritenum: 769,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Yellow",
+		forcedForme: "Arceus-Water",
+		num: -218,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	
+// BASE GAME	
 	abomasite: {
 		name: "Abomasite",
 		spritenum: 575,

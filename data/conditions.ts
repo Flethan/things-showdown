@@ -1,4 +1,695 @@
-export const Conditions: {[k: string]: ConditionData} = {
+export const Conditions: {[k: string]: ConditionData} =  {
+
+// NEW STUFF
+// Moves
+	calibration: {
+		name: 'calibration',
+		noCopy: true, // doesn't get copied by Baton Pass
+		onStart(pokemon, source, effect) {
+			if (effect && (['imposter', 'psychup', 'transform'].includes(effect.id))) {
+				this.add('-start', pokemon, 'move: Apex-Calibration', '[silent]');
+			} else {
+				this.add('-start', pokemon, 'move: Apex-Calibration');
+			}
+		},
+		onAnyInvulnerabilityPriority: 1,
+		onAnyInvulnerability(target, source, move) {
+			if (move && source === this.effectState.target && (move.category === 'Physical' || move.category === 'Special')) return 0;
+		},
+		onSourceAccuracy(accuracy, target, source, move) {
+			if (move.category === 'Physical' || move.category === 'Special') return true;
+			return accuracy;
+		},
+		onModifyCritRatio(critRatio) {
+			return 5;
+		},
+		onModifyMove(move) {
+			if (move.drain) {
+				move.drain = [(2 * move.drain[0]) + move.drain[1], 2 * move.drain[1]];
+			} else {
+				move.drain = [1, 2];
+			}
+		},
+		onAfterMove(pokemon, target, move) {
+			if (move.category === 'Physical' || move.category === 'Special') {
+				this.add('-end', pokemon, 'move: Apex-Calibration', '[silent]');
+				pokemon.removeVolatile('calibration');
+			}
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'move: Apex-Calibration', '[silent]');
+		},
+	},
+	beamfield: {
+		// this is a side condition
+		name: 'beamfield',
+		onStart(side) {
+			this.add('-sidestart', side, 'move: Beam Field');
+		},
+		onSwitchIn(pokemon) {
+			if (pokemon.hasItem('yellowsafetyvest')) return;
+			//Flethan - Copied from Steelsurge: 
+			// Ice Face and Disguise correctly get typed damage from Stealth Rock					?
+			// because Stealth Rock bypasses Substitute.														?
+			// They don't get typed damage from Beam Field because Beam Scatter doesn't,	?
+			// so we're going to test the damage of a Yellow-type Stealth Rock instead.			?
+			const yellowHazard = this.dex.getActiveMove('Stealth Rock');
+			yellowHazard.type = 'Yellow';
+			const typeMod = this.clampIntRange(pokemon.runEffectiveness(yellowHazard), -6, 6);
+			this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+		},
+	},
+	fireworked: {
+		name: 'fireworked',
+		noCopy: true, // doesn't get copied by Baton Pass
+		onStart(pokemon, source, effect) {
+			if (effect && (['imposter', 'psychup', 'transform'].includes(effect.id))) {
+				this.add('-start', pokemon, 'move: Fireworks\u0021', '[silent]');
+			} else {
+				this.add('-start', pokemon, 'move: Fireworks\u0021');
+			}
+			this.effectState.multiplier = 1.5;
+		},
+		onRestart(target, source) {
+			this.effectState.multiplier *= 1.5;
+			this.add('-start', target, 'move: Fireworks\u0021');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'move: Fireworks\u0021', '[silent]');
+		},
+		onDisableMove(pokemon) {
+			for (const moveSlot of pokemon.moveSlots) {
+				const move = this.dex.moves.get(moveSlot.id);
+				if (move.category === 'Status') {
+					pokemon.disableMove(moveSlot.id);
+				}
+			}
+		},
+		onBeforeMovePriority: 5,
+		onBeforeMove(attacker, defender, move) {
+			if (!move.isZ && !move.isMax && move.category === 'Status') {
+				this.add('cant', attacker, 'move: Fireworks\u0021', move);
+				return false;
+			}
+		},
+		onBasePowerPriority: 10,
+		onBasePower(basePower) {
+			this.debug('Boosting from Fireworks: ' + this.effectState.multiplier);
+			return this.chainModify(this.effectState.multiplier);
+		},
+	},
+	vetoed: {
+		name: 'vetoed',
+		noCopy: true, // doesn't get copied by Baton Pass
+		onStart(pokemon, source, effect) {
+			if (effect && (['imposter', 'psychup', 'transform'].includes(effect.id))) {
+				this.add('-start', pokemon, 'move: Vetoed', '[silent]');
+			} else {
+				this.add('-start', pokemon, 'move: Vetoed', '[silent]');
+			}
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'move: Vetoed', '[silent]');
+		},
+	},
+	
+// Statuses
+	prone: {
+		name: 'prone',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			this.add('-start', target, 'prone');
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'prone', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'prone');
+			}
+		},
+		onBeforeMovePriority: 10,
+		onBeforeMove(pokemon, target, move) {
+			if (move.category === 'Status') {
+				pokemon.cureStatus();
+				return;
+			}
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'prone');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'prone');
+		},
+		// Damage reduction is handled directly in the sim/battle.js damage function
+	},
+	banished: {
+		name: 'banished',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			this.add('-start', target, 'banished');
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'banished', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
+				this.add('-status', target, 'banished', '[from] move: ' + sourceEffect.name);
+			} else {
+				this.add('-status', target, 'banished');
+			}
+			// 1-3 turns
+			this.effectState.startTime = this.random(2, 5);
+			this.effectState.time = this.effectState.startTime;
+		},
+		onBeforeMovePriority: 10,
+		onBeforeMove(pokemon, target, move) {
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+				return;
+			}
+			this.add('cant', pokemon, 'banished');
+			if (move.banishedUsable) {
+				return;
+			}
+			return false;
+		},
+		onInvulnerability(target, source, move) {
+			if (move.hitsBanished) {
+				return;
+			}
+			return false;
+		},
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.id === 'noescape') {
+				return this.chainModify(2);
+			}
+		},
+		onResidual(pokemon) {
+			this.damage(pokemon.baseMaxhp / 8);
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'banished');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'banished');
+		},
+	},
+	blinded: {
+		name: 'blinded',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			this.add('-start', target, 'blinded');
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'blinded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'blinded');
+			}
+		},
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy, target, source, move) {
+			if (typeof accuracy === 'number') {
+				return this.chainModify(0.75);
+			}
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'blinded');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'blinded');
+		},
+	},
+	pressurized: {
+		name: 'pressurized',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			this.add('-start', target, 'pressurized');
+			this.field.addPseudoWeather('pressurizer');
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'pressurized', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'pressurized');
+			}
+			this.effectState.startTime = 3
+			this.effectState.time = this.effectState.startTime;
+		},
+		onResidual(pokemon) {
+			if (this.field.getPseudoWeather('hadalzone')) return;
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+				return;
+			}
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'pressurized');
+			this.effectState.time = this.effectState.startTime;
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'pressurized');
+		},
+	},
+	pressurizer: {
+		onResidualOrder: 9,
+		onResidual(targetSide) {
+			let pressureMod = 1;
+			if(this.field.getWeather().id === 'underwater') {
+				pressureMod = 2;
+			}
+			for (const side of this.sides) {
+				for (const ally of side.pokemon) {
+					if (ally.status !== 'pressurized') continue;
+					if (ally.isActive && !this.field.getPseudoWeather('hadalzone')) continue;
+					if (ally.fainted || !ally.hp) continue;
+					if (ally.ability === 'highpressure') {
+						this.add('-activate', ally, 'ability: High Pressure');
+						this.add('-message', `${ally.name} was healed by pressurized!`);
+						let collateral = this.clampIntRange(ally.baseMaxhp / (8 / pressureMod), 1);
+						if (collateral >= (ally.baseMaxhp - ally.hp)) collateral = (ally.baseMaxhp - ally.hp);
+						this.directHeal(collateral, ally);
+						if (ally.hp === ally.baseMaxhp) ally.cureStatus();
+					} else {
+						this.add('-message', `${ally.name} was hurt by pressurized!`);
+						let collateral = this.clampIntRange(ally.baseMaxhp / (8 / pressureMod), 1);
+						if (collateral >= ally.hp) collateral = ally.hp - 1;
+						this.directDamage(collateral, ally);
+						if (ally.hp === 1) ally.cureStatus();
+					}
+				}
+			}
+		},
+	},
+	fluctuant: {
+		name: 'fluctuant',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			this.add('-start', target, 'fluctuant');
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'fluctuant', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
+				this.add('-status', target, 'fluctuant', '[from] move: ' + sourceEffect.name);
+			} else {
+				this.add('-status', target, 'fluctuant');
+			}
+			// 1-3 turns
+			this.effectState.startTime = this.random(2, 5);
+			this.effectState.time = this.effectState.startTime;
+		},
+		onResidual(pokemon) {
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+				return;
+			}
+			let fluctMod = 1;
+			if(this.field.getWeather().id === 'hot' || this.field.getWeather().id === 'cold') {
+				fluctMod = 2;
+			}
+
+			let stats: BoostID[] = [];
+			const boost: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in pokemon.boosts) {
+				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				if (pokemon.boosts[statPlus] < 6) {
+					stats.push(statPlus);
+				}
+			}
+			let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = 1 * fluctMod;
+
+			stats = [];
+			let statMinus1: BoostID;
+			for (statMinus1 in pokemon.boosts) {
+				if (statMinus1 === 'accuracy' || statMinus1 === 'evasion') continue;
+				if (pokemon.boosts[statMinus1] > -6 && statMinus1 !== randomStat) {
+					stats.push(statMinus1);
+				}
+			}
+			randomStat = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = -1 * fluctMod;
+
+			stats = [];
+			let statMinus2: BoostID;
+			for (statMinus2 in pokemon.boosts) {
+				if (statMinus2 === 'accuracy' || statMinus2 === 'evasion') continue;
+				if (pokemon.boosts[statMinus2] > -6 && statMinus2 !== randomStat) {
+					stats.push(statMinus2);
+				}
+			}
+			randomStat = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = -1 * fluctMod;
+
+			this.boost(boost);
+		},
+		onSwitchIn(pokemon) {
+			this.add('-start', pokemon, 'fluctuant');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'fluctuant');
+		},
+	},
+	wounded: {
+		name: 'wounded',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'wounded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'wounded');
+			}
+		},
+		onModifyDefPriority: 10,
+		onModifyDef(def, pokemon) {
+			return this.modify(def, 0.5);
+		},
+		onResidualOrder: 9,
+		onResidual(pokemon) {
+			this.damage(pokemon.baseMaxhp / 8);
+		},
+	},
+	
+// Environmental Factors (New Weather)
+	yellowish: {
+		name: 'Yellowish',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		onWeatherModifyDamage(damage, attacker, defender, move) {
+			if (defender.hasItem('utilityumbrella')) return;
+			if (move.type === 'Green') {
+				this.debug('yellow green suppress');
+				return this.chainModify(0.5);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Yellowish', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Yellowish');
+			}
+		},
+		onModifyMove(move, pokemon, target) {
+			if (target?.effectiveWeather() === 'yellowish' && move.type === 'Yellow') move.accuracy = true;
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Yellowish', '[upkeep]');
+			if (this.field.isWeather('yellowish')) this.eachEvent('Weather');
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	locustswarm: {
+		name: 'Locust Swarm',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifySpe(spe, pokemon) {
+			if (pokemon.hasType('Arthropod') && this.field.isWeather('locustswarm')) {
+				return this.modify(spe, 1.5);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Locust Swarm', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Locust Swarm');
+			}
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Locust Swarm', '[upkeep]');
+			if (this.field.isWeather('Locust Swarm')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
+			this.damage(target.maxhp * Math.pow(2, typeMod) / 16);
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	nighttime: {
+		name: 'Nighttime',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifyAccuracyPriority: -1,
+		onModifyAccuracy(accuracy, target) {
+			if (typeof accuracy !== 'number') return;
+			if (target?.hasType('Night')) {
+				this.debug('Nighttime - decreasing accuracy');
+				return this.chainModify(0.8);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Nighttime', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Nighttime');
+			}
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Nighttime', '[upkeep]');
+			if (this.field.isWeather('Nighttime')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (target.hasType('Night')) {
+				this.heal(target.baseMaxhp / 16);
+			}
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	windy: {
+		name: 'Windy',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5 || source.hasAbility('lassihnfliegen')) this.effectState.duration = 0;
+				this.add('-weather', 'Windy', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Windy');
+			}
+			this.hint("Stat changes to speed are ignored while it is windy!"); 
+			//Done in pokemon.js
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (move?.type === 'Weather') return priority + 1;
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Windy', '[upkeep]');
+			if (this.field.isWeather('windy')) this.eachEvent('Weather');
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	hot: {
+		name: 'Hot',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onWeatherModifyDamage(damage, attacker, defender, move) {
+			if (defender.hasItem('utilityumbrella')) return;
+			if (move.type === 'Temperature') {
+				this.debug('hot temperature boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5 || source.hasAbility('ahotone')) this.effectState.duration = 0;
+				this.add('-weather', 'Hot', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Hot');
+			}
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Hot', '[upkeep]');
+			if (this.field.isWeather('Hot')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (target.hasType('Temperature')) {
+				this.boost({spe: 1}, target);
+			}
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	cold: {
+		name: 'Cold',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifyDefPriority: 10,
+		onModifyDef(def, pokemon) {
+			if (pokemon.hasType('Temperature') && this.field.isWeather('cold')) {
+				return this.modify(def, 1.5);
+			}
+		},
+		onModifySpDPriority: 10,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.hasType('Temperature') && this.field.isWeather('cold')) {
+				return this.modify(spd, 1.5);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Cold', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Cold');
+			}
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Cold', '[upkeep]');
+			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (!target.hasType('Temperature')) {
+				this.boost({spe: -1}, target);
+			}
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	timedilation: {
+		name: 'Time Dilation',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		onModifySpe(spe, pokemon) {
+			if (!pokemon.hasType('Time')) {
+				return this.chainModify(0.25);
+			}
+		},
+		onWeatherModifyDamage(damage, attacker, defender, move) {
+			if (defender.hasItem('utilityumbrella')) return;
+			if (move.type === 'Time' && (defender.newlySwitched || this.queue.willMove(defender))) {
+				this.debug('time dilation boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5 || source.hasAbility('sinningunapuro')) this.effectState.duration = 0;
+				this.add('-weather', 'Time Dilation', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Time Dilation');
+			}
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Time Dilation', '[upkeep]');
+			if (this.field.isWeather('Time Dilation')) this.eachEvent('Weather');
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+	underwater: {
+		name: 'Underwater',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifyAccuracyPriority: -1,
+		onModifyAccuracy(accuracy, target, source, move) {
+			if (typeof accuracy !== 'number') return;
+			if (move.type === 'Liquid') {
+				this.debug('Underwater - increasing accuracy');
+				return this.chainModify(1.2);
+			}
+		},
+		onStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Underwater', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Underwater');
+			}
+		},
+		onImmunity(type, pokemon) {
+			if (pokemon.hasItem('utilityumbrella')) return;
+			if (type === 'prone') return false;
+		},
+		onResidualOrder: 1,
+		onResidual() {
+			this.add('-weather', 'Underwater', '[upkeep]');
+			if (this.field.isWeather('Underwater')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			this.damage(target.baseMaxhp / 16);
+			if (target.hasType('Fish')) {
+				this.heal(target.baseMaxhp / 16);
+			}
+		},
+		onEnd() {
+			this.add('-weather', 'none');
+		},
+	},	
+
+	
+// BASE GAME
 	brn: {
 		name: 'brn',
 		effectType: 'Status',

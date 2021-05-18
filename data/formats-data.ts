@@ -1,4 +1,483 @@
 export const FormatsData: {[k: string]: SpeciesFormatsData} = {
+	
+// NEW STUFF
+	hubaby: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	hubert: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	swordhubert: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	anemoeba: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	kiteolus: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	stratosoar: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	empty: {
+		isNonstandard: "ThingMeme",
+		tier: "Thing",
+	},
+	triangl3: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	t3trahedron: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	p3ntachoron: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	l3mniscangl: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	meltipillar: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	puddlefly: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	djecridid: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	gryllague: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	schisteka: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	pescadestrian: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	motoriscis: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	aviachthys: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	angrybeehive: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	anomallish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	anomallamalocarish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	anomallolash: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	afishal: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	offishal: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	bassozefish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	clawtheod: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	lobviathan: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	starrvae: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	moonth: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sollep: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	lemon: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	e1: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	fishish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	goray: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	congeel: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sarcopharyn: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	demerfin: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	anglock: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	grenadire: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	toastie: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	microtron: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	yellosnow: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	yellowater: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	protosol: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	solor: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sollit: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	hellow: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	godbye: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	harry: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	horse: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	horseluigi: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	connector: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	connectphore: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	omnectivore: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	fsh: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	clanksy: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	clanksygreenstripe: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	loamuffin: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	clayke: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	whether: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	nighreto: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	albeedle: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	citrinity: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	reuleado: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	swordguy: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	guysword: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	hmug: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	moppit: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sweepit: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	manitsa: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	undulux: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	bathymney: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	abyssulfo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	dirtle: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sootortoise: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	tortesecrate: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	cheleaf: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	pristudine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	despacio: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	crescitten: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	crescent: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	cramble: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	pokarkinos: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	crabingo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	carcinizlot: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	fjean: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	soapy: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sudzerpent: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sudsquire: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	akimbonk: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	hydrolo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	heliquet: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	splattom: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonsprite: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonspriteorange: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonspriteyellow: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonspritegreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonspriteblue: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sonspritepurple: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	ossoligo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	osteoraptor: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	achrososaur: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	neunluft: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	algie: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	frogreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	botanoad: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	honey: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	hackit: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	notant: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	chordant: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	maestreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	magmegg: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	scramblaa: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	sunnoehoe: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	perpetronome: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	snowworm: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	glaciallid: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+
+// BASE GAME
+	bobasaur: {
+		isNonstandard: "ThingMeme"
+	},
 	bulbasaur: {
 		tier: "LC",
 	},

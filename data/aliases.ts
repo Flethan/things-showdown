@@ -1,4 +1,9 @@
 export const Aliases: {[alias: string]: string} = {
+	//things
+	connectorred: "Connector",
+	connectphorered: "Connectphore",
+	connectphorepurple: "Connectphore",
+	
 	// formats
 	randbats: "[Gen 8] Random Battle",
 	uber: "[Gen 8] Ubers",

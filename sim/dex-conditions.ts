@@ -40,7 +40,7 @@ export interface EventMethods {
 	onEffectiveness?: MoveEventMethods['onEffectiveness'];
 	onFaint?: CommonHandlers['VoidEffect'];
 	onFlinch?: ((this: Battle, pokemon: Pokemon) => boolean | void) | boolean;
-	onFractionalPriority?: CommonHandlers['ModifierSourceMove'] | -0.1;
+	onFractionalPriority?: CommonHandlers['ModifierSourceMove'] | number;
 	onHit?: MoveEventMethods['onHit'];
 	onImmunity?: (this: Battle, type: string, pokemon: Pokemon) => void;
 	onLockMove?: string | ((this: Battle, pokemon: Pokemon) => void | string);

@@ -1,6 +1,55 @@
 // Note: These are the rules that formats use
 // The list of formats is stored in config/formats.js
 export const Rulesets: {[k: string]: FormatData} = {
+	
+	// New Rulesets
+	///////////////////////////////////////////////////////////////////
+	
+	nonicknameclause: {
+		effectType: 'ValidatorRule',
+		name: 'No Nickname Clause',
+		desc: "Prevents Things from having nicknames",
+		onValidateTeam(team, format) {
+			for (const set of team) {
+				const name = set.name;
+				if (name) {
+					if (name !== this.dex.species.get(set.species).baseSpecies) return [`Your Things cannot have nicknames.`];
+				}
+			}
+			// Illegality of impersonation of other species is
+			// hardcoded in team-validator.js, so we are done.
+		},
+	},
+	thingsonly: {
+		effectType: 'ValidatorRule',
+		name: 'Things Only',
+		desc: "Only allows Things",
+		onValidateSet(set, format) {
+			const species = this.dex.species.get(set.species || set.name);
+			if (species.num > -200) {
+				return [species.baseSpecies + " is not a Thing."];
+			}
+		},
+	},
+	oneinfinityonly: {
+		effectType: 'ValidatorRule',
+		name: 'One Infinity Only',
+		desc: "Only allows one Infinity evolution.",
+		onValidateTeam(team, format) {
+			let infinityCount = 0;
+			for (const set of team) {
+				if (set.species === 'L3mniscangl' || set.species === 'Reuleado') {
+					if (infinityCount > 0) {
+						return [
+							`You cannot have more than Infinity evolution on your team.`,
+						];
+					}
+					infinityCount++;
+				}
+			}
+			return [];
+		},
+	},
 
 	// Rulesets
 	///////////////////////////////////////////////////////////////////

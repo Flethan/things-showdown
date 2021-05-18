@@ -18,6 +18,7 @@ export class Field {
 	terrain: ID;
 	terrainState: EffectState;
 	pseudoWeather: {[id: string]: EffectState};
+	activeFlags: string[];
 
 	constructor(battle: Battle) {
 		this.battle = battle;
@@ -30,6 +31,7 @@ export class Field {
 		this.terrain = '';
 		this.terrainState = {id: ''};
 		this.pseudoWeather = {};
+		this.activeFlags = [];
 	}
 
 	toJSON(): AnyObject {

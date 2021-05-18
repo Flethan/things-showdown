@@ -1,4 +1,9 @@
 export const AbilitiesText: {[k: string]: AbilityText} = {
+	three: {
+		name: "Three",
+		shortDesc: "Every third turn in battle, this Pokemon's moves have 1.5x power.",
+		start: "[POKEMON] is channeling the power of 3!",
+	},
 	noability: {
 		name: "No Ability",
 		shortDesc: "Does nothing.",
@@ -1306,7 +1311,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Slow Start",
 		shortDesc: "On switch-in, this Pokemon's Attack and Speed are halved for 5 turns.",
 
-		start: "  [POKEMON] can't get it going!",
+		start: "  [POKEMON] can't get shit going!",
 		end: "  [POKEMON] finally got its act together!",
 	},
 	slushrush: {
