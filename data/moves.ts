@@ -2914,13 +2914,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sword",
 		contestType: "Clever",
 	},
-	quickdraw: {
+	quickdrawstrike: {
 		num: 1519,
 		accuracy: 100,
 		basePower: 40,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Quick Draw",
+		name: "Quick-Draw Strike",
 		pp: 15,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
