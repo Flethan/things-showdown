@@ -1035,25 +1035,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (pokemon.species.id !== 'undulux') forme = 'Undulux';
 				break;
 			}
-			if (pokemon.isActive && forme) {
-				pokemon.formeChange(forme, this.effect, false, '[msg]');
-			}
+			if (pokemon.isActive && forme) pokemon.formeChange(forme, this.effect, false, '[msg]');
 		},
 		onDamagingHit(damage, target, source, move) {
-			if (target.baseSpecies.baseSpecies !== 'Undulux' || target.transformed) return;
-			if (['hot', 'cold'].includes(target.effectiveWeather())) return;
-			let forme = null;
-			switch (move.category) {
-			case 'Special':
-				if (target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
-				break;
-			case 'Physical':
-				if (target.species.id !== 'undulux') forme = 'Undulux';
-				break;
-			}
-			if (target.isActive && forme) {
-				target.formeChange(forme, this.effect, false, '[msg]');
-			}
+			if (
+				target.baseSpecies.baseSpecies !== 'Undulux' || 
+				target.transformed ||
+				['hot', 'cold'].includes(target.effectiveWeather())
+			) return;
+			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') const forme = 'Undulux-Overheated';
+			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]')
 		},
 		name: "Superconductor",
 		rating: 2,
