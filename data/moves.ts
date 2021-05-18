@@ -3336,13 +3336,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					'assist', 'copycat', 'encore', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'sketch', 'sleeptalk', 'struggle', 'transform', 'timeloop'
 				];
 				let loopMove: Move | ActiveMove | null  = pokemon.lastMove;
-				if (!loopMove || pokemon.volatiles['dynamax']) return false;
+				if (!loopMove || pokemon.volatiles['dynamax']) return;
 				
 				if (loopMove.isMax && loopMove.baseMove) loopMove = this.dex.moves.get(loopMove.baseMove);
 				const moveIndex = pokemon.moves.indexOf(loopMove.id);
 				if (loopMove.isZ || noLoop.includes(loopMove.id) || !pokemon.moveSlots[moveIndex] || pokemon.moveSlots[moveIndex].pp <= 0) {
 					// it failed
-					return false;
+					return;
 				}
 				if (move.id !== loopMove.id) return loopMove.id;
 			},

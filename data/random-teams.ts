@@ -286,6 +286,328 @@ export class RandomTeams {
 		return move.id !== 'bodypress';
 	}
 
+	// THINGS
+	randomThingTeam(): RandomTeamsTypes.RandomSet[] {
+		const dex = this.dex;
+		const team = [];
+
+		const natures = Object.keys(this.dex.data.Natures);
+		const items = Object.keys(this.dex.data.Items);
+
+		// For Monotype NOTE: NotFlethan has hacked in the type pool to exclude the not new types.
+		const ruleTable = this.dex.formats.getRuleTable(this.format);
+		const isMonotype = ruleTable.has('sametypeclause');
+		const typePool = ['Arthropod', 'Dirt', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
+		const type = isMonotype ? this.sample(typePool) : this.forceMonotype;
+
+		const randomN = this.randomNThings(this.maxTeamSize, type);
+
+		for (let forme of randomN) {
+			let species = dex.species.get(forme);
+
+			// Random unique item
+			let item = '';
+			do {
+				item = this.sampleNoReplace(items);
+			} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
+
+			// Make sure forme is legal
+			if (species.battleOnly) {
+				if (typeof species.battleOnly === 'string') {
+					species = dex.species.get(species.battleOnly);
+				} else {
+					species = dex.species.get(this.sample(species.battleOnly));
+				}
+				forme = species.name;
+			}
+
+			// Make sure that a base forme does not hold any forme-modifier items.
+			let itemData = this.dex.items.get(item);
+			if (itemData.forcedForme && forme === this.dex.species.get(itemData.forcedForme).baseSpecies) {
+				do {
+					item = this.sampleNoReplace(items);
+					itemData = this.dex.items.get(item);
+				} while (
+					itemData.isNonstandard !== 'Thing' ||
+					(itemData.forcedForme && forme === this.dex.species.get(itemData.forcedForme).baseSpecies)
+				);
+			}
+
+			// Random legal ability
+			const abilities = Object.values(species.abilities).filter(a => this.dex.abilities.get(a).gen <= this.gen);
+			const ability: string = this.sample(abilities);
+
+			// Four random unique moves from the movepool
+			let pool = ['struggle'];
+			let learnset = this.dex.data.Learnsets[species.id]?.learnset;
+			if (learnset) {
+				pool = Object.keys(learnset).filter(
+					moveid => learnset![moveid].find(learned => learned.startsWith(String(this.gen)))
+				);
+			}
+			if (species.changesFrom) {
+				learnset = this.dex.data.Learnsets[toID(species.changesFrom)].learnset;
+				const basePool = Object.keys(learnset!).filter(
+					moveid => learnset![moveid].find(learned => learned.startsWith(String(this.gen)))
+				);
+				pool = [...new Set(pool.concat(basePool))];
+			}
+			
+			const moves = this.multipleSamplesNoReplace(pool, 4);
+
+			// Random EVs
+			const evs: StatsTable = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
+			const s: StatID[] = ["hp", "atk", "def", "spa", "spd", "spe"];
+			let evpool = 510;
+			do {
+				const x = this.sample(s);
+				const y = this.random(Math.min(256 - evs[x], evpool + 1));
+				evs[x] += y;
+				evpool -= y;
+			} while (evpool > 0);
+
+			// Random IVs
+			const ivs = {
+				hp: this.random(32),
+				atk: this.random(32),
+				def: this.random(32),
+				spa: this.random(32),
+				spd: this.random(32),
+				spe: this.random(32),
+			};
+
+			// Random nature
+			const nature = this.sample(natures);
+
+			// Level balance--calculate directly from stats rather than using some silly lookup table
+			const mbstmin = 1307; // Sunkern has the lowest modified base stat total, and that total is 807
+
+			let stats = species.baseStats;
+
+			// Modified base stat total assumes 31 IVs, 85 EVs in every stat
+			let mbst = (stats["hp"] * 2 + 31 + 21 + 100) + 10;
+			mbst += (stats["atk"] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats["def"] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats["spa"] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats["spd"] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats["spe"] * 2 + 31 + 21 + 100) + 5;
+
+			let level = Math.floor(100 * mbstmin / mbst); // Initial level guess will underestimate
+			if (level > 100) level = 100; // What's a 'sunkern'?
+
+			while (level < 100) {
+				mbst = Math.floor((stats["hp"] * 2 + 31 + 21 + 100) * level / 100 + 10);
+				// Since damage is roughly proportional to level
+				mbst += Math.floor(((stats["atk"] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats["def"] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor(((stats["spa"] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats["spd"] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor((stats["spe"] * 2 + 31 + 21 + 100) * level / 100 + 5);
+
+				if (mbst >= mbstmin) break;
+				level++;
+			}
+
+			// Random happiness
+			const happiness = this.random(256);
+
+			// Random shininess
+			const shiny = this.randomChance(1, 1024);
+
+			team.push({
+				name: species.baseSpecies,
+				species: species.name,
+				gender: species.gender,
+				item: item,
+				ability: ability,
+				moves: moves,
+				evs: evs,
+				ivs: ivs,
+				nature: nature,
+				level: level,
+				happiness: happiness,
+				shiny: shiny,
+			});
+		}
+
+		return team;
+	}
+
+	randomNThings(n: number, requiredType?: string, minSourceGen?: number) {
+		// Pick `n` random things--no repeats, even among formes
+		// Also need to either normalize for formes or select formes at random
+		const last = -500;
+
+		if (requiredType && !this.dex.types.get(requiredType).exists) {
+			throw new Error(`"${requiredType}" is not a valid type.`);
+		}
+
+		const pool: number[] = [];
+		for (const id in this.dex.data.FormatsData) {
+			if (
+				!this.dex.data.Pokedex[id] || 
+				this.dex.data.FormatsData[id].isNonstandard !== 'Thing'
+			) continue;
+			if (requiredType && !this.dex.data.Pokedex[id].types.includes(requiredType)) continue;
+			if (minSourceGen && (this.dex.data.Pokedex[id].gen || 8) < minSourceGen) continue;
+			const num = this.dex.data.Pokedex[id].num;
+			if (num > 0 || pool.includes(num)) continue;
+			if (num < last) break;
+			pool.push(num);
+		}
+
+		let teamsize = Math.min(n, pool.length);
+		const hasDexNumber: {[k: string]: number} = {};
+		for (let i = 0; i < teamsize; i++) {
+			const num = this.sampleNoReplace(pool);
+			hasDexNumber[num] = i;
+		}
+
+		const formes: string[][] = [];
+		for (const id in this.dex.data.Pokedex) {
+			if (!(this.dex.data.Pokedex[id].num in hasDexNumber)) continue;
+			const species = this.dex.species.get(id);
+			if (!formes[hasDexNumber[species.num]]) formes[hasDexNumber[species.num]] = [];
+			formes[hasDexNumber[species.num]].push(species.name);
+		}
+
+		const nThings = [];
+		for (let i = 0; i < teamsize; i++) {
+			if (!formes[i].length) {
+				throw new Error(`Invalid pokemon gen ${this.gen}: ${JSON.stringify(formes)} numbers ${JSON.stringify(hasDexNumber)}`);
+			}
+			nThings.push(this.sample(formes[i]));
+		}
+		return nThings;
+	}
+
+	randomHThingTeam(): PokemonSet[] {
+		const team = [];
+
+		const itemPool = Object.keys(this.dex.data.Items);
+		const abilityPool = Object.keys(this.dex.data.Abilities);
+		const movePool = Object.keys(this.dex.data.Moves);
+		const naturePool = Object.keys(this.dex.data.Natures);
+
+		const randomN = this.randomNThings(this.maxTeamSize, this.forceMonotype);
+
+		for (const forme of randomN) {
+			// Choose forme
+			const species = this.dex.species.get(forme);
+
+			// Random unique item
+			let item = '';
+			if (Math.random() >= 0.5) {
+				do {
+					item = this.sampleNoReplace(itemPool);
+				} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
+			} else {
+				do {
+					item = this.sampleNoReplace(itemPool);
+				} while (this.dex.items.get(item).gen > this.gen || this.dex.data.Items[item].isNonstandard);
+			}
+
+			// Random unique ability
+			let ability = 'None';
+			do {
+				ability = this.sampleNoReplace(abilityPool);
+			} while (this.dex.data.Abilities[ability].isNonstandard !== 'Thing');
+
+			// Random unique moves
+			const m = [];
+			let move;
+			let moveid;
+			do {
+				if (Math.random() >= 0.5) {
+					do {
+						moveid = this.sampleNoReplace(movePool);
+						move = this.dex.moves.get(moveid);
+					} while (move.gen <= this.gen && move.isNonstandard === 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'))
+				} else {
+					do {
+						moveid = this.sampleNoReplace(movePool);
+						move = this.dex.moves.get(moveid);
+					} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'))
+				}
+				m.push(moveid);
+			} while (m.length < 4);
+
+			// Random EVs
+			const evs = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
+			if (this.gen === 6) {
+				let evpool = 510;
+				do {
+					const x = this.sample(Dex.stats.ids());
+					const y = this.random(Math.min(256 - evs[x], evpool + 1));
+					evs[x] += y;
+					evpool -= y;
+				} while (evpool > 0);
+			} else {
+				for (const x of Dex.stats.ids()) {
+					evs[x] = this.random(256);
+				}
+			}
+
+			// Random IVs
+			const ivs: StatsTable = {
+				hp: this.random(32),
+				atk: this.random(32),
+				def: this.random(32),
+				spa: this.random(32),
+				spd: this.random(32),
+				spe: this.random(32),
+			};
+
+			// Random nature
+			const nature = this.sample(naturePool);
+
+			// Level balance
+			const mbstmin = 1307;
+			const stats = species.baseStats;
+			let mbst = (stats['hp'] * 2 + 31 + 21 + 100) + 10;
+			mbst += (stats['atk'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['def'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spa'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spd'] * 2 + 31 + 21 + 100) + 5;
+			mbst += (stats['spe'] * 2 + 31 + 21 + 100) + 5;
+			let level = Math.floor(100 * mbstmin / mbst);
+			while (level < 100) {
+				mbst = Math.floor((stats['hp'] * 2 + 31 + 21 + 100) * level / 100 + 10);
+				mbst += Math.floor(((stats['atk'] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats['def'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor(((stats['spa'] * 2 + 31 + 21 + 100) * level / 100 + 5) * level / 100);
+				mbst += Math.floor((stats['spd'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				mbst += Math.floor((stats['spe'] * 2 + 31 + 21 + 100) * level / 100 + 5);
+				if (mbst >= mbstmin) break;
+				level++;
+			}
+
+			// Random happiness
+			const happiness = this.random(256);
+
+			// Random shininess
+			const shiny = this.randomChance(1, 1024);
+
+			team.push({
+				name: species.baseSpecies,
+				species: species.name,
+				gender: species.gender,
+				item: item,
+				ability: ability,
+				moves: m,
+				evs: evs,
+				ivs: ivs,
+				nature: nature,
+				level: level,
+				happiness: happiness,
+				shiny: shiny,
+			});
+		}
+
+		return team;
+	}
+
+	// BASE GAME
 	randomCCTeam(): RandomTeamsTypes.RandomSet[] {
 		const dex = this.dex;
 		const team = [];
@@ -314,10 +636,6 @@ export class RandomTeams {
 				} else {
 					species = dex.species.get(this.sample(species.battleOnly));
 				}
-				forme = species.name;
-			} else if (species.requiredItems && !species.requiredItems.some(req => toID(req) === item)) {
-				if (!species.changesFrom) throw new Error(`${species.name} needs a changesFrom value`);
-				species = dex.species.get(species.changesFrom);
 				forme = species.name;
 			}
 
@@ -394,6 +712,7 @@ export class RandomTeams {
 			const mbstmin = 1307; // Sunkern has the lowest modified base stat total, and that total is 807
 
 			let stats = species.baseStats;
+
 			// If Wishiwashi, use the school-forme's much higher stats
 			if (species.baseSpecies === 'Wishiwashi') stats = Dex.species.get('wishiwashischool').baseStats;
 
