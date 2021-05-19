@@ -1039,7 +1039,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	tortesecrate: {
 		num: -372,
 		name: "Tortesecrate",
-		types: ["Dirt"],
+		types: ["Dirt", "Industrial"],
 		genderRatio: {M: 0.3, F: 0.7},
 		baseStats: {hp: 80, atk: 120, def: 50, spa: 100, spd: 40, spe: 65},
 		abilities: {0: "Black", 1: "Dusty", H: "Robust"},
