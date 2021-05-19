@@ -2165,10 +2165,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				return 5;
 			},
+			onImmunity(type) {
+				return false;
+			},
 			onEffectivenessPriority: -3,
 			onEffectiveness(typeMod, target, type, move) {
-				if (!typeMod || typeMod == 3) return 2; 
-				if (typeMod == 2) return 3;
+				if(!target.runImmunity(type)) return 1;
+				return -typeMod;
 			},
 			onModifyMovePriority: -5,
 			onModifyMove(move) {
