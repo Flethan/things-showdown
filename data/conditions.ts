@@ -489,7 +489,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5 || source.hasAbility('lassihnfliegen')) this.effectState.duration = 0;
+				if (source.hasAbility('lassihnfliegen')) this.effectState.duration = 0;
 				this.add('-weather', 'Windy', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Windy');
@@ -498,7 +498,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			//Done in pokemon.js
 		},
 		onModifyPriority(priority, pokemon, target, move) {
-			if (move?.type === 'Weather') return priority + 1;
+			if (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) return priority + 1;
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {

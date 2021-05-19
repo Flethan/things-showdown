@@ -300,6 +300,16 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	landscapingpermits: {
+		name: "Landscaping Permits",
+		spritenum: 789,
+		fling: {
+			basePower: 20,
+		},
+		num: -238,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 	blindfold: {
 		name: "Blindfold",
 		spritenum: 790,

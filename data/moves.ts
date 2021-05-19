@@ -1237,8 +1237,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('terrainextender')) {
-					return 8;
+				if (source?.hasItem('landscapingpermits')) {
+					return 10;
 				}
 				return 5;
 			},
@@ -1723,8 +1723,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('terrainextender')) {
-					return 8;
+				if (source?.hasItem('landscapingpermits')) {
+					return 10;
 				}
 				return 5;
 			},
