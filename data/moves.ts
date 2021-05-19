@@ -1264,7 +1264,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return this.chainModify(1.2);
 				}
 			},
-			onStart(battle, source, effect) {
+			onFieldStart(battle, source, effect) {
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Sudscape', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
@@ -1273,7 +1273,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
-			onEnd(side) {
+			onFieldEnd(side) {
 				this.add('-fieldend', 'Sudscape');
 			},
 		},
@@ -1942,7 +1942,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			
 			},
-			onStart(battle, source, effect) {
+			onFieldStart(battle, source, effect) {
 				this.field.activeFlags = [];
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Mystical Song', '[from] ability: ' + effect, '[of] ' + source);
@@ -1952,7 +1952,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
-			onEnd(side) {
+			onFieldEnd(side) {
 				this.field.activeFlags = [];
 				this.add('-fieldend', 'Mystical Song');
 			},
@@ -2167,8 +2167,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onEffectivenessPriority: -3,
 			onEffectiveness(typeMod, target, type, move) {
-				if (!typeMod || typeMod == 3) return 2; 
-				if (typeMod == 2) return 3;
+				if(!target.runImmunity(type)) return 1;
+				return -typeMod;
 			},
 			onModifyMovePriority: -5,
 			onModifyMove(move) {
@@ -2186,7 +2186,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return this.chainModify(1.2);
 				}
 			},
-			onStart(battle, source, effect) {
+			onFieldStart(battle, source, effect) {
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Null Land', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
@@ -2195,7 +2195,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
-			onEnd(side) {
+			onFieldEnd(side) {
 				this.add('-fieldend', 'Null Land');
 			},
 		},
