@@ -43,16 +43,11 @@ export const Conditions: {[k: string]: ConditionData} =  {
 	beamfield: {
 		// this is a side condition
 		name: 'beamfield',
-		onStart(side) {
+		onSideStart(side) {
 			this.add('-sidestart', side, 'move: Beam Field');
 		},
 		onSwitchIn(pokemon) {
 			if (pokemon.hasItem('yellowsafetyvest')) return;
-			//Flethan - Copied from Steelsurge: 
-			// Ice Face and Disguise correctly get typed damage from Stealth Rock					?
-			// because Stealth Rock bypasses Substitute.														?
-			// They don't get typed damage from Beam Field because Beam Scatter doesn't,	?
-			// so we're going to test the damage of a Yellow-type Stealth Rock instead.			?
 			const yellowHazard = this.dex.getActiveMove('Stealth Rock');
 			yellowHazard.type = 'Yellow';
 			const typeMod = this.clampIntRange(pokemon.runEffectiveness(yellowHazard), -6, 6);

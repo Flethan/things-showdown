@@ -404,12 +404,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (typeof move.accuracy !== 'number' || pokemon.hasItem('yellowsafetyvest')) return;
 				move.accuracy *= 0.8;
 			},
-			onStart(side) {
+			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Dust Cloud');
 			},
-			onResidualOrder: 21,
-			onResidualSubOrder: 1,
-			onEnd(side) {
+			onSideResidualOrder: 21,
+			onSideResidualSubOrder: 1,
+			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Dust Cloud');
 			},
 		},
@@ -1132,7 +1132,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'wetfloor',
 		condition: {
 			// this is a side condition
-			onStart(side) {
+			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Wet Floor');
 			},
 			onSwitchIn(pokemon) {
@@ -3422,12 +3422,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 			},
-			onStart(side) {
+			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Supercell');
 			},
-			onResidualOrder: 21,
-			onResidualSubOrder: 1,
-			onEnd(side) {
+			onSideResidualOrder: 21,
+			onSideResidualSubOrder: 1,
+			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Supercell');
 			},
 		},
