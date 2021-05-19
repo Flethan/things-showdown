@@ -2160,14 +2160,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('terrainextender')) {
-					return 8;
+				if (source?.hasItem('landscapingpermits')) {
+					return 10;
 				}
 				return 5;
 			},
-			onEffectivenessPriority: -3,
+			onNegateImmunity: false,
+			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
-				if(!target.runImmunity(type)) return 1;
+				// The effectiveness of Reheat on Temperature isn't reverted
+				if (move && move.id === 'reheat' && type === 'Temperature') return;
+				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
 			},
 			onModifyMovePriority: -5,

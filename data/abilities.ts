@@ -631,7 +631,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return null;
 			}
 		},
-		name: "Beta Function",
+		name: "\u03B2 Function",
 		rating: 5,
 		num: -225,
 	},
