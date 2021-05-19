@@ -2168,8 +2168,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onNegateImmunity: false,
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
-				// The effectiveness of Reheat on Temperature isn't reverted
-				if (move && move.id === 'reheat' && type === 'Temperature') return;
 				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
 			},
