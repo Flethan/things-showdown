@@ -1043,7 +1043,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				target.transformed ||
 				['hot', 'cold'].includes(target.effectiveWeather())
 			) return;
-			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') const forme = 'Undulux-Overheated';
+			let forme = null;
+			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
 			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]')
 		},
 		name: "Superconductor",
