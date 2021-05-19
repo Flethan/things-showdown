@@ -617,22 +617,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -217,
 	},
-	no: {
+	betafunction: {
 		isNonstandard: "Thing",
 		onTryHit(target, source, move) {
 			if (target === source || move.category === 'Status' || move.type === '???' || move.id === 'struggle') return;
 			if (move.id === 'skydrop' && !source.volatiles['skydrop']) return;
-			this.debug('No... immunity: ' + move.id);
+			this.debug('Beta Function immunity: ' + move.id);
 			if (target.runEffectiveness(move) <= 0) {
 				if (move.smartTarget) {
 					move.smartTarget = false;
 				} else {
-					this.add('-immune', target, '[from] ability: No...');
+					this.add('-immune', target, '[from] ability: Beta Function');
 				}
 				return null;
 			}
 		},
-		name: "No...",
+		name: "Beta Function",
 		rating: 5,
 		num: -225,
 	},
