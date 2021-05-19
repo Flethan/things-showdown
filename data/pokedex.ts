@@ -155,7 +155,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["No"],
 		gender: "N",
 		baseStats: {hp: 225, atk: 15, def: 25, spa: 75, spd: 45, spe: 9},
-		abilities: {0: "\u03B2 Function"},
+		abilities: {0: "Beta Function"},
 		heightm: 0.01,
 		weightkg: 0.01,
 		color: "Black",
