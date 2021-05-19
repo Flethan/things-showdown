@@ -257,23 +257,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	white: {
 		isNonstandard: "Thing",
 		onAfterMoveSecondary(target, source, move) {
-			if (!target.hp) return;
-			const attackType = move.type;
-			if (attackType === 'Infinity' || !target.isActive || move.effectType !== 'Move' || move.category === 'Status' || attackType === '???') return false;
-			const possibleTypes = [];
-			const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
-			for (const type in this.dex.data.TypeChart) {
-				if (skippedTypes.includes(type)) continue;
-				const typeCheck = this.dex.data.TypeChart[type].damageTaken[attackType];
-				if (typeCheck === 0 || typeCheck === 2 || typeCheck === 3) possibleTypes.push(type);
+			if (!target.hp || !target.isActive || move.effectType !== 'Move' || move.category === 'Status' || move.type === 'Infinity' || move.type === '???') return;
+			if (target.runEffectiveness(move) > 0) {
+				const possibleTypes = [];
+				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
+				for (const type in this.dex.data.TypeChart) {
+					if (skippedTypes.includes(type)) continue;
+					const typeCheck = this.dex.data.TypeChart[type].damageTaken[move.type];
+					if (typeCheck === 0 || typeCheck === 2 || typeCheck === 3) possibleTypes.push(type);
+				}
+				if (!possibleTypes.length) return false;
+				while (possibleTypes.length > 2) {
+					possibleTypes.splice(Math.floor(Math.random()*possibleTypes.length), 1);
+				}
+				if (!target.setType(possibleTypes)) return false;
+				this.add('-start', target, 'typechange', '[from] ability: White');
 			}
-			if (!possibleTypes.length) return false;
-			while (possibleTypes.length > 2) {
-				possibleTypes.splice(Math.floor(Math.random()*possibleTypes.length), 1);
-			}
-			if (!target.setType(possibleTypes)) return false;
-			this.add('-start', target, 'typechange', possibleTypes[0], '[from] ability: White');
-			
 		},
 		name: "White",
 		rating: 0.1,

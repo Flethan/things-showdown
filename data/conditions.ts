@@ -382,7 +382,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(0.5);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Yellowish', '[from] ability: ' + effect, '[of] ' + source);
@@ -393,12 +393,12 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onModifyMove(move, pokemon, target) {
 			if (target?.effectiveWeather() === 'yellowish' && move.type === 'Yellow') move.accuracy = true;
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Yellowish', '[upkeep]');
 			if (this.field.isWeather('yellowish')) this.eachEvent('Weather');
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -419,7 +419,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.modify(spe, 1.5);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Locust Swarm', '[from] ability: ' + effect, '[of] ' + source);
@@ -427,8 +427,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Locust Swarm');
 			}
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Locust Swarm', '[upkeep]');
 			if (this.field.isWeather('Locust Swarm')) this.eachEvent('Weather');
 		},
@@ -436,7 +436,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
 			this.damage(target.maxhp * Math.pow(2, typeMod) / 16);
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -460,7 +460,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(0.8);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Nighttime', '[from] ability: ' + effect, '[of] ' + source);
@@ -468,8 +468,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Nighttime');
 			}
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Nighttime', '[upkeep]');
 			if (this.field.isWeather('Nighttime')) this.eachEvent('Weather');
 		},
@@ -478,7 +478,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -492,7 +492,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			}
 			return 5;
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5 || source.hasAbility('lassihnfliegen')) this.effectState.duration = 0;
 				this.add('-weather', 'Windy', '[from] ability: ' + effect, '[of] ' + source);
@@ -505,12 +505,12 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move?.type === 'Weather') return priority + 1;
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Windy', '[upkeep]');
 			if (this.field.isWeather('windy')) this.eachEvent('Weather');
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -533,7 +533,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(1.5);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5 || source.hasAbility('ahotone')) this.effectState.duration = 0;
 				this.add('-weather', 'Hot', '[from] ability: ' + effect, '[of] ' + source);
@@ -541,8 +541,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Hot');
 			}
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Hot', '[upkeep]');
 			if (this.field.isWeather('Hot')) this.eachEvent('Weather');
 		},
@@ -551,7 +551,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.boost({spe: 1}, target);
 			}
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -579,7 +579,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.modify(spd, 1.5);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Cold', '[from] ability: ' + effect, '[of] ' + source);
@@ -587,8 +587,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Cold');
 			}
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Cold', '[upkeep]');
 			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
 		},
@@ -597,7 +597,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.boost({spe: -1}, target);
 			}
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -623,7 +623,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(1.5);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5 || source.hasAbility('sinningunapuro')) this.effectState.duration = 0;
 				this.add('-weather', 'Time Dilation', '[from] ability: ' + effect, '[of] ' + source);
@@ -631,12 +631,12 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Time Dilation');
 			}
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Time Dilation', '[upkeep]');
 			if (this.field.isWeather('Time Dilation')) this.eachEvent('Weather');
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
@@ -660,7 +660,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(1.2);
 			}
 		},
-		onStart(battle, source, effect) {
+		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Underwater', '[from] ability: ' + effect, '[of] ' + source);
@@ -672,8 +672,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			if (pokemon.hasItem('utilityumbrella')) return;
 			if (type === 'prone') return false;
 		},
-		onResidualOrder: 1,
-		onResidual() {
+		onFieldResidualOrder: 1,
+		onFieldResidual() {
 			this.add('-weather', 'Underwater', '[upkeep]');
 			if (this.field.isWeather('Underwater')) this.eachEvent('Weather');
 		},
@@ -683,7 +683,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
-		onEnd() {
+		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},	
