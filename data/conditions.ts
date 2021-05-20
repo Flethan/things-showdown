@@ -677,6 +677,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			if (target.hasType('Fish')) {
 				this.heal(target.baseMaxhp / 16);
 			}
+			if(target.status === 'prone') {
+				target.cureStatus();
+			}
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
