@@ -1,4 +1,52 @@
 export const MovesText: {[k: string]: MoveText} = {
+	// THINGS
+	pinch: {
+		name: "Pinch",
+		desc: "Has a 50% chance to make the target flinch.",
+		shortDesc: "50% chance to make the target flinch.",
+	},
+	sting: {
+		name: "Sting",
+		desc: "Has a higher chance for a critical hit.",
+		shortDesc: "High critical hit ratio.",
+	},
+	arthrobite: {
+		name: "Arthro-Bite",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
+	},
+	beemovee: {
+		name: "Bee Move E",
+		desc: "Has a 40% chance to lower the user's Special Attack by 1 stage.",
+		shortDesc: "40% chance to lower the user's Sp. Atk by 1.",
+	},
+	nuisancepest: {
+		name: "Nuisance Pest",
+		desc: "If this move is successful, the effects of Reflect, Light Screen, Aurora Veil, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, Sticky Web, Supercell, Dust Cloud, Wet Floor, and Beam Field end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, Sticky Web, Supercell, Dust Cloud, Wet Floor, and Beam Field end for the user's side. If there is a terrain active and this move is successful, the terrain will be cleared.",
+		shortDesc: "Clears terrain and hazards on both sides.",
+	},
+	swarm: {
+		name: "Swarm",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		shortDesc: "User switches out after damaging the target.",
+	},
+	scuttle: {
+		name: "Scuttle",
+		desc: "Raises the user's Speed and evasiveness by 1 stage.",
+		shortDesc: "Raises the user's Speed and evasiveness by 1. Usually goes last.",
+	},
+	ecdyse: {
+		name: "Ecdyse",
+		desc: "The user heals all its HP, but will take double damage until the end of its next turn. Raises the user's Defense and Special Defense by 1 stage at the end of its next turn. Fails if the user already has full HP.",
+		shortDesc: "User restores all HP, receives double damage for a turn, then boosts Def and Sp. Def by 1.",
+	},
+	summonlocusts: {
+		name: "Summon Locusts",
+		desc: "For 5 turns, the weather becomes Locust Swarm. At the end of each turn except the last, all active Pokemon lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are a Arhtropod type, or have the Magic Guard or Overcoat Abilities. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Locust Swarm.",
+		shortDesc: "For 5 turns, a plague of locusts descends on the battlefield.",
+	},
+
+	// REGULAR
 	"10000000voltthunderbolt": {
 		name: "10,000,000 Volt Thunderbolt",
 		desc: "Has a very high chance for a critical hit.",
