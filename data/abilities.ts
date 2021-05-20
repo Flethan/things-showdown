@@ -1682,7 +1682,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	chilled: {
 		isNonstandard: "Thing",
-		onModifySpe(spd, pokemon) {
+		onModifySpD(spd, pokemon) {
 			if (['cold'].includes(pokemon.effectiveWeather())) {
 				return this.chainModify(2);
 			}
