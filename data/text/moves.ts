@@ -33,17 +33,17 @@ export const MovesText: {[k: string]: MoveText} = {
 	scuttle: {
 		name: "Scuttle",
 		desc: "Raises the user's Speed and evasiveness by 1 stage.",
-		shortDesc: "Raises the user's Speed and evasiveness by 1. Usually goes last.",
+		shortDesc: "Raises the user's Speed and evasiveness by 1.",
 	},
 	ecdyse: {
 		name: "Ecdyse",
 		desc: "The user heals all its HP, but will take double damage until the end of its next turn. Raises the user's Defense and Special Defense by 1 stage at the end of its next turn. Fails if the user already has full HP.",
-		shortDesc: "User restores all HP, receives double damage for a turn, then boosts Def and Sp. Def by 1.",
+		shortDesc: "Restores HP, is vulnerable, then boosts defenses.",
 	},
 	summonlocusts: {
 		name: "Summon Locusts",
 		desc: "For 5 turns, the weather becomes Locust Swarm. At the end of each turn except the last, all active Pokemon lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are a Arhtropod type, or have the Magic Guard or Overcoat Abilities. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Locust Swarm.",
-		shortDesc: "For 5 turns, a plague of locusts descends on the battlefield.",
+		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
 
 	// REGULAR
