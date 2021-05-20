@@ -1,5 +1,15 @@
 export const MovesText: {[k: string]: MoveText} = {
 	// THINGS
+	deposition: {
+		name: "Deposition",
+		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
+		shortDesc: "Same type as user's primary type.",
+	},
+	emanation: {
+		name: "Emanation",
+		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
+		shortDesc: "Same type as user's primary type.",
+	},
 	pinch: {
 		name: "Pinch",
 		desc: "Has a 50% chance to make the target flinch.",
