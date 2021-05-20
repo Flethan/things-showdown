@@ -879,7 +879,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidualPriority: 99,
 		onResidual(pokemon) {
-			let environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation',];
+			let environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater',];
 			let tempfactors = ['hot', 'cold'];
 			if (environmentalfactors.includes(pokemon.effectiveWeather())) {
 				if (!tempfactors.includes(pokemon.effectiveWeather())) {

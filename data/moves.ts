@@ -1140,9 +1140,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-sideend', pokemon.side, 'move: Wet Floor', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('wetfloor');
 					return;
-				}
-				if (pokemon.hasItem('yellowsafetyvest')) return;
-				pokemon.trySetStatus('prone', pokemon.side.foe.active[0]);
+				} else if (pokemon.hasItem('yellowsafetyvest')) return;
+				else pokemon.trySetStatus('prone', pokemon.side.foe.active[0]);
 			},
 		},
 		secondary: null,
