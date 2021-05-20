@@ -39,6 +39,8 @@ type MoveEnforcementChecker = (
 // Moves that restore HP:
 const RecoveryMove = [
 	'healorder', 'milkdrink', 'moonlight', 'morningsun', 'recover', 'roost', 'shoreup', 'slackoff', 'softboiled', 'strengthsap', 'synthesis',
+
+	'bask', 'ecdyse', 'coagulate',
 ];
 // Moves that drop stats:
 const ContraryMoves = [
@@ -47,18 +49,26 @@ const ContraryMoves = [
 // Moves that boost Attack:
 const PhysicalSetup = [
 	'bellydrum', 'bulkup', 'coil', 'curse', 'dragondance', 'honeclaws', 'howl', 'poweruppunch', 'swordsdance',
+
+	'warmup',
 ];
 // Moves which boost Special Attack:
 const SpecialSetup = [
 	'calmmind', 'chargebeam', 'geomancy', 'nastyplot', 'quiverdance', 'tailglow',
+
+	'cosmicdust', 'brilliantfish', 'crescendo',
 ];
 // Moves that boost Attack AND Special Attack:
 const MixedSetup = [
 	'clangoroussoul', 'growth', 'happyhour', 'holdhands', 'noretreat', 'shellsmash', 'workup',
+
+	'primordialsmoke', 'depthvanish', 'feelinglucky',
 ];
 // Some moves that only boost Speed:
 const SpeedSetup = [
 	'agility', 'autotomize', 'flamecharge', 'rockpolish',
+
+	'scuttle', 'accelerate', 'accelerando',
 ];
 // Moves that shouldn't be the only STAB moves:
 const NoStab = [
@@ -66,10 +76,14 @@ const NoStab = [
 	'fakeout', 'firstimpression', 'flamecharge', 'flipturn', 'iceshard', 'icywind', 'incinerate', 'machpunch',
 	'meteorbeam', 'pluck', 'pursuit', 'quickattack', 'reversal', 'selfdestruct', 'skydrop', 'snarl', 'suckerpunch', 'uturn', 'watershuriken',
 	'vacuumwave', 'voltswitch', 'waterspout',
+
+	'crashlanding', 'fourseamfastball', 'riposte', 'thermalexplosion',
 ];
 // Hazard-setting moves
 const Hazards = [
 	'spikes', 'stealthrock', 'stickyweb', 'toxicspikes',
+
+	'wetfloor', 'hotcoals',
 ];
 
 export class RandomTeams {
@@ -2135,6 +2149,18 @@ export class RandomTeams {
 							cull = false;
 						} else {
 							this.fastPop(movePool, sleeptalk);
+						}
+					}
+				}
+
+				// Riposte shouldn't be selected without Parry
+				if (move.id === 'parry' && cull) {
+					const riposte = movePool.indexOf('riposte');
+					if (riposte >= 0) {
+						if (movePool.length < 2) {
+							cull = false;
+						} else {
+							this.fastPop(movePool, riposte);
 						}
 					}
 				}
