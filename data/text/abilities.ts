@@ -21,7 +21,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	betafunction: {
 		name: "Beta Function",
-		shortDesc: "This Pokemon can only be damaged by supereffective moves and indirect damage.",
+		shortDesc: "This Thing can only be damaged by supereffective moves and indirect damage.",
 	},
 	biggamble: {
 		name: "Big Gamble",
@@ -38,10 +38,15 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	blind: {
 		name: "Blind",
-		shortDesc: "This Thing takes 0.25x damage from Night, Green, and Yellow-type attacks, but is always blind",
+		shortDesc: "This Thing takes 0.25x damage from Night, Green, and Yellow-type attacks, but is always blind.",
 
 		start: "  [POKEMON] is blind.",
 	},
+	bright: {
+		name: "Bright",
+		shortDesc: "While this Thing is active, it cannot be Nighttime."
+	},
+	
 
 	three: {
 		name: "Three",
