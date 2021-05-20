@@ -683,6 +683,9 @@ export class BattleActions {
 				if (!move.ohko && pokemon.hasItem('blunderpolicy') && pokemon.useItem()) {
 					this.battle.boost({spe: 2}, pokemon);
 				}
+				if (target.hasAbility('slippery') || this.battle.field.terrain === 'sudscape') {
+					pokemon.trySetStatus('prone');
+				}
 				hitResults[i] = false;
 				continue;
 			}
@@ -1693,6 +1696,10 @@ export class BattleActions {
 			if (this.battle.gen < 6 || move.id !== 'facade') {
 				baseDamage = this.battle.modify(baseDamage, 0.5);
 			}
+		}
+
+		if (pokemon.status === 'prone') {
+			baseDamage = this.battle.modify(baseDamage, 0.33);
 		}
 
 		// Generation 5, but nothing later, sets damage to 1 before the final damage modifiers
