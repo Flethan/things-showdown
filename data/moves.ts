@@ -1273,10 +1273,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onResidual(target) {
-				if(target.status !== 'prone') {
-				target.cureStatus();
-			}
-			}
+				if (target.status !== 'prone') {
+					target.cureStatus();
+				}
+			},
 			onFieldEnd(side) {
 				this.add('-fieldend', 'Sudscape');
 			},
