@@ -1,9 +1,55 @@
 export const AbilitiesText: {[k: string]: AbilityText} = {
+	// THINGS
+	a81117y: {
+		name: "A81117y",
+		shortDesc: "Aquire a random ability."
+	},
+	ahotone: {
+		name: "A Hot One",
+		shortDesc: "On switch-in, Hot begins until this Ability is not active in battle.",
+		desc: "On switch-in, the Field Condition becomes Hot. This Field Condition remains in effect until this Ability is no longer active for any Thing, or the weather is changed by Lass' ihn Fliegen or Sin Ningún Apuro."
+	},
+	aquatic: {
+		name: "Aquatic",
+		shortDesc: "Heal for 1/16 max HP instead of being hurt when Underwater is in effect.",
+		desc: "When Underwater is in effect, this Thing will heal for 1/16 of its maximum HP at the end of the turn, and won't take damage from Underwater."
+	},
+	assimilate: {
+		name: "Assimilate",
+		shortDesc: "Boost this Thing by 1 whenever another Thing faints based on their highest stat.",
+		desc: "Whenever another Thing faints, boost a stat for this Thing by 1 stage based on the fainted Thing's highest stat."
+	},
+	betafunction: {
+		name: "Beta Function",
+		shortDesc: "This Pokemon can only be damaged by supereffective moves and indirect damage.",
+	},
+	biggamble: {
+		name: "Big Gamble",
+		shortDesc: "bruh"
+	},
+	bigsword: {
+		name: "Big Sword",
+		shortDesc: "This Thing's attacking stat is multiplied by 1.5 while using a Sword-type attack.",
+	},
+	black: {
+		name: "Black",
+		shortDesc: "The attacker becomes Dirt-type when making contact.",
+		desc: "When another Thing attacks this Thing and makes contact, it will lose its types and become pure Dirt-type."
+	},
+	blind: {
+		name: "Blind",
+		shortDesc: "This Thing takes 0.25x damage from Night, Green, and Yellow-type attacks, but is always blind",
+
+		start: "  [POKEMON] is blind.",
+	},
+
 	three: {
 		name: "Three",
 		shortDesc: "Every third turn in battle, this Pokemon's moves have 1.5x power.",
 		start: "[POKEMON] is channeling the power of 3!",
 	},
+
+	// BASE GAME
 	noability: {
 		name: "No Ability",
 		shortDesc: "Does nothing.",
