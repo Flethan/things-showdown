@@ -967,10 +967,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.effectState.switchingIn = false;
 			let success = false;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
 			];
 			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
 			];
 			for (const targetCondition of removeAll) {
 				if (pokemon.side.foe.removeSideCondition(targetCondition)) {

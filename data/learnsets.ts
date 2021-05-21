@@ -1706,7 +1706,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hypnoticmelody: ["8L1"],
 			weatherfront: ["8M"],
 			rapidvortex: ["8L1"],
-			supercell: ["8L40"],
+			stormcell: ["8L40"],
 			hurricanewinds: ["8L50"],
 			fireworks: ["8L31"],
 			flashmissle: ["8L55"],

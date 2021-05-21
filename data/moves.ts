@@ -227,10 +227,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source, move) {
 			let success = false;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
 			];
 			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.foe.removeSideCondition(targetCondition)) {
@@ -946,10 +946,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source, move) {
 			let success = false;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
 			];
 			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'supercell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.foe.removeSideCondition(targetCondition)) {
@@ -3392,16 +3392,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		contestType: "Cool",
 	},
-	supercell: {
+	stormcell: {
 		num: 694,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		name: "Supercell",
+		name: "Storm Cell",
 		pp: 20,
 		priority: 0,
 		flags: {snatch: 1},
-		sideCondition: 'supercell',
+		sideCondition: 'stormcell',
 		condition: {
 			duration: 2,
 			durationCallback(target, source, effect) {
@@ -3413,25 +3413,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onAnyModifyDamage(damage, source, target, move) {
 				if (target !== source && target.side === this.effectState.target) {
 					if (!target.getMoveHitData(move).crit && !move.infiltrates && move.id !== 'staticstrike') {
-						this.debug('Supercell weaken');
+						this.debug('stormcell weaken');
 						if (target.side.active.length > 1) return this.chainModify(0.75);
 						return this.chainModify(0.66);
 					}
 				}
 				if (target !== source && source.side === this.effectState.target) {
 					if (move.type === 'Weather') {
-						this.debug('Supercell strengthen');
+						this.debug('stormcell strengthen');
 						return this.chainModify(1.5);
 					}
 				}
 			},
 			onSideStart(side) {
-				this.add('-sidestart', side, 'move: Supercell');
+				this.add('-sidestart', side, 'move: Storm Cell');
 			},
 			onSideResidualOrder: 21,
 			onSideResidualSubOrder: 1,
 			onSideEnd(side) {
-				this.add('-sideend', side, 'move: Supercell');
+				this.add('-sideend', side, 'move: Storm Cell');
 			},
 		},
 		secondary: null,
@@ -3597,7 +3597,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryHit(source, target, move) {
-			if (source.side.sideConditions['supercell'] || source.side.sideConditions['dustcloud'] || source.side.foe.sideConditions['supercell'] || source.side.foe.sideConditions['dustcloud']) {
+			if (source.side.sideConditions['stormcell'] || source.side.sideConditions['dustcloud'] || source.side.foe.sideConditions['stormcell'] || source.side.foe.sideConditions['dustcloud']) {
 				move.accuracy = true;
 			}
 		},
