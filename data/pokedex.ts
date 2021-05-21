@@ -731,6 +731,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: -350,
 		name: "Horse-Luigi",
 		baseSpecies: "Horse",
+		forme: "Luigi",
 		types: ["Hair", "H"],
 		genderRatio: {M: 0.8, F: 0.2},
 		baseStats: {hp: 90, atk: 90, def: 80, spa: 75, spd: 43, spe: 111},
