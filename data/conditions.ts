@@ -44,7 +44,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		// this is a side condition
 		name: 'beamfield',
 		onSideStart(side) {
-			this.add('-sidestart', side, 'move: Beam Field');
+			this.add('-sidestart', side, 'move: Beam Scatter');
 		},
 		onSwitchIn(pokemon) {
 			if (pokemon.hasItem('yellowsafetyvest')) return;

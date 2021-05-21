@@ -33,8 +33,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	nuisancepest: {
 		name: "Nuisance Pest",
-		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, and Beam Field end for the target's side, and the effects of Storm Cell, Dust Cloud, Wet Floor, and Beam Field end for the user's side. If there is a terrain active and this move is successful, the terrain will be cleared.",
-		shortDesc: "Clears terrain and hazards on both sides.",
+		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides.",
+		shortDesc: "Clears Side Conditions on both sides.",
 	},
 	swarm: {
 		name: "Swarm",
@@ -75,14 +75,14 @@ export const MovesText: {[k: string]: MoveText} = {
 	primordialsmoke: {
 		name: "Primordial Smoke",
 		desc: "Raises the user's Attack, Special Attack, Defense, Special Defense, and Speed by 2 stages in exchange for the user losing 1/2 of its maximum HP, rounded down. Fails if the user would faint. If there are other allied Things on the field, stat boosts are shared between them. In double battles, both active Things gain 1 stage of boosts. In triple battles, the user does not get the boosts, but the allies do.",
-		shortDesc: "User loses 50% max HP. Sharply raises stats, split with allies.",
+		shortDesc: "User loses 50% max HP. Sharply raises stats, split among allies.",
 
 		boost: "  [POKEMON] cut its own HP and raised its stats!",
 	},
 	dustcloud: {
 		name: "Dust Cloud",
-		desc: "Sets up a hazard on the opposing side of the field for 5 turns (or 8 with Environmental Accord), giving opposing Pokemon 80% accuracy. Fails if the effect is already active on the opposing side. Can be removed if any Thing uses Nuisance Pest or Tidy successfully.",
-		shortDesc: "Lowers foe accuracy by 20% for 5 turns.",
+		desc: "Sets up a Side Condition on the opposing side of the field for 5 turns, giving opposing Things 80% accuracy. Fails if the effect is already active on the opposing side.",
+		shortDesc: "Lowers foes' accuracy by 20% for 5 turns.",
 
 		start: "  A dust cloud has been stirred up in front of [TEAM]!",
 		end: "  The dust cloud has disappeared from [TEAM]!",
@@ -116,6 +116,11 @@ export const MovesText: {[k: string]: MoveText} = {
 	//green
 	//h
 	//hair
+	tidy: {
+		name: "Tidy",
+		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides. Heals the user for 25% of its maximum health for each Side Condition removed.",
+		shortDesc: "Clears Side Conditions on both sides, heal 25% each.",
+	},
 	//industrial
 	//liquid
 	soppingslap: {
@@ -155,7 +160,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	wetfloor: {
 		name: "Wet Floor",
-		desc: "Sets up a hazard on the opposing side of the field, knocking prone each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if any Thing uses Nuisance Pest or Tidy successfully, or a Liquid-type Thing switches in.",
+		desc: "Sets up a Side Condition on the opposing side of the field, knocking prone each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Liquid-type Thing switches in.",
 		shortDesc: "Knocks foes prone on switch-in.",
 
 		start: " A wet floor was spilled on the ground all around [TEAM]!",
@@ -189,11 +194,42 @@ export const MovesText: {[k: string]: MoveText} = {
 	//sport
 	//sword
 	//temperature
+	hotcoals: {
+		name: "Hot Coals",
+		desc: "Sets up a Side Condition on the opposing side of the field, making fluctuant each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Temperature-type Thing switches in.",
+		shortDesc: "Makes fluctuant foes on switch-in.",
+
+		start: " Hot coals litter the ground around [TEAM]!",
+		end: "  The hot coals cooled down around [TEAM]!",
+		activate: "  [POKEMON] minds their step around the coals!",
+	},
 	//time
 	//weather
-	//yellow
+	stormcell: {
+		name: "Storm Cell",
+		desc: "Sets up Storm Cell on the user's side of the field for 2 turns, or 4 turns if it is Windy. Ally Things in the Storm Cell take 0.66x damage (0.75x in multi-battles), and their Weather-type moves deal 1.5x damage.",
+		shortDesc: "Allies take less dmg, deal more dmg with Weather moves.",
 
-	// REGULAR
+		start: "  A storm whips around [TEAM]!",
+		end: "  The storm calms around [TEAM]!",
+	},
+	//yellow
+	staticstrike: {
+		name: "Static Strike",
+		desc: "If the target's side had Dust Cloud or Storm Cell active, this move deals double damage, always hits, and ignores the negative effects of those Side Conditions.",
+		shortDesc: "Foe: Dust Cloud, Storm Cell: 2x dmg and always hit"
+	},
+	beamscatter: {
+		name: "Beam Scatter",
+		desc: "If this move misses or otherwise fails, sets up a hazard on the opposing side of the field, damaging each opposing Pokemon that switches in by 1/8 of their maximum HP, factoring Yellow-type effectiveness.",
+		shortDesc: "On miss, hurts foes on switch-in. Factors Yellow weakness.",
+
+		start: "  Yellow beams surround [TEAM]!",
+		end: "  The yellow beams dispersed around [TEAM]!",
+		damage: "  [POKEMON] was scorched by the yellow beams!",
+	},
+
+	// BASE GAME
 	"10000000voltthunderbolt": {
 		name: "10,000,000 Volt Thunderbolt",
 		desc: "Has a very high chance for a critical hit.",

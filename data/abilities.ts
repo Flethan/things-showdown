@@ -167,7 +167,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			pokemon.addVolatile('3count1');
-			this.add('-ability', pokemon, 'Three: ?');
 		},
 		onResidual(pokemon)	{
 			//Three does not count up on turns you switch in on.
@@ -175,15 +174,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (pokemon.volatiles['3count1']) {
 					delete pokemon.volatiles['3count1'];
 					pokemon.addVolatile('3count2');
-					this.add('-ability', pokemon, 'Three: ?');
 				} else if (pokemon.volatiles['3count2']) {
 					delete pokemon.volatiles['3count2'];
 					pokemon.addVolatile('3count3');
-					this.add('-ability', pokemon, 'Three: ?');
+					this.add('-activate', pokemon, 'ability: Three');
 				} else if (pokemon.volatiles['3count3']) {
 					delete pokemon.volatiles['3count3'];
 					pokemon.addVolatile('3count1');
-					this.add('-ability', pokemon, 'Three: ?');
 				}
 			}
 		},
@@ -209,7 +206,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		onStart(pokemon) {
 			pokemon.addVolatile('ocount1');
-			this.add('-ability', pokemon, 'Omega: ?');
 		},
 		onResidual(pokemon)	{
 			//Omega does not count up on turns you switch in on.
@@ -217,15 +213,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (pokemon.volatiles['ocount1']) {
 					delete pokemon.volatiles['ocount1'];
 					pokemon.addVolatile('ocount2');
-					this.add('-ability', pokemon, 'Omega: ?');
 				} else if (pokemon.volatiles['ocount2']) {
 					delete pokemon.volatiles['ocount2'];
 					pokemon.addVolatile('ocount3');
-					this.add('-ability', pokemon, 'Omega: ?');
+					this.add('-activate', pokemon, 'ability: Omega');
 				} else if (pokemon.volatiles['ocount3']) {
 					delete pokemon.volatiles['ocount3'];
 					pokemon.addVolatile('ocount1');
-					this.add('-ability', pokemon, 'Omega: ?');
 				}
 			}
 		},
@@ -233,6 +227,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (attacker.volatiles['ocount3']) {
 				this.debug('Omega boost');
 				move.ohko = true;
+				move.accuracy = true;
 			}
 		},
 		name: "Omega",
@@ -961,35 +956,32 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onSwitchIn(pokemon) {
 			this.effectState.switchingIn = true;
 		},
-		onStart(pokemon) {
+		onStart(source) {
 			// Cleanup does not activate when Skill Swapped or when Neutralizing Gas leaves the field
 			if (!this.effectState.switchingIn) return;
 			this.effectState.switchingIn = false;
-			let success = false;
+			let success = 0;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
-			];
-			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
 			];
 			for (const targetCondition of removeAll) {
-				if (pokemon.side.foe.removeSideCondition(targetCondition)) {
-					if (noAnnounce.includes(targetCondition)) continue;
-					this.add('-sideend', pokemon.side.foe, this.dex.conditions.get(targetCondition).name, '[from] ability: Cleanup', '[of] ' + pokemon);
-					this.heal(pokemon.baseMaxhp / 4);
-					success = true;
+				if (source.side.foe.removeSideCondition(targetCondition)) {
+					this.add('-sideend', source.side.foe, this.dex.conditions.get(targetCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
+					success++;
 				}
 			}
 			for (const sideCondition of removeAll) {
-				if (pokemon.side.removeSideCondition(sideCondition)) {
-					if (noAnnounce.includes(sideCondition)) continue;
-					this.add('-sideend', pokemon.side, this.dex.conditions.get(sideCondition).name, '[from] ability: Cleanup', '[of] ' + pokemon);
-					this.heal(pokemon.baseMaxhp / 4);
-					success = true;
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.dex.conditions.get(sideCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
+					success++;
 				}
 			}
-			this.field.clearTerrain();
-			return success;
+			if (success) {
+				if (success > 4) success = 4;
+				this.heal(success * source.baseMaxhp / 4);
+				return true;
+			} else return false;
 		},
 		name: "Cleanup",
 		rating: 3.5,

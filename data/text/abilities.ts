@@ -69,7 +69,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	cleanup: {
 		name: "Cleanup",
-		shortDesc: "On switch-in, clear all side conditions."
+		shortDesc: "On switch-in, clear all side conditions and heal 25% max health for each."
 	},
 	cleareyes: {
 		name: "Clear Eyes",
@@ -144,10 +144,18 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage."
 	},
 
+	omega: {
+		name: "Omega",
+		shortDesc: "Every third turn in battle, this Thing's moves One-hit KO.",
+		start: "[POKEMON] is channeling the power of the end!",
+		activate: "[POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!"
+	},
+
 	three: {
 		name: "Three",
-		shortDesc: "Every third turn in battle, this Pokemon's moves have 1.5x power.",
+		shortDesc: "Every third turn in battle, this Thing's moves have 1.5x power.",
 		start: "[POKEMON] is channeling the power of 3!",
+		activate: "[POKEMON] is in tune with 3!"
 	},
 
 	// BASE GAME

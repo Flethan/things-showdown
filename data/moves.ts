@@ -227,26 +227,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source, move) {
 			let success = false;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
-			];
-			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
 			];
 			for (const targetCondition of removeAll) {
-				if (target.side.foe.removeSideCondition(targetCondition)) {
-					if (noAnnounce.includes(targetCondition)) continue;
-					this.add('-sideend', target.side.foe, this.dex.conditions.get(targetCondition).name, '[from] ability: Nuisance Pest', '[of] ' + target);
+				if (target.side.removeSideCondition(targetCondition)) {
+					this.add('-sideend', target.side, this.dex.conditions.get(targetCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
 					success = true;
 				}
 			}
 			for (const sideCondition of removeAll) {
-				if (target.side.removeSideCondition(sideCondition)) {
-					if (noAnnounce.includes(sideCondition)) continue;
-					this.add('-sideend', target.side, this.dex.conditions.get(sideCondition).name, '[from] ability: Nuisance Pest', '[of] ' + target);
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.dex.conditions.get(sideCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
 					success = true;
 				}
 			}
-			this.field.clearTerrain();
 			return success;
 		},
 		secondary: null,
@@ -394,12 +389,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'dustcloud',
 		condition: {
 			duration: 5,
-			durationCallback(target, source, effect) {
-				if (source?.hasItem('environmentalaccord')) {
-					return 8;
-				}
-				return 5;
-			},
 			onModifyMove(move, pokemon, target) {
 				if (typeof move.accuracy !== 'number' || pokemon.hasItem('yellowsafetyvest')) return;
 				move.accuracy *= 0.8;
@@ -944,31 +933,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, authentic: 1},
 		onHit(target, source, move) {
-			let success = false;
+			let success = 0;
 			const removeAll = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'wetfloor', 'beamfield',
-			];
-			const noAnnounce = [
-				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'stormcell', 'dustcloud', 'mist',
+				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
 			];
 			for (const targetCondition of removeAll) {
-				if (target.side.foe.removeSideCondition(targetCondition)) {
-					if (noAnnounce.includes(targetCondition)) continue;
-					this.add('-sideend', target.side.foe, this.dex.conditions.get(targetCondition).name, '[from] ability: Nuisance Pest', '[of] ' + target);
-					this.heal(source.baseMaxhp / 4);
-					success = true;
+				if (target.side.removeSideCondition(targetCondition)) {
+					this.add('-sideend', target.side, this.dex.conditions.get(targetCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
+					success++;
 				}
 			}
 			for (const sideCondition of removeAll) {
-				if (target.side.removeSideCondition(sideCondition)) {
-					if (noAnnounce.includes(sideCondition)) continue;
-					this.add('-sideend', target.side, this.dex.conditions.get(sideCondition).name, '[from] ability: Nuisance Pest', '[of] ' + target);
-					this.heal(source.baseMaxhp / 4);
-					success = true;
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.dex.conditions.get(sideCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
+					success++;
 				}
 			}
-			this.field.clearTerrain();
-			return success;
+			if (success) {
+				if (success > 4) success = 4;
+				this.heal(success * source.baseMaxhp / 4);
+				return true;
+			} else return false;
 		},
 		secondary: null,
 		target: "normal",
@@ -1141,7 +1127,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					pokemon.side.removeSideCondition('wetfloor');
 					return;
 				} else if (pokemon.hasItem('yellowsafetyvest')) return;
-				else pokemon.trySetStatus('prone', pokemon.side.foe.active[0]);
+				else pokemon.trySetStatus('prone', this.effectState.source);
 			},
 		},
 		secondary: null,
@@ -3079,9 +3065,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-sideend', pokemon.side, 'move: Hot Coals', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('hotcoals');
 					return;
-				}
-				if (pokemon.hasItem('yellowsafetyvest')) return;
-				pokemon.trySetStatus('fluctuant', pokemon.side.foe.active[0]);
+				} else if (pokemon.hasItem('yellowsafetyvest')) return;
+				else pokemon.trySetStatus('fluctuant', this.effectState.source);
 			},
 		},
 		secondary: null,
@@ -3412,17 +3397,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onAnyModifyDamage(damage, source, target, move) {
 				if (target !== source && target.side === this.effectState.target) {
-					if (!target.getMoveHitData(move).crit && !move.infiltrates && move.id !== 'staticstrike') {
-						this.debug('stormcell weaken');
-						if (target.side.active.length > 1) return this.chainModify(0.75);
-						return this.chainModify(0.66);
-					}
+					if (target.getMoveHitData(move).crit || move.infiltrates || move.id === 'staticstrike' || target.hasItem('yellowsafetyvest')) return;
+					this.debug('stormcell weaken');
+					if (target.side.active.length > 1) return this.chainModify(0.75);
+					else return this.chainModify(0.66);
 				}
 				if (target !== source && source.side === this.effectState.target) {
-					if (move.type === 'Weather') {
-						this.debug('stormcell strengthen');
-						return this.chainModify(1.5);
-					}
+					if (move.type !== 'Weather' || source.hasItem('yellowsafetyvest')) return;
+					this.debug('stormcell strengthen');
+					return this.chainModify(1.5);
 				}
 			},
 			onSideStart(side) {
@@ -3597,7 +3580,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryHit(source, target, move) {
-			if (source.side.sideConditions['stormcell'] || source.side.sideConditions['dustcloud'] || source.side.foe.sideConditions['stormcell'] || source.side.foe.sideConditions['dustcloud']) {
+			if (target.side.sideConditions['stormcell'] || target.side.sideConditions['dustcloud']) {
+				move.basePower *= 2;
 				move.accuracy = true;
 			}
 		},
@@ -3617,7 +3601,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {pulse: 1, protect: 1, mirror: 1},
 		onMoveFail(target, source, move) {
-			source.side.foe.addSideCondition('beamfield');
+			target?.side.addSideCondition('beamfield');
 		},
 		secondary: null,
 		target: "normal",
