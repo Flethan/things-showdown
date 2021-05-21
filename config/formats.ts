@@ -1692,6 +1692,7 @@ export const Formats: FormatList = [
 
 		mod: 'gen8',
 		team: 'random',
+		gameType: 'doubles',
 		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
 	},
 	{
@@ -1699,6 +1700,7 @@ export const Formats: FormatList = [
 
 		mod: 'gen8',
 		team: 'random',
+		gameType: 'triples',
 		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
 	},
 	{
