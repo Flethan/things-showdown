@@ -11,7 +11,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	aquatic: {
 		name: "Aquatic",
-		shortDesc: "Heal for 1/16 max HP instead of being hurt when Underwater is in effect.",
+		shortDesc: "Heal for 1/16 max HP instead of being hurt during Underwater.",
 		desc: "When Underwater is in effect, this Thing will heal for 1/16 of its maximum HP at the end of the turn, and won't take damage from Underwater."
 	},
 	assimilate: {
@@ -29,7 +29,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	bigsword: {
 		name: "Big Sword",
-		shortDesc: "This Thing's attacking stat is multiplied by 1.5 while using a Sword-type attack.",
+		shortDesc: "This Thing's Sword-type attacks deal 1.5x damage.",
 	},
 	black: {
 		name: "Black",
@@ -38,7 +38,8 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	blind: {
 		name: "Blind",
-		shortDesc: "This Thing takes 0.25x damage from Night, Green, and Yellow-type attacks, but is always blind.",
+		shortDesc: "Takes 0.25x dmg from Night, Green, or Yellow-type attacks, but is always blinded.",
+		desc: "This Thing takes 0.25x damage from Night, Green, and Yellow-type attacks, but is always blinded.",
 
 		start: "  [POKEMON] is blind.",
 	},
@@ -46,7 +47,102 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Bright",
 		shortDesc: "While this Thing is active, it cannot be Nighttime."
 	},
-	
+	brutalize: {
+		name: "Brutalize",
+		shortDesc: "This Thing's attacks that make contact have a 50% chance to inflict wounded."
+	},
+	bubblearmor: {
+		name: "Bubble Armor",
+		shortDesc: "This Thing takes 0.5x damage during Sudscape."
+	},
+	camouflage: {
+		name: "Camouflage",
+		shortDesc: "Attacks against this Thing have 0.9x accuracy."
+	},
+	chilled: {
+		name: "Chilled",
+		shortDesc: "2.0x special defense during Cold."
+	},
+	cleansing: {
+		name: "Cleansing",
+		shortDesc: "When this Thing lands a Liquid-type attack, cure its and the target's status."
+	},
+	cleanup: {
+		name: "Cleanup",
+		shortDesc: "On switch-in, clear all side conditions."
+	},
+	cleareyes: {
+		name: "Clear Eyes",
+		shortDesc: "This Thing cannot be blinded."
+	},
+	communal: {
+		name: "Communal",
+		shortDesc: "Allies with Communal have 1.5x attack and special attack."
+	},
+	competitivemirror: {
+		name: "Competitive Mirror",
+		shortDesc: "Whenever a foe gains a stat boost, copy it."
+	},
+	conductor: {
+		name: "Conductor",
+		shortDesc: "At the end of each turn during Mystical Song, add a random harmony."
+	},
+	connection: {
+		name: "Connection",
+		shortDesc: "Allies deal 1.2x damage."
+	},
+	depthcharge: {
+		name: "Depth Charge",
+		shortDesc: "When knocked-out by an attack, pressurizes all other active Things."
+	},
+	distantsystem: {
+		name: "Distant System",
+		shortDesc: "Allies cannot be blocked from switching."
+	},
+	dusty: {
+		name: "Dusty",
+		shortDesc: "The attacker has a 30% chance to be blinded when making contact."
+	},
+	eleventhhour: {
+		name: "Eleventh Hour",
+		shortDesc: "On switch-in, if this Thing has < 50% health remaining, endure the next lethal hit."
+	},
+	falsestart: {
+		name: "False-Start",
+		shortDesc: "All increased-priority moves fail."
+	},
+	farewell: {
+		name: "Farewell",
+		shortDesc: "After switch-in, at the end of the next turn, all other Things are switched out."
+	},
+	fickle: {
+		name: "Fickle",
+		shortDesc: "At the end of the turn, during a Field Condition, change it to another random one."
+	},
+	fiery: {
+		name: "Fiery",
+		shortDesc: "The attacker has a 30% chance to be made fluctuant when making contact."
+	},
+	gallant: {
+		name: "Gallant",
+		shortDesc: "This Thing's speed cannot be lowered."
+	},
+	gold: {
+		name: "Gold",
+		shortDesc: "This Thing is immune to super-effective attacks."
+	},
+	gravitywell: {
+		name: "Gravity Well",
+		shortDesc: "Foes are blocked from switching."
+	},
+	greenhero: {
+		name: "Green Hero",
+		shortDesc: "This Thing's Green-type attacks deal 1.5x damage."
+	},
+	greetings: {
+		name: "Greetings",
+		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage."
+	},
 
 	three: {
 		name: "Three",
