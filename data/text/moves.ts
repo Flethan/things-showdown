@@ -175,12 +175,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	sudscape: {
 		name: "Sudscape",
 		desc: "For 5 turns (or 8 with Landscaping Permits), the terrain becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current terrain is Sudscape.",
-		shortDesc: "5 turns. +Liquid power, misses->prone, cures conditions.",
+		shortDesc: "5 turns. +Liquid power, misses->prone, cures other.",
 	},
 	bubbleshield: {
 		name: "Bubble Shield",
 		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to make contact with the user lose 1/8 of their maximum HP, modified by Liquid type-effectiveness, rounded down. Fish-type Things have their Attack lowered by 1 stage instead. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
-		shortDesc: "Protects from damaging attacks. Contact: Liquid-type damage.",
+		shortDesc: "Protects from damaging attacks. Contact: Damage.",
 	},
 	//music
 	//night
