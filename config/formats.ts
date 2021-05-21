@@ -543,6 +543,7 @@ export const Formats: FormatList = [
 
 	{
 		section: "National Dex",
+		column: 2,
 	},
 	{
 		name: "[Gen 8] National Dex",
@@ -782,6 +783,7 @@ export const Formats: FormatList = [
 
 	{
 		section: "Pet Mods",
+		column: 2,
 	},
 	{
 		name: "[Gen 8] Fusion Evolution UU",
