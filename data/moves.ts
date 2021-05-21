@@ -957,7 +957,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else return false;
 		},
 		secondary: null,
-		target: "normal",
+		target: "self",
 		type: "Hair",
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",

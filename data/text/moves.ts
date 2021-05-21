@@ -101,7 +101,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	depthvanish: {
 		name: "Depth Vanish",
 		desc: "Raises the user's accuracy by 2 stages and critical hit ratio by 3. Banishes the user for 2 turns.",
-		shortDesc: "Banishes user, sharply raises accuracy and maximizes crit.",
+		shortDesc: "Banishes user, boosts accuracy up 2, crit max",
 	},
 	hadalzone: {
 		name: "Hadal Zone",
