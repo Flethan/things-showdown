@@ -1984,7 +1984,7 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod'],
 	},
 	{
-		name: "[Gen 8] Triples Monotype Random Battle",
+		name: "[Gen 8] Triples Monotype Hackmons Cup",
 
 		mod: 'gen8',
 		team: 'randomHC',
