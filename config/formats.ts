@@ -1688,6 +1688,20 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
 	},
 	{
+		name: "[Gen 8] Doubles Monotype Random Battle",
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Gen 8] Triples Monotype Random Battle",
+
+		mod: 'gen8',
+		team: 'random',
+		ruleset: ['Obtainable', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
 		name: "[Gen 8] Random Battle (No Dmax)",
 
 		mod: 'gen8',
