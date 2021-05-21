@@ -814,6 +814,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			landslide: ["8L45"],
 			yellowgigahit: ["8E"],
 			greentackle: ["8L20"],
+			greenify: ["8L20"],
 			whipcrack: ["8L40"],
 			heckle: ["8L15"],
 			harbinger: ["8L62"],
