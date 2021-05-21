@@ -174,7 +174,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	sudscape: {
 		name: "Sudscape",
-		desc: "For 5 turns, the terrain becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current terrain is Sudscape.",
+		desc: "For 5 turns (or 8 with Landscaping Permits), the terrain becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current terrain is Sudscape.",
 		shortDesc: "5 turns. +Liquid power, misses->prone, cures conditions.",
 	},
 	bubbleshield: {
