@@ -10,6 +10,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
 		shortDesc: "Same type as user's primary type.",
 	},
+	//arthropod
 	pinch: {
 		name: "Pinch",
 		desc: "Has a 50% chance to make the target flinch.",
@@ -32,12 +33,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	nuisancepest: {
 		name: "Nuisance Pest",
-		desc: "If this move is successful, the effects of Reflect, Light Screen, Aurora Veil, Safeguard, Mist, Spikes, Toxic Spikes, Stealth Rock, Sticky Web, Supercell, Dust Cloud, Wet Floor, and Beam Field end for the target's side, and the effects of Spikes, Toxic Spikes, Stealth Rock, Sticky Web, Supercell, Dust Cloud, Wet Floor, and Beam Field end for the user's side. If there is a terrain active and this move is successful, the terrain will be cleared.",
+		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, and Beam Field end for the target's side, and the effects of Storm Cell, Dust Cloud, Wet Floor, and Beam Field end for the user's side. If there is a terrain active and this move is successful, the terrain will be cleared.",
 		shortDesc: "Clears terrain and hazards on both sides.",
 	},
 	swarm: {
 		name: "Swarm",
-		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members, or if the target switched out using an Eject Button or through the effect of the Emergency Exit or Wimp Out Abilities.",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
 		shortDesc: "User switches out after damaging the target.",
 	},
 	scuttle: {
@@ -52,9 +53,145 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	summonlocusts: {
 		name: "Summon Locusts",
-		desc: "For 5 turns, the weather becomes Locust Swarm. At the end of each turn except the last, all active Pokemon lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are a Arhtropod type, or have the Magic Guard or Overcoat Abilities. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Locust Swarm.",
+		desc: "For 5 turns, the weather becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Locust Swarm.",
 		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
+	//dirt
+	landslide: {
+		name: "Landslide",
+		desc: "Has a 20% chance knock the target prone.",
+		shortDesc: "20% chance knock the target(s) prone.",
+	},
+	dirtypunch: {
+		name: "Landslide",
+		desc: "Has a 10% chance blind the target.",
+		shortDesc: "10% chance blind the target.",
+	},
+	cosmicdust: {
+		name: "Cosmic Dust",
+		desc: "Has a 10% chance to raise the user's Special Attack by 1 stage.",
+		shortDesc: "Hits adjacent foes. 10% chance to raise user's Sp. Atk by 1.",
+	},
+	primordialsmoke: {
+		name: "Primordial Smoke",
+		desc: "Raises the user's Attack, Special Attack, Defense, Special Defense, and Speed by 2 stages in exchange for the user losing 1/2 of its maximum HP, rounded down. Fails if the user would faint. If there are other allied Things on the field, stat boosts are shared between them. In double battles, both active Things gain 1 stage of boosts. In triple battles, the user does not get the boosts, but the allies do.",
+		shortDesc: "User loses 50% max HP. Sharply raises stats, split with allies.",
+
+		boost: "  [POKEMON] cut its own HP and raised its stats!",
+	},
+	dustcloud: {
+		name: "Dust Cloud",
+		desc: "Sets up a hazard on the opposing side of the field for 5 turns (or 8 with Environmental Accord), giving opposing Pokemon 80% accuracy. Fails if the effect is already active on the opposing side. Can be removed if any Thing uses Nuisance Pest or Tidy successfully.",
+		shortDesc: "Lowers foe accuracy by 20% for 5 turns.",
+
+		start: "  A dust cloud has been stirred up in front of [TEAM]!",
+		end: "  The dust cloud has disappeared from [TEAM]!",
+	},
+	//fish
+	fishslap: {
+		name: "Fish Slap",
+		desc: "Has a 10% chance to make the target flinch.",
+		shortDesc: "10% chance to make the target flinch.",
+	},
+	brilliantfish: {
+		name: "Brilliant Fish",
+		desc: "Has a 50% chance to raise the user's Special Attack by 2 stages.",
+		shortDesc: "Hits adjacent foes. 50% chance to raise user's Sp. Atk by 2.",
+	},
+	depthvanish: {
+		name: "Depth Vanish",
+		desc: "Raises the user's accuracy by 2 stages and critical hit ratio by 3. Banishes the user for 2 turns.",
+		shortDesc: "Banishes user, sharply raises accuracy and maximizes crit.",
+	},
+	hadalzone: {
+		name: "Hadal Zone",
+		desc: "For 5 turns, Things take damage from being pressurized even when active. While Hadal Zone is active, countdowns to remove pressurized are paused. If this move is used during the effect, the effect ends.",
+		shortDesc: "For 5 turns, pressurized affects active Things too.",
+	},
+	submerge: {
+		name: "Submerge",
+		desc: "For 5 turns, the weather becomes Underwater. At the end of each turn except the last, all active Fish-type Things recover 1/16 of their maximum HP, while Things that aren't Fish or Liquid type lose 1/16 of their maximum HP, rounded down; Things with prone have it removed. During the effect, the accuracy of Liquid-type moves is multiplied by 1.2, pressurized inflicts 2x damage, and the prone condition is prevented. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Underwater.",
+		shortDesc: "For 5 turns, the field sinks underwater.",
+	},
+	//green
+	//h
+	//hair
+	//industrial
+	//liquid
+	soppingslap: {
+		name: "Sopping Slap",
+		desc: "Has a 100% chance to lower the target's Attack by 1 stage.",
+		shortDesc: "100% chance to lower the target's Attack by 1.",
+	},
+	spurt: {
+		name: "Spurt",
+		desc: "No additional effect.",
+		shortDesc: "Usually goes first.",
+	},
+	lavaflow: {
+		name: "Lava Flow",
+		desc: "This move combines Temperature in its type effectiveness against the target.",
+		shortDesc: "Combines Temperature in its type effectiveness.",
+	},
+	spill: {
+		name: "Spill",
+		desc: "Has a 50% chance knock the target prone.",
+		shortDesc: "50% chance knock the target prone.",
+	},
+	spray: {
+		name: "Spray",
+		desc: "Has a 100% chance to lower the target's Speed by 1 stage.",
+		shortDesc: "100% chance to lower the foe(s) Speed by 1.",
+	},
+	alkalinesurge: {
+		name: "Alkaline Surge",
+		desc: "This move's type effectiveness against Fish is changed to be super effective no matter what this move's type is.",
+		shortDesc: "Super effective on Fish.",
+	},
+	cascade: {
+		name: "Cascade",
+		desc: "Has a 10% chance knock the target prone.",
+		shortDesc: "10% chance knock the foe(s) prone.",
+	},
+	wetfloor: {
+		name: "Wet Floor",
+		desc: "Sets up a hazard on the opposing side of the field, knocking prone each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if any Thing uses Nuisance Pest or Tidy successfully, or a Liquid-type Thing switches in.",
+		shortDesc: "Knocks foes prone on switch-in.",
+
+		start: " A wet floor was spilled on the ground all around [TEAM]!",
+		end: "  The wet floor disappeared from the ground around [TEAM]!",
+		activate: "  [POKEMON] slipped and fell!",
+	},
+	pressurelock: {
+		name: "Pressure Lock",
+		desc: "Pressurizes the target.",
+		shortDesc: "Pressurizes the target.",
+	},
+	refreshingcup: {
+		name: "Refreshing Cup",
+		desc: "The target restores 1/2 of its maximum HP, rounded half up.",
+		shortDesc: "Heals the target by 50% of its max HP.",
+	},
+	sudscape: {
+		name: "Sudscape",
+		desc: "For 5 turns, the terrain becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current terrain is Sudscape.",
+		shortDesc: "5 turns. +Liquid power, misses->prone, cures conditions.",
+	},
+	bubbleshield: {
+		name: "Bubble Shield",
+		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to make contact with the user lose 1/8 of their maximum HP, modified by Liquid type-effectiveness, rounded down. Fish-type Things have their Attack lowered by 1 stage instead. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+		shortDesc: "Protects from damaging attacks. Contact: Liquid-type damage.",
+	},
+	//music
+	//night
+	//no
+	//science
+	//sport
+	//sword
+	//temperature
+	//time
+	//weather
+	//yellow
 
 	// REGULAR
 	"10000000voltthunderbolt": {
