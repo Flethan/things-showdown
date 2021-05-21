@@ -119,7 +119,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	tidy: {
 		name: "Tidy",
 		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides. Heals the user for 25% of its maximum health for each Side Condition removed.",
-		shortDesc: "Clears Side Conditions on both sides, heal 25% each.",
+		shortDesc: "Clear Side Conditions on both sides, heal 25% each.",
 	},
 	//industrial
 	//liquid
@@ -197,7 +197,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	hotcoals: {
 		name: "Hot Coals",
 		desc: "Sets up a Side Condition on the opposing side of the field, making fluctuant each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Temperature-type Thing switches in.",
-		shortDesc: "Makes fluctuant foes on switch-in.",
+		shortDesc: "Makes foes fluctuant on switch-in.",
 
 		start: " Hot coals litter the ground around [TEAM]!",
 		end: "  The hot coals cooled down around [TEAM]!",
@@ -208,7 +208,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	stormcell: {
 		name: "Storm Cell",
 		desc: "Sets up Storm Cell on the user's side of the field for 2 turns, or 4 turns if it is Windy. Ally Things in the Storm Cell take 0.66x damage (0.75x in multi-battles), and their Weather-type moves deal 1.5x damage.",
-		shortDesc: "Allies take less dmg, deal more dmg with Weather moves.",
+		shortDesc: "Allies: take less dmg, Weather moves 1.5x",
 
 		start: "  A storm whips around [TEAM]!",
 		end: "  The storm calms around [TEAM]!",
@@ -217,12 +217,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	staticstrike: {
 		name: "Static Strike",
 		desc: "If the target's side had Dust Cloud or Storm Cell active, this move deals double damage, always hits, and ignores the negative effects of those Side Conditions.",
-		shortDesc: "Foe: Dust Cloud, Storm Cell: 2x dmg and always hit"
+		shortDesc: "Foe: Dust Cloud, Storm Cell: 2x dmg and always hit."
 	},
 	beamscatter: {
 		name: "Beam Scatter",
 		desc: "If this move misses or otherwise fails, sets up a hazard on the opposing side of the field, damaging each opposing Pokemon that switches in by 1/8 of their maximum HP, factoring Yellow-type effectiveness.",
-		shortDesc: "On miss, hurts foes on switch-in. Factors Yellow weakness.",
+		shortDesc: "On miss, hurts foes on switch-in. Factors Yellow.",
 
 		start: "  Yellow beams surround [TEAM]!",
 		end: "  The yellow beams dispersed around [TEAM]!",
