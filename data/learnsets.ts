@@ -1969,6 +1969,21 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			arthrobite: ["8L9"],
 		},
 	},
+	pillowhead: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			warmup: ["8L40"],
+			fourseamfastball: ["8L40"],
+			suplex: ["8L50"],
+			soaringaxekick: ["8L50"],
+			counterthrow: ["8L50"],
+			hit: ["8M"],
+			greenpunch: ["8T"],
+			voidpunch: ["8T"],
+			thermalpunch: ["8T"],
+		},
+	},
 
 // BASE GAME
 	missingno: {
