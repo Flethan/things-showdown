@@ -226,7 +226,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Accelerate",
 		desc: "Raises the user's Speed by 1. On the next turn, raises the Speed of the Thing in the user's position by 1. If this move is already in effect, it will still raise the user's Speed but will not do anything on the next turn.",
 		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2."
-	}
+	},
 	//liquid
 	soppingslap: {
 		name: "Sopping Slap",
