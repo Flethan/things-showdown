@@ -2699,6 +2699,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return 40;
 		},
 		category: "Physical",
+		isNonstandard: "Thing",
 		name: "Suplex",
 		pp: 10,
 		priority: 0,
@@ -2722,6 +2723,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 95,
 		basePower: 90,
 		category: "Physical",
+		isNonstandard: "Thing",
 		name: "Soaring Axe Kick",
 		pp: 15,
 		priority: 0,
@@ -2764,6 +2766,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			return pokemon.volatiles['counterthrow'].damage || 1;
 		},
 		category: "Physical",
+		isNonstandard: "Thing",
 		name: "Counter Throw",
 		pp: 20,
 		priority: -5,
