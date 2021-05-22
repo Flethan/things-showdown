@@ -588,7 +588,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (!target.hasType('Temperature')) {
+			if (!target.hasType('Temperature') && !target.hasAbility('Chilled')) {
 				this.boost({spe: -1}, target);
 			}
 		},

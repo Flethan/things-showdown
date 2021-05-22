@@ -61,7 +61,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	chilled: {
 		name: "Chilled",
-		shortDesc: "2.0x special defense during Cold."
+		shortDesc: "2.0x special defense during Cold. Prevents Cold Speed reduction."
 	},
 	cleansing: {
 		name: "Cleansing",
