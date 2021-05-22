@@ -209,8 +209,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	sharpsword: {
-		name: "Sharp Sword",
+	whetstone: {
+		name: "Whetstone",
 		spritenum: 783,
 		fling: {
 			basePower: 50,
@@ -345,7 +345,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart (pokemon) {
 			pokemon.trySetStatus('blinded', pokemon);
-			pokemon.useItem();
 		},
 		num: -241,
 		gen: 8,
