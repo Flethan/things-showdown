@@ -173,7 +173,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'blinded',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.add('-start', target, 'blinded');
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'blinded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -291,7 +290,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				const rand = Math.floor(Math.random() * stats.length);
 				const randomStat: BoostID = stats[rand];
 				stats.splice(rand, 1);
-				if (randomStat) boost[randomStat] = 1;
+				if (randomStat) boost[randomStat] = -1;
 			}
 			this.boost(boost);
 

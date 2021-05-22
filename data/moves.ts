@@ -3309,14 +3309,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'coagulate',
 		condition: {
 			duration: 2,
+			onRestart(pokemon) {
+				this.effectState.duration = 2;
+			},
 			onModifyPriority(priority, source, target, move) {
 				if (move.id === 'coagulate') {
 					return priority + 1;
-				}
-			},
-			onModifyMove(move, pokemon) {
-				if (move.id === 'coagulate') {
-					move.heal = [2, 5];
 				}
 			},
 		},	
