@@ -1314,9 +1314,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				if (move.flags['contact']) {
 					if (source.hasType('Fish')) {
-						this.boost({atk: -1}, source, target, this.dex.getActiveMove('bubbleshield'));
+						this.boost({atk: -1}, source, target, this.dex.getActiveMove('Bubble Shield'));
 					} else {
-						const typeMod = this.clampIntRange(source.runEffectiveness(this.dex.getActiveMove('bubbleshield')), -6, 6);
+						const typeMod = this.clampIntRange(source.runEffectiveness(this.dex.getActiveMove('Bubble Shield')), -6, 6);
 						this.damage(source.baseMaxhp * Math.pow(2, typeMod) / 8, source, target);
 					}
 				}
@@ -2335,7 +2335,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -2732,7 +2731,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
-			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}

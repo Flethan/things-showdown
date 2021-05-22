@@ -70,7 +70,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	cosmicdust: {
 		name: "Cosmic Dust",
 		desc: "Has a 10% chance to raise the user's Special Attack by 1 stage.",
-		shortDesc: "Hits adjacent foes. 10% chance to raise user's Sp. Atk by 1.",
+		shortDesc: "Hits adjacent foes. 10% raise user's Sp. Atk by 1.",
 	},
 	primordialsmoke: {
 		name: "Primordial Smoke",
@@ -96,7 +96,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	brilliantfish: {
 		name: "Brilliant Fish",
 		desc: "Has a 50% chance to raise the user's Special Attack by 2 stages.",
-		shortDesc: "Hits adjacent foes. 50% chance to raise user's Sp. Atk by 2.",
+		shortDesc: "Hits adjacent foes. 50% raise user's Sp. Atk by 2.",
 	},
 	depthvanish: {
 		name: "Depth Vanish",
@@ -114,14 +114,119 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "For 5 turns, the field sinks underwater.",
 	},
 	//green
+	greentackle: {
+		name: "Green Tackle",
+		shortDesc: "No additional effect.",
+	},
+	greenpunch: {
+		name: "Green Punch",
+		desc: "Has a 10% chance to add the Green type to the target.",
+		shortDesc: "10% chance to add Green the target's type(s).",
+	},
+	greenbite: {
+		name: "Green Bite",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
+	},
+	chartreusebeam: {
+		name: "Chartreuse Beam",
+		desc: "This move combines Yellow in its type effectiveness against the target.",
+		shortDesc: "Combines Yellow in its type effectiveness.",
+	},
+	greenify: {
+		name: "Greenify",
+		desc: "Adds the Green type to the user. A Thing can only have one added type at a time. Fails if the user already has Green type added.",
+		shortDesc: "Adds Green to the user's type(s).",
+	},
 	//h
+	hostile: {
+		name: "Hostile",
+		desc: "Has a 10% chance to lower the user's Defense by 1 stage.",
+		shortDesc: "10% chance to lower the user's Def by 1.",
+	},
+	heckle: {
+		name: "Heckle",
+		desc: "Hits one to three times.",
+		shortDesc: "Hits 1-3 times in one turn.",
+	},
+	hit: {
+		name: "Hit",
+		shortDesc: "No additional effect.",
+	},
+	hullabaloo: {
+		name: "Hostile",
+		desc: "Has a 10% chance to lower the user's Special Defense by 1 stage.",
+		shortDesc: "10% chance to lower the user's Sp. Def by 1.",
+	},
+	harbinger: {
+		name: "Harbinger",
+		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
+		shortDesc: "User cannot move next turn.",
+	},
+	hbond: {
+		name: "H-Bond",
+		desc: "Lowers the target's Defense by 1 stage and evasiveness by 2 stages. Prevents the user and the target from switching out. Fails if the user is already H-Bonded.",
+		shortDesc: "Lowers foe Def 1 and evasion 2. Traps user & foe.",
+	},
 	//hair
+	whipcrack: {
+		name: "Whipcrack",
+		desc: "Hits two times. The second hit acts as a Special move instead of Physical.",
+		shortDesc: "Hits 2 times, second hit Special instead of Physical.",
+	},
+	hairycrash: {
+		name: "Hairy Crash",
+		desc: "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP.",
+		shortDesc: "Has 33% recoil.",
+	},
+	hairball: {
+		name: "Hair Ball",
+		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
+		shortDesc: "10% chance to lower the target's Sp. Def by 1.",
+	},
+	brush: {
+		name: "Brush",
+		desc: "Cures the user of any status condition and raises the user's Special Defense by 1 stage.",
+		shortDesc: "Cures user's status, raises Sp. Def by 1.",
+	},
 	tidy: {
 		name: "Tidy",
 		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides. Heals the user for 25% of its maximum health for each Side Condition removed.",
 		shortDesc: "Clear Side Conditions on both sides, heal 25% each.",
 	},
 	//industrial
+	vroom: {
+		name: "Vroom",
+		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
+		shortDesc: "Uses user's Spe stat as Atk in damage calculation.",
+	},
+	crashlanding: {
+		name: "Crash Landing",
+		desc: "The user faints after using this move, even if this move fails for having no target.",
+		shortDesc: "The user faints.",
+	},
+	toxicsmog: {
+		name: "Toxic Smog",
+		desc: "Has a 75% chance blind the target.",
+		shortDesc: "75% chance blind the target.",
+	},
+	shrinkwrap: {
+		name: "Shrink Wrap",
+		desc: "Lowers the target's Attack by 1 stage. Changes the target's height to be 1m shorter.",
+		shortDesc: "Lowers target's Atk by 1, shortens target by 1m.",
+	},
+	apexcalibration: {
+		name: "Apex Calibration",
+		desc: "Guarantees the user's next attack will not miss, will be a critical hit, and will heal the user for 50% of the damage dealt. This attack charges on the first turn and executes on the second.",
+		shortDesc: "Charges, then buffs the user's next attack turn 2.",
+
+		prepare: "[POKEMON] is calibrating...",
+	},
+	accelerate: {
+		name: "Accelerate",
+		desc: "Raises the user's Speed by 1. On the next turn, raises the Speed of the Thing in the user's position by 1. If this move is already in effect, it will still raise the user's Speed but will not do anything on the next turn.",
+		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2."
+	},
 	//liquid
 	soppingslap: {
 		name: "Sopping Slap",
@@ -163,8 +268,8 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Sets up a Side Condition on the opposing side of the field, knocking prone each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Liquid-type Thing switches in.",
 		shortDesc: "Knocks foes prone on switch-in.",
 
-		start: " A wet floor was spilled on the ground all around [TEAM]!",
-		end: "  The wet floor disappeared from the ground around [TEAM]!",
+		start: " Slippery liquid has been spilled on the ground all around [TEAM]!",
+		end: "  The slippery liquid disappeared from the ground around [TEAM]!",
 		activate: "  [POKEMON] slipped and fell!",
 	},
 	pressurelock: {
@@ -190,6 +295,15 @@ export const MovesText: {[k: string]: MoveText} = {
 	//music
 	//night
 	//no
+	voidtrap: {
+		name: "Void Trap",
+		desc: "Sets up a Side Condition on the opposing side of the field, making banished the next opposing Thing that switches in. Fails if the effect is already active on the opposing side.",
+		shortDesc: "Makes foe banished on switch-in.",
+
+		start: " A mysterious portal opens on the ground around [TEAM]!",
+		end: "  The mysterious portal disappeared from the ground around [TEAM]!",
+		activate: "  [POKEMON] fell into the mysterious portal!",
+	},
 	//science
 	//sport
 	//sword
