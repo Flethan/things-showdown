@@ -124,6 +124,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			kineticenergy: ["8L25"],
 			horizontaltranslation: ["8L10"],
 			hit: ["8M"],
+			voidtrap: ["8L60"],
 		},
 	},
 	meltipillar: {
@@ -503,6 +504,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			noescape: ["8L50"],
 			hit: ["8M"],
 			nullland: ["8L1"],
+			voidtrap: ["8L38"],
 		},
 	},
 	fishish: {
@@ -770,6 +772,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nightmode: ["8L44"],
 			timecapsule: ["8L36"],
 			hit: ["8M"],
+			voidtrap: ["8L49"],
 		},
 	},
 	harry: {

@@ -2194,6 +2194,35 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spd: 1}},
 		contestType: "Cute",
 	},
+	voidtrap: {
+		num: 1447,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Void Trap",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'voidtrap',
+		condition: {
+			// this is a side condition
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Void Trap');
+			},
+			onSwitchIn(pokemon) {
+				if (pokemon.hasItem('yellowsafetyvest')) return;
+				else pokemon.trySetStatus('banished', this.effectState.source);
+				this.add('-sideend', pokemon.side, 'move: Void Trap', '[of] ' + pokemon);
+				pokemon.side.removeSideCondition('voidtrap');
+			},
+		},
+		secondary: null,
+		target: "foeSide",
+		type: "No",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
+	},
 	
 	//Science
 	study: {
