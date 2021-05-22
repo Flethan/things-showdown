@@ -300,8 +300,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	landscapingpermits: {
-		name: "Landscaping Permits",
+	landscapingpermit: {
+		name: "Landscaping Permit",
 		spritenum: 789,
 		fling: {
 			basePower: 20,
@@ -310,17 +310,15 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	blindfold: {
-		name: "Blindfold",
+	yellowsafetyvest: {
+		name: "Yellow Safety Vest",
 		spritenum: 790,
 		fling: {
-			basePower: 10,
-		},
-		onStart (pokemon) {
-			pokemon.trySetStatus('blinded', pokemon);
+			basePower: 20,
 		},
 		num: -239,
 		gen: 8,
+		// Hazard Immunity implemented in each hazard
 		isNonstandard: "Thing",
 	},
 	nonslipshoes: {
@@ -339,15 +337,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	yellowsafetyvest: {
-		name: "Yellow Safety Vest",
+	blindfold: {
+		name: "Blindfold",
 		spritenum: 792,
 		fling: {
-			basePower: 20,
+			basePower: 10,
+		},
+		onStart (pokemon) {
+			pokemon.trySetStatus('blinded', pokemon);
+			pokemon.useItem();
 		},
 		num: -241,
 		gen: 8,
-		// Hazard Immunity implemented in moves.js
 		isNonstandard: "Thing",
 	},
 	dimensionaltether: {

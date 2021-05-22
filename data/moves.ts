@@ -939,8 +939,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
 			];
 			for (const targetCondition of removeAll) {
-				if (target.side.removeSideCondition(targetCondition)) {
-					this.add('-sideend', target.side, this.dex.conditions.get(targetCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
+				if (source.side.foe.removeSideCondition(targetCondition)) {
+					this.add('-sideend', source.side.foe, this.dex.conditions.get(targetCondition).name, '[from] move: Nuisance Pest', '[of] ' + source);
 					success++;
 				}
 			}
@@ -1222,14 +1222,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('landscapingpermits')) {
+				if (source?.hasItem('landscapingpermit')) {
 					return 10;
 				}
 				return 5;
 			},
 			onSetStatus(status, target, source, effect) {
 				if (target.isSemiInvulnerable()) return;
-				if(status.id === 'prone') return;
+				if (status.id === 'prone') return;
 				if (effect && ((effect as Move).status || effect.id === 'yawn')) {
 					this.add('-activate', target, 'move: Sudscape');
 				}
@@ -1313,7 +1313,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (move.flags['contact']) {
-					if(source.hasType('Fish')) {
+					if (source.hasType('Fish')) {
 						this.boost({atk: -1}, source, target, this.dex.getActiveMove('bubbleshield'));
 					} else {
 						const typeMod = this.clampIntRange(source.runEffectiveness(this.dex.getActiveMove('bubbleshield')), -6, 6);
@@ -1324,7 +1324,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onHit(target, source, move) {
 				if (move.isZOrMaxPowered && move.flags['contact']) {
-					if(source.hasType('Fish')) {
+					if (source.hasType('Fish')) {
 						this.boost({atk: -1}, source, target, this.dex.getActiveMove('bubbleshield'));
 					} else {
 						const typeMod = this.clampIntRange(source.runEffectiveness(this.dex.getActiveMove('bubbleshield')), -6, 6);
@@ -1605,7 +1605,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		onTryHit() {
-			if(!this.field.isTerrain('mysticalsong')) return false;
+			if (!this.field.isTerrain('mysticalsong')) return false;
 		},
 		onHit() {
 			this.field.terrainState.duration = 5;
@@ -1711,13 +1711,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('landscapingpermits')) {
+				if (source?.hasItem('landscapingpermit')) {
 					return 10;
 				}
 				return 5;
 			},
 			onAfterMoveSecondary(target, source, move) {
-				if(move.songFlags) {
+				if (move.songFlags) {
 					for (const flag in move.songFlags) {
 						if (this.field.activeFlags.length && this.field.activeFlags.includes(move.songFlags[flag])) continue;
 						this.field.activeFlags.push(move.songFlags[flag]);
@@ -1727,7 +1727,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onTryHit(target, source, effect) {
 				if (!this.field.activeFlags.length) return;
-				if(this.field.activeFlags.includes('nopriority')) {
+				if (this.field.activeFlags.includes('nopriority')) {
 					if (['windy'].includes(target.effectiveWeather()) && effect.type === 'Weather' && effect.priority <= 1.5) return;
 					if (effect && (effect.priority <= 0.5 || effect.target === 'self')) return;
 					if (target.isSemiInvulnerable() || target.side === source.side) return;
@@ -1738,31 +1738,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onSetStatus(status, target, source, effect) {
 				if (!this.field.activeFlags.length) return;
 				if (target.isSemiInvulnerable()) return;
-				if(this.field.activeFlags.includes('nostatus')) {
+				if (this.field.activeFlags.includes('nostatus')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'prone' && this.field.activeFlags.includes('noprone')) {
+				if (status.id === 'prone' && this.field.activeFlags.includes('noprone')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'banished' && this.field.activeFlags.includes('nobanished')) {
+				if (status.id === 'banished' && this.field.activeFlags.includes('nobanished')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'blinded' && this.field.activeFlags.includes('noblinded')) {
+				if (status.id === 'blinded' && this.field.activeFlags.includes('noblinded')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'pressurized' && this.field.activeFlags.includes('nopressurized')) {
+				if (status.id === 'pressurized' && this.field.activeFlags.includes('nopressurized')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'fluctuant' && this.field.activeFlags.includes('nofluctuant')) {
+				if (status.id === 'fluctuant' && this.field.activeFlags.includes('nofluctuant')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
-				if(status.id === 'wounded' && this.field.activeFlags.includes('nowounded')) {
+				if (status.id === 'wounded' && this.field.activeFlags.includes('nowounded')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
@@ -2148,7 +2148,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				if (source?.hasItem('landscapingpermits')) {
+				if (source?.hasItem('landscapingpermit')) {
 					return 10;
 				}
 				return 5;
@@ -2501,7 +2501,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if(randomChance > 40) {
+				if (randomChance > 40) {
 					if (randomStat) boost[randomStat] = 2;
 				} else {
 					if (randomStat) boost[randomStat] = 1;
@@ -2520,7 +2520,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if(randomChance > 70) {
+				if (randomChance > 70) {
 					if (randomStat) boost[randomStat] = -2;
 				} else {
 					if (randomStat) boost[randomStat] = -1;
@@ -2834,7 +2834,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						delete source.volatiles['lockedmove'];
 					}
 				}
-				if(target.hasMove('riposte')) {
+				if (target.hasMove('riposte')) {
 					target.addVolatile('ripostemove');
 					this.actions.useMove('riposte', target, source);
 				}
@@ -3057,7 +3057,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		sideCondition: 'hotcoals',
 		condition: {
 			// this is a side condition
-			onStart(side) {
+			onSideStart(side) {
 				this.add('-sidestart', side, 'move: Hot Coals');
 			},
 			onSwitchIn(pokemon) {
@@ -3104,10 +3104,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
-			if(this.field.isWeather('cold')) {
+			if (this.field.isWeather('cold')) {
 				this.boost({def: 1}, pokemon);
 			}
-			if(this.field.isWeather('hot')) {
+			if (this.field.isWeather('hot')) {
 				this.boost({spd: 1}, pokemon);
 			}
 		},
@@ -3342,7 +3342,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (!move || pokemon.volatiles['dynamax']) return;
 				if (move.isMax && move.baseMove) move = this.dex.moves.get(move.baseMove);
 				const moveIndex = pokemon.moves.indexOf(move.id);
-				if(move.isZ || noLoop.includes(move.id) || !pokemon.moveSlots[moveIndex] || pokemon.moveSlots[moveIndex].pp <= 0) return;
+				if (move.isZ || noLoop.includes(move.id) || !pokemon.moveSlots[moveIndex] || pokemon.moveSlots[moveIndex].pp <= 0) return;
 				for (const moveSlot of pokemon.moveSlots) {
 					if (moveSlot.id !== move.id) {
 						pokemon.disableMove(moveSlot.id);

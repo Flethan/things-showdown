@@ -167,6 +167,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			pokemon.addVolatile('3count1');
+			this.add('-start', pokemon, 'ability: Three');
 		},
 		onResidual(pokemon)	{
 			//Three does not count up on turns you switch in on.
@@ -206,6 +207,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		onStart(pokemon) {
 			pokemon.addVolatile('ocount1');
+			this.add('-start', pokemon, 'ability: Omega');
 		},
 		onResidual(pokemon)	{
 			//Omega does not count up on turns you switch in on.

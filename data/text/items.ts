@@ -1,4 +1,103 @@
 export const ItemsText: {[k: string]: ItemText} = {
+	// THINGS
+	jellytreat: {
+		name: "Jelly Treat",
+		desc: "Holder's Arthropod-type attacks deal 1.2x damage.",
+	},
+	extradirtydirt: {
+		name: "Extra Dirty Dirt",
+		desc: "Holder's Dirt-type attacks deal 1.2x damage.",
+	},
+	fishscale: {
+		name: "Fish Scale",
+		desc: "Holder's Fish-type attacks deal 1.2x damage.",
+	},
+	greens: {
+		name: "Greens",
+		desc: "Holder's Green-type attacks deal 1.2x damage.",
+	},
+	hdictionary: {
+		name: "H Dictionary",
+		desc: "Holder's H-type attacks deal 1.2x damage.",
+	},
+	hairbrush: {
+		name: "Hairbrush",
+		desc: "Holder's Hair-type attacks deal 1.2x damage.",
+	},
+	machineoil: {
+		name: "Machine Oil",
+		desc: "Holder's Industrial-type attacks deal 1.2x damage.",
+	},
+	spraybottle: {
+		name: "Spray Bottle",
+		desc: "Holder's Liquid-type attacks deal 1.2x damage.",
+	},
+	tuningfork: {
+		name: "Tuning Fork",
+		desc: "Holder's Music-type attacks deal 1.2x damage.",
+	},
+	littleshadow: {
+		name: "Little Shadow",
+		desc: "Holder's Night-type attacks deal 1.2x damage.",
+	},
+	nothing: {
+		name: "Nothing",
+		desc: "Holder's No-type attacks deal 1.2x damage.",
+	},
+	beaker: {
+		name: "Beaker",
+		desc: "Holder's Science-type attacks deal 1.2x damage.",
+	},
+	rubberball: {
+		name: "Rubber Ball",
+		desc: "Holder's Sport-type attacks deal 1.2x damage.",
+	},
+	whetstone: {
+		name: "Whetstone",
+		desc: "Holder's Sword-type attacks deal 1.2x damage.",
+	},
+	thermometer: {
+		name: "Thermometer",
+		desc: "Holder's Temperature-type attacks deal 1.2x damage.",
+	},
+	pocketwatch: {
+		name: "Pocket Watch",
+		desc: "Holder's Time-type attacks deal 1.2x damage.",
+	},
+	barometer: {
+		name: "Barometer",
+		desc: "Holder's Weather-type attacks deal 1.2x damage.",
+	},
+	yellowstuff: {
+		name: "Yellow Stuff",
+		desc: "Holder's Yellow-type attacks deal 1.2x damage.",
+	},
+	environmentalaccord: {
+		name: "Environmental Accord",
+		desc: "Environmental Factors set by holder last 10 turns.",
+	},
+	landscapingpermit: {
+		name: "Landscaping Permit",
+		desc: "Landscape Factors set by holder last 10 turns.",
+	},
+	yellowsafetyvest: {
+		name: "Yellow Safety Vest",
+		desc: "Holder is immune to Side Conditions on its side.",
+	},
+	blindfold: {
+		name: "Blindfold",
+		desc: "Holder becomes blinded when sent out. Single use.",
+	},
+	nonslipshoes: {
+		name: "Non Slip Shoes",
+		desc: "Holder gets up if prone. Single use.",
+	},
+	dimensionaltether: {
+		name: "Yellow Safety Vest",
+		desc: "Holder reapears if banished. Single use.",
+	},
+
+	// BASE GAME
 	abomasite: {
 		name: "Abomasite",
 		desc: "If held by an Abomasnow, this item allows it to Mega Evolve in battle.",
