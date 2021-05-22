@@ -278,7 +278,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onEnd(target) {
 				if (target && !target.fainted) {
 					this.boost({def: 1, spd: 1});
-					target.removeVolatile('ecdyse');
 				}
 			},
 		},
