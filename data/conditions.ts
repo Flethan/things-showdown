@@ -113,7 +113,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'prone',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.add('-start', target, 'prone');
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'prone', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -122,24 +121,15 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
-			if (move.category === 'Status') {
-				pokemon.cureStatus();
-				return;
-			}
+			if (move.category === 'Status')	pokemon.cureStatus();
+			else this.add('reduced', pokemon, 'prone');
 		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'prone');
-		},
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'prone');
-		},
-		// Damage reduction is handled directly in the sim/battle.js damage function
+		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 	banished: {
 		name: 'banished',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.add('-start', target, 'banished');
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'banished', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
@@ -178,12 +168,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 8);
 		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'banished');
-		},
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'banished');
-		},
 	},
 	blinded: {
 		name: 'blinded',
@@ -202,18 +186,11 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return this.chainModify(0.75);
 			}
 		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'blinded');
-		},
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'blinded');
-		},
 	},
 	pressurized: {
 		name: 'pressurized',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.add('-start', target, 'pressurized');
 			this.field.addPseudoWeather('pressurizer');
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'pressurized', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
@@ -231,21 +208,14 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				return;
 			}
 		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'pressurized');
+		onSwitchIn() {
 			this.effectState.time = this.effectState.startTime;
-		},
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'pressurized');
 		},
 	},
 	pressurizer: {
 		onResidualOrder: 9,
-		onResidual(targetSide) {
-			let pressureMod = 1;
-			if(this.field.getWeather().id === 'underwater') {
-				pressureMod = 2;
-			}
+		onResidual() {
+			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
 			for (const side of this.sides) {
 				for (const ally of side.pokemon) {
 					if (ally.status !== 'pressurized') continue;
@@ -253,14 +223,13 @@ export const Conditions: {[k: string]: ConditionData} =  {
 					if (ally.fainted || !ally.hp) continue;
 					if (ally.ability === 'highpressure') {
 						this.add('-activate', ally, 'ability: High Pressure');
-						this.add('-message', `${ally.name} was healed by pressurized!`);
-						let collateral = this.clampIntRange(ally.baseMaxhp / (8 / pressureMod), 1);
-						if (collateral >= (ally.baseMaxhp - ally.hp)) collateral = (ally.baseMaxhp - ally.hp);
+						let collateral = this.clampIntRange(pressureMod * ally.maxhp / 8, 1);
+						if (collateral >= (ally.maxhp - ally.hp)) collateral = (ally.maxhp - ally.hp);
 						this.directHeal(collateral, ally);
 						if (ally.hp === ally.baseMaxhp) ally.cureStatus();
 					} else {
-						this.add('-message', `${ally.name} was hurt by pressurized!`);
-						let collateral = this.clampIntRange(ally.baseMaxhp / (8 / pressureMod), 1);
+						this.add('damage', ally, 'pressurized');
+						let collateral = this.clampIntRange(pressureMod * ally.maxhp / 8, 1);
 						if (collateral >= ally.hp) collateral = ally.hp - 1;
 						this.directDamage(collateral, ally);
 						if (ally.hp === 1) ally.cureStatus();
@@ -273,7 +242,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'fluctuant',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.add('-start', target, 'fluctuant');
 			if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'fluctuant', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
@@ -286,15 +254,11 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			this.effectState.time = this.effectState.startTime;
 		},
 		onResidual(pokemon) {
-			pokemon.statusState.time--;
-			if (pokemon.statusState.time <= 0) {
-				pokemon.cureStatus();
-				return;
-			}
-			let fluctMod = 1;
-			if(this.field.getWeather().id === 'hot' || this.field.getWeather().id === 'cold') {
-				fluctMod = 2;
-			}
+			this.add('activate', pokemon, 'fluctuant');
+
+			const loops = this.field.isWeather(['hot', 'cold']) ? 2 : 1;
+			const posLoops = pokemon.hasItem('pRNG Machine') ? 2 : 1;
+			const negLoops = 2;
 
 			let stats: BoostID[] = [];
 			const boost: SparseBoostsTable = {};
@@ -305,38 +269,37 @@ export const Conditions: {[k: string]: ConditionData} =  {
 					stats.push(statPlus);
 				}
 			}
-			let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-			if (randomStat) boost[randomStat] = 1 * fluctMod;
-
-			stats = [];
-			let statMinus1: BoostID;
-			for (statMinus1 in pokemon.boosts) {
-				if (statMinus1 === 'accuracy' || statMinus1 === 'evasion') continue;
-				if (pokemon.boosts[statMinus1] > -6 && statMinus1 !== randomStat) {
-					stats.push(statMinus1);
-				}
+			for (let i = 0; i < (loops * posLoops); i++) {
+				if (!stats.length) break;
+				const rand = Math.floor(Math.random() * stats.length);
+				const randomStat: BoostID = stats[rand];
+				stats.splice(rand, 1);
+				if (randomStat) boost[randomStat] = 1;
 			}
-			randomStat = stats.length ? this.sample(stats) : undefined;
-			if (randomStat) boost[randomStat] = -1 * fluctMod;
-
-			stats = [];
-			let statMinus2: BoostID;
-			for (statMinus2 in pokemon.boosts) {
-				if (statMinus2 === 'accuracy' || statMinus2 === 'evasion') continue;
-				if (pokemon.boosts[statMinus2] > -6 && statMinus2 !== randomStat) {
-					stats.push(statMinus2);
-				}
-			}
-			randomStat = stats.length ? this.sample(stats) : undefined;
-			if (randomStat) boost[randomStat] = -1 * fluctMod;
-
 			this.boost(boost);
-		},
-		onSwitchIn(pokemon) {
-			this.add('-start', pokemon, 'fluctuant');
-		},
-		onEnd(pokemon) {
-			this.add('-end', pokemon, 'fluctuant');
+
+			stats = [];
+			let statMinus: BoostID;
+			for (statMinus in pokemon.boosts) {
+				if (statMinus === 'accuracy' || statMinus === 'evasion') continue;
+				if (pokemon.boosts[statMinus] > -6) {
+					stats.push(statMinus);
+				}
+			}
+			for (let i = 0; i < (loops * negLoops); i++) {
+				if (!stats.length) break;
+				const rand = Math.floor(Math.random() * stats.length);
+				const randomStat: BoostID = stats[rand];
+				stats.splice(rand, 1);
+				if (randomStat) boost[randomStat] = 1;
+			}
+			this.boost(boost);
+
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+				return;
+			}
 		},
 	},
 	wounded: {
@@ -353,9 +316,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onModifyDef(def, pokemon) {
 			return this.modify(def, 0.5);
 		},
-		onResidualOrder: 9,
-		onResidual(pokemon) {
-			this.damage(pokemon.baseMaxhp / 8);
+		onBeforeMovePriority: 20,
+		onBeforeMove(source, target, move) {
+			if (source !== target) this.damage(source.baseMaxhp / 4);
 		},
 	},
 	
