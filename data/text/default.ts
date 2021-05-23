@@ -131,7 +131,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 	// status
 	prone: {
 		start: "  [POKEMON] was knocked prone!",
-		startFromItem: "  [POKEMON] fell over from the [ITEM]!",
+		startFromItem: "  [POKEMON]'s [ITEM] knocked it over!",
 		alreadyStarted: "  [POKEMON] is already knocked prone!",
 		end: "  [POKEMON] got back up!",
 		endFromItem: "  [POKEMON]'s [ITEM] helped it back up!",
@@ -150,7 +150,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 	blinded: {
 		start: "  [POKEMON] was blinded!",
 		startFromItem: "  [POKEMON] was blinded by the [ITEM]!",
-		alreadyStarted: "  [POKEMON] is blinded!",
+		alreadyStarted: "  [POKEMON] is already blind!",
 		end: "  [POKEMON]'s vision was restored!",
 		endFromItem: "  [POKEMON]'s [ITEM] restored its vision!",
 	},

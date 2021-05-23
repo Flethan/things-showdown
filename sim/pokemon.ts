@@ -1494,26 +1494,6 @@ export class Pokemon {
 			return false;
 		}
 		this.battle.add('-curestatus', this, this.status, silent ? '[silent]' : '[msg]');
-		if (this.status === 'prone') {
-			this.removeVolatile('prone');
-			this.battle.add('-end', this, 'prone');
-		}
-		if (this.status === 'banished') {
-			this.removeVolatile('banished');
-			this.battle.add('-end', this, 'banished');
-		}
-		if (this.status === 'blinded' && !this.hasAbility('blind')) {
-			this.removeVolatile('blinded');
-			this.battle.add('-end', this, 'blinded');
-		}
-		if (this.status === 'pressurized') {
-			this.removeVolatile('pressurized');
-			this.battle.add('-end', this, 'pressurized');
-		}
-		if (this.status === 'fluctuant') {
-			this.removeVolatile('fluctuant');
-			this.battle.add('-end', this, 'fluctuant');
-		}
 		if (this.status === 'slp' && !this.hasAbility('comatose') && this.removeVolatile('nightmare')) {
 			this.battle.add('-end', this, 'Nightmare', '[silent]');
 		}

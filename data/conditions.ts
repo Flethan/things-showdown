@@ -113,7 +113,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'prone',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'prone', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'prone', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
 				this.add('-status', target, 'prone');
@@ -130,10 +132,10 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'banished',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'banished', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'banished', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
-			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
-				this.add('-status', target, 'banished', '[from] move: ' + sourceEffect.name);
 			} else {
 				this.add('-status', target, 'banished');
 			}
@@ -173,7 +175,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'blinded',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'blinded', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'blinded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
 				this.add('-status', target, 'blinded');
@@ -191,7 +195,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			this.field.addPseudoWeather('pressurizer');
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'pressurized', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'pressurized', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
 				this.add('-status', target, 'pressurized');
@@ -241,10 +247,10 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'fluctuant',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'fluctuant', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'fluctuant', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
-			} else if (sourceEffect && sourceEffect.effectType === 'Move') {
-				this.add('-status', target, 'fluctuant', '[from] move: ' + sourceEffect.name);
 			} else {
 				this.add('-status', target, 'fluctuant');
 			}
@@ -260,7 +266,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			const negLoops = 2;
 
 			let stats: BoostID[] = [];
-			const boost: SparseBoostsTable = {};
+			let boost: SparseBoostsTable = {};
 			let statPlus: BoostID;
 			for (statPlus in pokemon.boosts) {
 				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
@@ -278,6 +284,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			this.boost(boost);
 
 			stats = [];
+			boost = {};
 			let statMinus: BoostID;
 			for (statMinus in pokemon.boosts) {
 				if (statMinus === 'accuracy' || statMinus === 'evasion') continue;
@@ -305,7 +312,9 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		name: 'wounded',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			if (sourceEffect && sourceEffect.effectType === 'Ability') {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'wounded', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'wounded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
 				this.add('-status', target, 'wounded');
