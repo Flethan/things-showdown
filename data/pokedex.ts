@@ -478,7 +478,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Yellow",
 		eggGroups: ["Grass"],
-		requiredAbility: "Lemon",
 	},
 	empty: {
 		num: -332,
