@@ -1,58 +1,5 @@
 export const DefaultText: {[k: string]: DefaultText} = {
 	default: {
-		// THINGS
-		// status
-		prone: {
-			start: "  [POKEMON] was knocked prone!",
-			startFromItem: "  [POKEMON] fell over from the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is already knocked prone!",
-			end: "  [POKEMON] got back up!",
-			endFromItem: "  [POKEMON]'s [ITEM] helped it back up!",
-			reduced: "  [POKEMON] can't get back up!",
-		},
-		banished: {
-			start: "  [POKEMON] was banished!",
-			startFromItem: "  [POKEMON] was banished by the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is already banished!",
-			end: "  [POKEMON] returned from its banishment!",
-			endFromItem: "  [POKEMON]'s [ITEM] returned it from its banishment!",
-			endFromMove: "  [POKEMON]'s [MOVE] opened a way back from its banishment!",
-			damage: "  [POKEMON]'s existence is being torn away by its banishment!",
-			cant: "[POKEMON] can't reach out from its banishment!",
-		},
-		blinded: {
-			start: "  [POKEMON] was blinded!",
-			startFromItem: "  [POKEMON] was blinded by the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is blinded!",
-			end: "  [POKEMON]'s vision was restored!",
-			endFromItem: "  [POKEMON]'s [ITEM] restored its vision!",
-		},
-		pressurized: {
-			start: "  [POKEMON] was pressurized!",
-			startFromItem: "  [POKEMON] was pressurized by the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is already under pressure!",
-			end: "  [POKEMON]'s pressure returned to normal!",
-			endFromItem: "  [POKEMON]'s [ITEM] returned its pressure to normal!",
-			damage: "  [POKEMON] can't take the pressure!",
-		},
-		fluctuant: {
-			start: "  [POKEMON] became fluctuant!",
-			startFromItem: "  [POKEMON] was made fluctuant by the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is already fluctuant!",
-			end: "  [POKEMON] is no longer fluctuant!",
-			endFromItem: "  [POKEMON]'s [ITEM] made it no longer fluctuant!",
-			activate: "  [POKEMON] stats fluctuated!",
-		},
-		wounded: {
-			start: "  [POKEMON] was wounded!",
-			startFromItem: "  [POKEMON] was wounded by the [ITEM]!",
-			alreadyStarted: "  [POKEMON] is already wounded!",
-			end: "  [POKEMON]'s wounds closed up!",
-			endFromItem: "  [POKEMON]'s [ITEM] closed its wounds!",
-			damage: "  [POKEMON] strained its wounds too much!",
-		},
-
-		// BASE GAME
 		startBattle: "Battle started between [TRAINER] and [TRAINER]!",
 		winBattle: "**[TRAINER]** won the battle!",
 		tieBattle: "Tie between [TRAINER] and [TRAINER]!",
@@ -180,6 +127,59 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		hitCountSingular: "  The Pok\u00E9mon was hit 1 time!",
 	},
 
+	// THINGS
+	// status
+	prone: {
+		start: "  [POKEMON] was knocked prone!",
+		startFromItem: "  [POKEMON] fell over from the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already knocked prone!",
+		end: "  [POKEMON] got back up!",
+		endFromItem: "  [POKEMON]'s [ITEM] helped it back up!",
+		reduced: "  [POKEMON] can't get back up!",
+	},
+	banished: {
+		start: "  [POKEMON] was banished!",
+		startFromItem: "  [POKEMON] was banished by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already banished!",
+		end: "  [POKEMON] returned from its banishment!",
+		endFromItem: "  [POKEMON]'s [ITEM] returned it from its banishment!",
+		endFromMove: "  [POKEMON]'s [MOVE] opened a way back from its banishment!",
+		damage: "  [POKEMON]'s existence is being torn away by its banishment!",
+		cant: "[POKEMON] can't reach out from its banishment!",
+	},
+	blinded: {
+		start: "  [POKEMON] was blinded!",
+		startFromItem: "  [POKEMON] was blinded by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is blinded!",
+		end: "  [POKEMON]'s vision was restored!",
+		endFromItem: "  [POKEMON]'s [ITEM] restored its vision!",
+	},
+	pressurized: {
+		start: "  [POKEMON] was pressurized!",
+		startFromItem: "  [POKEMON] was pressurized by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already under pressure!",
+		end: "  [POKEMON]'s pressure returned to normal!",
+		endFromItem: "  [POKEMON]'s [ITEM] returned its pressure to normal!",
+		damage: "  [POKEMON] can't take the pressure!",
+	},
+	fluctuant: {
+		start: "  [POKEMON] became fluctuant!",
+		startFromItem: "  [POKEMON] was made fluctuant by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already fluctuant!",
+		end: "  [POKEMON] is no longer fluctuant!",
+		endFromItem: "  [POKEMON]'s [ITEM] made it no longer fluctuant!",
+		activate: "  [POKEMON] stats fluctuated!",
+	},
+	wounded: {
+		start: "  [POKEMON] was wounded!",
+		startFromItem: "  [POKEMON] was wounded by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already wounded!",
+		end: "  [POKEMON]'s wounds closed up!",
+		endFromItem: "  [POKEMON]'s [ITEM] closed its wounds!",
+		damage: "  [POKEMON] strained its wounds too much!",
+	},
+
+	// BASE GAME
 	// stats
 	hp: {
 		statName: "HP",
