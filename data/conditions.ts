@@ -216,8 +216,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		},
 	},
 	pressurizer: {
-		onResidualOrder: 9,
-		onResidual() {
+		onFieldResidualOrder: 9,
+		onFieldResidual() {
 			console.log('pres');
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
 			for (const pokemon of this.getAllPokemon()) {
