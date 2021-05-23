@@ -666,6 +666,11 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cooldown: ["8L1"],
 			yellowgigahit: ["8L1"],
 			hit: ["8M"],
+			supercell: ["8L1"],
+			weatherfront: ["8L1"],
+			yellowsoak: ["8L1"],
+			yellowshift: ["8L1"],
+			yellowslap: ["8L1"],
 		},
 	},
 	yellowater: {
