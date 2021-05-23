@@ -124,7 +124,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (move.category === 'Status')	pokemon.cureStatus();
-			else this.add('reduced', pokemon, 'prone');
+			else this.add('-reduced', pokemon, 'prone');
 		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
@@ -148,19 +148,17 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			pokemon.statusState.time--;
 			if (pokemon.statusState.time <= 0) {
 				pokemon.cureStatus();
-				return;
+			} else if (move.banishedUsable) {
+				// this.add('-activate', pokemon, 'move: ' + this.effectState.sourceEffect, '[of] ' + pokemon);
+			} else {
+				this.add('cant', pokemon, 'banished');
+				return false;
 			}
-			this.add('cant', pokemon, 'banished');
-			if (move.banishedUsable) {
-				return;
-			}
-			return false;
 		},
 		onInvulnerability(target, source, move) {
-			if (move.hitsBanished) {
-				return;
+			if (!move.hitsBanished) {
+				return false;
 			}
-			return false;
 		},
 		onSourceModifyDamage(damage, source, target, move) {
 			if (move.id === 'noescape') {
@@ -221,24 +219,23 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onResidualOrder: 9,
 		onResidual() {
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
-			for (const side of this.sides) {
-				for (const ally of side.pokemon) {
-					if (ally.status !== 'pressurized') continue;
-					if (ally.isActive && !this.field.getPseudoWeather('hadalzone')) continue;
-					if (ally.fainted || !ally.hp) continue;
-					if (ally.ability === 'highpressure') {
-						this.add('-activate', ally, 'ability: High Pressure');
-						let collateral = this.clampIntRange(pressureMod * ally.maxhp / 8, 1);
-						if (collateral >= (ally.maxhp - ally.hp)) collateral = (ally.maxhp - ally.hp);
-						this.directHeal(collateral, ally);
-						if (ally.hp === ally.baseMaxhp) ally.cureStatus();
-					} else {
-						this.add('damage', ally, 'pressurized');
-						let collateral = this.clampIntRange(pressureMod * ally.maxhp / 8, 1);
-						if (collateral >= ally.hp) collateral = ally.hp - 1;
-						this.directDamage(collateral, ally);
-						if (ally.hp === 1) ally.cureStatus();
-					}
+			for (const pokemon of this.getAllPokemon()) {
+				if (pokemon.status !== 'pressurized' ||
+					(pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) ||
+					pokemon.fainted || !pokemon.hp
+				) continue;
+				if (pokemon.ability === 'highpressure') {
+					this.add('-activate', pokemon, 'ability: High Pressure');
+					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+					if (collateral >= (pokemon.maxhp - pokemon.hp)) collateral = (pokemon.maxhp - pokemon.hp);
+					this.directHeal(collateral, pokemon);
+					if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
+				} else {
+					this.add('-damage', pokemon, 'pressurized');
+					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+					if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
+					this.directDamage(collateral, pokemon);
+					if (pokemon.hp === 1) pokemon.cureStatus();
 				}
 			}
 		},
@@ -259,7 +256,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			this.effectState.time = this.effectState.startTime;
 		},
 		onResidual(pokemon) {
-			this.add('activate', pokemon, 'fluctuant');
+			this.add('-activate', pokemon, 'fluctuant');
 
 			const loops = this.field.isWeather(['hot', 'cold']) ? 2 : 1;
 			const posLoops = pokemon.hasItem('pRNG Machine') ? 2 : 1;
@@ -301,7 +298,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			}
 			this.boost(boost);
 
-			pokemon.statusState.time--;
+			if (!pokemon.hasItem('pRNG Machine')) pokemon.statusState.time--;
 			if (pokemon.statusState.time <= 0) {
 				pokemon.cureStatus();
 				return;
