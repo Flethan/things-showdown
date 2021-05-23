@@ -22749,7 +22749,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'tarshot',
 		condition: {
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Onstar Shot');
+				this.add('-start', pokemon, 'Tar Shot');
 			},
 			onEffectivenessPriority: -2,
 			onEffectiveness(typeMod, target, type, move) {
