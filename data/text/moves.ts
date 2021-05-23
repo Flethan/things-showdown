@@ -53,7 +53,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	summonlocusts: {
 		name: "Summon Locusts",
-		desc: "For 5 turns, the weather becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Locust Swarm.",
+		desc: "For 5 turns, the environment becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Locust Swarm.",
 		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
 	//dirt
@@ -110,7 +110,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	submerge: {
 		name: "Submerge",
-		desc: "For 5 turns, the weather becomes Underwater. At the end of each turn except the last, all active Fish-type Things recover 1/16 of their maximum HP, while Things that aren't Fish or Liquid type lose 1/16 of their maximum HP, rounded down; Things with prone have it removed. During the effect, the accuracy of Liquid-type moves is multiplied by 1.2, pressurized inflicts 2x damage, and the prone condition is prevented. Lasts for 8 turns if the user is holding Environmental Accord. Fails if the current weather is Underwater.",
+		desc: "For 5 turns, the environment becomes Underwater. At the end of each turn except the last, all active Fish-type Things recover 1/16 of their maximum HP, while Things that aren't Fish or Liquid type lose 1/16 of their maximum HP, rounded down; Things with prone have it removed. During the effect, the accuracy of Liquid-type moves is multiplied by 1.2, pressurized inflicts 2x damage, and the prone condition is prevented. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Underwater.",
 		shortDesc: "For 5 turns, the field sinks underwater.",
 	},
 	//green
@@ -284,7 +284,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	sudscape: {
 		name: "Sudscape",
-		desc: "For 5 turns, the Landscape Factor becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current Landscape Factor is Sudscape.",
+		desc: "For 5 turns, the landscape becomes Sudscape. During the effect, the power of Liquid-type attacks made by Things is multiplied by 1.2, if an attack misses the user falls prone, and Things cannot have non-prone conditions; cures conditions at the end of each turn. Fails if the current landscape is Sudscape.",
 		shortDesc: "5 turns. +Liquid power, misses->prone, cures other.",
 	},
 	bubbleshield: {
@@ -293,8 +293,127 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Protects from damaging attacks. Contact: Damage.",
 	},
 	//music
+	accent: {
+		name: "Accent",
+		desc: "Has a higher chance for a critical hit.",
+		shortDesc: "High critical hit ratio.",
+	},
+	earworm: {
+		name: "Earworm",
+		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move.",
+		shortDesc: "Traps and damages the target for 4-5 turns.",
+
+		start: "  [POKEMON] got the song stuck in its head!",
+	},
+	arpeggio: {
+		name: "Arpeggio",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times.",
+		shortDesc: "Hits 2-5 times in one turn.",
+	},
+	glissando: {
+		name: "Glissando",
+		desc: "No additional effect.",
+		shortDesc: "No additional effect. Hits adjacent foes.",
+	},
+	hypnoticmelody: {
+		name: "Hypnotic Melody",
+		desc: "Causes the target to become hypnotized, making it unable to attack 33% of the time. Fails if the target is already hypnotized. The effect ends when either the user or the target is no longer active.",
+		shortDesc: "A target gets hypnotized.",
+
+		start: "  [POKEMON] is put in a trance by the song!",
+		end: "  [POKEMON] recovered from the hypnosis!",
+		activate: "  [POKEMON] is in a trance from [TARGET]'s song!",
+		cant: "[POKEMON] is immobilized!",
+	},
+	crescendo: {
+		name: "Crescendo",
+		desc: "Raises the user's Special Attack by 1 stage. If Mystical Song is in effect, adds the Harmony to boost Music-type Things' Special Attack at the end of each turn.",
+		shortDesc: "Raises user's Sp. Atk 1. Harmony: Sp.Atk+1",
+	},
+	accelerando: {
+		name: "Accelerando",
+		desc: "Raises the user's Speed by 1 stage. If Mystical Song is in effect, adds the Harmony to boost Music-type Things' Speed at the end of each turn.",
+		shortDesc: "Raises user's Spe 1. Harmony: Spe+1",
+	},
+	diminuendo: {
+		name: "Diminuendo",
+		desc: "Lowers the target's Special Attack by 1 stage. If Mystical Song is in effect, adds the Harmony to lower non-Music-type Things' Special Attack at the end of each turn.",
+		shortDesc: "Lowers target's Sp. Atk 1. Harmony: Sp.Atk-1",
+	},
+	lento: {
+		name: "Lento",
+		desc: "Lowers the target's Speed by 1 stage. If Mystical Song is in effect, adds the Harmony to prevent the use of moves with original or altered priority greater than 0, except those with priority boosted by Windy.",
+		shortDesc: "Lowers foe(s) Spe by 1. Harmony: NoPriority",
+	},
+	mysticalsong: {
+		name: "Mystical	Song",
+		desc: "For 5 turns, the landscape becomes Mystical Song. During the effect, the power of Music-type moves is multiplied by 1.1, and if moves with Harmonies are used their specific effect is added to Mystical Song's effects. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Mystical Song.",
+		shortDesc: "For 5 turns, a mystical song manifests.",
+	},
+	dacapo: {
+		name: "Da Capo",
+		desc: "Resets the duration for Mystical Song to last for another 5 turns. Any Harmonies present are still maintained. Fails if the landscape is not Mystical Song.",
+		shortDesc: "Resets Mystical Song duration.",
+	},
+	conduct: {
+		name: "Conduct",
+		desc: "A random Music-type move is selected for use.",
+		shortDesc: "Picks a random Music-type move.",
+
+		move: "It conducts [MOVE]!",
+	},
+	harmoniouschord: {
+		name: "Harmonious Chord",
+		desc: "The user restores 1/2 of its maximum HP, rounded half up. If Mystical Song is in effect, adds the Harmony to heal Music-type Things by 1/8 of their max HP at the end of each turn.",
+		shortDesc: "Heals user by 50% max HP. Harmony:Heal",
+	},
 	//night
+	stealthstrike: {
+		name: "Stealth Strike",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
+	},
+	shootingstar: {
+		name: "Shooting Star",
+		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
+		shortDesc: "Uses user's Spe stat as Atk in damage calculation.",
+	},
+	moonbeam: {
+		name: "Moonbeam",
+		desc: "Has a 20% chance to lower the target's Special Attack by 1 stage.",
+		shortDesc: "20% chance to lower the target's Sp. Atk by 1.",
+	},
+	nightmode: {
+		name: "Night Mode",
+		desc: "Causes the target to become a Night type. Fails if the target is already purely Night type.",
+		shortDesc: "Changes the target's type to Night.",
+	},
+	nightfall: {
+		name: "Nightfall",
+		desc: "For 5 turns, the environment becomes Nighttime. At the end of each turn except the last, all active Night-type Things recover 1/16 of their maximum HP. During the effect, the accuracy of moves against of Night-type Things is multiplied by 0.8. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Nighttime.",
+		shortDesc: "For 5 turns, it turns to night.",
+	},
 	//no
+	voidpunch: {
+		name: "Void Punch",
+		desc: "Has a 10% chance to banish the target.",
+		shortDesc: "10% chance to banish the target.",
+	},
+	noescape: {
+		name: "No Escape",
+		desc: "If the target is banished, this move has its power doubled, cannot miss, and cures the target from being banished.",
+		shortDesc: "Hits banished targets for 2x power.",
+	},
+	voidscream: {
+		name: "Void Scream",
+		desc: "Has a 40% chance to make the target flinch. If the user is banished, this move has its power doubled",
+		shortDesc: "40% flinch chance. 2x power if user banished.",
+	},
+	nullland: {
+		name: "Null Land",
+		desc: "For 5 turns, the landscape becomes Null Land. During the effect, the power of No-type moves is multiplied by 1.2, and type effectivenesses are inverted. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Null Land.",
+		shortDesc: "For 5 turns, reality is inverted.",
+	},
 	voidtrap: {
 		name: "Void Trap",
 		desc: "Sets up a Side Condition on the opposing side of the field, making banished the next opposing Thing that switches in. Fails if the effect is already active on the opposing side.",
@@ -308,7 +427,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	study: {
 		name: "Study",
 		desc: "Lowers the target's Evasivness by 1 stage. Until the target switches out, the effectiveness of Science-type moves is doubled against it.",
-		shortDesc: "Target gets -1 Eva and becomes weaker to Fire.",
+		shortDesc: "Target gets -1 Eva and becomes weaker to Science.",
 
 		start: "  [POKEMON] became the subject of scientific study!",
 	},
