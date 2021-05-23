@@ -1861,7 +1861,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 			},
-			onResidual() {
+			onFieldResidual() {
 				if (!this.field.activeFlags.length) return;
 				for (const side of this.sides) {
 					for (const ally of side.active) {
