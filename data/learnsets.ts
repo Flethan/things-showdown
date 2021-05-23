@@ -688,6 +688,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowsoak: ["8L1"],
 			yellowshift: ["8L1"],
 			yellowslap: ["8L1"],
+			luminesce: ["8L1"],
+			brilliantflash: ["8L1"],
 		},
 	},
 	protosol: {
@@ -783,6 +785,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L36"],
 			hit: ["8M"],
 			voidtrap: ["8L49"],
+			noescape: ["8L55"],
+			dirtypunch: ["8L10"],
 		},
 	},
 	harry: {

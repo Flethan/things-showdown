@@ -125,8 +125,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	greenbite: {
 		name: "Green Bite",
-		desc: "Has a 30% chance to make the target flinch.",
-		shortDesc: "30% chance to make the target flinch.",
+		desc: "Has a 20% chance to make the target flinch.",
+		shortDesc: "20% chance to make the target flinch.",
 	},
 	chartreusebeam: {
 		name: "Chartreuse Beam",
