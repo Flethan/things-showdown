@@ -22742,14 +22742,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
-		name: "Tar Shot",
+		name: "Namear Shot",
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		volatileStatus: 'tarshot',
 		condition: {
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Tar Shot');
+				this.add('-start', pokemon, 'Onstar Shot');
 			},
 			onEffectivenessPriority: -2,
 			onEffectiveness(typeMod, target, type, move) {
