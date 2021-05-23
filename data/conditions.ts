@@ -124,7 +124,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			if (move.category === 'Status')	pokemon.cureStatus();
-			else this.add('-reduced', pokemon, 'prone');
+			else this.add('-activate', pokemon, 'prone');
 		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
@@ -218,6 +218,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 	pressurizer: {
 		onResidualOrder: 9,
 		onResidual() {
+			console.log('pres');
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
 			for (const pokemon of this.getAllPokemon()) {
 				if (pokemon.status !== 'pressurized' ||
@@ -231,7 +232,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 					this.directHeal(collateral, pokemon);
 					if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
 				} else {
-					this.add('-damage', pokemon, 'pressurized');
+					console.log('ident');
 					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
 					if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
 					this.directDamage(collateral, pokemon);

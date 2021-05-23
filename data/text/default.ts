@@ -135,7 +135,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		alreadyStarted: "  [POKEMON] is already knocked prone!",
 		end: "  [POKEMON] got back up!",
 		endFromItem: "  [POKEMON]'s [ITEM] helped it back up!",
-		reduced: "  [POKEMON] can't get back up!",
+		activate: "  [POKEMON] can't get back up!",
 	},
 	banished: {
 		start: "  [POKEMON] was banished!",
@@ -160,6 +160,8 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		alreadyStarted: "  [POKEMON] is already under pressure!",
 		end: "  [POKEMON]'s pressure returned to normal!",
 		endFromItem: "  [POKEMON]'s [ITEM] returned its pressure to normal!",
+	},
+	pressurizer: {
 		damage: "  [POKEMON] can't take the pressure!",
 	},
 	fluctuant: {
@@ -168,7 +170,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		alreadyStarted: "  [POKEMON] is already fluctuant!",
 		end: "  [POKEMON] is no longer fluctuant!",
 		endFromItem: "  [POKEMON]'s [ITEM] made it no longer fluctuant!",
-		activate: "  [POKEMON] stats fluctuated!",
+		activate: "  [POKEMON]'s stats fluctuated!",
 	},
 	wounded: {
 		start: "  [POKEMON] was wounded!",

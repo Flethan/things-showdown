@@ -96,6 +96,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Yellow Safety Vest",
 		desc: "Holder reapears if banished. Single use.",
 	},
+	prngmachine: {
+		name: "pRNG Machine",
+		desc: "Holder raises twice as many stats when fluctuant.",
+	},
 
 	// BASE GAME
 	abomasite: {

@@ -366,6 +366,16 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	prngmachine: {
+		name: "pRNG Machine",
+		spritenum: 794,
+		fling: {
+			basePower: 90,
+		},
+		num: -243,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 	
 	infinityiumz: {
 		name: "Infinityium Z",
