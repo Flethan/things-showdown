@@ -859,6 +859,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		prevo: "Albeedle",
 		evoLevel: 54,
+		evos: ["Reuleado"],
 		eggGroups: ["Mineral", "Bug"],
 	},
 	reuleado: {
@@ -887,6 +888,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 1.2,
 		weightkg: 70,
 		color: "Black",
+		evos: ["Guysword"],
 		eggGroups: ["Human-Like"],
 	},
 	guysword: {
