@@ -305,6 +305,13 @@ export const MovesText: {[k: string]: MoveText} = {
 		activate: "  [POKEMON] fell into the mysterious portal!",
 	},
 	//science
+	study: {
+		name: "Study",
+		desc: "Lowers the target's Evasivness by 1 stage. Until the target switches out, the effectiveness of Science-type moves is doubled against it.",
+		shortDesc: "Target gets -1 Eva and becomes weaker to Fire.",
+
+		start: "  [POKEMON] became the subject of scientific study!",
+	},
 	//sport
 	//sword
 	//temperature

@@ -162,7 +162,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		endFromItem: "  [POKEMON]'s [ITEM] returned its pressure to normal!",
 	},
 	pressurizer: {
-		damage: "  [POKEMON] can't take the pressure!",
+		activate: "  The pressure is intense!",
 	},
 	fluctuant: {
 		start: "  [POKEMON] became fluctuant!",

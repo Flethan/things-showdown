@@ -114,7 +114,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'prone', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'prone', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'prone', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -133,7 +133,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'banished', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'banished', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'banished', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -174,7 +174,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'blinded', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'blinded', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'blinded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -194,7 +194,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onStart(target, source, sourceEffect) {
 			this.field.addPseudoWeather('pressurizer');
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'pressurized', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'pressurized', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'pressurized', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -218,13 +218,17 @@ export const Conditions: {[k: string]: ConditionData} =  {
 	pressurizer: {
 		onFieldResidualOrder: 9,
 		onFieldResidual() {
-			console.log('pres');
+			let announced = false;
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
 			for (const pokemon of this.getAllPokemon()) {
 				if (pokemon.status !== 'pressurized' ||
 					(pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) ||
 					pokemon.fainted || !pokemon.hp
 				) continue;
+				if (!announced) {
+					this.add('-activate', null, 'pressurizer');
+					announced = true;
+				}
 				if (pokemon.ability === 'highpressure') {
 					this.add('-activate', pokemon, 'ability: High Pressure');
 					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
@@ -232,7 +236,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 					this.directHeal(collateral, pokemon);
 					if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
 				} else {
-					console.log('ident');
 					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
 					if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
 					this.directDamage(collateral, pokemon);
@@ -246,7 +249,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'fluctuant', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'fluctuant', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'fluctuant', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {
@@ -311,7 +314,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
-				this.add('-status', target, 'wounded', '[from] item: ' + sourceEffect.name, '[of] ' + source);
+				this.add('-status', target, 'wounded', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
 				this.add('-status', target, 'wounded', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
 			} else {

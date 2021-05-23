@@ -1228,7 +1228,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSetStatus(status, target, source, effect) {
 				if (target.isSemiInvulnerable()) return;
-				if (status.id === 'prone') return;
+				if (status.id === 'prone' || target.ability === 'blind') return;
 				if (effect && ((effect as Move).status || effect.id === 'yawn')) {
 					this.add('-activate', target, 'move: Sudscape');
 				}
