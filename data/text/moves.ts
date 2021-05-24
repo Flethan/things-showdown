@@ -519,11 +519,11 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	wager: {
 		name: "Wager",
-		desc: "If the selected target faints before the user's next move, boosts the user's Attack and Special Attack by 3.",
+		desc: "If the selected target faints before the end of the next turn, boosts the user's Attack and Special Attack by 3.",
 		shortDesc: "Choose target, boost Atk&SpA by 3 if they faint in next turn.",
 
-		start: "  [POKEMON] placed a bet on [TARGET]!",
-		activate: "[POKEMON]'s bet paid off!",
+		start: "  It placed a bet on [POKEMON]!",
+		activate: "The bet paid off!",
 	},
 	warmup: {
 		name: "Warm Up",
