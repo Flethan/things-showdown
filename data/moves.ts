@@ -2615,9 +2615,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			onStart(pokemon) {
-				this.add('-start', pokemon, 'Wager');
+				this.add('-start', pokemon, 'move: Wager', '[of] ' + this.effectState.source);
 			},
 			onFaint(target, source, effect) {
+				this.add('-activate', this.effectState.source, 'wager');
 				this.boost({atk: 3, spa: 3}, this.effectState.source);
 			},
 			onEnd(pokemon) {
@@ -3279,16 +3280,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1},
+		onTryHit(pokemon, target, move) {
+			let success = false;
+			let statName: BoostID;
+			for (statName in pokemon.boosts) {
+				const stage = pokemon.boosts[statName];
+				if (stage !== 0) success = true;
+			}
+			if (!success) return false;
+		},
 		slotCondition: 'timecapsule',
 		condition: {
 			duration: 2,
 			onStart(pokemon, source) {
-				this.effectState.passedBoosts = source.boosts;
-				source.clearBoosts();
-				this.add('-clearboost', source, '[from] move: Time Capsule');
+				const boosts: SparseBoostsTable = {};
+				let success = false;
+				let statName: BoostID;
+				for (statName in source.boosts) {
+					const stage = source.boosts[statName];
+					if (stage !== 0) {
+						boosts[statName] = stage;
+						success = true;
+					}
+				}
+				if (success) {
+					this.effectState.passedBoosts = boosts;
+					this.add('-clearboost', source, '[from] move: Time Capsule');
+					source.clearBoosts();
+				} else return false;
 			},
 			onResidualOrder: 4,
 			onEnd(pokemon) {
+				this.add('-activate', '[from] move: Time Capsule')
 				this.boost(this.effectState.passedBoosts, pokemon);
 			},
 		},

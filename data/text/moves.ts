@@ -522,8 +522,8 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If the selected target faints before the end of the next turn, boosts the user's Attack and Special Attack by 3.",
 		shortDesc: "Choose target, boost Atk&SpA by 3 if they faint in next turn.",
 
-		start: "  It placed a bet on [POKEMON]!",
-		activate: "The bet paid off!",
+		start: "  [POKEMON] placed a bet against [TARGET]!",
+		activate: "[POKEMON]'s bet paid off!",
 	},
 	warmup: {
 		name: "Warm Up",
@@ -654,6 +654,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Clears the user of all stat changes. At the end of the next turn, the Thing at the user's position receives all the cleared stat changes. Fails if this move is already in effect for the user's position.",
 		shortDesc: "Stats lost, and regained next turn.",
 
+		clearBoost: "  [SOURCE] placed their stat boosts into a time capsule!",
 		activate: "  [NICKNAME] opened the time capsule!",
 	},
 	coagulate: {
@@ -695,6 +696,30 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "For 5 turns, the wind picks up.",
 	},
 	//yellow
+	yellowslap: {
+		name: "Yellow Slap",
+		desc: "Has a 10% chance to blind the target.",
+		shortDesc: "10% chance to blind the target.",
+	},
+	limboeclipse: {
+		name: "Limbo Eclipse",
+		desc: "Lowers the target's attack by 1 stage. If this move misses, raises the user's attack by 2 stages instead.",
+		shortDesc: "Foe -1 atk. On miss, user +2 atk instead.",
+	},
+	flashmissle: {
+		name: "Flash Missle",
+		desc: "No additional effect.",
+		shortDesc: "Usually goes first.",
+	},
+	yellowgigahit: {
+		name: "Yellow Giga-Hit",
+		shortDesc: "No additional effect.",
+	},
+	luminesce: {
+		name: "Luminesce",
+		desc: "Has a 10% chance to blind the target.",
+		shortDesc: "10% chance to blind the target.",
+	},
 	staticstrike: {
 		name: "Static Strike",
 		desc: "If the target's side had Dust Cloud or Storm Cell active, this move deals double damage, always hits, and ignores the negative effects of those Side Conditions.",
@@ -707,7 +732,37 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  Yellow beams surround [TEAM]!",
 		end: "  The yellow beams dispersed around [TEAM]!",
-		damage: "  [POKEMON] was scorched by the yellow beams!",
+		damage: "  [POKEMON] was grazed by the yellow beams!",
+	},
+	brilliantflash: {
+		name: "Brilliant Flash",
+		desc: "Has a 20% chance to blind the target.",
+		shortDesc: "Hits adjacent foes, 20% chance to blind.",
+	},
+	yellowsoak: {
+		name: "Yellow Soak",
+		desc: "Raises the user's Defense and Special Defense by 1 stage. If the Environmental Factor is Yellowish, this move additionally raises the user's Attack, Special Attack, and Speed by 1 stage.",
+		shortDesc: "User +1 Def and SpD, and +1 Atk, SpA, and Spe in Yellowish.",
+	},
+	autumnaloffering: {
+		name: "Autumnal Offering",
+		desc: "For the remainder of the turn, allies' moves deal 1.5x damage.",
+		shortDesc: "This turn, allies deal 1.5x damage.",
+	},
+	fireworks: {
+		name: "Fireworks!",
+		desc: "The user faints, and if the Thing brought out to replace it has an attacking move, it will deal 1.5x damage and cannot use Status moves until it switches out. The replacement is sent out at the end of the turn. This effect continues until a Thing that meets this condition switches in at the user's position or gets swapped into the position with Horizontal Translation. Fails if the user is the last unfainted Thing in its party.",
+		shortDesc: "User faints. Next Thing's attack deal 1.5x.",
+	},
+	vetoslip: {
+		name: "Veto Slip",
+		desc: "The target is guarenteed to miss their next move. Cannot be used on the same target twice without them switching out.",
+		shortDesc: "Always goes first; Target misses next move.",
+	},
+	yellowshift: {
+		name: "Yellow-Shift",
+		desc: "For 5 turns, the environment becomes Yellowish. During the effect, Yellow-type moves never miss, and Green-type moves deal half damage. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Yellowish.",
+		shortDesc: "For 5 turns, it gets yellow.",
 	},
 
 	// BASE GAME
