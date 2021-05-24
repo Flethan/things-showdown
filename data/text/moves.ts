@@ -741,7 +741,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	yellowsoak: {
 		name: "Yellow Soak",
-		desc: "Raises the user's Defense and Special Defense by 1 stage. If the Environmental Factor is Yellowish, this move additionally raises the user's Attack, Special Attack, and Speed by 1 stage.",
+		desc: "Raises the user's Defense and Special Defense by 1 stage. If the environment is Yellowish, this move additionally raises the user's Attack, Special Attack, and Speed by 1 stage.",
 		shortDesc: "User +1 Def and SpD, and +1 Atk, SpA, and Spe in Yellowish.",
 	},
 	autumnaloffering: {
