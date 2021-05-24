@@ -125,8 +125,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	greenbite: {
 		name: "Green Bite",
-		desc: "Has a 20% chance to make the target flinch.",
-		shortDesc: "20% chance to make the target flinch.",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
 	},
 	chartreusebeam: {
 		name: "Chartreuse Beam",
@@ -260,8 +260,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	cascade: {
 		name: "Cascade",
-		desc: "Has a 10% chance knock the target prone.",
-		shortDesc: "10% chance knock the foe(s) prone.",
+		desc: "Has a 10% chance to knock the target prone.",
+		shortDesc: "10% chance to knock the foe(s) prone.",
 	},
 	wetfloor: {
 		name: "Wet Floor",
@@ -409,6 +409,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 40% chance to make the target flinch. If the user is banished, this move has its power doubled",
 		shortDesc: "40% flinch chance. 2x power if user banished.",
 	},
+	banish: {
+		name: "Banish",
+		desc: "Banishes the target.",
+		shortDesc: "Banishes the target.",
+	},
 	nullland: {
 		name: "Null Land",
 		desc: "For 5 turns, the landscape becomes Null Land. During the effect, the power of No-type moves is multiplied by 1.2, and type effectivenesses are inverted. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Null Land.",
@@ -424,6 +429,22 @@ export const MovesText: {[k: string]: MoveText} = {
 		activate: "  [POKEMON] fell into the mysterious portal!",
 	},
 	//science
+	kineticenergy: {
+		name: "Kinetic Energy",
+		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
+		shortDesc: "Uses user's Spe stat as Atk in damage calculation.",
+	},
+	factsandlogic: {
+		name: "Facts and Logic",
+		shortDesc: "No additional effect.",
+	},
+	particlebeam: {
+		name: "Particle Beam",
+		desc: "This attack charges on the first turn and executes on the second. ",
+		shortDesc: "Charges turn 1. Hits turn 2.",
+
+		prepare: "  [POKEMON] is building up energy!",
+	},
 	study: {
 		name: "Study",
 		desc: "Lowers the target's Evasivness by 1 stage. Until the target switches out, the effectiveness of Science-type moves is doubled against it.",
@@ -431,9 +452,166 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  [POKEMON] became the subject of scientific study!",
 	},
+	lookup: {
+		name: "Look Up",
+		desc: "A random move is selected for use.",
+		shortDesc: "Picks a random move.",
+
+		move: "It looked up how to use [MOVE]!",
+	},
+	horizontaltranslation: {
+		name: "Horizontal Translation",
+		desc: "The user swaps positions with its ally. Fails if the user is the only Pokemon on its side.",
+		shortDesc: "The user swaps positions with its ally.",
+	},
 	//sport
+	fourseamfastball: {
+		name: "Four-seam Fastball",
+		desc: "No additional effect.",
+		shortDesc: "Usually goes first.",
+	},
+	backtobreastturn: {
+		name: "Back-to-Breast Turn",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
+		shortDesc: "User switches out after damaging the target.",
+	},
+	openturn: {
+		name: "Open Turn",
+		desc: "If both the user and the target have not fainted, the target is forced to switch out and be replaced with a random unfainted ally.",
+		shortDesc: "Forces the target to switch to a random ally.",
+	},
+	shotput: {
+		name: "Shot Put",
+		desc: "Has a 10% chance to make the target flinch.",
+		shortDesc: "10% chance to make the target flinch.",
+	},
+	suplex: {
+		name: "Suplex",
+		desc: "The power of this move depends on (user's weight / target's weight), rounded down. Power is equal to 120 if the result is 5 or more, 100 if 4, 80 if 3, 60 if 2, and 40 if 1 or less.",
+		shortDesc: "More power the heavier the user than the target.",
+	},
+	soaringaxekick: {
+		name: "Soaring Axe Kick",
+		desc: "This attack charges on the first turn and executes on the second. On the first turn, the user avoids all attacks.",
+		shortDesc: "Jumps up on first turn, then strikes the next turn.",
+
+		prepare: "[POKEMON] jumped up high!",
+	},
+	counterthrow: {
+		name: "Counter Throw",
+		desc: "Deals damage to the last opposing Pokemon to hit the user with a physical attack this turn equal to twice the HP lost by the user from that attack, and forces them to switch out. If the user did not lose HP from the attack, this move deals 1 HP of damage instead. If that opposing Pokemon's position is no longer in use and there is another opposing Pokemon on the field, the damage is done to it instead. Only the last hit of a multi-hit attack is counted. Fails if the user was not hit by an opposing Pokemon's physical attack this turn.",
+		shortDesc: "If hit by physical, return 2x damage & force switch.",
+	},
+	fourinarow: {
+		name: "Four-in-a-Row",
+		desc: "Has a 20% chance to lower the target's Special Attack by 1 stage.",
+		shortDesc: "20% chance to lower the target's Sp. Atk by 1.",
+	},
+	whistle: {
+		name: "Whistle",
+		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to make contact with the user have their Attack and accuracy each lowered by 1 stage. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+		shortDesc: "Protects from damaging attacks. Contact: -1 Atk & acc.",
+	},
+	feelinglucky: {
+		name: "Feeling Lucky",
+		desc: "Gives the user 3 random effects. Each effect has a 1% chance of the user fainting, a 49% chance to boost a random stat by 1, a 25% chance to lower a random stat by 1, a 15% chance to heal the user and cure its statuses, a 9% chance to damage the user and give it a random status condition, and a 1% chance to boost all of the user's stats by 6 (excluding accuracy and evasion).",
+		shortDesc: "Gives the user some random effects.",
+	},
+	wager: {
+		name: "Wager",
+		desc: "If the selected target faints before the user's next move, boosts the user's Attack and Special Attack by 3.",
+		shortDesc: "Choose target, boost Atk&SpA by 3 if they faint in next turn.",
+
+		start: "  [POKEMON] placed a bet on [TARGET]!",
+		activate: "[POKEMON]'s bet paid off!",
+	},
+	warmup: {
+		name: "Warm Up",
+		desc: "Raises the user's Attack and Speed by 1 stage. If the user is Fjean, makes it change form.",
+		shortDesc: "Raises the user's Attack and Speed by 1.",
+	},
 	//sword
+	sharpslash: {
+		name: "Sharp Slash",
+		desc: "Has a higher chance for a critical hit.",
+		shortDesc: "High critical hit ratio.",
+	},
+	riposte: {
+		name: "Riposte",
+		desc: "Can only be used during a successful Parry. If Parry is used and succeeds, this move is automatically used against the attacker. Fails if used otherwise.",
+		shortDesc: "Can only be used during a successful Parry.",
+	},
+	swing: {
+		name: "Swing",
+		desc: "No additional effect.",
+		shortDesc: "No additional effect. Hits adjacent foes.",
+	},
+	disarmingstrike: {
+		name: "Disarming Strike",
+		desc: "Has a 100% chance to lower the target's Attack by 2 stages.",
+		shortDesc: "100% chance to lower the target's Attack by 2.",
+	},
+	quickdrawstrike: {
+		name: "Quick-draw Strike",
+		desc: "No additional effect.",
+		shortDesc: "Usually goes first.",
+	},
+	cheapstrike: {
+		name: "Cheap Strike",
+		desc: "Has a 50% chance to wound the target.",
+		shortDesc: "50% chance to wound the target.",
+	},
+	swordbeam: {
+		name: "Sword Beam",
+		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
+		shortDesc: "10% chance to lower the target's Sp. Def by 1.",
+	},
+	parry: {
+		name: "Parry",
+		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to attack the user are retaliated against with Riposte if the user knows it. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+		shortDesc: "Protects from damaging attacks. Hit: Use Riposte.",
+	},
 	//temperature
+	thermalpunch: {
+		name: "Thermal Punch",
+		desc: "Has a 10% chance to make the target fluctuant.",
+		shortDesc: "10% chance to make the target fluctuant.",
+	},
+	thermalslam: {
+		name: "Thermal Slam",
+		desc: "Has a 30% chance to make the target fluctuant.",
+		shortDesc: "30% chance to make the target fluctuant.",
+	},
+	reheat: {
+		name: "Reheat",
+		desc: "This move's type effectiveness against Temperature is changed to be super effective no matter what this move's type is.",
+		shortDesc: "Super effective on Temperature.",
+	},
+	radiate: {
+		name: "Radiate",
+		desc: "Has a 10% chance to make the target fluctuant.",
+		shortDesc: "Hits adjacent Things. 10% to make fluctant.",
+	},
+	thermicalcurrent: {
+		name: "Thermical Current",
+		desc: "Has a 70% chance to make the target fluctuant.",
+		shortDesc: "70% chance to make the foe(s) fluctuant.",
+	},
+	thermalexplosion: {
+		name: "Thermal Explosion",
+		desc: "The user faints after using this move, even if this move fails for having no target.",
+		shortDesc: "Hits adjacent Things. The user faints.",
+	},
+	heatup: {
+		name: "Heat Up",
+		desc: "For 5 turns, the environment becomes Hot. At the end of each turn except the last, all active Temperature-type Things have their Speed raised by 1. During the effect, the damage of Temperature-type moves is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Hot.",
+		shortDesc: "For 5 turns, it gets really hot.",
+	},
+	cooldown: {
+		name: "Cool Down",
+		desc: "For 5 turns, the environment becomes Cold. At the end of each turn except the last, all active Things have their Speed lowered by 1, unless they are Temperature-type. During the effect, the Temperature-type Things' Defense and Special Defense are multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Cold.",
+		shortDesc: "For 5 turns, it gets really cold.",
+	},
 	hotcoals: {
 		name: "Hot Coals",
 		desc: "Sets up a Side Condition on the opposing side of the field, making fluctuant each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Temperature-type Thing switches in.",
@@ -443,8 +621,66 @@ export const MovesText: {[k: string]: MoveText} = {
 		end: "  The hot coals cooled down around [TEAM]!",
 		activate: "  [POKEMON] minds their step around the coals!",
 	},
+	bask: {
+		name: "Bask",
+		desc: "The user restores 1/2 of its maximum HP. If the environment is Cold, the user's Defense is raised by 1; if the environment is Hot, the user's Special Defence is raised by 1.",
+		shortDesc: "Heals user by 1/2, boosts Def/SpD if Hot/Cold.",
+	},
 	//time
+	gravebite: {
+		name: "Grave Bite",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
+	},
+	minutehandslash: {
+		name: "Minute Hand Slash",
+		desc: "Hits six times.",
+		shortDesc: "Hits 6 times in one turn.",
+	},
+	hourhandslash: {
+		name: "Hour Hand Slash",
+		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
+		shortDesc: "User cannot move next turn.",
+	},
+	replay: {
+		name: "Replay",
+		desc: "The target immediately uses its last used move. Fails if the move is any two-turn move or any recharge move.",
+		shortDesc: "The target immediately uses its last used move.",
+
+		activate: "  [TARGET]'s move was replayed by [POKEMON]!",
+	},
+	timecapsule: {
+		name: "Time Capsule",
+		desc: "Clears the user of all stat changes. At the end of the next turn, the Thing at the user's position receives all the cleared stat changes. Fails if this move is already in effect for the user's position.",
+		shortDesc: "Stats lost, and regained next turn.",
+
+		activate: "  [NICKNAME] opened the time capsule!",
+	},
+	coagulate: {
+		name: "Coagulate",
+		desc: "The user restores 1/2 of its maximum HP, rounded half up. If used on the previous turn, has +1 priority.",
+		shortDesc: "Heals user by 50%. +1 priority if used last turn.",
+	},
+	timeloop: {
+		name: "Time Loop",
+		desc: "For 5 turns, Things can only use their last-selected move. If this move is used during the effect, the effect ends.",
+		shortDesc: "For 5 turns, all Things repeat their last move.",
+	},
 	//weather
+	rapidvortex: {
+		name: "Rapid Vortex",
+		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move.",
+		shortDesc: "Traps and damages the target for 4-5 turns.",
+
+		start: "  [POKEMON] became trapped in the vortex!",
+	},
+	hurricanewinds: {
+		name: "Hurricane Winds",
+		desc: "The power of this move varies; 20% chance for 40 power, 30% chance for 70 power, 25% chance for 90 power, 20% chance for 110 power, and 5% chance for 150 power.",
+		shortDesc: "Hits adjacent Pokemon. Power varies.",
+
+		activate: "  Category [NUMBER]!",
+	},
 	stormcell: {
 		name: "Storm Cell",
 		desc: "Sets up Storm Cell on the user's side of the field for 2 turns, or 4 turns if it is Windy. Ally Things in the Storm Cell take 0.66x damage (0.75x in multi-battles), and their Weather-type moves deal 1.5x damage.",
@@ -452,6 +688,11 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  A storm whips around [TEAM]!",
 		end: "  The storm calms around [TEAM]!",
+	},
+	weatherfront: {
+		name: "Weather Front",
+		desc: "For 5 turns, the environment becomes Windy. During the effect, the priority of Weather-type moves is increased by 1, and stat changes to Speed are ignored. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Windy.",
+		shortDesc: "For 5 turns, the wind picks up.",
 	},
 	//yellow
 	staticstrike: {

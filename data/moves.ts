@@ -641,7 +641,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	greenbite: {
 		num: 1631,
 		accuracy: 95,
-		basePower: 90,
+		basePower: 75,
 		category: "Physical",
 		isNonstandard: "Thing",
 		name: "Green Bite",
@@ -649,7 +649,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
 		secondary: {
-			chance: 20,
+			chance: 30,
 			volatileStatus: 'flinch',
 		},
 		target: "normal",
@@ -2938,7 +2938,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		basePower: 40,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Quick-Draw Strike",
+		name: "Quick-draw Strike",
 		pp: 15,
 		priority: 1,
 		flags: {contact: 1, protect: 1, mirror: 1},
