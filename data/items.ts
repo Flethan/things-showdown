@@ -376,6 +376,30 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	knife: {
+		name: "Knife",
+		spritenum: 795,
+		fling: {
+			basePower: 120,
+			volatileStatus: 'wounded',
+		},
+		onModifyMovePriority: -1,
+		onModifyMove(move) {
+			if (move.category !== "Status") {
+				if (!move.secondaries) move.secondaries = [];
+				for (const secondary of move.secondaries) {
+					if (secondary.volatileStatus === 'wounded') return;
+				}
+				move.secondaries.push({
+					chance: 10,
+					volatileStatus: 'wounded',
+				});
+			}
+		},
+		num: -244,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 	
 	infinityiumz: {
 		name: "Infinityium Z",
