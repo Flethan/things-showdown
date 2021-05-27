@@ -112,6 +112,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Fish Bait",
 		desc: "Fish-type Things must target the holder.",
 	},
+	bugbomb: {
+		name: "Bug Bomb",
+		desc: "If holder is hit, makes the environment Locust Swarm. Single use.",
+	},
 
 	// BASE GAME
 	abomasite: {

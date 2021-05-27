@@ -433,6 +433,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (source.hasType('Fish') && !this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+				this.add('-activate', pokemon, 'item: Fish Bait');
 				if (move.smartTarget) move.smartTarget = false;
 				this.debug("Fish Bait redirected target of move");
 				return this.effectState.target;
@@ -446,6 +447,21 @@ export const Items: {[itemid: string]: ItemData} = {
 		num: -246,
 		gen: 8,
 		isNonstandard: "Thing",
+	},
+	bugbomb: {
+		name: "Bug Bomb",
+		spritenum: 798,
+		fling: {
+			basePower: 40,
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (!move.damage && !move.damageCallback) {
+				target.useItem();
+				this.field.setWeather('locustswarm');
+			}
+		},
+		num: -247,
+		gen: 6,
 	},
 	
 	infinityiumz: {

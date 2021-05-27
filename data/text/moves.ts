@@ -764,6 +764,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Yellowish. During the effect, Yellow-type moves never miss, and Green-type moves deal half damage. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Yellowish.",
 		shortDesc: "For 5 turns, it gets yellow.",
 	},
+	transmute: {
+		name: "Transmute",
+		desc: "The user loses its current held item, and gains a random new held item. If it is not currently holding an item, it loses 1/4 of its max HP instead, then gains an item. Fails if the user has less than 1/4 of its max HP remaining and is not holding an item.",
+		shortDesc: "User exchanges its held item (or HP) for a new item.",
+	},
 
 	// BASE GAME
 	"10000000voltthunderbolt": {

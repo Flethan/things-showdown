@@ -3836,6 +3836,45 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'crit2'},
 		contestType: "Beautiful",
 	},
+	transmute: {
+		num: 500,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Transmute",
+		pp: 5,
+		priority: 0,
+		flags: {},
+		onHit() {
+			const items = Object.keys(this.dex.data.Items);
+
+			if(!pokemon.item) {
+				if (target.hp <= target.maxhp / 4 || target.maxhp === 1) { // Shedinja clause
+					return false;
+				}
+				this.directDamage(target.maxhp / 4);
+			} else {
+				const old_item = pokemon.getItem();
+				pokemon.setItem('');
+				pokemon.lastItem = old_item.id;
+				pokemon.usedItemThisTurn = true;
+			}
+
+			let item = '';
+			do {
+				item = this.sampleNoReplace(items);
+			} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
+
+			this.add('-item', pokemon, this.dex.items.get(item), '[from] move: Transmute');
+			pokemon.setItem(item);
+		},
+		secondary: null,
+		target: "self",
+		type: "Yellow",
+		zMove: {effect: 'heal'},
+		contestType: "Clever",
+	},
 	
 	//Infinity
 	
