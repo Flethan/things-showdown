@@ -100,6 +100,18 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "pRNG Machine",
 		desc: "Holder raises twice as many stats when fluctuant.",
 	},
+	knife: {
+		name: "Knife",
+		desc: "Holder's attacks without a chance to wound gain a 10% chance to wound.",
+	},
+	rechargeableshoes: {
+		name: "Rechargeable Shoes",
+		desc: "Holder moves first in its priority bracket, but skips every other turn.",
+	},
+	fishbait: {
+		name: "Fish Bait",
+		desc: "Fish-type Things must target the holder.",
+	},
 
 	// BASE GAME
 	abomasite: {

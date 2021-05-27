@@ -400,6 +400,53 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	rechargeableshoes: {
+		onStart(pokemon) {
+			pokemon.removeVolatile('rechargeableshoes');
+			if (pokemon.activeTurns && (pokemon.moveThisTurnResult !== undefined || !this.queue.willMove(pokemon))) {
+				pokemon.addVolatile('rechargeableshoes');
+			}
+		},
+		onBeforeMovePriority: 9,
+		onBeforeMove(pokemon) {
+			if (pokemon.removeVolatile('rechargeableshoes')) {
+				this.add('cant', pokemon, 'item: Rechargeable Shoes');
+				return false;
+			}
+			pokemon.addVolatile('truant');
+		},
+		onFractionalPriorityPriority: -2,
+		onFractionalPriority(priority, pokemon) {
+			this.add('-activate', pokemon, 'item: Rechargeable Shoes');
+			return 0.1;
+		},
+		name: "Rechargeable Shoes",
+		spritenum: 796,
+		fling: {
+			basePower: 60,
+		},
+		num: -245,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	fishbait: {
+		onFoeRedirectTargetPriority: 1,
+		onFoeRedirectTarget(target, source, source2, move) {
+			if (source.hasType('Fish') && !this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+				if (move.smartTarget) move.smartTarget = false;
+				this.debug("Fish Bait redirected target of move");
+				return this.effectState.target;
+			}
+		},
+		name: "Fish Bait",
+		spritenum: 797,
+		fling: {
+			basePower: 40,
+		},
+		num: -246,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 	
 	infinityiumz: {
 		name: "Infinityium Z",
