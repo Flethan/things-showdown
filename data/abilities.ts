@@ -702,7 +702,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 		},
-		name: "farewell",
+		name: "Farewell",
 		rating: 3.5,
 		num: 22,
 	},
