@@ -386,13 +386,13 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyMovePriority: -1,
 		onModifyMove(move) {
 			if (move.category !== "Status") {
-				if (!move.secondaries) move.secondaries = [];
-				for (const secondary of move.secondaries) {
-					if (secondary.volatileStatus === 'wounded') return;
+				if (!move || !move.flags['contact'] || move.target === 'self') return;
+				if (!move.secondaries) {
+					move.secondaries = [];
 				}
 				move.secondaries.push({
 					chance: 10,
-					volatileStatus: 'wounded',
+					status: 'wounded',
 				});
 			}
 		},
