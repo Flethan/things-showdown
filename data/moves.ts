@@ -3846,14 +3846,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		onHit() {
+		onHit(pokemon) {
 			const items = Object.keys(this.dex.data.Items);
 
 			if(!pokemon.item) {
-				if (target.hp <= target.maxhp / 4 || target.maxhp === 1) { // Shedinja clause
+				if (pokemon.hp <= pokemon.maxhp / 4 || pokemon.maxhp === 1) { // Shedinja clause
 					return false;
 				}
-				this.directDamage(target.maxhp / 4);
+				this.directDamage(pokemon.maxhp / 4);
 			} else {
 				const old_item = pokemon.getItem();
 				pokemon.setItem('');
@@ -3862,8 +3862,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 
 			let item = '';
+			items.sort((a, b) => a.num! - b.num!);
 			do {
-				item = this.sampleNoReplace(items);
+				item = this.sample(items);
 			} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
 
 			this.add('-item', pokemon, this.dex.items.get(item), '[from] move: Transmute');
