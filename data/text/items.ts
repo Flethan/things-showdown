@@ -102,7 +102,7 @@ export const ItemsText: {[k: string]: ItemText} = {
 	},
 	knife: {
 		name: "Knife",
-		desc: "Holder's attacks without a chance to wound gain a 10% chance to wound.",
+		desc: "Holder's contact attacks gain a 10% chance to wound.",
 	},
 	rechargeableshoes: {
 		name: "Rechargeable Shoes",
