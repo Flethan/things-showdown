@@ -413,7 +413,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.add('cant', pokemon, 'item: Rechargeable Shoes');
 				return false;
 			}
-			pokemon.addVolatile('truant');
+			pokemon.addVolatile('rechargeableshoes');
 		},
 		onFractionalPriorityPriority: -2,
 		onFractionalPriority(priority, pokemon) {
