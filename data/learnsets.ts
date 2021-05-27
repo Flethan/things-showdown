@@ -1998,6 +1998,22 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalpunch: ["8T"],
 		},
 	},
+	uwu: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			noescape: ["8L1"],
+			banish: ["8L25"],
+			nullland: ["8L40"],
+			voidscream: ["8L16"],
+			voidtrap: ["8L50"],
+			nightmode: ["8L20"],
+			horizontaltranslation: ["8L46"],
+			depthvanish: ["8L55"],
+			particlebeam: ["8L68"],
+			spray: ["8L29"],
+		},
+	},
 
 // BASE GAME
 	missingno: {

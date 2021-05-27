@@ -1617,6 +1617,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		eggGroups: ["Human-Like"],
 	},
+	uwu: {
+		num: -410,
+		name: "Uwu",
+		types: ["No"],
+		genderRatio: {M: 0.7, F: 0.3},
+		baseStats: {hp: 101, atk: 48, def: 63, spa: 212, spd: 94, spe: 82},
+		abilities: {0: "Reactive", H: "Blind"},
+		heightm: 0.4,
+		weightkg: 10,
+		color: "Black",
+		eggGroups: ["Human-Like"],
+	},
 
 // BASE GAME
 	bulbasaur: {
