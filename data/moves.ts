@@ -2377,19 +2377,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Status",
 		isNonstandard: "Thing",
 		name: "Reprogram",
-		pp: 15,
+		pp: 5,
 		priority: 0,
 		flags: {},
-		volatileStatus: 'infected',
+		volatileStatus: 'reprogram',
 		condition: {
 			duration: 2,
 			noCopy: true,
 			onStart(target, source) {
-				this.add('-start', pokemon, 'Infected');
+				this.add('-start', target, 'Reprogram');
 			},
 			onEnd(target, source) {
-				this.add('-end', pokemon, 'Infected');
-				target.setSpecies(this.effectState.source.getSpecies());
+				this.add('-end', target, 'Reprogram');
+				target.formeChange(this.effectState.source.species, this.effect, true, '[msg]');
 			},
 		},
 		secondary: null,

@@ -464,6 +464,14 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user swaps positions with its ally. Fails if the user is the only Pokemon on its side.",
 		shortDesc: "The user swaps positions with its ally.",
 	},
+	reprogram: {
+		name: "Reprogram",
+		desc: "At the end of the next turn, changes the target to the user's species. Switching out before the transformation prevents it. Switching out after the transformation does not remove it.",
+		shortDesc: "In 2 turns, target becomes user's species.",
+
+		start: "  [POKEMON] is being reprogrammed!",
+		end: "  [POKEMON] was reprogrammed!",
+	},
 	//sport
 	fourseamfastball: {
 		name: "Four-seam Fastball",
