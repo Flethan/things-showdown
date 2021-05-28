@@ -2370,6 +2370,34 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 2}},
 		contestType: "Clever",
 	},
+	reprogram: {
+		num: 502,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Reprogram",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		volatileStatus: 'infected',
+		condition: {
+			duration: 2,
+			noCopy: true,
+			onStart(target, source) {
+				this.add('-start', pokemon, 'Infected');
+			},
+			onEnd(target, source) {
+				this.add('-end', pokemon, 'Infected');
+				target.setSpecies(this.effectState.source.getSpecies());
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Science",
+		zMove: {boost: {spa: 2}},
+		contestType: "Clever",
+	},
 	
 	//Sport
 	fourseamfastball: {

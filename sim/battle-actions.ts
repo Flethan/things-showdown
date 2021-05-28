@@ -26,6 +26,25 @@ export class BattleActions {
 		Steel: 'Max Steelspike',
 		Normal: 'Max Strike',
 		Dragon: 'Max Wyrmwind',
+		// THINGS
+		Arthropod: "Max Arthropod",
+		Dirt: "Max Dirt",
+		Fish: "Max Fish",
+		Green: "Max Green",
+		H: "Max H",
+		Hair: "Max Hair",
+		Industrial: "Max Industrial",
+		Liquid: "Max Liquid",
+		Music: "Max Music",
+		Night: "Max Night",
+		No: "Max No",
+		Science: "Max Science",
+		Sport: "Max Sport",
+		Sword: "Max Sword",
+		Temperature: "Max Temperature",
+		Time: "Max Time",
+		Weather: "Max Weather",
+		Yellow: "Max Yellow",
 	};
 
 	readonly Z_MOVES: {readonly [k: string]: string} = {
@@ -47,6 +66,25 @@ export class BattleActions {
 		Flying: "Supersonic Skystrike",
 		Ground: "Tectonic Rage",
 		Fairy: "Twinkle Tackle",
+		// THINGS
+		Arthropod: "Z-Arthropod",
+		Dirt: "Z-Dirt",
+		Fish: "Z-Fish",
+		Green: "Z-Green",
+		H: "Z-H",
+		Hair: "Z-Hair",
+		Industrial: "Z-Industrial",
+		Liquid: "Z-Liquid",
+		Music: "Z-Music",
+		Night: "Z-Night",
+		No: "Z-No",
+		Science: "Z-Science",
+		Sport: "Z-Sport",
+		Sword: "Z-Sword",
+		Temperature: "Z-Temperature",
+		Time: "Z-Time",
+		Weather: "Z-Weather",
+		Yellow: "Z-Yellow",
 	};
 
 	constructor(battle: Battle) {
