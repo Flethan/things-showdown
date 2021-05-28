@@ -2389,7 +2389,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onEnd(target, source) {
 				this.add('-end', target, 'Reprogram');
+				const old_ability = target.ability;
 				target.formeChange(this.effectState.source.species, this.effect, true, '[msg]');
+				target.setAbility(old_ability, null, true);
+				target.baseAbility = old_ability;
 			},
 		},
 		secondary: null,
