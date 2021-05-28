@@ -433,7 +433,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (source.hasType('Fish') && !this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
-				this.add('-activate', pokemon, 'item: Fish Bait');
+				//this.add('-activate', pokemon, 'item: Fish Bait');
 				if (move.smartTarget) move.smartTarget = false;
 				this.debug("Fish Bait redirected target of move");
 				return this.effectState.target;
