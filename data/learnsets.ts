@@ -2014,6 +2014,19 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			spray: ["8L29"],
 		},
 	},
+	myomimeo: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			scuttle: ["8L7"],
+			reprogram: ["8L1"],
+			stealthstrike: ["8L30"],
+			particlebeam: ["8L60"],
+			sting: ["8L13"],
+			swarm: ["8L24"],
+		},
+	},
 
 // BASE GAME
 	missingno: {

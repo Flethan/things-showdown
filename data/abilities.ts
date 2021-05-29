@@ -1685,6 +1685,36 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 134,
 	},
+	replicator: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			const additionalBannedAbilities = [	'replicator',];
+			let multiplier = 0;
+			for (const target of pokemon.side.foe.active) {
+				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability) || target.species != pokemon.species) continue;
+				multiplier++;
+			}
+			for (const ally of pokemon.side.active) {
+				if (!ally || ally === pokemon || additionalBannedAbilities.includes(ally.ability) || target.species != pokemon.species) continue;
+				multiplier++
+			}
+			if(multiplier > 0) {
+				let stats: BoostID[] = [];
+				const boost: SparseBoostsTable = {};
+				let statPlus: BoostID;
+				for (statPlus in pokemon.boosts) {
+					if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (pokemon.boosts[statPlus] < 6) {
+						boost[statPlus] = multiplier;
+					}
+				}
+				this.boost(boost);
+			}
+		},
+		name: "Replicator",
+		rating: 0,
+		num: 58,
+	},
 
 // BASE GAME	
 	noability: {

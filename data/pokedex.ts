@@ -1629,6 +1629,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Human-Like"],
 	},
+	myomimeo: {
+		num: -411,
+		name: "Myomimeo",
+		types: ["Science"],
+		gender: "N",
+		baseStats: {hp: 30, atk: 30, def: 30, spa: 30, spd: 30, spe: 30},
+		abilities: {0: "Replicator"},
+		heightm: 0.3,
+		weightkg: 0.1,
+		color: "Purple",
+		eggGroups: ["Mineral"],
+	},
 
 // BASE GAME
 	bulbasaur: {
