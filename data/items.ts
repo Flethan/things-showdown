@@ -461,7 +461,8 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		num: -247,
-		gen: 6,
+		gen: 8,
+		isNonstandard: "Thing",
 	},
 	
 	infinityiumz: {
