@@ -67,3 +67,6 @@ local_settings.py
 .svn
 
 pip-log.txt
+
+
+images/sprites/swapped.png
