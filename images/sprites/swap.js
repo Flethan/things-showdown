@@ -1,16 +1,5 @@
 const fs = require('fs');
 
-const pathImg = process.argv[2];
-if (!(pathImg && fs.existsSync(`./gen5/${pathImg}.png`) && fs.existsSync(`palette.json`))) {
-	console.log("E.g. usage: `node swap undulux`");
-	process.exit(1);
-}
-
-const img = fs.readFileSync(`./gen5/${pathImg}.png`, { encoding: null });
-const paletteFile = JSON.parse(fs.readFileSync(`palette.json`, 'utf8'));
-const calibration = JSON.parse(fs.readFileSync('palettes.json', 'utf8'));
-const palette = paletteFile["palette"];
-
 const crcTable = [];
 let c;
 for (let n = 0; n < 256; n++) {
@@ -29,6 +18,14 @@ function crc32(buf) {
 	}
 
 	return (crc ^ 0xFFFFFFFF) >>> 0;
+};
+
+function B64ToIA(string) {
+	return Uint8Array.from(Buffer.from(string, 'base64'));
+};
+
+function IAToB64(intArray) {
+	return Buffer.from(intArray).toString('base64');
 };
 
 function parseColor(string) {
@@ -135,46 +132,96 @@ function applyDelta(hsl, delta) {
 	}
 
 	return [dh, ds, dl];
-}
+};
 
-const chunkIndex = img.indexOf(0x504c5445) - 7;
-const length = img.readUInt32BE(chunkIndex);
-const crcIndex = chunkIndex + 8 + length;
-const data = img.slice(chunkIndex + 4, crcIndex);
+function constructReplaceObj(calibration, palette) {
+	const replaceObj = {};
+	for (let [index, group] of calibration.entries()) {
+		if (!(index < palette.length)) break;
 
-const replaceArray = {};
+		let color = parseColor(palette[index]);
+		if (!color) break;
+		color = RGBToHSL(...color);
 
-for (let group of calibration[pathImg]) {
-	if (!palette.length) break;
-	let color = parseColor(palette.shift());
-	if (!color) break;
-	color = RGBToHSL(...color);
+		let groupLead = parseColor(group[0]);
+		if (!groupLead) continue;
+		groupLead = RGBToHSL(...groupLead);
 
-	let groupLead = parseColor(group[0]);
-	if (!groupLead) continue;
-	groupLead = RGBToHSL(...groupLead);
+		const delta = HSLdelta(groupLead, color);
 
-	delta = HSLdelta(groupLead, color);
+		for (let unit of group) {
+			const unitColor = parseColor(unit);
+			if (!unitColor) continue;
+			const unitNew = HSLtoRGB(...applyDelta(RGBToHSL(...unitColor), delta));
 
-	for (let unit of group) {
-		const unitColor = parseColor(unit);
-		if (!unitColor) continue;
-		const unitNew = HSLtoRGB(...applyDelta(RGBToHSL(...unitColor), delta));
-		const index = unitColor.reduce((a, b) => b + (a << 8 ));
-		replaceArray[index] = unitNew;
+			replaceObj[unitColor.reduce((a, b) => b + (a << 8))] = unitNew;
+		}
 	}
+	return replaceObj;
 }
 
-for (let i = 0; i < ((data.length - 4) / 3); i++) {
-	const slice = data.slice((i * 3) + 4, (i * 3) + 7).reduce((a, b) => b + (a << 8 ));
-	const replace = replaceArray[slice];
-	if (!replace) continue;
-	data[(i * 3) + 4] = replace[0];
-	data[(i * 3) + 5] = replace[1];
-	data[(i * 3) + 6] = replace[2];
+function replaceB64(imgB64, replaceObj) {
+	const imgIA = B64ToIA(imgB64);
+	let plteIndex = 0;
+	let plteLength = 0;
+	for (let i = 0; i < imgIA.length; i++) {
+		if (imgIA[i] === 0x50 && imgIA[i + 1] === 0x4C && imgIA[i + 2] === 0x54 && imgIA[i + 3] === 0x45) {
+			plteIndex = i;
+			plteLength = (
+				(imgIA[i - 4] << 24) +
+				(imgIA[i - 3] << 16) +
+				(imgIA[i - 2] << 8) +
+				imgIA[i - 1]
+			);
+		}
+	}
+
+	for (let i = 0; i < ((plteLength) / 3); i++) {
+		const slice = imgIA.slice(plteIndex + 4 + (i * 3), plteIndex + 4 + (i * 3) + 3)
+			.reduce((a, b) => b + (a << 8));
+		const replace = replaceObj[slice];
+		if (!replace) continue;
+
+		imgIA[plteIndex + 4 + (i * 3)] = replace[0];
+		imgIA[plteIndex + 4 + (i * 3) + 1] = replace[1];
+		imgIA[plteIndex + 4 + (i * 3) + 2] = replace[2];
+	}
+
+	const newCrc = crc32(imgIA.slice(plteIndex, plteIndex + plteLength + 4));
+	imgIA[plteIndex + 4 + plteLength] = (newCrc & 0xFF000000) >> 24;
+	imgIA[plteIndex + 4 + plteLength + 1] = (newCrc & 0x00FF0000) >> 16;
+	imgIA[plteIndex + 4 + plteLength + 2] = (newCrc & 0x0000FF00) >> 8;
+	imgIA[plteIndex + 4 + plteLength + 3] = newCrc & 0x000000FF;
+
+	return IAToB64(imgIA);
 }
 
-const newCrc = crc32(data);
-img.writeUInt32BE(newCrc, crcIndex);
 
-fs.writeFileSync(`./swapped.png`, img);
+const pathImg = process.argv[2];
+if (!fs.existsSync(`palette.json`)) {
+	console.log("Created palette.json with defaults.");
+	const write = {
+		"palette": [
+			"#DC5A50",
+			"#333634",
+			"#b4b4f6",
+			"#FF3838",
+			"#200f0f"
+		]
+	}
+	fs.writeFileSync(`palette.json`, JSON.stringify(write));
+} else if (!(pathImg && fs.existsSync(`./gen5/${pathImg}.png`))) {
+	console.log("E.g. usage: `node swap undulux`");
+	process.exit(1);
+}
+
+const imgB64 = fs.readFileSync(`${pathImg}.png`, { encoding: 'base64' });
+const paletteFile = JSON.parse(fs.readFileSync(`palette.json`, 'utf8'));
+const palette = paletteFile["palette"];
+const palettes = JSON.parse(fs.readFileSync('palettes.json', 'utf8'));
+const calibration = palettes[pathImg];
+
+const replaceObj = constructReplaceObj(calibration, palette);
+const newB64 = replaceB64(imgB64, replaceObj);
+
+fs.writeFileSync(`./swapped.png`, newB64, { encoding: 'base64' });
