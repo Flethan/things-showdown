@@ -31,6 +31,20 @@
       return btoa(intArray.reduce((data, byte) => data + String.fromCharCode(byte), ''));
     };
 
+    function toDataURL(url, callback) {
+      let xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        let reader = new FileReader();
+        reader.onloadend = function () {
+          callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    }
+
     function parseColor(string) {
       if (!/^#?([0-9a-fA-F]{2}){3,4}$/.test(string)) return false;
       string = string.replace("#", "");
@@ -116,7 +130,7 @@
 
       if (ds > 1) ds = 1;
       if (dl > 1) dl = 1;
-      
+
       return [dh, ds, dl];
     };
 
@@ -203,26 +217,48 @@
     }
 
     function changeHelperSquares(calibration, replaceObj) {
-      for (let [indexG, group] of calibration.entries()) {
-        for (let [indexU, unit] of group.entries()) {
-          if (replaceObj) {
-            unit = unit.replace("#", "");
-            let color = replaceObj[parseInt(unit, 16)].reduce((a, b) => b + (a << 8)).toString(16).padStart(6, '0');
-            document.querySelector(`#g${indexG + 1}u${indexU + 1}`).style = `background-color: #${color};`;
-          }
-          else document.querySelector(`#g${indexG + 1}u${indexU + 1}`).style = `background-color: ${unit};`;
+      for (let i = 0; i < 5; i++) {
+        const group = calibration[i];
+        for (let j = 0; j < 8; j++) {
+          if (group) {
+            unit = calibration[i][j]?.replace("#", "");
+            if (unit && replaceObj) {
+              let color = replaceObj[parseInt(unit, 16)].reduce((a, b) => b + (a << 8)).toString(16).padStart(6, '0');
+              document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #${color};`;
+            }
+            else if (unit) {
+              document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #${unit};`;
+            } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #FFFFFF;`;
+          } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #FFFFFF;`;
         }
       }
     }
 
-    const imgB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURQAAAABAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gALL5Dd0AAAABdFJOUwBA5thmAAACTklEQVRo3u2X63KDIBBGQU2Nl0i1wfj+T1qWiyxCZirCj3TYGdKmkzln/TCLJaRUqVKlSpUqla/a3PCWZYZnESB4y1g2OAO4WCwXfF854fAjlSAIlwKWSBCCt6wT5XxwlhXDD8P7vj8IHt8/z2iBB4fq3IxAcDEhBO97zlMI3sI5P2YE/FekwIdzlVEKQajz3gjYRf67zu+iDgLJPy8IdA7wRdQdZ/SI4yvBoXPBvsFCAoGP45Mu0Dngb/ByVxk9JD6Ov2e0wz0B0BU+iq8ECn7T0ei16G0GemT3VmDhN8lezF0kBPHNY4HKZEFwrre/e76uDWv3EmznXK/u6plgLsHtXC3uTYvo28iNhQ8cXUISgeU5b+Iz2rYNGXa4fbGGKMFUNdU0TYSs69o5cJ3P0F/KaF1HSqtK0Ou67gKdD6Kk5OwuwzOBwFJKxlHSm6bZBfJVUwflkH89kdE8y6ZpBVch6WIvNmTgO9W4xCg8swnzDNgKwq8lHX7t8P2jDdycEiczmmeBhc0VgmojI20mNbL3U00ZOMKLaXFqE/TtuVKBHutmQ6eaooKBI3x/MiP97EdXGdMWODcHOyZ0ROzkfQRV0dXw0bmJvsn4mx0zLaamNnx0bmITvyYgW2P4JPBU5A6nuHlnp5GfEUfz2nuKj5mox4zMJQD8K8G/IMGMTOfpBB5coVMInIxs5ikFHjyDQMIdWkqB6dylJTSEYZ8lCNGyC9S7jxGEaGUT/pjRhwn8TUjGf3cJeQXkKyE/ceJvDFn5+QVpEy9VqlSp/1W/9IpK9F2IYRgAAAAASUVORK5CYII=";
-    const calibration = [
-        ["#557A00", "#5B9B3E"],
-        ["#E1B868"],
-        ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"],
-        ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"],
-        ["#191919", "#303030", "#474747", "#606060", "#A0A0A0", "#AFAFAF"]
-    ];
+    function switchThing(thing) {
+      calibration = palettes[thing];
+      frontSpriteB64 = things[thing]["frontSprite"];
+      backSpriteB64 = things[thing]["backSprite"];
+      iconSpriteB64 = things[thing]["iconSprite"];
+      changePalette();
+    }
+
+    const palettes = {"undulux": [["#557A00", "#5B9B3E"], ["#E1B868"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#474747", "#606060", "#A0A0A0", "#AFAFAF"]], "undulux-overheated": [["#557A00", "#5B9B3E"], ["#DD801C"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#890000", "#606060", "#A0A0A0", "#AFAFAF"]], "hubert": [["#0C0C0C", "#3F3F3F"]], "swordhubert": [["#0C0C0C", "#3F3F3F"], ["#5F5A55", "#999592", "#C8C3BE", "#D8D4D0"], ["#3D2200", "#5A3200", "#723F00"], ["#934E00", "#AD6200"]], "uwu": [["#0C0C0C"]], "hmug": [["#857C7E", "#D2D2D2", "#E1E1E1", "#FFFFFF"], ["#ADAAAF", "#CFCBD3"], ["#AEAF89"], ["#BFE8FF"]], "yellosnow": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]], "yellowater": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]]};
+    const things = { "undulux": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "undulux-overheated": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "hubert": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "swordhubert": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "uwu": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "hmug": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "yellosnow": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, "yellowater": { "frontSprite": "", "backSprite": "", "iconSprite": "" }, }
+
+    for (let thing in things) {
+      toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/${thing}.png`,
+        function (dataUrl) {things[thing]["frontSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+      toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/${thing}.png`,
+        function (dataUrl) {things[thing]["backSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+      toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/${thing}.png`,
+        function (dataUrl) {things[thing]["iconSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+    }
+
+    let frontSpriteB64 = '';
+    let backSpriteB64 = '';
+    let iconSpriteB64 = '';
+
+    let calibration = [];
 
     let colorWell1;
     let colorWell2;
@@ -233,17 +269,22 @@
     window.addEventListener("load", startup, false);
 
     function startup() {
-      changeHelperSquares(calibration, null);
       colorWell1 = document.querySelector("#colorWell1");
       colorWell2 = document.querySelector("#colorWell2");
       colorWell3 = document.querySelector("#colorWell3");
       colorWell4 = document.querySelector("#colorWell4");
       colorWell5 = document.querySelector("#colorWell5");
+      calibration = palettes['undulux'];
+      frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURQAAAABAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gALL5Dd0AAAABdFJOUwBA5thmAAACTklEQVRo3u2X63KDIBBGQU2Nl0i1wfj+T1qWiyxCZirCj3TYGdKmkzln/TCLJaRUqVKlSpUqla/a3PCWZYZnESB4y1g2OAO4WCwXfF854fAjlSAIlwKWSBCCt6wT5XxwlhXDD8P7vj8IHt8/z2iBB4fq3IxAcDEhBO97zlMI3sI5P2YE/FekwIdzlVEKQajz3gjYRf67zu+iDgLJPy8IdA7wRdQdZ/SI4yvBoXPBvsFCAoGP45Mu0Dngb/ByVxk9JD6Ov2e0wz0B0BU+iq8ECn7T0ei16G0GemT3VmDhN8lezF0kBPHNY4HKZEFwrre/e76uDWv3EmznXK/u6plgLsHtXC3uTYvo28iNhQ8cXUISgeU5b+Iz2rYNGXa4fbGGKMFUNdU0TYSs69o5cJ3P0F/KaF1HSqtK0Ou67gKdD6Kk5OwuwzOBwFJKxlHSm6bZBfJVUwflkH89kdE8y6ZpBVch6WIvNmTgO9W4xCg8swnzDNgKwq8lHX7t8P2jDdycEiczmmeBhc0VgmojI20mNbL3U00ZOMKLaXFqE/TtuVKBHutmQ6eaooKBI3x/MiP97EdXGdMWODcHOyZ0ROzkfQRV0dXw0bmJvsn4mx0zLaamNnx0bmITvyYgW2P4JPBU5A6nuHlnp5GfEUfz2nuKj5mox4zMJQD8K8G/IMGMTOfpBB5coVMInIxs5ikFHjyDQMIdWkqB6dylJTSEYZ8lCNGyC9S7jxGEaGUT/pjRhwn8TUjGf3cJeQXkKyE/ceJvDFn5+QVpEy9VqlSp/1W/9IpK9F2IYRgAAAAASUVORK5CYII=";
+      backSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA/UExURQAAAEBAQICAgKCgoP8A3NsAtsQAurIA//8AiF18IHGeXf/YAP8AAH9qAAB/DgD/IQCU/wBKf38AADAwMAAAAA8f/lMAAAAVdFJOU///////////////////////////ACvZfeoAAAAJcEhZcwAADsIAAA7CARUoSoAAAAJ4SURBVGhD7dYJbuMwDAXQJtMt3uXq/mcdkmZcUSulOoMM6g94keD8V8uNkRf74JxAMSdQzAkUcwLFnEAxvwi48LE2WuCCQAtSAzQhauB6aUOUwOWKQAtSAbQheuDahugA7EcggeSiB9JINjHgD4UHlDuAW4hkEwVe394/XMDtjSDZRJcIAT6l+L1icCTg9joDviqeKPDpCW7nd+8+4Kvi0QBBp5hoATwh6BQTsOfrokkAQgg6xQQcbje+MpI4wAITQacYwKGrBzZhI4JOMQHpWgASiPgIOsUEpA0AYSPeg04xAcn1ZwAIEGAEnWIAaQfoNoJOMQHJrlAJgASdYgJyFLB3iglItr8SoE4xgPwQCDrFBCS/QjpAdIoJyFHA3ikmIHt/3/d85qYKoE4xgHTDMFg7juM0TyN/yEk1QL37Ca7QsixgTJMxK1JeSoDoc7dth8A8z2SsqzWGbsf9SaIB9j5/w3Sw9D0Z+NdPhm7HEbQA9bkDmoDAMx4nMlCABwFUzR2gIDrFAFcIgNmstp/oFsYRqFoAy0TvfrIB/bysUG34CffiV2ERuEETF957cdt2tEJQScszGPqA97OzBNw6rpQH2jDb1wyFwUz0CfE/pAFQ4Ep5wNzfEyAsc+RrpgQSCGR/EcGjjb0oFACkSyAI3F9E8CbiEy/Fh2ztVxJxgVQ0AO6iyPcKpaMFcB8iBwMYiZT7qwGMgzwGwAEjRwCRfh4hQie5/ASQc4k8J1DRrwVk2f8FxMpopOtvAiJT6egAWfZvAGX/EwDUJNq2waGALKORtl8B2C+v7HDAz8MBLFf3PycQPJVcmoCanEAxJ1DMCRRzAoVY+xej4m3xMUds0wAAAABJRU5ErkJggg==";
+      iconSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeBAMAAACs80HuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAtUExURf///wAAAACU/zAwMEBAQF18IGBgYHGeXYCAgKCgoK+vr7IA/+G4aP8AAP8AiK+h/dAAAAABdFJOUwBA5thmAAABDUlEQVQoz2NgIAewCGCKOYo0oouwCHp4oAkyeoi0dHh0oOoX6fBoaQ2NEGBgFBRAEnQNDS8vbWSQnDkRLigaGl5z5sxRoOA+uCBj+Jkzx8tBKgX3wbUzxpSXH3FxL20U3P0QIiIIUlni4rVqSXn07ncQhYwzBUCCq1a5uJTHvROEap2kKMAgWg4UOl4eIQgzb+4lRUHR4+U1IEGYLYwzZS/dvVpTXl5eBrIeCgQZ7yqp1tScSS8HORQGZJUuCcYcL08rR1LJIKt4STC8/MwxoCDC44x3FRljzgCFQoORwkhIgDEcJCQojByaoBABCTGjhjIzWAhdECRggCbIYACCRAky4xJkNkBPC8YE0g8AZO9QhLI9mrcAAAAASUVORK5CYII=";
+      changeHelperSquares(calibration, null);
       colorWell1.value = calibration[0][0];
       colorWell2.value = calibration[1][0];
       colorWell3.value = calibration[2][0];
       colorWell4.value = calibration[3][0];
       colorWell5.value = calibration[4][0];
+      changePalette();
       colorWell1.addEventListener("input", changePalette, false);
       colorWell2.addEventListener("input", changePalette, false);
       colorWell3.addEventListener("input", changePalette, false);
@@ -251,12 +292,16 @@
       colorWell5.addEventListener("input", changePalette, false);
     }
 
-    function changePalette(event) {
+    function changePalette() {
       const palette = [colorWell1.value, colorWell2.value, colorWell3.value, colorWell4.value, colorWell5.value];
       const replaceObj = constructReplaceObj(calibration, palette);
       changeHelperSquares(calibration, replaceObj);
-      const newB64 = replaceB64(imgB64, replaceObj);
-      thing.src = `data:image/png;base64, ${newB64}`;
+      const newFrontB64 = replaceB64(frontSpriteB64, replaceObj);
+      const newBackB64 = replaceB64(backSpriteB64, replaceObj);
+      const newIconB64 = replaceB64(iconSpriteB64, replaceObj);
+      frontSprite.src = `data:image/png;base64, ${newFrontB64}`;
+      backSprite.src = `data:image/png;base64, ${newBackB64}`;
+      iconSprite.src = `data:image/png;base64, ${newIconB64}`;
     }
 
     function resetPalette() {
@@ -266,18 +311,35 @@
       colorWell3.value = calibration[2][0];
       colorWell4.value = calibration[3][0];
       colorWell5.value = calibration[4][0];
-      thing.src = `data:image/png;base64, ${imgB64}`;
+      frontSprite.src = `data:image/png;base64, ${frontSpriteB64}`;
+      backSprite.src = `data:image/png;base64, ${backSpriteB64}`;
+      iconSprite.src = `data:image/png;base64, ${iconSpriteB64}`;
     }
   </script>
 
   <div class="row">
-    <div class="column">
-      <p style="text-align: right;">Thing swapper.</p>
+    <div class="column-left">
+      <div class="thing" onclick="switchThing('undulux')">Undulux</div>
+      <div class="thing" onclick="switchThing('undulux-overheated')">Undulux - Overheated</div>
+      <div class="thing" onclick="switchThing('hubert')">Hubert</div>
+      <div class="thing" onclick="switchThing('swordhubert')">Sword Hubert</div>
+      <div class="thing" onclick="switchThing('uwu')">UWU</div>
+      <div class="thing" onclick="switchThing('hmug')">H Mug</div>
+      <div class="thing" onclick="switchThing('yellosnow')">Yellosnow</div>
+      <div class="thing" onclick="switchThing('yellowater')">Yellowater</div>
     </div>
     <div class="column-center">
-      <img id="thing" src="./gen5/undulux.png">
+      <img class="sprite" id="frontSprite"
+        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
+      <div class="spriteLabel">Front Sprite</div>
+      <img class="sprite" id="backSprite"
+        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
+      <div class="spriteLabel">Back Sprite</div>
+      <img class="icon" id="iconSprite"
+        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
+      <div class="spriteLabel">Icon</div>
     </div>
-    <div class="column">
+    <div class="column-right">
       <label for="colorWell1">Group 1:</label>
       <input type="color" value="#FFFFFF" id="colorWell1">
       <div class="color-box" id="g1u1"></div>
@@ -343,14 +405,22 @@
   </div>
 
   <style>
-    .column {
+    .column-left {
       float: left;
-      width: 30%;
+      width: auto;
+      text-align: center;
     }
 
     .column-center {
       float: left;
-      width: 20%;
+      width: auto;
+      text-align: center;
+    }
+
+    .column-right {
+      float: left;
+      width: auto;
+      text-align: left;
     }
 
     .row:after {
@@ -359,12 +429,39 @@
       clear: both;
     }
 
+    .thing {
+      width: 300px;
+      border: 1px;
+      border-color: black;
+      border-top-style: solid;
+      border-bottom-style: solid;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .thing:hover {
+      background-color: #bbbbff;
+    }
+
+    .spriteLabel {
+      width: 300px;
+    }
+
     img {
       display: block;
-      width: 192px;
       image-rendering: pixelated;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    .sprite {
+      width: 192px;
+      height: 192px;
+    }
+
+    .icon {
+      width: 160px;
+      height: 120px;
     }
 
     .color-box {
