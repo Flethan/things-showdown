@@ -114,6 +114,9 @@
         dl = -(hsl1[2] - hsl2[2]) / hsl1[2] || 0;
       }
 
+      if (ds > 1) ds = 1;
+      if (dl > 1) dl = 1;
+      
       return [dh, ds, dl];
     };
 
@@ -204,7 +207,7 @@
         for (let [indexU, unit] of group.entries()) {
           if (replaceObj) {
             unit = unit.replace("#", "");
-            let color = replaceObj[parseInt(unit, 16)].reduce((a, b) => b + (a << 8)).toString(16);
+            let color = replaceObj[parseInt(unit, 16)].reduce((a, b) => b + (a << 8)).toString(16).padStart(6, '0');
             document.querySelector(`#g${indexG + 1}u${indexU + 1}`).style = `background-color: #${color};`;
           }
           else document.querySelector(`#g${indexG + 1}u${indexU + 1}`).style = `background-color: ${unit};`;
@@ -272,7 +275,7 @@
       <p style="text-align: right;">Thing swapper.</p>
     </div>
     <div class="column-center">
-      <img id="thing" src="undulux.png">
+      <img id="thing" src="./gen5/undulux.png">
     </div>
     <div class="column">
       <label for="colorWell1">Group 1:</label>
