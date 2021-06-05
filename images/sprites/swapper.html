@@ -228,8 +228,8 @@
             }
             else if (unit) {
               document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #${unit};`;
-            } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #FFFFFF;`;
-          } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `background-color: #FFFFFF;`;
+            } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `opacity: 0;`;
+          } else document.querySelector(`#g${i + 1}u${j + 1}`).style = `opacity: 0;`;
         }
       }
     }
@@ -238,12 +238,14 @@
       calibration = palettes[thing];
       frontSpriteB64 = things[thing]["frontSprite"];
       backSpriteB64 = things[thing]["backSprite"];
-      iconSpriteB64 = things[thing]["iconSprite"];
+      iconRSpriteB64 = things[thing]["iconRSprite"];
+      iconLSpriteB64 = things[thing]["iconLSprite"];
+      if (iconLSpriteB64.startsWith('data:text/plain')) iconLSpriteB64 = things[thing]["iconRSprite"];
       changePalette();
     }
 
     function loadPalette() {
-      let text = document.querySelector("#paletteBox").value;
+      let text = document.querySelector("#paletteBox").value.trim();
       if (/^((#?[0-9a-fA-F]{2}){3,4}[\s,|\-]+){0,4}(#?[0-9a-fA-F]{2}){3,4}$/.test(text)) {
         let arr = text.replace(/#+/g, '').split(/[\s,|\-]+/);
         colorWell1.value = '#' + (arr[0].substr(0, 6) ?? '000000');
@@ -252,6 +254,8 @@
         colorWell4.value = '#' + (arr[3].substr(0, 6) ?? '000000');
         colorWell5.value = '#' + (arr[4].substr(0, 6) ?? '000000');
         changePalette();
+        const palette = [colorWell1.value, colorWell2.value, colorWell3.value, colorWell4.value, colorWell5.value];
+        document.querySelector("#paletteBox").value = palette.join(', ');
       }
     }
 
@@ -265,12 +269,15 @@
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/${thing}.png`,
         function (dataUrl) {things[thing]["backSprite"] = dataUrl.replace('data:image/png;base64,', '');});
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/${thing}.png`,
-        function (dataUrl) {things[thing]["iconSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+        function (dataUrl) {things[thing]["iconRSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+      toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/${thing}-mirror.png`,
+        function (dataUrl) {things[thing]["iconLSprite"] = dataUrl.replace('data:image/png;base64,', '');});
     }
 
-    let frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURQAAAABAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gALL5Dd0AAAABdFJOUwBA5thmAAACTklEQVRo3u2X63KDIBBGQU2Nl0i1wfj+T1qWiyxCZirCj3TYGdKmkzln/TCLJaRUqVKlSpUqla/a3PCWZYZnESB4y1g2OAO4WCwXfF854fAjlSAIlwKWSBCCt6wT5XxwlhXDD8P7vj8IHt8/z2iBB4fq3IxAcDEhBO97zlMI3sI5P2YE/FekwIdzlVEKQajz3gjYRf67zu+iDgLJPy8IdA7wRdQdZ/SI4yvBoXPBvsFCAoGP45Mu0Dngb/ByVxk9JD6Ov2e0wz0B0BU+iq8ECn7T0ei16G0GemT3VmDhN8lezF0kBPHNY4HKZEFwrre/e76uDWv3EmznXK/u6plgLsHtXC3uTYvo28iNhQ8cXUISgeU5b+Iz2rYNGXa4fbGGKMFUNdU0TYSs69o5cJ3P0F/KaF1HSqtK0Ou67gKdD6Kk5OwuwzOBwFJKxlHSm6bZBfJVUwflkH89kdE8y6ZpBVch6WIvNmTgO9W4xCg8swnzDNgKwq8lHX7t8P2jDdycEiczmmeBhc0VgmojI20mNbL3U00ZOMKLaXFqE/TtuVKBHutmQ6eaooKBI3x/MiP97EdXGdMWODcHOyZ0ROzkfQRV0dXw0bmJvsn4mx0zLaamNnx0bmITvyYgW2P4JPBU5A6nuHlnp5GfEUfz2nuKj5mox4zMJQD8K8G/IMGMTOfpBB5coVMInIxs5ikFHjyDQMIdWkqB6dylJTSEYZ8lCNGyC9S7jxGEaGUT/pjRhwn8TUjGf3cJeQXkKyE/ceJvDFn5+QVpEy9VqlSp/1W/9IpK9F2IYRgAAAAASUVORK5CYII=";
-    let backSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAA8UExURQAAAABAfwB/AACA/wD/ADAwMEBAQFV6AFubPn8AAH8A/39uAICAgJ8A36CgoL8Av98An/8AAP8Af//gANEKdkYAAAABdFJOUwBA5thmAAABz0lEQVRo3u2YUXODIBCEAQlqIGkt//+/9u60aYiggtx0pmEfktGH/dzbQBiFaGpqampqeisZbn/DDEEAK8Q4wwoxDgGMEASwQsDccULQ36Uh1QIkINm6k2KAOCQf8Plxu94TE4pA8oWArQmFkIqABCQf8PVCMImHXy5OA1aewY2iGYWE6IM/bpRFCAjJ6cz+zvR9IeF6pAL4GvrCDDNipwLnhhIAEQhx3augEACEGXHbq8CV+S8pgLFXwQkAxWCqQBxeBdUADBUcWwWuQoB3qcB7z1PBNE1CWGuVVrYCYF1B13XAUErKEVE1Og4r0FoTYxyFlBQnPJIUdvyYEIzeEwOfXkmKk0E40rFVxEACFAGonAR07N3oGH+kVstReEURrAVULsCZ7WXmdTeCtVwa9ln+ov91j3aMq8DTeCb5OHjm+A+he3yZIWGS6udomxVgGFbukY0ICJ0uWWYzIAF53oig2qKNQvSgIQEJtuqyjYh0SULO/9nMgGSS01v1EwA/15DKgHWSKv4h4AXCA8CLBdLz+C9XCGEFXOq8RfgLQFX/2YcxADsgWUHVAP+yglr+/AByYqyAnFgDgNdF8AIOtFKfwOrPD1i10tTU1PT2+gZTBj8YcYRJIAAAAABJRU5ErkJggg==";
-    let iconSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeBAMAAACs80HuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAAwUExURf///wAAAACA/zAwMEBAQEdHR1V6AFubPmBgYH8A/4CAgKCgoK+vr+G4aP8AAP8Af1amhJwAAAABdFJOUwBA5thmAAABDUlEQVQoz53SsUrEQBAA0B1yH7CjIY0QyBXWAb/AxmL7YGMnZPEgWHljs7X+wlVH4LBIp23Azi6txmabFJYBv+DMeJeYWxHF2e4xs7M7jBD/iYn8bsd+7soElXIQlL8qVLFb7xdqdZfOpACUIzxJNc1zcVDeDxik2lj70uFyQNDW1sSZuBzKISN6Tk7nOS7eN4KceZWcVU90sVhvEqGUjFWVJHS5xm3pQyRFQB3VNMP+vscmwqAmw9h3gTJs2jdDRNfcfhsI7fTQGHtD/NA+wmmDWU23NMoUYdSgJvva4dfHoY0gsx2l56MZ7UnQTLg/niZPhMnbnbL3SS4yxA6KmM+f0PsJvdjdhaNf9ucD/jJXzOMfu+kAAAAASUVORK5CYII=";
+    let frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURf///wBAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gAIM1gdoAAAABdFJOUwBA5thmAAACRUlEQVRo3u2X25KCMAyGUVEsqHgK8v5Puml6hjIjob1wp5kpq3vxfelfaLGqSpUqVapUqVL5qskNb/rM8CwCD970fTZ4L+E4+lxwO3LC5Z9UgiicBKHhoYohiMGbXmClECzC27adCK731/vDFczgskSYEQm2JeTB2xYghWARDjDNiD2BKBxURikEsc5bI+g38pc6P2NNBLz+RaRzCX9inf2Mrjy+Ekw6R/ZRDie4Ip7Hr0Skc4k/yos0iCvR7y8e32Zk4TPBneivN5OvBAp+1NHo8dTLTPT3h8nXAgc/Evtp7iIUEP3D3qu1QGXy9OCgl1/w6CNWbAquc9BDrDx15HaO8BpLKcwUws7VgNlu8QVf0Q9YqLC3URgLdOBNYe0MiD5goWJ0zzLY/cf7wsjo8SC6/IiK/Y0MFu4uzrB+EQbz8bLbo0sEcJ1P127IyB7bFNNBRDrvsEiyfpXVfaQTkgtdWwFdNbVTDvqv4L0eDUSXz4NnAEs1LtwKeYLhQHS9yu7+0QYwpwQnIy1ANq7yqLZse6opA3h43C1Ygh32fgmeBN20NICHb3kZ7QaKaYycm53bJnREHMF+Nxi+d256T7L/ZHMyutUHw/fOTd8E2wTVWBt+FXkrCjcnlqAyB0IsI/D269lb/KZ3C20yU5DwU4LfONGMTOfpBDO4QqcQBBm5zFMKZvAMAoIHtJQC03lIS2iIw35LEKNlF6hvPyOI0coifJnRjwnmi5CMvzSFvILqlJCfOPEFQ1Z+fkHaxEuVKlXqf9UfYSxMc36R90QAAAAASUVORK5CYII=";
+    let backSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAA8UExURf///wBAfwB/AACA/wD/ADAwMEBAQFV6AFubPn8AAH8A/39uAICAgJ8A36CgoL8Av98An/8AAP8Af//gACnyQCAAAAABdFJOUwBA5thmAAABx0lEQVRo3u3Y626DMAwF4EK5DdIC5f3fdbZTNkISIE6sSWv8YxNVdb4lh5Jqt1uePHny5MnzUdNI5zfCCAKiSKMaUaRRCAgiCIgiEK4kEcxXfiTZAjxIQsCNhM5Tj2eHHEgawI+EA69pfPTPkx3aXAQLBPgqcCDRgJVpvMAA9oLzD/95IcESvLuj81XTtnHCcQXwq2uj1nBSgVIdA9BCf6kCHkACEP15BYqVTwIQYJxVwAVAAGJ8yFSgBSCmUaiClXhNVytYYFjGtQqWpYIhw3gQh52W/gog/g6jjTDhUgULxM8wZDBWcFbBUEI8vpmMCMBdAaSWxdf6/jkw3wLsCu60PZvzNr5js4KKCl4J7gLcCAJ4/5MxJ/tGZHdMBl846phuUuwY76Sor70HHzP4FMBNNBQ8oP1Nd3ZMzwnanrlg5XdmuvtJh8JclDygs9IdZwE+K6qBDXiQ7VkAd9HCqwCm8yDGack7DGhqL8I/jk3Au5Ko03IH4E8bSQzYK0mSbwI7RAbAizfSyuS/rxARBeo0/0X4CyBpvs4RXIA44K0g6QL+ZQWp8uUBShKsgJJEFwBZ9U0WuNBKekE0Xx6wWsmTJ0+ej59v7kNAJqUXueQAAAAASUVORK5CYII=";
+    let iconRSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAMAAABpA6zvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAA2UExURf///wAAAABAfwCA/zAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/4CAgKCgoK+vr+G4aP8AAP8Af5ocACAAAAABdFJOUwBA5thmAAAA60lEQVQ4y73T2RKDIAwFUAJYcaHi//9sbwi4NSM+dJrxyTlzITEa86/q6JmibqZWUFbdfA85KCs8RRJKc6J6lECKKFIho4ASSXFaFShoyVUjp1VxYkLYEklzgNksL1SGYGdX+kJiYPRGsZzAzq70lWFWErmCnc6l6Fx+UyNxvFzycj2KKTnLky2X3OC1CRw9jjal1IfSchh0SYYQ6hxDzIfVPskzBRstn82Rw7BP8gtaGtFRL1kFagvERxOPvHwY/pheXTDrSOZTEGbg9VWkbS0q8nere0T3sALfgOYQ9yNYxWNovG/9/m1xWx8LgQv1asLawAAAAABJRU5ErkJggg==";
+    let iconLSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAMAAABpA6zvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAA2UExURf///wAAAABAfwCA/zAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/4CAgKCgoK+vr+G4aP8AAP8Af5ocACAAAAABdFJOUwBA5thmAAAA5UlEQVQ4y73T2Q7CIBQEUAao0M3C//+sd+mCtkIfjJMmGj2dC1iN+Vc63FPoJrSKRHVTHXKRKLpqEkq6KVCakFGkXElQ5FXRItkh9hswU8BuNbFshHy3vs2jQiUPygYB5+ajMo/yYVD0pKgErEvpgCKhUJRWppTsMBSjVRLdKiMvYQnOUR2KzagkOsq56EIXGm0TUZyOKOf8BmNwA2y6PE2GPV16RGGS0Zc/TRDR91zJR+7sNyhj18rwuZFTI4+l+MpTEWS7jGjFvvZAlqgGTYnqcAO+AU1R9yO4idvQeN/6+7dFNS/rGQvhc3Lf0AAAAABJRU5ErkJggg==";
 
     let calibration = [];
 
@@ -290,11 +297,11 @@
       colorWell5 = document.querySelector("#colorWell5");
       calibration = palettes['undulux'];
       changeHelperSquares(calibration, null);
-      colorWell1.value = calibration[0][0];
-      colorWell2.value = calibration[1][0];
-      colorWell3.value = calibration[2][0];
-      colorWell4.value = calibration[3][0];
-      colorWell5.value = calibration[4][0];
+      colorWell1.value = calibration[0]?.[0] ?? '#000000';
+      colorWell2.value = calibration[1]?.[0] ?? '#000000';
+      colorWell3.value = calibration[2]?.[0] ?? '#000000';
+      colorWell4.value = calibration[3]?.[0] ?? '#000000';
+      colorWell5.value = calibration[4]?.[0] ?? '#000000';
       changePalette();
       colorWell1.addEventListener("input", changePalette, false);
       colorWell2.addEventListener("input", changePalette, false);
@@ -310,29 +317,34 @@
       changeHelperSquares(calibration, replaceObj);
       const newFrontB64 = replaceB64(frontSpriteB64, replaceObj);
       const newBackB64 = replaceB64(backSpriteB64, replaceObj);
-      const newIconB64 = replaceB64(iconSpriteB64, replaceObj);
+      const newRIconB64 = replaceB64(iconRSpriteB64, replaceObj);
+      const newLIconB64 = replaceB64(iconLSpriteB64, replaceObj);
       frontSprite.src = `data:image/png;base64, ${newFrontB64}`;
       backSprite.src = `data:image/png;base64, ${newBackB64}`;
-      iconSprite.src = `data:image/png;base64, ${newIconB64}`;
+      iconRSprite.src = `data:image/png;base64, ${newRIconB64}`;
+      iconLSprite.src = `data:image/png;base64, ${newLIconB64}`;
     }
 
     function resetPalette() {
       changeHelperSquares(calibration, null);
-      colorWell1.value = calibration[0][0];
-      colorWell2.value = calibration[1][0];
-      colorWell3.value = calibration[2][0];
-      colorWell4.value = calibration[3][0];
-      colorWell5.value = calibration[4][0];
+      colorWell1.value = calibration[0]?.[0] ?? '#000000';
+      colorWell2.value = calibration[1]?.[0] ?? '#000000';
+      colorWell3.value = calibration[2]?.[0] ?? '#000000';
+      colorWell4.value = calibration[3]?.[0] ?? '#000000';
+      colorWell5.value = calibration[4]?.[0] ?? '#000000';
+      const palette = [colorWell1.value, colorWell2.value, colorWell3.value, colorWell4.value, colorWell5.value];
+      document.querySelector("#paletteBox").value = palette.join(', ');
       frontSprite.src = `data:image/png;base64, ${frontSpriteB64}`;
       backSprite.src = `data:image/png;base64, ${backSpriteB64}`;
-      iconSprite.src = `data:image/png;base64, ${iconSpriteB64}`;
+      iconRSprite.src = `data:image/png;base64, ${iconRSpriteB64}`;
+      iconLSprite.src = `data:image/png;base64, ${iconLSpriteB64}`;
     }
   </script>
 
   <div class="row">
     <div class="column-left">
       <div class="thing" onclick="switchThing('undulux')">Undulux</div>
-      <div class="thing" onclick="switchThing('undulux-overheated')">Undulux - Overheated</div>
+      <div class="thing" onclick="switchThing('undulux-overheated')">Undulux <span class="form">OVERHEATED</span></div>
       <div class="thing" onclick="switchThing('hubert')">Hubert</div>
       <div class="thing" onclick="switchThing('swordhubert')">Sword Hubert</div>
       <div class="thing" onclick="switchThing('uwu')">UWU</div>
@@ -340,20 +352,29 @@
       <div class="thing" onclick="switchThing('yellosnow')">Yellosnow</div>
       <div class="thing" onclick="switchThing('yellowater')">Yellowater</div>
     </div>
+
     <div class="column-center">
-      <img class="sprite" id="frontSprite"
-        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
-      <div class="spriteLabel">Front Sprite</div>
-      <img class="sprite" id="backSprite"
-        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
-      <div class="spriteLabel">Back Sprite</div>
-      <img class="icon" id="iconSprite"
-        src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
-      <div class="spriteLabel">Icon</div>
+      <div class="spriteLabel">
+        <img class="sprite" id="frontSprite"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
+        Front Sprite</div>
+      <div class="spriteLabel">
+        <img class="sprite" id="backSprite"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
+        Back Sprite</div>
+      <div class="spriteLabel">
+        <img class="icon" id="iconRSprite"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
+        Right Icon</div>
+      <div class="spriteLabel">
+        <img class="icon" id="iconLSprite" style="transform: scaleX(-1);"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux-mirror.png">
+        Left Icon</div>
     </div>
+
     <div class="column-right">
       <label for="colorWell1">Group 1:</label>
-      <input type="color" value="#FFFFFF" id="colorWell1">
+      <input type="color" value="#000000" id="colorWell1">
       <div class="color-box" id="g1u1"></div>
       <div class="color-box" id="g1u2"></div>
       <div class="color-box" id="g1u3"></div>
@@ -365,7 +386,7 @@
       <br />
       <br />
       <label for="colorWell2">Group 2:</label>
-      <input type="color" value="#FFFFFF" id="colorWell2">
+      <input type="color" value="#000000" id="colorWell2">
       <div class="color-box" id="g2u1"></div>
       <div class="color-box" id="g2u2"></div>
       <div class="color-box" id="g2u3"></div>
@@ -377,7 +398,7 @@
       <br />
       <br />
       <label for="colorWell3">Group 3:</label>
-      <input type="color" value="#FFFFFF" id="colorWell3">
+      <input type="color" value="#000000" id="colorWell3">
       <div class="color-box" id="g3u1"></div>
       <div class="color-box" id="g3u2"></div>
       <div class="color-box" id="g3u3"></div>
@@ -389,7 +410,7 @@
       <br />
       <br />
       <label for="colorWell4">Group 4:</label>
-      <input type="color" value="#FFFFFF" id="colorWell4">
+      <input type="color" value="#000000" id="colorWell4">
       <div class="color-box" id="g4u1"></div>
       <div class="color-box" id="g4u2"></div>
       <div class="color-box" id="g4u3"></div>
@@ -401,7 +422,7 @@
       <br />
       <br />
       <label for="colorWell5">Group 5:</label>
-      <input type="color" value="#FFFFFF" id="colorWell5">
+      <input type="color" value="#000000" id="colorWell5">
       <div class="color-box" id="g5u1"></div>
       <div class="color-box" id="g5u2"></div>
       <div class="color-box" id="g5u3"></div>
@@ -414,27 +435,32 @@
       <br />
       <button onclick="resetPalette()">Reset</button>
       <br />
+      <br />
       <button onclick="loadPalette()">Load</button>
-      <input style="width: 300px;" id="paletteBox">
+      <input style="width: 275px;" id="paletteBox">
     </div>
   </div>
 
   <style>
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
     .column-left {
       float: left;
-      width: auto;
+      width: 30%;
       text-align: center;
     }
 
     .column-center {
       float: left;
-      width: auto;
+      width: 20%;
       text-align: center;
     }
 
     .column-right {
       float: left;
-      width: auto;
+      width: 40%;
       text-align: left;
     }
 
@@ -445,6 +471,7 @@
     }
 
     .thing {
+      margin-left: auto;
       width: 300px;
       border: 1px;
       border-color: black;
@@ -458,8 +485,8 @@
       background-color: #bbbbff;
     }
 
-    .spriteLabel {
-      width: 300px;
+    .form {
+      font-family: 'Courier New', Courier, monospace;
     }
 
     img {
@@ -480,10 +507,13 @@
     }
 
     .color-box {
-      width: 15px;
-      height: 15px;
+      width: 13px;
+      height: 13px;
       display: inline-block;
       margin-left: 10px;
+      border: 1px;
+      border-color: black;
+      border-style: solid;
     }
   </style>
 </body>
