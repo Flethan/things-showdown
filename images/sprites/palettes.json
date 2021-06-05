@@ -24,10 +24,11 @@
 	],
 	"uwu": [["#0C0C0C"]],
 	"hmug": [
-		["#857C7E","#D2D2D2","#E1E1E1","#FFFFFF"],
+		["#857C7E","#D2CDCD","#E1DCDC","#FFF5F5"],
 		["#ADAAAF","#CFCBD3"],
 		["#AEAF89"],
-		["#BFE8FF"]
+		["#BFE8FF"],
+		["#5B7F00", "#78A800"]
 	],
 	"yellosnow": [
 		["#7F6A00","#B2B27C","#CCCC8E","#E5E5A0","#F2F2A9","#FFFFB0"],
