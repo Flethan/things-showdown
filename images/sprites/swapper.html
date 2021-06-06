@@ -235,7 +235,13 @@
     }
 
     function switchThing(thing) {
+      activeThing.style = "";
+      activeThing = document.querySelector(`#${thing}`);
+      activeThing.style = "background-color: #425469;";
       calibration = palettes[thing];
+      for (let i = 0; i < 5; i++) {
+        document.querySelector(`#d${i + 1}`).style = `${i?'':'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
+      }
       frontSpriteB64 = things[thing]["frontSprite"];
       backSpriteB64 = things[thing]["backSprite"];
       iconRSpriteB64 = things[thing]["iconRSprite"];
@@ -274,12 +280,14 @@
         function (dataUrl) {things[thing]["iconLSprite"] = dataUrl.replace('data:image/png;base64,', '');});
     }
 
-    let frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURf///wBAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gAIM1gdoAAAABdFJOUwBA5thmAAACRUlEQVRo3u2X25KCMAyGUVEsqHgK8v5Puml6hjIjob1wp5kpq3vxfelfaLGqSpUqVapUqVL5qskNb/rM8CwCD970fTZ4L+E4+lxwO3LC5Z9UgiicBKHhoYohiMGbXmClECzC27adCK731/vDFczgskSYEQm2JeTB2xYghWARDjDNiD2BKBxURikEsc5bI+g38pc6P2NNBLz+RaRzCX9inf2Mrjy+Ekw6R/ZRDie4Ip7Hr0Skc4k/yos0iCvR7y8e32Zk4TPBneivN5OvBAp+1NHo8dTLTPT3h8nXAgc/Evtp7iIUEP3D3qu1QGXy9OCgl1/w6CNWbAquc9BDrDx15HaO8BpLKcwUws7VgNlu8QVf0Q9YqLC3URgLdOBNYe0MiD5goWJ0zzLY/cf7wsjo8SC6/IiK/Y0MFu4uzrB+EQbz8bLbo0sEcJ1P127IyB7bFNNBRDrvsEiyfpXVfaQTkgtdWwFdNbVTDvqv4L0eDUSXz4NnAEs1LtwKeYLhQHS9yu7+0QYwpwQnIy1ANq7yqLZse6opA3h43C1Ygh32fgmeBN20NICHb3kZ7QaKaYycm53bJnREHMF+Nxi+d256T7L/ZHMyutUHw/fOTd8E2wTVWBt+FXkrCjcnlqAyB0IsI/D269lb/KZ3C20yU5DwU4LfONGMTOfpBDO4QqcQBBm5zFMKZvAMAoIHtJQC03lIS2iIw35LEKNlF6hvPyOI0coifJnRjwnmi5CMvzSFvILqlJCfOPEFQ1Z+fkHaxEuVKlXqf9UfYSxMc36R90QAAAAASUVORK5CYII=";
-    let backSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAA8UExURf///wBAfwB/AACA/wD/ADAwMEBAQFV6AFubPn8AAH8A/39uAICAgJ8A36CgoL8Av98An/8AAP8Af//gACnyQCAAAAABdFJOUwBA5thmAAABx0lEQVRo3u3Y626DMAwF4EK5DdIC5f3fdbZTNkISIE6sSWv8YxNVdb4lh5Jqt1uePHny5MnzUdNI5zfCCAKiSKMaUaRRCAgiCIgiEK4kEcxXfiTZAjxIQsCNhM5Tj2eHHEgawI+EA69pfPTPkx3aXAQLBPgqcCDRgJVpvMAA9oLzD/95IcESvLuj81XTtnHCcQXwq2uj1nBSgVIdA9BCf6kCHkACEP15BYqVTwIQYJxVwAVAAGJ8yFSgBSCmUaiClXhNVytYYFjGtQqWpYIhw3gQh52W/gog/g6jjTDhUgULxM8wZDBWcFbBUEI8vpmMCMBdAaSWxdf6/jkw3wLsCu60PZvzNr5js4KKCl4J7gLcCAJ4/5MxJ/tGZHdMBl846phuUuwY76Sor70HHzP4FMBNNBQ8oP1Nd3ZMzwnanrlg5XdmuvtJh8JclDygs9IdZwE+K6qBDXiQ7VkAd9HCqwCm8yDGack7DGhqL8I/jk3Au5Ko03IH4E8bSQzYK0mSbwI7RAbAizfSyuS/rxARBeo0/0X4CyBpvs4RXIA44K0g6QL+ZQWp8uUBShKsgJJEFwBZ9U0WuNBKekE0Xx6wWsmTJ0+ej59v7kNAJqUXueQAAAAASUVORK5CYII=";
+    let frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURf///wBAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gAIM1gdoAAAABdFJOUwBA5thmAAACTUlEQVRo3u2X2XLDIAxFna0pdl1nqRz//5dWQqwGzzQKPKSDZnCTPpwjLjY4XdeqVatWrVq1qlfn2vDzVBleRRDAz9NUDT4RHMdUC+5GTTj9KSXIwrUgNly5BIIc/DwprBKCTXjf9yvBeLn/PKSCBE6l4oy04LWEAnjfA5QQbMIB1hmN4+XnIRSkcOCMSiSU67y3gunFCWx1/om1EoyiCahM5wS/YX2GGY3MlwlWnSP7RMMLRsKL+J3KdE74E13IoEamI17Cdxk5eCK4UN01XsJnAcNPJhozbmaZ70SX4q3Aw0+afbN3EQqY/pDu1UbAmdwCOJjlVzL6gpWbgu8czFBPnjq0nSP8iMUKO4W4cx6Q7BZ/4DP9gIUKdxvFscAAwRSenYGmz1ioWPyzDG7/Cb4IMrpeNZ0+omL/rQ0O7i/e8PwizPbj126PLhXBTT5D/0JG7tjWMR1UpvMBS0ueX2W+j0xCtNBHJ9BXQx3Yof+rZK9Hs6bT8xAYwFGtC7dCmWA+aLpZZX//GAPYU0KSkREgG1d54S3bnWpsgACPu4VIsMPev6InwTRNBgjwvSyj3cw5Lem5OfhtwkQkEex3dJMel/jcDJ7k8MmWZPR9dLtRcG6GJnhN0C1uP+0yb0Xx5iQSdO5EyGQEwX6dvMVLjrV1RnYKBP8o8Bsnm5HtvJwggTO6hCDKyGdeUpDAKwg0PKKVFNjOY1pBQx72XoIcrbqAv72NIEdri/DHjN5MkC5CMf7WFOoKuo+C/MKJbxiq8usLyibeqlWrVv+rfgFF9k3Q1LndxgAAAABJRU5ErkJggg==";
+    let backSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAAA8UExURf///wBAfwB/AACA/wD/ADAwMEBAQFV6AFubPn8AAH8A/39uAICAgJ8A36CgoL8Av98An/8AAP8Af//gACnyQCAAAAABdFJOUwBA5thmAAABy0lEQVRo3u3Y626DMAwFYKDcFtKWy/u/a22nHZckQEysSWv8YxNVdb6FE5pqWZYmTZo0adJ81dTS+bUwgoAoUutaFKk1AoIIAqIIhGtJBPO1H4m2AA8SEXAjofMw47lDDiQO4EfCgbF/3tXj4A4tLoIFAnwVOJDLgJW5eoEDjP1dqYMKfl+IsATv3TH5um6aa0vYrwB+tQ1rCepcBVq3DMAI6lQFHMAISKjjCjQjnwQk0DiqgAeAgAQYEhUsiP4pUsFMjP3ZCiYYlnGugmkqYchYfRCHnZb+CiD+BmOMMOFUBRPEDzBkMFZwVEFXQDy+mYwLgLsCSC3yn8/7h8B8C7AruNHtWZy31zteV1BSwR+CuwA3ggDufzKGaN+I7I7J4At7HdMmxY5xJ1362rvzmMFTAJuoy3lAM6c7O6bHmP74IWflt+t09wdRiRs1L3hAa6VbZ4H5JCo7NuBB5rOANurEqwCm9SDL05J3GJipvAj3ON4C3pVcOS23AP60kciAvZIo+Wtgg8gAePFGGpn89xUiokAV578IfwFEzTc5ggsQB7wVRF3Av6wgVr48QEmCFVCS6AIgq8pkgROtxBdE8+UBq5U0adKk+fp5AVW4QTl0vEEqAAAAAElFTkSuQmCC";
     let iconRSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAMAAABpA6zvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAA2UExURf///wAAAABAfwCA/zAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/4CAgKCgoK+vr+G4aP8AAP8Af5ocACAAAAABdFJOUwBA5thmAAAA60lEQVQ4y73T2RKDIAwFUAJYcaHi//9sbwi4NSM+dJrxyTlzITEa86/q6JmibqZWUFbdfA85KCs8RRJKc6J6lECKKFIho4ASSXFaFShoyVUjp1VxYkLYEklzgNksL1SGYGdX+kJiYPRGsZzAzq70lWFWErmCnc6l6Fx+UyNxvFzycj2KKTnLky2X3OC1CRw9jjal1IfSchh0SYYQ6hxDzIfVPskzBRstn82Rw7BP8gtaGtFRL1kFagvERxOPvHwY/pheXTDrSOZTEGbg9VWkbS0q8nere0T3sALfgOYQ9yNYxWNovG/9/m1xWx8LgQv1asLawAAAAABJRU5ErkJggg==";
     let iconLSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAeCAMAAABpA6zvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAA2UExURf///wAAAABAfwCA/zAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/4CAgKCgoK+vr+G4aP8AAP8Af5ocACAAAAABdFJOUwBA5thmAAAA5UlEQVQ4y73T2Q7CIBQEUAao0M3C//+sd+mCtkIfjJMmGj2dC1iN+Vc63FPoJrSKRHVTHXKRKLpqEkq6KVCakFGkXElQ5FXRItkh9hswU8BuNbFshHy3vs2jQiUPygYB5+ajMo/yYVD0pKgErEvpgCKhUJRWppTsMBSjVRLdKiMvYQnOUR2KzagkOsq56EIXGm0TUZyOKOf8BmNwA2y6PE2GPV16RGGS0Zc/TRDR91zJR+7sNyhj18rwuZFTI4+l+MpTEWS7jGjFvvZAlqgGTYnqcAO+AU1R9yO4idvQeN/6+7dFNS/rGQvhc3Lf0AAAAABJRU5ErkJggg==";
 
     let calibration = [];
+
+    let activeThing;
 
     let colorWell1;
     let colorWell2;
@@ -290,12 +298,17 @@
     window.addEventListener("load", startup, false);
 
     function startup() {
+      activeThing = document.querySelector("#undulux");
+      activeThing.style = "background-color: #425469;";
       colorWell1 = document.querySelector("#colorWell1");
       colorWell2 = document.querySelector("#colorWell2");
       colorWell3 = document.querySelector("#colorWell3");
       colorWell4 = document.querySelector("#colorWell4");
       colorWell5 = document.querySelector("#colorWell5");
       calibration = palettes['undulux'];
+      for (let i = 0; i < 5; i++) {
+        document.querySelector(`#d${i + 1}`).style = `${i?'':'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
+      }
       changeHelperSquares(calibration, null);
       colorWell1.value = calibration[0]?.[0] ?? '#000000';
       colorWell2.value = calibration[1]?.[0] ?? '#000000';
@@ -343,36 +356,48 @@
 
   <div class="row">
     <div class="column-left">
-      <div class="thing" onclick="switchThing('undulux')">Undulux</div>
-      <div class="thing" onclick="switchThing('undulux-overheated')">Undulux <span class="form">OVERHEATED</span></div>
-      <div class="thing" onclick="switchThing('hubert')">Hubert</div>
-      <div class="thing" onclick="switchThing('swordhubert')">Sword Hubert</div>
-      <div class="thing" onclick="switchThing('uwu')">UWU</div>
-      <div class="thing" onclick="switchThing('hmug')">H Mug</div>
-      <div class="thing" onclick="switchThing('yellosnow')">Yellosnow</div>
-      <div class="thing" onclick="switchThing('yellowater')">Yellowater</div>
+      <div class="thing" id="undulux" onclick="switchThing('undulux')">Undulux</div>
+      <div class="thing" id="undulux-overheated" onclick="switchThing('undulux-overheated')">Undulux <span
+          class="form">OVERHEATED</span></div>
+      <div class="thing" id="hubert" onclick="switchThing('hubert')">Hubert</div>
+      <div class="thing" id="swordhubert" onclick="switchThing('swordhubert')">Sword Hubert</div>
+      <div class="thing" id="uwu" onclick="switchThing('uwu')">UWU</div>
+      <div class="thing" id="hmug" onclick="switchThing('hmug')">H Mug</div>
+      <div class="thing" id="yellosnow" onclick="switchThing('yellosnow')">Yellosnow</div>
+      <div class="thing" id="yellowater" onclick="switchThing('yellowater')">Yellowater</div>
     </div>
 
     <div class="column-center">
       <div class="spriteLabel">
         <img class="sprite" id="frontSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
-        Front Sprite</div>
+        Front Sprite
+      </div>
+      <br />
       <div class="spriteLabel">
         <img class="sprite" id="backSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
-        Back Sprite</div>
+        Back Sprite
+      </div>
+      <br />
       <div class="spriteLabel">
         <img class="icon" id="iconRSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
-        Right Icon</div>
+        Right Icon
+      </div>
+      <br />
       <div class="spriteLabel">
         <img class="icon" id="iconLSprite" style="transform: scaleX(-1);"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux-mirror.png">
-        Left Icon</div>
+        Left Icon
+      </div>
     </div>
 
     <div class="column-right">
+      <button onclick="loadPalette()">Load</button>
+      <input type=text id="paletteBox">
+      <br />
+      <br />
       <label for="colorWell1">Group 1:</label>
       <input type="color" value="#000000" id="colorWell1">
       <div class="color-box" id="g1u1"></div>
@@ -431,19 +456,29 @@
       <div class="color-box" id="g5u6"></div>
       <div class="color-box" id="g5u7"></div>
       <div class="color-box" id="g5u8"></div>
-      <br />
-      <br />
-      <button onclick="resetPalette()">Reset</button>
-      <br />
-      <br />
-      <button onclick="loadPalette()">Load</button>
-      <input style="width: 275px;" id="paletteBox">
+    </div>
+    <div class="column-right">
+      <div class="reset" id="reset" onclick="resetPalette()">
+        Reset
+        <br />
+        <div class="reset-box" style="margin-top: 36px;" id="d1"></div>
+        <br />
+        <div class="reset-box" id="d2"></div>
+        <br />
+        <div class="reset-box" id="d3"></div>
+        <br />
+        <div class="reset-box" id="d4"></div>
+        <br />
+        <div class="reset-box" id="d5"></div>
+      </div>
     </div>
   </div>
 
   <style>
     body {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: lightgray;
+      background-color: #2f3133;
     }
 
     .column-left {
@@ -460,7 +495,7 @@
 
     .column-right {
       float: left;
-      width: 40%;
+      width: auto;
       text-align: left;
     }
 
@@ -471,18 +506,18 @@
     }
 
     .thing {
+      margin: 4px;
       margin-left: auto;
       width: 300px;
-      border: 1px;
-      border-color: black;
-      border-top-style: solid;
-      border-bottom-style: solid;
+      border: 2px solid #dbdbdb;
+      border-radius: 4px;
       padding-top: 10px;
       padding-bottom: 10px;
+      transition: 0.1s;
     }
 
     .thing:hover {
-      background-color: #bbbbff;
+      background-color: #4a4a61;
     }
 
     .form {
@@ -494,6 +529,10 @@
       image-rendering: pixelated;
       margin-left: auto;
       margin-right: auto;
+      background-color: #dbdbdb;
+      border: 3px;
+      border-color: #535f6b;
+      border-style: solid;
     }
 
     .sprite {
@@ -514,6 +553,77 @@
       border: 1px;
       border-color: black;
       border-style: solid;
+      transition: 0.3s;
+    }
+
+    input[type=text] {
+      width: 320px;
+      height: 30px;
+      padding: 0 8px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      color: lightgray;
+      background-color: #24282c;
+      border: 2px solid #dbdbdb;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 50px;
+      height: 30px;
+      color: #24282c;
+      background-color: lightgray;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: 0.1s;
+    }
+
+    button:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 2px 2px 2px black;
+    }
+
+    button:active {
+      transform: translate(0, 0);
+      box-shadow: none;
+    }
+
+    .reset {
+      margin: 8px;
+      padding: 8px;
+      color: #24282c;
+      background-color: lightgray;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: 0.5s;
+    }
+
+    .reset:hover {
+      background-color: white;
+    }
+    
+    .reset:active {
+      background-color: gray;
+    }
+
+    .reset-box {
+      width: 38px;
+      height: 13px;
+      display: inline-block;
+      margin-top: 28px;
+      margin-left: 5px;
+      margin-right: 5px;
+      border: 1px;
+      border-color: black;
+      border-style: solid;
+      transition: 0.5s;
+    }
+
+    .reset-box.swish {
+      transform: translate(-300px);
+      opacity: 0;
     }
   </style>
 </body>
