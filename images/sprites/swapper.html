@@ -367,13 +367,7 @@
       <div class="thing" id="yellowater" onclick="switchThing('yellowater')">Yellowater</div>
     </div>
 
-    <div class="column-center">
-      <div class="spriteLabel">
-        <img class="sprite" id="frontSprite"
-          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
-        Front Sprite
-      </div>
-      <br />
+	<div class="column-center">
       <div class="spriteLabel">
         <img class="sprite" id="backSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
@@ -381,15 +375,22 @@
       </div>
       <br />
       <div class="spriteLabel">
-        <img class="icon" id="iconRSprite"
-          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
-        Right Icon
-      </div>
-      <br />
-      <div class="spriteLabel">
         <img class="icon" id="iconLSprite" style="transform: scaleX(-1);"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux-mirror.png">
         Left Icon
+      </div>
+    </div>
+	<div class="column-center">
+      <div class="spriteLabel">
+        <img class="sprite" id="frontSprite"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
+        Front Sprite
+      </div>
+      <br />
+      <div class="spriteLabel">
+        <img class="icon" id="iconRSprite"
+          src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/undulux.png">
+        Right Icon
       </div>
     </div>
 
@@ -483,13 +484,15 @@
 
     .column-left {
       float: left;
+	  margin-right: 20px;
       width: 30%;
       text-align: center;
     }
 
     .column-center {
       float: left;
-      width: 20%;
+	  margin-right: 20px;
+      width: auto;
       text-align: center;
     }
 
