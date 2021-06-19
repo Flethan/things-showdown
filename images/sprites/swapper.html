@@ -240,7 +240,7 @@
       activeThing.style = "background-color: #425469;";
       calibration = palettes[thing];
       for (let i = 0; i < 5; i++) {
-        document.querySelector(`#d${i + 1}`).style = `${i?'':'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
+        document.querySelector(`#d${i + 1}`).style = `${i ? '' : 'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
       }
       frontSpriteB64 = things[thing]["frontSprite"];
       backSpriteB64 = things[thing]["backSprite"];
@@ -265,19 +265,19 @@
       }
     }
 
-    const palettes = {"undulux": [["#557A00", "#5B9B3E"], ["#E1B868"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#474747", "#606060", "#A0A0A0", "#AFAFAF"]], "undulux-overheated": [["#557A00", "#5B9B3E"], ["#DD801C"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#890000", "#606060", "#A0A0A0", "#AFAFAF"]], "hubert": [["#0C0C0C", "#3F3F3F"]], "swordhubert": [["#0C0C0C", "#3F3F3F"], ["#5F5A55", "#999592", "#C8C3BE", "#D8D4D0"], ["#3D2200", "#5A3200", "#723F00"], ["#934E00", "#AD6200"]], "uwu": [["#0C0C0C"]], "hmug": [["#857C7E", "#D2CDCD", "#E1DCDC", "#FFF5F5"], ["#ADAAAF", "#CFCBD3"], ["#AEAF89"], ["#BFE8FF"], ["#5B7F00", "#78A800"]], "yellosnow": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]], "yellowater": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]]};
+    const palettes = { "undulux": [["#557A00", "#5B9B3E"], ["#E1B868"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#474747", "#606060", "#A0A0A0", "#AFAFAF"]], "undulux-overheated": [["#557A00", "#5B9B3E"], ["#DD801C"], ["#7F00FF", "#9F00DF", "#BF00BF", "#DF009F", "#FF007F"], ["#FF0000", "#0080FF", "#00FF00", "#FFE000", "#7F0000", "#00407F", "#007F00", "#7F6E00"], ["#191919", "#303030", "#890000", "#606060", "#A0A0A0", "#AFAFAF"]], "hubert": [["#0C0C0C", "#3F3F3F"]], "swordhubert": [["#0C0C0C", "#3F3F3F"], ["#5F5A55", "#999592", "#C8C3BE", "#D8D4D0"], ["#3D2200", "#5A3200", "#723F00"], ["#934E00", "#AD6200"]], "uwu": [["#0C0C0C"]], "hmug": [["#857C7E", "#D2CDCD", "#E1DCDC", "#FFF5F5"], ["#ADAAAF", "#CFCBD3"], ["#AEAF89"], ["#BFE8FF"], ["#5B7F00", "#78A800"]], "yellosnow": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]], "yellowater": [["#7F6A00", "#B2B27C", "#CCCC8E", "#E5E5A0", "#F2F2A9", "#FFFFB0"], ["#191919", "#333333", "#404040"], ["#B26B00", "#FF9B00", "#FFB400"], ["#B37729", "#6D4E20"], ["#0C0C0C"]], "pescadestrian": [["#317BC4", "#A8D3FF", "#92B6E2", "#7C99C4", "#657CA6"], ["#8BEAFF"], ["#3C73A9", "#6FB3DF", "#639FC4", "#568AA8"], ["#6A8FFF", "#ABBDFF", "#9FB3FA", "#93A8F5"], ["#101020", "#202048", "#303080", "#9090D0", "#DAE2E6"]] };
     const things = {};
 
     for (let thing in palettes) {
       things[thing] = {};
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/${thing}.png`,
-        function (dataUrl) {things[thing]["frontSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+        function (dataUrl) { things[thing]["frontSprite"] = dataUrl.replace('data:image/png;base64,', ''); });
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/${thing}.png`,
-        function (dataUrl) {things[thing]["backSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+        function (dataUrl) { things[thing]["backSprite"] = dataUrl.replace('data:image/png;base64,', ''); });
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/${thing}.png`,
-        function (dataUrl) {things[thing]["iconRSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+        function (dataUrl) { things[thing]["iconRSprite"] = dataUrl.replace('data:image/png;base64,', ''); });
       toDataURL(`https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/thingicons/${thing}-mirror.png`,
-        function (dataUrl) {things[thing]["iconLSprite"] = dataUrl.replace('data:image/png;base64,', '');});
+        function (dataUrl) { things[thing]["iconLSprite"] = dataUrl.replace('data:image/png;base64,', ''); });
     }
 
     let frontSpriteB64 = "iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADr8AAA6/ATgFUyQAAABLUExURf///wBAfwB/AACA/wD/ABkZGTAwMEBAQEdHR1V6AFubPmBgYH8AAH8A/39uAICAgJ8A36CgoK+vr78Av98An+G4aP8AAP8Af//gAIM1gdoAAAABdFJOUwBA5thmAAACTUlEQVRo3u2X2XLDIAxFna0pdl1nqRz//5dWQqwGzzQKPKSDZnCTPpwjLjY4XdeqVatWrVq1qlfn2vDzVBleRRDAz9NUDT4RHMdUC+5GTTj9KSXIwrUgNly5BIIc/DwprBKCTXjf9yvBeLn/PKSCBE6l4oy04LWEAnjfA5QQbMIB1hmN4+XnIRSkcOCMSiSU67y3gunFCWx1/om1EoyiCahM5wS/YX2GGY3MlwlWnSP7RMMLRsKL+J3KdE74E13IoEamI17Cdxk5eCK4UN01XsJnAcNPJhozbmaZ70SX4q3Aw0+afbN3EQqY/pDu1UbAmdwCOJjlVzL6gpWbgu8czFBPnjq0nSP8iMUKO4W4cx6Q7BZ/4DP9gIUKdxvFscAAwRSenYGmz1ioWPyzDG7/Cb4IMrpeNZ0+omL/rQ0O7i/e8PwizPbj126PLhXBTT5D/0JG7tjWMR1UpvMBS0ueX2W+j0xCtNBHJ9BXQx3Yof+rZK9Hs6bT8xAYwFGtC7dCmWA+aLpZZX//GAPYU0KSkREgG1d54S3bnWpsgACPu4VIsMPev6InwTRNBgjwvSyj3cw5Lem5OfhtwkQkEex3dJMel/jcDJ7k8MmWZPR9dLtRcG6GJnhN0C1uP+0yb0Xx5iQSdO5EyGQEwX6dvMVLjrV1RnYKBP8o8Bsnm5HtvJwggTO6hCDKyGdeUpDAKwg0PKKVFNjOY1pBQx72XoIcrbqAv72NIEdri/DHjN5MkC5CMf7WFOoKuo+C/MKJbxiq8usLyibeqlWrVv+rfgFF9k3Q1LndxgAAAABJRU5ErkJggg==";
@@ -307,7 +307,7 @@
       colorWell5 = document.querySelector("#colorWell5");
       calibration = palettes['undulux'];
       for (let i = 0; i < 5; i++) {
-        document.querySelector(`#d${i + 1}`).style = `${i?'':'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
+        document.querySelector(`#d${i + 1}`).style = `${i ? '' : 'margin-top: 36px;'}background-color: ${calibration[i]?.[0] || '#000000'};`
       }
       changeHelperSquares(calibration, null);
       colorWell1.value = calibration[0]?.[0] ?? '#000000';
@@ -365,9 +365,10 @@
       <div class="thing" id="hmug" onclick="switchThing('hmug')">H Mug</div>
       <div class="thing" id="yellosnow" onclick="switchThing('yellosnow')">Yellosnow</div>
       <div class="thing" id="yellowater" onclick="switchThing('yellowater')">Yellowater</div>
+      <div class="thing" id="pescadestrian" onclick="switchThing('pescadestrian')">Pescadestrian</div>
     </div>
 
-	<div class="column-center">
+    <div class="column-center">
       <div class="spriteLabel">
         <img class="sprite" id="backSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5-back/undulux.png">
@@ -380,7 +381,7 @@
         Left Icon
       </div>
     </div>
-	<div class="column-center">
+    <div class="column-center">
       <div class="spriteLabel">
         <img class="sprite" id="frontSprite"
           src="https://raw.githubusercontent.com/Flethan/things-showdown/main-server/images/sprites/gen5/undulux.png">
@@ -484,14 +485,14 @@
 
     .column-left {
       float: left;
-	  margin-right: 20px;
+      margin-right: 20px;
       width: 30%;
       text-align: center;
     }
 
     .column-center {
       float: left;
-	  margin-right: 20px;
+      margin-right: 20px;
       width: auto;
       text-align: center;
     }
@@ -606,7 +607,7 @@
     .reset:hover {
       background-color: white;
     }
-    
+
     .reset:active {
       background-color: gray;
     }
