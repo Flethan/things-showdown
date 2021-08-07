@@ -1731,6 +1731,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (foeActive.hp < foeActive.maxhp * 2 / 10) {
 					if (pokemon.species.id !== 'tacilinksputt') {
 						pokemon.formeChange('Tacilinks-Putt', this.effect, false, '[msg]');
+						pokemon.setAbility('shortgame');
 					}
 				}
 			}
@@ -1757,6 +1758,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			if (pokemon.species.id === 'tacilinksputt') {
 				pokemon.formeChange('Tacilinks', this.effect, false, '[msg]');
+				pokemon.setAbility('longgame');
 			}
 		},
 		name: "Short Game",
