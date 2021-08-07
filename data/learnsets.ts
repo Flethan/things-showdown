@@ -2027,6 +2027,14 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swarm: ["8L24"],
 		},
 	},
+	tacilinks: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+		},
+	},
+
 
 // BASE GAME
 	missingno: {

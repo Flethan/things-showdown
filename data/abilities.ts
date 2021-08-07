@@ -1715,6 +1715,54 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 58,
 	},
+	longgame: {
+		isNonstandard: "Thing",
+		onModifyPriority(priority, pokemon, target, move) {
+			for (const foeActive of pokemon.foes()) {
+				if (foeActive.hp === foeActive.maxhp) {
+					return priority + 1;
+				}
+			}
+		},
+		onResidual(pokemon) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Tacilinks' || pokemon.transformed) return;
+			if (!pokemon.hp) return;
+			for (const foeActive of pokemon.foes()) {
+				if (foeActive.hp < foeActive.maxhp * 2 / 10) {
+					if (pokemon.species.id !== 'tacilinksputt') {
+						pokemon.formeChange('Tacilinks-Putt', this.effect, false, '[msg]');
+					}
+				}
+			}
+		},
+		name: "Long Game",
+		rating: 1,
+		num: 528,
+	},
+	shortgame: {
+		isNonstandard: "Thing",
+		onSourceModifyDamage(damage, source, target, move) {
+			if (source.hp < source.maxhp/2) {
+				this.debug('Short Game weaken');
+				return this.chainModify((source.hp*2)/source.maxhp);
+			}
+		},
+		onResidual(pokemon) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Tacilinks' || pokemon.transformed) return;
+			if (!pokemon.hp) return;
+			for (const foeActive of pokemon.foes()) {
+				if (foeActive.hp < foeActive.maxhp * 5 / 10) {
+					return;
+				}
+			}
+			if (pokemon.species.id === 'tacilinksputt') {
+				pokemon.formeChange('Tacilinks', this.effect, false, '[msg]');
+			}
+		},
+		name: "Short Game",
+		rating: 1,
+		num: 528,
+	},
 
 // BASE GAME	
 	noability: {

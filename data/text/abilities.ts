@@ -144,6 +144,14 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage."
 	},
 
+	longgame: {
+		name: "Long Game",
+		shortDesc: "If foe is at full HP, this Thing's moves have their priority increased by 1.",
+		gen6: {
+			shortDesc: "This Thing's moves have their priority increased by 1 against full-HP foes.",
+		},
+	},
+
 	omega: {
 		name: "Omega",
 		shortDesc: "Every third turn in battle, this Thing's moves One-hit KO.",

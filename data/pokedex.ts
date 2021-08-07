@@ -1641,6 +1641,33 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		eggGroups: ["Mineral"],
 	},
+	tacilinks: {
+		num: -412,
+		name: "Tacilinks",
+		types: ["Sport", "Far"],
+		baseStats: {hp: 70, atk: 40, def: 100, spa: 110, spd: 50, spe: 120},
+		abilities: {0: "Long Game"},
+		heightm: 0.9,
+		weightkg: 5.0,
+		color: "White",
+		eggGroups: ["Mineral"],
+		otherFormes: ["Tacilinks-Putt"],
+		formeOrder: ["Tacilinks", "Tacilinks-Putt"],
+	},
+	tacilinksputt: {
+		num: -412,
+		name: "Tacilinks-Putt",
+		baseSpecies: "Tacilinks",
+		forme: "Putt",
+		types: ["Sport", "Green"],
+		baseStats: {hp: 70, atk: 115, def: 95, spa: 5, spd: 110, spe: 45},
+		abilities: {0: "Short Game"},
+		heightm: 0.3,
+		weightkg: 5.0,
+		color: "White",
+		eggGroups: ["Mineral"],
+		battleOnly: "Tacilinks",
+	},
 
 // BASE GAME
 	bulbasaur: {
