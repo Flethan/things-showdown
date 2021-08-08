@@ -8,6 +8,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Extra Dirty Dirt",
 		desc: "Holder's Dirt-type attacks deal 1.2x damage.",
 	},
+	toofarjuice: {
+		name: "Too Far Juice",
+		desc: "Holder's Far-type attacks deal 1.2x damage.",
+	},
 	fishscale: {
 		name: "Fish Scale",
 		desc: "Holder's Fish-type attacks deal 1.2x damage.",
@@ -71,6 +75,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 	yellowstuff: {
 		name: "Yellow Stuff",
 		desc: "Holder's Yellow-type attacks deal 1.2x damage.",
+	},
+	everything: {
+		name: "Everything",
+		desc: "Holder's Infinity-type attacks deal 1.2x damage.",
 	},
 	environmentalaccord: {
 		name: "Environmental Accord",
