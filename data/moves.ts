@@ -2836,6 +2836,60 @@ export const Moves: {[moveid: string]: MoveData} = {
 		maxMove: {basePower: 75},
 		contestType: "Tough",
 	},
+	springfloor: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Spring Floor",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'springfloor',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onDamage(damage, target, source, effect) {
+				if (effect.id === 'recoil') {
+					if (!this.activeMove) throw new Error("Battle.activeMove is null");
+					if (this.activeMove.id !== 'struggle') return null;
+				}
+			},
+			onModifyAtkPriority: 10,
+			onModifyAtk(atk, pokemon) {
+				if (pokemon.hasType('Sport')) {
+					return this.modify(atk, 1.5);
+				}
+			},
+			onModifyDefPriority: 10,
+			onModifyDef(def, pokemon) {
+				if (pokemon.hasType('Sport')) {
+					return this.modify(def, 1.5);
+				}
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Spring Floor', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Spring Floor');
+				}
+			},
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Spring Floor');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Sport",
+		zMove: {boost: {spd: 1}},
+		contestType: "Cool",
+	},
 	
 	//Sword
 	sharpslash: {
