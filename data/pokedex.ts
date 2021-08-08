@@ -321,7 +321,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	afishal: {
 		num: -320,
 		name: "Afishal",
-		types: ["Fish","Night"],
+		types: ["Fish","Far"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 35, atk: 60, def: 40, spa: 25, spd: 30, spe: 40},
 		abilities: {0: "Pelagic", 1: "High Pressure"},
@@ -347,7 +347,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	bassozefish: {
 		num: -322,
 		name: "Bassozefish",
-		types: ["Fish","Night"],
+		types: ["Fish","Far"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 105, atk: 100, def: 60, spa: 50, spd: 60, spe: 75},
 		abilities: {0: "Robust", 1: "High Pressure"},
@@ -648,7 +648,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	solor: {
 		num: -345,
 		name: "Solor",
-		types: ["Yellow", "Night"],
+		types: ["Far", "Night"],
 		gender: "N",
 		baseStats: {hp: 47, atk: 111, def: 72, spa: 111, spd: 72, spe: 72},
 		abilities: {0: "Distant System"},
@@ -690,7 +690,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	godbye: {
 		num: -348,
 		name: "Godbye",
-		types: ["No"],
+		types: ["No", "Far"],
 		genderRatio: {M: 0.28, F: 0.72},
 		baseStats: {hp: 50, atk: 60, def: 65, spa: 85, spd: 70, spe: 150},
 		abilities: {0: "Farewell"},
