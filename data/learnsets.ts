@@ -1996,6 +1996,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenpunch: ["8T"],
 			voidpunch: ["8T"],
 			thermalpunch: ["8T"],
+			springfloor: ["8L20"],
 		},
 	},
 	uwu: {

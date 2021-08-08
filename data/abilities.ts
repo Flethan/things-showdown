@@ -1765,6 +1765,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 1,
 		num: 528,
 	},
+	agilebouncer: {
+		onModifySpe(spe) {
+			if (this.field.isTerrain('springfloor')) {
+				return this.chainModify(2);
+			}
+		},
+		name: "Agile Bouncer",
+		rating: 3,
+		num: 207,
+	},
+	powerbouncer: {
+		onModifyAtk(atk) {
+			if (this.field.isTerrain('springfloor')) {
+				return this.chainModify(2);
+			}
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if (this.field.isTerrain('springfloor')) {
+				return priority - 1;
+			}
+		},
+		name: "Power Bouncer",
+		rating: 3,
+		num: 207,
+	},
 
 // BASE GAME	
 	noability: {
