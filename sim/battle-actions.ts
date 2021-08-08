@@ -29,6 +29,7 @@ export class BattleActions {
 		// THINGS
 		Arthropod: "Max Arthropod",
 		Dirt: "Max Dirt",
+		Far: "Max Far",
 		Fish: "Max Fish",
 		Green: "Max Green",
 		H: "Max H",
@@ -69,6 +70,7 @@ export class BattleActions {
 		// THINGS
 		Arthropod: "Z-Arthropod",
 		Dirt: "Z-Dirt",
+		Far: "Z-Far",
 		Fish: "Z-Fish",
 		Green: "Z-Green",
 		H: "Z-H",

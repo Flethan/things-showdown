@@ -429,6 +429,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Dirt",
 		contestType: "Beautiful",
 	},
+
+	//Far
 	
 	//Fish
 	brilliantfish: {
@@ -3911,29 +3913,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 	//Infinity
 	
 // NEW GENERICS
-	maxinfinity: {
-		num: -200,
-		accuracy: true,
-		basePower: 10,
-		category: "Physical",
-		isNonstandard: "Thing",
-		name: "Max Infinity",
-		pp: 10,
-		priority: 0,
-		flags: {},
-		isMax: true,
-		self: {
-			onHit(source) {
-				if (!source.volatiles['dynamax']) return;
-				this.field.setWeather('locustswarm');
-			},
-		},
-		target: "adjacentFoe",
-		type: "Infinity",
-		contestType: "Cool",
-	},
 	maxarthropod: {
-		num: -201,
+		num: -200,
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
@@ -3953,29 +3934,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Arthropod",
 		contestType: "Cool",
 	},
-	maxfish: {
-		num: -202,
-		accuracy: true,
-		basePower: 10,
-		category: "Physical",
-		isNonstandard: "Thing",
-		name: "Max Fish",
-		pp: 10,
-		priority: 0,
-		flags: {},
-		isMax: true,
-		self: {
-			onHit(source) {
-				if (!source.volatiles['dynamax']) return;
-				this.field.setWeather('locustswarm');
-			},
-		},
-		target: "adjacentFoe",
-		type: "Fish",
-		contestType: "Cool",
-	},
 	maxdirt: {
-		num: -203,
+		num: -201,
 		accuracy: true,
 		basePower: 10,
 		category: "Physical",
@@ -3993,6 +3953,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "adjacentFoe",
 		type: "Dirt",
+		contestType: "Cool",
+	},
+	maxfar: {
+		num: -202,
+		accuracy: true,
+		basePower: 10,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Max Far",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		isMax: true,
+		self: {
+			onHit(source) {
+				if (!source.volatiles['dynamax']) return;
+				this.field.setWeather('locustswarm');
+			},
+		},
+		target: "adjacentFoe",
+		type: "Far",
+		contestType: "Cool",
+	},
+	maxfish: {
+		num: -203,
+		accuracy: true,
+		basePower: 10,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Max Fish",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		isMax: true,
+		self: {
+			onHit(source) {
+				if (!source.volatiles['dynamax']) return;
+				this.field.setWeather('locustswarm');
+			},
+		},
+		target: "adjacentFoe",
+		type: "Fish",
 		contestType: "Cool",
 	},
 	maxgreen: {
@@ -4314,24 +4316,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Cool",
 	},
-	zinfinity: {
-		num: -220,
+	maxinfinity: {
+		num: -219,
 		accuracy: true,
-		basePower: 1,
+		basePower: 10,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Z-Infinity",
-		pp: 1,
+		name: "Max Infinity",
+		pp: 10,
 		priority: 0,
 		flags: {},
-		isZ: "infinityiumz",
-		secondary: null,
-		target: "normal",
+		isMax: true,
+		self: {
+			onHit(source) {
+				if (!source.volatiles['dynamax']) return;
+				this.field.setWeather('locustswarm');
+			},
+		},
+		target: "adjacentFoe",
 		type: "Infinity",
 		contestType: "Cool",
 	},
 	zarthropod: {
-		num: -221,
+		num: -220,
 		accuracy: true,
 		basePower: 1,
 		category: "Physical",
@@ -4347,7 +4354,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		contestType: "Cool",
 	},
 	zdirt: {
-		num: -222,
+		num: -221,
 		accuracy: true,
 		basePower: 1,
 		category: "Physical",
@@ -4360,6 +4367,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dirt",
+		contestType: "Cool",
+	},
+	zfar: {
+		num: -222,
+		accuracy: true,
+		basePower: 1,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Z-Far",
+		pp: 1,
+		priority: 0,
+		flags: {},
+		isZ: "fariumz",
+		secondary: null,
+		target: "normal",
+		type: "Far",
 		contestType: "Cool",
 	},
 	zfish: {
@@ -4618,23 +4641,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Cool",
 	},
-	infinityphysical: {
-		num: -240,
-		accuracy: 100,
-		basePower: 80,
+	zinfinity: {
+		num: -239,
+		accuracy: true,
+		basePower: 1,
 		category: "Physical",
-		isNonstandard: "ThingGeneric",
-		name: "Infinity Physical",
-		pp: 35,
+		isNonstandard: "Thing",
+		name: "Z-Infinity",
+		pp: 1,
 		priority: 0,
-		flags: {protect: 1, mirror: 1},
+		flags: {},
+		isZ: "infinityiumz",
 		secondary: null,
 		target: "normal",
 		type: "Infinity",
-		contestType: "Tough",
+		contestType: "Cool",
 	},
 	arthropodphysical: {
-		num: -241,
+		num: -240,
 		accuracy: 100,
 		basePower: 80,
 		category: "Physical",
@@ -4649,7 +4673,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		contestType: "Tough",
 	},
 	dirtphysical: {
-		num: -242,
+		num: -241,
 		accuracy: 100,
 		basePower: 80,
 		category: "Physical",
@@ -4661,6 +4685,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dirt",
+		contestType: "Tough",
+	},
+	farphysical: {
+		num: -242,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		isNonstandard: "ThingGeneric",
+		name: "Far Physical",
+		pp: 35,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Far",
 		contestType: "Tough",
 	},
 	fishphysical: {
@@ -4903,13 +4942,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Tough",
 	},
-	infinityspecial: {
-		num: -260,
+	infinityphysical: {
+		num: -259,
 		accuracy: 100,
 		basePower: 80,
-		category: "Special",
+		category: "Physical",
 		isNonstandard: "ThingGeneric",
-		name: "Infinity Special",
+		name: "Infinity Physical",
 		pp: 35,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
@@ -4919,7 +4958,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		contestType: "Tough",
 	},
 	arthropodspecial: {
-		num: -261,
+		num: -260,
 		accuracy: 100,
 		basePower: 80,
 		category: "Special",
@@ -4934,7 +4973,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		contestType: "Tough",
 	},
 	dirtspecial: {
-		num: -262,
+		num: -261,
 		accuracy: 100,
 		basePower: 80,
 		category: "Special",
@@ -4946,6 +4985,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: null,
 		target: "normal",
 		type: "Dirt",
+		contestType: "Tough",
+	},
+	farspecial: {
+		num: -262,
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		isNonstandard: "ThingGeneric",
+		name: "Far Special",
+		pp: 35,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Far",
 		contestType: "Tough",
 	},
 	fishspecial: {
@@ -5188,6 +5242,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Tough",
 	},
+	infinityspecial: {
+		num: -279,
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		isNonstandard: "ThingGeneric",
+		name: "Infinity Special",
+		pp: 35,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Infinity",
+		contestType: "Tough",
+	},
+
 // BASE GAME
 	"10000000voltthunderbolt": {
 		num: 719,

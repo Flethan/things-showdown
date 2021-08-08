@@ -311,7 +311,7 @@ export class RandomTeams {
 		// For Monotype NOTE: NotFlethan has hacked in the type pool to exclude the not new types.
 		const ruleTable = this.dex.formats.getRuleTable(this.format);
 		const isMonotype = ruleTable.has('sametypeclause');
-		const typePool = ['Arthropod', 'Dirt', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
+		const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
 		const type = isMonotype ? this.sample(typePool) : this.forceMonotype;
 
 		const randomN = this.randomNThings(this.maxTeamSize, type);

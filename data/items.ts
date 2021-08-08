@@ -13,7 +13,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -219,
+		num: -220,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -29,13 +29,29 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -220,
+		num: -221,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	toofarjuice: {
+		name: "Too Far Juice",
+		spritenum: 772,
+		fling: {
+			basePower: 40,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Far') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -222,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	fishscale: {
 		name: "Fish Scale",
-		spritenum: 772,
+		spritenum: 773,
 		fling: {
 			basePower: 20,
 		},
@@ -45,13 +61,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -221,
+		num: -223,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	greens: {
 		name: "Greens",
-		spritenum: 773,
+		spritenum: 774,
 		fling: {
 			basePower: 10,
 		},
@@ -61,13 +77,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -222,
+		num: -224,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	hdictionary: {
 		name: "H Dictionary",
-		spritenum: 774,
+		spritenum: 775,
 		fling: {
 			basePower: 40,
 		},
@@ -77,13 +93,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -223,
+		num: -225,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	hairbrush: {
 		name: "Hairbrush",
-		spritenum: 775,
+		spritenum: 776,
 		fling: {
 			basePower: 20,
 		},
@@ -93,13 +109,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -224,
+		num: -226,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	machineoil: {
 		name: "Machine Oil",
-		spritenum: 776,
+		spritenum: 777,
 		fling: {
 			basePower: 30,
 		},
@@ -109,13 +125,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -225,
+		num: -227,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	spraybottle: {
 		name: "Spray Bottle",
-		spritenum: 777,
+		spritenum: 778,
 		fling: {
 			basePower: 20,
 		},
@@ -125,13 +141,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -226,
+		num: -228,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	tuningfork: {
 		name: "Tuning Fork",
-		spritenum: 778,
+		spritenum: 779,
 		fling: {
 			basePower: 30,
 		},
@@ -141,13 +157,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -227,
+		num: -229,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	littleshadow: {
 		name: "Little Shadow",
-		spritenum: 779,
+		spritenum: 780,
 		fling: {
 			basePower: 10,
 		},
@@ -157,13 +173,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -228,
+		num: -230,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	nothing: {
 		name: "Nothing",
-		spritenum: 780,
+		spritenum: 781,
 		fling: {
 			basePower: 0,
 		},
@@ -173,13 +189,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -229,
+		num: -231,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	beaker: {
 		name: "Beaker",
-		spritenum: 781,
+		spritenum: 782,
 		fling: {
 			basePower: 20,
 		},
@@ -189,13 +205,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -230,
+		num: -232,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	rubberball: {
 		name: "Rubber Ball",
-		spritenum: 782,
+		spritenum: 783,
 		fling: {
 			basePower: 30,
 		},
@@ -205,13 +221,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -231,
+		num: -233,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	whetstone: {
 		name: "Whetstone",
-		spritenum: 783,
+		spritenum: 784,
 		fling: {
 			basePower: 50,
 		},
@@ -221,13 +237,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -232,
+		num: -234,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	thermometer: {
 		name: "Thermometer",
-		spritenum: 784,
+		spritenum: 785,
 		fling: {
 			basePower: 20,
 		},
@@ -237,13 +253,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -233,
+		num: -235,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	pocketwatch: {
 		name: "Pocket Watch",
-		spritenum: 785,
+		spritenum: 786,
 		fling: {
 			basePower: 20,
 		},
@@ -253,13 +269,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -234,
+		num: -236,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	barometer: {
 		name: "Barometer",
-		spritenum: 786,
+		spritenum: 787,
 		fling: {
 			basePower: 20,
 		},
@@ -269,13 +285,13 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -235,
+		num: -237,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	yellowstuff: {
 		name: "Yellow Stuff",
-		spritenum: 787,
+		spritenum: 788,
 		fling: {
 			basePower: 20,
 		},
@@ -285,45 +301,61 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify([0x1333, 0x1000]);
 			}
 		},
-		num: -236,
+		num: -238,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	
+	everything: {
+		name: "Everything",
+		spritenum: 789,
+		fling: {
+			basePower: 20,
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move && move.type === 'Infinity') {
+				return this.chainModify([0x1333, 0x1000]);
+			}
+		},
+		num: -239,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+
 	environmentalaccord: {
 		name: "Environmental Accord",
-		spritenum: 788,
+		spritenum: 790,
 		fling: {
 			basePower: 10,
 		},
-		num: -237,
+		num: -240,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	landscapingpermit: {
 		name: "Landscaping Permit",
-		spritenum: 789,
+		spritenum: 791,
 		fling: {
 			basePower: 20,
 		},
-		num: -238,
+		num: -241,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	yellowsafetyvest: {
 		name: "Yellow Safety Vest",
-		spritenum: 790,
+		spritenum: 792,
 		fling: {
 			basePower: 20,
 		},
-		num: -239,
+		num: -242,
 		gen: 8,
 		// Hazard Immunity implemented in each hazard
 		isNonstandard: "Thing",
 	},
 	nonslipshoes: {
 		name: "Non-Slip Shoes",
-		spritenum: 791,
+		spritenum: 793,
 		fling: {
 			basePower: 10,
 		},
@@ -333,26 +365,26 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.useItem();
 			}
 		},
-		num: -240,
+		num: -243,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	blindfold: {
 		name: "Blindfold",
-		spritenum: 792,
+		spritenum: 794,
 		fling: {
 			basePower: 10,
 		},
 		onStart (pokemon) {
 			pokemon.trySetStatus('blinded', pokemon);
 		},
-		num: -241,
+		num: -244,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	dimensionaltether: {
 		name: "Dimensional Tether",
-		spritenum: 793,
+		spritenum: 795,
 		fling: {
 			basePower: 80,
 		},
@@ -362,23 +394,23 @@ export const Items: {[itemid: string]: ItemData} = {
 				pokemon.useItem();
 			}
 		},
-		num: -242,
+		num: -245,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	prngmachine: {
 		name: "pRNG Machine",
-		spritenum: 794,
+		spritenum: 796,
 		fling: {
 			basePower: 90,
 		},
-		num: -243,
+		num: -246,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	knife: {
 		name: "Knife",
-		spritenum: 795,
+		spritenum: 797,
 		fling: {
 			basePower: 120,
 			volatileStatus: 'wounded',
@@ -396,7 +428,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				});
 			}
 		},
-		num: -244,
+		num: -247,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -421,11 +453,11 @@ export const Items: {[itemid: string]: ItemData} = {
 			return 0.1;
 		},
 		name: "Rechargeable Shoes",
-		spritenum: 796,
+		spritenum: 798,
 		fling: {
 			basePower: 60,
 		},
-		num: -245,
+		num: -248,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -440,17 +472,17 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		name: "Fish Bait",
-		spritenum: 797,
+		spritenum: 799,
 		fling: {
 			basePower: 40,
 		},
-		num: -246,
+		num: -249,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	bugbomb: {
 		name: "Bug Bomb",
-		spritenum: 798,
+		spritenum: 800,
 		fling: {
 			basePower: 40,
 		},
@@ -460,42 +492,42 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.field.setWeather('locustswarm');
 			}
 		},
-		num: -247,
+		num: -250,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	
-	infinityiumz: {
-		name: "Infinityium Z",
-		spritenum: 751,
-		onPlate: 'Water',
-		onTakeItem: false,
-		zMove: true,
-		zMoveType: "Infinity",
-		forcedForme: "Arceus-Water",
-		num: -200,
-		gen: 7,
-		isNonstandard: "Past",
-	},
+
 	arthropodiumz: {
 		name: "Arthropodium Z",
-		spritenum: 752,
+		spritenum: 750,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
 		zMoveType: "Arthropod",
 		forcedForme: "Arceus-Water",
-		num: -201,
+		num: -200,
 		gen: 7,
 		isNonstandard: "Past",
 	},
 	dirtiumz: {
 		name: "Dirtium Z",
-		spritenum: 753,
+		spritenum: 751,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
 		zMoveType: "Dirt",
+		forcedForme: "Arceus-Water",
+		num: -201,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	fariumz: {
+		name: "Farium Z",
+		spritenum: 752,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Far",
 		forcedForme: "Arceus-Water",
 		num: -202,
 		gen: 7,
@@ -503,7 +535,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	fishiumz: {
 		name: "Fishium Z",
-		spritenum: 754,
+		spritenum: 753,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -515,7 +547,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	greeniumz: {
 		name: "Greenium Z",
-		spritenum: 755,
+		spritenum: 754,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -527,7 +559,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	hiumz: {
 		name: "Hium Z",
-		spritenum: 756,
+		spritenum: 755,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -539,7 +571,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	hairiumz: {
 		name: "Hairium Z",
-		spritenum: 757,
+		spritenum: 756,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -551,7 +583,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	industrialiumz: {
 		name: "Industrialium Z",
-		spritenum: 758,
+		spritenum: 757,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -563,7 +595,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	liquidiumz: {
 		name: "Liquidium Z",
-		spritenum: 759,
+		spritenum: 758,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -575,7 +607,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	musiciumz: {
 		name: "Musicium Z",
-		spritenum: 760,
+		spritenum: 759,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -587,7 +619,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	nightiumz: {
 		name: "Nightium Z",
-		spritenum: 761,
+		spritenum: 760,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -599,7 +631,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	noiumz: {
 		name: "Noium Z",
-		spritenum: 762,
+		spritenum: 761,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -611,7 +643,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	scienceiumz: {
 		name: "Scienceium Z",
-		spritenum: 763,
+		spritenum: 762,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -623,7 +655,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	sportiumz: {
 		name: "Sportium Z",
-		spritenum: 764,
+		spritenum: 763,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -635,7 +667,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	swordiumz: {
 		name: "Swordium Z",
-		spritenum: 765,
+		spritenum: 764,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -647,7 +679,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	temperatureiumz: {
 		name: "Temperatureium Z",
-		spritenum: 766,
+		spritenum: 765,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -659,7 +691,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	timeiumz: {
 		name: "Timeium Z",
-		spritenum: 767,
+		spritenum: 766,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -671,7 +703,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	weatheriumz: {
 		name: "Weatherium Z",
-		spritenum: 768,
+		spritenum: 767,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
@@ -683,13 +715,25 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	yellowiumz: {
 		name: "yellowium Z",
-		spritenum: 769,
+		spritenum: 768,
 		onPlate: 'Water',
 		onTakeItem: false,
 		zMove: true,
 		zMoveType: "Yellow",
 		forcedForme: "Arceus-Water",
 		num: -218,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	infinityiumz: {
+		name: "Infinityium Z",
+		spritenum: 769,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Infinity",
+		forcedForme: "Arceus-Water",
+		num: -219,
 		gen: 7,
 		isNonstandard: "Past",
 	},

@@ -87,6 +87,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: "  A dust cloud has been stirred up in front of [TEAM]!",
 		end: "  The dust cloud has disappeared from [TEAM]!",
 	},
+	//far
 	//fish
 	fishslap: {
 		name: "Fish Slap",
