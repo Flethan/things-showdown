@@ -265,10 +265,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 				if (!possibleTypes.length) return false;
 				while (possibleTypes.length > 2) {
-					possibleTypes.splice(Math.floor(Math.random()*possibleTypes.length), 1);
+					possibleTypes.splice(Math.floor(Math.random() * possibleTypes.length), 1);
 				}
-				if (!target.setType(possibleTypes)) return false;
-				this.add('-start', target, 'typechange', '[from] ability: White');
+				this.add('-start', target, 'typechange', possibleTypes.join('/'), '[from] ability: White');
+				target.setType(possibleTypes);
 			}
 		},
 		name: "White",
