@@ -673,7 +673,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			}
 		},
 		// Damage reduction is handled directly in the sim/battle.js damage function
-		onResidualOrder: 9,
+		onResidualOrder: 10,
 		onResidual(pokemon) {
 			this.damage(pokemon.baseMaxhp / 16);
 		},
@@ -875,7 +875,7 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			this.add('-activate', pokemon, 'move: ' + this.effectState.sourceEffect, '[of] ' + source);
 			this.effectState.boundDivisor = source.hasItem('bindingband') ? 6 : 8;
 		},
-		onResidualOrder: 11,
+		onResidualOrder: 13,
 		onResidual(pokemon) {
 			const source = this.effectState.source;
 			// G-Max Centiferno and G-Max Sandblast continue even after the user leaves the field
@@ -1046,6 +1046,10 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			const hitMove = new this.dex.Move(data.moveData) as ActiveMove;
 
 			this.actions.trySpreadMoveHit([target], data.source, hitMove, true);
+			if (data.source.isActive && data.source.hasItem('lifeorb') && this.gen >= 5) {
+				this.singleEvent('AfterMoveSecondarySelf', data.source.getItem(), data.source.itemState, data.source, target, data.source.getItem());
+			}
+
 			this.checkWin();
 		},
 	},

@@ -1,8 +1,8 @@
 'use strict';
 
 const assert = require('assert').strict;
-const TeamValidator = require('../../.sim-dist/team-validator').TeamValidator;
-const Teams = require('../../.sim-dist/teams').Teams;
+const TeamValidator = require('../../sim/team-validator').TeamValidator;
+const Teams = require('../../sim/teams').Teams;
 
 describe('Team Validator', function () {
 	it('should have valid formats to work with', function () {
@@ -128,6 +128,14 @@ describe('Team Validator', function () {
 			{species: 'pikachu', ability: 'static', moves: ['thunderbolt'], happiness: 'invalidHappinessValue', evs: {hp: 1}},
 		];
 		const illegal = TeamValidator.get('gen7customgame').validateTeam(team);
+		assert(illegal);
+	});
+
+	it('should validate EVs', function () {
+		const team = [
+			{species: 'pikachu', ability: 'static', moves: ['thunderbolt'], evs: {hp: 252, atk: 252, def: 252}},
+		];
+		const illegal = TeamValidator.get('gen8ou').validateTeam(team);
 		assert(illegal);
 	});
 
@@ -467,6 +475,12 @@ describe('Team Validator', function () {
 
 		team = [
 			{species: 'koffing', ability: 'levitate', moves: ['zapcannon'], evs: {hp: 1}},
+		];
+		illegal = TeamValidator.get('gen8ou').validateTeam(team);
+		assert.equal(illegal, null);
+
+		team = [
+			{species: 'weezing-galar', ability: 'levitate', moves: ['zapcannon'], evs: {hp: 1}},
 		];
 		illegal = TeamValidator.get('gen8ou').validateTeam(team);
 		assert.equal(illegal, null);
@@ -859,11 +873,29 @@ describe('Team Validator', function () {
 	});
 
 	it('should allow items to be banned', function () {
-		const team = [
+		let team = [
 			{species: 'pikachu', ability: 'static', moves: ['agility', 'protect', 'thunder', 'thunderbolt'], item: 'lightball', evs: {hp: 1}},
 		];
-		const illegal = TeamValidator.get('gen7anythinggoes@@@-Light Ball').validateTeam(team);
+		let illegal = TeamValidator.get('gen7anythinggoes@@@-Light Ball').validateTeam(team);
 		assert(illegal);
+
+		team = [
+			{species: 'pikachu', ability: 'static', moves: ['agility', 'protect', 'thunder', 'thunderbolt'], item: 'lightball', evs: {hp: 1}},
+		];
+		illegal = TeamValidator.get('gen7anythinggoes@@@-noitem').validateTeam(team);
+		assert.equal(illegal, null);
+
+		team = [
+			{species: 'pikachu', ability: 'static', moves: ['agility', 'protect', 'thunder', 'thunderbolt'], evs: {hp: 1}},
+		];
+		illegal = TeamValidator.get('gen7anythinggoes@@@-noitem').validateTeam(team);
+		assert(illegal);
+
+		team = [
+			{species: 'pikachu', ability: 'static', moves: ['agility', 'protect', 'thunder', 'thunderbolt'], evs: {hp: 1}},
+		];
+		illegal = TeamValidator.get('gen7anythinggoes@@@-allitems').validateTeam(team);
+		assert.equal(illegal, null);
 	});
 
 	it('should allow items to be unbanned', function () {

@@ -16,6 +16,11 @@ export const Items: {[k: string]: ModdedItemData} = {
 			}
 		},
 	},
+	blacksludge: {
+		inherit: true,
+		onResidualOrder: 10,
+		onResidualSubOrder: 4,
+	},
 	brightpowder: {
 		inherit: true,
 		onModifyAccuracyPriority: 5,
@@ -27,15 +32,27 @@ export const Items: {[k: string]: ModdedItemData} = {
 	},
 	choiceband: {
 		inherit: true,
-		onStart() { },
+		onStart() {},
+		onModifyMove() {},
+		onAfterMove(pokemon) {
+			pokemon.addVolatile('choicelock');
+		},
 	},
 	choicescarf: {
 		inherit: true,
-		onStart() { },
+		onStart() {},
+		onModifyMove() {},
+		onAfterMove(pokemon) {
+			pokemon.addVolatile('choicelock');
+		},
 	},
 	choicespecs: {
 		inherit: true,
-		onStart() { },
+		onStart() {},
+		onModifyMove() {},
+		onAfterMove(pokemon) {
+			pokemon.addVolatile('choicelock');
+		},
 	},
 	chopleberry: {
 		inherit: true,
@@ -96,6 +113,11 @@ export const Items: {[k: string]: ModdedItemData} = {
 			}
 		},
 	},
+	flameorb: {
+		inherit: true,
+		onResidualOrder: 10,
+		onResidualSubOrder: 20,
+	},
 	focussash: {
 		inherit: true,
 		onDamage() { },
@@ -154,6 +176,11 @@ export const Items: {[k: string]: ModdedItemData} = {
 			return accuracy * 0.9;
 		},
 	},
+	leftovers: {
+		inherit: true,
+		onResidualOrder: 10,
+		onResidualSubOrder: 4,
+	},
 	lifeorb: {
 		inherit: true,
 		onModifyDamage() {},
@@ -165,7 +192,7 @@ export const Items: {[k: string]: ModdedItemData} = {
 			return basePower;
 		},
 		onModifyDamagePhase2(damage, source, target, move) {
-			return damage * 1.3;
+			if (!move.isFutureMove) return damage * 1.3;
 		},
 		condition: {
 			duration: 1,
@@ -179,12 +206,9 @@ export const Items: {[k: string]: ModdedItemData} = {
 	},
 	lightball: {
 		inherit: true,
-		onModifyAtk(atk, pokemon) {
-			if (pokemon.species.name === 'Pikachu') {
-				return this.chainModify(2);
-			}
-		},
-		onModifySpA(spa, pokemon) {
+		onModifyAtk() {},
+		onModifySpA() {},
+		onBasePower(basePower, pokemon) {
 			if (pokemon.species.name === 'Pikachu') {
 				return this.chainModify(2);
 			}
@@ -285,6 +309,11 @@ export const Items: {[k: string]: ModdedItemData} = {
 			}
 		},
 	},
+	stickybarb: {
+		inherit: true,
+		onResidualOrder: 10,
+		onResidualSubOrder: 20,
+	},
 	thickclub: {
 		inherit: true,
 		onModifyAtk(atk, pokemon) {
@@ -292,6 +321,11 @@ export const Items: {[k: string]: ModdedItemData} = {
 				return this.chainModify(2);
 			}
 		},
+	},
+	toxicorb: {
+		inherit: true,
+		onResidualOrder: 10,
+		onResidualSubOrder: 20,
 	},
 	widelens: {
 		inherit: true,
