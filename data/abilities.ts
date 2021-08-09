@@ -259,10 +259,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const possibleTypes = [];
 				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
 				for (const type in this.dex.types.names()) {
+					console.log(type);
 					if (skippedTypes.includes(type)) continue;
 					const typeCheck = this.dex.types.get(type).damageTaken[move.type];
 					if (typeCheck === 0 || typeCheck === 2 || typeCheck === 3) possibleTypes.push(type);
 				}
+				console.log(possibleTypes);
 				if (!possibleTypes.length) return false;
 				while (possibleTypes.length > 2) {
 					possibleTypes.splice(Math.floor(Math.random() * possibleTypes.length), 1);
