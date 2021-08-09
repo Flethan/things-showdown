@@ -258,9 +258,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (target.runEffectiveness(move) > 0) {
 				const possibleTypes = [];
 				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
-				for (const type in this.dex.data.TypeChart) {
+				for (const type in this.dex.types.names()) {
 					if (skippedTypes.includes(type)) continue;
-					const typeCheck = this.dex.data.TypeChart[type].damageTaken[move.type];
+					const typeCheck = this.dex.types.get(type).damageTaken[move.type];
 					if (typeCheck === 0 || typeCheck === 2 || typeCheck === 3) possibleTypes.push(type);
 				}
 				if (!possibleTypes.length) return false;
