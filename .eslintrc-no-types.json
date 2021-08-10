@@ -82,7 +82,6 @@
     "no-empty": ["error", {"allowEmptyCatch": true}],
     "no-extra-bind": "error",
     "no-extra-label": "error",
-    "no-fallthrough": "error",
     "no-label-var": "error",
     "no-new-require": "error",
     "no-new": "error",
@@ -215,7 +214,7 @@
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["warn", {"args": "none"}],
         "max-len": ["warn", {
-          "code": 120, "tabWidth": 0,
+          "code": 240, "tabWidth": 0,
           // see bottom of file for source
           "ignorePattern": "^\\s*(?:\\/\\/ \\s*)?(?:(?:export )?(?:let |const |readonly )?[a-zA-Z0-9_$.]+(?: \\+?=>? )|[a-zA-Z0-9$]+: \\[?|(?:return |throw )?(?:new )?(?:[a-zA-Z0-9$.]+\\()?)?(?:Utils\\.html|(?:this\\.)?(?:room\\.)?tr|\\$\\()?['\"`/]"
         }],

@@ -170,7 +170,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('-start', pokemon, 'ability: Three');
 		},
 		onResidual(pokemon)	{
-			//Three does not count up on turns you switch in on.
+			// Three does not count up on turns you switch in on.
 			if (pokemon.activeTurns) {
 				if (pokemon.volatiles['3count1']) {
 					delete pokemon.volatiles['3count1'];
@@ -210,7 +210,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('-start', pokemon, 'ability: Omega');
 		},
 		onResidual(pokemon)	{
-			//Omega does not count up on turns you switch in on.
+			// Omega does not count up on turns you switch in on.
 			if (pokemon.activeTurns) {
 				if (pokemon.volatiles['ocount1']) {
 					delete pokemon.volatiles['ocount1'];
@@ -241,10 +241,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact']) {
 				if (source.getTypes().join() === 'Dirt' || !source.setType('Dirt')) {
-				return false;
+					return false;
 				}
 				this.add('-ability', target, 'Black');
-			this.add('-start', source, 'typechange', 'Dirt');
+				this.add('-start', source, 'typechange', 'Dirt');
 			}
 		},
 		name: "Black",
@@ -387,7 +387,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	highpressure: {
 		isNonstandard: "Thing",
-		//done in conditions.js > pressurizer
+		// done in conditions.js > pressurizer
 		name: "High Pressure",
 		rating: 4,
 		num: -106,
@@ -501,7 +501,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	bright: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			if(this.field.getWeather().id === 'nighttime') {
+			if (this.field.getWeather().id === 'nighttime') {
 				this.field.clearWeather();
 			}
 		},
@@ -515,16 +515,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	lemon: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
-			if (pokemon.species.forme !== 'Lemon') {
-					pokemon.formeChange('Lemon');
+			if (pokemon.species.id !== 'Lemon') {
+				pokemon.formeChange('Lemon');
 			}
 		},
 		onEnd(pokemon) {
-			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' || pokemon.transformed || !pokemon.hp) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' && (pokemon.transformed || !pokemon.hp)) {
 				pokemon.formeChange(pokemon.set.species);
-			}
-			if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp) {
-				if (pokemon.switchFlag) return;
+			} else if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !pokemon.switchFlag) {
 				pokemon.formeChange('<empty>');
 			}
 		},
@@ -538,7 +536,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (target.getHeight() <= 4) {
 				this.debug('microwaveable');
 				return 5;
-			} 
+			}
 		},
 		name: "Microwave",
 		rating: 1.5,
@@ -550,7 +548,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (target.getHeight() <= 1) {
 				this.debug('toastable');
 				return 5;
-			} 
+			}
 		},
 		name: "Toaster",
 		rating: 0.5,
@@ -634,7 +632,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	blind: {
 		isNonstandard: "Thing",
-		onStart (pokemon) {
+		onStart(pokemon) {
 			pokemon.trySetStatus('blinded', pokemon);
 		},
 		onSetStatus(status, target, source, effect) {
@@ -673,7 +671,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Farewell activates at the end of the turn after switching in.
 			if (!this.effectState.switchingIn || !pokemon.activeTurns) return;
 			this.effectState.switchingIn = false;
-			const additionalBannedAbilities = [	'farewell',];
+			const additionalBannedAbilities = ['farewell'];
 			let announced = false;
 			for (const target of pokemon.side.foe.active) {
 				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability)) continue;
@@ -719,7 +717,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						this.add('-ability', source, 'Perish Jaws');
 						announced = true;
 					}
-				pokemon.addVolatile('perishsong');
+					pokemon.addVolatile('perishsong');
 				}
 			}
 		},
@@ -731,7 +729,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (source.isActive) source.addVolatile('trapped', source, move, 'trapper');
-		},		
+		},
 		name: "Nebulous",
 		rating: 5,
 		num: -122,
@@ -752,14 +750,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	distantsystem: {
 		isNonstandard: "Thing",
-/*		onDragOutPriority: 1,
-		onDragOut(pokemon) {
-			this.add('-activate', pokemon, 'ability: Distant System'); 
-			return null;
-		}, */
 		onAnyDragOut(pokemon, target) {
 			if (pokemon.side === this.effectState.target.side) {
-				this.add('-activate', this.effectState.target, 'ability: Distant System'); 
+				this.add('-activate', this.effectState.target, 'ability: Distant System');
 				return null;
 			}
 		},
@@ -805,7 +798,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onAfterEachBoost(boost, target, source, effect) {
 			if (boost.spe) {
-				this.boost({atk: boost.spe}, target, target, null, true); 
+				this.boost({atk: boost.spe}, target, target, null, true);
 			}
 		},
 		name: "Momentum",
@@ -821,7 +814,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			return this.chainModify(0.9);
 		},
 		name: "Camouflage",
-		rating:3,
+		rating: 3,
 		num: -128,
 	},
 	paintityellow: {
@@ -876,8 +869,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidualPriority: 99,
 		onResidual(pokemon) {
-			let environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater',];
-			let tempfactors = ['hot', 'cold'];
+			const environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater'];
+			const tempfactors = ['hot', 'cold'];
 			if (environmentalfactors.includes(pokemon.effectiveWeather())) {
 				if (!tempfactors.includes(pokemon.effectiveWeather())) {
 					const hotorcold = environmentalfactors.indexOf(this.sample(tempfactors));
@@ -983,7 +976,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (success > 4) success = 4;
 				this.heal(success * source.baseMaxhp / 4);
 				return true;
-			} else return false;
+			} else { return false; }
 		},
 		name: "Cleanup",
 		rating: 3.5,
@@ -993,7 +986,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(source) {
 			this.field.setWeather('hot');
-			//Infinite duration done in conditions.js#hot
+			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy'];
@@ -1032,13 +1025,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onDamagingHit(damage, target, source, move) {
 			if (
-				target.baseSpecies.baseSpecies !== 'Undulux' || 
+				target.baseSpecies.baseSpecies !== 'Undulux' ||
 				target.transformed ||
 				['hot', 'cold'].includes(target.effectiveWeather())
 			) return;
 			let forme = null;
 			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
-			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]')
+			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]');
 		},
 		name: "Superconductor",
 		rating: 2,
@@ -1061,7 +1054,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(source) {
 			this.field.setWeather('timedilation');
-			//Infinite duration done in conditions.js#hot
+			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy'];
@@ -1123,23 +1116,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
 			this.add('-activate', pokemon, 'ability: Big Gamble');
-			let randomChance = Math.floor(Math.random()*100);
+			const randomChance = Math.floor(Math.random() * 100);
 			if (randomChance < 1) {
 				// die
 				this.damage(pokemon.baseMaxhp);
 			} else if (randomChance < 50) {
 				// boost random stat
-				let stats: BoostID[] = [];
+				const stats: BoostID[] = [];
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in pokemon.boosts) {
-					//if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
 					if (pokemon.boosts[statPlus] < 6) {
 						stats.push(statPlus);
 					}
 				}
-				let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if(randomChance > 40) {
+				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+				if (randomChance > 40) {
 					if (randomStat) boost[randomStat] = 2;
 				} else {
 					if (randomStat) boost[randomStat] = 1;
@@ -1147,17 +1140,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.boost(boost);
 			} else if (randomChance < 75) {
 				// lower random stat
-				let stats: BoostID[] = [];
+				const stats: BoostID[] = [];
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in pokemon.boosts) {
-					//if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
 					if (pokemon.boosts[statPlus] < 6) {
 						stats.push(statPlus);
 					}
 				}
-				let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if(randomChance > 70) {
+				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+				if (randomChance > 70) {
 					if (randomStat) boost[randomStat] = -2;
 				} else {
 					if (randomStat) boost[randomStat] = -1;
@@ -1187,7 +1180,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			} else {
 				// jackpot
-				let stats: BoostID[] = [];
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in pokemon.boosts) {
@@ -1436,7 +1428,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(source) {
 			this.field.setWeather('windy');
-			//Infinite duration done in conditions.js#hot
+			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy'];
@@ -1554,10 +1546,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = [ 'nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
-									'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown', 
-									'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce', 
-									'hurt', 'heal'];
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+					'hurt', 'heal'];
 				const randomFlag = this.sample(sflags);
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
@@ -1566,10 +1558,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onAnyTerrainStart() {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = [ 'nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
-									'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown', 
-									'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce', 
-									'hurt', 'heal'];
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+					'hurt', 'heal'];
 				const randomFlag = this.sample(sflags);
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
@@ -1618,11 +1610,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual() {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = [ 'nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
-									'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown', 
-									'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce', 
-									'hurt', 'heal'];
-				let randomFlag = this.sample(sflags);
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+					'hurt', 'heal'];
+				const randomFlag = this.sample(sflags);
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
 				this.hint("Conductor: " + randomFlag);
@@ -1661,7 +1653,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	repetitivebeat: {
 		isNonstandard: "Thing",
 		onResidual(source) {
-			if(this.field.getPseudoWeather('timeloop')) {
+			if (this.field.getPseudoWeather('timeloop')) {
 				this.field.pseudoWeather['timeloop'].duration = 5;
 			} else {
 				this.field.addPseudoWeather('timeloop', source);
@@ -1688,18 +1680,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	replicator: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			const additionalBannedAbilities = [	'replicator',];
+			const additionalBannedAbilities = ['replicator'];
 			let multiplier = 0;
 			for (const target of pokemon.side.foe.active) {
-				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability) || target.species != pokemon.species) continue;
+				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability) || target.species !== pokemon.species) continue;
 				multiplier++;
 			}
 			for (const ally of pokemon.side.active) {
-				if (!ally || ally === pokemon || additionalBannedAbilities.includes(ally.ability) || target.species != pokemon.species) continue;
-				multiplier++
+				if (!ally || ally === pokemon || additionalBannedAbilities.includes(ally.ability) || ally.species !== pokemon.species) continue;
+				multiplier++;
 			}
-			if(multiplier > 0) {
-				let stats: BoostID[] = [];
+			if (multiplier > 0) {
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in pokemon.boosts) {
@@ -1731,8 +1722,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (foeActive.hp < foeActive.maxhp * 2 / 10) {
 					if (pokemon.species.id !== 'tacilinksputt') {
 						pokemon.formeChange('Tacilinks-Putt', this.effect, false, '[msg]');
+						this.add('-ability', pokemon, 'shortgame', '[from] ability: Long Game');
 						pokemon.setAbility('shortgame');
-						this.singleEvent('Start', 'shortgame', pokemon.abilityState, pokemon);
 					}
 				}
 			}
@@ -1744,9 +1735,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	shortgame: {
 		isNonstandard: "Thing",
 		onSourceModifyDamage(damage, source, target, move) {
-			if (source.hp < source.maxhp/2) {
+			if (source.hp < source.maxhp / 2) {
 				this.debug('Short Game weaken');
-				return this.chainModify((source.hp*2)/source.maxhp);
+				return this.chainModify((source.hp * 2) / source.maxhp);
 			}
 		},
 		onResidual(pokemon) {
@@ -1759,8 +1750,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			if (pokemon.species.id === 'tacilinksputt') {
 				pokemon.formeChange('Tacilinks', this.effect, false, '[msg]');
+				this.add('-ability', pokemon, 'longgame', '[from] ability: Short Game');
 				pokemon.setAbility('longgame');
-				this.singleEvent('Start', 'longgame', pokemon.abilityState, pokemon);
 			}
 		},
 		name: "Short Game",
@@ -1799,13 +1790,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					this.field.setTerrain('mysticalsong');
 				}
 			}
-		},		
+		},
 		name: "A One, Two, Three...",
 		rating: 3,
 		num: 207,
 	},
 
-// BASE GAME	
+	// BASE GAME
 	noability: {
 		isNonstandard: "Past",
 		name: "No Ability",

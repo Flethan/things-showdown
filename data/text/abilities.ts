@@ -2,22 +2,22 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	// THINGS
 	a81117y: {
 		name: "A81117y",
-		shortDesc: "Aquire a random ability."
+		shortDesc: "Aquire a random ability.",
 	},
 	ahotone: {
 		name: "A Hot One",
 		shortDesc: "On switch-in, Hot begins until this Ability is not active in battle.",
-		desc: "On switch-in, the Field Condition becomes Hot. This Field Condition remains in effect until this Ability is no longer active for any Thing, or the weather is changed by Lass' ihn Fliegen or Sin Ningún Apuro."
+		desc: "On switch-in, the Field Condition becomes Hot. This Field Condition remains in effect until this Ability is no longer active for any Thing, or the weather is changed by Lass' ihn Fliegen or Sin Ningún Apuro.",
 	},
 	aquatic: {
 		name: "Aquatic",
 		shortDesc: "Heal for 1/16 max HP instead of being hurt during Underwater.",
-		desc: "When Underwater is in effect, this Thing will heal for 1/16 of its maximum HP at the end of the turn, and won't take damage from Underwater."
+		desc: "When Underwater is in effect, this Thing will heal for 1/16 of its maximum HP at the end of the turn, and won't take damage from Underwater.",
 	},
 	assimilate: {
 		name: "Assimilate",
 		shortDesc: "Boost this Thing by 1 whenever another Thing faints based on their highest stat.",
-		desc: "Whenever another Thing faints, boost a stat for this Thing by 1 stage based on the fainted Thing's highest stat."
+		desc: "Whenever another Thing faints, boost a stat for this Thing by 1 stage based on the fainted Thing's highest stat.",
 	},
 	betafunction: {
 		name: "Beta Function",
@@ -25,7 +25,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	biggamble: {
 		name: "Big Gamble",
-		shortDesc: "bruh"
+		shortDesc: "bruh",
 	},
 	bigsword: {
 		name: "Big Sword",
@@ -34,7 +34,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	black: {
 		name: "Black",
 		shortDesc: "The attacker becomes Dirt-type when making contact.",
-		desc: "When another Thing attacks this Thing and makes contact, it will lose its types and become pure Dirt-type."
+		desc: "When another Thing attacks this Thing and makes contact, it will lose its types and become pure Dirt-type.",
 	},
 	blind: {
 		name: "Blind",
@@ -45,103 +45,103 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	bright: {
 		name: "Bright",
-		shortDesc: "While this Thing is active, it cannot be Nighttime."
+		shortDesc: "While this Thing is active, it cannot be Nighttime.",
 	},
 	brutalize: {
 		name: "Brutalize",
-		shortDesc: "This Thing's attacks that make contact have a 50% chance to inflict wounded."
+		shortDesc: "This Thing's attacks that make contact have a 50% chance to inflict wounded.",
 	},
 	bubblearmor: {
 		name: "Bubble Armor",
-		shortDesc: "This Thing takes 0.5x damage during Sudscape."
+		shortDesc: "This Thing takes 0.5x damage during Sudscape.",
 	},
 	camouflage: {
 		name: "Camouflage",
-		shortDesc: "Attacks against this Thing have 0.9x accuracy."
+		shortDesc: "Attacks against this Thing have 0.9x accuracy.",
 	},
 	chilled: {
 		name: "Chilled",
-		shortDesc: "2.0x special defense during Cold. Prevents Cold Speed reduction."
+		shortDesc: "2.0x special defense during Cold. Prevents Cold Speed reduction.",
 	},
 	cleansing: {
 		name: "Cleansing",
-		shortDesc: "When this Thing lands a Liquid-type attack, cure its and the target's status."
+		shortDesc: "When this Thing lands a Liquid-type attack, cure its and the target's status.",
 	},
 	cleanup: {
 		name: "Cleanup",
-		shortDesc: "On switch-in, clear all side conditions and heal 25% max health for each."
+		shortDesc: "On switch-in, clear all side conditions and heal 25% max health for each.",
 	},
 	cleareyes: {
 		name: "Clear Eyes",
-		shortDesc: "This Thing cannot be blinded."
+		shortDesc: "This Thing cannot be blinded.",
 	},
 	communal: {
 		name: "Communal",
-		shortDesc: "Allies with Communal have 1.5x attack and special attack."
+		shortDesc: "Allies with Communal have 1.5x attack and special attack.",
 	},
 	competitivemirror: {
 		name: "Competitive Mirror",
-		shortDesc: "Whenever a foe gains a stat boost, copy it."
+		shortDesc: "Whenever a foe gains a stat boost, copy it.",
 	},
 	conductor: {
 		name: "Conductor",
-		shortDesc: "At the end of each turn during Mystical Song, add a random harmony."
+		shortDesc: "At the end of each turn during Mystical Song, add a random harmony.",
 	},
 	connection: {
 		name: "Connection",
-		shortDesc: "Allies deal 1.2x damage."
+		shortDesc: "Allies deal 1.2x damage.",
 	},
 	depthcharge: {
 		name: "Depth Charge",
-		shortDesc: "When knocked-out by an attack, pressurizes all other active Things."
+		shortDesc: "When knocked-out by an attack, pressurizes all other active Things.",
 	},
 	distantsystem: {
 		name: "Distant System",
-		shortDesc: "Allies cannot be blocked from switching."
+		shortDesc: "Allies cannot be blocked from switching.",
 	},
 	dusty: {
 		name: "Dusty",
-		shortDesc: "The attacker has a 30% chance to be blinded when making contact."
+		shortDesc: "The attacker has a 30% chance to be blinded when making contact.",
 	},
 	eleventhhour: {
 		name: "Eleventh Hour",
-		shortDesc: "On switch-in, if this Thing has < 50% health remaining, endure the next lethal hit."
+		shortDesc: "On switch-in, if this Thing has < 50% health remaining, endure the next lethal hit.",
 	},
 	falsestart: {
 		name: "False-Start",
-		shortDesc: "All increased-priority moves fail."
+		shortDesc: "All increased-priority moves fail.",
 	},
 	farewell: {
 		name: "Farewell",
-		shortDesc: "After switch-in, at the end of the next turn, all other Things are switched out."
+		shortDesc: "After switch-in, at the end of the next turn, all other Things are switched out.",
 	},
 	fickle: {
 		name: "Fickle",
-		shortDesc: "At the end of the turn, during a Field Condition, change it to another random one."
+		shortDesc: "At the end of the turn, during a Field Condition, change it to another random one.",
 	},
 	fiery: {
 		name: "Fiery",
-		shortDesc: "The attacker has a 30% chance to be made fluctuant when making contact."
+		shortDesc: "The attacker has a 30% chance to be made fluctuant when making contact.",
 	},
 	gallant: {
 		name: "Gallant",
-		shortDesc: "This Thing's speed cannot be lowered."
+		shortDesc: "This Thing's speed cannot be lowered.",
 	},
 	gold: {
 		name: "Gold",
-		shortDesc: "This Thing is immune to super-effective attacks."
+		shortDesc: "This Thing is immune to super-effective attacks.",
 	},
 	gravitywell: {
 		name: "Gravity Well",
-		shortDesc: "Foes are blocked from switching."
+		shortDesc: "Foes are blocked from switching.",
 	},
 	greenhero: {
 		name: "Green Hero",
-		shortDesc: "This Thing's Green-type attacks deal 1.5x damage."
+		shortDesc: "This Thing's Green-type attacks deal 1.5x damage.",
 	},
 	greetings: {
 		name: "Greetings",
-		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage."
+		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage.",
 	},
 
 	longgame: {
@@ -156,14 +156,14 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Omega",
 		shortDesc: "Every third turn in battle, this Thing's moves One-hit KO.",
 		start: "[POKEMON] is channeling the power of the end!",
-		activate: "[POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!"
+		activate: "[POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!",
 	},
 
 	three: {
 		name: "Three",
 		shortDesc: "Every third turn in battle, this Thing's moves have 1.5x power.",
 		start: "[POKEMON] is channeling the power of 3!",
-		activate: "[POKEMON] is in tune with 3!"
+		activate: "[POKEMON] is in tune with 3!",
 	},
 
 	// BASE GAME
