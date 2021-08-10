@@ -1952,6 +1952,78 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spd: 1}},
 		contestType: "Beautiful",
 	},
+	jamminbasssolo: {
+		num: 1235,
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Jammin' Bass Solo",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			self: {
+				boosts: {
+					spd: 1,
+				},
+			},
+		},
+		songFlags: ['spdboost','heal'],
+		target: "normal",
+		type: "Music",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
+	},
+	slammindrumsolo: {
+		num: 1235,
+		accuracy: 100,
+		basePower: 80,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Slammin' Drum Solo",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			self: {
+				boosts: {
+					spe: 1,
+				},
+			},
+		},
+		songFlags: ['speboost','defboost'],
+		target: "normal",
+		type: "Music",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
+	},
+	whamminkeyboardsolo: {
+		num: 1235,
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Whammin' Keyboard Solo",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			self: {
+				boosts: {
+					spa: 1,
+				},
+			},
+		},
+		songFlags: ['spaboost','atkboost'],
+		target: "normal",
+		type: "Music",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
+	},
 	
 	//Night
 	stealthstrike: {

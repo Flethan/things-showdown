@@ -489,6 +489,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	jazzecko: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	pluckay: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	fattempo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	keycrest: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 // BASE GAME
 	bobasaur: {

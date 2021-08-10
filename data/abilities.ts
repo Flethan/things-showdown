@@ -1732,6 +1732,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					if (pokemon.species.id !== 'tacilinksputt') {
 						pokemon.formeChange('Tacilinks-Putt', this.effect, false, '[msg]');
 						pokemon.setAbility('shortgame');
+						this.singleEvent('Start', 'shortgame', pokemon.abilityState, pokemon);
 					}
 				}
 			}
@@ -1759,6 +1760,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.species.id === 'tacilinksputt') {
 				pokemon.formeChange('Tacilinks', this.effect, false, '[msg]');
 				pokemon.setAbility('longgame');
+				this.singleEvent('Start', 'longgame', pokemon.abilityState, pokemon);
 			}
 		},
 		name: "Short Game",
@@ -1787,6 +1789,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Power Bouncer",
+		rating: 3,
+		num: 207,
+	},
+	aonetwothree: {
+		onStart(pokemon) {
+			for (const allyActive of pokemon.allies()) {
+				if (allyActive.hasAbility(['aonetwothree'])) {
+					this.field.setTerrain('mysticalsong');
+				}
+			}
+		},		
+		name: "A One, Two, Three...",
 		rating: 3,
 		num: 207,
 	},
