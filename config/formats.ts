@@ -451,6 +451,74 @@ export const Formats: FormatList = [
 		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
 	},
 
+	// Things
+	//////////////////
+	{
+		section: "Things",
+		column: 1,
+	},
+	{
+		section: "Things Monotype",
+		column: 1,
+	},
+	{
+		section: "Things 4-Player",
+		column: 1,
+	},
+	{
+		name: "[Things] Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Things] Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod',
+		],
+	},
+	{
+		name: "[Things] Monotype Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Same Type Clause', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod'],
+	},
+	{
+		name: "[Things] Monotype Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Same Type Clause', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod',
+		],
+	},
+	{
+		section: "Hackthings",
+		column: 1,
+	},
+
+
 	// National Dex
 	///////////////////////////////////////////////////////////////////
 
