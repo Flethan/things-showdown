@@ -3617,59 +3617,35 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (target.volatiles['fastforward']) return false;
 		},
 		onHit(target, source) {
+			const action = this.queue.willMove(target);
+			if (action) {
+				this.queue.prioritizeAction(action);
+				this.add('-activate', target, 'move: Fast Forward');
+			}
+
 			if (target.volatiles['dynamax']) return false;
-			this.effectState.ffMove = true;
-			const noFF = [
-				'beakblast', 'bide', 'focuspunch', 'shelltrap', 'sleeptalk', 'uproar', 'outrage', 'petaldance', 'iceball', 'rollout', 'thrash', 'batonpass', 'flipturn', 'voltswitch', 'partingshot', 'teleport', 'uturn', 'dragontail', 'roar', 'whirlwind', 'circlethrow',
-			];
+			const bannedMoves = ['openturn'];
 			const moves = [];
 			for (const moveSlot of target.moveSlots) {
 				const moveid = moveSlot.id;
 				if (!moveid) continue;
 				const move = this.dex.moves.get(moveid);
-				if (noFF.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+				if (bannedMoves.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
 					continue;
 				}
 				moves.push(moveid);
 			}
 
-			let randomMove = '';
-			if (moves.length) randomMove = this.sample(moves);
-			if (!randomMove) {
-				this.effectState.ffMove = false;
-				return false;
+			for (let i = 0; i < 2; i++) {
+				let randomMove = '';
+				if (moves.length) randomMove = this.sample(moves);
+				if (!randomMove) break;
+				this.actions.useMove(randomMove, target);
 			}
-			this.actions.useMove(randomMove, target);
 
-			randomMove = '';
-			if (moves.length) randomMove = this.sample(moves);
-			if (!randomMove) {
-				this.effectState.ffMove = false;
-				return false;
-			}
-			this.actions.useMove(randomMove, target);
-
-			this.effectState.ffMove = false;
+			this.addVolatile('fastforward');
 		},
 		volatileStatus: 'fastforward',
-		condition: {
-			duration: 3,
-			onStart(pokemon) {
-				this.add('-start', pokemon, 'Fast Forward');
-			},
-			onEnd(pokemon) {
-				this.add('-end', pokemon, 'Fast Forward', '[silent]');
-			},
-			onTrapPokemon(pokemon) {
-				pokemon.tryTrap();
-			},
-			onTryMove(attacker, defender, move) {
-				if(!this.effectState.ffMove) {
-					this.add('-fail', attacker);
-					return null;
-				}
-			},
-		},
 		secondary: null,
 		target: "normal",
 		type: "Time",

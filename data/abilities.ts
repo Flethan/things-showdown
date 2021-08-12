@@ -320,15 +320,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!this.effectState.switchingIn) return;
 			this.effectState.switchingIn = false;
 			this.effectState.greetingsMove = true;
-			const noGreetings = [
-				'beakblast', 'bide', 'focuspunch', 'shelltrap', 'sleeptalk', 'uproar', 'outrage', 'petaldance', 'iceball', 'rollout', 'thrash', 'batonpass', 'flipturn', 'voltswitch', 'partingshot', 'teleport', 'uturn', 'dragontail', 'roar', 'whirlwind', 'circlethrow',
-			];
+			const bannedMoves = ['openturn'];
 			const moves = [];
 			for (const moveSlot of pokemon.moveSlots) {
 				const moveid = moveSlot.id;
 				if (!moveid) continue;
 				const move = this.dex.moves.get(moveid);
-				if (noGreetings.includes(moveid) || move.category === 'Status' || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+				if (bannedMoves.includes(moveid) || move.category === 'Status' || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
 					continue;
 				}
 				moves.push(moveid);

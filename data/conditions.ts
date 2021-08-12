@@ -107,6 +107,23 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-end', pokemon, 'move: Vetoed', '[silent]');
 		},
 	},
+	fastforward: {
+		name: 'fastforward',
+		noCopy: true,
+		duration: 3,
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'Fast Forward');
+		},
+		onEnd(pokemon) {
+			this.add('-end', pokemon, 'Fast Forward', '[silent]');
+		},
+		onTrapPokemon(pokemon) {
+			pokemon.tryTrap();
+		},
+		onTryMove(attacker, defender, move) {
+			return false;
+		},
+	},
 
 	// Statuses
 	prone: {
