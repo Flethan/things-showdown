@@ -3582,12 +3582,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (target.volatiles['pause']) return false;
 		},
 		condition: {
-			duration: 1,
+			duration: 2,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Pause');
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Pause', '[silent]');
+			},
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
 			onTryMove(attacker, defender, move) {
-				this.add('-fail', pokemon);
+				this.add('-fail', attacker);
 				return null;
 			},
 		},
@@ -3647,13 +3653,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		volatileStatus: 'fastforward',
 		condition: {
-			duration: 2,
+			duration: 3,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Fast Forward');
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Fast Forward', '[silent]');
+			},
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
 			onTryMove(attacker, defender, move) {
 				if(!this.effectState.ffMove) {
-					this.add('-fail', pokemon);
+					this.add('-fail', attacker);
 					return null;
 				}
 			},
