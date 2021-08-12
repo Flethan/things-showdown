@@ -1769,7 +1769,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Industrial", "Far"],
 		gender: "N",
 		baseStats: {hp: 46, atk: 34, def: 65, spa: 86, spd: 46, spe: 145},
-		abilities: {0: "Blind"},
+		abilities: {0: "Too Far Away", 1: "Blind"},
 		heightm: 0.1,
 		weightkg: 0.1,
 		color: "Black",
