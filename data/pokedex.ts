@@ -51,7 +51,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Hubaby",
 		eggGroups: ["Monster"],
 	},
-	anemoeba:{
+	anemoeba: {
 		num: -204,
 		name: "Anemoeba",
 		types: ["Weather"],
@@ -62,7 +62,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 14.2,
 		color: "White",
 		evos: ["Kiteolus"],
-		eggGroups: ["Amorphous","Water 3"],
+		eggGroups: ["Amorphous", "Water 3"],
 	},
 	kiteolus: {
 		num: -205,
@@ -77,7 +77,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Anemoeba",
 		evoLevel: 16,
 		evos: ["Stratosoar"],
-		eggGroups: ["Amorphous","Water 3"],
+		eggGroups: ["Amorphous", "Water 3"],
 	},
 	stratosoar: {
 		num: -206,
@@ -91,7 +91,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		prevo: "Kiteolus",
 		evoLevel: 32,
-		eggGroups: ["Amorphous","Water 3"],
+		eggGroups: ["Amorphous", "Water 3"],
 	},
 	triangl3: {
 		num: -207,
@@ -242,7 +242,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	anomallish: {
 		num: -314,
 		name: "Anomallish",
-		types: ["Arthropod","Fish"],
+		types: ["Arthropod", "Fish"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 55, atk: 35, def: 30, spa: 10, spd: 15, spe: 40},
 		abilities: {0: "Primitive", 1: "Aquatic"},
@@ -255,7 +255,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	anomallamalocarish: {
 		num: -315,
 		name: "Anomallamalocarish",
-		types: ["Arthropod","Fish"],
+		types: ["Arthropod", "Fish"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 95, atk: 55, def: 100, spa: 50, spd: 65, spe: 60},
 		abilities: {0: "Primitive", 1: "Aquatic"},
@@ -268,7 +268,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	anomallolash: {
 		num: -316,
 		name: "Anomallolash",
-		types: ["Arthropod","Sword"],
+		types: ["Arthropod", "Sword"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 70, atk: 85, def: 65, spa: 20, spd: 45, spe: 75},
 		abilities: {0: "Competitive Mirror", 1: "Aquatic", H: "Big Sword"},
@@ -281,7 +281,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	djecridid: {
 		num: -317,
 		name: "Djecridid",
-		types: ["Arthropod","Weather"],
+		types: ["Arthropod", "Weather"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 50, atk: 15, def: 20, spa: 35, spd: 30, spe: 50},
 		abilities: {0: "Clear Eyes", H: "Plague Bringer"},
@@ -294,7 +294,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	gryllague: {
 		num: -318,
 		name: "Gryllague",
-		types: ["Arthropod","Weather"],
+		types: ["Arthropod", "Weather"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 80, atk: 35, def: 40, spa: 55, spd: 45, spe: 60},
 		abilities: {0: "Plague Bringer", H: "Clear Eyes"},
@@ -308,7 +308,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	schisteka: {
 		num: -319,
 		name: "Schisteka",
-		types: ["Arthropod","Weather"],
+		types: ["Arthropod", "Weather"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 105, atk: 40, def: 55, spa: 85, spd: 70, spe: 70},
 		abilities: {0: "Plague Bringer", H: "Clear Eyes"},
@@ -321,7 +321,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	afishal: {
 		num: -320,
 		name: "Afishal",
-		types: ["Fish","Far"],
+		types: ["Fish", "Far"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 35, atk: 60, def: 40, spa: 25, spd: 30, spe: 40},
 		abilities: {0: "Pelagic", 1: "High Pressure"},
@@ -334,7 +334,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	offishal: {
 		num: -321,
 		name: "Offishal",
-		types: ["Fish","Sport"],
+		types: ["Fish", "Sport"],
 		genderRatio: {M: 0.8, F: 0.2},
 		baseStats: {hp: 90, atk: 50, def: 80, spa: 50, spd: 80, spe: 100},
 		abilities: {0: "False Start"},
@@ -347,7 +347,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	bassozefish: {
 		num: -322,
 		name: "Bassozefish",
-		types: ["Fish","Far"],
+		types: ["Fish", "Far"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 105, atk: 100, def: 60, spa: 50, spd: 60, spe: 75},
 		abilities: {0: "Robust", 1: "High Pressure"},
@@ -360,7 +360,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	clawtheod: {
 		num: -323,
 		name: "Clawtheod",
-		types: ["Arthropod","Fish"],
+		types: ["Arthropod", "Fish"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 80, atk: 45, def: 60, spa: 20, spd: 20, spe: 35},
 		abilities: {0: "Scavenger"},
@@ -373,7 +373,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	lobviathan: {
 		num: -324,
 		name: "Lobviathan",
-		types: ["Arthropod","Fish"],
+		types: ["Arthropod", "Fish"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 150, atk: 80, def: 110, spa: 20, spd: 20, spe: 20},
 		abilities: {0: "Telomerase"},
@@ -386,7 +386,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	starrvae: {
 		num: -325,
 		name: "Starrvae",
-		types: ["Arthropod","Night"],
+		types: ["Arthropod", "Night"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 30, atk: 20, def: 35, spa: 35, spd: 50, spe: 20},
 		abilities: {0: "Low-Lying"},
@@ -399,7 +399,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	moonth: {
 		num: -326,
 		name: "Moonth",
-		types: ["Arthropod","Night"],
+		types: ["Arthropod", "Night"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 75, atk: 30, def: 55, spa: 75, spd: 110, spe: 60},
 		abilities: {0: "Moonrise"},
@@ -412,7 +412,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	sollep: {
 		num: -327,
 		name: "Sollep",
-		types: ["Arthropod","Yellow"],
+		types: ["Arthropod", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 75, atk: 30, def: 45, spa: 110, spd: 60, spe: 85},
 		abilities: {0: "Bright"},
@@ -428,7 +428,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Science"],
 		gender: "N",
 		baseStats: {hp: 15, atk: 25, def: 25, spa: 35, spd: 35, spe: 20},
-		abilities: {0: "Connection", H:"Omnipresent"},
+		abilities: {0: "Connection", H: "Omnipresent"},
 		heightm: 0.4,
 		weightkg: 1.0,
 		color: "Black",
@@ -440,10 +440,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	connectphore: {
 		num: -329,
 		name: "Connectphore",
-		types: ["Sport","Science"],
+		types: ["Sport", "Science"],
 		gender: "N",
 		baseStats: {hp: 60, atk: 50, def: 50, spa: 70, spd: 70, spe: 40},
-		abilities: {0: "Connection", H:"Omnipresent"},
+		abilities: {0: "Connection", H: "Omnipresent"},
 		heightm: 1.6,
 		weightkg: 4.0,
 		color: "Black",
@@ -456,10 +456,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	omnectivore: {
 		num: -330,
 		name: "Omnectivore",
-		types: ["Sport","No"],
+		types: ["Sport", "No"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 110, def: 90, spa: 130, spd: 110, spe: 60},
-		abilities: {0: "Assimilate", H:"Omnipresent"},
+		abilities: {0: "Assimilate", H: "Omnipresent"},
 		heightm: 40,
 		weightkg: 400.0,
 		color: "Black",
@@ -1471,7 +1471,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Yellow", "Liquid"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 20, def: 30, spa: 30, spd: 20, spe: 10},
-		abilities: {0: "Its   honey"},
+		abilities: {0: "Its\u00A0\u00A0\u00A0Honey"},
 		heightm: 0.1,
 		weightkg: 2,
 		color: "Yellow",
@@ -1728,7 +1728,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 112, atk: 40, def: 77, spa: 45, spd: 77, spe: 48},
-		abilities: {0: "Shining Attitude", H: "Its   honey"},
+		abilities: {0: "Shining Attitude", H: "Its\u00A0\u00A0\u00A0Honey"},
 		heightm: 0.2,
 		weightkg: 15,
 		color: "Yellow",
@@ -1776,7 +1776,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 	},
 
-// BASE GAME
+	// BASE GAME
 	bulbasaur: {
 		num: 1,
 		name: "Bulbasaur",

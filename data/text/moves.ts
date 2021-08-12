@@ -10,7 +10,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
 		shortDesc: "Same type as user's primary type.",
 	},
-	//arthropod
+	// arthropod
 	pinch: {
 		name: "Pinch",
 		desc: "Has a 50% chance to make the target flinch.",
@@ -56,7 +56,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Locust Swarm.",
 		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
-	//dirt
+	// dirt
 	landslide: {
 		name: "Landslide",
 		desc: "Has a 20% chance knock the target prone.",
@@ -87,8 +87,8 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: "  A dust cloud has been stirred up in front of [TEAM]!",
 		end: "  The dust cloud has disappeared from [TEAM]!",
 	},
-	//far
-	//fish
+	// far
+	// fish
 	fishslap: {
 		name: "Fish Slap",
 		desc: "Has a 10% chance to make the target flinch.",
@@ -114,7 +114,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Underwater. At the end of each turn except the last, all active Fish-type Things recover 1/16 of their maximum HP, while Things that aren't Fish or Liquid type lose 1/16 of their maximum HP, rounded down; Things with prone have it removed. During the effect, the accuracy of Liquid-type moves is multiplied by 1.2, pressurized inflicts 2x damage, and the prone condition is prevented. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Underwater.",
 		shortDesc: "For 5 turns, the field sinks underwater.",
 	},
-	//green
+	// green
 	greentackle: {
 		name: "Green Tackle",
 		shortDesc: "No additional effect.",
@@ -139,7 +139,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Adds the Green type to the user. A Thing can only have one added type at a time. Fails if the user already has Green type added.",
 		shortDesc: "Adds Green to the user's type(s).",
 	},
-	//h
+	// h
 	hostile: {
 		name: "Hostile",
 		desc: "Has a 10% chance to lower the user's Defense by 1 stage.",
@@ -169,7 +169,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Lowers the target's Defense by 1 stage and evasiveness by 2 stages. Prevents the user and the target from switching out. Fails if the user is already H-Bonded.",
 		shortDesc: "Lowers foe Def 1 and evasion 2. Traps user & foe.",
 	},
-	//hair
+	// hair
 	whipcrack: {
 		name: "Whipcrack",
 		desc: "Hits two times. The second hit acts as a Special move instead of Physical.",
@@ -195,7 +195,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides. Heals the user for 25% of its maximum health for each Side Condition removed.",
 		shortDesc: "Clear Side Conditions on both sides, heal 25% each.",
 	},
-	//industrial
+	// industrial
 	vroom: {
 		name: "Vroom",
 		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
@@ -226,9 +226,9 @@ export const MovesText: {[k: string]: MoveText} = {
 	accelerate: {
 		name: "Accelerate",
 		desc: "Raises the user's Speed by 1. On the next turn, raises the Speed of the Thing in the user's position by 1. If this move is already in effect, it will still raise the user's Speed but will not do anything on the next turn.",
-		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2."
+		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2.",
 	},
-	//liquid
+	// liquid
 	soppingslap: {
 		name: "Sopping Slap",
 		desc: "Has a 100% chance to lower the target's Attack by 1 stage.",
@@ -293,7 +293,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to make contact with the user lose 1/8 of their maximum HP, modified by Liquid type-effectiveness, rounded down. Fish-type Things have their Attack lowered by 1 stage instead. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
 		shortDesc: "Protects from damaging attacks. Contact: Damage.",
 	},
-	//music
+	// music
 	accent: {
 		name: "Accent",
 		desc: "Has a higher chance for a critical hit.",
@@ -368,7 +368,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user restores 1/2 of its maximum HP, rounded half up. If Mystical Song is in effect, adds the Harmony to heal Music-type Things by 1/8 of their max HP at the end of each turn.",
 		shortDesc: "Heals user by 50% max HP. Harmony:Heal",
 	},
-	//night
+	// night
 	stealthstrike: {
 		name: "Stealth Strike",
 		desc: "Has a 30% chance to make the target flinch.",
@@ -394,7 +394,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Nighttime. At the end of each turn except the last, all active Night-type Things recover 1/16 of their maximum HP. During the effect, the accuracy of moves against of Night-type Things is multiplied by 0.8. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Nighttime.",
 		shortDesc: "For 5 turns, it turns to night.",
 	},
-	//no
+	// no
 	voidpunch: {
 		name: "Void Punch",
 		desc: "Has a 10% chance to banish the target.",
@@ -429,7 +429,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		end: "  The mysterious portal disappeared from the ground around [TEAM]!",
 		activate: "  [POKEMON] fell into the mysterious portal!",
 	},
-	//science
+	// science
 	kineticenergy: {
 		name: "Kinetic Energy",
 		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
@@ -473,7 +473,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: "  [POKEMON] is being reprogrammed!",
 		end: "  [POKEMON] was reprogrammed!",
 	},
-	//sport
+	// sport
 	fourseamfastball: {
 		name: "Four-seam Fastball",
 		desc: "No additional effect.",
@@ -539,7 +539,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Raises the user's Attack and Speed by 1 stage. If the user is Fjean, makes it change form.",
 		shortDesc: "Raises the user's Attack and Speed by 1.",
 	},
-	//sword
+	// sword
 	sharpslash: {
 		name: "Sharp Slash",
 		desc: "Has a higher chance for a critical hit.",
@@ -580,7 +580,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to attack the user are retaliated against with Riposte if the user knows it. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
 		shortDesc: "Protects from damaging attacks. Hit: Use Riposte.",
 	},
-	//temperature
+	// temperature
 	thermalpunch: {
 		name: "Thermal Punch",
 		desc: "Has a 10% chance to make the target fluctuant.",
@@ -635,7 +635,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user restores 1/2 of its maximum HP. If the environment is Cold, the user's Defense is raised by 1; if the environment is Hot, the user's Special Defence is raised by 1.",
 		shortDesc: "Heals user by 1/2, boosts Def/SpD if Hot/Cold.",
 	},
-	//time
+	// time
 	gravebite: {
 		name: "Grave Bite",
 		desc: "Has a 30% chance to make the target flinch.",
@@ -676,7 +676,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, Things can only use their last-selected move. If this move is used during the effect, the effect ends.",
 		shortDesc: "For 5 turns, all Things repeat their last move.",
 	},
-	//weather
+	// weather
 	rapidvortex: {
 		name: "Rapid Vortex",
 		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move.",
@@ -704,7 +704,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Windy. During the effect, the priority of Weather-type moves is increased by 1, and stat changes to Speed are ignored. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Windy.",
 		shortDesc: "For 5 turns, the wind picks up.",
 	},
-	//yellow
+	// yellow
 	yellowslap: {
 		name: "Yellow Slap",
 		desc: "Has a 10% chance to blind the target.",
@@ -732,7 +732,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	staticstrike: {
 		name: "Static Strike",
 		desc: "If the target's side had Dust Cloud or Storm Cell active, this move deals double damage, always hits, and ignores the negative effects of those Side Conditions.",
-		shortDesc: "Foe: Dust Cloud, Storm Cell: 2x dmg and always hit."
+		shortDesc: "Foe: Dust Cloud, Storm Cell: 2x dmg and always hit.",
 	},
 	beamscatter: {
 		name: "Beam Scatter",
