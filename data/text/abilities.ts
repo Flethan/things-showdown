@@ -59,6 +59,13 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Camouflage",
 		shortDesc: "Attacks against this Thing have 0.9x accuracy.",
 	},
+	cargofromeverywhen: {
+		name: "Cargo from Everywhen",
+		desc: "When this Thing is hit by an attack, its Speed is raised by 1 stage, and its Defense and Special Defense are lowered by 1 stage. However, the attacker is rewarded with a random, unique treasure, which may benefit the attacker and/or harm this Thing.",
+		shortDesc: "When damaged, +1 Spe, -1 Def, -1 SpD, but the attacker gets a powerful effect.",
+
+		start: "  [POKEMON] brings with it everything from all space and time!",
+	},
 	chilled: {
 		name: "Chilled",
 		shortDesc: "2.0x special defense during Cold. Prevents Cold Speed reduction.",
@@ -166,6 +173,13 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Lass' ihn Fliegen",
 		shortDesc: "On switch-in, Windy begins until this Ability is not active in battle.",
 		desc: "On switch-in, the Field Condition becomes Windy. This Field Condition remains in effect until this Ability is no longer active for any Thing, or the weather is changed by A Hot One or Sin Ningún Apuro.",
+	},
+	legendsoftreasure: {
+		name: "Legends of Treasure",
+		desc: "When this Thing is hit by an attack, its Attack and Special Attack are raised by 1 stage, and its Speed is lowered by 1 stage. However, the attacker is rewarded with one of 19 random treasures, which may benefit the attacker and/or harm this Thing. No treasure may be rolled twice while this Thing is active.",
+		shortDesc: "When damaged, +1 Atk, +1 SpA, -1 Spe, but the attacker gets a powerful effect.",
+
+		start: "  [POKEMON] brings with it legends of treasure!",
 	},
 	lemon: {
 		name: "Lemon",

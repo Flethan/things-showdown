@@ -1,6 +1,6 @@
 export const FormatsData: {[k: string]: SpeciesFormatsData} = {
-	
-// NEW STUFF
+
+	// NEW STUFF
 	hubaby: {
 		isNonstandard: "Thing",
 		tier: "Thing",
@@ -513,11 +513,16 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-
-// BASE GAME
-	bobasaur: {
-		isNonstandard: "ThingMeme"
+	alabroad: {
+		isNonstandard: "Thing",
+		tier: "Thing",
 	},
+	babellinks: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+
+	// BASE GAME
 	bulbasaur: {
 		tier: "LC",
 	},

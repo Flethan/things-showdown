@@ -1827,77 +1827,138 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	legendsoftreasure: {
 		onStart(target) {
 			this.add('-activate', target, 'ability: Legends of Treasure');
+			// eslint-disable-next-line max-len
 			this.effectState.treasures = ['Ceremonial Scarab Hairpin', 'Lunar Soil', 'Space Telescope', 'Sarcopharyn Skeleton', 'Extraterrestrial Globe', 'Historiography', 'Fiber Optic Cable', 'Discarded Singularity', 'Lava Lamp', 'Bone Flute', 'Bottle of Condensed Nebula Gas', 'empty', 'Trans-warp Space Probe', 'All-sports Ball', 'Jeweled Falchion', 'Sealed Vacuum Flask', 'Really, Really Thick Calendar', 'Cloud Seeder', 'Magnetically-locked Yellow Dwarf Star'];
 		},
 		onDamagingHit(damage, target, source) {
 			if (target === source || !this.effectState.treasures.length) return;
-			const treasure = this.effectState.treasures.splice(Math.floor(Math.random() * this.effectState.treasures), 1)[0];
+			const treasure = this.effectState.treasures.splice(Math.floor(Math.random() * this.effectState.treasures.length), 1)[0];
 			if (treasure === 'empty') {
-				this.hint(`That train car was empty...`);
+				this.hint(`${source.name} found an empty train car...`);
+			} else {
+				this.hint(`${source.name} found the ${treasure} in one of ${target.name}'s cars!`);
 			}
-			this.hint(`${source} found the ${treasure} in one of ${target}'s cars!`)
-			switch(treasure) {
-				case 'Ceremonial Scarab Hairpin':
-					this.heal(source.baseMaxhp / 4, source);
-					this.boost({def: 2, spd: 2}, source);
-					break;
-				case 'Lunar Soil':
-					this.boost({accuracy: -1}, target);
-					target?.side.addSideCondition('dustcloud');
-					break;
-				case 'Space Telescope':
-					source.addVolatile('calibration');
-					break;
-				case 'Sarcopharyn Skeleton':
-					this.boost({evasion: 1}, source);
-					source.addVolatile('depthvanish');
-					break;
-				case 'Extraterrestrial Globe':
-					this.boost({def: -1, spd: -1}, target);
-					target.addType('Green');
-					break;
-				case 'Historiography':
-					break;
-				case 'Fiber Optic Cable':
-					this.boost({atk: 1, spa:1}, source);
-					target?.side.addSideCondition('beamfield');
-					break;
-				case 'Discarded Singularity':
-					this.boost({spa:2}, source);
-					target.addVolatile('study');
-					break;
-				case 'Lava Lamp':
-					break;
-				case 'Bone Flute':
-					break;
-				case 'Bottle of Condensed Nebula Gas':
-					break;
-				case 'Trans-warp Space Probe':
-					this.boost({spe: 12}, source);
-					break;
-				case 'All-sports Ball':
-					break;
-				case 'Jeweled Falchion':
-					this.boost({atk:2}, source);
-					target.trySetStatus('wounded');
-					break;
-				case 'Sealed Vacuum Flask':
-					break;
-				case 'Really, Really Thick Calendar':
-					break;
-				case 'Cloud Seeder':
-					source?.side.addSideCondition('stormcell');
-					break;
-				case 'Magnetically-locked Yellow Dwarf Star':
-					break;
+			switch (treasure) {
+			case 'Ceremonial Scarab Hairpin':
+				this.heal(source.baseMaxhp / 4, source, target, null);
+				this.boost({def: 2, spd: 2}, source, target, null, true);
+				break;
+			case 'Lunar Soil':
+				this.boost({accuracy: -1}, target, target, null, true);
+				target.side.addSideCondition('dustcloud');
+				break;
+			case 'Space Telescope':
+				source.addVolatile('calibration');
+				break;
+			case 'Sarcopharyn Skeleton':
+				this.boost({evasion: 1}, source, target, null, true);
+				source.addVolatile('depthvanish');
+				break;
+			case 'Extraterrestrial Globe':
+				this.boost({def: -1, spd: -1}, target, target, null, true);
+				target.addType('Green');
+				this.add('-start', target, 'typeadd', 'Green');
+				break;
+			case 'Historiography':
+				break;
+			case 'Fiber Optic Cable':
+				this.boost({atk: 1, spa: 1}, source, target, null, true);
+				target.side.addSideCondition('beamfield');
+				break;
+			case 'Discarded Singularity':
+				this.boost({spa: 2}, source, target, null, true);
+				target.addVolatile('study');
+				break;
+			case 'Lava Lamp':
+				this.boost({spe: -2}, target, target, null, true);
+				target.side.addSideCondition('wetfloor');
+				break;
+			case 'Bone Flute':
+				this.boost({spa: 2}, source, target, null, true);
+				break;
+			case 'Bottle of Condensed Nebula Gas':
+				this.boost({def: 2}, source, target, null, true);
+				target.addVolatile('trapped');
+				break;
+			case 'Trans-warp Space Probe':
+				this.boost({spe: 12}, source, target, null, true);
+				break;
+			case 'All-sports Ball':
+				target.addVolatile('wager');
+				this.boost({atk: 2}, source, target, null, true);
+				break;
+			case 'Jeweled Falchion':
+				this.boost({atk: 2}, source, target, null, true);
+				target.trySetStatus('wounded');
+				break;
+			case 'Sealed Vacuum Flask':
+				break;
+			case 'Really, Really Thick Calendar':
+				break;
+			case 'Cloud Seeder':
+				source.side.addSideCondition('stormcell');
+				break;
+			case 'Magnetically-locked Yellow Dwarf Star':
+				source.addVolatile('fireworked');
+				break;
 			}
-			this.boost({atk: 1, spa: 1, spe: -1}, target);
+			this.boost({atk: 1, spa: 1, spe: -1}, target, target, null, true);
 		},
 		name: "Legends of Treasure",
 		rating: 5,
 		num: 529,
 	},
 	cargofromeverywhen: {
+		onStart(target) {
+			this.add('-activate', target, 'ability: Cargo from Everywhen');
+		},
+		onDamagingHit(damage, target, source) {
+			if (target === source) return;
+
+			// eslint-disable-next-line max-len
+			const adj = [' bright', ' premium', ' spiritual', ' marked', ' draconian', 'n adhesive', ' bitter', ' slippery', ' second-hand', ' splendid', ' barbarous', 'n ancient', 'n infamous', ' freezing', ' magnificent', ' heavy', ' secretive', ' lumpy', ' scattered', 'n acoustic', 'n unkempt', ' functional', ' flat', ' used', ' rustic', ' hollow', ' dark', ' powerful', 'n obtainable', 'n alive', 'n automatic', ' plastic'];
+			// eslint-disable-next-line max-len
+			const noun = ['dress', 'throne', 'brush', 'basin', 'coil', 'cup', 'potato', 'match', 'cannon', 'milk', 'drawer', 'carriage', 'insect', 'zipper', 'bee', 'pen', 'horse', 'appliance', 'book', 'powder', 'calendar', 'gun', 'patch', 'airplane', 'goose', 'lock', 'hole', 'game', 'station', 'giraffe', 'clam', 'donkey', 'crow', 'iron', 'oil', 'kettle', 'linen', 'orange', 'frog', 'glue', 'finger', 'boat', 'flag', 'mint', 'toy', 'egg', 'basket', 'wood', 'rake'];
+			this.hint(`${source.name} found a${adj[Math.floor(Math.random() * adj.length)]} ${noun[Math.floor(Math.random() * noun.length)]} in one of ${target.name}'s cars!`);
+
+			const wTable: number[] = [5, 3, 2, 1];
+			let r = Math.random() * 5;
+			let sum = 0;
+			wTable.forEach((value, index) => {
+				sum += value;
+				if (r <= sum) r = index;
+			});
+
+			switch (r) {
+			case 0:
+				const stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
+				const boost: SparseBoostsTable = {};
+				for (let i = Math.floor(Math.random() * 3) + 1; i > 0; i--) {
+					const rand = Math.floor(Math.random() * stats.length);
+					const randomStat: BoostID = stats[rand];
+					stats.splice(rand, 1);
+					if (randomStat) boost[randomStat] = (7 - Math.floor(Math.sqrt(Math.floor(Math.random() * 36) + 1)));
+				}
+				this.boost(boost, source, target, null, true);
+				break;
+			case 1:
+				const environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater'];
+				this.field.setWeather(this.sample(environmentalfactors));
+				break;
+			case 2:
+				const sideconditions = ['duststorm', 'hotcoals', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap'];
+				source.side.addSideCondition(this.sample(sideconditions));
+				break;
+			case 3:
+				const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
+				const type = this.sample(typePool);
+				source.addType(type);
+				this.add('-start', source, 'typeadd', type);
+				break;
+			}
+
+			this.boost({def: -1, spd: -1, spe: 1}, target, target, null, true);
+		},
 		name: "Cargo from Everywhen",
 		rating: 5,
 		num: 529,
