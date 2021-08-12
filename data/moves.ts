@@ -431,6 +431,53 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 
 	// Far
+	closein: {
+		num: 1605,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Close In",
+		pp: 5,
+		priority: 6,
+		flags: {},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Far')) return;
+			this.add('-fail', pokemon, 'move: Close In');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		self: {
+			onHit(pokemon) {
+				pokemon.setType(pokemon.getTypes(true).map(type => type === "Far" ? "???" : type));
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
+
+				for (const foe of pokemon.foes()) {
+					if (!foe || foe === pokemon) continue;
+					if (!foe.isActive) {
+						break;
+					}
+					if(this.queue.willMove(foe).originalTarget === pokemon) {
+						foe.addVolatile('flinch', pokemon);
+					}
+				}
+				for (const ally of pokemon.allies()) {
+					if (!ally || ally === pokemon) continue;
+					if (!ally.isActive) {
+						return;
+					}
+					if(this.queue.willMove(ally).originalTarget === pokemon) {
+						ally.addVolatile('flinch', pokemon);
+					}
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Far",
+		contestType: "Tough",
+	},
+
 
 	// Fish
 	brilliantfish: {
