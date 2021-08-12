@@ -3580,6 +3580,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'pause',
 		onTry(source, target, move) {
 			if (target.volatiles['pause']) return false;
+			if (target.volatiles['fastforward']) return false;
 		},
 		condition: {
 			duration: 2,
@@ -3592,9 +3593,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
-			onTryMove(attacker, defender, move) {
-				this.add('-fail', attacker);
-				return null;
+			onBeforeMove(attacker) {
+				this.add('cant', attacker);
+				return false;
 			},
 		},
 		secondary: null,
@@ -3614,6 +3615,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 2,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
 		onTry(source, target, move) {
+			if (target.volatiles['pause']) return false;
 			if (target.volatiles['fastforward']) return false;
 		},
 		onHit(target, source) {
@@ -3625,7 +3627,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 
 			if (target.volatiles['dynamax']) return false;
-			const bannedMoves = ['openturn'];
+			const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
 			const moves = [];
 			for (const moveSlot of target.moveSlots) {
 				const moveid = moveSlot.id;
