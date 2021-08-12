@@ -3578,12 +3578,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: -7,
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
 		volatileStatus: 'pause',
+		onTry(source, target, move) {
+			if (target.volatiles['pause']) return false;
+		},
 		condition: {
 			duration: 1,
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
-			onTry(attacker, defender, move) {
+			onTryMove(attacker, defender, move) {
+				this.add('-fail', pokemon);
 				return null;
 			},
 		},
@@ -3647,8 +3651,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
-			onTry(attacker, defender, move) {
+			onTryMove(attacker, defender, move) {
 				if(!this.effectState.ffMove) {
+					this.add('-fail', pokemon);
 					return null;
 				}
 			},
