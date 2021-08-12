@@ -477,7 +477,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Far",
 		contestType: "Tough",
 	},
-
+	changechannel: {
+		num: 503,
+		accuracy: 80,
+		basePower: 0,
+		category: "Status",
+		name: "Change Channel",
+		pp: 5,
+		priority: +1,
+		flags: {reflectable: 1, authentic: 1},
+		forceSwitch: true,
+		secondary: null,
+		target: "normal",
+		type: "Far",
+		zMove: {boost: {spe: 2}},
+	},
 
 	// Fish
 	brilliantfish: {
@@ -2070,6 +2084,42 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cool",
 	},
+	volumeup: {
+		num: 501,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Volume Up",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		boosts: {
+			spa: 1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Music",
+		zMove: {boost: {spd: 1}},
+	},
+	volumedown: {
+		num: 502,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Volume Down",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		boosts: {
+			spa: -1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Music",
+		zMove: {boost: {spd: 1}},
+	},
 
 	// Night
 	stealthstrike: {
@@ -2341,6 +2391,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "No",
 		zMove: {boost: {def: 1}},
 		contestType: "Clever",
+	},
+	poweroff: {
+		num: 504,
+		accuracy: 65,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Power Off",
+		pp: 5,
+		priority: 2,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		status: 'banished',
+		secondary: null,
+		target: "normal",
+		type: "No",
+		zMove: {effect: 'clearnegativeboost'},
 	},
 
 	// Science
