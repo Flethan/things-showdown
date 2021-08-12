@@ -1524,7 +1524,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	itshoney: {
 		isNonstandard: "Thing",
-		name: "It's   honey",
+		name: "Its   honey",
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['bite'] && !source.status) {
