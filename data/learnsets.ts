@@ -299,6 +299,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cascade: ["8M"],
 			submerge: ["8M"],
 			hit: ["8M"],
+			fossilize: ["8E"],
 		},
 	},
 	anomallamalocarish: {
@@ -318,6 +319,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cascade: ["8M"],
 			submerge: ["8M"],
 			hit: ["8M"],
+			fossilize: ["8E"],
 		},
 	},
 	anomallolash: {
@@ -341,6 +343,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cascade: ["8M"],
 			submerge: ["8M"],
 			hit: ["8M"],
+			fossilize: ["8E"],
 		},
 	},
 	afishal: {
@@ -1669,6 +1672,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cheapstrike: ["8L32"],
 			timecapsule: ["8E"],
 			hit: ["8M"],
+			fossilize: ["8L15"],
 		},
 	},
 	osteoraptor: {
@@ -1689,6 +1693,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			vroom: ["8L45"],
 			crashlanding: ["8L55"],
 			hit: ["8M"],
+			fossilize: ["8L15"],
 		},
 	},
 	achrososaur: {
@@ -1715,6 +1720,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swing: ["8L60"],
 			landslide: ["8L63"],
 			hit: ["8M"],
+			fossilize: ["8L15"],
 		},
 	},
 	neunluft: {

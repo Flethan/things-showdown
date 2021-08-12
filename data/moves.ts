@@ -2474,6 +2474,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spa: 2}},
 		contestType: "Clever",
 	},
+	fossilize: {
+		num: 1104,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Fossilize",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1},
+		boosts: {
+			def: 3,
+			spe: -1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Science",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Tough",
+	},
 
 	// Sport
 	fourseamfastball: {
