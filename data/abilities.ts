@@ -1814,6 +1814,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 207,
 	},
+	toofaraway: {
+		onTryHit(target, source, move) {
+			if (target === source || move.category === 'Status') return;
+			if (this.checkMoveMakesContact(move, source, target) && !target.volatiles['toofaraway']) {
+				target.addVolatile('toofaraway');
+				return false;
+			}
+		},
+		name: "Too Far Away",
+		rating: 3,
+		num: 529,		
+	},
 
 	// BASE GAME
 	noability: {
