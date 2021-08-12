@@ -3631,7 +3631,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			this.actions.useMove(randomMove, target);
 
-			let randomMove = '';
+			randomMove = '';
 			if (moves.length) randomMove = this.sample(moves);
 			if (!randomMove) {
 				this.effectState.ffMove = false;
