@@ -117,7 +117,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	fickle: {
 		name: "Fickle",
-		shortDesc: "At the end of the turn, during a Field Condition, change it to another random one.",
+		shortDesc: "At the end of the turn, the active Environmental Condition is randomly changed.",
 	},
 	fiery: {
 		name: "Fiery",
@@ -129,7 +129,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	gold: {
 		name: "Gold",
-		shortDesc: "This Thing is immune to super-effective attacks.",
+		shortDesc: "This Thing is immune to supereffective attacks.",
 	},
 	gravitywell: {
 		name: "Gravity Well",
@@ -143,13 +143,61 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Greetings",
 		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage.",
 	},
-
+	hazardous: {
+		name: "Hazardous",
+		shortDesc: "This Thing's Liquid-type attacks ignore Liquid-type immunities.",
+	},
+	highpressure: {
+		name: "High Pressure",
+		desc: "If this Pokemon is pressurized, it restores 1/8 of its maximum HP, rounded down, at the end of each turn it is not active instead of losing HP.",
+		shortDesc: "When not active, this Thing is healed by 1/8 max HP each turn when pressurized.",
+	},
+	itshoney: {
+		name: "Its   honey",
+		desc: "When this Thing is damaged by a bite-based attack, the attacker is healed by 1/8 of this Thing's max HP. When this Thing is knocked out by another Thing, the attacker is healed by 100% of this Thing's max HP.",
+		shortDesc: "Heals attackers 1/8 its max HP when biten, 100% max HP when KOd.",
+	},
+	inert: {
+		name: "Inert",
+		shortDesc: "This Thing receives and deals 2/3 damage from supereffective attacks.",
+		desc: "This Thing's supereffective attacks deal 2/3 damage, and this Thing receives 2/3 damage from supereffective attacks.",
+	},
+	lassihnfliegen: {
+		name: "Lass' ihn Fliegen",
+		shortDesc: "On switch-in, Windy begins until this Ability is not active in battle.",
+		desc: "On switch-in, the Field Condition becomes Windy. This Field Condition remains in effect until this Ability is no longer active for any Thing, or the weather is changed by A Hot One or Sin Ningún Apuro.",
+	},
+	lemon: {
+		name: "Lemon",
+		shortDesc: "This Thing is a Lemon.",
+		desc: "If this Thing is not Lemon, and gains this Ability, the Thing changes to be Lemon. If this Thing started the battle as Lemon and loses this ability, it becomes Empty.",
+	},
 	longgame: {
 		name: "Long Game",
-		shortDesc: "If foe is at full HP, this Thing's moves have their priority increased by 1.",
-		gen6: {
-			shortDesc: "This Thing's moves have their priority increased by 1 against full-HP foes.",
-		},
+		shortDesc: "+1 priority if foe is full HP. End of turn, Putt forme if foe is < 20% HP.",
+		desc: "This Thing's moves have their priority increased by 1 if there is a full HP foe. At the end of the turn, if there is a foe with less than 20% remaining HP, this Thing changes to Putt forme, with its ability becoming Short Game.",
+		activate: "[POKEMON] switched to its putter!"
+	},
+	lookbothways: {
+		name: "Look Both Ways",
+		shortDesc: "Moves used against this Thing have 80% accuracy if this Thing has yet to act."
+	},
+	lowlying: {
+		name: "Low-Lying",
+		shortDesc: "This Thing cannot be knocked prone.",
+	},
+	lucky: {
+		name: "Lucky",
+		shortDesc: "This Thing's moves have x2 secondary effect chance and +1 crit.",
+		desc: "This Thing's moves have their secondary effect chance doubled and critical hit ratio raised by 1 stage.",
+	},
+	microwave: {
+		name: "Microwave",
+		shortDesc: "This Thing's moves are always a critical hit against foes smaller than 0.4 meters.",
+	},
+	momentum: {
+		name: "Momentum",
+		shortDesc: "When this Thing's speed is raised, its attack is also raised by the same amount.",
 	},
 
 	omega: {

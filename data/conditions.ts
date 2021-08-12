@@ -1,7 +1,7 @@
-export const Conditions: {[k: string]: ConditionData} =  {
+export const Conditions: {[k: string]: ConditionData} = {
 
-// NEW STUFF
-// Moves
+	// NEW STUFF
+	// Moves
 	calibration: {
 		name: 'calibration',
 		noCopy: true, // doesn't get copied by Baton Pass
@@ -107,8 +107,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			this.add('-end', pokemon, 'move: Vetoed', '[silent]');
 		},
 	},
-	
-// Statuses
+
+	// Statuses
 	prone: {
 		name: 'prone',
 		effectType: 'Status',
@@ -200,16 +200,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			} else {
 				this.add('-status', target, 'pressurized');
 			}
-			this.effectState.startTime = 3
+			this.effectState.startTime = 3;
 			this.effectState.time = this.effectState.startTime;
-		},
-		onResidual(pokemon) {
-			if (this.field.getPseudoWeather('hadalzone')) return;
-			pokemon.statusState.time--;
-			if (pokemon.statusState.time <= 0) {
-				pokemon.cureStatus();
-				return;
-			}
 		},
 		onSwitchIn() {
 			this.effectState.time = this.effectState.startTime;
@@ -222,9 +214,16 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
 			for (const pokemon of this.getAllPokemon()) {
 				if (pokemon.status !== 'pressurized' ||
-					(pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) ||
-					pokemon.fainted || !pokemon.hp
+					pokemon.fainted || !pokemon.hp ||
+					pokemon.hasItem('pressurecapsule')
 				) continue;
+				if (pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) {
+					pokemon.statusState.time--;
+					if (pokemon.statusState.time <= 0) {
+						pokemon.cureStatus();
+					}
+					continue;
+				}
 				if (!announced) {
 					this.add('-activate', null, 'pressurizer');
 					announced = true;
@@ -330,8 +329,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			if (source !== target) this.damage(source.baseMaxhp / 4);
 		},
 	},
-	
-// Environmental Factors (New Weather)
+
+	// Environmental Factors (New Weather)
 	yellowish: {
 		name: 'Yellowish',
 		effectType: 'Weather',
@@ -342,13 +341,6 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			}
 			return 5;
 		},
-		onWeatherModifyDamage(damage, attacker, defender, move) {
-			if (defender.hasItem('utilityumbrella')) return;
-			if (move.type === 'Green') {
-				this.debug('yellow green suppress');
-				return this.chainModify(0.5);
-			}
-		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
@@ -357,8 +349,12 @@ export const Conditions: {[k: string]: ConditionData} =  {
 				this.add('-weather', 'Yellowish');
 			}
 		},
-		onModifyMove(move, pokemon, target) {
-			if (target?.effectiveWeather() === 'yellowish' && move.type === 'Yellow') move.accuracy = true;
+		onModifyMovePriority: -5,
+		onModifyMove(move) {
+			if (move.type === 'Yellow') {
+				move.accuracy = true;
+				move.ignoreImmunity = true;
+			}
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
@@ -466,8 +462,8 @@ export const Conditions: {[k: string]: ConditionData} =  {
 			} else {
 				this.add('-weather', 'Windy');
 			}
-			this.hint("Stat changes to speed are ignored while it is windy!"); 
-			//Done in pokemon.js
+			this.hint("Stat changes to speed are ignored while it is windy!");
+			// Done in pokemon.js
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) return priority + 1;
@@ -656,10 +652,10 @@ export const Conditions: {[k: string]: ConditionData} =  {
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
-	},	
+	},
 
-	
-// BASE GAME
+
+	// BASE GAME
 	brn: {
 		name: 'brn',
 		effectType: 'Status',

@@ -104,6 +104,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Yellow Safety Vest",
 		desc: "Holder reapears if banished. Single use.",
 	},
+	pressurecapsule: {
+		name: "Pressure Capsule",
+		desc: "Holder is not affected by effects caused by pressurized.",
+	},
 	prngmachine: {
 		name: "pRNG Machine",
 		desc: "Holder raises twice as many stats when fluctuant.",

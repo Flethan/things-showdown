@@ -2012,7 +2012,7 @@ export class Battle {
 		this.runEvent('Heal', target, source, effect, finalDamage);
 		return finalDamage;
 	}
-	
+
 	directHeal(damage: number, target?: Pokemon, source: Pokemon | null = null, effect: 'drain' | Effect | null = null) {
 		if (this.event) {
 			if (!target) target = this.event.target;
