@@ -3619,8 +3619,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source) {
 			const action = this.queue.willMove(target);
 			if (action) {
-				this.queue.prioritizeAction(action);
+				this.queue.cancelMove(target);
 				this.add('-activate', target, 'move: Fast Forward');
+				this.actions.useMove(action.move, target);
 			}
 
 			if (target.volatiles['dynamax']) return false;

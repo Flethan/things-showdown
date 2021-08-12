@@ -120,7 +120,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onTrapPokemon(pokemon) {
 			pokemon.tryTrap();
 		},
-		onTryMove(attacker, defender, move) {
+		onBeforeMove(attacker) {
+			this.add('-fail', attacker);
 			return false;
 		},
 	},
