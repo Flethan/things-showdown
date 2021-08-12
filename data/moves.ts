@@ -3583,7 +3583,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
-			onTryMove(attacker, defender, move) {
+			onTry(attacker, defender, move) {
 				return null;
 			},
 		},
@@ -3647,8 +3647,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onTrapPokemon(pokemon) {
 				pokemon.tryTrap();
 			},
-			onTryMove(attacker, defender, move) {
-				return null;
+			onTry(attacker, defender, move) {
+				if(!this.effectState.ffMove) {
+					return null;
+				}
 			},
 		},
 		secondary: null,
