@@ -176,11 +176,11 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Long Game",
 		shortDesc: "+1 priority if foe is full HP. End of turn, Putt forme if foe is < 20% HP.",
 		desc: "This Thing's moves have their priority increased by 1 if there is a full HP foe. At the end of the turn, if there is a foe with less than 20% remaining HP, this Thing changes to Putt forme, with its ability becoming Short Game.",
-		activate: "[POKEMON] switched to its putter!"
+		activate: "[POKEMON] switched to its putter!",
 	},
 	lookbothways: {
 		name: "Look Both Ways",
-		shortDesc: "Moves used against this Thing have 80% accuracy if this Thing has yet to act."
+		shortDesc: "Moves used against this Thing have 80% accuracy if this Thing has yet to act.",
 	},
 	lowlying: {
 		name: "Low-Lying",

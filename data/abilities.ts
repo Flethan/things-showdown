@@ -520,11 +520,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onResidual(pokemon) {
 			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Chronoise' || pokemon.transformed) return;
-				if (pokemon.species.id !== 'chronoisenight') {
-					pokemon.formeChange('Chronoise-Night', this.effect, false, '[msg]');
-					this.add('-ability', pokemon, 'moonrise', '[from] ability: Bright');
-					pokemon.setAbility('moonrise');
-				}
+			if (pokemon.species.id !== 'chronoisenight') {
+				pokemon.formeChange('Chronoise-Night', this.effect, false, '[msg]');
+				this.add('-ability', pokemon, 'moonrise', '[from] ability: Bright');
+				pokemon.setAbility('moonrise');
 			}
 		},
 		name: "Bright",
@@ -1742,7 +1741,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (foeActive.hp < foeActive.maxhp * 2 / 10) {
 					if (pokemon.species.id !== 'tacilinksputt') {
 						pokemon.formeChange('Tacilinks-Putt', this.effect, false, '[msg]');
-						this.add('-ability', pokemon, 'shortgame', '[from] ability: Long Game');
+						this.add('-activate', pokemon, 'ability: Long Game');
 						pokemon.setAbility('shortgame');
 					}
 				}
