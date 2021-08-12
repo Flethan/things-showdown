@@ -1824,6 +1824,84 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 529,
 	},
+	legendsoftreasure: {
+		onStart(target) {
+			this.add('-activate', target, 'ability: Legends of Treasure');
+			this.effectState.treasures = ['Ceremonial Scarab Hairpin', 'Lunar Soil', 'Space Telescope', 'Sarcopharyn Skeleton', 'Extraterrestrial Globe', 'Historiography', 'Fiber Optic Cable', 'Discarded Singularity', 'Lava Lamp', 'Bone Flute', 'Bottle of Condensed Nebula Gas', 'empty', 'Trans-warp Space Probe', 'All-sports Ball', 'Jeweled Falchion', 'Sealed Vacuum Flask', 'Really, Really Thick Calendar', 'Cloud Seeder', 'Magnetically-locked Yellow Dwarf Star'];
+		},
+		onDamagingHit(damage, target, source) {
+			if (target === source || !this.effectState.treasures.length) return;
+			const treasure = this.effectState.treasures.splice(Math.floor(Math.random() * this.effectState.treasures), 1)[0];
+			if (treasure === 'empty') {
+				this.hint(`That train car was empty...`);
+			}
+			this.hint(`${source} found the ${treasure} in one of ${target}'s cars!`)
+			switch(treasure) {
+				case 'Ceremonial Scarab Hairpin':
+					this.heal(source.baseMaxhp / 4, source);
+					this.boost({def: 2, spd: 2}, source);
+					break;
+				case 'Lunar Soil':
+					this.boost({accuracy: -1}, target);
+					target?.side.addSideCondition('dustcloud');
+					break;
+				case 'Space Telescope':
+					source.addVolatile('calibration');
+					break;
+				case 'Sarcopharyn Skeleton':
+					this.boost({evasion: 1}, source);
+					source.addVolatile('depthvanish');
+					break;
+				case 'Extraterrestrial Globe':
+					this.boost({def: -1, spd: -1}, target);
+					target.addType('Green');
+					break;
+				case 'Historiography':
+					break;
+				case 'Fiber Optic Cable':
+					this.boost({atk: 1, spa:1}, source);
+					target?.side.addSideCondition('beamfield');
+					break;
+				case 'Discarded Singularity':
+					this.boost({spa:2}, source);
+					target.addVolatile('study');
+					break;
+				case 'Lava Lamp':
+					break;
+				case 'Bone Flute':
+					break;
+				case 'Bottle of Condensed Nebula Gas':
+					break;
+				case 'Trans-warp Space Probe':
+					this.boost({spe: 12}, source);
+					break;
+				case 'All-sports Ball':
+					break;
+				case 'Jeweled Falchion':
+					this.boost({atk:2}, source);
+					target.trySetStatus('wounded');
+					break;
+				case 'Sealed Vacuum Flask':
+					break;
+				case 'Really, Really Thick Calendar':
+					break;
+				case 'Cloud Seeder':
+					source?.side.addSideCondition('stormcell');
+					break;
+				case 'Magnetically-locked Yellow Dwarf Star':
+					break;
+			}
+			this.boost({atk: 1, spa: 1, spe: -1}, target);
+		},
+		name: "Legends of Treasure",
+		rating: 5,
+		num: 529,
+	},
+	cargofromeverywhen: {
+		name: "Cargo from Everywhen",
+		rating: 5,
+		num: 529,
+	},
 
 	// BASE GAME
 	noability: {

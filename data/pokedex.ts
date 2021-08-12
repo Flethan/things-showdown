@@ -1775,6 +1775,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Undiscovered"],
 	},
+	alabroad: {
+		num: -420,
+		name: "Alabroad",
+		types: ["Far", "Time"],
+		gender: "N",
+		baseStats: {hp: 255, atk: 25, def: 150, spa: 25, spd: 150, spe: 120},
+		abilities: {0: "Legends of Treasure"},
+		heightm: 90.0,
+		weightkg: 90.0,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
