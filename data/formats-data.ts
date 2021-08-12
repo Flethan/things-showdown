@@ -505,6 +505,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	pancakecat: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 // BASE GAME
 	bobasaur: {

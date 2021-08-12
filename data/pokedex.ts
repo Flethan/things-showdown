@@ -1722,6 +1722,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Jazzecko",
 		eggGroups: ["Monster"],
 	},
+	pancakecat: {
+		num: -417,
+		name: "Pancake Cat",
+		types: ["Yellow"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 112, atk: 40, def: 77, spa: 45, spd: 77, spe: 48},
+		abilities: {0: "Shining Attitude", H: "It's   honey"},
+		heightm: 0.2,
+		weightkg: 15,
+		color: "Yellow",
+		eggGroups: ["Monster"],
+	},
+
 
 // BASE GAME
 	bulbasaur: {
