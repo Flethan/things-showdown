@@ -509,6 +509,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	chronoise: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 // BASE GAME
 	bobasaur: {

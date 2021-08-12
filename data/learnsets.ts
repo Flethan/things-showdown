@@ -2193,6 +2193,18 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmute: ["8L70"],
 		},
 	},
+	chronoise: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			pause: ["8L1"],
+			replay: ["8L1"],
+			fastforward: ["8L1"],
+			timeloop: ["8L30"],
+			timecapsule: ["8L35"],
+		}
+	},
 
 // BASE GAME
 	missingno: {

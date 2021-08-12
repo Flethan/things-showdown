@@ -494,6 +494,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			this.field.setWeather('nighttime');
 		},
+		onResidual(pokemon) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Chronoise' || pokemon.transformed) return;
+			if (!pokemon.hp) return;
+			if (pokemon.species.id === 'chronoisenight') {
+				pokemon.formeChange('Chronoise', this.effect, false, '[msg]');
+				this.add('-ability', pokemon, 'bright', '[from] ability: Moonrise');
+				pokemon.setAbility('bright');
+			}
+		},
 		name: "Moonrise",
 		rating: 2,
 		num: -111,
@@ -507,6 +516,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onAnySetWeather(target, source, weather) {
 			if (weather.id === 'nighttime') return false;
+		},
+		onResidual(pokemon) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Chronoise' || pokemon.transformed) return;
+				if (pokemon.species.id !== 'chronoisenight') {
+					pokemon.formeChange('Chronoise-Night', this.effect, false, '[msg]');
+					this.add('-ability', pokemon, 'moonrise', '[from] ability: Bright');
+					pokemon.setAbility('moonrise');
+				}
+			}
 		},
 		name: "Bright",
 		rating: 2,
