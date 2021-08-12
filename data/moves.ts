@@ -3643,9 +3643,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.actions.useMove(randomMove, target);
 			}
 
-			this.addVolatile('fastforward');
+			target.addVolatile('fastforward');
 		},
-		volatileStatus: 'fastforward',
 		secondary: null,
 		target: "normal",
 		type: "Time",
