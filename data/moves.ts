@@ -3627,7 +3627,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 
 			if (target.volatiles['dynamax']) return false;
-			const bannedMoves = ['openturn'];
+			const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
 			const moves = [];
 			for (const moveSlot of target.moveSlots) {
 				const moveid = moveSlot.id;
