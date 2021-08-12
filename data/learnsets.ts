@@ -2210,7 +2210,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			emanation: ["8M"],
 			deposition: ["8M"],
 			hit: ["8M"],
-			closein: ["8M"],
 			pause: ["8L1"],
 			replay: ["8L1"],
 			fastforward: ["8L1"],
