@@ -2205,6 +2205,28 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L35"],
 		}
 	},
+	infared: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			closein: ["8M"],
+			pause: ["8L1"],
+			replay: ["8L1"],
+			fastforward: ["8L1"],
+			apexcalibration: ["8L16"],
+			reprogram: ["8L18"],
+			brilliantflash: ["8L23"],
+			study: ["8L24"],
+			lookup: ["8L25"],
+			beamscatter: ["8L27"],
+			timeloop: ["8L30"],
+			flashmissle: ["8L33"],
+			timecapsule: ["8L35"],
+			particlebeam: ["8L45"],
+		}
+	},
+
 
 // BASE GAME
 	missingno: {

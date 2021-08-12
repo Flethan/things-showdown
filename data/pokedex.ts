@@ -1763,6 +1763,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		battleOnly: "Chronoise",
 	},
+	infared: {
+		num: -419,
+		name: "Infared",
+		types: ["Industrial", "Far"],
+		gender: "N",
+		baseStats: {hp: 46, atk: 34, def: 65, spa: 86, spd: 46, spe: 145},
+		abilities: {0: "Too Far Away", 1: "Blind"},
+		heightm: 0.1,
+		weightkg: 0.1,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+	},
 
 // BASE GAME
 	bulbasaur: {
