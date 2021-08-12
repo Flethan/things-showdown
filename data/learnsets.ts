@@ -977,6 +977,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			landslide: ["8L1"],
 			study: ["8L1"],
 			hit: ["8M"],
+			transmute: ["8L1"],
 		},
 	},
 	albeedle: {
@@ -990,6 +991,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			pinch: ["8L1"],
 			study: ["8L1"],
 			hit: ["8M"],
+			transmute: ["8L1"],
 		},
 	},
 	citrinity: {
@@ -1004,6 +1006,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			study: ["8L1"],
 			brilliantflash: ["8L1"],
 			hit: ["8M"],
+			transmute: ["8L1"],
 		},
 	},
 	swordguy: {
@@ -2160,6 +2163,47 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			moonbeam: ["8L55"],
 			replay: ["8L51"],
 		},
+	},
+	pancakecat: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			yellowslap: ["8L1"],
+			yellowgigahit: ["8L50"],
+			beamscatter: ["8L30"],
+			luminesce: ["8L12"],
+			yellowsoak: ["8L10"],
+			autumnaloffering: ["8L25"],
+			yellowshift: ["8M"],
+			vetoslip: ["8E"],
+			reheat: ["8L30"],
+			thermalexplosion: ["8L60"],
+			heatup: ["8M"],
+			bask: ["8L28"],
+			cheapstrike: ["8E"],
+			hypnoticmelody: ["8E"],
+			spill: ["8L35"],
+			spray: ["8L38"],
+			accelerate: ["8L45"],
+			hairball: ["8L41"],
+			brush: ["8L22"],
+			hairycrash: ["8L48"],
+			greenify: ["8E"],
+			transmute: ["8L70"],
+		},
+	},
+	chronoise: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			pause: ["8L1"],
+			replay: ["8L1"],
+			fastforward: ["8L1"],
+			timeloop: ["8L30"],
+			timecapsule: ["8L35"],
+		}
 	},
 
 // BASE GAME
