@@ -2850,8 +2850,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		volatileStatus: 'wager',
 		condition: {
 			duration: 2,
-			onStart(pokemon) {
-				this.add('-start', pokemon, 'move: Wager', '[of] ' + this.effectState.source);
+			onStart(pokemon, source, effect) {
+				this.add('-start', pokemon, 'move: Wager', '[of] ' + source);
+				if (effect.id === 'legendsoftreasure') this.effectState.duration = 0;
 			},
 			onFaint(target, source, effect) {
 				this.add('-activate', this.effectState.source, 'wager');
@@ -3819,7 +3820,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			durationCallback(target, source, effect) {
-				if (this.field.isWeather('windy')) {
+				if (effect.id === 'legendsoftreasure') {
+					return 6;
+				} else if (this.field.isWeather('windy')) {
 					return 4;
 				}
 				return 2;
