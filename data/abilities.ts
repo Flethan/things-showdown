@@ -312,6 +312,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	greetings: {
 		isNonstandard: "Thing",
 		onSwitchIn() {
+			if (!this.field.battle.turn) return;
 			this.effectState.switchingIn = true;
 		},
 		onStart(pokemon) {
@@ -662,6 +663,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	farewell: {
 		isNonstandard: "Thing",
 		onSwitchIn(pokemon) {
+			if (!this.field.battle.turn) return;
 			this.add('-ability', pokemon, 'Farewell');
 			this.hint("Farewell will switch everyone else out at the end of the next turn!");
 			this.effectState.switchingIn = true;
@@ -671,23 +673,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Farewell activates at the end of the turn after switching in.
 			if (!this.effectState.switchingIn || !pokemon.activeTurns) return;
 			this.effectState.switchingIn = false;
-			const additionalBannedAbilities = ['farewell'];
+			const bannedAbilities = ['farewell', 'greetings', 'eleventhhour'];
 			let announced = false;
-			for (const target of pokemon.side.foe.active) {
-				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability)) continue;
-				if (!target.isActive || !this.canSwitch(target.side) || target.forceSwitchFlag) {
+			for (const foe of pokemon.foes()) {
+				if (!foe || foe === pokemon || bannedAbilities.includes(foe.ability)) continue;
+				if (!foe.isActive || !this.canSwitch(foe.side) || foe.forceSwitchFlag) {
 					break;
 				}
-				if (this.runEvent('DragOut', pokemon, target)) {
+				if (this.runEvent('DragOut', pokemon, foe)) {
 					if (!announced) {
 						this.add('-ability', pokemon, 'Farewell');
 						announced = true;
 					}
-					target.forceSwitchFlag = true;
+					foe.forceSwitchFlag = true;
 				}
 			}
-			for (const ally of pokemon.side.active) {
-				if (!ally || ally === pokemon || additionalBannedAbilities.includes(ally.ability)) continue;
+			for (const ally of pokemon.allies()) {
+				if (!ally || ally === pokemon || bannedAbilities.includes(ally.ability)) continue;
 				if (!ally.isActive || !this.canSwitch(ally.side) || ally.forceSwitchFlag) {
 					return;
 				}
@@ -1509,10 +1511,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['bite'] && !source.status) {
-				this.heal(source.baseMaxhp / 8, target, source);
+				this.heal(target.baseMaxhp / 8, target, source);
 			}
 			if (!target.hp) {
-				this.heal(source.baseMaxhp, target, source);
+				this.heal(target.baseMaxhp, target, source);
 			}
 		},
 		rating: 1,

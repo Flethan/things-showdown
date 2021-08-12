@@ -1,6 +1,6 @@
 export const Items: {[itemid: string]: ItemData} = {
 // NEW STUFF
-	
+
 	jellytreat: {
 		name: "Jelly Treat",
 		spritenum: 770,
@@ -375,7 +375,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
-		onStart (pokemon) {
+		onStart(pokemon) {
 			pokemon.trySetStatus('blinded', pokemon);
 		},
 		num: -244,
@@ -398,19 +398,30 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	pressurecapsule: {
+		name: "Pressure Capsule",
+		spritenum: 796,
+		fling: {
+			basePower: 100,
+		},
+		// Pressurized immunity implemented in hazard
+		num: -246,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 	prngmachine: {
 		name: "pRNG Machine",
-		spritenum: 796,
+		spritenum: 797,
 		fling: {
 			basePower: 90,
 		},
-		num: -246,
+		num: -247,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	knife: {
 		name: "Knife",
-		spritenum: 797,
+		spritenum: 798,
 		fling: {
 			basePower: 120,
 			volatileStatus: 'wounded',
@@ -428,7 +439,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				});
 			}
 		},
-		num: -247,
+		num: -248,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -453,11 +464,11 @@ export const Items: {[itemid: string]: ItemData} = {
 			return 0.1;
 		},
 		name: "Rechargeable Shoes",
-		spritenum: 798,
+		spritenum: 799,
 		fling: {
 			basePower: 60,
 		},
-		num: -248,
+		num: -249,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -465,24 +476,24 @@ export const Items: {[itemid: string]: ItemData} = {
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (source.hasType('Fish') && !this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
-				//this.add('-activate', pokemon, 'item: Fish Bait');
+				// this.add('-activate', pokemon, 'item: Fish Bait');
 				if (move.smartTarget) move.smartTarget = false;
 				this.debug("Fish Bait redirected target of move");
 				return this.effectState.target;
 			}
 		},
 		name: "Fish Bait",
-		spritenum: 799,
+		spritenum: 800,
 		fling: {
 			basePower: 40,
 		},
-		num: -249,
+		num: -250,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
 	bugbomb: {
 		name: "Bug Bomb",
-		spritenum: 800,
+		spritenum: 801,
 		fling: {
 			basePower: 40,
 		},
@@ -492,7 +503,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				this.field.setWeather('locustswarm');
 			}
 		},
-		num: -250,
+		num: -251,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
@@ -737,8 +748,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 7,
 		isNonstandard: "Past",
 	},
-	
-// BASE GAME	
+
+	// BASE GAME
 	abomasite: {
 		name: "Abomasite",
 		spritenum: 575,
