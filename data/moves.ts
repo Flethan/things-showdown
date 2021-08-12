@@ -3567,6 +3567,96 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",
 	},
+	pause: {
+		num: -276,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Pause",
+		pp: 5,
+		priority: -7,
+		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
+		volatileStatus: 'pause',
+		condition: {
+			duration: 1,
+			onTrapPokemon(pokemon) {
+				pokemon.tryTrap();
+			},
+			onTryMove(attacker, defender, move) {
+				return null;
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Time",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	fastforward: {
+		num: -276,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Fast Forward",
+		pp: 5,
+		priority: 2,
+		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
+		onTry(source, target, move) {
+			if (target.volatiles['fastforward']) return false;
+		},
+		onHit(target, source) {
+			if (target.volatiles['dynamax']) return false;
+			this.effectState.ffMove = true;
+			const noFF = [
+				'beakblast', 'bide', 'focuspunch', 'shelltrap', 'sleeptalk', 'uproar', 'outrage', 'petaldance', 'iceball', 'rollout', 'thrash', 'batonpass', 'flipturn', 'voltswitch', 'partingshot', 'teleport', 'uturn', 'dragontail', 'roar', 'whirlwind', 'circlethrow',
+			];
+			const moves = [];
+			for (const moveSlot of target.moveSlots) {
+				const moveid = moveSlot.id;
+				if (!moveid) continue;
+				const move = this.dex.moves.get(moveid);
+				if (noFF.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+					continue;
+				}
+				moves.push(moveid);
+			}
+
+			let randomMove = '';
+			if (moves.length) randomMove = this.sample(moves);
+			if (!randomMove) {
+				this.effectState.ffMove = false;
+				return false;
+			}
+			this.actions.useMove(randomMove, target);
+
+			let randomMove = '';
+			if (moves.length) randomMove = this.sample(moves);
+			if (!randomMove) {
+				this.effectState.ffMove = false;
+				return false;
+			}
+			this.actions.useMove(randomMove, target);
+
+			this.effectState.ffMove = false;
+		},
+		volatileStatus: 'fastforward',
+		condition: {
+			duration: 2,
+			onTrapPokemon(pokemon) {
+				pokemon.tryTrap();
+			},
+			onTryMove(attacker, defender, move) {
+				return null;
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Time",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// Weather
 	rapidvortex: {

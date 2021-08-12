@@ -1734,7 +1734,35 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		eggGroups: ["Monster"],
 	},
-
+	chronoise: {
+		num: -418,
+		name: "Chronoise",
+		types: ["Time"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 50},
+		abilities: {0: "Bright"},
+		heightm: 2.3,
+		weightkg: 350,
+		color: "Blue",
+		eggGroups: ["Undiscovered"],
+		otherFormes: ["Chronoise-Night"],
+		formeOrder: ["Chronoise", "Chronoise-Night"],
+	},
+	chronoisenight: {
+		num: -418,
+		name: "Chronoise-Night",
+		baseSpecies: "Chronoise",
+		forme: "Night",
+		types: ["Time", "Night"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 50},
+		abilities: {0: "Moonrise"},
+		heightm: 2.3,
+		weightkg: 350,
+		color: "Blue",
+		eggGroups: ["Undiscovered"],
+		battleOnly: "Chronoise",
+	},
 
 // BASE GAME
 	bulbasaur: {
