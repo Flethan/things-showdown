@@ -2394,7 +2394,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	poweroff: {
 		num: 504,
-		accuracy: 65,
+		accuracy: 75,
 		basePower: 0,
 		category: "Status",
 		isNonstandard: "Thing",

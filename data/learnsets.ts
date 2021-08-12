@@ -2219,6 +2219,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			pause: ["8L1"],
 			replay: ["8L1"],
 			fastforward: ["8L1"],
+			volumeup: ["8L1"],
+			volumedown: ["8L3"],
+			changechannel: ["8L13"],
 			apexcalibration: ["8L16"],
 			reprogram: ["8L18"],
 			brilliantflash: ["8L23"],
@@ -2229,6 +2232,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			flashmissle: ["8L33"],
 			timecapsule: ["8L35"],
 			particlebeam: ["8L45"],
+			poweroff: ["8L55"],
 		}
 	},
 
