@@ -691,10 +691,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const bannedAbilities = ['farewell', 'greetings', 'eleventhhour'];
 			let announced = false;
 			for (const foe of pokemon.foes()) {
-				if (!foe || foe === pokemon || bannedAbilities.includes(foe.ability)) continue;
-				if (!foe.isActive || !this.canSwitch(foe.side) || foe.forceSwitchFlag) {
-					break;
-				}
+				if (!foe?.isActive || foe === pokemon || bannedAbilities.includes(foe.ability) ||
+					!this.canSwitch(foe.side) || foe.forceSwitchFlag) continue;
 				if (this.runEvent('DragOut', pokemon, foe)) {
 					if (!announced) {
 						this.add('-ability', pokemon, 'Farewell');
@@ -704,10 +702,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 			for (const ally of pokemon.allies()) {
-				if (!ally || ally === pokemon || bannedAbilities.includes(ally.ability)) continue;
-				if (!ally.isActive || !this.canSwitch(ally.side) || ally.forceSwitchFlag) {
-					return;
-				}
+				if (!ally?.isActive || ally === pokemon || bannedAbilities.includes(ally.ability) ||
+					!this.canSwitch(ally.side) || ally.forceSwitchFlag) continue;
 				if (this.runEvent('DragOut', pokemon, ally)) {
 					if (!announced) {
 						this.add('-ability', pokemon, 'Farewell');
@@ -1699,12 +1695,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			const additionalBannedAbilities = ['replicator'];
 			let multiplier = 0;
-			for (const target of pokemon.side.foe.active) {
-				if (!target || target === pokemon || additionalBannedAbilities.includes(target.ability) || target.species !== pokemon.species) continue;
+			for (const foe of pokemon.foes()) {
+				if (foe?.isActive || foe === pokemon || additionalBannedAbilities.includes(foe.ability) || foe.species !== pokemon.species) continue;
 				multiplier++;
 			}
-			for (const ally of pokemon.side.active) {
-				if (!ally || ally === pokemon || additionalBannedAbilities.includes(ally.ability) || ally.species !== pokemon.species) continue;
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon || additionalBannedAbilities.includes(ally.ability) || ally.species !== pokemon.species) continue;
 				multiplier++;
 			}
 			if (multiplier > 0) {
@@ -1921,13 +1917,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const noun = ['dress', 'throne', 'brush', 'basin', 'coil', 'cup', 'potato', 'match', 'cannon', 'milk', 'drawer', 'carriage', 'insect', 'zipper', 'bee', 'pen', 'horse', 'appliance', 'book', 'powder', 'calendar', 'gun', 'patch', 'airplane', 'goose', 'lock', 'hole', 'game', 'station', 'giraffe', 'clam', 'donkey', 'crow', 'iron', 'oil', 'kettle', 'linen', 'orange', 'frog', 'glue', 'finger', 'boat', 'flag', 'mint', 'toy', 'egg', 'basket', 'wood', 'rake'];
 			this.hint(`${source.name} found a${adj[Math.floor(Math.random() * adj.length)]} ${noun[Math.floor(Math.random() * noun.length)]} in one of ${target.name}'s cars!`);
 
-			const wTable: number[] = [5, 3, 2, 1];
-			let r = Math.random() * 5;
+			const wTable = [5, 3, 2, 1];
+			let r = Math.random() * 11;
 			let sum = 0;
-			wTable.forEach((value, index) => {
+			for (const [index, value] of wTable.entries()) {
 				sum += value;
-				if (r <= sum) r = index;
-			});
+				if (r <= sum) {
+					r = index;
+					break;
+				}
+			}
 
 			switch (r) {
 			case 0:
