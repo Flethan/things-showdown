@@ -1806,6 +1806,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "other",
 		evoCondition: "Infinity",
 	},
+	sodike: {
+		num: -422,
+		name: "Sodike",
+		types: ["Liquid", "Fish"],
+		gender: "M",
+		baseStats: {hp: 80, atk: 90, def: 150, spa: 180, spd: 90, spe: 10},
+		abilities: {0: "Soda Spreader"},
+		heightm: 0.0225,
+		weightkg: 0.01,
+		color: "Red",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

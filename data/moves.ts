@@ -1551,6 +1551,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {basePower: 160},
 		contestType: "Tough",
 	},
+	rootbeerblast: {
+		num: -5610,
+		accuracy: 90,
+		basePower: 130,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Rootbeer Blast",
+		pp: 5,
+		flags: {protect: 1, mirror: 1},
+		priority: 0,
+		secondary: null,
+		target: "normal",
+		type: "Liquid",
+		zMove: {basePower: 160},
+		contestType: "Cute",
+	},
 
 	// Music
 	earworm: {

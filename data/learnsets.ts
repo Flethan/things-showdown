@@ -2247,7 +2247,14 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			poweroff: ["8L55"],
 		}
 	},
-
+	sodike: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			rootbeerblast: ["8L1"],
+		}
+	},
 
 // BASE GAME
 	missingno: {
