@@ -1187,6 +1187,12 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 
 		start: "  Both Pok\u00E9mon will faint in three turns!",
 	},
+	perishjaws: {
+		name: "Perish Jaws",
+		shortDesc: "Biting moves used by this Thing will cause them and the target to perish in 3 turns.",
+
+		start: "  Both Things will faint in three turns!",
+	},
 	pickpocket: {
 		name: "Pickpocket",
 		desc: "If this Pokemon has no item and is hit by a contact move, it steals the attacker's item. This effect applies after all hits from a multi-hit move; Sheer Force prevents it from activating if the move has a secondary effect.",
@@ -1780,6 +1786,11 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Tinted Lens",
 		shortDesc: "This Pokemon's attacks that are not very effective on a target deal double damage.",
 	},
+	toofaraway: {
+		name: "Too Far Away",
+		desc: "When this Thing is targeted by a contact move for the first time since it was sent out, that move will always miss. Contact moves after this may hit. This ability is reset after this Thing returns to the party and is sent back out again.",
+		shortDesc: "The first contact move used on this Thing always misses.",
+	},
 	torrent: {
 		name: "Torrent",
 		desc: "When this Pokemon has 1/3 or less of its maximum HP, rounded down, its attacking stat is multiplied by 1.5 while using a Water-type attack.",
@@ -1837,6 +1848,11 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		},
 
 		start: "  [POKEMON] is radiating a blazing aura!",
+	},
+	ultrasense: {
+		name: "Ultrasense",
+		desc: "This Thing cannot miss an attack, even if the target is banished. However, you are always last in priority, regardless of speed.",
+		shortDesc: "None of your attacks can miss a target, but you always attack after your opponents.",
 	},
 	unaware: {
 		name: "Unaware",
