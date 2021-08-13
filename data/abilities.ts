@@ -1812,7 +1812,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onTryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
 			if (this.checkMoveMakesContact(move, source, target) && !target.volatiles['toofaraway']) {
+				this.add('-ability', pokemon, 'Too Far Away');
 				target.addVolatile('toofaraway');
+				this.add('-start', pokemon, 'Too Far Away');
 				return false;
 			}
 		},
