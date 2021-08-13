@@ -2199,6 +2199,12 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmute: ["8L70"],
 		},
 	},
+	hourlorn: {
+		learnset: {
+			fastforward: ["8L1"],
+			sandsoftime: ["8L1"],
+		}
+	},
 	chronoise: {
 		learnset: {
 			emanation: ["8M"],
@@ -2209,6 +2215,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fastforward: ["8L1"],
 			timeloop: ["8L30"],
 			timecapsule: ["8L35"],
+			sandsoftime: ["8L1"],
 		}
 	},
 	infared: {

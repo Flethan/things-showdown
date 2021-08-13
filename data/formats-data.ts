@@ -509,6 +509,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	hourlorn: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	chronoise: {
 		isNonstandard: "Thing",
 		tier: "Thing",
