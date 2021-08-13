@@ -620,6 +620,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			apexcalibration: ["8L22"],
 			submerge: ["8M"],
 			hit: ["8M"],
+			brilliantflash: ["8L27"],
 		},
 	},
 	grenadire: {
@@ -634,6 +635,10 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			apexcalibration: ["8L22"],
 			submerge: ["8M"],
 			hit: ["8M"],
+			flashmissle: ["8L45"],
+			brilliantflash: ["8L27"],
+			delayedround: ["8L47"],
+			piercinground: ["8L43"],
 		},
 	},
 	toastie: {
