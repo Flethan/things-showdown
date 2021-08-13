@@ -796,9 +796,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 22,
 		eggGroups: ["Amorphous", "Grass"],
 	},
-	whether: {
+	hwether: {
 		num: -356,
-		name: "Whether",
+		name: "Hwether",
 		types: ["Weather", "H"],
 		genderRatio: {M: 0.25, F: 0.75},
 		baseStats: {hp: 50, atk: 60, def: 110, spa: 120, spd: 135, spe: 5},
@@ -1454,9 +1454,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Frogreen",
 		eggGroups: ["Grass"],
 	},
-	honey: {
+	Yenoh: {
 		num: -398,
-		name: "Honey",
+		name: "Yenoh",
 		types: ["Yellow", "Liquid"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 20, def: 30, spa: 30, spd: 20, spe: 10},
