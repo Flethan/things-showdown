@@ -1696,7 +1696,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const additionalBannedAbilities = ['replicator'];
 			let multiplier = 0;
 			for (const foe of pokemon.foes()) {
-				if (foe?.isActive || foe === pokemon || additionalBannedAbilities.includes(foe.ability) || foe.species !== pokemon.species) continue;
+				if (!foe?.isActive || foe === pokemon || additionalBannedAbilities.includes(foe.ability) || foe.species !== pokemon.species) continue;
 				multiplier++;
 			}
 			for (const ally of pokemon.allies()) {
