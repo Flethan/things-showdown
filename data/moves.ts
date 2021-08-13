@@ -1166,6 +1166,65 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Industrial",
 		contestType: "Beautiful",
 	},
+	piercinground: {
+		num: 1514,
+		accuracy: 50,
+		basePower: 90,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Piercing Round",
+		pp: 5,
+		priority: 0,
+		flags: {mirror: 1},
+		secondary: {
+			boosts: {
+				spd: -1,
+			},
+		},
+		target: "normal",
+		type: "Industrial",
+		contestType: "Cool",
+	},
+	delayedround: {
+		num: 1515,
+		accuracy: 65,
+		basePower: 30,
+		category: "Special",
+		name: "Delayed Round",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		ignoreImmunity: false,
+		isFutureMove: true,
+		onTry(source, target) {
+			if (!target.side.addSlotCondition(target, 'delayedmove')) return false;
+			Object.assign(target.side.slotConditions[target.position]['delayedmove'], {
+				duration: 2,
+				move: 'delayedround',
+				source: source,
+				moveData: {
+					id: 'delayedround',
+					name: "Delayed Round",
+					accuracy: 100,
+					basePower: 100,
+					category: "Special",
+					target: "allAdjacentFoes",
+					priority: 0,
+					flags: {},
+					ignoreImmunity: false,
+					effectType: 'Move',
+					isFutureMove: true,
+					type: 'Industrial',
+				},
+			});
+			this.add('-start', source, 'move: Delayed Round');
+			return this.NOT_FAIL;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Industrial",
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {
@@ -2096,7 +2155,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		boosts: {
-			spa: 1,
+			spa: 2,
 		},
 		secondary: null,
 		target: "normal",
@@ -2114,7 +2173,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		boosts: {
-			spa: -1,
+			spa: -2,
 		},
 		secondary: null,
 		target: "normal",

@@ -88,6 +88,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		end: "  The dust cloud has disappeared from [TEAM]!",
 	},
 	// far
+	changechannel: {
+		name: "Change Channel",
+		desc: "The target is forced to switch out and be replaced with a random unfainted ally. Fails if the target is the last unfainted Pokemon in its party. This attack does not go last in priority.",
+		shortDesc: "Forces the target to switch to a random ally.",
+	},
 	// fish
 	fishslap: {
 		name: "Fish Slap",
@@ -227,6 +232,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Accelerate",
 		desc: "Raises the user's Speed by 1. On the next turn, raises the Speed of the Thing in the user's position by 1. If this move is already in effect, it will still raise the user's Speed but will not do anything on the next turn.",
 		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2.",
+	},
+	piercinground: {
+		name: "Piercing Round",
+		desc: "Ignores protecting moves like Whistle and Parry. Lowers target's Special Defence by 1 stage.",
+		shortDesc: "Ignores protect. Lowers target's Special Defence by 1.",
+	},
+	delayedround: {
+		name: "Delayed Round",
+		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
+		shortDesc: "Hits again one turn after being used to all adjacent foes.",
 	},
 	// liquid
 	soppingslap: {
@@ -368,6 +383,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user restores 1/2 of its maximum HP, rounded half up. If Mystical Song is in effect, adds the Harmony to heal Music-type Things by 1/8 of their max HP at the end of each turn.",
 		shortDesc: "Heals user by 50% max HP. Harmony:Heal",
 	},
+	volumeup: {
+		name: "Volume Up",
+		desc: "Raises the target's Special Attack stat by 2 stages",
+		shortDesc: "Raises the target's Special Attack stat by 2",
+	},
+	volumedown: {
+		name: "Volume Down",
+		desc: "Lowers the target's Special Attack stat by 2 stages",
+		shortDesc: "Lowers the target's Special Attack stat by 2",
+	},
 	// night
 	stealthstrike: {
 		name: "Stealth Strike",
@@ -428,6 +453,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: " A mysterious portal opens on the ground around [TEAM]!",
 		end: "  The mysterious portal disappeared from the ground around [TEAM]!",
 		activate: "  [POKEMON] fell into the mysterious portal!",
+	},
+	poweroff: {
+		name: "Power Off",
+		desc: "Banishes the target.",
+		shortDesc: "Banishes the target.",
 	},
 	// science
 	kineticenergy: {
