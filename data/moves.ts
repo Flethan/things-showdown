@@ -457,7 +457,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if (!foe.isActive) {
 						break;
 					}
-					if(this.queue.willMove(foe).originalTarget === pokemon) {
+					if (this.queue.willMove(foe)?.originalTarget === pokemon) {
 						foe.addVolatile('flinch', pokemon);
 					}
 				}
@@ -466,7 +466,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if (!ally.isActive) {
 						return;
 					}
-					if(this.queue.willMove(ally).originalTarget === pokemon) {
+					if (this.queue.willMove(ally)?.originalTarget === pokemon) {
 						ally.addVolatile('flinch', pokemon);
 					}
 				}
@@ -2574,7 +2574,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(target, source) {
 				this.add('-start', target, 'Reprogram');
 			},
-			onEnd(target, source) {
+			onEnd(target) {
 				this.add('-end', target, 'Reprogram');
 				const old_ability = target.ability;
 				target.formeChange(this.effectState.source.species, this.effect, true, '[msg]');
@@ -3821,7 +3821,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			durationCallback(target, source, effect) {
-				if (effect.id === 'legendsoftreasure') {
+				if (effect?.id === 'legendsoftreasure') {
 					return 6;
 				} else if (this.field.isWeather('windy')) {
 					return 4;

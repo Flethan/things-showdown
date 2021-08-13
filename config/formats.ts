@@ -283,6 +283,28 @@ export const Formats: FormatList = [
 		// no restrictions, for serious (other than team preview)
 		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
 	},
+	{
+		name: "[Gen 8] Free-For-All Custom Game",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		searchShow: false,
+		debug: true,
+		battle: {trunc: Math.trunc},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+	},
+	{
+		name: "[Gen 8] Multi Custom Game",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		searchShow: false,
+		debug: true,
+		battle: {trunc: Math.trunc},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+	},
 
 	// Sw/Sh Doubles
 	///////////////////////////////////////////////////////////////////
@@ -463,6 +485,32 @@ export const Formats: FormatList = [
 	},
 	{
 		section: "Things 4-Player",
+		column: 1,
+	},
+	{
+		name: "[Things] Free-For-All Battle",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause'],
+	},
+	{
+		name: "[Things] Multi Battle",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause',
+		],
+	},
+	{
+		section: "Things 4-Player Random",
 		column: 1,
 	},
 	{
