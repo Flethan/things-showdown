@@ -466,6 +466,32 @@ export const Formats: FormatList = [
 		column: 1,
 	},
 	{
+		name: "[Things] Free-For-All Battle",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause'],
+	},
+	{
+		name: "[Things] Multi Battle",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause',
+		],
+	},
+	{
+		section: "Things 4-Player Random",
+		column: 1,
+	},
+	{
 		name: "[Things] Free-For-All Random Battle",
 
 		mod: 'gen8',
