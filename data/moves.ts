@@ -482,6 +482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 50,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Change Channel",
 		pp: 5,
 		priority: 0,
