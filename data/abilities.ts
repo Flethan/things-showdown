@@ -1830,7 +1830,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// eslint-disable-next-line max-len
 			this.effectState.treasures = ['Ceremonial Scarab Hairpin', 'Lunar Soil', 'Space Telescope', 'Sarcopharyn Skeleton', 'Extraterrestrial Globe', 'Historiography', 'Fiber Optic Cable', 'Discarded Singularity', 'Lava Lamp', 'Bone Flute', 'Bottle of Condensed Nebula Gas', 'empty', 'Trans-warp Space Probe', 'All-sports Ball', 'Jeweled Falchion', 'Sealed Vacuum Flask', 'Really, Really Thick Calendar', 'Cloud Seeder', 'Magnetically-locked Yellow Dwarf Star'];
 		},
-		onDamagingHit(damage, target, source) {
+		onAfterMoveSecondary(target, source) {
 			if (target === source || !this.effectState.treasures.length) return;
 			const treasure = this.effectState.treasures.splice(Math.floor(Math.random() * this.effectState.treasures.length), 1)[0];
 			if (treasure === 'empty') {
@@ -1884,7 +1884,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.boost({spe: 12}, source, target, null, true);
 				break;
 			case 'All-sports Ball':
-				target.addVolatile('wager');
+				target.addVolatile('wager', source, this.effect);
 				this.boost({atk: 2}, source, target, null, true);
 				break;
 			case 'Jeweled Falchion':
@@ -1896,7 +1896,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			case 'Really, Really Thick Calendar':
 				break;
 			case 'Cloud Seeder':
-				source.side.addSideCondition('stormcell');
+				source.side.addSideCondition('stormcell', source, this.effect);
 				break;
 			case 'Magnetically-locked Yellow Dwarf Star':
 				source.addVolatile('fireworked');
@@ -1912,7 +1912,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(target) {
 			this.add('-activate', target, 'ability: Cargo from Everywhen');
 		},
-		onDamagingHit(damage, target, source) {
+		onAfterMoveSecondary(target, source) {
 			if (target === source) return;
 
 			// eslint-disable-next-line max-len
