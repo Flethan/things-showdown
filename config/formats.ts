@@ -283,6 +283,28 @@ export const Formats: FormatList = [
 		// no restrictions, for serious (other than team preview)
 		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
 	},
+	{
+		name: "[Gen 8] Free-For-All Custom Game",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		searchShow: false,
+		debug: true,
+		battle: {trunc: Math.trunc},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+	},
+	{
+		name: "[Gen 8] Multi Custom Game",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		searchShow: false,
+		debug: true,
+		battle: {trunc: Math.trunc},
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+	},
 
 	// Sw/Sh Doubles
 	///////////////////////////////////////////////////////////////////
