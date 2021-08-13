@@ -482,6 +482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 50,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Change Channel",
 		pp: 5,
 		priority: 0,
@@ -3820,7 +3821,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			durationCallback(target, source, effect) {
-				if (effect.id === 'legendsoftreasure') {
+				if (effect?.id === 'legendsoftreasure') {
 					return 6;
 				} else if (this.field.isWeather('windy')) {
 					return 4;
