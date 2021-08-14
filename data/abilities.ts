@@ -1518,14 +1518,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	itshoney: {
 		isNonstandard: "Thing",
-		name: "Its\u00A0\u00A0\u00A0Honey",
+		name: "It's Honey",
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
-			if (move.flags['bite'] && !source.status) {
-				this.heal(target.baseMaxhp / 8, source, target);
-			}
 			if (!target.hp) {
-				this.heal(target.baseMaxhp, source, target);
+				this.heal(target.baseMaxhp, source, target, this.effect);
+			} else if (move.flags['bite'] && !source.status) {
+				this.heal(target.baseMaxhp / 8, source, target);
 			}
 		},
 		rating: 1,
