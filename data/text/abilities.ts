@@ -160,7 +160,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		shortDesc: "When not active, this Thing is healed by 1/8 max HP each turn when pressurized.",
 	},
 	itshoney: {
-		name: "Its\u00A0\u00A0\u00A0Honey",
+		name: "It's Honey",
 		desc: "When this Thing is damaged by a bite-based attack, the attacker is healed by 1/8 of this Thing's max HP. When this Thing is knocked out by another Thing, the attacker is healed by 100% of this Thing's max HP.",
 		shortDesc: "Heals attackers 1/8 its max HP when biten, 100% max HP when KOd.",
 	},

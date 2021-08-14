@@ -1456,13 +1456,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Frogreen",
 		eggGroups: ["Grass"],
 	},
-	Yenoh: {
+	yenoh: {
 		num: -398,
 		name: "Yenoh",
 		types: ["Yellow", "Liquid"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 20, def: 30, spa: 30, spd: 20, spe: 10},
-		abilities: {0: "Its\u00A0\u00A0\u00A0Honey"},
+		abilities: {0: "It's Honey"},
 		heightm: 0.1,
 		weightkg: 2,
 		color: "Yellow",

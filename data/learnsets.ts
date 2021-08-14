@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 
 export const Learnsets: {[speciesid: string]: LearnsetData} = {
-	
-// NEW STUFF
+
+	// NEW STUFF
 	hubaby: {
 		learnset: {
 			hullabaloo: ["8L1"],
@@ -1030,7 +1030,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swordbeam: ["8T"],
 			warmup: ["8L1"],
 			hit: ["8M"],
-		}
+		},
 	},
 	hmug: {
 		learnset: {
@@ -1047,7 +1047,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hadalzone: ["8E"],
 			reheat: ["8L28"],
 			hit: ["8M"],
-		}
+		},
 	},
 	moppit: {
 		learnset: {
@@ -1063,7 +1063,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			tidy: ["8L20"],
-		}
+		},
 	},
 	sweepit: {
 		learnset: {
@@ -1075,7 +1075,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8L44"],
 			hit: ["8M"],
 			tidy: ["8L20"],
-		}
+		},
 	},
 	manitsa: {
 		learnset: {
@@ -1097,7 +1097,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			accelerando: ["8L40"],
 			diminuendo: ["8L40"],
 			lento: ["8L40"],
-		}
+		},
 	},
 	undulux: {
 		learnset: {
@@ -2098,7 +2098,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dirtypunch: ["8L28"],
 			scuttle: ["8L12"],
 			ecdyse: ["8L40"],
-			accent: ["8L41"],
 			jamminbasssolo: ["8L50"],
 			crescendo: ["8L41"],
 			accelerando: ["8L41"],
@@ -2129,7 +2128,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dirtypunch: ["8L28"],
 			scuttle: ["8L12"],
 			ecdyse: ["8L40"],
-			accent: ["8L41"],
 			slammindrumsolo: ["8L50"],
 			crescendo: ["8L41"],
 			accelerando: ["8L41"],
@@ -2160,7 +2158,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dirtypunch: ["8L28"],
 			scuttle: ["8L12"],
 			ecdyse: ["8L40"],
-			accent: ["8L41"],
 			whamminkeyboardsolo: ["8L50"],
 			crescendo: ["8L41"],
 			accelerando: ["8L41"],
@@ -2210,7 +2207,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 		learnset: {
 			fastforward: ["8L1"],
 			sandsoftime: ["8L1"],
-		}
+		},
 	},
 	chronoise: {
 		learnset: {
@@ -2223,7 +2220,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timeloop: ["8L30"],
 			timecapsule: ["8L35"],
 			sandsoftime: ["8L1"],
-		}
+		},
 	},
 	infared: {
 		learnset: {
@@ -2247,7 +2244,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L35"],
 			particlebeam: ["8L45"],
 			poweroff: ["8L55"],
-		}
+		},
 	},
 	sodike: {
 		learnset: {
@@ -2255,10 +2252,10 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			deposition: ["8M"],
 			hit: ["8M"],
 			rootbeerblast: ["8L1"],
-		}
+		},
 	},
 
-// BASE GAME
+	// BASE GAME
 	missingno: {
 		learnset: {
 			blizzard: ["3L1"],
