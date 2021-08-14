@@ -454,6 +454,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Connectphore",
 		eggGroups: ["Monster"],
+		cosmeticFormes: ["Omnectivore-Red", "Omnectivore-Purple"],
+		formeOrder: ["Omnectivore", "Omnectivore-Red", "Omnectivore-Purple"],
 	},
 	lemon: {
 		num: -331,
