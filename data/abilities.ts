@@ -971,7 +971,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -1812,9 +1812,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onTryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
 			if (this.checkMoveMakesContact(move, source, target) && !target.volatiles['toofaraway']) {
-				this.add('-ability', pokemon, 'Too Far Away');
+				this.add('-ability', target, 'Too Far Away');
 				target.addVolatile('toofaraway');
-				this.add('-start', pokemon, 'Too Far Away');
+				this.add('-start', target, 'Too Far Away');
 				return false;
 			}
 		},
@@ -1947,7 +1947,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.setWeather(this.sample(environmentalfactors));
 				break;
 			case 2:
-				const sideconditions = ['duststorm', 'hotcoals', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap'];
+				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap'];
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:

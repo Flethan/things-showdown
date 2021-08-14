@@ -229,7 +229,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = false;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.removeSideCondition(targetCondition)) {
@@ -1054,7 +1054,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -3524,6 +3524,34 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "foeSide",
+		type: "Temperature",
+		zMove: {boost: {def: 1}},
+		contestType: "Tough",
+	},
+	permafrost: {
+		num: 1446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Permafrost",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'permafrost',
+		condition: {
+			// this is a side condition
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Permafrost');
+			},
+			onSwitchIn(pokemon) {
+				if (pokemon.hasItem('yellowsafetyvest')) {
+					return;
+				} else { pokemon.trySetStatus('fluctuant', this.effectState.source); }
+			},
+		},
+		secondary: null,
+		target: "allySide",
 		type: "Temperature",
 		zMove: {boost: {def: 1}},
 		contestType: "Tough",

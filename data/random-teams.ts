@@ -368,7 +368,7 @@ export class RandomTeams {
 				);
 				pool = [...new Set(pool.concat(basePool))];
 			}
-			
+
 			const moves = this.multipleSamplesNoReplace(pool, 4);
 
 			// Random EVs
@@ -398,7 +398,7 @@ export class RandomTeams {
 			// Level balance--calculate directly from stats rather than using some silly lookup table
 			const mbstmin = 1307; // Sunkern has the lowest modified base stat total, and that total is 807
 
-			let stats = species.baseStats;
+			const stats = species.baseStats;
 
 			// Modified base stat total assumes 31 IVs, 85 EVs in every stat
 			let mbst = (stats["hp"] * 2 + 31 + 21 + 100) + 10;
@@ -461,7 +461,7 @@ export class RandomTeams {
 		const pool: number[] = [];
 		for (const id in this.dex.data.FormatsData) {
 			if (
-				!this.dex.data.Pokedex[id] || 
+				!this.dex.data.Pokedex[id] ||
 				this.dex.data.FormatsData[id].isNonstandard !== 'Thing'
 			) continue;
 			if (requiredType && !this.dex.data.Pokedex[id].types.includes(requiredType)) continue;
@@ -472,7 +472,7 @@ export class RandomTeams {
 			pool.push(num);
 		}
 
-		let teamsize = Math.min(n, pool.length);
+		const teamsize = Math.min(n, pool.length);
 		const hasDexNumber: {[k: string]: number} = {};
 		for (let i = 0; i < teamsize; i++) {
 			const num = this.sampleNoReplace(pool);
@@ -481,7 +481,7 @@ export class RandomTeams {
 
 		const formes: string[][] = [];
 		for (const id in this.dex.data.Pokedex) {
-			if (!(this.dex.data.Pokedex[id].num in hasDexNumber)) continue;
+			if (!(this.dex.data.Pokedex[id].num in hasDexNumber) || (requiredType && !this.dex.data.Pokedex[id].types.includes(requiredType))) continue;
 			const species = this.dex.species.get(id);
 			if (!formes[hasDexNumber[species.num]]) formes[hasDexNumber[species.num]] = [];
 			formes[hasDexNumber[species.num]].push(species.name);
@@ -538,12 +538,12 @@ export class RandomTeams {
 					do {
 						moveid = this.sampleNoReplace(movePool);
 						move = this.dex.moves.get(moveid);
-					} while (move.gen <= this.gen && move.isNonstandard === 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'))
+					} while (move.gen <= this.gen && move.isNonstandard === 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
 				} else {
 					do {
 						moveid = this.sampleNoReplace(movePool);
 						move = this.dex.moves.get(moveid);
-					} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'))
+					} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
 				}
 				m.push(moveid);
 			} while (m.length < 4);

@@ -664,6 +664,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		end: "  The hot coals cooled down around [TEAM]!",
 		activate: "  [POKEMON] minds their step around the coals!",
 	},
+	permafrost: {
+		name: "Permafrost",
+		desc: "Sets up a Side Condition on the allied side of the field, making fluctuant each opposing Thing that switches in. Fails if the effect is already active on the opposing side.",
+		shortDesc: "Makes allies fluctuant on switch-in.",
+
+		start: " A permafrost sets in around [TEAM]!",
+		end: "  The permafrost thawed around [TEAM]!",
+		activate: "  [POKEMON] trudges through the permafrost!",
+	},
 	bask: {
 		name: "Bask",
 		desc: "The user restores 1/2 of its maximum HP. If the environment is Cold, the user's Defense is raised by 1; if the environment is Hot, the user's Special Defence is raised by 1.",
