@@ -241,7 +241,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	whether: {
+	hwether: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -429,7 +429,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	honey: {
+	yenoh: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},

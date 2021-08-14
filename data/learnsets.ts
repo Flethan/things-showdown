@@ -179,6 +179,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8E"],
 			nuisancepest: ["8L1"],
 			hit: ["8M"],
+			permafrost: ["8L20"],
+			transmute: ["8L50"],
 		},
 	},
 	gryllague: {
@@ -201,6 +203,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8E"],
 			nuisancepest: ["8L1"],
 			hit: ["8M"],
+			permafrost: ["8L20"],
+			transmute: ["8L50"],
 		},
 	},
 	schisteka: {
@@ -223,6 +227,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8E"],
 			nuisancepest: ["8L1"],
 			hit: ["8M"],
+			permafrost: ["8L20"],
+			transmute: ["8L50"],
 		},
 	},
 	pescadestrian: {
@@ -679,6 +685,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowsoak: ["8L1"],
 			yellowshift: ["8L1"],
 			yellowslap: ["8L1"],
+			permafrost: ["8L1"],
 		},
 	},
 	yellowater: {
@@ -698,6 +705,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowslap: ["8L1"],
 			luminesce: ["8L1"],
 			brilliantflash: ["8L1"],
+			permafrost: ["8L1"],
 		},
 	},
 	protosol: {
@@ -961,7 +969,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 		},
 	},
-	whether: {
+	hwether: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -974,6 +982,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hostile: ["8L1"],
 			nightmode: ["8L1"],
 			hit: ["8M"],
+			permafrost: ["8L1"],
 		},
 	},
 	nighreto: {
@@ -1812,7 +1821,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 		},
 	},
-	honey: {
+	yenoh: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1975,6 +1984,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8L22"],
 			depthvanish: ["8L3"],
 			arthrobite: ["8L9"],
+			permafrost: ["8L1"],
 		},
 	},
 	glaciallid: {
@@ -1996,6 +2006,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8L22"],
 			depthvanish: ["8L3"],
 			arthrobite: ["8L9"],
+			permafrost: ["8L1"],
 		},
 	},
 	pillowhead: {
@@ -2252,6 +2263,41 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			deposition: ["8M"],
 			hit: ["8M"],
 			rootbeerblast: ["8L1"],
+		},
+	},
+	alabroad: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			vroom: ["8L70"],
+			beemovee: ["8L100"],
+			primordialsmoke: ["8L80"],
+			closein: ["8L1"],
+			spatialexpansion: ["8L29"],
+			depthvanish: ["8L60"],
+			chartreusebeam: ["8L50"],
+			harbinger: ["8L30"],
+			hairycrash: ["8L75"],
+			toxicsmog: ["8L35"],
+			accelerate: ["8L1"],
+			apexcalibration: ["8L55"],
+			spray: ["8L5"],
+			harmoniouschord: ["8L40"],
+			hypnoticmelody: ["8L40"],
+			shootingstar: ["8L95"],
+			noescape: ["8L25"],
+			kineticenergy: ["8L85"],
+			horizontaltranslation: ["8L10"],
+			whistle: ["8L65"],
+			swordbeam: ["8L88"],
+			hotcoals: ["8L45"],
+			sandsoftime: ["8L7"],
+			timeloop: ["8L39"],
+			timecapsule: ["8L1"],
+			hurricanewinds: ["8L68"],
+			luminesce: ["8L25"],
+			brilliantflash: ["8L31"],
 		},
 	},
 
