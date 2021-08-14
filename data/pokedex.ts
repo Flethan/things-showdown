@@ -1727,7 +1727,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	},
 	hourlorn: {
 		num: -418,
-		name: "Hourpass",
+		name: "Hourlorn",
 		types: ["Time", "H"],
 		gender: "N",
 		baseStats: {hp: 60, atk: 10, def: 60, spa: 10, spd: 60, spe: 10},
