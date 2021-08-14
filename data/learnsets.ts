@@ -795,6 +795,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			voidtrap: ["8L49"],
 			noescape: ["8L55"],
 			dirtypunch: ["8L10"],
+			spatialexpansion: ["8L30"],
 		},
 	},
 	harry: {
@@ -2059,6 +2060,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			apexcalibration: ["8L35"],
 			vroom: ["8L48"],
 			hairball: ["8E"],
+			spatialexpansion: ["8L39"],
 		},
 	},
 	jazzecko: {
