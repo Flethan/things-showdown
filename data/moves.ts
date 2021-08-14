@@ -1551,6 +1551,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {basePower: 160},
 		contestType: "Tough",
 	},
+	rootbeerblast: {
+		num: -5610,
+		accuracy: 90,
+		basePower: 130,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Rootbeer Blast",
+		pp: 5,
+		flags: {protect: 1, mirror: 1},
+		priority: 0,
+		secondary: null,
+		target: "normal",
+		type: "Liquid",
+		zMove: {basePower: 160},
+		contestType: "Cute",
+	},
 
 	// Music
 	earworm: {
@@ -3587,6 +3603,35 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Time",
 		contestType: "Tough",
+	},
+	sandsoftime: {
+		num: 416,
+		accuracy: true,
+		basePower: 10,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Sands of Time",
+		pp: 15,
+		priority: 0,
+		flags: {mirror: 1},
+		slotCondition: 'sandsoftime',
+		condition: {
+			duration: 5,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Sands of Time');
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Sands of Time', '[silent]');
+			},
+			onResidual(pokemon) {
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(this.dex.getActiveMove('timephysical')), -6, 6);
+				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 16);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Time",
+		contestType: "Smart",
 	},
 	replay: {
 		num: 1689,

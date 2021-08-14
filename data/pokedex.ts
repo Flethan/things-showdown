@@ -796,9 +796,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 22,
 		eggGroups: ["Amorphous", "Grass"],
 	},
-	whether: {
+	hwether: {
 		num: -356,
-		name: "Whether",
+		name: "Hwether",
 		types: ["Weather", "H"],
 		genderRatio: {M: 0.25, F: 0.75},
 		baseStats: {hp: 50, atk: 60, def: 110, spa: 120, spd: 135, spe: 5},
@@ -1454,9 +1454,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Frogreen",
 		eggGroups: ["Grass"],
 	},
-	honey: {
+	Yenoh: {
 		num: -398,
-		name: "Honey",
+		name: "Yenoh",
 		types: ["Yellow", "Liquid"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 20, def: 30, spa: 30, spd: 20, spe: 10},
@@ -1723,8 +1723,21 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		eggGroups: ["Monster"],
 	},
-	chronoise: {
+	hourlorn: {
 		num: -418,
+		name: "Hourpass",
+		types: ["Time", "H"],
+		gender: "N",
+		baseStats: {hp: 60, atk: 10, def: 60, spa: 10, spd: 60, spe: 10},
+		abilities: {0: "Communal"},
+		heightm: 0.2,
+		weightkg: 3.0,
+		color: "Blue",
+		evos: ["Chronoise"],
+		eggGroups: ["Undiscovered"],
+	},
+	chronoise: {
+		num: -419,
 		name: "Chronoise",
 		types: ["Time"],
 		gender: "N",
@@ -1733,12 +1746,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 2.3,
 		weightkg: 350,
 		color: "Blue",
+		prevo: "Hourlorn",
 		eggGroups: ["Undiscovered"],
 		otherFormes: ["Chronoise-Night"],
 		formeOrder: ["Chronoise", "Chronoise-Night"],
 	},
 	chronoisenight: {
-		num: -418,
+		num: -419,
 		name: "Chronoise-Night",
 		baseSpecies: "Chronoise",
 		forme: "Night",
@@ -1753,7 +1767,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		battleOnly: "Chronoise",
 	},
 	infared: {
-		num: -419,
+		num: -420,
 		name: "Infared",
 		types: ["Industrial", "Far"],
 		gender: "N",
@@ -1765,7 +1779,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 	},
 	alabroad: {
-		num: -420,
+		num: -421,
 		name: "Alabroad",
 		types: ["Far", "Time"],
 		gender: "N",
@@ -1777,7 +1791,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 	},
 	babellinks: {
-		num: -421,
+		num: -422,
 		name: "Babellinks",
 		forme: "Infinity",
 		types: ["Far", "Time"],
@@ -1791,6 +1805,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		evoType: "other",
 		evoCondition: "Infinity",
+	},
+	sodike: {
+		num: -422,
+		name: "Sodike",
+		types: ["Liquid", "Fish"],
+		gender: "M",
+		baseStats: {hp: 80, atk: 90, def: 150, spa: 180, spd: 90, spe: 10},
+		abilities: {0: "Soda Spreader"},
+		heightm: 0.0225,
+		weightkg: 0.01,
+		color: "Red",
+		eggGroups: ["Undiscovered"],
 	},
 
 	// BASE GAME

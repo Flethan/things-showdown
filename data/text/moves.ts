@@ -308,6 +308,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to make contact with the user lose 1/8 of their maximum HP, modified by Liquid type-effectiveness, rounded down. Fish-type Things have their Attack lowered by 1 stage instead. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
 		shortDesc: "Protects from damaging attacks. Contact: Damage.",
 	},
+	rootbeerblast: {
+		name: "Rootbeer Blast",
+		shortDesc: "No additional effect.",
+	},
 	// music
 	accent: {
 		name: "Accent",
@@ -396,7 +400,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	// night
 	stealthstrike: {
 		name: "Stealth Strike",
-		desc: "Has a 30% chance to make the target flinch.",
+		desc: "Bites the targeted Thing. Has a 30% chance to make the target flinch.",
 		shortDesc: "30% chance to make the target flinch.",
 	},
 	shootingstar: {

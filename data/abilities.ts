@@ -1964,6 +1964,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 529,
 	},
+	sodaspreader: {
+		isNonstandard: "Thing",
+		name: "Soda Spreader",
+		rating: 4,
+		num: 1191,
+	},
 
 	// BASE GAME
 	noability: {
