@@ -1522,7 +1522,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (!target.hp) {
-				this.heal(target.baseMaxhp, source, target, this);
+				this.heal(target.baseMaxhp, source, target, this.effect);
 			} else if (move.flags['bite'] && !source.status) {
 				this.heal(target.baseMaxhp / 8, source, target);
 			}
