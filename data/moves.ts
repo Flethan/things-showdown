@@ -3707,9 +3707,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-end', pokemon, 'Sands of Time', '[silent]');
 			},
 			onResidual(pokemon) {
-				const typeMod = this.clampIntRange(pokemon.runEffectiveness(this.dex.getActiveMove('timephysical')), -6, 6);
+				const timeHazard = this.dex.getActiveMove('Stealth Rock');
+				timeHazard.type = 'Time';
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(timeHazard), -6, 6);
 				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 16);
-			}
+			},
 		},
 		secondary: null,
 		target: "normal",

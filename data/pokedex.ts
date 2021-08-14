@@ -1719,7 +1719,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 112, atk: 40, def: 77, spa: 45, spd: 77, spe: 48},
-		abilities: {0: "Shining Attitude", H: "Its\u00A0\u00A0\u00A0Honey"},
+		abilities: {0: "Shining Attitude", H: "It's Honey"},
 		heightm: 0.2,
 		weightkg: 15,
 		color: "Yellow",
