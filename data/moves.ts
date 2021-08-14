@@ -493,6 +493,53 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Far",
 		zMove: {boost: {spe: 2}},
 	},
+	spatialexpansion: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Spatial Expansion",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'spatialexpansion',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onAnyRedirectTarget(target, source, source2, move) {
+				// redirects all spread moves
+				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
+					return;
+				}
+				move.target = 'randomNormal';
+				return;
+			},
+			
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Spatial Expansion', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Spatial Expansion');
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Spatial Expansion');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Far",
+		zMove: {boost: {spd: 1}},
+		contestType: "Clever",
+	},
 
 	// Fish
 	brilliantfish: {
