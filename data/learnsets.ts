@@ -1688,6 +1688,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8E"],
 			hit: ["8M"],
 			fossilize: ["8L15"],
+			permafrost: ["8L1"],
 		},
 	},
 	osteoraptor: {
@@ -1709,6 +1710,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			crashlanding: ["8L55"],
 			hit: ["8M"],
 			fossilize: ["8L15"],
+			permafrost: ["8L1"],
 		},
 	},
 	achrososaur: {
@@ -1736,6 +1738,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			landslide: ["8L63"],
 			hit: ["8M"],
 			fossilize: ["8L15"],
+			permafrost: ["8L1"],
 		},
 	},
 	neunluft: {
