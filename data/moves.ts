@@ -512,13 +512,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				return 5;
 			},
-			onAnyRedirectTarget(target, source, source2, move) {
+
+			onModifyMove(move) {
 				// redirects all spread moves
 				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
 					return;
 				}
 				move.target = 'randomNormal';
-				return;
+			},
+
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type !== 'Far' && !defender.isSemiInvulnerable()) {
+					this.debug('spatial expansion drop');
+					return this.chainModify(0.8);
+				}
 			},
 			
 			onFieldStart(battle, source, effect) {
