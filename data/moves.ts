@@ -450,7 +450,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		self: {
 			onHit(pokemon) {
 				pokemon.setType(pokemon.getTypes(true).map(type => type === "Far" ? "???" : type));
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
+				if (pokemon.types[1]) {
+					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
+				} else {
+					this.add('-start', pokemon, 'typechange', pokemon.types[0], '[from] move: Close In');
+				}
 
 				for (const foe of pokemon.foes()) {
 					if (!foe || foe === pokemon) continue;
@@ -4014,9 +4018,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			this.effectState.passedBoosts = boosts;
 		},
-		onAfterMoveSecondary(target) {
-			this.add('-activate', '[from] move: Wind Dispersal');
-			this.boost(this.effectState.passedBoosts, target);
+		slotCondition: 'winddispersal',
+		condition: {
+			duration: 1,
+			onSwap(target) {
+				if (!target.fainted && this.effectState.passedBoosts) {
+					this.add('-activate', '[from] move: Wind Dispersal');
+					this.boost(this.effectState.passedBoosts, target);
+				}
+			},
 		},
 		target: "normal",
 		type: "Weather",
