@@ -4017,19 +4017,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 			this.effectState.passedBoosts = boosts;
-			this.hint(this.effectState.passedBoosts);
+			this.hint(target.name);
 		},
 		onHit(target) {
-			this.hint(target);
+			this.hint(target.name);
 		},
 		onAfterMoveSecondary(target) {
-			this.hint(target);
+			this.hint(target.name);
 		},
 		slotCondition: 'winddispersal',
 		condition: {
 			duration: 1,
 			onStart(target) {
-				this.hint(target);
+				this.hint(target.name);
 			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.passedBoosts) {
