@@ -2413,10 +2413,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whipcrack: ["8L35"],
 			bask: ["8L15"],
 			weatherfront: ["8M"],
-			supercell: ["8L45"],
+			stormcell: ["8L45"],
 			hurricanewinds: ["8L60"],
 			autumnaloffering: ["8L24"],
-
 		},
 	},
 	treefurtheraway: {
@@ -2432,7 +2431,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whipcrack: ["8L35"],
 			bask: ["8L15"],
 			weatherfront: ["8M"],
-			supercell: ["8L45"],
+			stormcell: ["8L45"],
 			hurricanewinds: ["8L60"],
 			autumnaloffering: ["8L24"],
 			closein: ["8L1"],
