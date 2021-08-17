@@ -2220,7 +2220,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 	hourlorn: {
 		learnset: {
 			fastforward: ["8L1"],
-			//sandsoftime: ["8L1"],
+			// sandsoftime: ["8L1"],
 		},
 	},
 	chronoise: {
@@ -2233,7 +2233,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fastforward: ["8L1"],
 			timeloop: ["8L30"],
 			timecapsule: ["8L35"],
-			//sandsoftime: ["8L1"],
+			// sandsoftime: ["8L1"],
 		},
 	},
 	infared: {
@@ -2295,7 +2295,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whistle: ["8L65"],
 			swordbeam: ["8L88"],
 			hotcoals: ["8L45"],
-			//sandsoftime: ["8L7"],
+			// sandsoftime: ["8L7"],
 			timeloop: ["8L39"],
 			timecapsule: ["8L1"],
 			hurricanewinds: ["8L68"],
@@ -2438,6 +2438,27 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			closein: ["8L1"],
 			noescape: ["8L70"],
 			particlebeam: ["8L80"],
+		},
+	},
+	mistimink: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			spurt: ["8L1"],
+			spill: ["8L1"],
+			spray: ["8L1"],
+			alkalinesurge: ["8L1"],
+			cascade: ["8L1"],
+			wetfloor: ["8L1"],
+			refreshingcup: ["8L1"],
+			noescape: ["8L1"],
+			voidscream: ["8L1"],
+			banish: ["8L1"],
+			voidtrap: ["8L1"],
+			greenbite: ["8L1"],
+			hit: ["8L1"],
+			whipcrack: ["8L1"],
+			coagulate: ["8L1"],
 		},
 	},
 	triathlide: {
