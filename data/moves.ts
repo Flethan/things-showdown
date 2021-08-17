@@ -3698,7 +3698,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {mirror: 1},
-		slotCondition: 'sandsoftime',
+		volatileStatus: 'sandsoftime',
 		condition: {
 			duration: 5,
 			onStart(pokemon) {
@@ -3708,6 +3708,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-end', pokemon, 'Sands of Time', '[silent]');
 			},
 			onResidual(pokemon) {
+				let announced = false;
 				const timeHazard = this.dex.getActiveMove('Stealth Rock');
 				timeHazard.type = 'Time';
 				const typeMod = this.clampIntRange(pokemon.runEffectiveness(timeHazard), -6, 6);
