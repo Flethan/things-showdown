@@ -449,7 +449,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				pokemon.setType(pokemon.getTypes(true).filter(type => type === "Far";);
+				pokemon.setType(pokemon.getTypes(true).filter(type => type === "Far"));
 				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
 
 				for (const foe of pokemon.foes()) {
@@ -4147,7 +4147,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			for (const target of side.active) {
 				for (const moveSlot of target.moveSlots) {
 					if (moveSlot.move === 'Blessed Rain' || moveSlot.maxpp === moveSlot.pp) continue;
-					success = true
+					success = true;
 					if (moveSlot.maxpp - moveSlot.pp > 5) {
 						moveSlot.pp += 5;
 					} else {
