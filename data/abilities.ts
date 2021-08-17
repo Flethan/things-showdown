@@ -1046,6 +1046,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
 			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]');
 		},
+		isPermanent: true,
 		name: "Superconductor",
 		rating: 2,
 		num: 59,
@@ -2002,7 +2003,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (type && type === 'Liquid') {
 					forme = 'Mistimink-Optimist';
 				} else if (type && type === 'No') {
-					forme = 'Mistimink-Optimist';
+					forme = 'Mistimink-Pessimist';
 				}
 				break;
 			case 'mistiminkpessimist':
@@ -2018,21 +2019,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			if (source.isActive && forme) source.formeChange(forme, this.effect, false, '[msg]');
 		},
+		isPermanent: true,
 		name: "Half-Full",
 		rating: 2,
 		num: 59,
 	},
 	changeevent: {
-		onModifyMovePriority: 1,
-		onModifyMove(move, attacker, defender) {
+		onPrepareHit(attacker, target, move) {
 			if (attacker.species.baseSpecies !== 'Triathlide' || attacker.transformed) return;
-			let targetForme = 'Triathlide';
-			if (move.category === 'Status') {
-				targetForme = 'Triathlide-Cycle';
-			} else if (move.category === 'Special') {
-				targetForme = 'Triathlide-Swim'
+			let forme = null;
+			switch (move.category) {
+			case 'Status':
+				forme = 'Triathlide-Cycle';
+				break;
+			case 'Special':
+				forme = 'Triathlide-Swim';
+				break;
+			case 'Physical':
+				forme = 'Triathlide';
+				break;
 			}
-			if (attacker.species.name !== targetForme) attacker.formeChange(targetForme);
+			if (attacker.species.name !== forme) attacker.formeChange(forme, this.effect, false, '[msg]');
 		},
 		isPermanent: true,
 		name: "Change Event",
