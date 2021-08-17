@@ -1969,6 +1969,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 1191,
 	},
+	photosynthetic: {
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Yellow') {
+				if (!this.heal(target.baseMaxhp / 4)) {
+					this.add('-immune', target, '[from] ability: Photosynthetic');
+				}
+				return null;
+			}
+		},
+		isBreakable: true,
+		name: "Photosynthetic",
+		rating: 3.5,
+		num: 10,
+	},
+	furtheraway: {
+		onStart(source) {
+			this.field.setTerrain('spatialexpansion');
+		},
+		name: "Further Away",
+		rating: 3.5,
+		num: 228,
+	},
 
 	// BASE GAME
 	noability: {
