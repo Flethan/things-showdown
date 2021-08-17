@@ -150,6 +150,11 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Greetings",
 		shortDesc: "On switch-in, this Thing randomly uses one of its one turn attacks at 0.5x damage.",
 	},
+	halffull: {
+		name: "Half-Full",
+		shortDesc: "Using Liquid-type or No-type moves changes this Thing's forme.",
+		desc: "This Thing has access to three formes: Pessimiest, Half-Full, and Optimist. Using a Liquid-type move will change this Thing's forme one closer to Optimist before the move's execution. Using a No-type move will change this Thing's forme one closer to Pessimist before the move's execution.",
+	},
 	hazardous: {
 		name: "Hazardous",
 		shortDesc: "This Thing's Liquid-type attacks ignore Liquid-type immunities.",

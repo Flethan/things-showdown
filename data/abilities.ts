@@ -1991,6 +1991,37 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 228,
 	},
+	halffull: {
+		isNonstandard: "Thing",
+		onPrepareHit(source, target, move) {
+			if (source.baseSpecies.baseSpecies !== 'Mistimink' || source.transformed) return;
+			let forme = null;
+			const type = move.type;
+			switch (source.species.id) {
+			case 'mistimink':
+				if (type && type === 'Liquid') {
+					forme = 'Mistimink-Optimist';
+				} else if (type && type === 'No') {
+					forme = 'Mistimink-Optimist';
+				}
+				break;
+			case 'mistiminkpessimist':
+				if (type && type === 'Liquid') {
+					forme = 'Mistimink';
+				}
+				break;
+			case 'mistiminkoptimist':
+				if (type && type === 'No') {
+					forme = 'Mistimink';
+				}
+				break;
+			}
+			if (source.isActive && forme) source.formeChange(forme, this.effect, false, '[msg]');
+		},
+		name: "Half-Full",
+		rating: 2,
+		num: 59,
+	},
 
 	// BASE GAME
 	noability: {
