@@ -4017,10 +4017,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 			this.effectState.passedBoosts = boosts;
+			this.hint(this.effectState.passedBoosts);
+		},
+		onHit(target) {
+			this.hint(target);
+		},
+		onAfterMoveSecondary(target) {
+			this.hint(target);
 		},
 		slotCondition: 'winddispersal',
 		condition: {
 			duration: 1,
+			onStart(target) {
+				this.hint(target);
+			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.passedBoosts) {
 					this.add('-activate', '[from] move: Wind Dispersal');
