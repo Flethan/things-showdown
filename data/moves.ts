@@ -4059,6 +4059,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onUseMoveMessage(pokemon, target, move) {
+			this.hint(move.magnitude);
 			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
 		},
 		secondary: null,
