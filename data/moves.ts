@@ -4024,7 +4024,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.success) {
-					this.add('-activate', '[from] move: Wind Dispersal');
+					this.add('-activate', target, 'move: Wind Dispersal',);
 					this.boost(this.effectState.passedBoosts, target);
 				}
 			},
@@ -4147,15 +4147,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {snatch: 1},
 		onHitSide(side) {
+			let success = false;
 			for (const target of side.active) {
 				for (const moveSlot of target.moveSlots) {
-					if (moveSlot.move === 'Blessed Rain') continue;
+					if (moveSlot.move === 'Blessed Rain' || moveSlot.maxpp === moveSlot.pp) continue;
+					success = true
 					if (moveSlot.maxpp - moveSlot.pp > 5) {
 						moveSlot.pp += 5;
 					} else {
 						moveSlot.pp = moveSlot.maxpp;
 					}
 				}
+			}
+			if (success) {
+				this.add('-activate', side, 'move: Blessed Rain',);
+			} else {
+				return false;
 			}
 		},
 		secondary: null,
