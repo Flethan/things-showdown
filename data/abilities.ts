@@ -1991,6 +1991,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 228,
 	},
+	changeevent: {
+		onModifyMovePriority: 1,
+		onModifyMove(move, attacker, defender) {
+			if (attacker.species.baseSpecies !== 'Triathlide' || attacker.transformed) return;
+			let targetForme = 'Triathlide';
+			if (move.category === 'Status') {
+				targetForme = 'Triathlide-Cycle';
+			} else if (move.category === 'Special') {
+				targetForme = 'Triathlide-Swim'
+			}
+			if (attacker.species.name !== targetForme) attacker.formeChange(targetForme);
+		},
+		isPermanent: true,
+		name: "Change Event",
+		rating: 4,
+		num: 176,
+	},
 
 	// BASE GAME
 	noability: {
