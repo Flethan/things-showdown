@@ -1722,15 +1722,13 @@ export class BattleActions {
 		if (typeMod > 0) {
 			if (!suppressMessages) this.battle.add('-supereffective', target);
 
-			for (let i = 0; i < typeMod; i++) {
-				baseDamage *= 2;
-			}
+			baseDamage = tr(baseDamage * ((2 + typeMod) / 2));
 		}
 		if (typeMod < 0) {
 			if (!suppressMessages) this.battle.add('-resisted', target);
 
 			for (let i = 0; i > typeMod; i--) {
-				baseDamage = tr(baseDamage / 2);
+				baseDamage = tr(baseDamage * (2 / (2 + typeMod)));
 			}
 		}
 

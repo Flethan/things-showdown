@@ -2028,7 +2028,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	changeevent: {
 		onModifyMovePriority: 1,
 		onModifyMove(move, source) {
-			if (source.species.baseSpecies !== 'Triathlide' || source.transformed) return;
+			if (source.baseSpecies.baseSpecies !== 'Triathlide' || source.transformed) return;
 			let forme = null;
 			switch (move.category) {
 			case 'Status':
