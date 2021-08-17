@@ -4007,29 +4007,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: -5,
 		flags: {protect: 1, mirror: 1},
 		forceSwitch: true,
-		onTryHit(source, target) {
-			const boosts: SparseBoostsTable = {};
-			let statName: BoostID;
-			for (statName in target.boosts) {
-				const stage = target.boosts[statName];
-				if (stage !== 0) {
-					boosts[statName] = stage;
-				}
-			}
-			this.effectState.passedBoosts = boosts;
-			this.hint(target.name);
-		},
-		onHit(target) {
-			this.hint(target.name);
-		},
-		onAfterMoveSecondary(target) {
-			this.hint(target.name);
-		},
 		slotCondition: 'winddispersal',
 		condition: {
 			duration: 1,
 			onStart(target) {
-				this.hint(target.name);
+				const boosts: SparseBoostsTable = {};
+				let statName: BoostID;
+				for (statName in target.boosts) {
+					const stage = target.boosts[statName];
+					if (stage !== 0) {
+						boosts[statName] = stage;
+					}
+				}
+				this.effectState.passedBoosts = boosts;
 			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.passedBoosts) {
