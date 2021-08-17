@@ -512,7 +512,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				return 5;
 			},
-
 			onModifyMove(move) {
 				// redirects all spread moves
 				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
@@ -520,7 +519,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				move.target = 'randomNormal';
 			},
-
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
 				if (move.type !== 'Far' && !defender.isSemiInvulnerable()) {
@@ -528,7 +526,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return this.chainModify(0.8);
 				}
 			},
-			
 			onFieldStart(battle, source, effect) {
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Spatial Expansion', '[from] ability: ' + effect, '[of] ' + source);
@@ -3996,6 +3993,89 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		contestType: "Cool",
 	},
+	winddispersal: {
+		num: 525,
+		accuracy: 90,
+		basePower: 40,
+		category: "Special",
+		name: "Wind Dispersal",
+		pp: 10,
+		priority: -5,
+		flags: {protect: 1, mirror: 1},
+		forceSwitch: true,
+		onHit(target) {
+			const boosts: SparseBoostsTable = {};
+			let statName: BoostID;
+			for (statName in target.boosts) {
+				const stage = target.boosts[statName];
+				if (stage !== 0) {
+					boosts[statName] = stage;
+				}
+			}
+			this.effectState.passedBoosts = boosts;
+		},
+		onAfterMoveSecondary(target) {
+			this.add('-activate', '[from] move: Wind Dispersal');
+			this.boost(this.effectState.passedBoosts, target);
+		},
+		target: "normal",
+		type: "Weather",
+		contestType: "Clever",
+	},
+	hurricanewinds: {
+		num: 1222,
+		accuracy: 100,
+		basePower: 0,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Hurricane Winds",
+		pp: 30,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onModifyMove(move, pokemon) {
+			const i = this.random(100);
+			if (i < 20) {
+				move.magnitude = 1;
+				move.basePower = 40;
+			} else if (i < 50) {
+				move.magnitude = 2;
+				move.basePower = 70;
+			} else if (i < 75) {
+				move.magnitude = 3;
+				move.basePower = 90;
+			} else if (i < 95) {
+				move.magnitude = 4;
+				move.basePower = 110;
+			} else {
+				move.magnitude = 5;
+				move.basePower = 150;
+			}
+		},
+		onUseMoveMessage(pokemon, target, move) {
+			this.add('-activate', pokemon, 'move: Category', move.magnitude);
+		},
+		secondary: null,
+		target: "allAdjacent",
+		type: "Weather",
+		zMove: {basePower: 140},
+		maxMove: {basePower: 140},
+		contestType: "Clever",
+	},
+	bluejet: {
+		num: 1222,
+		accuracy: 100,
+		basePower: 140,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Blue Jet",
+		pp: 1,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, pulse: 1},
+		secondary: null,
+		target: "any",
+		type: "Weather",
+		contestType: "Cool",
+	},
 	stormcell: {
 		num: 694,
 		accuracy: true,
@@ -4045,6 +4125,34 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'redirect'},
 		contestType: "Cool",
 	},
+	blessedrain: {
+		num: 500,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Blessed Rain",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1},
+		onHitSide(side) {
+			for (const target of side.active) {
+				for (const moveSlot of target.moveSlots) {
+					if (moveSlot.move === 'Blessed Rain') continue;
+					if (moveSlot.maxpp - moveSlot.pp > 5) {
+						moveSlot.pp += 5;
+					} else {
+						moveSlot.pp = moveSlot.maxpp;
+					}
+				}
+			}
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Weather",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Beautiful",
+	},
 	weatherfront: {
 		num: 500,
 		accuracy: true,
@@ -4061,45 +4169,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Tough",
-	},
-	hurricanewinds: {
-		num: 1222,
-		accuracy: 100,
-		basePower: 0,
-		category: "Special",
-		isNonstandard: "Thing",
-		name: "Hurricane Winds",
-		pp: 30,
-		priority: 0,
-		flags: {protect: 1, mirror: 1},
-		onModifyMove(move, pokemon) {
-			const i = this.random(100);
-			if (i < 20) {
-				move.magnitude = 1;
-				move.basePower = 40;
-			} else if (i < 50) {
-				move.magnitude = 2;
-				move.basePower = 70;
-			} else if (i < 75) {
-				move.magnitude = 3;
-				move.basePower = 90;
-			} else if (i < 95) {
-				move.magnitude = 4;
-				move.basePower = 110;
-			} else {
-				move.magnitude = 5;
-				move.basePower = 150;
-			}
-		},
-		onUseMoveMessage(pokemon, target, move) {
-			this.add('-activate', pokemon, 'move: Category', move.category);
-		},
-		secondary: null,
-		target: "allAdjacent",
-		type: "Weather",
-		zMove: {basePower: 140},
-		maxMove: {basePower: 140},
-		contestType: "Clever",
 	},
 
 	// Yellow
