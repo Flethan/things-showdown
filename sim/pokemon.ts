@@ -596,7 +596,7 @@ export class Pokemon {
 		const weighthg = this.battle.runEvent('ModifyWeight', this, null, null, this.weighthg);
 		return Math.max(1, weighthg);
 	}
-	
+
 	getHeight() {
 		const heightdm = this.battle.runEvent('ModifyHeight', this, null, null, this.heightdm);
 		return Math.max(1, heightdm);

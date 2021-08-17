@@ -449,7 +449,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				pokemon.setType(pokemon.getTypes(true).map(type => type === "Far" ? "???" : type));
+				pokemon.setType(pokemon.getTypes(true).map(type => type === "Far" ? "???" : type).concat("???"));
 				if (pokemon.types[1]) {
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
 				} else {
@@ -4024,7 +4024,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.success) {
-					this.add('-activate', target, 'move: Wind Dispersal',);
+					this.add('-activate', target, 'move: Wind Dispersal', target);
 					this.boost(this.effectState.passedBoosts, target);
 				}
 			},
@@ -4063,7 +4063,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onUseMoveMessage(pokemon, target, move) {
-			this.add('-activate', pokemon, 'move: Category', move.magnitude);
+			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
 		},
 		secondary: null,
 		target: "allAdjacent",
@@ -4146,7 +4146,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 0.625,
 		priority: 0,
 		flags: {snatch: 1},
-		onHitSide(side) {
+		onHitSide(side, source) {
 			let success = false;
 			for (const target of side.active) {
 				for (const moveSlot of target.moveSlots) {
@@ -4160,7 +4160,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 			if (success) {
-				this.add('-activate', side, 'move: Blessed Rain',);
+				this.add('-activate', source, 'move: Blessed Rain', side);
 			} else {
 				return false;
 			}
