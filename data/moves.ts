@@ -449,12 +449,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				pokemon.setType(pokemon.getTypes(true).map(type => type === "Far" ? "???" : type).concat("???"));
-				if (pokemon.types[1]) {
-					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
-				} else {
-					this.add('-start', pokemon, 'typechange', pokemon.types[0], '[from] move: Close In');
-				}
+				pokemon.setType(pokemon.getTypes(true).filter(type => type === "Far";);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
 
 				for (const foe of pokemon.foes()) {
 					if (!foe || foe === pokemon) continue;
