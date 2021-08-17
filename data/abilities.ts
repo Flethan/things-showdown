@@ -1994,7 +1994,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	halffull: {
 		isNonstandard: "Thing",
-		onPrepareHit(source, target, move) {
+		onModifyMovePriority: 1,
+		onModifyMove(move, source) {
 			if (source.baseSpecies.baseSpecies !== 'Mistimink' || source.transformed) return;
 			let forme = null;
 			const type = move.type;
@@ -2025,8 +2026,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 59,
 	},
 	changeevent: {
-		onPrepareHit(attacker, target, move) {
-			if (attacker.species.baseSpecies !== 'Triathlide' || attacker.transformed) return;
+		onModifyMovePriority: 1,
+		onModifyMove(move, source) {
+			if (source.species.baseSpecies !== 'Triathlide' || source.transformed) return;
 			let forme = null;
 			switch (move.category) {
 			case 'Status':
@@ -2039,7 +2041,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				forme = 'Triathlide';
 				break;
 			}
-			if (attacker.species.name !== forme) attacker.formeChange(forme, this.effect, false, '[msg]');
+			if (source.species.name !== forme) source.formeChange(forme, this.effect, false, '[msg]');
 		},
 		isPermanent: true,
 		name: "Change Event",

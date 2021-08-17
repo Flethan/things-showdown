@@ -1970,7 +1970,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	},
 	triathlideswim: {
 		num: -432,
-		name: "Triathlide",
+		name: "Triathlide-Swim",
+		baseSpecies: "Triathlide",
 		forme: "Swim",
 		types: ["Sport", "Liquid"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -1980,11 +1981,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 11.0,
 		color: "Red",
 		eggGroups: ["Monster"],
+		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
 	},
 	triathlidecyle: {
 		num: -432,
-		name: "Triathlide",
+		name: "Triathlide-Cycle",
+		baseSpecies: "Triathlide",
 		forme: "Cycle",
 		types: ["Sport", "Industrial"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -1994,6 +1997,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 20.0,
 		color: "Red",
 		eggGroups: ["Monster"],
+		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
 	},
 
