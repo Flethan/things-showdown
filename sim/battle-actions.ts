@@ -1727,9 +1727,7 @@ export class BattleActions {
 		if (typeMod < 0) {
 			if (!suppressMessages) this.battle.add('-resisted', target);
 
-			for (let i = 0; i > typeMod; i--) {
-				baseDamage = tr(baseDamage * (2 / (2 + typeMod)));
-			}
+			baseDamage = tr(baseDamage * (2 / (2 + typeMod)));
 		}
 
 		if (isCrit && !suppressMessages) this.battle.add('-crit', target);

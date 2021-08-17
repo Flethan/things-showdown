@@ -1984,7 +1984,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
 	},
-	triathlidecyle: {
+	triathlidecycle: {
 		num: -432,
 		name: "Triathlide-Cycle",
 		baseSpecies: "Triathlide",
