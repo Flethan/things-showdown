@@ -4017,12 +4017,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					const stage = target.boosts[statName];
 					if (stage !== 0) {
 						boosts[statName] = stage;
+						this.effectState.success = true;
 					}
 				}
 				this.effectState.passedBoosts = boosts;
 			},
 			onSwap(target) {
-				if (!target.fainted && this.effectState.passedBoosts) {
+				if (!target.fainted && this.effectState.success) {
 					this.add('-activate', '[from] move: Wind Dispersal');
 					this.boost(this.effectState.passedBoosts, target);
 				}
@@ -4142,7 +4143,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Status",
 		isNonstandard: "Thing",
 		name: "Blessed Rain",
-		pp: 5,
+		pp: 0.625,
 		priority: 0,
 		flags: {snatch: 1},
 		onHitSide(side) {

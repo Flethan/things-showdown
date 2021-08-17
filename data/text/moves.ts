@@ -727,12 +727,22 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  [POKEMON] became trapped in the vortex!",
 	},
+	winddispersal: {
+		name: "Wind Dispersal",
+		desc: "If both the user and the target have not fainted, the target is forced to switch out and be replaced with a random unfainted ally. The new ally receives the stat changes of the previous ally.",
+		shortDesc: "Forces the target to switch, passing its stat changes.",
+
+		activate: "  The stat changes were dispersed to [POKEMON]!",
+	},
 	hurricanewinds: {
 		name: "Hurricane Winds",
 		desc: "The power of this move varies; 20% chance for 40 power, 30% chance for 70 power, 25% chance for 90 power, 20% chance for 110 power, and 5% chance for 150 power.",
 		shortDesc: "Hits adjacent Pokemon. Power varies.",
 
 		activate: "  Category [NUMBER]!",
+	},
+	bluejet: {
+		name: "Blue Jet",
 	},
 	stormcell: {
 		name: "Storm Cell",
@@ -741,6 +751,11 @@ export const MovesText: {[k: string]: MoveText} = {
 
 		start: "  A storm whips around [TEAM]!",
 		end: "  The storm calms around [TEAM]!",
+	},
+	blessedrain: {
+		name: "Blessed Rain",
+		desc: "The user and its active allies have the PP of their moves restored by up to 5. Blessed Rain can not have its PP restored this way.",
+		shortDesc: "Restores 5 PP for all allies' other moves.",
 	},
 	weatherfront: {
 		name: "Weather Front",
