@@ -2440,6 +2440,25 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			particlebeam: ["8L80"],
 		},
 	},
+	triathlide: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			accelerate: ["8L1"],
+			vroom: ["8L50"],
+			whipcrack: ["8L40"],
+			greenbite: ["8L10"],
+			stealthstrike: ["8L20"],
+			shootingstar: ["8L60"],
+			spurt: ["8L15"],
+			cascade: ["8L55"],
+			horizontaltranslation: ["8L25"],
+			warmup: ["8L1"],
+			bask: ["8L45"],
+			brilliantfish: ["8L30"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
