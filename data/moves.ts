@@ -4007,7 +4007,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: -5,
 		flags: {protect: 1, mirror: 1},
 		forceSwitch: true,
-		onHit(target) {
+		onTryHit(source, target) {
 			const boosts: SparseBoostsTable = {};
 			let statName: BoostID;
 			for (statName in target.boosts) {
@@ -4078,7 +4078,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Special",
 		isNonstandard: "Thing",
 		name: "Blue Jet",
-		pp: 1,
+		pp: 0.625,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, pulse: 1},
 		secondary: null,
