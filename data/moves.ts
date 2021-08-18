@@ -1277,6 +1277,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Industrial",
 		contestType: "Clever",
 	},
+	shoot: {
+		num: 1515,
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		name: "Shoot",
+		pp: 1,
+		priority: 0,
+		flags: {mirror: 1, bullet: 1},
+		onModifyMove(move, pokemon) {
+			pokemon.addVolatile('shoot');
+		},
+		condition: {
+			duration: 1,
+			onModifyAtkPriority: -101,
+			onModifyAtk(atk, pokemon, defender, move) {
+				//this.add('-activate', pokemon, 'move: Beat Up', '[of] ' + move.allies![0].name);
+				//this.event.modifier = 1;
+				return 100;
+			},
+		},
+		target: "randomNormal",
+		type: "Industrial",
+		contestType: "Tough",
+	},
 
 	// Liquid
 	wetfloor: {
@@ -3998,6 +4023,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 90,
 		basePower: 40,
 		category: "Special",
+		isNonstandard: "Thing",
 		name: "Wind Dispersal",
 		pp: 10,
 		priority: -5,
