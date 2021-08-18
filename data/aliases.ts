@@ -881,7 +881,6 @@ export const Aliases: {[alias: string]: string} = {
 	cs: "Clangorous Soulblaze",
 	ee: "Extreme Evoboost",
 	extreme: "Extreme Evoboost",
-	genesis: "Genesis Supernova",
 	goa: "Guardian of Alola",
 	gs: "Genesis Supernova",
 	guardian: "Guardian of Alola",
