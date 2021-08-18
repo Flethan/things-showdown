@@ -2533,7 +2533,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			pinch: ["8L1"],
 			swarm: ["8L1"],
 			arthrobite: ["8L1"],
-			dirtypuch: ["8L1"],
+			dirtypunch: ["8L1"],
 			hostile: ["8L1"],
 			heckle: ["8L1"],
 			harbinger: ["8L1"],
