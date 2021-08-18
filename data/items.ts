@@ -507,6 +507,20 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	gun: {
+		name: "Gun",
+		spritenum:802,
+		fling: {
+			basePower: 40,
+		},
+		onStart(pokemon) {
+			this.actions.useMove('shoot', pokemon);
+			pokemon.useItem();
+		},
+		num: -252,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
