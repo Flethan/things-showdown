@@ -292,6 +292,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			bluejet: ["8L65"],
+			autoturret: ["8L65"],
 		},
 	},
 	angrybeehive: {
@@ -1214,6 +1215,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8L30"],
 			vroom: ["8L45"],
 			hit: ["8M"],
+			autoturret: ["8L55"],
 		},
 	},
 	cheleaf: {
@@ -2440,6 +2442,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			particlebeam: ["8L85"],
 			fireworks: ["8M"],
 			cosmicdust: ["8M"],
+			autoturret: ["8L75"],
 		},
 	},
 	tree: {
