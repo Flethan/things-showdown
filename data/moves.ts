@@ -4059,8 +4059,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onUseMoveMessage(pokemon, target, move) {
-			this.hint(move.magnitude);
-			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
+			this.hint(`Category ${move.magnitude}!`);
+			// this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
 		},
 		secondary: null,
 		target: "allAdjacent",
@@ -4157,7 +4157,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 			if (success) {
-				this.add('-activate', source, 'move: Blessed Rain', side);
+				this.add('-activate', source, 'move: Blessed Rain');
 			} else {
 				return false;
 			}

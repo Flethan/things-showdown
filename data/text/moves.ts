@@ -757,7 +757,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user and its active allies have the PP of their moves restored by up to 5. Blessed Rain can not have its PP restored this way.",
 		shortDesc: "Restores 5 PP for all allies' other moves.",
 
-		activate: "  [TEAM] had its PP restored!",
+		activate: "  A gentle rain blesses the area!",
 	},
 	weatherfront: {
 		name: "Weather Front",

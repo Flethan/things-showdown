@@ -2525,6 +2525,28 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantfish: ["8L30"],
 		},
 	},
+	honi: {
+		learnset: {
+			emenation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			pinch: ["8L1"],
+			swarm: ["8L1"],
+			arthrobite: ["8L1"],
+			dirtypuch: ["8L1"],
+			hostile: ["8L1"],
+			heckle: ["8L1"],
+			harbinger: ["8L1"],
+			hullabaloo: ["8L1"],
+			suplex: ["8L1"],
+			counterthrow: ["8L1"],
+			cheapstrike: ["8L1"],
+			yellowslap: ["8L1"],
+			yellowgigahit: ["8L1"],
+			yellowsoak: ["8L1"],
+			limboeclipse: ["8L1"],
+		}
+	},
 
 	// BASE GAME
 	missingno: {

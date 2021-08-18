@@ -1466,6 +1466,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.1,
 		weightkg: 2,
 		color: "Yellow",
+		evos: ["H'Oni"],
 		eggGroups: ["Undiscovered"],
 	},
 	hackit: {
@@ -1999,6 +2000,20 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
+	},
+	honi: {
+		num: -433,
+		name: "H'Oni",
+		types: ["H"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 65, atk: 95, def: 35, spa: 95, spd: 50, spe: 85},
+		abilities: {0: "Brutalize"},
+		heightm: 0.3,
+		weightkg: 0.3,
+		color: "Brown",
+		prevo: "Yenoh",
+		evoType: "levelFriendship",
+		eggGroups: ["Monster"],
 	},
 
 	// BASE GAME
