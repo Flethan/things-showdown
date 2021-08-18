@@ -2527,7 +2527,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 	},
 	honi: {
 		learnset: {
-			emenation: ["8M"],
+			emanation: ["8M"],
 			deposition: ["8M"],
 			hit: ["8M"],
 			pinch: ["8L1"],
@@ -2545,7 +2545,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowgigahit: ["8L1"],
 			yellowsoak: ["8L1"],
 			limboeclipse: ["8L1"],
-		}
+		},
 	},
 
 	// BASE GAME
