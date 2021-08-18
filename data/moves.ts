@@ -1335,6 +1335,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if(foe.hasItem('yellowsafetyvest')) continue;
 					foes.push(foe);
 				}
+				if (foes.length === 0) return;
 				const foeNum = this.random(0, foes.length);
 				const target = foes[foeNum];
 				const hitMove = this.dex.getActiveMove('Shoot');
