@@ -513,15 +513,9 @@ export class RandomTeams {
 
 			// Random unique item
 			let item = '';
-			if (Math.random() >= 0.5) {
-				do {
-					item = this.sampleNoReplace(itemPool);
-				} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
-			} else {
-				do {
-					item = this.sampleNoReplace(itemPool);
-				} while (this.dex.items.get(item).gen > this.gen || this.dex.data.Items[item].isNonstandard);
-			}
+			do {
+				item = this.sampleNoReplace(itemPool);
+			} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
 
 			// Random unique ability
 			let ability = 'None';
@@ -534,17 +528,10 @@ export class RandomTeams {
 			let move;
 			let moveid;
 			do {
-				if (Math.random() >= 0.5) {
-					do {
-						moveid = this.sampleNoReplace(movePool);
-						move = this.dex.moves.get(moveid);
-					} while (move.gen <= this.gen && move.isNonstandard === 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
-				} else {
-					do {
-						moveid = this.sampleNoReplace(movePool);
-						move = this.dex.moves.get(moveid);
-					} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
-				}
+				do {
+					moveid = this.sampleNoReplace(movePool);
+					move = this.dex.moves.get(moveid);
+				} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
 				m.push(moveid);
 			} while (m.length < 4);
 
