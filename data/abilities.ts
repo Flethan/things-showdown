@@ -1772,6 +1772,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 528,
 	},
 	agilebouncer: {
+		isNonstandard: "Thing",
 		onModifySpe(spe) {
 			if (this.field.isTerrain('springfloor')) {
 				return this.chainModify(2);
@@ -1782,6 +1783,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 207,
 	},
 	powerbouncer: {
+		isNonstandard: "Thing",
 		onModifyAtk(atk) {
 			if (this.field.isTerrain('springfloor')) {
 				return this.chainModify(2);
@@ -1797,6 +1799,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 207,
 	},
 	aonetwothree: {
+		isNonstandard: "Thing",
 		onStart(pokemon) {
 			for (const allyActive of pokemon.allies()) {
 				if (allyActive.hasAbility(['aonetwothree'])) {
@@ -1809,6 +1812,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 207,
 	},
 	toofaraway: {
+		isNonstandard: "Thing",
 		onTryHit(target, source, move) {
 			if (target === source || move.category === 'Status') return;
 			if (this.checkMoveMakesContact(move, source, target) && !target.volatiles['toofaraway']) {
@@ -1823,6 +1827,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 529,
 	},
 	legendsoftreasure: {
+		isNonstandard: "Thing",
 		onStart(target) {
 			this.add('-activate', target, 'ability: Legends of Treasure');
 			// eslint-disable-next-line max-len
@@ -1907,6 +1912,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 529,
 	},
 	cargofromeverywhen: {
+		isNonstandard: "Thing",
 		onStart(target) {
 			this.add('-activate', target, 'ability: Cargo from Everywhen');
 		},
@@ -1971,6 +1977,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 1191,
 	},
 	photosynthetic: {
+		isNonstandard: "Thing",
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Yellow') {
 				if (!this.heal(target.baseMaxhp / 4)) {
@@ -1985,6 +1992,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 10,
 	},
 	furtheraway: {
+		isNonstandard: "Thing",
 		onStart(source) {
 			this.field.setTerrain('spatialexpansion');
 		},
@@ -2026,6 +2034,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 59,
 	},
 	changeevent: {
+		isNonstandard: "Thing",
 		onModifyMovePriority: 1,
 		onModifyMove(move, source) {
 			if (source.baseSpecies.baseSpecies !== 'Triathlide' || source.transformed) return;
@@ -2045,6 +2054,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		isPermanent: true,
 		name: "Change Event",
+		rating: 4,
+		num: 176,
+	},
+	genesis: {
+		isNonstandard: "Thing",
+		onSwitchIn(pokemon) {
+			for (const moveSlot of pokemon.moveSlots) {
+				if (moveSlot.maxpp === moveSlot.pp) continue;
+				if (moveSlot.maxpp - moveSlot.pp > 5) {
+					moveSlot.pp += 5;
+				} else {
+					moveSlot.pp = moveSlot.maxpp;
+				}
+			}
+		},
+		name: "Genesis",
 		rating: 4,
 		num: 176,
 	},

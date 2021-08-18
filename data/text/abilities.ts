@@ -134,6 +134,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Gallant",
 		shortDesc: "This Thing's speed cannot be lowered.",
 	},
+	genesis: {
+		name: "Genesis",
+		shortDesc: "Restore 5 PP for this Thing's moves on switch in.",
+	},
 	gold: {
 		name: "Gold",
 		shortDesc: "This Thing is immune to supereffective attacks.",
