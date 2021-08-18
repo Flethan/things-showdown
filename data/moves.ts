@@ -1288,7 +1288,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {mirror: 1, bullet: 1},
-		isFutureMove: true,
 		onModifyMove(move, pokemon) {
 			pokemon.addVolatile('shoot');
 		},
@@ -1296,7 +1295,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 1,
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				return 100;
+				if(move.id === 'shoot') {
+					return 100;
+				}
 			},
 		},
 		target: "randomNormal",
@@ -1321,11 +1322,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Auto-Turret');
 				this.effectState.source = source;
 			},
-			onResidual() {
-				let pokemon = this.effectState.source;
-				if(pokemon !== null) {
-					this.actions.useMove('shoot', pokemon);
+			onModifyAtkPriority: -101,
+			onModifyAtk(atk, pokemon, defender, move) {
+				if(move.id === 'shoot') {
+					return 100;
 				}
+			},
+			onSideResidual() {
+				const pokemon = this.effectState.source;
+				const foes = pokemon.foes();
+				const foeNum = this.random(0, foes.length);
+				const target = foes[foeNum];
+				const hitMove = this.dex.getActiveMove('Shoot');
+				if(pokemon !== null) {
+					this.add('-activate', target, 'move: Auto-Turret');
+					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);	
+				}
+			},
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Auto-Turret');
 			},
 		},
 		secondary: null,
