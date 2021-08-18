@@ -1721,13 +1721,15 @@ export class BattleActions {
 		target.getMoveHitData(move).typeMod = typeMod;
 		if (typeMod > 0) {
 			if (!suppressMessages) this.battle.add('-supereffective', target);
-
+			console.log(baseDamage);
 			baseDamage = tr(baseDamage * ((2 + typeMod) / 2));
+			console.log(baseDamage);
 		}
 		if (typeMod < 0) {
 			if (!suppressMessages) this.battle.add('-resisted', target);
-
+			console.log(baseDamage);
 			baseDamage = tr(baseDamage * (2 / (2 + typeMod)));
+			console.log(baseDamage);
 		}
 
 		if (isCrit && !suppressMessages) this.battle.add('-crit', target);
