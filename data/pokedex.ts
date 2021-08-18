@@ -2015,6 +2015,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "levelFriendship",
 		eggGroups: ["Monster"],
 	},
+	anoano: {
+		num: -434,
+		name: "Ano'Ano",
+		types: ["Far", "Temperature"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 85, atk: 65, def: 50, spa: 65, spd: 40, spe: 55},
+		abilities: {0: "Genesis"},
+		heightm: 200.0,
+		weightkg: 998.0,
+		color: "Red",
+		evos: ["Ther'Ther"],
+		eggGroups: ["Undiscovered"],
+	},
+	therther: {
+		num: -435,
+		name: "Ther'Ther",
+		types: ["Far", "Dirt"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 115, atk: 75, def: 70, spa: 60, spd: 70, spe: 40},
+		abilities: {0: "Genesis"},
+		heightm: 190.0,
+		weightkg: 998.0,
+		color: "Brown",
+		prevo: "Ano'Ano",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
