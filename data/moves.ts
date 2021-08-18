@@ -1296,7 +1296,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
 				if(move.id === 'shoot') {
-					return 100;
+					return 150;
 				}
 			},
 		},
@@ -1325,7 +1325,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
 				if(move.id === 'shoot') {
-					return 100;
+					return 150;
 				}
 			},
 			onSideResidual() {
@@ -1334,7 +1334,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const foeNum = this.random(0, foes.length);
 				const target = foes[foeNum];
 				const hitMove = this.dex.getActiveMove('Shoot');
-				if(pokemon !== null) {
+				if(pokemon !== null && target !== null) {
 					this.add('-activate', target, 'move: Auto-Turret');
 					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);	
 				}
