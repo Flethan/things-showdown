@@ -26,6 +26,8 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
+import { Pokemon } from "../sim";
+
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
@@ -1286,6 +1288,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 1,
 		priority: 0,
 		flags: {mirror: 1, bullet: 1},
+		isFutureMove: true,
 		onModifyMove(move, pokemon) {
 			pokemon.addVolatile('shoot');
 		},
@@ -1293,14 +1296,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 1,
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				//this.add('-activate', pokemon, 'move: Beat Up', '[of] ' + move.allies![0].name);
-				//this.event.modifier = 1;
 				return 100;
 			},
 		},
 		target: "randomNormal",
 		type: "Industrial",
 		contestType: "Tough",
+	},
+	autoturret: {
+		num: 1446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Auto-Turret",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'autoturret',
+		condition: {
+			duration: 5,
+			// this is a side condition
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Auto-Turret');
+				this.effectState.source = source;
+			},
+			onResidual() {
+				let pokemon = this.effectState.source;
+				if(pokemon !== null) {
+					this.actions.useMove('shoot', pokemon);
+				}
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Industrial",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
 	},
 
 	// Liquid
