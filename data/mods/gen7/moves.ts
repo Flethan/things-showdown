@@ -250,7 +250,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		inherit: true,
 		isNonstandard: null,
 	},
-	benesissupernova: {
+	genesissupernova: {
 		inherit: true,
 		isNonstandard: null,
 	},

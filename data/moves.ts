@@ -11923,7 +11923,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spa: 1}},
 		contestType: "Clever",
 	},
-	benesissupernova: {
+	genesissupernova: {
 		num: 703,
 		accuracy: true,
 		basePower: 185,
