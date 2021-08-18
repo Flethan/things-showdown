@@ -1296,7 +1296,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
 				if(move.id === 'shoot') {
-					return 150;
+					return 200;
 				}
 			},
 		},
@@ -1325,7 +1325,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
 				if(move.id === 'shoot') {
-					return 150;
+					return 200;
 				}
 			},
 			onSideResidual() {
