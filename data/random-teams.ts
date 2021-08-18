@@ -531,7 +531,7 @@ export class RandomTeams {
 				do {
 					moveid = this.sampleNoReplace(movePool);
 					move = this.dex.moves.get(moveid);
-				} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Hidden Power ') && !move.name.startsWith('Infinity Cycle'));
+				} while (move.gen <= this.gen && move.isNonstandard !== 'Thing' && !move.name.startsWith('Infinity Cycle'));
 				m.push(moveid);
 			} while (m.length < 4);
 
