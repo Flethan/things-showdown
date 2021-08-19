@@ -907,6 +907,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 					if(type === 'Green') count++;
 				}
 			}
+			for(const type of pokemon.getTypes()) {
+				if(type === 'Green') count++;
+			}
 			if (count === 0) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
