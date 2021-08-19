@@ -566,7 +566,7 @@ export const Formats: FormatList = [
 		column: 1,
 	},
 	{
-		name: "[Things] Hackthings Free-For-All Random Battle",
+		name: "[Things] Random Hackthings Free-For-All",
 
 		mod: 'gen8',
 		team: 'randomHThing',
@@ -576,7 +576,7 @@ export const Formats: FormatList = [
 		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
 	},
 	{
-		name: "[Things] Hackthings Multi Random Battle",
+		name: "[Things] Random Hackthings Multi",
 
 		mod: 'gen8',
 		team: 'randomHThing',
