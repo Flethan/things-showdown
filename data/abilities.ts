@@ -833,8 +833,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	paintityellow: {
 		isNonstandard: "Thing",
 		onSourceHit(target, source, move) {
-			if (move.type !== 'Liquid') return;
-			if (target.hasType('Yellow')) return false;
+			if (move.type !== 'Liquid' || target === source) return;
+			if (target.addedType === 'Yellow') return false;
 			if (!target.addType('Yellow')) return false;
 			this.add('-start', target, 'typeadd', 'Yellow', '[from] ability: Paint it Yellow');
 		},
@@ -845,8 +845,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	paintitgreen: {
 		isNonstandard: "Thing",
 		onSourceHit(target, source, move) {
-			if (move.type !== 'Liquid') return;
-			if (target.hasType('Green')) return false;
+			if (move.type !== 'Liquid' || target === source) return;
+			if (target.addedType === 'Green') return false;
 			if (!target.addType('Green')) return false;
 			this.add('-start', target, 'typeadd', 'Green', '[from] ability: Paint it Green');
 		},

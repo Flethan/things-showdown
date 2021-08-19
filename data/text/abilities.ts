@@ -222,12 +222,76 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Momentum",
 		shortDesc: "When this Thing's speed is raised, its attack is also raised by the same amount.",
 	},
-
+	moonrise: {
+		name: "Moonrise",
+		shortDesc: "On switch-in, this Thing summons Nighttime.",
+	},
+	nebulous: {
+		name: "Nebulous",
+		desc: "When this Thing is hit by an attack, the attacker is prevented from choosing to switch out, unless they are immune to trapping.",
+		shortDesc: "Prevents attackers from choosing to switch.",
+	},
+	nocturnal: {
+		name: "Nocturnal",
+		desc: "If Nighttime is active, this Thing's attacks have their Accuracy multiplied by 1.2 and are always a critical hit.",
+		shortDesc: "If Nighttime is active, this Thing's attacks have 1.2x Accuracy and always crit.",
+	},
+	noteofintroduction: {
+		name: "Note of Introduction",
+		desc: "When Mystical Song begins, or on switch-in, if Mystical Song is active, add a random Harmony to Mystical Song.",
+		shortDesc: "On switch-in, or when Mystical Song begins, add a random Harmony.",
+	},
+	nutrientrich: {
+		name: "Nutrient Rich",
+		shortDesc: "This Thing and its allies' Green-type moves have their power multiplied by 1.5.",
+	},
 	omega: {
 		name: "Omega",
 		shortDesc: "Every third turn in battle, this Thing's moves One-hit KO.",
-		start: "[POKEMON] is channeling the power of the end!",
-		activate: "[POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!",
+
+		start: "  [POKEMON] is channeling the power of the end!",
+		activate: "  [POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!",
+	},
+	omnipresent: {
+		name: "Omnipresent",
+		shortDesc: "This Thing cannot be banished. Gaining this Ability while banished cures it.",
+	},
+	paintitgreen: {
+		name: "Paint it Green",
+		shortDesc: "This Thing's Liquid-type attacks add Green-type on hit.",
+	},
+	paintityellow: {
+		name: "Paint it Yellow",
+		shortDesc: "This Thing's Liquid-type attacks add Yellow-type on hit.",
+	},
+	pelagic: {
+		name: "Pelagic",
+		shortDesc: "This Thing's Fish-type and Liquid-type moves have their power multiplied by 1.5.",
+	},
+	perishjaws: {
+		name: "Perish Jaws",
+		shortDesc: "This Thing's bite-based attacks cause itself and its target to faint in 3 turns.",
+	},
+	perseverant: {
+		name: "Perseverant",
+		shortDesc: "This Thing has a 50% chance to survive an attack that would KO it with 1 HP.",
+	},
+	pestresistant: {
+		name: "Pest Resistant",
+		shortDesc: "This Thing takes half damage from Arthropod-type moves.",
+	},
+	photosynthetic: {
+		name: "Photosynthetic",
+		desc: "This Thing is immune to Yellow-type moves and restores 1/4 of its maximum HP, rounded down, when hit by a Yellow-type move.",
+		shortDesc: "This Thing heals 1/4 of its max HP when hit by Yellow moves; Yellow immunity.",
+	},
+	plaguebringer: {
+		name: "Plague Bringer",
+		shortDesc: "On switch-in, this Thing summons Locust Swarm.",
+	},
+	poisonous: {
+		name: "Poisonous",
+		shortDesc: "Blind, make Fluctuant, or Wound the attacker when hit by a bite-based attack.",
 	},
 
 	resonance: {
@@ -1206,12 +1270,6 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		shortDesc: "Making contact with this Pokemon starts the Perish Song effect for it and the attacker.",
 
 		start: "  Both Pok\u00E9mon will faint in three turns!",
-	},
-	perishjaws: {
-		name: "Perish Jaws",
-		shortDesc: "Biting moves used by this Thing will cause them and the target to perish in 3 turns.",
-
-		start: "  Both Things will faint in three turns!",
 	},
 	pickpocket: {
 		name: "Pickpocket",
