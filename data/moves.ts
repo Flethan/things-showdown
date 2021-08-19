@@ -1107,7 +1107,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		alsoH: ['hadalzone', 'hairycrash', 'hairball', 'hypnoticmelody', 'harmoniouschord', 'horizontaltranslation', 'heatup', 'hotcoals', 'hurricanewinds'],
+		alsoH: ['Hadal Zone', 'Hairy Crash', 'Hair Ball', 'Hypnotic Melody', 'Harmonious Chord', 'Horizontal Translation', 'Heat Up', 'Hot Coals', 'Hurricane Winds'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
 			for (const id in Moves) {
@@ -1593,8 +1593,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(pokemon) {
-			pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
-			this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+			if (pokemon.hasType('Green')) {
+				pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+			}
 		},
 		secondary: null,
 		target: "normal",
@@ -2918,7 +2920,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		noLookUp: ['lookup', 'parry', 'riposte', 'whistle'],
+		noLookUp: ['Look Up', 'Parry', 'Riposte', 'Whistle'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
 			for (const id in Moves) {
