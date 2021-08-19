@@ -2652,6 +2652,32 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L1"],
 		},
 	},
+	beano: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			warmup: ["8L40"],
+			fourseamfastball: ["8L40"],
+			suplex: ["8L50"],
+			counterthrow: ["8L50"],
+			hit: ["8M"],
+			springfloor: ["8L20"],
+			hairycrash: ["8L45"],
+		},
+	},
+	beanette: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			warmup: ["8L40"],
+			fourseamfastball: ["8L40"],
+			suplex: ["8L50"],
+			counterthrow: ["8L50"],
+			hit: ["8M"],
+			springfloor: ["8L20"],
+			hairycrash: ["8L45"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
