@@ -844,7 +844,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		pp: 5,
 		priority: 0,
-		flags: {protect: 1, mirror: 1, defrost: 1},
+		flags: {protect: 1, mirror: 1},
 		onTryMove(pokemon, target, move) {
 			if (pokemon.hasType('Green')) return;
 			this.add('-fail', pokemon, 'move: Deciduous Blast');
@@ -1582,7 +1582,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1, mirror: 1, defrost: 1},
+		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, pokemon) {
 			if (pokemon.hasType('Green')) {
 				return this.chainModify(2);
@@ -1594,7 +1594,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "normal",
-		type: "Green",
+		type: "Industrial",
 		contestType: "Clever",
 	},
 
