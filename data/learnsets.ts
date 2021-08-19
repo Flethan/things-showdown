@@ -849,6 +849,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brush: ["8L1"],
 			brilliantflash: ["8L50"],
 			hit: ["8M"],
+			hsearch: ["8T"],
 		},
 	},
 	horse: {
@@ -867,6 +868,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brush: ["8L1"],
 			hairycrash: ["8L55"],
 			hit: ["8M"],
+			hsearch: ["8T"],
 		},
 	},
 	horseluigi: {
@@ -887,6 +889,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brush: ["8L1"],
 			hairycrash: ["8L55"],
 			hit: ["8M"],
+			hsearch: ["8T"],
 		},
 	},
 	connector: {
@@ -1910,6 +1913,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			emanation: ["8M"],
 			deposition: ["8M"],
 			hit: ["8M"],
+			hsearch: ["8T"],
 		},
 	},
 	notant: {
@@ -2294,6 +2298,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 		learnset: {
 			fastforward: ["8L1"],
 			sandsoftime: ["8L1"],
+			hsearch: ["8T"],
 		},
 	},
 	chronoise: {
@@ -2307,6 +2312,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timeloop: ["8L30"],
 			timecapsule: ["8L35"],
 			sandsoftime: ["8L1"],
+			hsearch: ["8T"],
 		},
 	},
 	infared: {
