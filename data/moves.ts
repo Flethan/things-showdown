@@ -1599,7 +1599,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Prune');
 			} else {
 				let types = pokemon.getTypes(true);
 				for (const [index, type] of types.entries()) {
@@ -1610,7 +1610,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				if (!types.length) types = ['???'];
 				pokemon.setType(types);
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
 			}
 		},
 		secondary: null,
