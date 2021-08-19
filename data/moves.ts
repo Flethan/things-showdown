@@ -26,8 +26,6 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
-import { Pokemon } from "../sim";
-
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
@@ -357,6 +355,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			switch (targets.length) {
 			case 3:
 				targets.splice(indexOfSource, 1);
+				for (const target of targets) {
+					didSomething = this.boost({atk: 1, def: 1, spa: 1, spd: 1, spe: 1}, target, source, move, false, true) || didSomething;
+				}
+				break;
 			case 2:
 				for (const target of targets) {
 					didSomething = this.boost({atk: 1, def: 1, spa: 1, spd: 1, spe: 1}, target, source, move, false, true) || didSomething;
@@ -1512,7 +1514,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 1,
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				if(move.id === 'shoot') {
+				if (move.id === 'shoot') {
 					return 200;
 				}
 			},
@@ -1541,24 +1543,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				if(move.id === 'shoot') {
+				if (move.id === 'shoot') {
 					return 200;
 				}
 			},
 			onSideResidual() {
 				const pokemon = this.effectState.source;
 				const foes: Pokemon[] = [];
-				for(const foe of pokemon.foes()) {
-					if(foe.hasItem('yellowsafetyvest')) continue;
+				for (const foe of pokemon.foes()) {
+					if (foe.hasItem('yellowsafetyvest')) continue;
 					foes.push(foe);
 				}
 				if (foes.length === 0) return;
 				const foeNum = this.random(0, foes.length);
 				const target = foes[foeNum];
 				const hitMove = this.dex.getActiveMove('Shoot');
-				if(pokemon !== null && target !== null) {
+				if (pokemon !== null && target !== null) {
 					this.add('-activate', target, 'move: Auto-Turret');
-					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);	
+					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);
 				}
 			},
 			onSideEnd(side) {
@@ -2227,10 +2229,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onAfterMoveSecondary(target, source, move) {
 				if (move.songFlags) {
-					for (const flag in move.songFlags) {
-						if (this.field.activeFlags.length && this.field.activeFlags.includes(move.songFlags[flag])) continue;
-						this.field.activeFlags.push(move.songFlags[flag]);
-						this.hint("Mystical Song +: " + move.songFlags[flag]);
+					for (const flag of move.songFlags) {
+						if (this.field.activeFlags.length && this.field.activeFlags.includes(flag)) continue;
+						this.field.activeFlags.push(flag);
+						this.hint("Mystical Song +: " + flag);
 					}
 				}
 			},
@@ -4088,8 +4090,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		slotCondition: 'timecapsule',
 		condition: {
-			duration: 2,
-			onStart(pokemon, source) {
+			onStart(source) {
 				const boosts: SparseBoostsTable = {};
 				let success = false;
 				let statName: BoostID;
@@ -4106,10 +4107,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				} else { return false; }
 			},
-			onResidualOrder: 4,
-			onEnd(pokemon) {
-				this.add('-activate', '[from] move: Time Capsule');
-				this.boost(this.effectState.passedBoosts, pokemon);
+			onRestart(source) {
+				const boosts = this.effectState.passedBoosts;
+				let success = false;
+				let statName: BoostID;
+				for (statName in source.boosts) {
+					const stage = source.boosts[statName];
+					if (stage !== 0) {
+						boosts[statName] += stage;
+						success = true;
+					}
+				}
+				if (success) {
+					this.effectState.passedBoosts = boosts;
+					this.add('-clearboost', source, '[from] move: Time Capsule');
+					source.clearBoosts();
+				}
+			},
+			onSwap(target) {
+				if (!target.fainted && this.effectState.success) {
+					this.add('-activate', '[from] move: Time Capsule');
+					this.boost(this.effectState.passedBoosts, target);
+					target.side.removeSlotCondition(target, 'timecapsule');
+				}
 			},
 		},
 		secondary: null,
