@@ -2073,6 +2073,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 176,
 	},
+	quickblade: {
+		isNonstandard: "Thing",
+		name: "Quick Blade",
+		rating: 4,
+		num: 1191,
+	},
 
 	// BASE GAME
 	noability: {

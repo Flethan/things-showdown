@@ -3601,7 +3601,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						delete source.volatiles['lockedmove'];
 					}
 				}
-				if (target.hasMove('riposte')) {
+				if (target.hasMove('riposte') || target.hasAbility('quickblade')) {
 					target.addVolatile('ripostemove');
 					this.actions.useMove('riposte', target, source);
 				}
