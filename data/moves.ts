@@ -935,7 +935,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "self",
-		type: "Dirt",
+		type: "Green",
 		contestType: "Cool",
 	},
 
