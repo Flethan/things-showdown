@@ -1116,6 +1116,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
 				if (this.dex.moves.get(id).gen > this.gen) continue;
 				if (move.type !== 'H' && !effect.alsoH!.includes(move.name)) continue;
+				if (move.name === 'H Search') continue;
 				moves.push(move);
 			}
 			let randomMove = '';
@@ -2194,6 +2195,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (move.realMove) continue;
 				if (move.isZ || move.isMax || move.type !== 'Music' || move.isNonstandard !== 'Thing') continue;
 				if (this.dex.moves.get(id).gen > this.gen) continue;
+				if (move.name === 'Conduct') continue;
 				moves.push(move);
 			}
 			let randomMove = '';
