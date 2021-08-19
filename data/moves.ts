@@ -749,7 +749,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		secondary: {
 			chance: 10,
 			onHit(target, source, move) {
-				if (target.hasType('Green')) return false;
 				if (!target.addType('Green')) return false;
 				this.add('-start', target, 'typeadd', 'Green', '[from] move: Green Punch');
 			},
@@ -853,8 +852,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				if (pokemon.addedType === 'Green') {
+					if (!pokemon.addType('')) return false;
+					this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
+				} else {
+					let types = pokemon.getTypes(true);
+					for (const [index, type] of types.entries()) {
+						if (type === 'Green') {
+							types.splice(index, 1);
+							break;
+						}
+					}
+					if (!types.length) types = ['???'];
+					pokemon.setType(types);
+					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				}
 			},
 		},
 		secondary: null,
@@ -874,8 +886,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
 			let factor = 0.25;
-			for(const type of pokemon.getTypes()) {
-				if(type === 'Green') factor += 0.25;
+			for (const type of pokemon.getTypes()) {
+				if (type === 'Green') factor += 0.25;
 			}
 			return !!this.heal(this.modify(pokemon.maxhp, factor));
 		},
@@ -897,42 +909,36 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
 			let count = 0;
-			for (const foe of pokemon.foes()) {
-				for(const type of foe.getTypes()) {
-					if(type === 'Green') count++;
-				}
-			}
-			for (const ally of pokemon.allies()) {
-				for(const type of ally.getTypes()) {
-					if(type === 'Green') count++;
-				}
-			}
-			for(const type of pokemon.getTypes()) {
-				if(type === 'Green') count++;
-			}
-			if (count === 0) {
+			this.getAllActive().forEach(
+				active => active.getTypes().forEach(
+					type => { if (type === 'Green') count++; }
+				)
+			);
+			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
 				return null;
 			}
+
+			const oldStats = pokemon.boosts;
+			const boost: SparseBoostsTable = {};
 			let loopNum = 0;
 			do {
-				// boost random stat
-				// console.log("boost");
 				const stats: BoostID[] = [];
-				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
-				for (statPlus in pokemon.boosts) {
-				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-					if (pokemon.boosts[statPlus] < 6) {
+				for (statPlus in oldStats) {
+					// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (oldStats[statPlus] < 6) {
 						stats.push(statPlus);
 					}
 				}
 				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if (randomStat) boost[randomStat] = 1;
-				this.boost(boost);
+				if (!randomStat) break;
+				boost[randomStat] = boost[randomStat]! + 1 || 1;
+				oldStats[randomStat]++;
 				loopNum++;
 			} while (loopNum < count && pokemon.hp);
+			this.boost(boost);
 
 			return;
 		},
@@ -1107,16 +1113,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		alsoH: ['hadalzone', 'hairycrash', 'hairball', 'hypnoticmelody', 'harmoniouschord', 'horizontaltranslation', 'heatup', 'hotcoals', 'hurricanewinds'],
+		noMetronome: ['H Search'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
 			for (const id in Moves) {
 				const move = Moves[id];
 				if (move.realMove) continue;
 				if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
-				if (this.dex.moves.get(id).gen > this.gen) continue;
-				if (move.type !== 'H' && !effect.alsoH!.includes(move.name)) continue;
-				if (move.name === 'H Search') continue;
+				if (!/^[hH]/.test(move.name) || effect.noMetronome!.includes(move.name)) continue;
 				moves.push(move);
 			}
 			let randomMove = '';
@@ -1593,8 +1597,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(pokemon) {
-			pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
-			this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+			if (pokemon.addedType === 'Green') {
+				if (!pokemon.addType('')) return false;
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
+			} else {
+				let types = pokemon.getTypes(true);
+				for (const [index, type] of types.entries()) {
+					if (type === 'Green') {
+						types.splice(index, 1);
+						break;
+					}
+				}
+				if (!types.length) types = ['???'];
+				pokemon.setType(types);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+			}
 		},
 		secondary: null,
 		target: "normal",
@@ -2918,14 +2935,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		noLookUp: ['lookup', 'parry', 'riposte', 'whistle'],
+		noMetronome: ['Parry', 'Riposte', 'Whistle'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
 			for (const id in Moves) {
 				const move = Moves[id];
 				if (move.realMove) continue;
 				if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
-				if (effect.noLookUp!.includes(move.name)) continue;
+				if (effect.noMetronome!.includes(move.name) || move.noMetronome?.length) continue;
 				moves.push(move);
 			}
 			let randomMove = '';
