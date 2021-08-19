@@ -774,6 +774,168 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Green",
 		contestType: "Clever",
 	},
+	greenseeds: {
+		num: 567,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Green Seeds",
+		isNonstandard: "Thing",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
+		onHit(target) {
+			if (!target.addType('Green')) return false;
+			this.add('-start', target, 'typeadd', 'Green', '[from] move: Green Seeds');
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		zMove: {boost: {atk: 1, def: 1, spa: 1, spd: 1, spe: 1}},
+		contestType: "Cute",
+	},
+	abilityseeds: {
+		num: 494,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Ability Seeds",
+		isNonstandard: "Thing",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, mystery: 1},
+		onTryHit(target, source) {
+			if (target === source || target.volatiles['dynamax']) return false;
+
+			const additionalBannedSourceAbilities = [
+				'omega', 'reallybigsword', 'red',
+			];
+			if (
+				target.ability === source.ability ||
+				target.getAbility().isPermanent || target.ability === 'truant' ||
+				source.getAbility().isPermanent || additionalBannedSourceAbilities.includes(source.ability)
+			) {
+				return false;
+			}
+		},
+		onHit(target, source) {
+			const oldAbility = target.setAbility(source.ability);
+			if (oldAbility) {
+				this.add('-ability', target, target.getAbility().name, '[from] move: Green Seeds');
+				if (!target.isAlly(source)) target.volatileStaleness = 'external';
+				return;
+			}
+			return false;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		zMove: {boost: {spd: 1}},
+		contestType: "Cute",
+	},
+	deciduousblast: {
+		num: 682,
+		accuracy: 95,
+		basePower: 170,
+		category: "Special",
+		name: "Deciduous Blast",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, defrost: 1},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Green')) return;
+			this.add('-fail', pokemon, 'move: Deciduous Blast');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		self: {
+			onHit(pokemon) {
+				pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		contestType: "Clever",
+	},
+	photosynthesize: {
+		num: 235,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Photosynthesize",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1, heal: 1},
+		onHit(pokemon) {
+			let factor = 0.25;
+			for(const type of pokemon.getTypes()) {
+				if(type === 'Green') factor += 0.25;
+			}
+			return !!this.heal(this.modify(pokemon.maxhp, factor));
+		},
+		secondary: null,
+		target: "self",
+		type: "Green",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	greennetwork: {
+		num: 63,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Green Network",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, snatch: 1, authentic: 1},
+		onHit(pokemon) {
+			let count = 0;
+			for (const foe of pokemon.foes()) {
+				for(const type of foe.getTypes()) {
+					if(type === 'Green') count++;
+				}
+			}
+			for (const ally of pokemon.allies()) {
+				for(const type of ally.getTypes()) {
+					if(type === 'Green') count++;
+				}
+			}
+			if (count === 0) {
+				this.add('-fail', pokemon, 'move: Green Network');
+				this.attrLastMove('[still]');
+				return null;
+			}
+			let loopNum = 0;
+			do {
+				// boost random stat
+				// console.log("boost");
+				const stats: BoostID[] = [];
+				const boost: SparseBoostsTable = {};
+				let statPlus: BoostID;
+				for (statPlus in pokemon.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (pokemon.boosts[statPlus] < 6) {
+						stats.push(statPlus);
+					}
+				}
+				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+				if (randomStat) boost[randomStat] = 1;
+				this.boost(boost);
+				loopNum++;
+			} while (loopNum < count && pokemon.hp);
+
+			return;
+		},
+		secondary: null,
+		target: "self",
+		type: "Dirt",
+		contestType: "Cool",
+	},
 
 	// H
 	hostile: {
@@ -910,6 +1072,61 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "H",
 		contestType: "Tough",
+	},
+	hide: {
+		num: 1104,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Hide",
+		pp: 15,
+		priority: 0,
+		flags: {snatch: 1},
+		boosts: {
+			evasion: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "H",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
+	},
+	hsearch: {
+		num: 1118,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "H Search",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		alsoH: ['hadalzone', 'hairycrash', 'hairball', 'hypnoticmelody', 'harmoniouschord', 'horizontaltranslation', 'heatup', 'hotcoals', 'hurricanewinds'],
+		onHit(target, source, effect) {
+			const moves: MoveData[] = [];
+			for (const id in Moves) {
+				const move = Moves[id];
+				if (move.realMove) continue;
+				if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
+				if (this.dex.moves.get(id).gen > this.gen) continue;
+				if (move.type !== 'H' && !effect.alsoH!.includes(move.name)) continue;
+				moves.push(move);
+			}
+			let randomMove = '';
+			if (moves.length) {
+				moves.sort((a, b) => a.num! - b.num!);
+				randomMove = this.sample(moves).name;
+			}
+			if (!randomMove) {
+				return false;
+			}
+			this.actions.useMove(randomMove, target);
+		},
+		secondary: null,
+		target: "self",
+		type: "H",
+		contestType: "Clever",
 	},
 	/* homoerectus: {
 		num: 1981,
@@ -1352,6 +1569,30 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "allySide",
 		type: "Industrial",
 		zMove: {boost: {def: 1}},
+		contestType: "Clever",
+	},
+	prune: {
+		num: 682,
+		accuracy: 100,
+		basePower: 50,
+		category: "Special",
+		name: "Prune",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, defrost: 1},
+		onBasePower(basePower, pokemon) {
+			if (pokemon.hasType('Green') {
+				return this.chainModify(2);
+			}
+		},
+		onHit(pokemon) {
+			pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Green"));
+			this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
 		contestType: "Clever",
 	},
 
