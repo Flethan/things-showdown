@@ -565,6 +565,30 @@ export const Formats: FormatList = [
 		section: "Hackthings",
 		column: 1,
 	},
+	{
+		name: "[Things] Hackthings Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomHThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Hackthings Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomHThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause',
+		],
+	},
 
 
 	// National Dex
