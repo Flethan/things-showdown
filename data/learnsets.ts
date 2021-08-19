@@ -524,7 +524,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenify: ["8L1"],
 			hit: ["8M"],
 			greenseeds: ["8L1"],
-			abilityseeds: ["8L1"],			
+			abilityseeds: ["8L1"],
 		},
 	},
 	e1: {
@@ -2676,6 +2676,12 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			springfloor: ["8L20"],
 			hairycrash: ["8L45"],
+		},
+	},
+	ronging: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
 		},
 	},
 

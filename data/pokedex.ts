@@ -2065,6 +2065,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		eggGroups: ["Human-Like"],
 	},
+	ronging: {
+		num: -438,
+		name: "Ronging",
+		types: ["Infinity"],
+		gender: "N",
+		baseStats: {hp: 105, atk: 125, def: 85, spa: 125, spd: 85, spe: 75},
+		abilities: {0: "Resonance"},
+		heightm: 0.7,
+		weightkg: 20.4,
+		color: "Gray",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

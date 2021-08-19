@@ -312,6 +312,12 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Rootbeer Blast",
 		shortDesc: "No additional effect.",
 	},
+	stickysituation: {
+		name: "Sticky Situation",
+		desc: "Summons Sticky Situation for 5 turns. The damage of soda-based attacks is multiplied by 1.2 and they happen first in their priority bracket.",
+		shortDesc: "For 5 turns, soda-based moves power up and go first.",
+	},
+
 	// music
 	accent: {
 		name: "Accent",

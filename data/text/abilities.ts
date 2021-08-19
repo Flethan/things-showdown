@@ -230,6 +230,17 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		activate: "[POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!",
 	},
 
+	resonance: {
+		name: "Resonance",
+		shortDesc: "+2 Atk/SpA after being hit by a supereffective physical/special move, respectively.",
+		desc: "This Thing's Attack or Special Attack is raised by 2 stages after it is damaged by a super effective physical or special move, respectively.",
+	},
+
+	sodaspreader: {
+		name: "Soda Spreader",
+		shortDesc: "When this Thing uses a soda-based attacks, it summons Sticky Situation.",
+	},
+
 	three: {
 		name: "Three",
 		shortDesc: "Every third turn in battle, this Thing's moves have 1.5x power.",

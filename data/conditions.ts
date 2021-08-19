@@ -375,9 +375,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onModifyDef(def, pokemon) {
 			return this.modify(def, 0.5);
 		},
-		onBeforeMovePriority: 20,
-		onBeforeMove(source, target, move) {
-			if (source !== target) this.damage(source.baseMaxhp / 4);
+		onAfterMoveSecondaryPriority: 20,
+		onAfterMoveSecondary(source, target, move) {
+			if (source !== target) this.damage(source.baseMaxhp / 6);
 		},
 	},
 
@@ -704,7 +704,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'none');
 		},
 	},
-
 
 	// BASE GAME
 	brn: {

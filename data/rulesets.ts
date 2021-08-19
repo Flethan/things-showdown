@@ -4,10 +4,10 @@ import {Utils} from "../lib";
 
 // The list of formats is stored in config/formats.js
 export const Rulesets: {[k: string]: FormatData} = {
-	
+
 	// New Rulesets
 	///////////////////////////////////////////////////////////////////
-	
+
 	nonicknameclause: {
 		effectType: 'ValidatorRule',
 		name: 'No Nickname Clause',

@@ -1523,8 +1523,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHitOrder: 1,
 		onDamagingHit(damage, target, source, move) {
 			if (!target.hp) {
-				this.heal(target.baseMaxhp, source, target, this.effect);
-			} else if (move.flags['bite'] && !source.status) {
+				this.heal(target.baseMaxhp, source, target);
+			} else if (move.flags['bite']) {
 				this.heal(target.baseMaxhp / 8, source, target);
 			}
 		},
@@ -1972,6 +1972,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	sodaspreader: {
 		isNonstandard: "Thing",
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (move.flags['soda']) {
+				this.field.setTerrain('stickysituation');
+			}
+		},
 		name: "Soda Spreader",
 		rating: 4,
 		num: 1191,
@@ -2078,6 +2083,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Quick Blade",
 		rating: 4,
 		num: 1191,
+	},
+	resonance: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			if (target.getMoveHitData(move).typeMod > 0) {
+				if (move.category === 'Physical') {
+					this.boost({atk: 2});
+				} else if (move.category === 'Special') {
+					this.boost({atk: 2});
+				}
+			}
+		},
+		name: "Resonance",
+		rating: 2.5,
+		num: 154,
 	},
 
 	// BASE GAME

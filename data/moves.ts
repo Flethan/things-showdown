@@ -1952,13 +1952,51 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		name: "Rootbeer Blast",
 		pp: 5,
-		flags: {protect: 1, mirror: 1},
+		flags: {protect: 1, mirror: 1, soda: 1},
 		priority: 0,
 		secondary: null,
 		target: "normal",
 		type: "Liquid",
 		zMove: {basePower: 160},
 		contestType: "Cute",
+	},
+	stickysituation: {
+		num: 433,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Sticky Situation",
+		pp: 10,
+		priority: 0,
+		flags: {mirror: 1, soda: 1},
+		pseudoWeather: 'stickysituation',
+		condition: {
+			duration: 5,
+			onStart(target, source, effect) {
+				this.add('-fieldstart', 'move: Sticky Situation', '[of] ' + source);
+			},
+			onFractionalPriority(priority, pokemon, target, move) {
+				if (move.flags['soda']) {
+					return 0.1;
+				}
+			},
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.flags['soda'] && !defender.isSemiInvulnerable()) {
+					this.debug('soda boost');
+					return this.chainModify(1.2);
+				}
+			},
+			onEnd() {
+				this.add('-fieldend', 'move: Sticky Situation');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Fish",
+		zMove: {boost: {accuracy: 1}},
+		contestType: "Clever",
 	},
 
 	// Music
