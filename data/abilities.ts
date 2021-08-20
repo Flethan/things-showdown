@@ -2134,6 +2134,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 113,
 	},
 	uhoh: {
+		isNonstandard: "Thing",
 		name: "Uh oh",
 		onDamagingHit(damage, target, source, move) {
 			const sourceAbility = source.getAbility();
