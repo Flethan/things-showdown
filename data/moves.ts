@@ -858,7 +858,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 				} else {
 					let types = pokemon.getTypes(true);
-					let newTypes = [];
+					const newTypes = [];
 					let skip = false;
 					for (const type of types) {
 						if (type === 'Green' && !skip) {
@@ -869,7 +869,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 					if (!types.length) types = ['???'];
 					const addedType = pokemon.addedType;
-					pokemon.setType(types);
+					pokemon.setType(newTypes);
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 					if (addedType) {
 						if (!pokemon.addType(addedType)) return false;
@@ -1609,21 +1609,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!pokemon.hasType('Green')) return;
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 			} else {
 				let types = pokemon.getTypes(true);
-				for (const [index, type] of types.entries()) {
-					if (type === 'Green') {
-						types.splice(index, 1);
-						break;
+				const newTypes = [];
+				let skip = false;
+				for (const type of types) {
+					if (type === 'Green' && !skip) {
+						skip = true;
+						continue;
 					}
+					newTypes.push(type);
 				}
 				if (!types.length) types = ['???'];
 				const addedType = pokemon.addedType;
-				pokemon.setType(types);
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+				pokemon.setType(newTypes);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 				if (addedType) {
-					pokemon.addType(addedType);
+					if (!pokemon.addType(addedType)) return false;
 					this.add('-start', pokemon, 'typeadd', addedType);
 				}
 			}
