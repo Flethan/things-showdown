@@ -2103,6 +2103,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			const hitMove = this.dex.getActiveMove('Ball Bounce');
+			if(move.name === 'Riposte') return;
 			hitMove.category = move.category;
 			hitMove.basePower = move.basePower / 2;
 			if (source !== null && target !== null) {
