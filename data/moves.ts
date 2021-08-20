@@ -869,7 +869,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					pokemon.setType(types);
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 					if (addedType) {
-						pokemon.addType(addedType);
+						if (!pokemon.addType(addedType)) return false;
 						this.add('-start', pokemon, 'typeadd', addedType);
 					}
 				}
@@ -1597,8 +1597,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
-		onBasePower(basePower, pokemon) {
-			if (pokemon.hasType('Green')) {
+		onBasePower(basePower, source, target) {
+			if (target.hasType('Green')) {
 				return this.chainModify(2);
 			}
 		},
