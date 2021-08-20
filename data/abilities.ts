@@ -531,14 +531,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	lemon: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
-			if (pokemon.species.id !== 'Lemon') {
+			if (pokemon.species.name !== 'Lemon') {
 				pokemon.formeChange('Lemon');
 			}
 		},
 		onEnd(pokemon) {
-			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' && (pokemon.transformed || !pokemon.hp)) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' && pokemon.transformed) {
 				pokemon.formeChange(pokemon.set.species);
-			} else if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !pokemon.switchFlag) {
+			} else if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !pokemon.beingCalledBack && !pokemon.switchFlag) {
 				pokemon.formeChange('<empty>');
 			}
 		},
@@ -2103,7 +2103,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			const hitMove = this.dex.getActiveMove('Ball Bounce');
-			if(move.name === 'Riposte') return;
+			if (move.name === 'Riposte') return;
 			hitMove.category = move.category;
 			hitMove.basePower = move.basePower / 2;
 			if (source !== null && target !== null && target.hp) {
@@ -2118,14 +2118,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	shininghair: {
 		isNonstandard: "Thing",
 		onSourceEffectiveness(typeMod, target, type, move) {
-			if(move.type === 'Hair') {
+			if (move.type === 'Hair') {
 				return typeMod + this.dex.getEffectiveness('Yellow', type);
 			}
 		},
 		onModifyMovePriority: -5,
 		onModifyMove(move) {
+			if (move.type !== 'Hair') return;
 			if (!move.ignoreImmunity) move.ignoreImmunity = {};
-			if (move.ignoreImmunity !== true && move.type === 'Hair') {
+			if (move.ignoreImmunity !== true) {
 				move.ignoreImmunity['Yellow'] = true;
 			}
 		},

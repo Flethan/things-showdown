@@ -852,9 +852,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
+				if (!pokemon.hasType('Green')) return;
 				if (pokemon.addedType === 'Green') {
 					if (!pokemon.addType('')) return false;
-					this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
+					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 				} else {
 					let types = pokemon.getTypes(true);
 					for (const [index, type] of types.entries()) {
@@ -864,8 +865,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 						}
 					}
 					if (!types.length) types = ['???'];
+					const addedType = pokemon.addedType;
 					pokemon.setType(types);
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+					if (addedType) {
+						pokemon.addType(addedType);
+						this.add('-start', pokemon, 'typeadd', addedType);
+					}
 				}
 			},
 		},
@@ -1597,9 +1603,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(pokemon) {
+			if (!pokemon.hasType('Green')) return;
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typeadd', '', '[from] move: Prune');
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
 			} else {
 				let types = pokemon.getTypes(true);
 				for (const [index, type] of types.entries()) {
@@ -1609,8 +1616,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (!types.length) types = ['???'];
+				const addedType = pokemon.addedType;
 				pokemon.setType(types);
 				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
+				if (addedType) {
+					pokemon.addType(addedType);
+					this.add('-start', pokemon, 'typeadd', addedType);
+				}
 			}
 		},
 		secondary: null,
