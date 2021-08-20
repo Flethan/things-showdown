@@ -2077,6 +2077,30 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
 	},
+	searke: {
+		num: -439,
+		name: "Searke",
+		types: ["Liquid", "Sport"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
+		abilities: {0: "Bouncy"},
+		heightm: 0.2,
+		weightkg: 0.1,
+		color: "Blue",
+		eggGroups: ["Undiscovered"],
+	},
+	gorn: {
+		num: -440,
+		name: "Gorn",
+		types: ["Yellow", "Hair"],
+		gender: "N",
+		baseStats: {hp: 60, atk: 60, def: 82, spa: 150, spd: 170, spe: 78},
+		abilities: {0: "Shining Hair"},
+		heightm: 0.8,
+		weightkg: 22.0,
+		color: "Gray",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

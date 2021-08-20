@@ -3604,6 +3604,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spd: 1}},
 		contestType: "Cool",
 	},
+	ballbounce: {
+		num: 709,
+		accuracy: 100,
+		basePower: 0,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Ball Bounce",
+		pp: 1,
+		priority: 1,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Sport",
+		contestType: "Cool",
+	},
 
 	// Sword
 	sharpslash: {

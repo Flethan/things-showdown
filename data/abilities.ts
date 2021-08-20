@@ -2099,6 +2099,39 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 154,
 	},
+	bouncy: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			const hitMove = this.dex.getActiveMove('Ball Bounce');
+			hitMove.category = move.category;
+			hitMove.basePower = move.basePower / 2;
+			if (source !== null && target !== null) {
+				this.add('-activate', target, 'ability: Bouncy');
+				this.actions.trySpreadMoveHit([target], source, hitMove, true);
+			}
+		},
+		name: "Bouncy",
+		rating: 2.5,
+		num: 154,
+	},
+	shininghair: {
+		isNonstandard: "Thing",
+		onEffectiveness(typeMod, target, type, move) {
+			if(move.type === 'Hair') {
+				return typeMod + this.dex.getEffectiveness('Yellow', type);
+			}
+		},
+		onModifyMovePriority: -5,
+		onModifyMove(move) {
+			if (!move.ignoreImmunity) move.ignoreImmunity = {};
+			if (move.ignoreImmunity !== true && move.type === 'Hair') {
+				move.ignoreImmunity['Yellow'] = true;
+			}
+		},
+		name: "Shining Hair",
+		rating: 3,
+		num: 113,
+	},
 
 	// BASE GAME
 	noability: {
