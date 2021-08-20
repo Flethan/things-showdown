@@ -2117,8 +2117,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	shininghair: {
 		isNonstandard: "Thing",
-		onSourceEffectiveness(typeMod, target, type, move) {
-			if (move.type === 'Hair') {
+		/* onSourceEffectiveness(typeMod, target, type, move) {
+			if(move.type === 'Hair') {
 				return typeMod + this.dex.getEffectiveness('Yellow', type);
 			}
 		},
@@ -2128,6 +2128,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!move.ignoreImmunity) move.ignoreImmunity = {};
 			if (move.ignoreImmunity !== true) {
 				move.ignoreImmunity['Yellow'] = true;
+			}
+		}, */
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (move.type === 'Hair') {
+				this.field.setWeather('yellowshish');
 			}
 		},
 		name: "Shining Hair",
