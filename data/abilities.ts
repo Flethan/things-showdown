@@ -2106,7 +2106,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if(move.name === 'Riposte') return;
 			hitMove.category = move.category;
 			hitMove.basePower = move.basePower / 2;
-			if (source !== null && target !== null) {
+			if (source !== null && target !== null && target.hp) {
 				this.add('-activate', target, 'ability: Bouncy');
 				this.actions.trySpreadMoveHit([source], target, hitMove, true);
 			}
@@ -2144,6 +2144,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const oldAbility = source.setAbility('uhoh', target);
 				if (oldAbility) {
 					this.add('-activate', target, 'ability: Uh oh', this.dex.abilities.get(oldAbility).name, '[of] ' + source);
+					this.add('-ability', source, source.getAbility().name, '[from] ability: Uh oh');
 				}
 			}
 		},
@@ -2156,6 +2157,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const oldAbility = target.setAbility('uhoh', source);
 				if (oldAbility) {
 					this.add('-activate', source, 'ability: Uh oh', this.dex.abilities.get(oldAbility).name, '[of] ' + target);
+					this.add('-ability', target, target.getAbility().name, '[from] ability: Uh oh');
 				}
 			}
 		},
