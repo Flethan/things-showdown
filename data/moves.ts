@@ -1585,7 +1585,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		num: 682,
 		accuracy: 100,
 		basePower: 50,
-		category: "Special",
+		category: "Physical",
 		name: "Prune",
 		isNonstandard: "Thing",
 		pp: 10,
