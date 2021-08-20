@@ -2107,7 +2107,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			hitMove.basePower = move.basePower / 2;
 			if (source !== null && target !== null) {
 				this.add('-activate', target, 'ability: Bouncy');
-				this.actions.trySpreadMoveHit([target], source, hitMove, true);
+				this.actions.trySpreadMoveHit([source], target, hitMove, true);
 			}
 		},
 		name: "Bouncy",
