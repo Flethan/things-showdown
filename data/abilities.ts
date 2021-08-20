@@ -2117,7 +2117,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	shininghair: {
 		isNonstandard: "Thing",
-		onEffectiveness(typeMod, target, type, move) {
+		onSourceEffectiveness(typeMod, target, type, move) {
 			if(move.type === 'Hair') {
 				return typeMod + this.dex.getEffectiveness('Yellow', type);
 			}
