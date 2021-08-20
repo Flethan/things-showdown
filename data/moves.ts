@@ -858,11 +858,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
 				} else {
 					let types = pokemon.getTypes(true);
-					for (const [index, type] of types.entries()) {
-						if (type === 'Green') {
-							types.splice(index, 1);
-							break;
+					let newTypes = [];
+					let skip = false;
+					for (const type of types) {
+						if (type === 'Green' && !skip) {
+							skip = true;
+							continue;
 						}
+						newTypes.push(type);
 					}
 					if (!types.length) types = ['???'];
 					const addedType = pokemon.addedType;
