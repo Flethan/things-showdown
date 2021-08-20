@@ -2101,6 +2101,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
 	},
+	bean: {
+		num: -441,
+		name: "Bean",
+		types: ["Green"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 60, atk: 70, def: 80, spa: 20, spd: 70, spe: 80},
+		abilities: {0: "Uh oh"},
+		heightm: 0.2,
+		weightkg: 4.0,
+		color: "Green",
+		eggGroups: ["Grass"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

@@ -2132,6 +2132,35 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 113,
 	},
+	uhoh: {
+		name: "Uh oh",
+		onDamagingHit(damage, target, source, move) {
+			const sourceAbility = source.getAbility();
+			if (sourceAbility.isPermanent || sourceAbility.id === 'uhoh') {
+				return;
+			}
+			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
+				const oldAbility = source.setAbility('uhoh', target);
+				if (oldAbility) {
+					this.add('-activate', target, 'ability: Uh oh', this.dex.abilities.get(oldAbility).name, '[of] ' + source);
+				}
+			}
+		},
+		onSourceHit(target, source, move) {
+			const targetAbility = target.getAbility();
+			if (targetAbility.isPermanent || targetAbility.id === 'uhoh') {
+				return;
+			}
+			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
+				const oldAbility = target.setAbility('uhoh', source);
+				if (oldAbility) {
+					this.add('-activate', source, 'ability: Uh oh', this.dex.abilities.get(oldAbility).name, '[of] ' + target);
+				}
+			}
+		},
+		rating: 2,
+		num: 152,
+	},
 
 	// BASE GAME
 	noability: {
