@@ -375,9 +375,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onModifyDef(def, pokemon) {
 			return this.modify(def, 0.5);
 		},
-		onAfterMoveSecondaryPriority: 20,
-		onAfterMoveSecondary(source, target, move) {
-			if (source !== target) this.damage(source.baseMaxhp / 6);
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (source && source !== target && move && move.category !== 'Status') {
+				this.damage(source.baseMaxhp / 6);
+			}
 		},
 	},
 
