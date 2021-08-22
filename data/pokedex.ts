@@ -2113,6 +2113,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		eggGroups: ["Grass"],
 	},
+	kaijuv: {
+		num: -442,
+		name: "Kaijuv",
+		types: ["No"],
+		genderRatio: {M: 0.3, F: 0.7},
+		baseStats: {hp: 35, atk: 35, def: 35, spa: 35, spd: 35, spe: 35},
+		abilities: {0: "Primitive"},
+		heightm: 0.2,
+		weightkg: 1.0,
+		evos: ["Gigaroach"],
+		color: "Black",
+		eggGroups: ["Monster"],
+	},
+	gigaroach: {
+		num: -443,
+		name: "Gigaroach",
+		types: ["No", "Arthropod"],
+		genderRatio: {M: 0.3, F: 0.7},
+		baseStats: {hp: 225, atk: 145, def: 145, spa: 55, spd: 55, spe: 45},
+		abilities: {0: "Colossal"},
+		heightm: 99.9,
+		weightkg: 199.9,
+		prevo: "Kaijuv",
+		color: "Orange",
+		eggGroups: ["Monster"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

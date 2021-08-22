@@ -2171,6 +2171,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 152,
 	},
+	colossal: {
+		isNonstandard: "Thing",
+
+		onDamagingHit(damage, target, source, move) {
+			if (move.category === 'Physical') {
+				this.boost({def: -1}, target, target);
+			} else if (move.category === 'Special') {
+				this.boost({spd: -1}, target, target);
+			}
+		},
+		onSourceHit(target, source, move) {
+			if (move.category === 'Physical') {
+				this.boost({def: -1}, target, target);
+			} else if (move.category === 'Special') {
+				this.boost({spd: -1}, target, target);
+			}
+		},
+		onSwitchOut(pokemon) {
+			pokemon.damage(pokemon.baseMaxhp / 3, pokemon);
+		},
+
+		name: "Colossal",
+		rating: 3,
+		num: 113,
+	},
 
 	// BASE GAME
 	noability: {
