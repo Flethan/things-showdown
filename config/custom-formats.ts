@@ -6,7 +6,7 @@ export const Formats: FormatList = [
 
 	{
 		section: "Strategic Things",
-		column: 2,
+		column: 3,
 	},
 	{
 		name: "[Things] Random Strategic Singles",

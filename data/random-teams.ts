@@ -788,7 +788,7 @@ export class RandomTeams {
 		const pokemonPool = [];
 		for (const id in this.dex.data.FormatsData) {
 			let species = this.dex.species.get(id);
-			if (species.gen > this.gen || exclude.includes(species.id)) continue;
+			if (species.gen > this.gen || exclude.includes(species.id) || species.isNonstandard !== 'Thing') continue;
 			if (isMonotype) {
 				if (!species.types.includes(type)) continue;
 				if (typeof species.battleOnly === 'string') {
