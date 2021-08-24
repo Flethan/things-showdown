@@ -3,8 +3,21 @@
 
 export const Formats: FormatList = [
 //Things
-	///////////////////////////////////////////////////////////////////
-	
+
+	{
+		section: "Strategic Things",
+		column: 2,
+	},
+	{
+		name: "[Things] Random Strategic Singles",
+		desc: `Randomized teams of level-balanced Things`,
+
+		mod: 'gen8',
+		team: 'randomGThing',
+		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
+	},
+
+
 	{
 		section: "Things",
 		column: 1,
@@ -85,6 +98,84 @@ export const Formats: FormatList = [
 		ruleset: ['Obtainable Formes', 'Same Type Clause', 'HP Percentage Mod', 'Cancel Mod', 'Dynamax Clause'],
 	},
 	{
+		section: "Things 4-Player",
+		column: 1,
+	},
+	{
+		name: "[Things] Free-For-All Battle",
+
+		mod: 'gen8',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause'],
+	},
+	{
+		name: "[Things] Multi Battle",
+
+		mod: 'gen8',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause', 'No Nickname Clause',
+		],
+	},
+	{
+		section: "Things 4-Player Random",
+		column: 1,
+	},
+	{
+		name: "[Things] Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause',
+		],
+	},
+	{
+		name: "[Things] Monotype Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Same Type Clause', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Monotype Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Same Type Clause', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause',
+		],
+	},
+	{
 		section: "Hackthings",
 	},
 	{
@@ -112,6 +203,30 @@ export const Formats: FormatList = [
 		mod: 'gen8',
 		team: 'randomHThing',
 		ruleset: ['Obtainable Formes', 'HP Percentage Mod', 'Cancel Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Random Hackthings Free-For-All",
+
+		mod: 'gen8',
+		team: 'randomHThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Random Hackthings Multi",
+
+		mod: 'gen8',
+		team: 'randomHThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause',
+		],
 	},
 
 	{
