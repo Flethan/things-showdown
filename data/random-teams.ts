@@ -686,6 +686,9 @@ export class RandomTeams {
 			const tier = species.tier;
 			const types = species.types;
 			const typeCombo = types.slice().sort().join();
+			
+			/*
+
 			// Dynamically scale limits for different team sizes. The default and minimum value is 1.
 			const limitFactor = Math.round(this.maxTeamSize / 6) || 1;
 
@@ -711,6 +714,8 @@ export class RandomTeams {
 
 			// Limit one of any type combination, two in Monotype
 			if (!this.forceMonotype && typeComboCount[typeCombo] >= (isMonotype ? 2 : 1) * limitFactor) continue;
+
+			*/
 
 			// The Pokemon of the Day
 			//if (potd?.exists && (pokemon.length === 1 || this.maxTeamSize === 1)) species = potd;
