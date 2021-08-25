@@ -720,7 +720,7 @@ export class RandomTeams {
 			// The Pokemon of the Day
 			//if (potd?.exists && (pokemon.length === 1 || this.maxTeamSize === 1)) species = potd;
 
-			const set = this.randomSet(species, teamDetails, pokemon.length === 0,
+			const set = this.randomThingSet(species, teamDetails, pokemon.length === 0,
 				this.format.gameType !== 'singles', this.dex.formats.getRuleTable(this.format).has('dynamaxclause'));
 
 			// Okay, the set passes, add it to our team
@@ -805,6 +805,481 @@ export class RandomTeams {
 		}
 		return pokemonPool;
 	}
+
+	randomThingSet(
+		species: string | Species,
+		teamDetails: RandomTeamsTypes.TeamDetails = {},
+		isLead = false,
+		isDoubles = false,
+		isNoDynamax = false
+	): RandomTeamsTypes.RandomSet {
+		species = this.dex.species.get(species);
+		let forme = species.name;
+		let gmax = false;
+
+		if (typeof species.battleOnly === 'string') {
+			// Only change the forme. The species has custom moves, and may have different typing and requirements.
+			forme = species.battleOnly;
+		}
+		if (species.cosmeticFormes) {
+			forme = this.sample([species.name].concat(species.cosmeticFormes));
+		}
+		if (species.name.endsWith('-Gmax')) {
+			forme = species.name.slice(0, -5);
+			gmax = true;
+		}
+
+		const randMoves =
+			(isDoubles && species.randomDoubleBattleMoves) ||
+			(isNoDynamax && species.randomBattleNoDynamaxMoves) ||
+			species.randomBattleMoves;
+		const movePool = (randMoves || Object.keys(this.dex.data.Learnsets[species.id]!.learnset!)).slice();
+		if (this.format.gameType === 'multi' || this.format.gameType === 'freeforall') {
+			// Random Multi Battle uses doubles move pools, but Ally Switch fails in multi battles
+			// Random Free-For-All also uses doubles move pools, for now
+			const allySwitch = movePool.indexOf('allyswitch');
+			if (allySwitch > -1) {
+				if (movePool.length > 4) {
+					this.fastPop(movePool, allySwitch);
+				} else {
+					// Ideally, we'll never get here, but better to have a move that usually does nothing than one that always does
+					movePool[allySwitch] = 'sleeptalk';
+				}
+			}
+		}
+		const rejectedPool = [];
+		let ability = '';
+		let item = undefined;
+
+		const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
+		const ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
+
+		const types = new Set(species.types);
+		const abilities = new Set(Object.values(species.abilities));
+		if (species.unreleasedHidden) abilities.delete(species.abilities.H);
+
+		const moves = new Set<string>();
+		let counter: MoveCounter;
+
+		do {
+			// Choose next 4 moves from learnset/viable moves and add them to moves list:
+			const pool = (movePool.length ? movePool : rejectedPool);
+			while (moves.size < 4 && pool.length) {
+				const moveid = this.sampleNoReplace(pool);
+				moves.add(moveid);
+			}
+
+			counter = this.queryMoves(moves, species.types, abilities, movePool);
+			const runEnforcementChecker = (checkerName: string) => {
+				if (!this.moveEnforcementCheckers[checkerName]) return false;
+				return this.moveEnforcementCheckers[checkerName](
+					movePool, moves, abilities, types, counter, species as Species, teamDetails
+				);
+			};
+
+			// Iterate through the moves again, this time to cull them:
+			for (const moveid of moves) {
+				const move = this.dex.moves.get(moveid);
+
+				let {cull, isSetup} = this.shouldCullMove(
+					move, types, moves, abilities, counter,
+					movePool, teamDetails, species, isLead, isDoubles, isNoDynamax
+				);
+
+				if (move.id !== 'photongeyser' && (
+					(move.category === 'Physical' && counter.setupType === 'Special') ||
+					(move.category === 'Special' && counter.setupType === 'Physical')
+				)) {
+					// Reject STABs last in case the setup type changes later on
+					const stabs = counter.get(species.types[0]) + (species.types[1] ? counter.get(species.types[1]) : 0);
+					if (!types.has(move.type) || stabs > 1 || counter.get(move.category) < 2) cull = true;
+				}
+
+				// Pokemon should have moves that benefit their types, stats, or ability
+				const isLowBP = move.basePower && move.basePower < 50;
+
+				// Genesect-Douse should never reject Techno Blast
+				const moveIsRejectable = !(species.id === 'genesectdouse' && move.id === 'technoblast') && (
+					move.category === 'Status' ||
+					!types.has(move.type) ||
+					(isLowBP && !move.multihit && !abilities.has('Technician'))
+				);
+				// Setup-supported moves should only be rejected under specific circumstances
+				const notImportantSetup = (
+					!counter.setupType ||
+					counter.setupType === 'Mixed' ||
+					(counter.get(counter.setupType) + counter.get('Status') > 3 && !counter.get('hazards')) ||
+					(move.category !== counter.setupType && move.category !== 'Status')
+				);
+
+				if (moveIsRejectable && (
+					!cull && !isSetup && !move.weather && !move.stallingMove && notImportantSetup && !move.damage &&
+					(isDoubles ? this.unrejectableMovesInDoubles(move) : this.unrejectableMovesInSingles(move))
+				)) {
+					// There may be more important moves that this Pokemon needs
+					if (
+						// Pokemon should have at least one STAB move
+						(!counter.get('stab') && counter.get('physicalpool') + counter.get('specialpool') > 0 && move.id !== 'stickyweb') ||
+						// Swords Dance Mew should have Brave Bird
+						(moves.has('swordsdance') && species.id === 'mew' && runEnforcementChecker('Flying')) ||
+						// Dhelmise should have Anchor Shot
+						(abilities.has('Steelworker') && runEnforcementChecker('Steel')) ||
+						// Check for miscellaneous important moves
+						(!isDoubles && runEnforcementChecker('recovery') && move.id !== 'stickyweb') ||
+						runEnforcementChecker('screens') ||
+						runEnforcementChecker('misc') ||
+						(isLead && runEnforcementChecker('lead')) ||
+						(moves.has('leechseed') && runEnforcementChecker('leechseed'))
+					) {
+						cull = true;
+					// Pokemon should have moves that benefit their typing
+					} else if (move.id !== 'stickyweb') { // Don't cull Sticky Web in type-based enforcement
+						for (const type of types) {
+							if (runEnforcementChecker(type)) {
+								cull = true;
+							}
+						}
+					}
+				}
+
+				// Sleep Talk shouldn't be selected without Rest
+				if (move.id === 'rest' && cull) {
+					const sleeptalk = movePool.indexOf('sleeptalk');
+					if (sleeptalk >= 0) {
+						if (movePool.length < 2) {
+							cull = false;
+						} else {
+							this.fastPop(movePool, sleeptalk);
+						}
+					}
+				}
+
+				// Riposte shouldn't be selected without Parry
+				if (move.id === 'parry' && cull) {
+					const riposte = movePool.indexOf('riposte');
+					if (riposte >= 0) {
+						if (movePool.length < 2) {
+							cull = false;
+						} else {
+							this.fastPop(movePool, riposte);
+						}
+					}
+				}
+
+				// Remove rejected moves from the move list
+				if (cull && movePool.length) {
+					if (move.category !== 'Status' && !move.damage) rejectedPool.push(moveid);
+					moves.delete(moveid);
+					break;
+				}
+				if (cull && rejectedPool.length) {
+					moves.delete(moveid);
+					break;
+				}
+			}
+		} while (moves.size < 4 && (movePool.length || rejectedPool.length));
+
+		const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
+		Utils.sortBy(abilityData, abil => -abil.rating);
+
+		if (abilityData[1]) {
+			// Sort abilities by rating with an element of randomness
+			if (abilityData[2] && abilityData[1].rating <= abilityData[2].rating && this.randomChance(1, 2)) {
+				[abilityData[1], abilityData[2]] = [abilityData[2], abilityData[1]];
+			}
+			if (abilityData[0].rating <= abilityData[1].rating) {
+				if (this.randomChance(1, 2)) [abilityData[0], abilityData[1]] = [abilityData[1], abilityData[0]];
+			} else if (abilityData[0].rating - 0.6 <= abilityData[1].rating) {
+				if (this.randomChance(2, 3)) [abilityData[0], abilityData[1]] = [abilityData[1], abilityData[0]];
+			}
+
+			// Start with the first abiility and work our way through, culling as we go
+			ability = abilityData[0].name;
+			let rejectAbility = false;
+			do {
+				rejectAbility = this.shouldCullAbility(
+					ability, types, moves, abilities, counter, movePool, teamDetails, species, isDoubles, isNoDynamax
+				);
+
+				if (rejectAbility) {
+					// Lopunny, and other Facade users, don't want Limber, even if other abilities are poorly rated,
+					// since paralysis would arguably be good for them.
+					const limberFacade = moves.has('facade') && ability === 'Limber';
+
+					if (ability === abilityData[0].name && (abilityData[1].rating >= 1 || limberFacade)) {
+						ability = abilityData[1].name;
+					} else if (ability === abilityData[1].name && abilityData[2] && (abilityData[2].rating >= 1 || limberFacade)) {
+						ability = abilityData[2].name;
+					} else {
+						// Default to the highest rated ability if all are rejected
+						ability = abilityData[0].name;
+						rejectAbility = false;
+					}
+				}
+			} while (rejectAbility);
+
+			// Hardcoded abilities for certain contexts
+			if (forme === 'Copperajah' && gmax) {
+				ability = 'Heavy Metal';
+			} else if (abilities.has('Guts') && (
+				species.id === 'gurdurr' || species.id === 'throh' ||
+				moves.has('facade') || (moves.has('rest') && moves.has('sleeptalk'))
+			)) {
+				ability = 'Guts';
+			} else if (abilities.has('Moxie') && (counter.get('Physical') > 3 || moves.has('bounce')) && !isDoubles) {
+				ability = 'Moxie';
+			} else if (isDoubles) {
+				if (abilities.has('Competitive') && ability !== 'Shadow Tag' && ability !== 'Strong Jaw') ability = 'Competitive';
+				if (abilities.has('Friend Guard')) ability = 'Friend Guard';
+				if (abilities.has('Gluttony') && moves.has('recycle')) ability = 'Gluttony';
+				if (abilities.has('Guts')) ability = 'Guts';
+				if (abilities.has('Harvest')) ability = 'Harvest';
+				if (abilities.has('Healer') && (
+					abilities.has('Natural Cure') ||
+					(abilities.has('Aroma Veil') && this.randomChance(1, 2))
+				)) ability = 'Healer';
+				if (abilities.has('Intimidate')) ability = 'Intimidate';
+				if (abilities.has('Klutz') && ability === 'Limber') ability = 'Klutz';
+				if (abilities.has('Magic Guard') && ability !== 'Friend Guard' && ability !== 'Unaware') ability = 'Magic Guard';
+				if (abilities.has('Ripen')) ability = 'Ripen';
+				if (abilities.has('Stalwart')) ability = 'Stalwart';
+				if (abilities.has('Storm Drain')) ability = 'Storm Drain';
+				if (abilities.has('Telepathy') && (ability === 'Pressure' || abilities.has('Analytic'))) ability = 'Telepathy';
+			}
+		} else {
+			ability = abilityData[0].name;
+		}
+
+		// item = !isDoubles ? 'Leftovers' : 'Sitrus Berry';
+		if (species.requiredItems) {
+			item = this.sample(species.requiredItems);
+		// First, the extra high-priority items
+		} else {
+
+			item = this.getThingItem(ability, types, moves, counter, teamDetails, species, isLead, isDoubles);
+
+			if(item === undefined ) {
+				item = this.getHighPriorityItem(ability, types, moves, counter, teamDetails, species, isLead, isDoubles);
+			}
+			if (item === undefined && isDoubles) {
+				item = this.getDoublesItem(ability, types, moves, abilities, counter, teamDetails, species);
+			}
+			if (item === undefined) {
+				item = this.getMediumPriorityItem(ability, moves, counter, species, isLead, isDoubles, isNoDynamax);
+			}
+			if (item === undefined) {
+				item = this.getLowPriorityItem(
+					ability, types, moves, abilities, counter, teamDetails, species, isLead, isDoubles, isNoDynamax
+				);
+			}
+
+			// fallback
+			if (item === undefined) item = isDoubles ? 'Sitrus Berry' : 'Leftovers';
+		}
+
+		// For Trick / Switcheroo
+		if (item === 'Leftovers' && types.has('Poison')) {
+			item = 'Black Sludge';
+		}
+		if (species.baseSpecies === 'Pikachu' && !gmax) {
+			forme = 'Pikachu' + this.sample(['', '-Original', '-Hoenn', '-Sinnoh', '-Unova', '-Kalos', '-Alola', '-Partner', '-World']);
+		}
+
+		let level: number;
+		if (isDoubles && species.randomDoubleBattleLevel) {
+			level = species.randomDoubleBattleLevel;
+		} else if (isNoDynamax) {
+			const tier = species.name.endsWith('-Gmax') ? this.dex.species.get(species.changesFrom).tier : species.tier;
+			const tierScale: {[k: string]: number} = {
+				Uber: 76,
+				OU: 80,
+				UUBL: 81,
+				UU: 82,
+				RUBL: 83,
+				RU: 84,
+				NUBL: 85,
+				NU: 86,
+				PUBL: 87,
+				PU: 88, "(PU)": 88, NFE: 88,
+			};
+			const customScale: {[k: string]: number} = {
+				// These Pokemon are too strong and need a lower level
+				zaciancrowned: 65, calyrexshadow: 68, xerneas: 70, necrozmaduskmane: 72, zacian: 72, kyogre: 73, eternatus: 73,
+				zekrom: 74, marshadow: 75, glalie: 78, urshifurapidstrike: 79, haxorus: 80, inteleon: 80,
+				cresselia: 83, octillery: 84, jolteon: 84, swoobat: 84, dugtrio: 84, slurpuff: 84, polteageist: 84,
+				wobbuffet: 86, scrafty: 86,
+				// These Pokemon are too weak and need a higher level
+				delibird: 100, vespiquen: 96, pikachu: 92, shedinja: 92, solrock: 90, arctozolt: 88, reuniclus: 87,
+				decidueye: 87, noivern: 85, magnezone: 82, slowking: 81,
+			};
+			level = customScale[species.id] || tierScale[tier];
+		} else if (species.randomBattleLevel) {
+			level = species.randomBattleLevel;
+		} else {
+			level = 80;
+		}
+
+
+		// Prepare optimal HP
+		const srImmunity = ability === 'Magic Guard' || item === 'Heavy-Duty Boots';
+		const srWeakness = srImmunity ? 0 : this.dex.getEffectiveness('Rock', species);
+		while (evs.hp > 1) {
+			const hp = Math.floor(Math.floor(2 * species.baseStats.hp + ivs.hp + Math.floor(evs.hp / 4) + 100) * level / 100 + 10);
+			const multipleOfFourNecessary = (moves.has('substitute') && (
+				item === 'Sitrus Berry' ||
+				item === 'Salac Berry' ||
+				ability === 'Power Construct'
+			));
+			if (multipleOfFourNecessary) {
+				// Two Substitutes should activate Sitrus Berry
+				if (hp % 4 === 0) break;
+			} else if (moves.has('bellydrum') && (item === 'Sitrus Berry' || ability === 'Gluttony')) {
+				// Belly Drum should activate Sitrus Berry
+				if (hp % 2 === 0) break;
+			} else if (moves.has('substitute') && moves.has('reversal')) {
+				// Reversal users should be able to use four Substitutes
+				if (hp % 4 > 0) break;
+			} else {
+				// Maximize number of Stealth Rock switch-ins
+				if (srWeakness <= 0 || hp % (4 / srWeakness) > 0) break;
+			}
+			evs.hp -= 4;
+		}
+
+		if (moves.has('shellsidearm') && item === 'Choice Specs') evs.atk -= 4;
+
+		// Minimize confusion damage
+		if (!counter.get('Physical') && !moves.has('transform') && (!moves.has('shellsidearm') || !counter.get('Status'))) {
+			evs.atk = 0;
+			ivs.atk = 0;
+		}
+
+		// Ensure Nihilego's Beast Boost gives it Special Attack boosts instead of Special Defense
+		if (forme === 'Nihilego') evs.spd -= 32;
+
+		if (moves.has('gyroball') || moves.has('trickroom')) {
+			evs.spe = 0;
+			ivs.spe = 0;
+		}
+
+		return {
+			name: species.baseSpecies,
+			species: forme,
+			gender: species.gender,
+			shiny: this.randomChance(1, 1024),
+			gigantamax: gmax,
+			level,
+			moves: Array.from(moves),
+			ability,
+			evs,
+			ivs,
+			item,
+		};
+	}
+
+	getThingItem(
+		ability: string,
+		types: Set<string>,
+		moves: Set<string>,
+		counter: MoveCounter,
+		teamDetails: RandomTeamsTypes.TeamDetails,
+		species: Species,
+		isLead: boolean,
+		isDoubles: boolean
+	) {
+
+		if (moves.has('mysticalsong')) return 'Environmental Accord';
+
+		const potentialItems = [];
+		if (ability !== 'Blind') {
+			if (ability !== 'Low-Lying') potentialItems.push('Non-Slip Shoes');
+			if (ability !== 'Omnipresent') potentialItems.push('Dimensional Tether');
+			if (ability !== 'High Pressure') potentialItems.push('Pressure Capsule');
+			potentialItems.push('pRNG Machine');
+			potentialItems.push('Blindfold');
+		}
+		if(moves.has('summonlocusts') || moves.has('nightfall') || moves.has('heatup') || moves.has('cooldown') ||
+			moves.has('weatherfront') || moves.has('yellowshift') || moves.has('submerge')) potentialItems.push('Environmental Accord');
+		if(moves.has('spatialexpansion') || moves.has('sudscape') || moves.has('nullland') ||
+			moves.has('springfloor')) potentialItems.push('Landscaping Permit');
+		if (ability !== 'Cleanup') potentialItems.push('Yellow Safety Vest');
+
+		if (isDoubles) potentialItems.push('Fish Bait');
+
+		potentialItems.push('Rechargeable Shoes');
+
+		if (!isLead) potentialItems.push('Gun');
+		
+		if (types.has('Arthropod')) potentialItems.push('Bug Bomb');
+
+		for (const move of moves) {
+			if(this.dex.moves.get(move).category === 'Status') continue;
+			if(this.dex.moves.get(move).flags['contact']) potentialItems.push('Knife');
+			switch (this.dex.moves.get(move).type) {
+				case 'Arthropod':
+					potentialItems.push('Jelly Treat');
+					continue;
+				case 'Dirt':
+					potentialItems.push('Extra Dirty Dirt');
+					continue;
+				case 'Far':
+					potentialItems.push('Too Far Juice');
+					continue;
+				case 'Fish':
+					potentialItems.push('Fish Scale');
+					continue;
+				case 'Green':
+					potentialItems.push('Greens');
+					continue;
+				case 'H':
+					potentialItems.push('H Dictionary');
+					continue;
+				case 'Hair':
+					potentialItems.push('Hairbrush');
+					continue;
+				case 'Industrial':
+					potentialItems.push('Machine Oil');
+					continue;
+				case 'Liquid':
+					potentialItems.push('Spray Bottle');
+					continue;
+				case 'Music':
+					potentialItems.push('Tuning Fork');
+					continue;
+				case 'Night':
+					potentialItems.push('Little Shadow');
+					continue;
+				case 'No':
+					potentialItems.push('Nothing');
+					continue;
+				case 'Science':
+					potentialItems.push('Beaker');
+					continue;
+				case 'Sport':
+					potentialItems.push('Rubber Ball');
+					continue;
+				case 'Sword':
+					potentialItems.push('Whetstone');
+					continue;
+				case 'Temperature':
+					potentialItems.push('Thermometer');
+					continue;
+				case 'Time':
+					potentialItems.push('Pocket Watch');
+					continue;
+				case 'Weather':
+					potentialItems.push('Barometer');
+					continue;
+				case 'Yellow':
+					potentialItems.push('Yellow Stuff');
+					continue;
+				}
+		}
+
+		return this.sampleNoReplace(potentialItems);
+
+	}
+
 
 	// BASE GAME
 	randomCCTeam(): RandomTeamsTypes.RandomSet[] {
