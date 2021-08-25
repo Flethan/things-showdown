@@ -1189,6 +1189,7 @@ export class RandomTeams {
 	) {
 
 		if (moves.has('mysticalsong')) return 'Environmental Accord';
+		if (moves.has('depthvanish')) return 'Dimensional Tether';
 
 		const potentialItems = [];
 		if (ability !== 'Blind') {

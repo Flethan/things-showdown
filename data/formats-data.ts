@@ -6,10 +6,12 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	hubert: {
+		randomBattleMoves: ['hullabaloo', 'hostile', 'arthrobite', 'scuttle', 'stealthstrike', 'sting', 'hsearch'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	swordhubert: {
+		randomBattleMoves: ['cheapstrike', 'disarmingstrike', 'quickdrawstrike', 'parry', 'riposte', 'sharpslash', 'stealthstrike', 'hit'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -22,6 +24,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	stratosoar: {
+		randomBattleMoves: ['yellowshift', 'greentackle', 'deposition', 'hit', 'toxicsmog', 'hide'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -38,6 +41,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	p3ntachoron: {
+		randomBattleMoves: ['banish', 'particlebeam', 'voidscream', 'noescape', 'voidtrap', 'kineticenergy', 'lookup'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -50,7 +54,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	puddlefly: {
-		randomBattleMoves: ["wetfloor", "submerge", "spill", "cascade"],
+		randomBattleMoves: ["wetfloor", "submerge", "spill", "cascade", 'coagulate', 'nuisancepest'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -63,6 +67,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	schisteka: {
+		randomBattleMoves: ['banish', 'bluejet', 'brilliantflash', 'chartreusebeam', 'moonbeam', 'nightmode', 'nuisancepest', 'winddispersal'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -75,11 +80,12 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	aviachthys: {
-		randomBattleMoves: ["vroom", "kineticenergy", "brilliantfish", "crashlanding"],
+		randomBattleMoves: ["vroom", "kineticenergy", "brilliantfish", "crashlanding", 'autoturret', 'kineticenergy', 'accelerate', 'bluejet'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	angrybeehive: {
+		randomBattleMoves: ['flashmissile', 'yellowsoak', 'sharpslash', 'hostile', 'yellowgigahit', 'sting'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -88,10 +94,12 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	anomallamalocarish: {
+		randomBattleMoves: ['ecdyse', 'arthrobite', 'landslide', 'gravebite', 'openturn', 'stealthstrike', 'fossilize'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	anomallolash: {
+		randomBattleMoves: ['parry', 'riposte', 'gravebite', 'arthrobite', 'openturn', 'sharpslash', 'stealthstrike'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -148,6 +156,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	sarcopharyn: {
+		randomBattleMoves: ['gravebite', 'minutehandslash', 'depthvanish', 'stealthstrike'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -176,6 +185,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	yellowater: {
+		randomBattleMoves: ['brilliantflash', 'yellowsoak', 'yellowshift', 'permafrost', 'wetfloor', 'stormcell', 'emanation'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -192,10 +202,12 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	hellow: {
+		randomBattleMoves: ['beamscatter', 'limboeclipse', 'yellowshift', 'yellowsoak'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	godbye: {
+		randomBattleMoves: ['voidtrap', 'noescape', 'banish', 'pinch', 'voidpunch', 'winddispersal'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -329,6 +341,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	crescent: {
+		randomBattleMoves: ['nightfall', 'hairycrash', 'stealthstrike', 'sharpslash'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -357,11 +370,12 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	sudzerpent: {
-		randomBattleMoves: ["swarm", "cascade", "alkalinesurge", "shootingstar"],
+		randomBattleMoves: ["swarm", "cascade", "alkalinesurge", "shootingstar", 'nuisancepest'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	sudsquire: {
+		randomBattleMoves: ['parry', 'riposte', 'soppingslap', 'alkalinesurge', 'bubbleshield'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -374,7 +388,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	heliquet: {
-		randomBattleMoves: ["hbond", "swarm", "cosmicdust", "particlebeam"],
+		randomBattleMoves: ["hbond", "swarm", "cosmicdust", "particlebeam", 'harbinger'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -415,6 +429,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	achrososaur: {
+		randomBattleMoves: ['sharpslash', 'stealthstrike', 'kineticenergy', 'gravebite', 'cheapstrike', 'crashlanding'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -451,6 +466,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	maestreen: {
+		randomBattleMoves: ['mysticalsong', 'dacapo', 'conduct', 'glissando'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -483,6 +499,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	uwu: {
+		randomBattleMoves: ['emanation', 'spray', 'banish', 'voidtrap', 'voidscream'],
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
