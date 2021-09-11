@@ -622,8 +622,8 @@ export class RandomTeams {
 		const type = this.forceMonotype || this.sample(typePool);
 
 		// PotD stuff
-		//const usePotD = global.Config && Config.potd && ruleTable.has('potd');
-		//const potd = usePotD ? this.dex.species.get(Config.potd) : null;
+		// const usePotD = global.Config && Config.potd && ruleTable.has('potd');
+		// const potd = usePotD ? this.dex.species.get(Config.potd) : null;
 
 		const baseFormes: {[k: string]: number} = {};
 
@@ -634,7 +634,7 @@ export class RandomTeams {
 
 		const pokemonPool = this.getThingPool(type, pokemon, isMonotype);
 		while (pokemonPool.length && pokemon.length < this.maxTeamSize) {
-			let species = this.dex.species.get(this.sampleNoReplace(pokemonPool));
+			const species = this.dex.species.get(this.sampleNoReplace(pokemonPool));
 			if (!species.exists) continue;
 
 			// Check if the forme has moves for random battle
@@ -686,7 +686,7 @@ export class RandomTeams {
 			const tier = species.tier;
 			const types = species.types;
 			const typeCombo = types.slice().sort().join();
-			
+
 			/*
 
 			// Dynamically scale limits for different team sizes. The default and minimum value is 1.
@@ -718,7 +718,7 @@ export class RandomTeams {
 			*/
 
 			// The Pokemon of the Day
-			//if (potd?.exists && (pokemon.length === 1 || this.maxTeamSize === 1)) species = potd;
+			// if (potd?.exists && (pokemon.length === 1 || this.maxTeamSize === 1)) species = potd;
 
 			const set = this.randomThingSet(species, teamDetails, pokemon.length === 0,
 				this.format.gameType !== 'singles', this.dex.formats.getRuleTable(this.format).has('dynamaxclause'));
@@ -1055,10 +1055,9 @@ export class RandomTeams {
 			item = this.sample(species.requiredItems);
 		// First, the extra high-priority items
 		} else {
-
 			item = this.getThingItem(ability, types, moves, counter, teamDetails, species, isLead, isDoubles);
 
-			if(item === undefined ) {
+			if (item === undefined) {
 				item = this.getHighPriorityItem(ability, types, moves, counter, teamDetails, species, isLead, isDoubles);
 			}
 			if (item === undefined && isDoubles) {
@@ -1187,7 +1186,6 @@ export class RandomTeams {
 		isLead: boolean,
 		isDoubles: boolean
 	) {
-
 		if (moves.has('mysticalsong')) return 'Environmental Accord';
 		if (moves.has('depthvanish')) return 'Dimensional Tether';
 
@@ -1199,9 +1197,9 @@ export class RandomTeams {
 			potentialItems.push('pRNG Machine');
 			potentialItems.push('Blindfold');
 		}
-		if(moves.has('summonlocusts') || moves.has('nightfall') || moves.has('heatup') || moves.has('cooldown') ||
+		if (moves.has('summonlocusts') || moves.has('nightfall') || moves.has('heatup') || moves.has('cooldown') ||
 			moves.has('weatherfront') || moves.has('yellowshift') || moves.has('submerge')) potentialItems.push('Environmental Accord');
-		if(moves.has('spatialexpansion') || moves.has('sudscape') || moves.has('nullland') ||
+		if (moves.has('spatialexpansion') || moves.has('sudscape') || moves.has('nullland') ||
 			moves.has('springfloor')) potentialItems.push('Landscaping Permit');
 		if (ability !== 'Cleanup') potentialItems.push('Yellow Safety Vest');
 
@@ -1210,75 +1208,74 @@ export class RandomTeams {
 		potentialItems.push('Rechargeable Shoes');
 
 		if (!isLead) potentialItems.push('Gun');
-		
+
 		if (types.has('Arthropod')) potentialItems.push('Bug Bomb');
 
 		for (const move of moves) {
-			if(this.dex.moves.get(move).category === 'Status') continue;
-			if(this.dex.moves.get(move).flags['contact']) potentialItems.push('Knife');
+			if (this.dex.moves.get(move).category === 'Status') continue;
+			if (this.dex.moves.get(move).flags['contact']) potentialItems.push('Knife');
 			switch (this.dex.moves.get(move).type) {
-				case 'Arthropod':
-					potentialItems.push('Jelly Treat');
-					continue;
-				case 'Dirt':
-					potentialItems.push('Extra Dirty Dirt');
-					continue;
-				case 'Far':
-					potentialItems.push('Too Far Juice');
-					continue;
-				case 'Fish':
-					potentialItems.push('Fish Scale');
-					continue;
-				case 'Green':
-					potentialItems.push('Greens');
-					continue;
-				case 'H':
-					potentialItems.push('H Dictionary');
-					continue;
-				case 'Hair':
-					potentialItems.push('Hairbrush');
-					continue;
-				case 'Industrial':
-					potentialItems.push('Machine Oil');
-					continue;
-				case 'Liquid':
-					potentialItems.push('Spray Bottle');
-					continue;
-				case 'Music':
-					potentialItems.push('Tuning Fork');
-					continue;
-				case 'Night':
-					potentialItems.push('Little Shadow');
-					continue;
-				case 'No':
-					potentialItems.push('Nothing');
-					continue;
-				case 'Science':
-					potentialItems.push('Beaker');
-					continue;
-				case 'Sport':
-					potentialItems.push('Rubber Ball');
-					continue;
-				case 'Sword':
-					potentialItems.push('Whetstone');
-					continue;
-				case 'Temperature':
-					potentialItems.push('Thermometer');
-					continue;
-				case 'Time':
-					potentialItems.push('Pocket Watch');
-					continue;
-				case 'Weather':
-					potentialItems.push('Barometer');
-					continue;
-				case 'Yellow':
-					potentialItems.push('Yellow Stuff');
-					continue;
-				}
+			case 'Arthropod':
+				potentialItems.push('Jelly Treat');
+				continue;
+			case 'Dirt':
+				potentialItems.push('Extra Dirty Dirt');
+				continue;
+			case 'Far':
+				potentialItems.push('Too Far Juice');
+				continue;
+			case 'Fish':
+				potentialItems.push('Fish Scale');
+				continue;
+			case 'Green':
+				potentialItems.push('Greens');
+				continue;
+			case 'H':
+				potentialItems.push('H Dictionary');
+				continue;
+			case 'Hair':
+				potentialItems.push('Hairbrush');
+				continue;
+			case 'Industrial':
+				potentialItems.push('Machine Oil');
+				continue;
+			case 'Liquid':
+				potentialItems.push('Spray Bottle');
+				continue;
+			case 'Music':
+				potentialItems.push('Tuning Fork');
+				continue;
+			case 'Night':
+				potentialItems.push('Little Shadow');
+				continue;
+			case 'No':
+				potentialItems.push('Nothing');
+				continue;
+			case 'Science':
+				potentialItems.push('Beaker');
+				continue;
+			case 'Sport':
+				potentialItems.push('Rubber Ball');
+				continue;
+			case 'Sword':
+				potentialItems.push('Whetstone');
+				continue;
+			case 'Temperature':
+				potentialItems.push('Thermometer');
+				continue;
+			case 'Time':
+				potentialItems.push('Pocket Watch');
+				continue;
+			case 'Weather':
+				potentialItems.push('Barometer');
+				continue;
+			case 'Yellow':
+				potentialItems.push('Yellow Stuff');
+				continue;
+			}
 		}
 
 		return this.sampleNoReplace(potentialItems);
-
 	}
 
 

@@ -2139,6 +2139,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		eggGroups: ["Monster"],
 	},
+	oboromorose: {
+		num: -444,
+		name: "Oboromorose",
+		types: ["No", "Hair"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 225, atk: 180, def: 35, spa: 180, spd: 35, spe: 15},
+		abilities: {0: "Colossal"},
+		heightm: 99.9,
+		weightkg: 199.9,
+		prevo: "Kaijuv",
+		color: "Blue",
+		eggGroups: ["Monster"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

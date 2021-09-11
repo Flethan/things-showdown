@@ -2937,6 +2937,33 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nullland: ["8L75"],
 		},
 	},
+	oboromorose: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			voidscream: ["8L1"],
+			noescape: ["8L20"],
+			stealthstrike: ["8L10"],
+			lookup: ["8L30"],
+			gravebite: ["8L40"],
+			landslide: ["8L50"],
+			nuisancepest: ["8L51"],
+			voidpunch: ["8L52"],
+			summonlocusts: ["8L53"],
+			cheapstrike: ["8L54"],
+			swing: ["8L55"],
+			arthrobite: ["8L56"],
+			dirtypunch: ["8L57"],
+			moonbeam: ["8L58"],
+			suplex: ["8L59"],
+			ecdyse: ["8L60"],
+			bask: ["8L65"],
+			yellowgigahit: ["8L70"],
+			nullland: ["8L75"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
