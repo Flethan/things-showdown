@@ -4600,6 +4600,46 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Beautiful",
 	},
+	advancedforecasting: {
+		num: 500,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Advanced Forecasting",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1},
+		sideCondition: 'advancedforecasting',
+		condition: {
+			duration: 3,
+			durationCallback(target, source, effect) {
+				const dur = 3 + Math.floor(Math.random() * 2);
+				return dur;
+			},
+			onAnyModifyDamage(damage, source, target, move) {
+				if (target !== source && source.side === this.effectState.target && this.effectState.duration === 1) {
+					this.debug('adv forecast strengthen');
+					return this.chainModify(2);
+				}
+			},
+			onSideStart(side) {
+				this.hint(`A storm was predicted to arrive in ${this.effectState.duration - 1} turns!`);
+			},
+			onSideResidualOrder: 21,
+			onSideResidualSubOrder: 1,
+			onSideResidual(side) {
+				if (this.effectState.duration === 2) {
+					this.hint(`A storm arrives for ${side.name}!`);
+				}
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Weather",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 	weatherfront: {
 		num: 500,
 		accuracy: true,
