@@ -236,12 +236,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	piercinground: {
 		name: "Piercing Round",
 		desc: "Ignores protecting moves like Whistle and Parry. Lowers target's Special Defence by 1 stage.",
-		shortDesc: "Ignores protect. Lowers target's Special Defence by 1.",
+		shortDesc: "Ignores protect. Lowers target's SpD by 1.",
 	},
 	delayedround: {
 		name: "Delayed Round",
 		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
-		shortDesc: "Hits again one turn after being used to all adjacent foes.",
+		shortDesc: "Hits one turn after being used.",
 	},
 	// liquid
 	soppingslap: {

@@ -1480,6 +1480,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 65,
 		basePower: 30,
 		category: "Special",
+		isNonstandard: "Thing",
 		name: "Delayed Round",
 		pp: 10,
 		priority: 0,
