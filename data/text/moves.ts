@@ -390,8 +390,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	harmoniouschord: {
 		name: "Harmonious Chord",
-		desc: "The user restores 1/2 of its maximum HP, rounded half up. If Mystical Song is in effect, adds the Harmony to heal Music-type Things by 1/8 of their max HP at the end of each turn.",
-		shortDesc: "Heals user by 50% max HP. Harmony:Heal",
+		desc: "The target restores 1/2 of its maximum HP, rounded half up. If Mystical Song is in effect, adds the Harmony to heal Music-type Things by 1/8 of their max HP at the end of each turn.",
+		shortDesc: "Heals target by 50% max HP. Harmony:Heal",
 	},
 	volumeup: {
 		name: "Volume Up",
