@@ -652,6 +652,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	cululus: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	cumulunormous: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

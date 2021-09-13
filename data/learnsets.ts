@@ -3092,6 +3092,37 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalslam: ["8L85"],
 		},
 	},
+	cululus: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			weatherfront: ["8L1"],
+			yellowshift: ["8L1"],
+			brilliantflash: ["8L1"],
+			toxicsmog: ["8L1"],
+			hit: ["8M"],
+			hide: ["8M"],
+			winddispersal: ["8L1"],
+			bluejet: ["8L1"],
+			blessedrain: ["8L1"],
+		},
+	},
+	cumulunormous: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			greentackle: ["8L1"],
+			weatherfront: ["8L1"],
+			yellowshift: ["8L1"],
+			brilliantflash: ["8L1"],
+			toxicsmog: ["8L1"],
+			hit: ["8M"],
+			hide: ["8M"],
+			winddispersal: ["8L1"],
+			bluejet: ["8L1"],
+			blessedrain: ["8L1"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
