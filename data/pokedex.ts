@@ -2199,7 +2199,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		abilities: {0: "Sedimentary", H: "Low-Lying"},
 		heightm: 99.9,
 		weightkg: 999.9,
-		evos: ["Geosonde"],
+		prevo: "Litheath",
 		color: "Brown",
 		eggGroups: ["Mineral"],
 	},
