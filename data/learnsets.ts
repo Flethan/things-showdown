@@ -2999,7 +2999,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cooldown: ["8M"],
 			thermalexplosion: ["8L65"],
 			rapidvortex: ["8L1"],
-			winddisperal: ["8L5"],
+			winddispersal: ["8L5"],
 			hurricanewinds: ["8L30"],
 			weatherfront: ["8M"],
 			supercell: ["8L24"],
