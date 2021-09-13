@@ -2139,8 +2139,21 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		eggGroups: ["Monster"],
 	},
-	oboromorose: {
+	molluskeleton: {
 		num: -444,
+		name: "Molluskeleton",
+		types: ["No", "Fish"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 225, atk: 70, def: 45, spa: 150, spd: 150, spe: 30},
+		abilities: {0: "Colossal"},
+		heightm: 99.9,
+		weightkg: 199.9,
+		prevo: "Kaijuv",
+		color: "White",
+		eggGroups: ["Monster"],
+	},
+	oboromorose: {
+		num: -445,
 		name: "Oboromorose",
 		types: ["No", "Hair"],
 		genderRatio: {M: 0.5, F: 0.5},

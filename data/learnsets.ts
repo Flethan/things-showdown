@@ -2964,6 +2964,19 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nullland: ["8L75"],
 		},
 	},
+	molluskeleton: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			voidscream: ["8L1"],
+			noescape: ["8L20"],
+			stealthstrike: ["8L10"],
+			lookup: ["8L30"],
+			gravebite: ["8L40"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
