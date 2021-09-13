@@ -2197,6 +2197,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 113,
 	},
 	sedimentary: {
+		isNonstandard: "Thing",
 		onAnyTerrainStart() {
 			const pokemon = this.effectState.target;
 			let newType;
@@ -2225,6 +2226,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 250,
 	},
 	breezy: {
+		isNonstandard: "Thing",
 		onStart(source) {
 			this.field.setWeather('windy');
 		},
