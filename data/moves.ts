@@ -4098,6 +4098,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Time",
 		contestType: "Tough",
 	},
+	/* midnightvision: {
+		num: 500,
+		accuracy: true,
+		basePower: 120,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Midnight Vision",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		sideCondition: 'midnightvision',
+		onTryHit(source, target) {
+			if (target.side.sideConditions['midnightvision']) {
+				return false;
+			}
+		},
+		condition: {
+			duration: 0,
+			onSideStart(side, source) {
+				this.effectState.attackStat = (source.getStat('spa', false, true));
+				this.hint(`Midnight Vision: ${this.effectState.attackStat}!`);
+			},
+			onSideResidualOrder: -10,
+			onSideResidual(side) {
+				for (const foe of side.active) {
+					if (this.effectState.duration === 2) {
+						this.hint(`A storm arrives for ${side.name}!`);
+					}
+				}
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Weather",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	}, */
 	sandsoftime: {
 		num: 416,
 		accuracy: true,
