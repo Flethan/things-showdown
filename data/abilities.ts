@@ -2196,6 +2196,42 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 113,
 	},
+	sedimentary: {
+		onAnyTerrainStart() {
+			const pokemon = this.effectState.target;
+			let newType;
+				switch (this.field.terrain) {
+				case 'spatialexpansion':
+					newType = 'Far';
+					break;
+				case 'sudscape':
+					newType = 'Liquid';
+					break;
+				case 'mysticalsong':
+					newType = 'Music';
+					break;
+				case 'nullland':
+					newType = 'No';
+					break;
+				case 'springfloor':
+					newType = 'Sport';
+					break;
+				}
+				this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
+		},
+	
+		name: "Sedimentary",
+		rating: 1,
+		num: 250,
+	},
+	breezy: {
+		onStart(source) {
+			this.field.setWeather('windy');
+		},
+		name: "Breezy",
+		rating: 4,
+		num: 2,
+	},
 
 	// BASE GAME
 	noability: {

@@ -640,6 +640,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	aerraton: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheath: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosonde: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
