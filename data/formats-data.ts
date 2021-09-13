@@ -652,7 +652,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	saniteyser {
+	saniteyser: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
