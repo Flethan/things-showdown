@@ -2152,9 +2152,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		eggGroups: ["Monster"],
 	},
-	oboromorose: {
+	ouromorose: {
 		num: -445,
-		name: "Oboromorose",
+		name: "Ouromorose",
 		types: ["No", "Hair"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 225, atk: 180, def: 35, spa: 180, spd: 35, spe: 15},

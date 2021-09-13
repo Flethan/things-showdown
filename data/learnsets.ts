@@ -2937,7 +2937,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nullland: ["8L75"],
 		},
 	},
-	oboromorose: {
+	ouromorose: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

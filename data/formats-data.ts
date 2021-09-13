@@ -632,7 +632,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	oboromorose: {
+	ouromorose: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
