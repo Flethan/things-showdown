@@ -3003,7 +3003,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hurricanewinds: ["8L30"],
 			weatherfront: ["8M"],
 			stormcell: ["8L24"],
-			flashmissile: ["8L70"],
+			flashmissle: ["8L70"],
 		},
 	},
 	litheath: {
