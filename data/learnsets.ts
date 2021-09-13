@@ -3123,6 +3123,33 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L1"],
 		},
 	},
+	saniteyser: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			landslide: ["8L40"],
+			cosmicdust: ["8L45"],
+			dustcloud: ["8L30"],
+			primordialsmoke: ["8L60"],
+			submerge: ["8M"],
+			tidy: ["8L20"],
+			soppingslap: ["8L50"],
+			spurt: ["8L10"],
+			spill: ["8L15"],
+			spray: ["8L1"],
+			cascade: ["8L35"],
+			wetfloor: ["8L12"],
+			sudscape: ["8L65"],
+			voidscream: ["8L25"],
+			particlebeam: ["8L70"],
+			study: ["8L28"],
+			heatup: ["8M"],
+			thermalexplosion: ["8L55"],
+			coagulate: ["8L33"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {

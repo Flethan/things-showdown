@@ -2174,7 +2174,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		abilities: {0: "Breezy", 1: "Camouflage", H: "Ultrasense"},
 		heightm: 0.5,
 		weightkg: 40.0,
-		color: "Grey",
+		color: "Gray",
 		eggGroups: ["Mineral"],
 	},
 	litheath: {
@@ -2228,6 +2228,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Cululus",
 		color: "White",
 		eggGroups: ["Amorphous"],
+	},
+	saniteyser: {
+		num: -448,
+		name: "Saniteyser",
+		types: ["Liquid", "Science"],
+		gender: "N",
+		baseStats: {hp: 50, atk: 38, def: 56, spa: 133, spd: 64, spe: 102},
+		abilities: {0: "Cleansing", 1: "Hazardous"},
+		heightm: 0.1,
+		weightkg: 100.0,
+		color: "Gray",
+		eggGroups: ["Mineral"],
 	},
 
 	// BASE GAME

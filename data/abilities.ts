@@ -2183,9 +2183,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, target);
+				this.boost({def: -1}, source, target);
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, target);
+				this.boost({spd: -1}, source, target);
 			}
 		},
 		onSwitchOut(pokemon) {
