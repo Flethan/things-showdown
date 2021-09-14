@@ -1093,14 +1093,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	nocturnal: {
 		isNonstandard: "Thing",
 		onModifyCritRatio(critRatio, source, target) {
-			if (this.field.isWeather('nighttime')) return 5;
+			if (this.field.isWeather('nighttime')) return critRatio + 2;
 		},
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy) {
 			if (typeof accuracy !== 'number') return;
 			if (this.field.isWeather('nighttime')) {
 				this.debug('nocturnal - enhancing accuracy');
-				return this.chainModify(1.2);
+				return this.chainModify(1.3);
 			}
 		},
 		name: "Nocturnal",
@@ -1804,6 +1804,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			for (const allyActive of pokemon.allies()) {
 				if (allyActive.hasAbility(['aonetwothree'])) {
 					this.field.setTerrain('mysticalsong');
+					const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+					'hurt', 'heal'];
+					const randomFlag = this.sample(sflags);
+					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
+					this.field.activeFlags.push(randomFlag);
+					this.hint("A One, Two, Three...: " + randomFlag);
 				}
 			}
 		},
@@ -2233,6 +2241,52 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Breezy",
 		rating: 4,
 		num: 2,
+	},
+	withgun: {
+		name: "With Gun",
+		onResidualOrder: 28,
+		onResidualSubOrder: 2,
+		onResidual(pokemon) {
+			if (this.randomChance(1, 3)) {
+				if (pokemon.hp && !pokemon.item) {
+					pokemon.setItem('gun');
+					pokemon.lastItem = '';
+					this.add('-item', pokemon, pokemon.getItem(), '[from] ability: With Gun');
+				}
+			}
+		},
+		rating: 2.5,
+		num: 139,
+	},
+	marksman: {
+		onBasePowerPriority: 30,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['bullet']) {
+				this.debug('Marksman boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy) {
+			if (typeof accuracy !== 'number') return;
+			this.debug('marksman - enhancing accuracy');
+			return this.chainModify(1.5);
+		},
+		name: "Marksman",
+		rating: 3,
+		num: 171,
+	},
+	gunaura: {
+		onAllyBasePowerPriority: 22,
+		onAllyBasePower(basePower, attacker, defender, move) {
+			if (move.name === 'Shoot') {
+				this.debug('Gun Aura boost');
+				return this.chainModify(2);
+			}
+		},
+		name: "Gun Aura",
+		rating: 3.5,
+		num: 252,
 	},
 
 	// BASE GAME

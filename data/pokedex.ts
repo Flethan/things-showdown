@@ -2204,7 +2204,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 	},
 	cululus: {
-		num: -447,
+		num: -449,
 		name: "Cululus",
 		types: ["Weather"],
 		gender: "N",
@@ -2217,7 +2217,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Amorphous"],
 	},
 	cumulunormous: {
-		num: -448,
+		num: -450,
 		name: "Cumulunormous",
 		types: ["Weather", "Far"],
 		gender: "N",
@@ -2230,7 +2230,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Amorphous"],
 	},
 	saniteyser: {
-		num: -448,
+		num: -451,
 		name: "Saniteyser",
 		types: ["Liquid", "Science"],
 		gender: "N",
@@ -2240,6 +2240,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 100.0,
 		color: "Gray",
 		eggGroups: ["Mineral"],
+	},
+	syrupwgun: {
+		num: -452,
+		name: "Syrup w/ Gun",
+		types: ["Industrial", "Liquid"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 20, def: 30, spa: 130, spd: 20, spe: 10},
+		abilities: {0: "With Gun", 1: "Gun Aura", H: "Marksman"},
+		heightm: 0.1,
+		weightkg: 12,
+		color: "Brown",
+		eggGroups: ["Undiscovered"],
 	},
 
 	// BASE GAME

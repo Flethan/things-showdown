@@ -163,6 +163,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			blessedrain: ["8L30"],
+			pheromonemark: ["8L50"],
 		},
 	},
 	puddlefly: {
@@ -181,6 +182,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			blessedrain: ["8L30"],
+			pheromonemark: ["8L50"],
 		},
 	},
 	djecridid: {
@@ -209,6 +211,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L15"],
 			bluejet: ["8L60"],
 			blessedrain: ["8L30"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	gryllague: {
@@ -237,6 +240,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L15"],
 			bluejet: ["8L60"],
 			blessedrain: ["8L30"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	schisteka: {
@@ -265,6 +269,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L15"],
 			bluejet: ["8L60"],
 			blessedrain: ["8L30"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	pescadestrian: {
@@ -502,6 +507,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nuisancepest: ["8L40"],
 			hit: ["8M"],
 			hide: ["8M"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	moonth: {
@@ -518,6 +524,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swarm: ["8L20"],
 			hit: ["8M"],
 			hide: ["8M"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	sollep: {
@@ -538,6 +545,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fireworks: ["8L46"],
 			hit: ["8M"],
 			hide: ["8M"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	lemon: {
@@ -1507,6 +1515,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			counterthrow: ["8L50"],
 			hit: ["8M"],
 			hide: ["8M"],
+			pheromonemark: ["8L55"],
 		},
 	},
 	soapy: {
@@ -2029,6 +2038,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swarm: ["8L39"],
 			scuttle: ["8L16"],
 			greenbite: ["8T"],
+			pheromonemark: ["8L50"],
 		},
 	},
 	chordant: {
@@ -2049,6 +2059,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			arpeggio: ["8L42"],
 			glissando: ["8L50"],
 			harmoniouschord: ["8L55"],
+			pheromonemark: ["8L50"],
 		},
 	},
 	maestreen: {
@@ -2079,6 +2090,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lookup: ["8T"],
 			swordbeam: ["8L65"],
 			replay: ["8L1"],
+			pheromonemark: ["8L50"],
 		},
 	},
 	magmegg: {
@@ -2935,6 +2947,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bask: ["8L65"],
 			yellowgigahit: ["8L70"],
 			nullland: ["8L75"],
+			pheromonemark: ["8L1"],
 		},
 	},
 	ouromorose: {
@@ -3148,6 +3161,27 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			heatup: ["8M"],
 			thermalexplosion: ["8L55"],
 			coagulate: ["8L33"],
+		},
+	},
+	syrupwgun: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			beemovee: ["8S1"],
+			spill: ["8L1"],
+			refreshingcup: ["8L1"],
+			yellowsoak: ["8L20"],
+			luminesce: ["8L30"],
+			hit: ["8M"],
+			hide: ["8M"],
+			autumnaloffering: ["8L10"],
+			piercinground: ["8L40"],
+			delayedround: ["8L40"],
+			autoturret: ["8L50"],
+			apexcalibration: ["8L55"],
+			coagulate: ["8L60"],
+			flashmissle: ["8L45"],
+			fireworks: ["8L65"],
 		},
 	},
 
