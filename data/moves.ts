@@ -292,6 +292,36 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {evasion: 1}},
 		contestType: "Clever",
 	},
+	pheromonemark: {
+		num: 193,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Pheromone Mark",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
+		volatileStatus: 'pheromonemark',
+		onTryHit(target) {
+			if (target.volatiles['pheromonemark']) return false;
+		},
+		condition: {
+			noCopy: true,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Pheromone Mark');
+			},
+			
+			onSourceModifyCritRatio(critRatio, source, target) {
+				if (source.hasType('Arthropod')) return critRatio + 2;
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Arthropod",
+		zMove: {effect: 'crit2'},
+		contestType: "Clever",
+	},
 
 	// Dirt
 	landslide: {

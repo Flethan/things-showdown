@@ -449,7 +449,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeather(target) {
 			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
-			this.damage(target.maxhp * Math.pow(2, typeMod) / 16);
+
+			let bonus = 1;
+			if(target.volatiles['pheromonemark']) {
+				bonus = 1.5;
+			}
+
+			this.damage(target.maxhp * Math.pow(2, typeMod) * bonus / 16);
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
