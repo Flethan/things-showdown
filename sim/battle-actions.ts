@@ -1800,11 +1800,13 @@ export class BattleActions {
 			return item.megaStone;
 		}
 
+		console.log('checkInf')
 		// Infinity
 		if(species.isNonstandard === 'Thing' && species.evos) {
-			let evo;
-			for(evo in species.evos) {
+			for(const evo of species.evos) {
+				console.log(evo)
 				if(this.dex.species.get(evo).evoCondition === 'Infinity') {
+					console.log('inf-able')
 					return evo;
 				}
 			}
@@ -1833,7 +1835,7 @@ export class BattleActions {
 		}
 
 		if (pokemon.baseSpecies.isNonstandard === 'Thing' ) {
-			pokemon.formeChange(speciesid, pokemon.baseSpecies, true);
+			pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
 		} else {
 			pokemon.formeChange(speciesid, pokemon.getItem(), true);
 		}
