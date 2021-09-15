@@ -2107,7 +2107,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	},
 	bean: {
 		num: -441,
-		name: "Bean\uD83D\uDC41",
+		name: "Bean",
 		types: ["Green"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 60, atk: 70, def: 80, spa: 20, spd: 70, spe: 80},
@@ -2273,6 +2273,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "other",
 		evoCondition: "Element",
 		elementType: "Yellow",
+	},
+	feyesh: {
+		num: -454,
+		name: "F\uD83D\uDC41sh",
+		types: ["Fish", "Yellow"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 85, atk: 70, def: 91, spa: 63, spd: 34, spe: 60},
+		abilities: {0: "Blind"},
+		heightm: 1.2,
+		weightkg: 64,
+		color: "Blue",
+		eggGroups: ["Water 1"],
 	},
 
 	// BASE GAME
