@@ -2107,7 +2107,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	},
 	bean: {
 		num: -441,
-		name: "Bean",
+		name: "Bean\u1f441",
 		types: ["Green"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 60, atk: 70, def: 80, spa: 20, spd: 70, spe: 80},
