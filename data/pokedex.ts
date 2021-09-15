@@ -743,6 +743,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 64,
 		color: "Blue",
 		eggGroups: ["Water 1"],
+		evos: ["Fi\uD83D\uDC41ish"],
 	},
 	clanksy: {
 		num: -352,
@@ -2274,17 +2275,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Element",
 		elementType: "Yellow",
 	},
-	fish: {
+	f__sh: {
 		num: -454,
-		name: "Fi\b\uD83D\uDC41sh",
+		name: "Fi\uD83D\uDC41ish",
 		types: ["Fish", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
-		baseStats: {hp: 85, atk: 70, def: 91, spa: 63, spd: 34, spe: 60},
+		baseStats: {hp: 85, atk: 20, def: 91, spa: 113, spd: 34, spe: 60},
 		abilities: {0: "Blind"},
 		heightm: 1.2,
 		weightkg: 64,
 		color: "Blue",
 		eggGroups: ["Water 1"],
+		evoType: "other",
+		evoCondition: "Infinity",
 	},
 
 	// BASE GAME
