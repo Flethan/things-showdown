@@ -243,6 +243,7 @@ export class Pokemon {
 	speed: number;
 	abilityOrder: number;
 
+	canSymbolEvo: string | null | undefined;
 	canMegaEvo: string | null | undefined;
 	canUltraBurst: string | null | undefined;
 	readonly canGigantamax: string | null;
@@ -437,6 +438,7 @@ export class Pokemon {
 		 */
 		this.abilityOrder = 0;
 
+		this.canSymbolEvo = this.battle.actions.canSymbolEvo(this);
 		this.canMegaEvo = this.battle.actions.canMegaEvo(this);
 		this.canUltraBurst = this.battle.actions.canUltraBurst(this);
 		this.canGigantamax = this.baseSpecies.canGigantamax || null;
@@ -945,7 +947,7 @@ export class Pokemon {
 		if (!skipChecks) {
 			if (!this.side.canDynamaxNow()) return;
 			if (
-				this.species.isMega || this.species.isPrimal || this.species.forme === "Ultra" ||
+				this.species.isSymbol || this.species.isMega || this.species.isPrimal || this.species.forme === "Ultra" ||
 				this.getItem().zMove || this.canMegaEvo
 			) {
 				return;
@@ -990,6 +992,7 @@ export class Pokemon {
 			maybeDisabled?: boolean,
 			trapped?: boolean,
 			maybeTrapped?: boolean,
+			canSymbolEvo?: boolean,
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
 			canZMove?: AnyObject | null,
@@ -1016,6 +1019,7 @@ export class Pokemon {
 		}
 
 		if (!lockedMove) {
+			if (this.canSymbolEvo) data.canSymbolEvo = true;
 			if (this.canMegaEvo) data.canMegaEvo = true;
 			if (this.canUltraBurst) data.canUltraBurst = true;
 			const canZMove = this.battle.actions.canZMove(this);
@@ -1891,6 +1895,7 @@ export class Pokemon {
 	setType(newType: string | string[], enforce = false) {
 		// First type of Arceus, Silvally cannot be normally changed
 		if (!enforce) {
+			if (this.species.forme === 'Null') return false;
 			if ((this.battle.gen >= 5 && (this.species.num === 493 || this.species.num === 773)) ||
 				(this.battle.gen === 4 && this.hasAbility('multitype'))) {
 				return false;
@@ -1899,7 +1904,7 @@ export class Pokemon {
 
 		if (!newType) throw new Error("Must pass type to setType");
 		this.types = (typeof newType === 'string' ? [newType] : newType);
-		this.addedType = '';
+		this.addType('');
 		this.knownType = true;
 		this.apparentType = this.types.join('/');
 
@@ -1908,6 +1913,7 @@ export class Pokemon {
 
 	/** Removes any types added previously and adds another one. */
 	addType(newType: string) {
+		if ((this.species.forme === 'Infinity' && this.addedType === 'Infinity') || this.species.forme === 'Null') return false;
 		this.addedType = newType;
 		return true;
 	}

@@ -887,7 +887,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	guysword: {
 		num: -362,
 		name: "Guysword",
-		forme: "Epsilon",
+		forme: "Element",
 		types: ["Sword"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 65, atk: 75, def: 42, spa: 55, spd: 36, spe: 31},
@@ -898,8 +898,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Sword Guy",
 		eggGroups: ["Mineral"],
 		evoType: "other",
-		evoCondition: "Epsilon",
-		epsilonType: "Sword",
+		evoCondition: "Element",
+		elementType: "Sword",
 	},
 	hmug: {
 		num: -363,
@@ -2260,7 +2260,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	celiorship: {
 		num: -453,
 		name: "Celiorship",
-		forme: "Epsilon",
+		forme: "Element",
 		types: ["Weather", "Green"],
 		gender: "N",
 		baseStats: {hp: 200, atk: 48, def: 87, spa: 33, spd: 82, spe: 78},
@@ -2271,8 +2271,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Stratosoar",
 		eggGroups: ["Amorphous", "Water 3"],
 		evoType: "other",
-		evoCondition: "Epsilon",
-		epsilonType: "Yellow",
+		evoCondition: "Element",
+		elementType: "Yellow",
 	},
 
 	// BASE GAME

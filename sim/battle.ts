@@ -2440,6 +2440,9 @@ export class Battle {
 			this.actions.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
 				action.zmove, undefined, action.maxMove, action.originalTarget);
 			break;
+		case 'symbolEvo':
+			this.actions.runSymbolEvo(action.pokemon);
+			break;
 		case 'megaEvo':
 			this.actions.runMegaEvo(action.pokemon);
 			break;

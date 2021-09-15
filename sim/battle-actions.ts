@@ -665,8 +665,8 @@ export class BattleActions {
 				if (!target.illusion) this.battle.hint("Since gen 7, Dark is immune to Prankster moves.");
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
-			} else if (target.species.evoCondition === 'Epsilon' && move.type === target.species.epsilonType) {
-				this.battle.debug('natural epsilon immunity');
+			} else if (target.species.evoCondition === 'Element' && move.type === target.species.elementType) {
+				this.battle.debug('natural Element immunity');
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
 			} else {
@@ -1398,7 +1398,7 @@ export class BattleActions {
 	canZMove(pokemon: Pokemon) {
 		if (pokemon.side.zMoveUsed ||
 			(pokemon.transformed &&
-				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra"))
+				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra" || pokemon.species.forme === "Infinity" || pokemon.species.forme === "Element" || pokemon.species.forme === "Null"))
 		) return;
 		const item = pokemon.getItem();
 		if (!item.zMove) return;
@@ -1712,12 +1712,17 @@ export class BattleActions {
 		baseDamage = this.battle.randomizer(baseDamage);
 
 		// STAB
-		if (move.forceSTAB || (type !== '???' && (pokemon.hasType(type)) || pokemon.species.evoCondition === 'Epsilon')) {
+		if (move.forceSTAB || (type !== '???' && (pokemon.hasType(type)) || type === pokemon.species.elementType)) {
+			let count = 0;
+			for (const pType of pokemon.types) {
+				if (type === pType) count++;
+			}
+			if (type === pokemon.species.elementType) count++;
 			// The "???" type never gets STAB
 			// Not even if you Roost in Gen 4 and somehow manage to use
 			// Struggle in the same turn.
 			// (On second thought, it might be easier to get a MissingNo.)
-			baseDamage = this.battle.modify(baseDamage, move.stab || 1.5);
+			baseDamage = this.battle.modify(baseDamage, move.stab || 1.0 + (count * 0.5));
 		}
 		// types
 		let typeMod = target.runEffectiveness(move);
@@ -1789,6 +1794,57 @@ export class BattleActions {
 	// #region MEGA EVOLUTION
 	// ==================================================================
 
+	canSymbolEvo(pokemon: Pokemon) {
+		// Infinity, Element, and Null formes
+		const species = pokemon.baseSpecies;
+		if (species.isNonstandard === 'Thing' && species.evos) {
+			for (const evo of species.evos) {
+				const evoType = this.dex.species.get(evo).evoCondition;
+				if (evoType === 'Infinity' || evoType === 'Element' || evoType === 'Null') {
+					return evo;
+				}
+			}
+		}
+	}
+
+	runSymbolEvo(pokemon: Pokemon) {
+		const speciesid = pokemon.canSymbolEvo;
+		if (!speciesid) return false;
+
+		// Pokémon affected by Sky Drop cannot symbol evolve. Enforce it here for now.
+		for (const foeActive of pokemon.foes()) {
+			if (foeActive.volatiles['skydrop']?.source === pokemon) {
+				return false;
+			}
+		}
+
+		pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
+		pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
+
+		pokemon.baseMaxhp = Math.floor(Math.floor(
+			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
+		) * pokemon.level / 100 + 10);
+		pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
+		pokemon.maxhp = pokemon.baseMaxhp;
+		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+
+		if (this.dex.species.get(speciesid).evoCondition === 'Infinity') {
+			pokemon.addType('Infinity');
+			this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
+		}
+
+		// Limit one symbol evolution
+		const wasSymbol = pokemon.canSymbolEvo;
+		for (const ally of pokemon.side.pokemon) {
+			if (wasSymbol) {
+				ally.canSymbolEvo = null;
+			}
+		}
+
+		this.battle.runEvent('AfterMega', pokemon);
+		return true;
+	}
+
 	canMegaEvo(pokemon: Pokemon) {
 		const species = pokemon.baseSpecies;
 		const altForme = species.otherFormes && this.dex.species.get(species.otherFormes[0]);
@@ -1802,16 +1858,6 @@ export class BattleActions {
 		// a hacked-in Megazard X can mega evolve into Megazard Y, but not into Megazard X
 		if (item.megaEvolves === species.baseSpecies && item.megaStone !== species.name) {
 			return item.megaStone;
-		}
-
-		// Infinity, Epsilon
-		if (species.isNonstandard === 'Thing' && species.evos) {
-			for (const evo of species.evos) {
-				const evoType = this.dex.species.get(evo).evoCondition;
-				if (evoType === 'Infinity' || evoType === 'Epsilon') {
-					return evo;
-				}
-			}
 		}
 
 		return null;

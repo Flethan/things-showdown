@@ -36,6 +36,8 @@ export interface MoveAction {
 	moveid: ID;
 	/** a move to use (move action only) */
 	move: Move;
+	/** true if evolving into an infinity, element, or nothing evo */
+	symbol: boolean | 'done';
 	/** true if megaing or ultra bursting */
 	mega: boolean | 'done';
 	/** if zmoving, the name of the zmove */
@@ -92,7 +94,7 @@ export interface FieldAction {
 /** A generic action done by a single pokemon */
 export interface PokemonAction {
 	/** action type */
-	choice: 'megaEvo' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve' | 'runDynamax';
+	choice: 'symbolEvo' | 'megaEvo' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve' | 'runDynamax';
 	/** priority of the action (lower first) */
 	priority: number;
 	/** speed of pokemon doing action (higher first if priority tie) */
@@ -179,6 +181,7 @@ export class BattleQueue {
 				switch: 103,
 				megaEvo: 104,
 				runDynamax: 105,
+				symbolEvo: 106,
 
 				shift: 200,
 				// default is 200 (for moves)
@@ -206,6 +209,14 @@ export class BattleQueue {
 					// (This is currently being done in `runMegaEvo`).
 					actions.unshift(...this.resolveAction({
 						choice: 'megaEvo',
+						pokemon: action.pokemon,
+					}));
+				}
+				if (action.symbol) {
+					// TODO: Check that the Pokémon is not affected by Sky Drop.
+					// (This is currently being done in `runSymbolEvo`).
+					actions.unshift(...this.resolveAction({
+						choice: 'symbolEvo',
 						pokemon: action.pokemon,
 					}));
 				}

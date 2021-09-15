@@ -215,6 +215,7 @@ interface ModdedBattleActions {
 	inherit?: true;
 	afterMoveSecondaryEvent?: (this: BattleActions, targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) => undefined;
 	calcRecoilDamage?: (this: BattleActions, damageDealt: number, move: Move) => number;
+	canSymbolEvo?: (this: BattleActions, pokemon: Pokemon) => string | undefined | null;
 	canMegaEvo?: (this: BattleActions, pokemon: Pokemon) => string | undefined | null;
 	canUltraBurst?: (this: BattleActions, pokemon: Pokemon) => string | null;
 	canZMove?: (this: BattleActions, pokemon: Pokemon) => ZMoveOptions | void;
@@ -246,6 +247,7 @@ interface ModdedBattleActions {
 		moveData?: ActiveMove, isSecondary?: boolean, isSelf?: boolean
 	) => number | undefined | false;
 	runAction?: (this: BattleActions, action: Action) => void;
+	runSymbolEvo?: (this: BattleActions, pokemon: Pokemon) => boolean;
 	runMegaEvo?: (this: BattleActions, pokemon: Pokemon) => boolean;
 	runMove?: (
 		this: BattleActions, moveOrMoveName: Move | string, pokemon: Pokemon, targetLoc: number, sourceEffect?: Effect | null,
@@ -315,7 +317,7 @@ interface ModdedBattlePokemon {
 	getMoveRequestData?: (this: Pokemon) => {
 		moves: {move: string, id: ID, target?: string, disabled?: boolean}[],
 		maybeDisabled?: boolean, trapped?: boolean, maybeTrapped?: boolean,
-		canMegaEvo?: boolean, canUltraBurst?: boolean, canZMove?: ZMoveOptions,
+		canSymbolEvo?: boolean, canMegaEvo?: boolean, canUltraBurst?: boolean, canZMove?: ZMoveOptions,
 	};
 	getStat?: (
 		this: Pokemon, statName: StatIDExceptHP, unboosted?: boolean, unmodified?: boolean, fastReturn?: boolean

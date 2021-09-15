@@ -132,8 +132,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly evoType?: 'trade' | 'useItem' | 'levelMove' | 'levelExtra' | 'levelFriendship' | 'levelHold' | 'other';
 	/** Evolution condition. falsy if doesn't evolve. */
 	declare readonly evoCondition?: string;
-	/** Type effect gained from Epsilon. falsy if isn't Epsilon form. */
-	declare readonly epsilonType?: string;
 	/** Evolution item. falsy if doesn't evolve. */
 	declare readonly evoItem?: string;
 	/** Evolution move. falsy if doesn't evolve. */
@@ -180,6 +178,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * This is mainly relevant to Gen 5.
 	 */
 	readonly maleOnlyHidden: boolean;
+	/** Type effect gained from Element. falsy if isn't Element form. */
+	readonly elementType?: string;
+	/** True if a thing is symbol. */
+	readonly isSymbol?: boolean;
 	/** True if a pokemon is mega. */
 	readonly isMega?: boolean;
 	/** True if a pokemon is primal. */
@@ -279,11 +281,12 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.unreleasedHidden = data.unreleasedHidden || false;
 		this.maleOnlyHidden = !!data.maleOnlyHidden;
 		this.maxHP = data.maxHP || undefined;
+		this.isSymbol = !!(this.forme && ['Infinity', 'Element', 'Null'].includes(this.forme)) || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;
 		this.canGigantamax = data.canGigantamax || undefined;
 		this.gmaxUnreleased = !!data.gmaxUnreleased;
 		this.cannotDynamax = !!data.cannotDynamax;
-		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined);
+		this.battleOnly = data.battleOnly || (this.isMega ? this.baseSpecies : undefined) || (this.isSymbol ? this.prevo : undefined);
 		this.changesFrom = data.changesFrom ||
 			(this.battleOnly !== this.baseSpecies ? this.battleOnly : this.baseSpecies);
 		if (Array.isArray(data.changesFrom)) this.changesFrom = data.changesFrom[0];
@@ -403,6 +406,9 @@ export class DexSpecies {
 			const formeNames: {[k: string]: string[]} = {
 				alola: ['a', 'alola', 'alolan'],
 				galar: ['g', 'galar', 'galarian'],
+				null: ['∅', 'null'],
+				element: ['∈', 'element'],
+				infinity: ['∞', 'infinity'],
 				mega: ['m', 'mega'],
 				primal: ['p', 'primal'],
 			};

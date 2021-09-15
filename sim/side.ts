@@ -35,6 +35,7 @@ export interface ChosenAction {
 	target?: Pokemon; // the target of the action
 	index?: number; // the chosen index in Team Preview
 	side?: Side; // the action's side
+	symbol?: boolean | null; // true if symboling
 	mega?: boolean | null; // true if megaing or ultra bursting
 	zmove?: string; // if zmoving, the name of the zmove
 	maxMove?: string; // if dynamaxed, the name of the max move
@@ -50,6 +51,7 @@ export interface Choice {
 	forcedPassesLeft: number; // number of passes left that need to be performed
 	switchIns: Set<number>; // indexes of pokemon chosen to switch in
 	zMove: boolean; // true if a Z-move has already been selected
+	symbol: boolean; // true if a symbol evolution has already been selected
 	mega: boolean; // true if a mega evolution has already been selected
 	ultra: boolean; // true if an ultra burst has already been selected
 	dynamax: boolean; // true if a dynamax has already been selected
@@ -149,6 +151,7 @@ export class Side {
 			forcedPassesLeft: 0,
 			switchIns: new Set(),
 			zMove: false,
+			symbol: false,
 			mega: false,
 			ultra: false,
 			dynamax: false,
@@ -188,6 +191,7 @@ export class Side {
 			case 'move':
 				let details = ``;
 				if (action.targetLoc && this.active.length > 1) details += ` ${action.targetLoc > 0 ? '+' : ''}${action.targetLoc}`;
+				if (action.symbol) details += ` symbol`;
 				if (action.mega) details += (action.pokemon!.item === 'ultranecroziumz' ? ` ultra` : ` mega`);
 				if (action.zmove) details += ` zmove`;
 				if (action.maxMove) details += ` dynamax`;
@@ -396,7 +400,7 @@ export class Side {
 		return this.choice.actions.length >= this.active.length;
 	}
 
-	chooseMove(moveText?: string | number, targetLoc = 0, megaDynaOrZ: 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '') {
+	chooseMove(moveText?: string | number, targetLoc = 0, megaDynaOrZ: 'infinity' | 'element'| 'null' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '') {
 		if (this.requestState !== 'move') {
 			return this.emitChoiceError(`Can't move: You need a ${this.requestState} response`);
 		}
@@ -575,6 +579,16 @@ export class Side {
 			// The chosen move is valid yay
 		}
 
+		// Symbol evolution
+
+		const symbol = (megaDynaOrZ === 'infinity' || megaDynaOrZ === 'element' || megaDynaOrZ === 'null');
+		if (symbol && !pokemon.canMegaEvo) {
+			return this.emitChoiceError(`Can't move: ${pokemon.name} can't symbol evolve`);
+		}
+		if (symbol && this.choice.mega) {
+			return this.emitChoiceError(`Can't move: You can only symbol-evolve once per battle`);
+		}
+
 		// Mega evolution
 
 		const mega = (megaDynaOrZ === 'mega');
@@ -613,6 +627,7 @@ export class Side {
 			pokemon,
 			targetLoc,
 			moveid,
+			symbol: symbol,
 			mega: mega || ultra,
 			zmove: zMove,
 			maxMove: maxMove ? maxMove.id : undefined,
@@ -622,6 +637,7 @@ export class Side {
 			this.choice.cantUndo = this.choice.cantUndo || pokemon.isLastActive();
 		}
 
+		if (symbol) this.choice.symbol = true;
 		if (mega) this.choice.mega = true;
 		if (ultra) this.choice.ultra = true;
 		if (zMove) this.choice.zMove = true;
@@ -836,6 +852,7 @@ export class Side {
 			forcedPassesLeft: forcedPasses,
 			switchIns: new Set(),
 			zMove: false,
+			symbol: false,
 			mega: false,
 			ultra: false,
 			dynamax: false,
@@ -872,7 +889,7 @@ export class Side {
 				const original = data;
 				const error = () => this.emitChoiceError(`Conflicting arguments for "move": ${original}`);
 				let targetLoc: number | undefined;
-				let megaDynaOrZ: 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '';
+				let megaDynaOrZ: 'infinity' | 'element' | 'null' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '';
 				while (true) {
 					// If data ends with a number, treat it as a target location.
 					// We need to special case 'Conversion 2' so it doesn't get
@@ -882,6 +899,18 @@ export class Side {
 						if (targetLoc !== undefined) return error();
 						targetLoc = parseInt(data.slice(-2));
 						data = data.slice(0, -2).trim();
+					} else if (data.endsWith(' infinity')) {
+						if (megaDynaOrZ) return error();
+						megaDynaOrZ = 'infinity';
+						data = data.slice(0, -5);
+					} else if (data.endsWith(' element')) {
+						if (megaDynaOrZ) return error();
+						megaDynaOrZ = 'element';
+						data = data.slice(0, -5);
+					} else if (data.endsWith(' null')) {
+						if (megaDynaOrZ) return error();
+						megaDynaOrZ = 'null';
+						data = data.slice(0, -5);
 					} else if (data.endsWith(' mega')) {
 						if (megaDynaOrZ) return error();
 						megaDynaOrZ = 'mega';
