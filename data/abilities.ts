@@ -1805,9 +1805,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (allyActive.hasAbility(['aonetwothree'])) {
 					this.field.setTerrain('mysticalsong');
 					const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
-					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-					'hurt', 'heal'];
+						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+						'hurt', 'heal'];
 					const randomFlag = this.sample(sflags);
 					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 					this.field.activeFlags.push(randomFlag);
@@ -2070,7 +2070,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 176,
 	},
-	genesis: {
+	cumulate: {
 		isNonstandard: "Thing",
 		onSwitchIn(pokemon) {
 			for (const moveSlot of pokemon.moveSlots) {
@@ -2082,7 +2082,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 		},
-		name: "Genesis",
+		name: "Cumulate",
 		rating: 4,
 		num: 176,
 	},
@@ -2181,7 +2181,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	colossal: {
 		isNonstandard: "Thing",
-
 		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
 				this.boost({def: -1}, target, target);
@@ -2199,7 +2198,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onSwitchOut(pokemon) {
 			pokemon.damage(pokemon.baseMaxhp / 3, pokemon);
 		},
-
 		name: "Colossal",
 		rating: 3,
 		num: 113,
@@ -2209,26 +2207,25 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAnyTerrainStart() {
 			const pokemon = this.effectState.target;
 			let newType;
-				switch (this.field.terrain) {
-				case 'spatialexpansion':
-					newType = 'Far';
-					break;
-				case 'sudscape':
-					newType = 'Liquid';
-					break;
-				case 'mysticalsong':
-					newType = 'Music';
-					break;
-				case 'nullland':
-					newType = 'No';
-					break;
-				case 'springfloor':
-					newType = 'Sport';
-					break;
-				}
-				this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
+			switch (this.field.terrain) {
+			case 'spatialexpansion':
+				newType = 'Far';
+				break;
+			case 'sudscape':
+				newType = 'Liquid';
+				break;
+			case 'mysticalsong':
+				newType = 'Music';
+				break;
+			case 'nullland':
+				newType = 'No';
+				break;
+			case 'springfloor':
+				newType = 'Sport';
+				break;
+			}
+			this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
 		},
-	
 		name: "Sedimentary",
 		rating: 1,
 		num: 250,
@@ -2243,6 +2240,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 2,
 	},
 	withgun: {
+		isNonstandard: "Thing",
 		name: "With Gun",
 		onResidualOrder: 28,
 		onResidualSubOrder: 2,
@@ -2259,6 +2257,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 139,
 	},
 	marksman: {
+		isNonstandard: "Thing",
 		onBasePowerPriority: 30,
 		onBasePower(basePower, attacker, defender, move) {
 			if (move.flags['bullet']) {
@@ -2277,6 +2276,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 171,
 	},
 	gunaura: {
+		isNonstandard: "Thing",
 		onAllyBasePowerPriority: 22,
 		onAllyBasePower(basePower, attacker, defender, move) {
 			if (move.name === 'Shoot') {
@@ -2285,6 +2285,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Gun Aura",
+		rating: 3.5,
+		num: 252,
+	},
+	genesis: {
+		isNonstandard: "Thing",
+		onSwitchInPriority: -10,
+		onSwitchIn(pokemon) {
+			if (!pokemon.addType('Green')) return false;
+			this.add('-start', pokemon, 'typeadd', 'Green', '[from] ability: Genesis');
+		},
+		name: "Genesis",
 		rating: 3.5,
 		num: 252,
 	},

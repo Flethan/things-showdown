@@ -98,6 +98,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Connection",
 		shortDesc: "Allies deal 1.2x damage.",
 	},
+	cumulate: {
+		name: "Cumulate",
+		shortDesc: "Restore 5 PP for this Thing's moves on switch in.",
+	},
 	depthcharge: {
 		name: "Depth Charge",
 		shortDesc: "When knocked-out by an attack, pressurizes all other active Things.",
@@ -136,7 +140,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	genesis: {
 		name: "Genesis",
-		shortDesc: "Restore 5 PP for this Thing's moves on switch in.",
+		shortDesc: "This Thing gains the Green-type on switch in.",
 	},
 	gold: {
 		name: "Gold",
@@ -302,7 +306,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 
 	sodaspreader: {
 		name: "Soda Spreader",
-		shortDesc: "When this Thing uses a soda-based attacks, it summons Sticky Situation.",
+		shortDesc: "When this Thing uses a soda-based attack, it summons Sticky Situation.",
 	},
 
 	three: {

@@ -311,7 +311,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Pheromone Mark');
 			},
-			
 			onSourceModifyCritRatio(critRatio, source, target) {
 				if (source.hasType('Arthropod')) return critRatio + 2;
 			},
