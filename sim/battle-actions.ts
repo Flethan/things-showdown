@@ -1838,7 +1838,11 @@ export class BattleActions {
 
 		if (pokemon.baseSpecies.isNonstandard === 'Thing' ) {
 			pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
-			pokemon.addType('Infinity');
+			pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
+			if(this.dex.species.get(speciesid).evoCondition === 'Infinity') {
+				pokemon.addType('Infinity');
+				this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
+			}
 		} else {
 			pokemon.formeChange(speciesid, pokemon.getItem(), true);
 		}
