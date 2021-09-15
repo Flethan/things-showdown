@@ -125,6 +125,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify(2.5);
 			}
 		},
+		isPermanent: true,
 		name: "Really Big Sword",
 		rating: 3,
 		num: 1501,
@@ -232,6 +233,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 			}
 		},
+		isPermanent: true,
 		name: "Omega",
 		rating: 3,
 		num: 505,
@@ -305,6 +307,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-heal', pokemon, pokemon.getHealth, '[from] ability: Red');
 			}
 		},
+		isPermanent: true,
 		name: "Red",
 		rating: 5,
 		num: -509,
@@ -1974,6 +1977,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 			this.boost({def: -1, spd: -1, spe: 1}, target, target, null, true);
 		},
+		isPermanent: true,
 		name: "Cargo from Everywhen",
 		rating: 5,
 		num: 529,

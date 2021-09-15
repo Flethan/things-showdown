@@ -1792,6 +1792,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 120.0,
 		weightkg: 999.0,
 		color: "Black",
+		evos: ["Babellinks"],
 		eggGroups: ["Undiscovered"],
 	},
 	babellinks: {
