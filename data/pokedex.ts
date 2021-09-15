@@ -80,6 +80,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		prevo: "Kiteolus",
 		evoLevel: 32,
+		evos: ["Celiorship"],
 		eggGroups: ["Amorphous", "Water 3"],
 	},
 	triangl3: {
