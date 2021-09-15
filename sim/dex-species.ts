@@ -132,7 +132,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly evoType?: 'trade' | 'useItem' | 'levelMove' | 'levelExtra' | 'levelFriendship' | 'levelHold' | 'other';
 	/** Evolution condition. falsy if doesn't evolve. */
 	declare readonly evoCondition?: string;
-	/** Type effect gained from Epsilon. falsy if isn't espsilon form. */
+	/** Type effect gained from Epsilon. falsy if isn't Epsilon form. */
 	declare readonly epsilonType?: string;
 	/** Evolution item. falsy if doesn't evolve. */
 	declare readonly evoItem?: string;

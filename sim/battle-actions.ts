@@ -1805,10 +1805,10 @@ export class BattleActions {
 		}
 
 		// Infinity, Epsilon
-		if(species.isNonstandard === 'Thing' && species.evos) {
-			for(const evo of species.evos) {
+		if (species.isNonstandard === 'Thing' && species.evos) {
+			for (const evo of species.evos) {
 				const evoType = this.dex.species.get(evo).evoCondition;
-				if(evoType === 'Infinity' || evoType === 'Epsilon') {
+				if (evoType === 'Infinity' || evoType === 'Epsilon') {
 					return evo;
 				}
 			}
@@ -1836,10 +1836,18 @@ export class BattleActions {
 			}
 		}
 
-		if (pokemon.baseSpecies.isNonstandard === 'Thing' ) {
+		if (pokemon.baseSpecies.isNonstandard === 'Thing') {
 			pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
 			pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
-			if(this.dex.species.get(speciesid).evoCondition === 'Infinity') {
+
+			pokemon.baseMaxhp = Math.floor(Math.floor(
+				2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
+			) * pokemon.level / 100 + 10);
+			pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
+			pokemon.maxhp = pokemon.baseMaxhp;
+			this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+
+			if (this.dex.species.get(speciesid).evoCondition === 'Infinity') {
 				pokemon.addType('Infinity');
 				this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
 			}
