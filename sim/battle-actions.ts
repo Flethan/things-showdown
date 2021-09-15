@@ -1800,13 +1800,11 @@ export class BattleActions {
 			return item.megaStone;
 		}
 
-		console.log('checkInf')
-		// Infinity
+		// Infinity, Epsilon
 		if(species.isNonstandard === 'Thing' && species.evos) {
 			for(const evo of species.evos) {
-				console.log(evo)
-				if(this.dex.species.get(evo).evoCondition === 'Infinity') {
-					console.log('inf-able')
+				const evoType = this.dex.species.get(evo).evoCondition;
+				if(evoType === 'Infinity' || evoType === 'Epsilon') {
 					return evo;
 				}
 			}
