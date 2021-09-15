@@ -1799,6 +1799,17 @@ export class BattleActions {
 		if (item.megaEvolves === species.baseSpecies && item.megaStone !== species.name) {
 			return item.megaStone;
 		}
+
+		// Infinity
+		if(species.isNonstandard === 'Thing' && species.evos) {
+			let evo;
+			for(evo in species.evos) {
+				if(this.dex.species.get(evo).evoCondition === 'Infinity') {
+					return evo;
+				}
+			}
+		}
+
 		return null;
 	}
 
@@ -1821,7 +1832,11 @@ export class BattleActions {
 			}
 		}
 
-		pokemon.formeChange(speciesid, pokemon.getItem(), true);
+		if (pokemon.baseSpecies.isNonstandard === 'Thing' ) {
+			pokemon.formeChange(speciesid, pokemon.baseSpecies, true);
+		} else {
+			pokemon.formeChange(speciesid, pokemon.getItem(), true);
+		}
 
 		// Limit one mega evolution
 		const wasMega = pokemon.canMegaEvo;
