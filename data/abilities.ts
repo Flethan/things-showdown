@@ -69,6 +69,41 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.1,
 		num: 500,
 	},
+	servantofthesun: {
+		isNonstandard: "ThingInf",
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, pokemon) {
+			if (['yellowish'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifyDefPriority: 5,
+		onModifyDef(def, pokemon) {
+			if (['yellowish'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 6,
+		onModifySpA(spa, pokemon) {
+			if (['yellowish'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpDPriority: 6,
+		onModifySpD(spd, pokemon) {
+			if (['yellowish'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpe(spe, pokemon) {
+			if (['yellowish'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(1.5);
+			}
+		},
+		name: "Servant of the Sun",
+		rating: 0.1,
+		num: 500,
+	},
 	bigsword: {
 		isNonstandard: "Thing",
 		onModifyAtkPriority: 5,
