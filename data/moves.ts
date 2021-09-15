@@ -4284,7 +4284,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				}
 			},
-			onSwap(target) {
+			onSwitchIn(target) {
 				if (!target.fainted && this.effectState.success) {
 					this.add('-activate', '[from] move: Time Capsule');
 					this.boost(this.effectState.passedBoosts, target);
