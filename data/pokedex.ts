@@ -2261,7 +2261,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Celiorship",
 		forme: "Epsilon",
 		types: ["Weather", "Green"],
-		genderRatio: {M: 0.5, F: 0.5},
+		gender: "N",
 		baseStats: {hp: 200, atk: 48, def: 87, spa: 33, spd: 82, spe: 78},
 		abilities: {0: "Servant of the Sun"},
 		heightm: 50.7,
