@@ -400,7 +400,7 @@ export class Side {
 		return this.choice.actions.length >= this.active.length;
 	}
 
-	chooseMove(moveText?: string | number, targetLoc = 0, megaDynaOrZ: 'infinity' | 'element'| 'null' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '') {
+	chooseMove(moveText?: string | number, targetLoc = 0, megaDynaOrZ: 'symbol' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '') {
 		if (this.requestState !== 'move') {
 			return this.emitChoiceError(`Can't move: You need a ${this.requestState} response`);
 		}
@@ -581,7 +581,7 @@ export class Side {
 
 		// Symbol evolution
 
-		const symbol = (megaDynaOrZ === 'infinity' || megaDynaOrZ === 'element' || megaDynaOrZ === 'null');
+		const symbol = (megaDynaOrZ === 'symbol');
 		if (symbol && !pokemon.canMegaEvo) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't symbol evolve`);
 		}
@@ -889,7 +889,7 @@ export class Side {
 				const original = data;
 				const error = () => this.emitChoiceError(`Conflicting arguments for "move": ${original}`);
 				let targetLoc: number | undefined;
-				let megaDynaOrZ: 'infinity' | 'element' | 'null' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '';
+				let megaDynaOrZ: 'symbol' | 'mega' | 'zmove' | 'ultra' | 'dynamax' | '' = '';
 				while (true) {
 					// If data ends with a number, treat it as a target location.
 					// We need to special case 'Conversion 2' so it doesn't get
@@ -899,18 +899,10 @@ export class Side {
 						if (targetLoc !== undefined) return error();
 						targetLoc = parseInt(data.slice(-2));
 						data = data.slice(0, -2).trim();
-					} else if (data.endsWith(' infinity')) {
+					} else if (data.endsWith(' symbol')) {
 						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'infinity';
-						data = data.slice(0, -5);
-					} else if (data.endsWith(' element')) {
-						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'element';
-						data = data.slice(0, -5);
-					} else if (data.endsWith(' null')) {
-						if (megaDynaOrZ) return error();
-						megaDynaOrZ = 'null';
-						data = data.slice(0, -5);
+						megaDynaOrZ = 'symbol';
+						data = data.slice(0, -7);
 					} else if (data.endsWith(' mega')) {
 						if (megaDynaOrZ) return error();
 						megaDynaOrZ = 'mega';
