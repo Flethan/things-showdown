@@ -2274,9 +2274,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Element",
 		elementType: "Yellow",
 	},
-	feyesh: {
+	fish: {
 		num: -454,
-		name: "F\uD83D\uDC41sh",
+		name: "Fi\b\uD83D\uDC41sh",
 		types: ["Fish", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 85, atk: 70, def: 91, spa: 63, spd: 34, spe: 60},
