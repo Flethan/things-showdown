@@ -898,6 +898,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		evoType: "other",
 		evoCondition: "Epsilon",
+		epsilonType: "Sword",
 	},
 	hmug: {
 		num: -363,

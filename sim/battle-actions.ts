@@ -665,6 +665,10 @@ export class BattleActions {
 				if (!target.illusion) this.battle.hint("Since gen 7, Dark is immune to Prankster moves.");
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
+			} else if (target.species.evoCondition === 'Epsilon' && move.type === target.species.epsilonType) {
+				this.battle.debug('natural epsilon immunity');
+				this.battle.add('-immune', target);
+				hitResults[i] = false;
 			} else {
 				hitResults[i] = true;
 			}
@@ -1708,7 +1712,7 @@ export class BattleActions {
 		baseDamage = this.battle.randomizer(baseDamage);
 
 		// STAB
-		if (move.forceSTAB || (type !== '???' && pokemon.hasType(type))) {
+		if (move.forceSTAB || (type !== '???' && (pokemon.hasType(type)) || pokemon.species.evoCondition === 'Epsilon')) {
 			// The "???" type never gets STAB
 			// Not even if you Roost in Gen 4 and somehow manage to use
 			// Struggle in the same turn.
