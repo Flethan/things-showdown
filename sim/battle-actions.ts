@@ -1834,6 +1834,7 @@ export class BattleActions {
 
 		if (pokemon.baseSpecies.isNonstandard === 'Thing' ) {
 			pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
+			pokemon.addType('Infinity');
 		} else {
 			pokemon.formeChange(speciesid, pokemon.getItem(), true);
 		}

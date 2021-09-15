@@ -120,6 +120,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 3.0,
 		color: "Black",
 		prevo: "T3trahedron",
+		evos: ["L3mniscangl"],
 		eggGroups: ["Monster"],
 	},
 	l3mniscangl: {
@@ -896,7 +897,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Sword Guy",
 		eggGroups: ["Mineral"],
 		evoType: "other",
-		evoCondition: "Infinity",
+		evoCondition: "Epsilon",
 	},
 	hmug: {
 		num: -363,
