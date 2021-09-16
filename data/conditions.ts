@@ -431,6 +431,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 				return false;
 			}
 		},
+		onResidualOrder: 6,
+		onResidual(pokemon) {
+			if(pokemon.hasType('Far')) this.heal(pokemon.baseMaxhp / 16);
+		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 

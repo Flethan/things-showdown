@@ -1751,7 +1751,7 @@ export class BattleActions {
 			baseDamage = this.battle.modify(baseDamage, 0.33);
 		}
 
-		if (pokemon.status === 'distanced') {
+		if (pokemon.status === 'distanced' || target.status === 'distanced') {
 			baseDamage = this.battle.modify(baseDamage, 0.80);
 		}
 
