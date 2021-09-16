@@ -2363,6 +2363,34 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 252,
 	},
+	beeretribution: {
+		isNonstandard: "ThingInf",
+		onStart(pokemon) {
+			const atkBoost = pokemon.boosts.atk
+			if(atkBoost < 1) return;
+			for (const foe of pokemon.foes()) {
+				if (!foe?.isActive || foe === pokemon) continue;
+				this.add('-ability', pokemon, 'Bee Retribution');
+				this.boost({atk: -atkBoost}, foe, pokemon, null, true);
+			}
+		},
+		name: "Bee Retribution",
+		rating: 5,
+		num: 252,
+	},
+	furthestaway: {
+		isNonstandard: "ThingInf",
+		onStart(source) {
+			this.add('-activate', source, 'ability: Furthest Away');
+			for (const thing of this.getAllActive()) {
+				if (thing.fainted || !thing.hp) continue;
+				thing.trySetStatus('distanced', source);
+			}
+		},
+		name: "Furthest Away",
+		rating: 5,
+		num: 228,
+	},
 
 	// BASE GAME
 	noability: {
