@@ -475,15 +475,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 6,
 		flags: {},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.hasType('Far')) return;
+			if (pokemon.hasType('Far') || pokemon.status === 'distanced') return;
 			this.add('-fail', pokemon, 'move: Close In');
 			this.attrLastMove('[still]');
 			return null;
 		},
 		self: {
 			onHit(pokemon) {
-				pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Far"));
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
+				if(pokemon.status === 'distanced') {
+					pokemon.cureStatus();
+				} else {
+					pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Far"));
+					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Close In');
+				}
 
 				for (const foe of pokemon.foes()) {
 					if (!foe || foe === pokemon) continue;
