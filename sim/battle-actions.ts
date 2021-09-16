@@ -687,7 +687,9 @@ export class BattleActions {
 					if (move.ohko === 'Ice' && this.battle.gen >= 7 && !pokemon.hasType('Ice')) {
 						accuracy = 20;
 					}
-					if (!target.volatiles['dynamax'] && pokemon.level >= target.level &&
+					if (pokemon.volatiles['ocount3']) {
+						accuracy = true;
+					} else if (!target.volatiles['dynamax'] && pokemon.level >= target.level &&
 						(move.ohko === true || !target.hasType(move.ohko))) {
 						accuracy += (pokemon.level - target.level);
 					} else {
@@ -1644,7 +1646,7 @@ export class BattleActions {
 		const ignoreOffensive = !!(move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0));
 		const ignoreDefensive = !!(move.ignoreDefensive || (ignorePositiveDefensive && defBoosts > 0));
 
-		if (ignoreOffensive || (move.useSourceSpeedAsOffensive && this.battle.field.getWeather().id === 'windy')) {
+		if (ignoreOffensive) {
 			this.battle.debug('Negating (sp)atk boost/penalty.');
 			atkBoosts = 0;
 		}

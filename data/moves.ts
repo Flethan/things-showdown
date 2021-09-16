@@ -482,7 +482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				if(pokemon.status === 'distanced') {
+				if (pokemon.status === 'distanced') {
 					pokemon.cureStatus();
 				} else {
 					pokemon.setType(pokemon.getTypes(true).filter(type => type !== "Far"));

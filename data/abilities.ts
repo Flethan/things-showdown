@@ -262,7 +262,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		onModifyMove(move, attacker, defender) {
-			if (attacker.volatiles['ocount3']) {
+			if (attacker.volatiles['ocount3'] && move.category !== 'Status') {
 				this.debug('Omega boost');
 				move.ohko = true;
 				move.accuracy = true;
@@ -2366,8 +2366,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	beeretribution: {
 		isNonstandard: "ThingInf",
 		onStart(pokemon) {
-			const atkBoost = pokemon.boosts.atk
-			if(atkBoost < 1) return;
+			const atkBoost = pokemon.boosts.atk;
+			if (atkBoost < 1) return;
 			for (const foe of pokemon.foes()) {
 				if (!foe?.isActive || foe === pokemon) continue;
 				this.add('-ability', pokemon, 'Bee Retribution');
