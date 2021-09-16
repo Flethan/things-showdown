@@ -2278,6 +2278,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	f__sh: {
 		num: -454,
 		name: "Fi\uD83D\uDC41ish",
+		forme: "Mu",
 		types: ["Fish", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 85, atk: 20, def: 91, spa: 113, spd: 34, spe: 60},
