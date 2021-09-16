@@ -1608,7 +1608,7 @@ export class BattleActions {
 		const attacker = pokemon;
 		const defender = target;
 		let attackStat: StatIDExceptHP = category === 'Physical' ? 'atk' : 'spa';
-		const defenseStat: StatIDExceptHP = defensiveCategory === 'Physical' ? 'def' : 'spd';
+		let defenseStat: StatIDExceptHP = defensiveCategory === 'Physical' ? 'def' : 'spd';
 		if (move.useSourceDefensiveAsOffensive) {
 			attackStat = defenseStat;
 			// Body press really wants to use the def stat,
@@ -1625,13 +1625,14 @@ export class BattleActions {
 				}
 			}
 		}
+		if (move.useSourceSpeedAsOffensive) attackStat = 'spe';
 
 		const statTable = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe'};
 		let attack;
 		let defense;
 
 		let atkBoosts = move.useTargetOffensive ? defender.boosts[attackStat] : attacker.boosts[attackStat];
-		let defBoosts = defender.boosts[defenseStat];
+		let defBoosts = move.useTargetOffensiveAsDefensive ? defender.boosts[attackStat] : defender.boosts[defenseStat];
 
 		let ignoreNegativeOffensive = !!move.ignoreNegativeOffensive;
 		let ignorePositiveDefensive = !!move.ignorePositiveDefensive;
@@ -1643,7 +1644,7 @@ export class BattleActions {
 		const ignoreOffensive = !!(move.ignoreOffensive || (ignoreNegativeOffensive && atkBoosts < 0));
 		const ignoreDefensive = !!(move.ignoreDefensive || (ignorePositiveDefensive && defBoosts > 0));
 
-		if (ignoreOffensive) {
+		if (ignoreOffensive || (move.useSourceSpeedAsOffensive && this.battle.field.getWeather().id === 'windy')) {
 			this.battle.debug('Negating (sp)atk boost/penalty.');
 			atkBoosts = 0;
 		}
@@ -1657,9 +1658,10 @@ export class BattleActions {
 		} else {
 			attack = attacker.calculateStat(attackStat, atkBoosts);
 		}
+		defense = defender.calculateStat(defenseStat, defBoosts);
 
 		attackStat = (category === 'Physical' ? 'atk' : 'spa');
-		defense = defender.calculateStat(defenseStat, defBoosts);
+		defenseStat = (defensiveCategory === 'Physical' ? 'def' : 'spd');
 
 		// Apply Stat Modifiers
 		attack = this.battle.runEvent('Modify' + statTable[attackStat], attacker, defender, move, attack);
@@ -1832,7 +1834,7 @@ export class BattleActions {
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		const evoType = this.dex.species.get(speciesid).evoCondition
+		const evoType = this.dex.species.get(speciesid).evoCondition;
 
 		if (evoType === 'Infinity') {
 			pokemon.addType('Infinity');

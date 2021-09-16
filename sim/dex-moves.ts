@@ -234,6 +234,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	 */
 	tracksTarget?: boolean;
 	useTargetOffensive?: boolean;
+	useTargetOffensiveAsDefensive?: boolean;
 	useSourceDefensiveAsOffensive?: boolean;
 	useSourceSpeedAsOffensive?: boolean;
 	willCrit?: boolean;
@@ -370,6 +371,8 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 	readonly defensiveCategory?: MoveCategory;
 	/** Uses the target's Atk/SpA as the attacking stat, instead of the user's. */
 	readonly useTargetOffensive: boolean;
+	/** Uses the target's Atk/SpA as the defending stat, instead of Def/SpD. */
+	readonly useTargetOffensiveAsDefensive: boolean;
 	/** Use the user's Def/SpD as the attacking stat, instead of Atk/SpA. */
 	readonly useSourceDefensiveAsOffensive: boolean;
 	/** Use the user's Spe as the attacking stat, instead of Atk/SpA. */
@@ -456,6 +459,7 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 		this.category = data.category!;
 		this.defensiveCategory = data.defensiveCategory || undefined;
 		this.useTargetOffensive = !!data.useTargetOffensive;
+		this.useTargetOffensiveAsDefensive = !!data.useTargetOffensiveAsDefensive;
 		this.useSourceDefensiveAsOffensive = !!data.useSourceDefensiveAsOffensive;
 		this.useSourceSpeedAsOffensive = !!data.useSourceSpeedAsOffensive;
 		this.ignoreNegativeOffensive = !!data.ignoreNegativeOffensive;

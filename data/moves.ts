@@ -5138,7 +5138,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Clever",
 	},
-	
 
 	// Infinity
 

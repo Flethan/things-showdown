@@ -398,7 +398,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy, target, source, move) {
 			if (typeof accuracy === 'number') {
-				if(move.target !== 'any') {
+				if (move.target !== 'any') {
 					return this.chainModify(0.90);
 				}
 			}
@@ -406,7 +406,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onAnyAccuracy(accuracy, target, source, move) {
 			if (move && target === this.effectState.target) {
 				if (typeof accuracy === 'number') {
-					if(move.target !== 'any') {
+					if (move.target !== 'any') {
 						return this.chainModify(0.90);
 					}
 				}
@@ -433,7 +433,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onResidualOrder: 6,
 		onResidual(pokemon) {
-			if(pokemon.hasType('Far')) this.heal(pokemon.baseMaxhp / 16);
+			if (pokemon.hasType('Far')) this.heal(pokemon.baseMaxhp / 16);
 		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
@@ -507,7 +507,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
 
 			let bonus = 1;
-			if(target.volatiles['pheromonemark']) {
+			if (target.volatiles['pheromonemark']) {
 				bonus = 1.5;
 			}
 
