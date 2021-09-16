@@ -180,6 +180,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly maleOnlyHidden: boolean;
 	/** Type effect gained from Element. falsy if isn't Element form. */
 	readonly elementType?: string;
+	/** Move  gained from Mu. falsy if isn't Mu form. */
+	readonly muMove?: string;
 	/** True if a thing is symbol. */
 	readonly isSymbol?: boolean;
 	/** True if a pokemon is mega. */

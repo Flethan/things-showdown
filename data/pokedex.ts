@@ -2281,13 +2281,14 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Fish", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 85, atk: 20, def: 91, spa: 113, spd: 34, spe: 60},
-		abilities: {0: "Blind"},
+		abilities: {0: "All-Seeing"},
 		heightm: 1.2,
 		weightkg: 64,
 		color: "Blue",
 		eggGroups: ["Water 1"],
 		evoType: "other",
-		evoCondition: "Infinity",
+		evoCondition: "Mu",
+		muMove: "True Sight",
 	},
 
 	// BASE GAME

@@ -5069,6 +5069,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'heal'},
 		contestType: "Clever",
 	},
+	truesight: {
+		num: 498,
+		accuracy: 10,
+		basePower: 100,
+		category: "Special",
+		isNonstandard: "ThingInf",
+		name: "True Sight",
+		pp: 3,
+		priority: 0,
+		flags: {},
+		ignorePositiveDefensive: true,
+		secondary: null,
+		target: "any",
+		type: "Yellow",
+		contestType: "Clever",
+	},
+	
 
 	// Infinity
 

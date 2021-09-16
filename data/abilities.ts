@@ -2338,6 +2338,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 252,
 	},
+	allseeing: {
+		isNonstandard: "ThingInf",
+		onAnyInvulnerabilityPriority: 1,
+		onAnyInvulnerability(target, source, move) {
+			if (move && (source === this.effectState.target)) return 0;
+		},
+		onAnyAccuracy(accuracy, target, source, move) {
+			if (move && (source === this.effectState.target)) {
+				return true;
+			}
+			return accuracy;
+		},
+		name: "All-Seeing",
+		rating: 5,
+		num: 252,
+	},
 
 	// BASE GAME
 	noability: {

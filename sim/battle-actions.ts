@@ -1800,7 +1800,7 @@ export class BattleActions {
 		if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
 				const evoType = this.dex.species.get(evo).evoCondition;
-				if (evoType === 'Infinity' || evoType === 'Element' || evoType === 'Null') {
+				if (evoType === 'Infinity' || evoType === 'Element' || evoType === 'Null' || evoType === 'Mu') {
 					return evo;
 				}
 			}
@@ -1828,9 +1828,23 @@ export class BattleActions {
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		if (this.dex.species.get(speciesid).evoCondition === 'Infinity') {
+		const evoType = this.dex.species.get(speciesid).evoCondition
+
+		if (evoType === 'Infinity') {
 			pokemon.addType('Infinity');
 			this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
+		} else if (evoType === 'Mu') {
+			const muMove = this.dex.moves.get(pokemon.species.muMove);
+			const newMove = {
+				move: muMove.name,
+				id: muMove.id,
+				pp: muMove.pp,
+				maxpp: muMove.pp,
+				target: muMove.target,
+				disabled: false,
+				used: false,
+			};
+			pokemon.moveSlots[0] = newMove;
 		}
 
 		// Limit one symbol evolution
