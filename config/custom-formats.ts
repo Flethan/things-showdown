@@ -28,6 +28,48 @@ export const Formats: FormatList = [
 		team: 'randomThing',
 		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'Visible Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
 	},
+	{
+		name: "[Things] Random Visible Doubles",
+		desc: `Randomized teams of level-balanced Things`,
+
+		gameType: 'doubles',
+		mod: 'gen8',
+		team: 'randomThing',
+		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'Visible Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Random Visible Triples",
+		desc: `Randomized teams of level-balanced Things`,
+
+		gameType: 'triples',
+		mod: 'gen8',
+		team: 'randomThing',
+		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'Visible Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Visible Free-For-All Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'freeforall',
+		tournamentShow: false,
+		rated: false,
+		ruleset: ['Things Only', 'Species Clause', 'Visible Only',  'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause'],
+	},
+	{
+		name: "[Things] Visible Multi Random Battle",
+
+		mod: 'gen8',
+		team: 'randomThing',
+		gameType: 'multi',
+		searchShow: false,
+		tournamentShow: false,
+		rated: false,
+		ruleset: [
+			'Max Team Size = 3',
+			'Things Only', 'Species Clause', 'Visible Only',  'HP Percentage Mod', 'Cancel Mod', 'Sleep Clause Mod', 'Dynamax Clause',
+		],
+	},
 
 
 	{
