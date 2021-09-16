@@ -422,8 +422,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 				if (move.flags['contact'])	{
 					pokemon.cureStatus();
 					this.add('cant', pokemon, 'distanced');
+					return false;
 				}
-				return false;
+				
 			}
 		},
 		onInvulnerability(target, source, move) {
