@@ -16,6 +16,18 @@ export const Formats: FormatList = [
 		team: 'randomGThing',
 		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
 	},
+	{
+		section: "Visible Things",
+		column: 3,
+	},
+	{
+		name: "[Things] Random Visible Singles",
+		desc: `Randomized teams of level-balanced Things`,
+
+		mod: 'gen8',
+		team: 'randomThing',
+		ruleset: ['Obtainable Abilities', 'Obtainable Formes', 'Obtainable Misc', 'Things Only', 'Visible Only', 'One Infinity Only', 'Species Clause', 'HP Percentage Mod', 'Cancel Mod', 'Endless Battle Clause', 'No Nickname Clause', 'Dynamax Clause'],
+	},
 
 
 	{

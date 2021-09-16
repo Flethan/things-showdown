@@ -315,8 +315,9 @@ export class RandomTeams {
 		const isMonotype = ruleTable.has('sametypeclause');
 		const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
 		const type = isMonotype ? this.sample(typePool) : this.forceMonotype;
+		const visOnly = ruleTable.has('visibleonly');
 
-		const randomN = this.randomNThings(this.maxTeamSize, type);
+		const randomN = this.randomNThings(this.maxTeamSize, type, visOnly);
 
 		for (let forme of randomN) {
 			let species = dex.species.get(forme);
@@ -449,7 +450,7 @@ export class RandomTeams {
 		return team;
 	}
 
-	randomNThings(n: number, requiredType?: string, minSourceGen?: number) {
+	randomNThings(n: number, requiredType?: string, visOnly?: boolean, minSourceGen?: number) {
 		// Pick `n` random things--no repeats, even among formes
 		// Also need to either normalize for formes or select formes at random
 		const last = -500;
@@ -462,7 +463,8 @@ export class RandomTeams {
 		for (const id in this.dex.data.FormatsData) {
 			if (
 				!this.dex.data.Pokedex[id] ||
-				this.dex.data.FormatsData[id].isNonstandard !== 'Thing'
+				this.dex.data.FormatsData[id].isNonstandard !== 'Thing' ||
+				(visOnly && !this.dex.data.Pokedex[id].hasSprite)
 			) continue;
 			if (requiredType && !this.dex.data.Pokedex[id].types.includes(requiredType)) continue;
 			if (minSourceGen && (this.dex.data.Pokedex[id].gen || 8) < minSourceGen) continue;

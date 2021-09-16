@@ -13,6 +13,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Hubert", "Sword Hubert"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	hubert: {
 		num: -202,
@@ -26,6 +27,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Hubaby",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	swordhubert: {
 		num: -203,
@@ -39,6 +41,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Hubaby",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	anemoeba: {
 		num: -204,
@@ -95,6 +98,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["T3trahedron"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	t3trahedron: {
 		num: -208,
@@ -109,6 +113,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Triangl3",
 		evos: ["P3ntachoron"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	p3ntachoron: {
 		num: -209,
@@ -123,6 +128,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "T3trahedron",
 		evos: ["L3mniscangl"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	l3mniscangl: {
 		num: -210,
@@ -139,6 +145,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		evoType: "other",
 		evoCondition: "Infinity",
+		hasSprite: true,
 	},
 	e1: {
 		num: -307,
@@ -151,6 +158,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.01,
 		color: "Black",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	meltipillar: {
 		num: -308,
@@ -164,6 +172,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Puddlefly"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	puddlefly: {
 		num: -309,
@@ -177,6 +186,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Meltipillar",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	pescadestrian: {
 		num: -310,
@@ -190,6 +200,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Motoriscis"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	motoriscis: {
 		num: -311,
@@ -204,6 +215,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Pescadestrian",
 		evos: ["Aviachthys"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	aviachthys: {
 		num: -312,
@@ -217,6 +229,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Motoriscis",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	angrybeehive: {
 		num: -313,
@@ -230,6 +243,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		eggGroups: ["Monster"],
 		evos: ["Adjudicative Beehive"],
+		hasSprite: true,
 	},
 	anomallish: {
 		num: -314,
@@ -256,6 +270,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Anomallish",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	anomallolash: {
 		num: -316,
@@ -322,6 +337,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Ofishal", "Bassozefish"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	offishal: {
 		num: -321,
@@ -335,6 +351,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Afishal",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	bassozefish: {
 		num: -322,
@@ -428,6 +445,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		cosmeticFormes: ["Connector-Red"],
 		formeOrder: ["Connector", "Connector-Red"],
+		hasSprite: true,
 	},
 	connectphore: {
 		num: -329,
@@ -444,6 +462,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		cosmeticFormes: ["Connectphore-Red", "Connectphore-Purple"],
 		formeOrder: ["Connectphore", "Connectphore-Red", "Connectphore-Purple"],
+		hasSprite: true,
 	},
 	omnectivore: {
 		num: -330,
@@ -459,6 +478,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		cosmeticFormes: ["Omnectivore-Red", "Omnectivore-Purple"],
 		formeOrder: ["Omnectivore", "Omnectivore-Red", "Omnectivore-Purple"],
+		hasSprite: true,
 	},
 	lemon: {
 		num: -331,
@@ -471,6 +491,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Yellow",
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	empty: {
 		num: -332,
@@ -483,6 +504,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 1,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	yellosnow: {
 		num: -333,
@@ -496,6 +518,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		evos: ["Yellowater"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	yellowater: {
 		num: -334,
@@ -509,6 +532,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		prevo: "Yellosnow",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	fishish: {
 		num: -335,
@@ -534,6 +558,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Congeel",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	demerfin: {
 		num: -337,
@@ -559,6 +584,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Grenadier"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	grenadire: {
 		num: -339,
@@ -572,6 +598,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Anglock",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	congeel: {
 		num: -340,
@@ -586,6 +613,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Sarcopharyn"],
 		prevo: "Goray",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	goray: {
 		num: -341,
@@ -599,6 +627,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Congeel", "Sarcopharyn"],
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	toastie: {
 		num: -342,
@@ -612,6 +641,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Micro-tron"],
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	microtron: {
 		num: -343,
@@ -625,6 +655,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Toastie",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	protosol: {
 		num: -344,
@@ -638,6 +669,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		evos: ["Solor", "Sollit"],
 		eggGroups: ["Amorphous"],
+		hasSprite: true,
 	},
 	solor: {
 		num: -345,
@@ -653,6 +685,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 22,
 		evoCondition: "at night",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	sollit: {
 		num: -346,
@@ -668,6 +701,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 22,
 		evoCondition: "during the day",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	hellow: {
 		num: -347,
@@ -680,6 +714,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 26.5,
 		color: "Yellow",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	godbye: {
 		num: -348,
@@ -718,6 +753,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		otherFormes: ["Horse-Luigi"],
 		formeOrder: ["Horse", "Horse-Luigi"],
+		hasSprite: true,
 	},
 	horseluigi: {
 		num: -350,
@@ -732,6 +768,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 450,
 		color: "Brown",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	fsh: {
 		num: -351,
@@ -745,6 +782,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		eggGroups: ["Water 1"],
 		evos: ["Fi\uD83D\uDC41ish"],
+		hasSprite: true,
 	},
 	clanksy: {
 		num: -352,
@@ -885,6 +923,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Guysword"],
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	guysword: {
 		num: -362,
@@ -914,6 +953,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 4,
 		color: "White",
 		eggGroups: ["Mireral"],
+		hasSprite: true,
 	},
 	moppit: {
 		num: -364,
@@ -926,6 +966,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Brown",
 		eggGroups: ["Mireral"],
+		hasSprite: true,
 	},
 	sweepit: {
 		num: -365,
@@ -938,6 +979,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Brown",
 		eggGroups: ["Mireral"],
+		hasSprite: true,
 	},
 	manitsa: {
 		num: -366,
@@ -963,6 +1005,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		otherFormes: ["Undulux-Overheated"],
 		formeOrder: ["Undulux", "Undulux-Overheated"],
+		hasSprite: true,
 	},
 	unduluxoverheated: {
 		num: -367,
@@ -978,6 +1021,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		requiredAbility: "Superconductor",
 		battleOnly: "Undulux",
+		hasSprite: true,
 	},
 	bathymney: {
 		num: -368,
@@ -1018,6 +1062,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Sootortoise", "Cheleaf"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	sootortoise: {
 		num: -371,
@@ -1097,6 +1142,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Crescent"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	crescent: {
 		num: -377,
@@ -1110,6 +1156,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Crescitten",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	cramble: {
 		num: -378,
@@ -1177,6 +1224,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 		otherFormes: ["Fjean-Brawler"],
 		formeOrder: ["Fjean", "Fjean-Brawler"],
+		hasSprite: true,
 	},
 	fjeanbrawler: {
 		num: -382,
@@ -1193,6 +1241,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 		requiredMove: "Warm-Up",
 		battleOnly: "Fjean",
+		hasSprite: true,
 	},
 	soapy: {
 		num: -383,
@@ -1206,6 +1255,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		evos: ["Sudzerpent", "Sudsquire"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	sudzerpent: {
 		num: -384,
@@ -1219,6 +1269,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		prevo: "Soapy",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	sudsquire: {
 		num: -385,
@@ -1232,6 +1283,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		prevo: "Soapy",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	akimbonk: {
 		num: -386,
@@ -1257,6 +1309,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		evos: ["Heliquet", "Splattom"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	heliquet: {
 		num: -388,
@@ -1270,6 +1323,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		prevo: "Hydrolo",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	splattom: {
 		num: -389,
@@ -1283,6 +1337,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		prevo: "Hydrolo",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	sonsprite: {
 		num: -390,
@@ -1298,6 +1353,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		otherFormes: ["Sonsprtie-Orange", "Sonsprtie-Yellow", "Sonsprtie-Green", "Sonsprtie-Blue", "Sonsprtie-Purple"],
 		formeOrder: ["Sonsprite", "Sonsprtie-Orange", "Sonsprtie-Yellow", "Sonsprtie-Green", "Sonsprtie-Blue", "Sonsprtie-Purple"],
+		hasSprite: true,
 	},
 	sonspriteorange: {
 		num: -390,
@@ -1312,6 +1368,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.5,
 		color: "Orange",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	sonspriteyellow: {
 		num: -390,
@@ -1326,6 +1383,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.5,
 		color: "Yellow",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	sonspritegreen: {
 		num: -390,
@@ -1340,6 +1398,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.5,
 		color: "Green",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	sonspriteblue: {
 		num: -390,
@@ -1354,6 +1413,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.5,
 		color: "Blue",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	sonspritepurple: {
 		num: -390,
@@ -1368,6 +1428,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.5,
 		color: "Purple",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	ossoligo: {
 		num: -391,
@@ -1433,6 +1494,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		evos: ["Frogreen"],
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	frogreen: {
 		num: -396,
@@ -1447,6 +1509,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Algie",
 		evos: ["Botanoad"],
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	botanoad: {
 		num: -397,
@@ -1460,6 +1523,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		prevo: "Frogreen",
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	yenoh: {
 		num: -398,
@@ -1498,6 +1562,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Chordant", "Maestreen"],
 		eggGroups: ["Bug"],
+		hasSprite: true,
 	},
 	chordant: {
 		num: -401,
@@ -1511,6 +1576,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Notant",
 		eggGroups: ["Bug"],
+		hasSprite: true,
 	},
 	maestreen: {
 		num: -402,
@@ -1537,6 +1603,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Scrambla'a", "Sunnoehoe"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	scramblaa: {
 		num: -404,
@@ -1550,6 +1617,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Magmegg",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	sunnoehoe: {
 		num: -405,
@@ -1563,6 +1631,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Magmegg",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	perpetronome: {
 		num: -406,
@@ -1588,6 +1657,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		evos: ["Glaciallid"],
 		eggGroups: ["Mineral", "Bug"],
+		hasSprite: true,
 	},
 	glaciallid: {
 		num: -408,
@@ -1613,6 +1683,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 80,
 		color: "Green",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	uwu: {
 		num: -410,
@@ -1625,6 +1696,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Black",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	myomimeo: {
 		num: -411,
@@ -1637,6 +1709,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Purple",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	tacilinks: {
 		num: -412,
@@ -1651,6 +1724,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		otherFormes: ["Tacilinks-Putt"],
 		formeOrder: ["Tacilinks", "Tacilinks-Putt"],
+		hasSprite: true,
 	},
 	tacilinksputt: {
 		num: -412,
@@ -1666,6 +1740,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		eggGroups: ["Mineral"],
 		battleOnly: "Tacilinks",
+		hasSprite: true,
 	},
 	jazzecko: {
 		num: -413,
@@ -1730,6 +1805,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 15,
 		color: "Yellow",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	hourlorn: {
 		num: -418,
@@ -1785,6 +1861,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Black",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	alabroad: {
 		num: -421,
@@ -1903,6 +1980,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		evos: ["Tree Further Away"],
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	treefurtheraway: {
 		num: -430,
@@ -1917,6 +1995,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Tree",
 		evos: ["Tree Furthest Away"],
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	mistimink: {
 		num: -431,
@@ -1975,6 +2054,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		otherFormes: ["Triathlide-Swim", "Triathlide-Cycle"],
 		formeOrder: ["Triathlide", "Triathlide-Swim", "Triathlide-Cycle"],
+		hasSprite: true,
 	},
 	triathlideswim: {
 		num: -432,
@@ -1991,6 +2071,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
+		hasSprite: true,
 	},
 	triathlidecycle: {
 		num: -432,
@@ -2007,6 +2088,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		requiredAbility: "Change Event",
 		battleOnly: "Triathlide",
+		hasSprite: true,
 	},
 	honi: {
 		num: -433,
@@ -2095,6 +2177,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Blue",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	gorn: {
 		num: -440,
@@ -2119,6 +2202,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 4.0,
 		color: "Green",
 		eggGroups: ["Grass"],
+		hasSprite: true,
 	},
 	kaijuv: {
 		num: -442,
@@ -2293,6 +2377,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "other",
 		evoCondition: "Mu",
 		muMove: "True Sight",
+		hasSprite: true,
 	},
 	adjudicativebeehive: {
 		num: -455,
@@ -2326,6 +2411,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Grass"],
 		evoType: "other",
 		evoCondition: "Infinity",
+		hasSprite: true,
 	},
 
 	// BASE GAME

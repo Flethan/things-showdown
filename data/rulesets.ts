@@ -53,6 +53,17 @@ export const Rulesets: {[k: string]: FormatData} = {
 			return [];
 		},
 	},
+	visibleonly: {
+		effectType: 'ValidatorRule',
+		name: 'Visible Only',
+		desc: "Only allows Visible Things",
+		onValidateSet(set, format) {
+			const species = this.dex.species.get(set.species || set.name);
+			if (!species.hasSprite) {
+				return [species.baseSpecies + " does not have a sprite."];
+			}
+		},
+	},
 
 	// Rulesets
 	///////////////////////////////////////////////////////////////////

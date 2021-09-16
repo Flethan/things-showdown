@@ -144,6 +144,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly eggGroups: string[];
 	/** True if this species can hatch from an Egg. */
 	readonly canHatch: boolean;
+	/** Species has sprite. falsy if eh. */
+	declare readonly hasSprite?: boolean;
 	/**
 	 * Gender. M = always male, F = always female, N = always
 	 * genderless, '' = sometimes male sometimes female.
