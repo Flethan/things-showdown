@@ -888,6 +888,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dirtypunch: ["8L10"],
 			spatialexpansion: ["8L30"],
 			winddispersal: ["8L20"],
+			sendoff: ["8L5"],
+			shove: ["8L60"],
 		},
 	},
 	harry: {
@@ -2677,6 +2679,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L10"],
 			photosynthesize: ["8L15"],
 			greennetwork: ["8L20"],
+			farbeam: ["8L52"],
 		},
 	},
 	mistimink: {
