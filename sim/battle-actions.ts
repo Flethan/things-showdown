@@ -1398,7 +1398,7 @@ export class BattleActions {
 	canZMove(pokemon: Pokemon) {
 		if (pokemon.side.zMoveUsed ||
 			(pokemon.transformed &&
-				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra" || pokemon.species.forme === "Infinity" || pokemon.species.forme === "Element" || pokemon.species.forme === "Null"))
+				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra" || pokemon.species.forme === "Infinity" || pokemon.species.forme === "Element" || pokemon.species.forme === "Null" || pokemon.species.forme === "Mu"))
 		) return;
 		const item = pokemon.getItem();
 		if (!item.zMove) return;

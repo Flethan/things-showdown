@@ -411,6 +411,7 @@ export class DexSpecies {
 				null: ['∅', 'null'],
 				element: ['∈', 'element'],
 				infinity: ['∞', 'infinity'],
+				mu: ['μ', 'mu'],
 				mega: ['m', 'mega'],
 				primal: ['p', 'primal'],
 			};
