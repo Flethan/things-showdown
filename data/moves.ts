@@ -1275,6 +1275,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cute",
 	},*/
+	handdownjudgement: {
+		num: 1541,
+		accuracy: 100,
+		basePower: 70,
+		category: "Physical",
+		isNonstandard: "ThingInf",
+		name: "Hand Down Judgement",
+		pp: 3,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "H",
+		zMove: {basePower: 140},
+		maxMove: {basePower: 130},
+		contestType: "Tough",
+	},
 
 	// Hair
 	whipcrack: {
