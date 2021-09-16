@@ -2046,9 +2046,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	furtheraway: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setTerrain('spatialexpansion');
+			source.trySetStatus('distanced', source);
 		},
 		name: "Further Away",
+		rating: 3.5,
+		num: 228,
+	},
+	spaced: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('spatialexpansion');
+		},
+		name: "Spaced",
 		rating: 3.5,
 		num: 228,
 	},
