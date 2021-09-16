@@ -2275,7 +2275,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Element",
 		elementType: "Yellow",
 	},
-	f__sh: {
+	fiish: {
 		num: -454,
 		name: "Fi\uD83D\uDC41ish",
 		forme: "Mu",
@@ -2287,6 +2287,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 64,
 		color: "Blue",
 		eggGroups: ["Water 1"],
+		prevo: "Fsh",
 		evoType: "other",
 		evoCondition: "Mu",
 		muMove: "True Sight",
