@@ -381,6 +381,58 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 	},
+	distanced: {
+		name: 'distanced',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			if (sourceEffect && sourceEffect.effectType === 'Item') {
+				this.add('-status', target, 'distanced', '[from] item: ' + sourceEffect.name);
+			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
+				this.add('-status', target, 'distanced', '[from] ability: ' + sourceEffect.name, '[of] ' + source);
+			} else {
+				this.add('-status', target, 'distanced');
+			}
+			this.effectState.startTime = 3;
+			this.effectState.time = this.effectState.startTime;
+		},
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy, target, source, move) {
+			if (typeof accuracy === 'number') {
+				if(move.target !== 'any') {
+					return this.chainModify(0.90);
+				}
+			}
+		},
+		onAnyAccuracy(accuracy, target, source, move) {
+			if (move && target === this.effectState.target) {
+				if (typeof accuracy === 'number') {
+					if(move.target !== 'any') {
+						return this.chainModify(0.90);
+					}
+				}
+			}
+			return accuracy;
+		},
+		onBeforeMovePriority: 10,
+		onBeforeMove(pokemon, target, move) {
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+			} else {
+				this.add('-activate', pokemon, 'distanced');
+				if (move.flags['contact'])	{
+					pokemon.cureStatus();
+					this.add('cant', pokemon, 'distanced');
+				}
+				return false;
+			}
+		},
+		onInvulnerability(target, source, move) {
+			if (move.flags['contact']) {
+				return false;
+			}
+		},
+		// Damage reduction is handled directly in the sim/battle-actions.js damage function
+	},
 
 	// Environmental Factors (New Weather)
 	yellowish: {

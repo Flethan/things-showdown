@@ -887,6 +887,7 @@ export const TypeChart: {[k: string]: TypeData} = {
 	},
 	far: {
 		damageTaken: {
+			distanced: 3,
 			Arthropod: 2,
 			Dirt: 0,
 			Far: 0,
