@@ -415,16 +415,16 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
+			pokemon.statusState.time--;
 			if (pokemon.statusState.time <= 0) {
 				pokemon.cureStatus();
 			} else {
 				this.add('-activate', pokemon, 'distanced');
 				if (move.flags['contact'])	{
-					pokemon.cureStatus();
 					this.add('cant', pokemon, 'distanced');
+					pokemon.cureStatus();
 					return false;
 				}
-				
 			}
 		},
 		onInvulnerability(target, source, move) {
