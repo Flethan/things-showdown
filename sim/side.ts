@@ -582,7 +582,7 @@ export class Side {
 		// Symbol evolution
 
 		const symbol = (megaDynaOrZ === 'symbol');
-		if (symbol && !pokemon.canMegaEvo) {
+		if (symbol && !pokemon.canSymbolEvo) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't symbol evolve`);
 		}
 		if (symbol && this.choice.mega) {
