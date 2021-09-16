@@ -1288,6 +1288,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Hand Down Judgement",
 		pp: 3,
 		priority: 0,
+		useTargetOffensiveAsDefensive: true,
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
