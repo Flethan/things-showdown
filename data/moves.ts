@@ -3742,6 +3742,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		contestType: "Cool",
 	},
+	cominginhot: {
+		num: 710,
+		accuracy: 50,
+		basePower: 150,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Coming in Hot",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: null,
+		target: "normal",
+		type: "Sport",
+		contestType: "Tough",
+	},
 
 	// Sword
 	sharpslash: {

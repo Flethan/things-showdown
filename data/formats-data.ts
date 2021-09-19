@@ -684,6 +684,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	dabarrel: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	dabarreldatandem: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	dabarreldatrandem: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

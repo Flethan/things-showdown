@@ -2391,6 +2391,30 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 228,
 	},
+	zoom: {
+		isNonstandard: "Thing",
+		onAfterEachBoost(boost, target, source, effect) {
+			if (boost.spe) {
+				this.boost({evasion: boost.spe}, target, target, null, true);
+			}
+		},
+		name: "Zoom",
+		rating: 3,
+		num: -128,
+	},
+	double: {
+		onPrepareHit(source, target, move) {
+			if (move.category === 'Status' || move.selfdestruct || move.multihit) return;
+			if (['endeavor', 'fling', 'iceball', 'rollout'].includes(move.id)) return;
+			if (!move.flags['charge'] && !move.spreadHit && !move.isZ && !move.isMax) {
+				move.multihit = 2;
+				move.multihitType = 'double';
+			}
+		},
+		name: "Double",
+		rating: 4.5,
+		num: 185,
+	},
 
 	// BASE GAME
 	noability: {
