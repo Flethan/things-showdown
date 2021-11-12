@@ -2456,6 +2456,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "other",
 		evoCondition: "Infinity",
 	},
+	dishwashersnake: {
+		num: -460,
+		name: "Dishwashersnake",
+		types: ["Industrial", "Liquid"],
+		gender: {M: 0.4, F: 0.6},
+		baseStats: {hp: 150, atk: 2, def: 99, spa: 34, spd: 44, spe: 5},
+		abilities: {0: "Refill"},
+		heightm: 0.8,
+		weightkg: 35.1,
+		evos: ["Dishwashilisk"],
+		color: "Red",
+		eggGroups: ["Monster"],
+	},
+	dishwashilisk: {
+		num: -461,
+		name: "Dishwashilisk",
+		types: ["Industrial", "Liquid"],
+		gender: {M: 0.4, F: 0.6},
+		baseStats: {hp: 160, atk: 62, def: 102, spa: 112, spd: 66, spe: 13},
+		abilities: {0: "Hazardous"},
+		heightm: 6.0,
+		weightkg: 435,
+		prevo: "Dishwashersnake",
+		color: "Red",
+		eggGroups: ["Monster"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

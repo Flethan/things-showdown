@@ -696,7 +696,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-
+	dishwashersnake: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	dishwashilisk: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	// BASE GAME
 	bulbasaur: {
 		tier: "LC",
