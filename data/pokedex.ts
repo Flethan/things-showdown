@@ -2496,6 +2496,30 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		hasSprite: true,
 	},
+	hedgepig: {
+		num: -463,
+		name: "Hedgepig",
+		types: ["Dirt", "H"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 150, def: 120, spa: 20, spd: 60, spe: 150},
+		abilities: {0: "No Ability"},
+		heightm: 0.8,
+		weightkg: 44.0,
+		color: "Brown",
+		eggGroups: ["Undiscovered"],
+	},
+	mimunclownfish: {
+		num: -464,
+		name: "Mimunclownfish",
+		types: ["Fish", "Weather"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 80, def: 90, spa: 105, spd: 110, spe: 115},
+		abilities: {0: "No Ability"},
+		heightm: 0.4,
+		weightkg: 15.0,
+		color: "Orange",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
