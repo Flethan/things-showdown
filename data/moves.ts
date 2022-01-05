@@ -3247,6 +3247,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {authentic: 1},
+		volatileStatus: 'brilliancy',
 		onPrepareHit(target, source, move) {
 			for (const action of this.queue.list as MoveAction[]) {
 				if (
@@ -3261,26 +3262,46 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return null;
 				}
 			}
+			return !target.removeVolatile('brilliancy');
 		},
 		onModifyMove(move) {
 			if (move.sourceEffect === 'promote') {
 				move.type = 'Sword';
-				move.self = {sideCondition: 'promote'};
+				move.volatileStatus = 'promote';
+				move.wargamesBoosted = true;
 			}
 			if (move.sourceEffect === 'rankandfile') {
-				move.type = 'Science';
-				move.volatileStatus = 'brilliancy';
+				move.wargamesBoosted = true;
 			}
 		},
 		condition: {
-			onStart(target) {
-				this.add('-start', target, 'Brilliancy');
+			onStart(pokemon, source, effect) {
+				if (effect?.effectType === 'Move' && effect.wargamesBoosted) this.effectState.boosts = {def: 6, spd: 6, spe: 6};
+				else this.effectState.boosts = {atk: 6, spa: 6};
+				this.add('-singlemove', pokemon, 'Brilliancy');
 			},
-			
+			onFaint(target, source, effect) {
+				if (!source || !effect || target.isAlly(source)) return;
+				if (effect.effectType === 'Move') {
+					this.add('-activate', target, 'move: Brilliancy');
+					target.side.addSlotCondition(target, 'brilliancyboost');
+					target.side.slotConditions[target.position]['brilliancyboost'].effectState.boosts = this.effectState.boosts;
+				}
+			},
+			onBeforeMovePriority: -1,
+			onBeforeMove(pokemon, target, move) {
+				if (move.id === 'brilliancy') return;
+				this.debug('removing Brilliancy before attack');
+				pokemon.removeVolatile('brilliancy');
+			},
+			onMoveAborted(pokemon, target, move) {
+				pokemon.removeVolatile('brilliancy');
+			},
 		},
 		secondary: null,
 		target: "self",
 		type: "Science",
+		zMove: {effect: 'redirect'},
 		contestType: "Clever",
 	},
 
@@ -3812,6 +3833,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
+		pseudoWeather: 'rankandfile',
 		onPrepareHit(target, source, move) {
 			for (const action of this.queue.list as MoveAction[]) {
 				if (
@@ -3829,19 +3851,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onModifyMove(move) {
 			if (move.sourceEffect === 'promote') {
-				move.type = 'Sport';
-				move.sideCondition = 'rankandfile';
-				move.self = {sideCondition: 'rankandfile'};
+				move.wargamesBoosted = true;
 			}
 			if (move.sourceEffect === 'brilliancy') {
 				move.type = 'Science';
-				move.self = {volatileStatus: 'brilliancy'};
+				move.volatileStatus = 'brilliancy';
+				move.pseudoWeather = undefined;
+				move.wargamesBoosted = true;
 			}
 		},
 		condition: {
 			duration: 5,
-			onFieldStart(target, source) {
+			onFieldStart(target, source, effect) {
+				if (effect?.effectType === 'Move' && effect.wargamesBoosted) {
+					this.effectState.duration = 0;
+				}
 				this.add('-fieldstart', 'move: Rank and File', '[of] ' + source);
+			},
+			onFieldRestart(target, source) {
+				if (this.effectState.duration > 0) this.field.removePseudoWeather('rankandfile');
 			},
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Rank and File');
@@ -4041,6 +4069,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {authentic: 1},
+		volatileStatus: 'promote',
 		onPrepareHit(target, source, move) {
 			for (const action of this.queue.list as MoveAction[]) {
 				if (
@@ -4059,23 +4088,30 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move) {
 			if (move.sourceEffect === 'rankandfile') {
 				move.type = 'Sport';
-				move.self = {sideCondition: 'rankandfile'};
+				move.wargamesBoosted = true;
+				move.volatileStatus = undefined;
+				move.pseudoWeather = 'rankandfile';
 			}
 			if (move.sourceEffect === 'brilliancy') {
-				move.type = 'Sword';
-				move.volatileStatus = 'promote';
+				move.wargamesBoosted = true;
 			}
 		},
 		condition: {
-			onStart(target) {
+			onStart(target, source, effect) {
+				if (effect?.effectType === 'Move') {
+					this.effectState.wargamesBoosted = effect.wargamesBoosted ?? false;
+				}
 				this.add('-start', target, 'Promote');
 			},
-			onModifyTypePriority: -1,
+			onRestart(target, source, effect) {
+				if (effect?.effectType === 'Move' && !this.effectState.wargamesBoosted) {
+					this.effectState.wargamesBoosted = effect.wargamesBoosted ?? false;
+				}
+			},
+			onModifyTypePriority: 5,
 			onModifyType(move, pokemon) {
-				const noModifyType = [];
-				if (move.type === 'Sword' && !noModifyType.includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				if ((move.type === 'Sword' || this.effectState.wargamesBoosted) && move.id !== 'struggle') {
 					move.type = 'Infinity';
-					//move.promoted = true;
 				}
 			},
 		},

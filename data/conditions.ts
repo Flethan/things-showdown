@@ -158,6 +158,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.checkWin();
 		},
 	},
+	brilliancyboost: {
+		onSwap(target) {
+			if (!target.fainted) {
+				this.boost(this.effectState.boosts, target);
+				target.side.removeSlotCondition(target, 'brilliancyboost');
+			}
+		},
+	},
 
 	// Statuses
 	prone: {
