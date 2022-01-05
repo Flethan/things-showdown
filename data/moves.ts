@@ -3238,6 +3238,52 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Tough",
 	},
+	brilliancy: {
+		num: 5119,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Brilliancy",
+		pp: 5,
+		priority: 0,
+		flags: {authentic: 1},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['rankandfile', 'promote'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
+		onModifyMove(move) {
+			if (move.sourceEffect === 'promote') {
+				move.type = 'Sword';
+				move.self = {sideCondition: 'promote'};
+			}
+			if (move.sourceEffect === 'rankandfile') {
+				move.type = 'Science';
+				move.volatileStatus = 'brilliancy';
+			}
+		},
+		condition: {
+			onStart(target) {
+				this.add('-start', target, 'Brilliancy');
+			},
+			
+		},
+		secondary: null,
+		target: "self",
+		type: "Science",
+		contestType: "Clever",
+	},
+
 
 	// Sport
 	fourseamfastball: {
@@ -3757,6 +3803,55 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		contestType: "Tough",
 	},
+	rankandfile: {
+		num: 5119,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Rank and File",
+		pp: 5,
+		priority: 0,
+		flags: {},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['promote', 'brilliancy'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
+		onModifyMove(move) {
+			if (move.sourceEffect === 'promote') {
+				move.type = 'Sport';
+				move.sideCondition = 'rankandfile';
+				move.self = {sideCondition: 'rankandfile'};
+			}
+			if (move.sourceEffect === 'brilliancy') {
+				move.type = 'Science';
+				move.self = {volatileStatus: 'brilliancy'};
+			}
+		},
+		condition: {
+			duration: 5,
+			onFieldStart(target, source) {
+				this.add('-fieldstart', 'move: Rank and File', '[of] ' + source);
+			},
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Rank and File');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Sport",
+		contestType: "Clever",
+	},
 
 	// Sword
 	sharpslash: {
@@ -3936,6 +4031,58 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Sword",
 		contestType: "Tough",
+	},
+	promote: {
+		num: 5119,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Promote",
+		pp: 5,
+		priority: 0,
+		flags: {authentic: 1},
+		onPrepareHit(target, source, move) {
+			for (const action of this.queue.list as MoveAction[]) {
+				if (
+					!action.move || !action.pokemon?.isActive ||
+					action.pokemon.fainted || action.maxMove || action.zmove
+				) {
+					continue;
+				}
+				if (action.pokemon.isAlly(source) && ['rankandfile', 'brilliancy'].includes(action.move.id)) {
+					this.queue.prioritizeAction(action, move);
+					this.add('-waiting', source, action.pokemon);
+					return null;
+				}
+			}
+		},
+		onModifyMove(move) {
+			if (move.sourceEffect === 'rankandfile') {
+				move.type = 'Sport';
+				move.self = {sideCondition: 'rankandfile'};
+			}
+			if (move.sourceEffect === 'brilliancy') {
+				move.type = 'Sword';
+				move.volatileStatus = 'promote';
+			}
+		},
+		condition: {
+			onStart(target) {
+				this.add('-start', target, 'Promote');
+			},
+			onModifyTypePriority: -1,
+			onModifyType(move, pokemon) {
+				const noModifyType = [];
+				if (move.type === 'Sword' && !noModifyType.includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+					move.type = 'Infinity';
+					//move.promoted = true;
+				}
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Sword",
+		contestType: "Clever",
 	},
 
 	// Temperature
