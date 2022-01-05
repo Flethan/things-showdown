@@ -189,6 +189,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	saxosnowne: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	protosol: {
 		isNonstandard: "Thing",
 		tier: "Thing",
