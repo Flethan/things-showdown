@@ -3331,7 +3331,32 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalslam: ["8L78"],
 		},
 	},
-
+	hedgepig: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			landslide: ["8L1"],
+			hairycrash: ["8L20"],
+			dustcloud: ["8L10"],
+			nuisancepest: ["8L30"],
+			greenseeds: ["8L40"],
+		},
+	},
+	mimunclownfish: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			fishslap: ["8L1"],
+			brilliantfish: ["8L20"],
+			submerge: ["8L10"],
+			winddispersal: ["8L30"],
+			advancedforecasting: ["8L40"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {
