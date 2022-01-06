@@ -5412,6 +5412,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {recharge: 1},
 		songFlags: ['hurt'],
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
 		boosts: {
 			atk: 1,
 			def: 1,
@@ -5436,6 +5439,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {recharge: 1},
 		songFlags: ['heal'],
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
 		boosts: {
 			atk: -1,
 			def: -1,
