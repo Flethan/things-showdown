@@ -45,6 +45,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			hsearch: ["8T"],
+			promote: ["8T"],
 		},
 	},
 	anemoeba: {
@@ -145,6 +146,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			voidtrap: ["8L60"],
+			brilliancy: ["8T"],
 		},
 	},
 	meltipillar: {
@@ -270,6 +272,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bluejet: ["8L60"],
 			blessedrain: ["8L30"],
 			pheromonemark: ["8L55"],
+			brilliancy: ["8T"],
 		},
 	},
 	pescadestrian: {
@@ -317,6 +320,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			bluejet: ["8L65"],
 			autoturret: ["8L65"],
+			rankandfile: ["8T"],
 		},
 	},
 	angrybeehive: {
@@ -334,6 +338,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swarm: ["8L20"],
 			hit: ["8M"],
 			hide: ["8M"],
+			rankandfile: ["8T"],
 		},
 	},
 	anomallish: {
@@ -717,6 +722,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantflash: ["8L27"],
 			delayedround: ["8L47"],
 			piercinground: ["8L43"],
+			rankandfile: ["8T"],
 		},
 	},
 	toastie: {
@@ -745,6 +751,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lookup: ["8T"],
 			hit: ["8M"],
 			hide: ["8M"],
+			brilliancy: ["8T"],
 		},
 	},
 	yellosnow: {
@@ -896,6 +903,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			hsearch: ["8T"],
+			promote: ["8T"],
 		},
 	},
 	godbye: {
@@ -917,6 +925,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L20"],
 			sendoff: ["8L5"],
 			shove: ["8L60"],
+			brilliancy: ["8T"],
 		},
 	},
 	harry: {
@@ -1026,6 +1035,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			bluejet: ["8L80"],
+			rankandfile: ["8T"],
 		},
 	},
 	fsh: {
@@ -1162,6 +1172,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			transmute: ["8L1"],
+			brilliancy: ["8T"],
 		},
 	},
 	swordguy: {
@@ -1177,6 +1188,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			warmup: ["8L1"],
 			hit: ["8M"],
 			hide: ["8M"],
+			promote: ["8T"],
 		},
 	},
 	hmug: {
@@ -1340,6 +1352,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			autoturret: ["8L55"],
 			prune: ["8L25"],
 			hide: ["8M"],
+			rankandfile: ["8T"],
 		},
 	},
 	cheleaf: {
@@ -1386,6 +1399,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			photosynthesize: ["8L31"],
 			deciduousblast: ["8L60"],
 			greennetwork: ["8L70"],
+			brilliancy: ["8T"],
 		},
 	},
 	despacio: {
@@ -1610,6 +1624,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cascade: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			rankandfile: ["8T"],
 		},
 	},
 	akimbonk: {
@@ -1630,6 +1645,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			rankandfile: ["8T"],
 		},
 	},
 	hydrolo: {
@@ -1672,6 +1688,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			bluejet: ["8E"],
 			hsearch: ["8T"],
+			rankandfile: ["8T"],
 		},
 	},
 	splattom: {
@@ -1700,6 +1717,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			radiate: ["8T"],
 			bluejet: ["8E"],
 			hsearch: ["8T"],
+			brilliancy: ["8T"],
 		},
 	},
 	sonsprite: {
@@ -2026,6 +2044,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greennetwork: ["8L28"],
 			greenseeds: ["8L60"],
 			abilityseeds: ["8L60"],
+			brilliancy: ["8T"],
 		},
 	},
 	yenoh: {
@@ -2093,6 +2112,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			glissando: ["8L50"],
 			harmoniouschord: ["8L55"],
 			pheromonemark: ["8L50"],
+			rankandfile: ["8T"],
 		},
 	},
 	maestreen: {
@@ -2124,6 +2144,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			swordbeam: ["8L65"],
 			replay: ["8L1"],
 			pheromonemark: ["8L50"],
+			promote: ["8T"],
 		},
 	},
 	magmegg: {
@@ -2191,6 +2212,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			noescape: ["8L42"],
 			hit: ["8M"],
 			hide: ["8M"],
+			rankandfile: ["8T"],
 		},
 	},
 	snowworm: {
@@ -2285,6 +2307,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			particlebeam: ["8L60"],
 			sting: ["8L13"],
 			swarm: ["8L24"],
+			rankandfile: ["8T"],
 		},
 	},
 	tacilinks: {
@@ -2585,6 +2608,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			apexcalibration: ["8L50"],
 			sting: ["8L20"],
 			wager: ["8L25"],
+			rankandfile: ["8T"],
 		},
 	},
 	sword1: {
@@ -2599,6 +2623,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			quickdrawstrike: ["8L40"],
 			banish: ["8L20"],
 			noescape: ["8L50"],
+			brilliancy: ["8T"],
 		},
 	},
 	pauerowt: {
@@ -2673,6 +2698,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cosmicdust: ["8M"],
 			autoturret: ["8L75"],
 			prune: ["8L5"],
+			promote: ["8T"],
 		},
 	},
 	tree: {
@@ -2769,6 +2795,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			warmup: ["8L1"],
 			bask: ["8L45"],
 			brilliantfish: ["8L30"],
+			rankandfile: ["8T"],
 		},
 	},
 	honi: {
@@ -3067,6 +3094,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			weatherfront: ["8M"],
 			stormcell: ["8L24"],
 			flashmissle: ["8L70"],
+			rankandfile: ["8T"],
 		},
 	},
 	litheath: {
@@ -3232,6 +3260,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			coagulate: ["8L60"],
 			flashmissle: ["8L45"],
 			fireworks: ["8L65"],
+			promote: ["8T"],
 		},
 	},
 	dabarrel: {
@@ -3293,6 +3322,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sendoff: ["8L7"],
 			shove: ["8L41"],
 			fourinarow: ["8L1"],
+			rankandfile: ["8T"],
 		},
 	},
 	dishwashersnake: {
@@ -3353,6 +3383,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			heatup: ["8M"],
 			bask: ["8L16"],
 			thermalslam: ["8L78"],
+			promote: ["8T"],
 		},
 	},
 	hedgepig: {
