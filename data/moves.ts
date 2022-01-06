@@ -3266,6 +3266,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onModifyMove(move) {
 			if (move.sourceEffect === 'promote') {
+				move.target = move.sourceEffect.target;
 				move.type = 'Sword';
 				move.volatileStatus = 'promote';
 				move.wargamesBoosted = true;
@@ -3285,7 +3286,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (effect.effectType === 'Move') {
 					this.add('-activate', target, 'move: Brilliancy');
 					target.side.addSlotCondition(target, 'brilliancyboost');
-					target.side.slotConditions[target.position]['brilliancyboost'].effectState.boosts = this.effectState.boosts;
+					target.side.slotConditions[target.position]['brilliancyboost'].boosts = this.effectState.boosts;
 				}
 			},
 			onBeforeMovePriority: -1,
