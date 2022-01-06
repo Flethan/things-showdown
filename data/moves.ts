@@ -5368,7 +5368,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Major",
 		pp: 15,
 		priority: 0,
-		flags: {speboost: 1},
+		flags: {},
+		songFlags: ['speboost'],
 		boosts: {
 			atk: 1,
 			spa: 1,
@@ -5388,7 +5389,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Minor",
 		pp: 15,
 		priority: 0,
-		flags: {spereduce: 1},
+		flags: {},
+		songFlags: ['spereduce'],
 		boosts: {
 			atk: -1,
 			spa: -1,
@@ -5408,7 +5410,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Augment",
 		pp: 5,
 		priority: 0,
-		flags: {hurt: 1, recharge: 1},
+		flags: {recharge: 1},
+		songFlags: ['hurt'],
 		boosts: {
 			atk: 1,
 			def: 1,
@@ -5431,7 +5434,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Diminish",
 		pp: 5,
 		priority: 0,
-		flags: {heal: 1, recharge: 1},
+		flags: {recharge: 1},
+		songFlags: ['heal'],
 		boosts: {
 			atk: -1,
 			def: -1,
