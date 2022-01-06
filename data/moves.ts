@@ -3844,7 +3844,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				) {
 					continue;
 				}
-				if (action.pokemon.isAlly(source) && action.move.id === 'rankandfile') {
+				if (action.pokemon.isAlly(source) && action.move.id === 'promote') {
 					this.queue.cancelAction(action.pokemon);
 					this.hint(`Rank and File was upgraded by ${action.pokemon.name}'s Promote!`);
 					move.wargamesBoosted = true;
@@ -3869,8 +3869,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				this.add('-fieldstart', 'move: Rank and File', '[of] ' + source);
 			},
-			onFieldRestart(target, source) {
-				if (this.effectState.duration > 0) this.field.removePseudoWeather('rankandfile');
+			onFieldRestart(target, source, effect) {
+				if (this.effectState.duration > 0 || (effect?.effectType === 'Move' && effect.wargamesBoosted)) this.field.removePseudoWeather('rankandfile');
 			},
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Rank and File');
