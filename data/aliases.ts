@@ -1,9 +1,9 @@
 export const Aliases: {[alias: string]: string} = {
-	//things
+	// things
 	connectorred: "Connector",
 	connectphorered: "Connectphore",
 	connectphorepurple: "Connectphore",
-	
+
 	// formats
 	randbats: "[Gen 8] Random Battle",
 	uber: "[Gen 8] Ubers",
@@ -1004,7 +1004,6 @@ export const Aliases: {[alias: string]: string} = {
 	oneblow: "G-Max One Blow",
 	rapidflow: "G-Max Rapid Flow",
 	replenish: "G-Max Replenish",
-	resonance: "G-Max Resonance",
 	sandblast: "G-Max Sandblast",
 	smite: "G-Max Smite",
 	snooze: "G-Max Snooze",

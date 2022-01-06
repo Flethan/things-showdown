@@ -3256,21 +3256,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 				) {
 					continue;
 				}
-				if (action.pokemon.isAlly(source) && ['rankandfile', 'promote'].includes(action.move.id)) {
+				if (action.pokemon.isAlly(source) && action.move.id === 'rankandfile') {
+					this.queue.cancelAction(action.pokemon);
+					this.hint(`Brilliancy was upgraded by ${action.pokemon.name}'s Rank and File!`);
+					target.removeVolatile('brilliancy');
+					move.wargamesBoosted = true;
+					return true;
+				} else if (action.pokemon.isAlly(source) && action.move.id === 'promote') {
 					this.queue.prioritizeAction(action, move);
-					this.add('-waiting', source, action.pokemon);
+					this.hint(`Brilliancy is upgrading ${action.pokemon.name}'s Promote!`);
+					target.removeVolatile('brilliancy');
 					return null;
 				}
 			}
 			return !target.removeVolatile('brilliancy');
 		},
 		onModifyMove(move) {
-			if (move.sourceEffect === 'promote') {
-				move.target = move.sourceEffect.target;
-				move.type = 'Sword';
-				move.volatileStatus = 'promote';
-				move.wargamesBoosted = true;
-			}
 			if (move.sourceEffect === 'rankandfile') {
 				move.wargamesBoosted = true;
 			}
@@ -3843,21 +3844,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 				) {
 					continue;
 				}
-				if (action.pokemon.isAlly(source) && ['promote', 'brilliancy'].includes(action.move.id)) {
+				if (action.pokemon.isAlly(source) && action.move.id === 'rankandfile') {
+					this.queue.cancelAction(action.pokemon);
+					this.hint(`Rank and File was upgraded by ${action.pokemon.name}'s Promote!`);
+					move.wargamesBoosted = true;
+					return true;
+				} else if (action.pokemon.isAlly(source) && action.move.id === 'brilliancy') {
 					this.queue.prioritizeAction(action, move);
-					this.add('-waiting', source, action.pokemon);
+					this.hint(`Rank and File is upgrading ${action.pokemon.name}'s Brilliancy!`);
 					return null;
 				}
 			}
 		},
 		onModifyMove(move) {
 			if (move.sourceEffect === 'promote') {
-				move.wargamesBoosted = true;
-			}
-			if (move.sourceEffect === 'brilliancy') {
-				move.type = 'Science';
-				move.volatileStatus = 'brilliancy';
-				move.pseudoWeather = undefined;
 				move.wargamesBoosted = true;
 			}
 		},
@@ -3877,7 +3877,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 		},
 		secondary: null,
-		target: "normal",
+		target: "all",
 		type: "Sport",
 		contestType: "Clever",
 	},
@@ -4079,20 +4079,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 				) {
 					continue;
 				}
-				if (action.pokemon.isAlly(source) && ['rankandfile', 'brilliancy'].includes(action.move.id)) {
+				if (action.pokemon.isAlly(source) && action.move.id === 'brilliancy') {
+					this.queue.cancelAction(action.pokemon);
+					this.hint(`Promote was upgraded by ${action.pokemon.name}'s Brilliancy!`);
+					move.wargamesBoosted = true;
+					return true;
+				} else if (action.pokemon.isAlly(source) && action.move.id === 'rankandfile') {
 					this.queue.prioritizeAction(action, move);
-					this.add('-waiting', source, action.pokemon);
+					this.hint(`Promote is upgrading ${action.pokemon.name}'s Rank and File!`);
 					return null;
 				}
 			}
 		},
 		onModifyMove(move) {
-			if (move.sourceEffect === 'rankandfile') {
-				move.type = 'Sport';
-				move.wargamesBoosted = true;
-				move.volatileStatus = undefined;
-				move.pseudoWeather = 'rankandfile';
-			}
 			if (move.sourceEffect === 'brilliancy') {
 				move.wargamesBoosted = true;
 			}
