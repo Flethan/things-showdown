@@ -3378,7 +3378,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantfish: ["8L20"],
 			submerge: ["8L10"],
 			winddispersal: ["8L30"],
-			advancedforecasting: ["8L40"],
+			//advancedforecasting: ["8L40"],
 		},
 	},
 	// BASE GAME
