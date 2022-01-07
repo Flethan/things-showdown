@@ -571,6 +571,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 2.0,
 		color: "Brown",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	anglock: {
 		num: -338,
@@ -1754,6 +1755,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Pink",
 		evos: ["Pluckay", "Fattempo", "Keycrest"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	pluckay: {
 		num: -414,
@@ -1767,6 +1769,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		prevo: "Jazzecko",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	fattempo: {
 		num: -415,
@@ -1780,6 +1783,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		prevo: "Jazzecko",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	keycrest: {
 		num: -416,
@@ -1793,6 +1797,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		prevo: "Jazzecko",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	pancakecat: {
 		num: -417,
@@ -1903,6 +1908,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.01,
 		color: "Red",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	epee: {
 		num: -424,
@@ -2165,6 +2171,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 20.4,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	searke: {
 		num: -439,
@@ -2190,6 +2197,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 22.0,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	bean: {
 		num: -441,
@@ -2267,6 +2275,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 40.0,
 		color: "Gray",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	litheath: {
 		num: -447,
@@ -2343,6 +2352,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 12,
 		color: "Brown",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	celiorship: {
 		num: -453,
@@ -2425,6 +2435,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Dabarrel Datandem"],
 		color: "Black",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	dabarreldatandem: {
 		num: -458,
@@ -2439,6 +2450,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Dabarrel Datrandem"],
 		color: "Black",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	dabarreldatrandem: {
 		num: -459,
@@ -2455,6 +2467,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		evoType: "other",
 		evoCondition: "Infinity",
+		hasSprite: true,
 	},
 	dishwashersnake: {
 		num: -460,
@@ -2468,6 +2481,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Dishwashilisk"],
 		color: "Red",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	dishwashilisk: {
 		num: -461,
@@ -2481,6 +2495,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Dishwashersnake",
 		color: "Red",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	saxosnowne: {
 		num: -462,
@@ -2507,6 +2522,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 44.0,
 		color: "Brown",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	mimunclownfish: {
 		num: -464,
@@ -2519,6 +2535,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 15.0,
 		color: "Orange",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 
 	// BASE GAME
