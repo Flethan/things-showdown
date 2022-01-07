@@ -4524,21 +4524,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 		slotCondition: 'timecapsule',
 		condition: {
 			onStart(source) {
-				const boosts: SparseBoostsTable = {};
 				let success = false;
 				let statName: BoostID;
 				for (statName in source.boosts) {
 					const stage = source.boosts[statName];
 					if (stage !== 0) {
-						boosts[statName] = stage;
 						success = true;
 					}
 				}
 				if (success) {
-					this.effectState.passedBoosts = boosts;
+					this.effectState.passedBoosts = source.boosts;
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
-				} else { return false; }
+				}
 			},
 			onRestart(source) {
 				const boosts = this.effectState.passedBoosts;
@@ -4548,7 +4546,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					const stage = source.boosts[statName];
 					if (stage !== 0) {
 						boosts[statName] += stage;
-						success = true;
+						boosts[statName] = Math.min(Math.max(boosts[statName], -6), 6);
+						if (boosts[statName] !== source.boosts[statName]) success = true;
 					}
 				}
 				if (success) {
@@ -4557,8 +4556,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				}
 			},
-			onSwitchIn(target) {
-				if (!target.fainted && this.effectState.success) {
+			onSwap(target) {
+				if (!target.fainted) {
 					this.add('-activate', '[from] move: Time Capsule');
 					this.boost(this.effectState.passedBoosts, target);
 					target.side.removeSlotCondition(target, 'timecapsule');
@@ -5188,8 +5187,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.multiplier *= 1.5;
 				this.add('-sidestart', side, 'Autumnal Offering');
 			},
-			onBasePowerPriority: 10,
-			onBasePower(basePower) {
+			onAllyBasePowerPriority: 10,
+			onAllyBasePower(basePower) {
 				this.debug('Boosting from Autumnal Offering: ' + this.effectState.multiplier);
 				return this.chainModify(this.effectState.multiplier);
 			},
