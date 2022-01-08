@@ -404,6 +404,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Moonth", "Sollep"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	moonth: {
 		num: -326,
@@ -417,6 +418,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Starrvae",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	sollep: {
 		num: -327,
@@ -430,6 +432,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		prevo: "Starrvae",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	connector: {
 		num: -328,
