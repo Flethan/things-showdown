@@ -4360,8 +4360,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		secondary: null,
+		onPrepareHit(source) {
+			if (!source.critLastMove) return false;
+		},
 		onHit(source) {
-				if (!source.critLastTurn) return;
 				this.field.setWeather('hot');
 				for (const side of source.side.foeSidesWithConditions()) {
 					side.addSideCondition('hotcoals');
