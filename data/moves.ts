@@ -4360,10 +4360,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		secondary: null,
-		onPrepareHit(source) {
+		onPrepareHit(target, source) {
 			if (!source.critLastMove) return false;
 		},
-		onHit(source) {
+		onHit(target, source) {
 				this.field.setWeather('hot');
 				for (const side of source.side.foeSidesWithConditions()) {
 					side.addSideCondition('hotcoals');
@@ -4382,7 +4382,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				this.heal(source.baseMaxhp / 2);
 			},
-		target: "any",
+		target: "all",
 		type: "Temperature",
 		contestType: "Cute",
 	},
