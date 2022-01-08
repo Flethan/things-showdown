@@ -151,6 +151,8 @@ export class Pokemon {
 	lastMove: ActiveMove | null;
 	lastMoveUsed: ActiveMove | null;
 	lastMoveTargetLoc?: number;
+	critLastTurn: boolean;
+	critThisTurn: boolean;
 	moveThisTurn: string | boolean;
 	statsRaisedThisTurn: boolean;
 	statsLoweredThisTurn: boolean;
@@ -410,6 +412,9 @@ export class Pokemon {
 		this.draggedIn = null;
 		this.newlySwitched = false;
 		this.beingCalledBack = false;
+
+		this.critLastTurn = false;
+		this.critThisTurn = false;
 
 		this.lastMove = null;
 		this.lastMoveUsed = null;

@@ -1597,6 +1597,7 @@ export class BattleActions {
 
 		if (moveHit.crit) {
 			moveHit.crit = this.battle.runEvent('CriticalHit', target, null, move);
+			pokemon.critThisTurn = true;
 		}
 
 		// happens after crit calculation

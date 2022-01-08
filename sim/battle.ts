@@ -1418,6 +1418,9 @@ export class Battle {
 					// It shouldn't be possible in a normal battle for a Pokemon to be damaged before turn 1's move selection
 					// However, this could be potentially relevant in certain OMs
 					pokemon.hurtThisTurn = null;
+
+					pokemon.critLastTurn = pokemon.critThisTurn;
+					pokemon.critThisTurn = false;
 				}
 
 				pokemon.maybeDisabled = false;

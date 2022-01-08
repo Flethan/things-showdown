@@ -584,6 +584,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: -1000,
 	},
+	oven: {
+		isNonstandard: "ThingInf",
+		onModifyCritRatio(critRatio, source, target) {
+			if (target.getHeight() <= 7) {
+				this.debug('ovenable');
+				return 5;
+			}
+		},
+		name: "Oven",
+		rating: 2.5,
+		num: -116,
+	},
 	microwave: {
 		isNonstandard: "Thing",
 		onModifyCritRatio(critRatio, source, target) {
