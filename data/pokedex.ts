@@ -2556,7 +2556,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Micro-tron",
 		evoType: "other",
 		evoCondition: "Mu",
-		muMove: "True Sight",
+		muMove: "Out Hot Eat",
 	},
 
 	// BASE GAME
