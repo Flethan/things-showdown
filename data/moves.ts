@@ -4360,29 +4360,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		secondary: null,
-		onPrepareHit(target, source) {
+		onPrepareHit(source) {
 			if (!source.critLastMove) return false;
 		},
-		onHit(target, source) {
-				this.field.setWeather('hot');
-				for (const side of source.side.foeSidesWithConditions()) {
-					side.addSideCondition('hotcoals');
-				}
-				let announced = false;
-				for (const foe of source.foes()) {
-					if (!foe?.isActive || foe === source ||
-						!this.canSwitch(foe.side)) continue;
-					if (this.runEvent('DragOut', source, foe)) {
-						if (!announced) {
-							this.add('-move', source, 'Out Hot Eat');
-							announced = true;
-						}
-						foe.forceSwitchFlag = true;
+		onHit(source) {
+			this.field.setWeather('hot');
+			for (const side of source.side.foeSidesWithConditions()) {
+				side.addSideCondition('hotcoals');
+			}
+			let announced = false;
+			for (const foe of source.foes()) {
+				if (!foe?.isActive || foe === source ||
+					!this.canSwitch(foe.side)) continue;
+				if (this.runEvent('DragOut', source, foe)) {
+					if (!announced) {
+						this.add('-move', source, 'Out Hot Eat');
+						announced = true;
 					}
+					foe.forceSwitchFlag = true;
 				}
-				this.heal(source.baseMaxhp / 2);
-			},
-		target: "all",
+			}
+			this.heal(source.baseMaxhp / 2);
+		},
+		target: "self",
 		type: "Temperature",
 		contestType: "Cute",
 	},
