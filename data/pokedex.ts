@@ -2558,6 +2558,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Mu",
 		muMove: "Out Hot Eat",
 	},
+	exceller: {
+		num: -466,
+		name: "Exceller",
+		types: ["Sword", "No"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 200, def: 73, spa: 1, spd: 77, spe: 149},
+		abilities: {0: "Honing"},
+		heightm: 1.9,
+		weightkg: 74,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+		hasSprite: true,
+	},
 
 	// BASE GAME
 	bulbasaur: {

@@ -3412,6 +3412,31 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			//advancedforecasting: ["8L40"],
 		},
 	},
+	exceller: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			swordbeam: ["8L100"],
+			sharpslash: ["8L50"],
+			parry: ["8L20"],
+			riposte: ["8L20"],
+			swing: ["8L60"],
+			quickdrawstrike: ["8L1"],
+			cheapstrike: ["8L44"],
+			disarmingstrike: ["8L5"],
+			noescape: ["8L20"],
+			kineticenergy: ["8L40"],
+			horizontaltranslation: ["8L5"],
+			shootingstar: ["8L70"],
+			vroom: ["8L80"],
+			cominginhot: ["8L90"],
+			warmup: ["8L15"],
+			prune: ["8L30"],
+			fullpowerstrike: ["8L75"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {

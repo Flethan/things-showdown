@@ -4123,6 +4123,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sword",
 		contestType: "Clever",
 	},
+	fullpowerstrike: {
+		num: 1719,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Full Power Strike",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onModifyMove(move, pokemon) {
+			if(pokemon.getMoveHitData(move).crit) {
+				this.debug('Full power strike boost');
+				move.basePower *= 2;
+			}
+		},
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if(pokemon.getMoveHitData(move).crit) {
+				pokemon.faint();
+			}
+		},
+		target: "normal",
+		type: "Sword",
+		contestType: "Tough",
+	},
 
 	// Temperature
 	reheat: {

@@ -720,6 +720,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	exceller: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	// BASE GAME
 	bulbasaur: {
 		tier: "LC",
