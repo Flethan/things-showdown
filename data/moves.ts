@@ -3883,6 +3883,37 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		contestType: "Clever",
 	},
+	cheeron: {
+		num: 270,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Cheer On",
+		pp: 15,
+		priority: 5,
+		flags: {authentic: 1},
+		volatileStatus: 'cheeron',
+		onTryHit(target) {
+			if (!target.newlySwitched && !this.queue.willMove(target)) return false;
+		},
+		condition: {
+			duration: 1,
+			onStart(target, source) {
+				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
+			},
+			onRestart(target, source) {
+				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
+			},
+			onModifyCritRatio(critRatio) {
+				return critRatio + 2;
+			},
+		},
+		secondary: null,
+		target: "any",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
+	},
 
 	// Sword
 	sharpslash: {

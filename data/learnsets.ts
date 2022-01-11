@@ -2491,6 +2491,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hairycrash: ["8L48"],
 			greenify: ["8E"],
 			transmute: ["8L70"],
+			cheeron: ["8L11"],
 		},
 	},
 	hourlorn: {
@@ -2933,6 +2934,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8L1"],
 			fishslap: ["8L1"],
 			accelerate: ["8L1"],
+			cheeron: ["8L1"],
 		},
 	},
 	gorn: {
