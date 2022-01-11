@@ -3906,7 +3906,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
 			},
 			onModifyCritRatio(critRatio) {
-				return critRatio + 5;
+				return 5;
 			},
 		},
 		secondary: null,
@@ -4165,14 +4165,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		onModifyMove(move, pokemon) {
-			if(pokemon.getMoveHitData(move).crit) {
+		onModifyMove(move, pokemon, target) {
+			/*if(target.getMoveHitData(move).crit) {
 				this.debug('Full power strike boost');
 				move.basePower *= 2;
-			}
+			}*/
 		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
-			if(pokemon.getMoveHitData(move).crit) {
+			if(target.getMoveHitData(move).crit) {
 				pokemon.faint();
 			}
 		},
