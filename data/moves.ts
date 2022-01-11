@@ -3906,7 +3906,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
 			},
 			onModifyCritRatio(critRatio) {
-				return critRatio + 2;
+				return critRatio + 5;
 			},
 		},
 		secondary: null,
