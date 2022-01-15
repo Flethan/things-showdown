@@ -86,6 +86,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Communal",
 		shortDesc: "Allies with Communal have 1.5x attack and special attack.",
 	},
+	compartmentalization: {
+		name: "Compartmentalization",
+		shortDesc: "When this Thing lands an attack, gain the target's types as ∈ types.",
+	},
 	competitivemirror: {
 		name: "Competitive Mirror",
 		shortDesc: "Whenever a foe gains a stat boost, copy it.",
@@ -97,6 +101,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	connection: {
 		name: "Connection",
 		shortDesc: "Allies deal 1.2x damage.",
+	},
+	conservationalism: {
+		name: "Conservationalism",
+		shortDesc: "On switch-in, all Things gain Green-type as an ∈ type.",
 	},
 	cumulate: {
 		name: "Cumulate",
@@ -117,6 +125,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	eleventhhour: {
 		name: "Eleventh Hour",
 		shortDesc: "On switch-in, if this Thing has < 50% health remaining, endure the next lethal hit.",
+	},
+	encompassingflow: {
+		name: "Encompassing Flow",
+		shortDesc: "All Things' moves receive the same-type attack bonus.",
 	},
 	falsestart: {
 		name: "False-Start",
@@ -255,6 +267,10 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 
 		start: "  [POKEMON] is channeling the power of the end!",
 		activate: "  [POKEMON] is in tune with the end! It's ready to unleash a fatal attack!!",
+	},
+	omnicide: {
+		name: "Omnicide",
+		shortDesc: "This Thing's attacks that aren't supereffective deal 2x damage.",
 	},
 	omnipresent: {
 		name: "Omnipresent",

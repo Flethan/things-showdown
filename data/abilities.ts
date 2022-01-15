@@ -2427,6 +2427,65 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 185,
 	},
+	encompassingflow: {
+		isNonstandard: "Thing",
+		onModifyMovePriority: 1,
+		onAnyModifyMove(move) {
+			move.forceSTAB = true;
+		},
+		name: "Encompassing Flow",
+		rating: 4.5,
+		num: 185,
+	},
+	omnicide: {
+		isNonstandard: "ThingInf",
+		onModifyDamage(damage, source, target, move) {
+			if (move && target.getMoveHitData(move).typeMod <= 0) {
+				return this.chainModify(2);
+			}
+		},
+		isPermanent: true,
+		name: "Omnicide",
+		rating: 4.5,
+		num: 185,
+	},
+	compartmentalization: {
+		isNonstandard: "Thing",
+		// onAfterMoveSecondarySelf(source, target, move) {
+		//	if (!move || !target) return;
+		//	if (target !== source && move.category !== 'Status') {
+		//		const types = source.getTypes();
+		//		if (!yourItem) return;
+		//		if (!source.setItem(yourItem)) {
+		//			target.item = yourItem.id; // bypass setItem so we don't break choicelock or anything
+		//			return;
+		//		}
+		//		this.add('-item', source, yourItem, '[from] ability: Magician', '[of] ' + target);
+		//	}
+		// },
+		// onAfterMoveSecondarySelf(source, target, move) {
+		//	if (source.getTypes().join() === 'Dirt' || !source.setType('Dirt')) {
+		//		return false;
+		//	}
+		//	this.add('-ability', target, 'Black');
+		//	this.add('-start', source, 'typechange', 'Dirt');
+		// },
+		name: "Compartmentalization",
+		rating: 4.5,
+		num: 185,
+	},
+	conservationalism: {
+		isNonstandard: "ThingInf",
+		// onModifyDamage(damage, source, target, move) {
+		//	if (move && target.getMoveHitData(move).typeMod <= 0) {
+		//		return this.chainModify(2);
+		//	}
+		// },
+		isPermanent: true,
+		name: "Conservationalism",
+		rating: 4.5,
+		num: 185,
+	},
 
 	// BASE GAME
 	noability: {

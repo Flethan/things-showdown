@@ -720,6 +720,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	serpeternal: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	serpextinction: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	boxlegend: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	planterlegend: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	// BASE GAME
 	bulbasaur: {
 		tier: "LC",

@@ -4358,25 +4358,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {},
 		secondary: null,
 		onHit(source) {
-				if (!source.critLastTurn) return;
-				this.field.setWeather('hot');
-				for (const side of source.side.foeSidesWithConditions()) {
-					side.addSideCondition('hotcoals');
-				}
-				let announced = false;
-				for (const foe of source.foes()) {
-					if (!foe?.isActive || foe === source ||
+			if (!source.critLastTurn) return;
+			this.field.setWeather('hot');
+			for (const side of source.side.foeSidesWithConditions()) {
+				side.addSideCondition('hotcoals');
+			}
+			let announced = false;
+			for (const foe of source.foes()) {
+				if (!foe?.isActive || foe === source ||
 						!this.canSwitch(foe.side)) continue;
-					if (this.runEvent('DragOut', source, foe)) {
-						if (!announced) {
-							this.add('-move', source, 'Out Hot Eat');
-							announced = true;
-						}
-						foe.forceSwitchFlag = true;
+				if (this.runEvent('DragOut', source, foe)) {
+					if (!announced) {
+						this.add('-move', source, 'Out Hot Eat');
+						announced = true;
 					}
+					foe.forceSwitchFlag = true;
 				}
-				this.heal(source.baseMaxhp / 2);
-			},
+			}
+			this.heal(source.baseMaxhp / 2);
+		},
 		target: "any",
 		type: "Temperature",
 		contestType: "Cute",

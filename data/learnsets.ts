@@ -3412,6 +3412,18 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			//advancedforecasting: ["8L40"],
 		},
 	},
+	serpeternal: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
+	boxlegend: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {
