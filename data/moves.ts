@@ -3242,6 +3242,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		num: 5119,
 		accuracy: true,
 		basePower: 0,
+		isNonstandard: "Thing",
 		category: "Status",
 		name: "Brilliancy",
 		pp: 5,
@@ -3831,6 +3832,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Rank and File",
 		pp: 5,
 		priority: 0,
@@ -3880,6 +3882,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "all",
 		type: "Sport",
 		contestType: "Clever",
+	},
+	cheeron: {
+		num: 270,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Cheer On",
+		pp: 15,
+		priority: 5,
+		flags: {authentic: 1},
+		volatileStatus: 'cheeron',
+		onTryHit(target) {
+			if (!target.newlySwitched && !this.queue.willMove(target)) return false;
+		},
+		condition: {
+			duration: 1,
+			onStart(target, source) {
+				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
+			},
+			onRestart(target, source) {
+				this.add('-singleturn', target, 'Cheer On', '[of] ' + source);
+			},
+			onModifyCritRatio(critRatio) {
+				return 5;
+			},
+		},
+		secondary: null,
+		target: "any",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
 	},
 
 	// Sword
@@ -4066,6 +4100,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Promote",
 		pp: 5,
 		priority: 0,
@@ -4119,6 +4154,31 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Sword",
 		contestType: "Clever",
+	},
+	fullpowerstrike: {
+		num: 1719,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Full Power Strike",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		// onModifyMove(move, pokemon, target) {
+		// 	if (target.getMoveHitData(move).crit) {
+		// 		this.debug('Full power strike boost');
+		// 		move.basePower *= 2;
+		// 	}
+		// },
+		onAfterMoveSecondarySelf(pokemon, target, move) {
+			if (target.getMoveHitData(move).crit) {
+				pokemon.faint();
+			}
+		},
+		target: "normal",
+		type: "Sword",
+		contestType: "Tough",
 	},
 
 	// Temperature
@@ -4357,8 +4417,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		secondary: null,
+		onPrepareHit(source) {
+			if (!source.critLastMove) return false;
+		},
 		onHit(source) {
-			if (!source.critLastTurn) return;
 			this.field.setWeather('hot');
 			for (const side of source.side.foeSidesWithConditions()) {
 				side.addSideCondition('hotcoals');
@@ -4366,7 +4428,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let announced = false;
 			for (const foe of source.foes()) {
 				if (!foe?.isActive || foe === source ||
-						!this.canSwitch(foe.side)) continue;
+					!this.canSwitch(foe.side)) continue;
 				if (this.runEvent('DragOut', source, foe)) {
 					if (!announced) {
 						this.add('-move', source, 'Out Hot Eat');
@@ -4377,7 +4439,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 			this.heal(source.baseMaxhp / 2);
 		},
-		target: "any",
+		target: "self",
 		type: "Temperature",
 		contestType: "Cute",
 	},

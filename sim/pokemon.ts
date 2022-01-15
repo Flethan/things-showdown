@@ -153,6 +153,7 @@ export class Pokemon {
 	lastMoveTargetLoc?: number;
 	critLastTurn: boolean;
 	critThisTurn: boolean;
+	critLastMove: boolean;
 	moveThisTurn: string | boolean;
 	statsRaisedThisTurn: boolean;
 	statsLoweredThisTurn: boolean;
@@ -415,6 +416,7 @@ export class Pokemon {
 
 		this.critLastTurn = false;
 		this.critThisTurn = false;
+		this.critLastMove = false;
 
 		this.lastMove = null;
 		this.lastMoveUsed = null;

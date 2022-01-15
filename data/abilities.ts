@@ -2415,6 +2415,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -128,
 	},
 	double: {
+		isNonstandard: "ThingInf",
 		onPrepareHit(source, target, move) {
 			if (move.category === 'Status' || move.selfdestruct || move.multihit) return;
 			if (['endeavor', 'fling', 'iceball', 'rollout'].includes(move.id)) return;
@@ -2485,6 +2486,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Conservationalism",
 		rating: 4.5,
 		num: 185,
+	},
+	honing: {
+		isNonstandard: "Thing",
+		onResidualOrder: 28,
+		onResidualSubOrder: 2,
+		onResidual(pokemon) {
+			if (pokemon.activeTurns) {
+				this.boost({atk: 1});
+			}
+		},
+		name: "Honing",
+		rating: 4.5,
+		num: 3,
 	},
 
 	// BASE GAME
