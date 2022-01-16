@@ -1809,12 +1809,12 @@ export class BattleActions {
 	// ==================================================================
 
 	canSymbolEvo(pokemon: Pokemon) {
-		// Infinity, Element, and Null formes
+		// Infinite, Element, Null, and Mu formes
 		const species = pokemon.baseSpecies;
 		if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
-				const evoType = this.dex.species.get(evo).evoCondition;
-				if (evoType === 'Infinity' || evoType === 'Element' || evoType === 'Null' || evoType === 'Mu') {
+				const evoCondition = this.dex.species.get(evo).evoCondition;
+				if (evoCondition === 'Infinite' || evoCondition === 'Element' || evoCondition === 'Null' || evoCondition === 'Mu') {
 					return evo;
 				}
 			}
@@ -1842,12 +1842,12 @@ export class BattleActions {
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		const evoType = this.dex.species.get(speciesid).evoCondition;
+		const evoCondition = this.dex.species.get(speciesid).evoCondition;
 
-		if (evoType === 'Infinity') {
+		if (evoCondition === 'Infinite') {
 			pokemon.addType('Infinity');
 			this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
-		} else if (evoType === 'Mu') {
+		} else if (evoCondition === 'Mu') {
 			const muMove = this.dex.moves.get(pokemon.species.muMove);
 			const newMove = {
 				move: muMove.name,
@@ -1910,24 +1910,7 @@ export class BattleActions {
 			}
 		}
 
-		if (pokemon.baseSpecies.isNonstandard === 'Thing') {
-			pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
-			pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
-
-			pokemon.baseMaxhp = Math.floor(Math.floor(
-				2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
-			) * pokemon.level / 100 + 10);
-			pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
-			pokemon.maxhp = pokemon.baseMaxhp;
-			this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
-
-			if (this.dex.species.get(speciesid).evoCondition === 'Infinity') {
-				pokemon.addType('Infinity');
-				this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
-			}
-		} else {
-			pokemon.formeChange(speciesid, pokemon.getItem(), true);
-		}
+		pokemon.formeChange(speciesid, pokemon.getItem(), true);
 
 		// Limit one mega evolution
 		const wasMega = pokemon.canMegaEvo;

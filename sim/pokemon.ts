@@ -1895,7 +1895,7 @@ export class Pokemon {
 	};
 
 	/**
-	 * Sets a type (except on Arceus, who resists type changes)
+	 * Sets a type (except on Arceus and Null formes, who resist type changes)
 	 * newType can be an array, but this is for OMs only. The game in
 	 * reality doesn't support setting a type to more than one type.
 	 */
@@ -1911,16 +1911,17 @@ export class Pokemon {
 
 		if (!newType) throw new Error("Must pass type to setType");
 		this.types = (typeof newType === 'string' ? [newType] : newType);
-		this.addType('');
+		// this.addType('');
 		this.knownType = true;
 		this.apparentType = this.types.join('/');
+		if (this.addedType) this.apparentType += `/${this.addedType}`;
 
 		return true;
 	}
 
-	/** Removes any types added previously and adds another one. */
-	addType(newType: string) {
-		if ((this.species.forme === 'Infinity' && this.addedType === 'Infinity') || this.species.forme === 'Null') return false;
+	/** Removes any types added previously and adds another one. Infinite and Null formes supress type adding. */
+	addType(newType: string, enforce = false) {
+		if (!enforce && ((this.species.forme === 'Infinite' && this.addedType === 'Infinity') || this.species.forme === 'Null')) return false;
 		this.addedType = newType;
 		return true;
 	}
