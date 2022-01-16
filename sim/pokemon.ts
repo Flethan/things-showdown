@@ -1253,7 +1253,8 @@ export class Pokemon {
 
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
-		// this.addedType = species.addedType || '';
+		species.elementTypes?.forEach((type: string) => this.addElementType(type));
+		if (species.addedType) this.addType(species.addedType);
 		this.knownType = true;
 		this.weighthg = species.weighthg;
 		this.heightdm = species.heightdm;
@@ -1935,8 +1936,13 @@ export class Pokemon {
 		return true;
 	}
 
+	clearElementTypes() {
+		this.elementTypes = [];
+		return true;
+	}
+
 	getTypes(excludeAdded?: boolean, includeElement?: boolean): string[] {
-		const types = this.battle.runEvent('Type', this, null, null, this.types);
+		const types = [...this.battle.runEvent('Type', this, null, null, this.types)];
 		if (!excludeAdded && this.addedType) types.push(this.addedType);
 		if (includeElement && this.elementTypes.length) types.push(...this.elementTypes);
 		return types.length ? types : ['???'];

@@ -182,8 +182,6 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 * This is mainly relevant to Gen 5.
 	 */
 	readonly maleOnlyHidden: boolean;
-	/** Type effect gained from Element. falsy if isn't Element form. */
-	readonly elementType?: string;
 	/** Move  gained from Mu. falsy if isn't Mu form. */
 	readonly muMove?: string;
 	/** True if a thing is symbol. */

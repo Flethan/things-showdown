@@ -667,10 +667,6 @@ export class BattleActions {
 				if (!target.illusion) this.battle.hint("Since gen 7, Dark is immune to Prankster moves.");
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
-			} else if (target.species.evoCondition === 'Element' && move.type === target.species.elementType) {
-				this.battle.debug('natural Element immunity');
-				this.battle.add('-immune', target);
-				hitResults[i] = false;
 			} else {
 				hitResults[i] = true;
 			}
@@ -1722,12 +1718,9 @@ export class BattleActions {
 		baseDamage = this.battle.randomizer(baseDamage);
 
 		// STAB
-		if (move.forceSTAB || (type !== '???' && (pokemon.hasType(type)) || type === pokemon.species.elementType)) {
-			let count = 0;
-			for (const pType of pokemon.types) {
-				if (type === pType) count++;
-			}
-			if (type === pokemon.species.elementType) count++;
+		if (move.forceSTAB || (type !== '???' && (pokemon.hasType(type, true)))) {
+			let count = pokemon.getTypes(false, true).filter(pType => pType === type).length;
+			if (!count && move.forceSTAB) count = 1;
 			// The "???" type never gets STAB
 			// Not even if you Roost in Gen 4 and somehow manage to use
 			// Struggle in the same turn.
@@ -1844,10 +1837,11 @@ export class BattleActions {
 
 		const evoCondition = this.dex.species.get(speciesid).evoCondition;
 
-		if (evoCondition === 'Infinite') {
-			pokemon.addType('Infinity');
-			this.battle.add('-start', pokemon, 'typeadd', 'Infinity');
-		} else if (evoCondition === 'Mu') {
+		if (evoCondition === 'Null') {
+			pokemon.addType('', true);
+			pokemon.clearElementTypes();
+		}
+		if (evoCondition === 'Mu') {
 			const muMove = this.dex.moves.get(pokemon.species.muMove);
 			const newMove = {
 				move: muMove.name,

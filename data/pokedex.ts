@@ -146,6 +146,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		evoType: "symbol",
 		evoCondition: "Infinite",
+		addedType: "Infinity",
 		hasSprite: true,
 	},
 	e1: {
@@ -916,6 +917,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral", "Bug"],
 		evoType: "symbol",
 		evoCondition: "Infinite",
+		addedType: "Infinity",
 	},
 	swordguy: {
 		num: -361,
@@ -946,7 +948,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		evoType: "symbol",
 		evoCondition: "Element",
-		elementType: "Sword",
+		elementTypes: ["Sword"],
 	},
 	hmug: {
 		num: -363,
@@ -1903,6 +1905,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
 		evoCondition: "Infinite",
+		addedType: "Infinity",
 	},
 	sodike: {
 		num: -423,
@@ -2376,7 +2379,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Amorphous", "Water 3"],
 		evoType: "symbol",
 		evoCondition: "Element",
-		elementType: "Yellow",
+		elementTypes: ["Yellow"],
 	},
 	fiish: {
 		num: -454,
@@ -2428,6 +2431,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Grass"],
 		evoType: "symbol",
 		evoCondition: "Infinite",
+		addedType: "Infinity",
 		hasSprite: true,
 	},
 	dabarrel: {
@@ -2474,6 +2478,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		evoType: "symbol",
 		evoCondition: "Infinite",
+		addedType: "Infinity",
 		hasSprite: true,
 	},
 	dishwashersnake: {
@@ -2631,7 +2636,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
 		evoCondition: "Element",
-		elementType: "Green",
+		elementTypes: ["Green"],
 	},
 	exallout: {
 		num: -470,
@@ -2664,7 +2669,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Hubert",
 		evoType: "symbol",
 		evoCondition: "Element",
-		elementType: "Hair",
+		elementTypes: ["Hair"],
 	},
 	myomolem: {
 		num: -472,
@@ -2681,7 +2686,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Myomimeo",
 		evoType: "symbol",
 		evoCondition: "Element",
-		elementType: "No",
+		elementTypes: ["No"],
 	},
 
 	// BASE GAME
