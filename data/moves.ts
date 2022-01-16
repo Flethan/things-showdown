@@ -3310,10 +3310,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 	inject: {
 		num: 284,
 		accuracy: 95,
-		basePower: 2,
+		basePower: 1,
 		isNonstandard: "Thing",
 		basePowerCallback(pokemon, target, move) {
-			return move.basePower * pokemon.hp;
+			return move.basePower * pokemon.hp / 6;
 		},
 		category: "Physical",
 		name: "Inject",
