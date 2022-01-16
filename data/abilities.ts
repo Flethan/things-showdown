@@ -2304,17 +2304,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(pokemon) {
 			for (const foe of pokemon.foes()) {
 				if (!foe?.isActive || foe === pokemon) continue;
-				const oldAbility = pokemon.setAbility('unstable', foe);
+				const oldAbility = foe.setAbility('unstable', pokemon);
 				if (oldAbility) {
-					this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + foe);
+					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + pokemon);
 					this.add('-ability', foe, foe.getAbility().name, '[from] ability: Disaster');
 				}
 			}
 			for (const ally of pokemon.allies()) {
 				if (!ally?.isActive || ally === pokemon) continue;
-				const oldAbility = pokemon.setAbility('unstable', ally);
+				const oldAbility = ally.setAbility('unstable', pokemon);
 				if (oldAbility) {
-					this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + ally);
+					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + ally);
 					this.add('-ability', ally, ally.getAbility().name, '[from] ability: Disaster');
 				}
 			}
