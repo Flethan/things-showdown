@@ -4626,6 +4626,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		slotCondition: 'timecapsule',
 		condition: {
 			onStart(source) {
+				console.log("start");
 				let success = false;
 				let statName: BoostID;
 				for (statName in source.boosts) {
@@ -4635,7 +4636,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (success) {
-					console.log("start");
 					console.log(this.effectState.passedBoosts);
 					this.effectState.passedBoosts = source.boosts;
 					console.log(source.boosts);
@@ -4644,7 +4644,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				}
 			},
-			onRestart(source) {
+			onRestart(target, source) {
+				console.log("restart");
 				const boosts: BoostsTable = {...this.effectState.passedBoosts};
 				let success = false;
 				let statName: BoostID;
@@ -4657,7 +4658,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (success) {
-					console.log("restart");
 					console.log(this.effectState.passedBoosts);
 					this.effectState.passedBoosts = boosts;
 					console.log(boosts);
