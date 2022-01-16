@@ -2339,20 +2339,67 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	unify: {
 		isNonstandard: "ThingInf",
 		name: "Unify",
-		onStart(source) {
+		onAfterMega(source) {
 			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				console.log(poke.species.name);
+			for(const poke of source.side.foe.pokemon) {
 				if(poke.species.name === 'Myomimeo') mult ++;
 			}
-			for(const poke of source.side.foe.pokemon) {
-				console.log(poke.species.name);
+			if (mult > 1) {
+				this.heal(source.baseMaxhp);
+			}
+			for(const poke of source.side.pokemon) {
 				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			if (mult > 5) {
+				this.field.setTerrain('nullland');
 			}
 		},
 		onModifyAtk(atk, source) {
 			let mult = 0;
 			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			return this.chainModify(mult);
+		},
+		onModifyDef(def, source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			return this.chainModify(mult);
+		},
+		onModifySpA(spa, source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			return this.chainModify(mult);
+		},
+		onModifySpD(spd, source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			return this.chainModify(mult);
+		},
+		onModifySpe(spe, source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
 				if(poke.species.name === 'Myomimeo') mult ++;
 			}
 			return this.chainModify(mult);
