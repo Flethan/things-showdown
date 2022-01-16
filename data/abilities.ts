@@ -2299,6 +2299,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2,
 	},
+	disaster: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.actions.useMove('thermalexplosion', pokemon);
+			for (const foe of pokemon.foes()) {
+				if (!foe?.isActive || foe === pokemon) continue;
+				const oldAbility = pokemon.setAbility('unstable', foe);
+				if (oldAbility) {
+					this.add('-activate', foe, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + pokemon);
+					this.add('-ability', pokemon, pokemon.getAbility().name, '[from] ability: Disaster');
+				}
+			}
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon) continue;
+				const oldAbility = pokemon.setAbility('unstable', ally);
+				if (oldAbility) {
+					this.add('-activate', ally, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + pokemon);
+					this.add('-ability', pokemon, pokemon.getAbility().name, '[from] ability: Disaster');
+				}
+			}
+		},
+		name: "Disaster",
+		rating: 4,
+		num: 2111,
+	},
 	withgun: {
 		isNonstandard: "Thing",
 		name: "With Gun",

@@ -2630,6 +2630,22 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Element",
 		elementType: "Green",
 	},
+	exallout: {
+		num: -470,
+		name: "Exallout",
+		forme: "Empty",
+		types: [],
+		gender: "N",
+		baseStats: {hp: 10, atk: 100, def: 30, spa: 120, spd: 80, spe: 150},
+		abilities: {0: "Disaster"},
+		heightm: 0.1,
+		weightkg: 0.1,
+		color: "Purple",
+		eggGroups: ["Mineral"],
+		prevo: "Splattom",
+		evoType: "other",
+		evoCondition: "Null",
+	},
 
 	// BASE GAME
 	bulbasaur: {
