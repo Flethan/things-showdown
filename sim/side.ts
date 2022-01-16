@@ -327,8 +327,6 @@ export class Side {
 		if (!source) throw new Error(`setting sidecond without a source`);
 
 		status = this.battle.dex.conditions.get(status);
-		console.log(status);
-		console.log(this.slotConditions);
 		if (this.slotConditions[target][status.id]) {
 			if (!status.onRestart) return false;
 			return this.battle.singleEvent('Restart', status, this.slotConditions[target][status.id], this, source, sourceEffect);

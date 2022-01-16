@@ -4644,8 +4644,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				}
 			},
-			onRestart(target, source) {
-				const boosts: BoostsTable = this.effectState.passedBoosts;
+			onRestart(source) {
+				const boosts: BoostsTable = {...this.effectState.passedBoosts};
 				let success = false;
 				let statName: BoostID;
 				for (statName in source.boosts) {
