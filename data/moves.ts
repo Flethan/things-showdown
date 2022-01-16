@@ -4632,7 +4632,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				if (success) {
 					console.log(this.effectState.passedBoosts);
-					this.effectState.passedBoosts = source.boosts;
+					this.effectState.passedBoosts = {...source.boosts};
 					console.log(source.boosts);
 					console.log(this.effectState.passedBoosts);
 					this.add('-clearboost', source, '[from] move: Time Capsule');
@@ -4654,7 +4654,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				if (success) {
 					console.log(this.effectState.passedBoosts);
-					this.effectState.passedBoosts = boosts;
+					this.effectState.passedBoosts = {...boosts};
 					console.log(boosts);
 					console.log(this.effectState.passedBoosts);
 					this.add('-clearboost', source, '[from] move: Time Capsule');
