@@ -733,10 +733,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	planterlegend: {
-		isNonstandard: "Thing",
+		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
 	exceller: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	exallout: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	hubantula: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},

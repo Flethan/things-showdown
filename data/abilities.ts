@@ -32,6 +32,8 @@ Ratings and how they work:
 
 */
 
+import { Target } from "brain.js";
+
 export const Abilities: {[abilityid: string]: AbilityData} = {
 // NEW STUFF
 	sunsailor: {
@@ -2298,6 +2300,43 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Breezy",
 		rating: 4,
 		num: 2,
+	},
+	disaster: {
+		isNonstandard: "ThingInf",
+		onAfterMega(pokemon) {
+			for (const foe of pokemon.foes()) {
+				if (!foe?.isActive || foe === pokemon) continue;
+				const oldAbility = foe.setAbility('unstable', pokemon);
+				if (oldAbility) {
+					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + pokemon);
+					this.add('-ability', foe, foe.getAbility().name, '[from] ability: Disaster');
+				}
+			}
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon) continue;
+				const oldAbility = ally.setAbility('unstable', pokemon);
+				if (oldAbility) {
+					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + ally);
+					this.add('-ability', ally, ally.getAbility().name, '[from] ability: Disaster');
+				}
+			}
+			this.actions.useMove('thermalexplosion', pokemon);
+		},
+		name: "Disaster",
+		rating: 4,
+		num: 2111,
+	},
+	vindictive: {
+		isNonstandard: "ThingInf",
+		name: "Vindictive",
+		onStart(pokemon) {
+			if(pokemon.hp === 1) {
+				this.boost({atk: 2}, pokemon, pokemon, null, true);
+				this.boost({spe: 2}, pokemon, pokemon, null, true);
+			}
+		},
+		rating: 2.5,
+		num: 139,
 	},
 	withgun: {
 		isNonstandard: "Thing",
