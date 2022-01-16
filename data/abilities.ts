@@ -2344,7 +2344,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			let mult = 0;
 			for(const poke of source.side.pokemon) {
-				console.log(poke);
+				console.log(poke.species.name);
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			for(const poke of source.side.foe.pokemon) {
 				console.log(poke.species.name);
 				if(poke.species.name === 'Myomimeo') mult ++;
 			}
