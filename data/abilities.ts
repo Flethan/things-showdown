@@ -2303,13 +2303,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	disaster: {
 		isNonstandard: "ThingInf",
-		onStart(pokemon) {
+		onAfterMega(pokemon) {
 			for (const foe of pokemon.foes()) {
 				if (!foe?.isActive || foe === pokemon) continue;
 				const oldAbility = foe.setAbility('unstable', pokemon);
 				if (oldAbility) {
 					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + pokemon);
-					//this.add('-ability', foe, foe.getAbility().name, '[from] ability: Disaster');
+					this.add('-ability', foe, foe.getAbility().name, '[from] ability: Disaster');
 				}
 			}
 			for (const ally of pokemon.allies()) {
@@ -2317,7 +2317,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const oldAbility = ally.setAbility('unstable', pokemon);
 				if (oldAbility) {
 					//this.add('-activate', pokemon, 'ability: Disaster', this.dex.abilities.get(oldAbility).name, '[of] ' + ally);
-					//this.add('-ability', ally, ally.getAbility().name, '[from] ability: Disaster');
+					this.add('-ability', ally, ally.getAbility().name, '[from] ability: Disaster');
 				}
 			}
 			this.actions.useMove('thermalexplosion', pokemon);

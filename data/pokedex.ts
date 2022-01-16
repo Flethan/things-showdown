@@ -2654,7 +2654,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		forme: "Element",
 		types: ["Arthropod", "H"],
 		genderRatio: {M: 0.5, F: 0.5},
-		baseStats: {hp: 80, atk: 80, def: 70, spa: 20, spd: 40, spe: 80},
+		baseStats: {hp: 30, atk: 80, def: 100, spa: 20, spd: 60, spe: 80},
 		abilities: {0: "Vindictive"},
 		heightm: 0.5,
 		weightkg: 11.0,
