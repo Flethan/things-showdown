@@ -4630,25 +4630,33 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 				if (success) {
+					console.log("start");
+					console.log(this.effectState.passedBoosts);
 					this.effectState.passedBoosts = source.boosts;
+					console.log(source.boosts);
+					console.log(this.effectState.passedBoosts);
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
 				}
 			},
 			onRestart(source) {
-				const boosts = this.effectState.passedBoosts;
+				const boosts: BoostsTable = this.effectState.passedBoosts;
 				let success = false;
 				let statName: BoostID;
 				for (statName in source.boosts) {
 					const stage = source.boosts[statName];
 					if (stage !== 0) {
+						success = true;
 						boosts[statName] += stage;
 						boosts[statName] = Math.min(Math.max(boosts[statName], -6), 6);
-						if (boosts[statName] !== source.boosts[statName]) success = true;
 					}
 				}
 				if (success) {
+					console.log("restart");
+					console.log(this.effectState.passedBoosts);
 					this.effectState.passedBoosts = boosts;
+					console.log(boosts);
+					console.log(this.effectState.passedBoosts);
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
 				}
