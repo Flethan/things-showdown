@@ -32,6 +32,8 @@ Ratings and how they work:
 
 */
 
+import { Target } from "brain.js";
+
 export const Abilities: {[abilityid: string]: AbilityData} = {
 // NEW STUFF
 	sunsailor: {
@@ -2323,6 +2325,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Disaster",
 		rating: 4,
 		num: 2111,
+	},
+	vindictive: {
+		isNonstandard: "ThingInf",
+		name: "Vindictive",
+		onStart(pokemon) {
+			if(pokemon.hp === 1) {
+				this.boost({atk: 2}, pokemon, pokemon, null, true);
+				this.boost({spe: 2}, pokemon, pokemon, null, true);
+			}
+		},
+		rating: 2.5,
+		num: 139,
 	},
 	withgun: {
 		isNonstandard: "Thing",
