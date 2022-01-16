@@ -3307,7 +3307,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'redirect'},
 		contestType: "Clever",
 	},
-
+	inject: {
+		num: 284,
+		accuracy: 95,
+		basePower: 2,
+		isNonstandard: "Thing",
+		basePowerCallback(pokemon, target, move) {
+			return move.basePower * pokemon.hp;
+		},
+		category: "Physical",
+		name: "Inject",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1},
+		secondary: null,
+		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
 
 	// Sport
 	fourseamfastball: {
@@ -4171,6 +4188,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		// 		move.basePower *= 2;
 		// 	}
 		// },
+		onModifyMove(move, pokemon, target) {
+			if (!move.critRatio) move.critRatio = 0;
+			move.critRatio += pokemon.boosts.atk
+		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
 			if (target.getMoveHitData(move).crit) {
 				pokemon.faint();

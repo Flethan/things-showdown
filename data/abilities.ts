@@ -2344,7 +2344,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (count > 1) this.heal(source.baseMaxhp);
 
 			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			if (count > 3) {
+				for (const foe of source.foes()) {
+					if (!foe?.isActive || foe === source) continue;
+					foe.addVolatile('study');
+				}
+			}
 			if (count > 5) this.field.setTerrain('nullland');
+			if (count > 10) source.addVolatile('calibration');
 		},
 		onModifyAtk(atk, source) {
 			let count = 1;

@@ -26,6 +26,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			hsearch: ["8T"],
+			hairycrash: ["8L50"],
+			hairball: ["8M"],
 		},
 	},
 	swordhubert: {
@@ -2308,6 +2310,10 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sting: ["8L13"],
 			swarm: ["8L24"],
 			rankandfile: ["8T"],
+			inject: ["8L20"],
+			noescape: ["8L50"],
+			voidpunch: ["8L70"],
+			study: ["8L40"],
 		},
 	},
 	tacilinks: {
