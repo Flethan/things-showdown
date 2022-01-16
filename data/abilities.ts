@@ -2336,6 +2336,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 139,
 	},
+	unify: {
+		isNonstandard: "ThingInf",
+		name: "Unify",
+		onStart(source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				console.log(poke);
+				console.log(poke.species.name);
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+		},
+		onModifyAtk(atk, source) {
+			let mult = 0;
+			for(const poke of source.side.pokemon) {
+				if(poke.species.name === 'Myomimeo') mult ++;
+			}
+			return this.chainModify(mult);
+		},
+		rating: 2.5,
+		num: 139,
+	},
 	withgun: {
 		isNonstandard: "Thing",
 		name: "With Gun",
