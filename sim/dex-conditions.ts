@@ -592,6 +592,15 @@ export interface SideEventMethods extends EventMethods {
 	onSideResidualPriority?: number;
 	onSideResidualSubOrder?: number;
 }
+export interface SlotEventMethods extends EventMethods {
+	onSlotStart?: (this: Battle, target: Pokemon, source: Pokemon, sourceEffect: Effect) => void;
+	onSlotRestart?: (this: Battle, target: Pokemon, source: Pokemon, sourceEffect: Effect) => void;
+	onSlotResidual?: (this: Battle, target: Pokemon, source: Pokemon, effect: Effect) => void;
+	onSlotEnd?: (this: Battle, target: Side) => void;
+	onSlotResidualOrder?: number;
+	onSlotResidualPriority?: number;
+	onSlotResidualSubOrder?: number;
+}
 export interface FieldEventMethods extends EventMethods {
 	onFieldStart?: (this: Battle, target: Field, source: Pokemon, sourceEffect: Effect) => void;
 	onFieldRestart?: (this: Battle, target: Field, source: Pokemon, sourceEffect: Effect) => void;
