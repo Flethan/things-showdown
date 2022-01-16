@@ -1020,7 +1020,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return null;
 			}
 
-			const oldStats = pokemon.boosts;
+			const oldStats = {...pokemon.boosts};
 			const boost: SparseBoostsTable = {};
 			let loopNum = 0;
 			do {
@@ -1035,11 +1035,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
 				if (!randomStat) break;
 				boost[randomStat] = boost[randomStat]! + 1 || 1;
-				console.log(oldStats);
-				console.log(pokemon.boosts);
 				oldStats[randomStat]++;
-				console.log(oldStats);
-				console.log(pokemon.boosts);
 				loopNum++;
 			} while (loopNum < count && pokemon.hp);
 			this.boost(boost);
