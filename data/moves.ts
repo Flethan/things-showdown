@@ -1005,9 +1005,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			let count = 0;
 			this.getAllActive().forEach(
-				active => active.getTypes().forEach(
-					type => { if (type === 'Green') count++; }
-				)
+				active => {
+					active.getTypes().forEach(
+						type => { if (type === 'Green') count++; }
+					);
+					// active.getElementTypes().forEach(
+					// 	type => { if (type === 'Green') count++; }
+					// );
+				}
 			);
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
@@ -1030,7 +1035,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
 				if (!randomStat) break;
 				boost[randomStat] = boost[randomStat]! + 1 || 1;
+				console.log(oldStats);
+				console.log(pokemon.boosts);
 				oldStats[randomStat]++;
+				console.log(oldStats);
+				console.log(pokemon.boosts);
 				loopNum++;
 			} while (loopNum < count && pokemon.hp);
 			this.boost(boost);
@@ -4639,7 +4648,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					source.clearBoosts();
 				}
 			},
-			onRestart(source) {
+			onRestart(target, source) {
 				const boosts: BoostsTable = this.effectState.passedBoosts;
 				let success = false;
 				let statName: BoostID;
