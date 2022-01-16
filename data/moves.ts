@@ -980,11 +980,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
-			let factor = 0.25;
-			for (const type of pokemon.getTypes()) {
-				if (type === 'Green') factor += 0.25;
+			let count = pokemon.getTypes(false, true).filter(type => type === 'Green').length;
+			if (this.field.getTerrain().id === 'greenfloor') count++;
+			if (!count) {
+				this.add('-fail', pokemon, 'move: Photosynthesize');
+				this.attrLastMove('[still]');
+				return null;
 			}
-			return !!this.heal(this.modify(pokemon.maxhp, factor));
+			const heal = pokemon.maxhp * count * 0.25;
+			return !!this.heal(heal, pokemon);
 		},
 		secondary: null,
 		target: "self",
@@ -1003,17 +1007,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
-			let count = 0;
-			this.getAllActive().forEach(
-				active => {
-					active.getTypes().forEach(
-						type => { if (type === 'Green') count++; }
-					);
-					// active.getElementTypes().forEach(
-					// 	type => { if (type === 'Green') count++; }
-					// );
-				}
-			);
+			let count = this.getAllActive().reduce((total, active) => total + active.getTypes(false, true).filter(type => type === 'Green').length, 0);
+			if (this.field.getTerrain().id === 'greenfloor') count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');

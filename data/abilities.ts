@@ -2329,8 +2329,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Vindictive",
 		onStart(pokemon) {
 			if (pokemon.hp === 1) {
-				this.boost({atk: 2}, pokemon, pokemon, null, true);
-				this.boost({spe: 2}, pokemon, pokemon, null, true);
+				this.boost({atk: 2, spe: 2}, pokemon, pokemon, null, true);
 			}
 		},
 		rating: 2.5,
@@ -2340,69 +2339,52 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		name: "Unify",
 		onAfterMega(source) {
-			let mult = 0;
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			if (mult > 1) {
-				this.heal(source.baseMaxhp);
-			}
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			if (mult > 5) {
-				this.field.setTerrain('nullland');
-			}
+			let count = 0;
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			if (count > 1) this.heal(source.baseMaxhp);
+
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			if (count > 5) this.field.setTerrain('nullland');
 		},
 		onModifyAtk(atk, source) {
-			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			return this.chainModify(mult);
+			let count = 1;
+
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+
+			return this.chainModify(count);
 		},
 		onModifyDef(def, source) {
-			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			return this.chainModify(mult);
+			let count = 1;
+
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+
+			return this.chainModify(count);
 		},
 		onModifySpA(spa, source) {
-			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			return this.chainModify(mult);
+			let count = 1;
+
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+
+			return this.chainModify(count);
 		},
 		onModifySpD(spd, source) {
-			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			return this.chainModify(mult);
+			let count = 1;
+
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+
+			return this.chainModify(count);
 		},
 		onModifySpe(spe, source) {
-			let mult = 0;
-			for(const poke of source.side.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			for(const poke of source.side.foe.pokemon) {
-				if(poke.species.name === 'Myomimeo') mult ++;
-			}
-			return this.chainModify(mult);
+			let count = 1;
+
+			count += source.foes(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+			count += source.alliesAndSelf(true).filter(pokemon => pokemon.species.id === 'myomimeo').length;
+
+			return this.chainModify(count);
 		},
 		rating: 2.5,
 		num: 139,
