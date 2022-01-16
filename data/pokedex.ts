@@ -1342,6 +1342,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		prevo: "Hydrolo",
 		eggGroups: ["Mineral"],
+		evos: ["Exallout"],
 		hasSprite: true,
 	},
 	sonsprite: {
