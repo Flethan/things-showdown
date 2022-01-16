@@ -132,7 +132,7 @@ export class Pokemon {
 
 	types: string[];
 	addedType: string;
-	epsilonTypes: string[];
+	elementTypes: string[];
 	knownType: boolean;
 	/** Keeps track of what type the client sees for this Pokemon. */
 	apparentType: string;
@@ -405,7 +405,7 @@ export class Pokemon {
 
 		this.types = this.baseSpecies.types;
 		this.addedType = '';
-		this.epsilonTypes = [];
+		this.elementTypes = [];
 		this.knownType = true;
 		this.apparentType = this.baseSpecies.types.join('/');
 
@@ -633,25 +633,25 @@ export class Pokemon {
 		});
 	}
 
-	alliesAndSelf(): Pokemon[] {
-		return this.side.allies();
+	alliesAndSelf(all?: boolean): Pokemon[] {
+		return this.side.allies(all);
 	}
 
-	allies(): Pokemon[] {
-		return this.side.allies().filter(ally => ally !== this);
+	allies(all?: boolean): Pokemon[] {
+		return this.side.allies(all).filter(ally => ally !== this);
 	}
 
-	adjacentAllies(): Pokemon[] {
-		return this.side.allies().filter(ally => this.isAdjacent(ally));
+	adjacentAllies(all?: boolean): Pokemon[] {
+		return this.side.allies(all).filter(ally => this.isAdjacent(ally));
 	}
 
 	foes(all?: boolean): Pokemon[] {
 		return this.side.foes(all);
 	}
 
-	adjacentFoes(): Pokemon[] {
-		if (this.battle.activePerHalf <= 2) return this.side.foes();
-		return this.side.foes().filter(foe => this.isAdjacent(foe));
+	adjacentFoes(all?: boolean): Pokemon[] {
+		if (this.battle.activePerHalf <= 2) return this.side.foes(all);
+		return this.side.foes(all).filter(foe => this.isAdjacent(foe));
 	}
 
 	isAlly(pokemon: Pokemon | null) {
@@ -1166,6 +1166,7 @@ export class Pokemon {
 
 		const types = pokemon.getTypes(true);
 		this.setType(pokemon.volatiles['roost'] ? pokemon.volatiles['roost'].typeWas : types, true);
+		this.elementTypes = pokemon.elementTypes;
 		this.addedType = pokemon.addedType;
 		this.knownType = this.isAlly(pokemon) && pokemon.knownType;
 		this.apparentType = pokemon.apparentType;
@@ -1252,7 +1253,7 @@ export class Pokemon {
 
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
-		this.addedType = species.addedType || '';
+		// this.addedType = species.addedType || '';
 		this.knownType = true;
 		this.weighthg = species.weighthg;
 		this.heightdm = species.heightdm;
@@ -1395,8 +1396,8 @@ export class Pokemon {
 		this.setSpecies(this.baseSpecies);
 	}
 
-	hasType(type: string | string[]) {
-		const thisTypes = this.getTypes();
+	hasType(type: string | string[], includeElement = false) {
+		const thisTypes = this.getTypes(false, includeElement);
 		if (typeof type === 'string') {
 			return thisTypes.includes(type);
 		}
@@ -1914,7 +1915,7 @@ export class Pokemon {
 		// this.addType('');
 		this.knownType = true;
 		this.apparentType = this.types.join('/');
-		if (this.addedType) this.apparentType += `/${this.addedType}`;
+		// if (this.addedType) this.apparentType += `/${this.addedType}`;
 
 		return true;
 	}
@@ -1926,11 +1927,19 @@ export class Pokemon {
 		return true;
 	}
 
-	getTypes(excludeAdded?: boolean): string[] {
+	/** Adds a new element type. False if they already have it. Null formes supress element type adding. */
+	addElementType(elementType: string, enforce = false) {
+		if (!enforce && this.species.forme === 'Null') return false;
+		if (this.elementTypes.includes(elementType)) return false;
+		this.elementTypes.push(elementType);
+		return true;
+	}
+
+	getTypes(excludeAdded?: boolean, includeElement?: boolean): string[] {
 		const types = this.battle.runEvent('Type', this, null, null, this.types);
-		if (!excludeAdded && this.addedType) return types.concat(this.addedType);
-		if (types.length) return types;
-		return [this.battle.gen >= 5 ? 'Normal' : '???'];
+		if (!excludeAdded && this.addedType) types.push(this.addedType);
+		if (includeElement && this.elementTypes.length) types.push(...this.elementTypes);
+		return types.length ? types : ['???'];
 	}
 
 	isGrounded(negateImmunity = false) {

@@ -123,8 +123,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly abilities: SpeciesAbility;
 	/** Types. */
 	readonly types: string[];
-	/** Added type (added by Trick-Or-Treat or Forest's Curse, but only listed in species by OMs). */
+	/** Added type (added by Trick-Or-Treat or Forest's Curse or Infinite formes, but only listed in species by OMs). */
 	readonly addedType?: string;
+	/** Element type (added by Element formes). */
+	readonly elementTypes?: string[];
 	/** Pre-evolution. '' if nothing evolves into this Pokemon. */
 	readonly prevo: string;
 	/** Evolutions. Array because many Pokemon have multiple evolutions. */
@@ -256,6 +258,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.abilities = data.abilities || {0: ""};
 		this.types = data.types || ['???'];
 		this.addedType = data.addedType || undefined;
+		this.elementTypes = data.elementTypes || undefined;
 		this.prevo = data.prevo || '';
 		this.tier = data.tier || '';
 		this.doublesTier = data.doublesTier || '';
