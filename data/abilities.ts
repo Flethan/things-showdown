@@ -2602,7 +2602,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onSourceHit(target, source, move) {
 			if (!move) return;
 			if (!move.flags['contact']) return;
-			
+
 			const stats: BoostID[] = [];
 			const boost: SparseBoostsTable = {};
 			let statPlus: BoostID;
@@ -2614,7 +2614,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
 			if (randomStat) boost[randomStat] = 1;
-			this.boost(boost);
+			this.boost(boost, source);
 		},
 		name: "Magic Touch",
 		rating: 4,
