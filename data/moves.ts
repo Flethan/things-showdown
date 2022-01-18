@@ -3932,6 +3932,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cute",
 	},
+	myman: {
+		num: 1241,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "My Man",
+		pp: 3,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1, authentic: 1},
+		secondary: null,
+		onHit(target, source) {
+			const boostSource: SparseBoostsTable = {};
+			const boostTarget: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in source.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				let statDiff = source.boosts[statPlus] - target.boosts[statPlus];
+				if (statDiff < 0) {
+					boostSource[statPlus] = Math.abs(statDiff);
+				} else if (statDiff > 0) {
+					boostTarget[statPlus] = statDiff;
+				}
+			}
+			this.boost(boostSource, source);
+			this.boost(boostTarget, target);
+		},
+		target: "normal",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Tough",
+	},
 
 	// Sword
 	sharpslash: {
@@ -4823,7 +4855,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	fastforward: {
 		num: -276,
-		accuracy: true,
+		accuracy: 80,
 		basePower: 0,
 		category: "Status",
 		isNonstandard: "Thing",

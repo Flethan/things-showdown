@@ -2597,6 +2597,29 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 3,
 	},
+	magictouch: {
+		isNonstandard: "ThingInf",
+		onSourceHit(target, source, move) {
+			if (!move) return;
+			if (!move.flags['contact']) return;
+
+			const stats: BoostID[] = [];
+			const boost: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in source.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				if (source.boosts[statPlus] < 6) {
+					stats.push(statPlus);
+				}
+			}
+			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = 1;
+			this.boost(boost, source);
+		},
+		name: "Magic Touch",
+		rating: 4,
+		num: 1132,
+	},
 
 	// BASE GAME
 	noability: {

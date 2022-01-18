@@ -1852,6 +1852,13 @@ export class BattleActions {
 				disabled: false,
 				used: false,
 			};
+
+			/*let action = this.battle.queue.willMove(pokemon);
+			if(action && action.moveid === pokemon.moveSlots[0].id) {
+				action.move = this.dex.moves.get(pokemon.species.muMove);
+				action.moveid = newMove.id;
+				this.battle.queue.changeAction(pokemon, action);
+			}*/
 			pokemon.moveSlots[0] = newMove;
 		}
 
