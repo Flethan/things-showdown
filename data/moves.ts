@@ -4190,7 +4190,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		// },
 		onModifyMove(move, pokemon, target) {
 			if (!move.critRatio) move.critRatio = 0;
-			move.critRatio += pokemon.boosts.atk
+			move.critRatio += pokemon.boosts.atk;
 		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
 			if (target.getMoveHitData(move).crit) {
@@ -4643,35 +4643,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			onStart(source) {
 				let success = false;
+				const pendingBoosts: BoostsTable = {...source.boosts};
 				let statName: BoostID;
-				for (statName in source.boosts) {
-					const stage = source.boosts[statName];
-					if (stage !== 0) {
-						success = true;
-					}
+				for (statName in pendingBoosts) {
+					if (pendingBoosts[statName]) success = true;
+					else delete pendingBoosts[statName];
 				}
+
 				if (success) {
-					this.effectState.passedBoosts = {...source.boosts};
+					this.effectState.passedBoosts = {...pendingBoosts};
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
+				} else {
+					source.side.removeSlotCondition(source, 'timecapsule');
 				}
 			},
 			onRestart(target, source) {
-				const boosts: BoostsTable = {...this.effectState.passedBoosts};
 				let success = false;
+				const pendingBoosts: BoostsTable = {...source.boosts};
 				let statName: BoostID;
-				for (statName in source.boosts) {
-					const stage = source.boosts[statName];
+				for (statName in pendingBoosts) {
+					const stage = this.effectState.passedBoosts[statName];
 					if (stage !== 0) {
-						success = true;
-						boosts[statName] += stage;
-						boosts[statName] = Math.min(Math.max(boosts[statName], -6), 6);
+						pendingBoosts[statName] += stage;
+						pendingBoosts[statName] = Math.min(Math.max(pendingBoosts[statName], -6), 6);
 					}
+					if (pendingBoosts[statName] !== stage) {
+						success = true;
+					}
+					if (!pendingBoosts[statName]) delete pendingBoosts[statName];
 				}
 				if (success) {
-					this.effectState.passedBoosts = {...boosts};
+					this.effectState.passedBoosts = {...pendingBoosts};
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
+					if (!this.effectState.passedBoosts.keys().length) {
+						source.side.removeSlotCondition(source, 'timecapsule');
+					}
 				}
 			},
 			onSwap(target) {
