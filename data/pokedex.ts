@@ -2713,7 +2713,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		forme: "Mu",
 		types: ["Liquid", "Weather"],
 		genderRatio: {M: 0.5, F: 0.5},
-		baseStats: {hp: 120, atk: 70, def: 75, spa: 95, spd: 75, spe: 120},
+		baseStats: {hp: 100, atk: 55, def: 75, spa: 115, spd: 85, spe: 125},
 		abilities: {0: "Water Bringer"},
 		heightm: 4.8,
 		weightkg: 7,
