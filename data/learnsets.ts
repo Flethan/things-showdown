@@ -3420,7 +3420,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			// advancedforecasting: ["8L40"],
 		},
 	},
-	serpeternal: {
+	serpiternal: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

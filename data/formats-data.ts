@@ -29,7 +29,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	empty: {
-		isNonstandard: "ThingMeme",
+		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
 	triangl3: {
@@ -720,11 +720,11 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	serpeternal: {
+	serpiternal: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	serpextinction: {
+	serpixtinction: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
@@ -757,6 +757,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	sudzerial: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	yellomatter: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
