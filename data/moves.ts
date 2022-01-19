@@ -3688,6 +3688,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -5158,8 +5159,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {charge: 1, gravity: 1, distance: 1},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
+				this.boost({spa: 1, spe: 1}, attacker);
 				return;
 			}
+			//this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.boost({spa: 1, spe: 1}, attacker);
 				return;
