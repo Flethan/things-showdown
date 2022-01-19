@@ -1833,7 +1833,7 @@ export class BattleActions {
 		pokemon.baseMaxhp = Math.floor(Math.floor(
 			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
 		) * pokemon.level / 100 + 10);
-		pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
+		if (!forcedSpeciesId) pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 

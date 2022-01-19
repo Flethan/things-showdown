@@ -941,26 +941,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (!pokemon.hasType('Green')) return;
 				if (pokemon.addedType === 'Green') {
 					if (!pokemon.addType('')) return false;
-					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+					this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
 				} else {
 					let types = pokemon.getTypes(true);
-					const newTypes = [];
-					let skip = false;
-					for (const type of types) {
-						if (type === 'Green' && !skip) {
-							skip = true;
-							continue;
-						}
-						newTypes.push(type);
-					}
+					types.splice(types.indexOf('Green'), 1);
 					if (!types.length) types = ['???'];
-					const addedType = pokemon.addedType;
-					pokemon.setType(newTypes);
+					pokemon.setType(types);
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
-					if (addedType) {
-						if (!pokemon.addType(addedType)) return false;
-						this.add('-start', pokemon, 'typeadd', addedType);
-					}
 				}
 			},
 		},
@@ -1714,26 +1701,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!pokemon.hasType('Green')) return;
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
 			} else {
 				let types = pokemon.getTypes(true);
-				const newTypes = [];
-				let skip = false;
-				for (const type of types) {
-					if (type === 'Green' && !skip) {
-						skip = true;
-						continue;
-					}
-					newTypes.push(type);
-				}
+				types.splice(types.indexOf('Green'), 1);
 				if (!types.length) types = ['???'];
-				const addedType = pokemon.addedType;
-				pokemon.setType(newTypes);
+				pokemon.setType(types);
 				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
-				if (addedType) {
-					if (!pokemon.addType(addedType)) return false;
-					this.add('-start', pokemon, 'typeadd', addedType);
-				}
 			}
 		},
 		secondary: null,

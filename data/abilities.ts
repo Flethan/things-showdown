@@ -570,14 +570,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (pokemon.species.name !== 'Lemon') {
-				pokemon.formeChange('Lemon');
+				pokemon.formeChange('Lemon', this.effect);
 			}
 		},
 		onEnd(pokemon) {
-			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' && pokemon.transformed) {
-				pokemon.formeChange(pokemon.set.species);
-			} else if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !pokemon.beingCalledBack && !pokemon.switchFlag) {
-				pokemon.formeChange('<empty>');
+			if (pokemon.baseSpecies.baseSpecies !== 'Lemon') {
+				pokemon.formeChange(pokemon.baseSpecies);
+			} else if (pokemon.hp && !pokemon.beingCalledBack && !pokemon.switchFlag && !pokemon.forceSwitchFlag) {
+				this.actions.runSymbolEvo(pokemon, '<empty>');
 			}
 		},
 		name: "Lemon",
@@ -1071,7 +1071,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onUpdate(pokemon) {
 			if (pokemon.baseSpecies.baseSpecies !== 'Undulux' || pokemon.transformed) return;
-			let forme = null;
+			let forme = '';
 			switch (pokemon.effectiveWeather()) {
 			case 'hot':
 				if (pokemon.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
@@ -1088,7 +1088,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				target.transformed ||
 				['hot', 'cold'].includes(target.effectiveWeather())
 			) return;
-			let forme = null;
+			let forme = '';
 			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
 			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]');
 		},
@@ -2543,40 +2543,40 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 185,
 	},
-	compartmentalization: {
+	compartments: {
 		isNonstandard: "Thing",
-		// onAfterMoveSecondarySelf(source, target, move) {
-		//	if (!move || !target) return;
-		//	if (target !== source && move.category !== 'Status') {
-		//		const types = source.getTypes();
-		//		if (!yourItem) return;
-		//		if (!source.setItem(yourItem)) {
-		//			target.item = yourItem.id; // bypass setItem so we don't break choicelock or anything
-		//			return;
-		//		}
-		//		this.add('-item', source, yourItem, '[from] ability: Magician', '[of] ' + target);
-		//	}
-		// },
-		// onAfterMoveSecondarySelf(source, target, move) {
-		//	if (source.getTypes().join() === 'Dirt' || !source.setType('Dirt')) {
-		//		return false;
-		//	}
-		//	this.add('-ability', target, 'Black');
-		//	this.add('-start', source, 'typechange', 'Dirt');
-		// },
-		name: "Compartmentalization",
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (!move || !target) return;
+			if (target !== source && move.category !== 'Status') {
+				const types = source.getTypes();
+				let success = false;
+				types.forEach(type => { if (source.addElementType(type)) success = true; });
+				if (success) {
+					this.add('-ability', source, 'Compartments');
+					this.add('-start', source, 'elementtypes', source.elementTypes.join('/'), '[silent]');
+				}
+			}
+		},
+		name: "Compartments",
 		rating: 4.5,
 		num: 185,
 	},
-	conservationalism: {
+	composting: {
 		isNonstandard: "ThingInf",
-		// onModifyDamage(damage, source, target, move) {
-		//	if (move && target.getMoveHitData(move).typeMod <= 0) {
-		//		return this.chainModify(2);
-		//	}
-		// },
+		onResidual(pokemon) {
+			pokemon.alliesAndSelf().forEach(
+				pkmn => {
+					if (pkmn.addElementType('Green')) this.add('-start', this.effect, 'elementtypes', pkmn.elementTypes.join('/'));
+				}
+			);
+			pokemon.foes().forEach(
+				pkmn => {
+					if (pkmn.addElementType('Green')) this.add('-start', this.effect, 'elementtypes', pkmn.elementTypes.join('/'));
+				}
+			);
+		},
 		isPermanent: true,
-		name: "Conservationalism",
+		name: "Composting",
 		rating: 4.5,
 		num: 185,
 	},
@@ -2612,6 +2612,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (randomStat) boost[randomStat] = 1;
 			this.boost(boost, source);
 		},
+		isPermanent: true,
 		name: "Magic Touch",
 		rating: 4,
 		num: 1132,
@@ -2622,6 +2623,25 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('sudscape');
 			this.field.setWeather('windy');
 		},
+		isPermanent: true,
+		name: "Water Bringer",
+		rating: 5,
+		num: 1229,
+	},
+	phaseshift: {
+		isNonstandard: "ThingInf",
+		onResidual(pokemon) {
+			let energy = 0;
+			energy = 2.5; // yep
+			let forme = '';
+			if (energy >= 3) forme = 'Yellomatter-Plasma';
+			else if (energy >= 2) forme = 'Yellomatter-Gas';
+			else if (energy >= 1) forme = 'Yellomatter-Liquid';
+			else forme = 'Yellomatter';
+
+			if (pokemon.species.name !== forme)	this.actions.runSymbolEvo(pokemon, forme);
+		},
+		isPermanent: true,
 		name: "Water Bringer",
 		rating: 5,
 		num: 1229,
