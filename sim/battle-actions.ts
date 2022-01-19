@@ -1807,15 +1807,15 @@ export class BattleActions {
 		if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
 				const evoCondition = this.dex.species.get(evo).evoCondition;
-				if (evoCondition === 'Infinite' || evoCondition === 'Element' || evoCondition === 'Null' || evoCondition === 'Mu') {
+				if (evoCondition === 'Symbol') {
 					return evo;
 				}
 			}
 		}
 	}
 
-	runSymbolEvo(pokemon: Pokemon) {
-		const speciesid = pokemon.canSymbolEvo;
+	runSymbolEvo(pokemon: Pokemon, forcedSpeciesId?: string | Species) {
+		const speciesid = forcedSpeciesId ?? pokemon.canSymbolEvo;
 		if (!speciesid) return false;
 
 		// Pokémon affected by Sky Drop cannot symbol evolve. Enforce it here for now.
@@ -1825,8 +1825,7 @@ export class BattleActions {
 			}
 		}
 
-		pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
-		pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
+		pokemon.formeChange(speciesid, pokemon.baseSpecies, true, forcedSpeciesId ? 'forced' : 'symbol');
 
 		pokemon.baseMaxhp = Math.floor(Math.floor(
 			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
@@ -1835,13 +1834,9 @@ export class BattleActions {
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		const evoCondition = this.dex.species.get(speciesid).evoCondition;
+		const symbolType = this.dex.species.get(speciesid).forme;
 
-		if (evoCondition === 'Null') {
-			pokemon.addType('', true);
-			pokemon.clearElementTypes();
-		}
-		if (evoCondition === 'Mu') {
+		if (symbolType === 'Mu') {
 			const muMove = this.dex.moves.get(pokemon.species.muMove);
 			const newMove = {
 				move: muMove.name,
@@ -1853,20 +1848,22 @@ export class BattleActions {
 				used: false,
 			};
 
-			/*let action = this.battle.queue.willMove(pokemon);
+			/* let action = this.battle.queue.willMove(pokemon);
 			if(action && action.moveid === pokemon.moveSlots[0].id) {
 				action.move = this.dex.moves.get(pokemon.species.muMove);
 				action.moveid = newMove.id;
 				this.battle.queue.changeAction(pokemon, action);
-			}*/
+			} */
 			pokemon.moveSlots[0] = newMove;
 		}
 
-		// Limit one symbol evolution
-		const wasSymbol = pokemon.canSymbolEvo;
-		for (const ally of pokemon.side.pokemon) {
-			if (wasSymbol) {
-				ally.canSymbolEvo = null;
+		// Limit one symbol evolution, don't count forced evos: Lemon -> Empty, Yellomatter's Phase Change
+		if (!forcedSpeciesId) {
+			const wasSymbol = pokemon.canSymbolEvo;
+			for (const ally of pokemon.side.pokemon) {
+				if (wasSymbol) {
+					ally.canSymbolEvo = null;
+				}
 			}
 		}
 

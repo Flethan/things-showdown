@@ -1254,7 +1254,11 @@ export class Pokemon {
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
 		species.elementTypes?.forEach((type: string) => this.addElementType(type));
-		if (species.addedType) this.addType(species.addedType);
+		if (species.addedType) this.addType(species.addedType, species.forme === 'Infinite');
+		if (species.forme === 'Null') {
+			this.addType('', true);
+			this.clearElementTypes();
+		}
 		this.knownType = true;
 		this.weighthg = species.weighthg;
 		this.heightdm = species.heightdm;
@@ -1307,7 +1311,10 @@ export class Pokemon {
 			this.details = species.name + (this.level === 100 ? '' : ', L' + this.level) +
 				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
 			this.battle.add('detailschange', this, (this.illusion || this).details);
-			if (source.effectType === 'Item') {
+			// Can't use evoCondition in case of Empty or Yellomatter formes
+			if (species.evoType === 'symbol') {
+				this.battle.add('-symbol', this, apparentSpecies, message);
+			} else if (source.effectType === 'Item') {
 				if (source.zMove) {
 					this.battle.add('-burst', this, apparentSpecies, species.requiredItem);
 					this.moveThisTurnResult = true; // Ultra Burst counts as an action for Truant
@@ -1340,6 +1347,14 @@ export class Pokemon {
 			this.setAbility(species.abilities['0'], null, true);
 			this.baseAbility = this.ability;
 		}
+
+		if (species.addedType) this.battle.add('-start', this, 'typeadd', species.addedType, '[silent]');
+		if (species.elementTypes.length) this.battle.add('-start', this, 'elementtypes', species.elementTypes.join('/'), '[silent]');
+		if (species.forme === 'Null') {
+			this.battle.add('-start', this, 'typeadd', '', '[silent]');
+			this.battle.add('-start', this, 'elementtypes', '', '[silent]');
+		}
+
 		return true;
 	}
 
@@ -1923,7 +1938,7 @@ export class Pokemon {
 
 	/** Removes any types added previously and adds another one. Infinite and Null formes supress type adding. */
 	addType(newType: string, enforce = false) {
-		if (!enforce && ((this.species.forme === 'Infinite' && this.addedType === 'Infinity') || this.species.forme === 'Null')) return false;
+		if (!enforce && (this.species.forme === 'Infinite' || this.species.forme === 'Null')) return false;
 		this.addedType = newType;
 		return true;
 	}

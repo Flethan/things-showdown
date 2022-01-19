@@ -3949,7 +3949,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let statPlus: BoostID;
 			for (statPlus in source.boosts) {
 				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-				let statDiff = source.boosts[statPlus] - target.boosts[statPlus];
+				const statDiff = source.boosts[statPlus] - target.boosts[statPlus];
 				if (statDiff < 0) {
 					boostSource[statPlus] = Math.abs(statDiff);
 				} else if (statDiff > 0) {

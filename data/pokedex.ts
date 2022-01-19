@@ -134,7 +134,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	l3mniscangl: {
 		num: -210,
 		name: "L3mniscangl",
-		forme: "Infinity",
+		forme: "Infinite",
 		types: ["Science", "No"],
 		gender: "N",
 		baseStats: {hp: 66, atk: 30, def: 30, spa: 150, spd: 150, spe: 111},
@@ -145,7 +145,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "P3ntachoron",
 		eggGroups: ["Monster"],
 		evoType: "symbol",
-		evoCondition: "Infinite",
+		evoCondition: "Symbol",
 		addedType: "Infinity",
 		hasSprite: true,
 	},
@@ -501,6 +501,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	empty: {
 		num: -332,
 		name: "empty",
+		forme: "Null",
 		types: ["???"],
 		gender: "N",
 		baseStats: {hp: 75, atk: 75, def: 75, spa: 75, spd: 75, spe: 75},
@@ -509,6 +510,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 1,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		evoType: 'symbol',
 		hasSprite: true,
 	},
 	yellosnow: {
@@ -906,7 +908,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	reuleado: {
 		num: -360,
 		name: "Reuleado",
-		forme: "Infinity",
+		forme: "Infinite",
 		types: ["Science", "Yellow"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 65, atk: 115, def: 65, spa: 115, spd: 65, spe: 115},
@@ -917,7 +919,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Citrinity",
 		eggGroups: ["Mineral", "Bug"],
 		evoType: "symbol",
-		evoCondition: "Infinite",
+		evoCondition: "Symbol",
 		addedType: "Infinity",
 	},
 	swordguy: {
@@ -948,7 +950,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Sword Guy",
 		eggGroups: ["Mineral"],
 		evoType: "symbol",
-		evoCondition: "Element",
+		evoCondition: "Symbol",
 		elementTypes: ["Sword"],
 	},
 	hmug: {
@@ -1894,7 +1896,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	babellinks: {
 		num: -422,
 		name: "Babellinks",
-		forme: "Infinity",
+		forme: "Infinite",
 		types: ["Far", "Time"],
 		gender: "N",
 		baseStats: {hp: 255, atk: 15, def: 210, spa: 15, spd: 210, spe: 20},
@@ -1905,7 +1907,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "alabroad",
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
-		evoCondition: "Infinite",
+		evoCondition: "Symbol",
 		addedType: "Infinity",
 	},
 	sodike: {
@@ -2379,7 +2381,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Stratosoar",
 		eggGroups: ["Amorphous", "Water 3"],
 		evoType: "symbol",
-		evoCondition: "Element",
+		evoCondition: "Symbol",
 		elementTypes: ["Yellow"],
 	},
 	fiish: {
@@ -2396,7 +2398,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Water 1"],
 		prevo: "Fsh",
 		evoType: "symbol",
-		evoCondition: "Mu",
+		evoCondition: "Symbol",
 		muMove: "True Sight",
 		hasSprite: true,
 	},
@@ -2414,13 +2416,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		prevo: "Angry Beehive",
 		evoType: "symbol",
-		evoCondition: "Mu",
+		evoCondition: "Symbol",
 		muMove: "Hand Down Judgement",
 	},
 	treefurthestaway: {
 		num: -456,
 		name: "Tree Furthest Away",
-		forme: "Infinity",
+		forme: "Infinite",
 		types: ["Green", "Far"],
 		genderRatio: {M: 0.2, F: 0.8},
 		baseStats: {hp: 132, atk: 18, def: 92, spa: 58, spd: 102, spe: 4},
@@ -2431,7 +2433,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Tree Further Away",
 		eggGroups: ["Grass"],
 		evoType: "symbol",
-		evoCondition: "Infinite",
+		evoCondition: "Symbol",
 		addedType: "Infinity",
 		hasSprite: true,
 	},
@@ -2467,7 +2469,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	dabarreldatrandem: {
 		num: -459,
 		name: "Dabarrel Datrandem",
-		forme: "Infinity",
+		forme: "Infinite",
 		types: ["Sport", "Far"],
 		gender: "N",
 		baseStats: {hp: 22, atk: 126, def: 26, spa: 56, spd: 46, spe: 206},
@@ -2478,7 +2480,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Human-Like"],
 		evoType: "symbol",
-		evoCondition: "Infinite",
+		evoCondition: "Symbol",
 		addedType: "Infinity",
 		hasSprite: true,
 	},
@@ -2564,7 +2566,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		prevo: "Micro-tron",
 		evoType: "symbol",
-		evoCondition: "Mu",
+		evoCondition: "Symbol",
 		muMove: "Out Hot Eat",
 	},
 	exceller: {
@@ -2606,7 +2608,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Serpeternal",
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
-		evoCondition: "Null",
+		evoCondition: "Symbol",
 	},
 	boxlegend: {
 		num: -468,
@@ -2636,7 +2638,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Box Legend",
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
-		evoCondition: "Element",
+		evoCondition: "Symbol",
 		elementTypes: ["Green"],
 	},
 	exallout: {
@@ -2653,7 +2655,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Splattom",
 		evoType: "symbol",
-		evoCondition: "Null",
+		evoCondition: "Symbol",
 	},
 	hubantula: {
 		num: -471,
@@ -2669,7 +2671,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		prevo: "Hubert",
 		evoType: "symbol",
-		evoCondition: "Element",
+		evoCondition: "Symbol",
 		elementTypes: ["Hair"],
 	},
 	myomolem: {
@@ -2686,7 +2688,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Myomimeo",
 		evoType: "symbol",
-		evoCondition: "Element",
+		evoCondition: "Symbol",
 		elementTypes: ["No"],
 	},
 	handhorse: {
@@ -2703,7 +2705,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		prevo: "Horse",
 		evoType: "symbol",
-		evoCondition: "Mu",
+		evoCondition: "Symbol",
 		muMove: "My Man",
 	},
 
