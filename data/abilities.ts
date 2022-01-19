@@ -2620,6 +2620,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 1132,
 	},
+	waterbringer: {
+		isNonstandard: "ThingInf",
+		onAfterMega(source) {
+			this.field.setTerrain('sudscape');
+			this.field.setWeather('windy');
+		},
+		name: "Water Bringer",
+		rating: 5,
+		num: 1229,
+	},
 
 	// BASE GAME
 	noability: {

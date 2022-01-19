@@ -621,6 +621,9 @@ export class BattleActions {
 				} else {
 					if (!move.spreadHit) this.battle.attrLastMove('[miss]');
 					this.battle.add('-miss', pokemon, target);
+					if (this.battle.field.terrain === 'sudscape') {
+						pokemon.trySetStatus('prone');
+					}
 				}
 			}
 		}

@@ -3688,6 +3688,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -5153,6 +5154,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Tough",
+	},
+	ascend: {
+		num: 1119,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "Ascend",
+		pp: 3,
+		priority: 0,
+		flags: {charge: 1, gravity: 1, distance: 1},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				this.boost({spa: 1, spe: 1}, attacker);
+				return;
+			}
+			//this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				this.boost({spa: 1, spe: 1}, attacker);
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability(target, source, move) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows'].includes(move.id)) {
+					return;
+				}
+				return false;
+			},
+			onSourceModifyDamage(damage, source, target, move) {
+				if (move.id === 'gust' || move.id === 'twister') {
+					return this.chainModify(2);
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Weather",
+		contestType: "Beautiful",
 	},
 
 	// Yellow

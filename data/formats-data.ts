@@ -748,6 +748,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	handhorse: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	myomolem: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	sudzerial: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	// BASE GAME
 	bulbasaur: {
 		tier: "LC",
