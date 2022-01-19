@@ -2516,7 +2516,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Saxosnowne",
 		types: ["Music", "Yellow"],
 		genderRatio: {M: 0.25, F: 0.5},
-		baseStats: {hp: 90, atk: 40, def: 80, spa: 100, spd: 90, spe: 80},
+		baseStats: {hp: 50, atk: 10, def: 30, spa: 51, spd: 40, spe: 251},
 		abilities: {0: "A One, Two, Three...", 1: "Chilled"},
 		heightm: 0.1,
 		weightkg: 0.1,
