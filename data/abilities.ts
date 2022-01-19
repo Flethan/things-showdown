@@ -825,11 +825,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	windsurfer: {
 		isNonstandard: "Thing",
-		onModifySpe(spe, pokemon) {
-			if (['windy'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(2);
-			}
-		},
+		// Checked in conditions.js: windy.onAnyModifyBoost
 		name: "Wind Surfer",
 		rating: 3,
 		num: -125,

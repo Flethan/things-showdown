@@ -586,7 +586,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 				this.add('-weather', 'Windy');
 			}
 			this.hint("Stat changes to speed are ignored while it is windy!");
-			// Done in pokemon.js
+		},
+		onAnyModifyBoost(boosts, pokemon) {
+			if (!pokemon.hasAbility('windsurfer')) {
+				boosts['spe'] = 0;
+			}
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) return priority + 1;

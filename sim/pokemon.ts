@@ -527,7 +527,6 @@ export class Pokemon {
 		const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
 		if (boost > 6) boost = 6;
 		if (boost < -6) boost = -6;
-		if (statName === 'spe' && this.battle.field.isWeather(['windy'])) boost = 0;
 		if (boost >= 0) {
 			stat = Math.floor(stat * boostTable[boost]);
 		} else {
@@ -557,7 +556,7 @@ export class Pokemon {
 		}
 
 		// stat boosts
-		if (!unboosted && !(statName === 'spe' && this.battle.field.isWeather(['windy']))) {
+		if (!unboosted) {
 			const boosts = this.battle.runEvent('ModifyBoost', this, null, null, {...this.boosts});
 			let boost = boosts[statName];
 			const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
