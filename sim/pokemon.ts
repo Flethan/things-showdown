@@ -1348,8 +1348,8 @@ export class Pokemon {
 			this.baseAbility = this.ability;
 		}
 
-		if (species.addedType) this.battle.add('-start', this, 'typeadd', species.addedType, '[silent]');
-		if (species.elementTypes.length) this.battle.add('-start', this, 'elementtypes', species.elementTypes.join('/'), '[silent]');
+		if (species.addedType) this.battle.add('-start', this, 'typeadd', this.addedType, '[silent]');
+		if (species.elementTypes?.length) this.battle.add('-start', this, 'elementtypes', this.elementTypes.join('/'), '[silent]');
 		if (species.forme === 'Null') {
 			this.battle.add('-start', this, 'typeadd', '', '[silent]');
 			this.battle.add('-start', this, 'elementtypes', '', '[silent]');

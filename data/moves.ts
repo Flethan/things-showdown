@@ -5170,7 +5170,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.boost({spa: 1, spe: 1}, attacker);
 				return;
 			}
-			//this.add('-prepare', attacker, move.name);
+			// this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				this.boost({spa: 1, spe: 1}, attacker);
 				return;
