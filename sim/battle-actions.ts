@@ -1830,9 +1830,6 @@ export class BattleActions {
 
 		const hasNickname = (this.dex.species.get(pokemon.set.species).baseSpecies !== pokemon.set.name);
 		const newSpecies = this.dex.species.get(speciesid);
-		console.log(hasNickname + ' has nickname');
-		console.log(pokemon.name);
-		console.log(newSpecies.baseSpecies);
 		if (pokemon.name !== newSpecies.baseSpecies && !hasNickname) {
 			this.battle.add('-name', pokemon, newSpecies.baseSpecies);
 		}
