@@ -2633,15 +2633,57 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	phaseshift: {
 		isNonstandard: "ThingInf",
 		onResidual(pokemon) {
-			let energy = 0;
-			energy = 2.5; // yep
+			const energy = pokemon.getEnergyValue();
+
 			let forme = '';
 			if (energy >= 3) forme = 'Yellomatter-Plasma';
-			else if (energy >= 2) forme = 'Yellomatter-Gas';
-			else if (energy >= 1) forme = 'Yellomatter-Liquid';
-			else forme = 'Yellomatter';
+			else if (energy >= 1) forme = 'Yellomatter-Gas';
+			else if (energy < -1) forme = 'Yellomatter';
+			else forme = 'Yellomatter-Liquid';
 
-			if (pokemon.species.name !== forme)	this.actions.runSymbolEvo(pokemon, forme);
+			if (pokemon.baseSpecies.name === 'Yellomatter' && pokemon.species.name !== forme) {
+				let stat1 = 0;
+				let stat2 = 0;
+				switch(pokemon.species.name) {
+				case 'Yellomatter':
+					stat1 = pokemon.boosts.def;
+					stat2 = pokemon.boosts.atk;
+					pokemon.setBoost({atk:0, def:0});
+					break;
+				case 'Yellomatter-Liquid':
+					stat1 = pokemon.boosts.atk;
+					stat2 = pokemon.boosts.spd;
+					pokemon.setBoost({atk:0, spd:0});
+					break;
+				case 'Yellomatter-Gas':
+					stat1 = pokemon.boosts.spd;
+					stat2 = pokemon.boosts.spa;
+					pokemon.setBoost({spa:0, spd:0});
+					break;
+				case 'Yellomatter-Plasma':
+					stat1 = pokemon.boosts.spa;
+					stat2 = pokemon.boosts.spe;
+					pokemon.setBoost({spa:0, spe:0});
+					break;
+				}
+
+				switch(forme) {
+					case 'Yellomatter':
+						this.boost({atk: stat2, def: stat1}, pokemon);
+						break;
+					case 'Yellomatter-Liquid':
+						this.boost({atk: stat1, spd: stat2}, pokemon);
+						break;
+					case 'Yellomatter-Gas':
+						this.boost({spa: stat2, spd: stat1}, pokemon);
+						break;
+					case 'Yellomatter-Plasma':
+						this.boost({spa: stat1, spe: stat2}, pokemon);
+						break;
+				}
+
+				this.actions.runSymbolEvo(pokemon, forme);
+			}
 		},
 		isPermanent: true,
 		name: "Phase Shift",

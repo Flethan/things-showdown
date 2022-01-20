@@ -463,6 +463,138 @@ export class Pokemon {
 		this.hp = this.maxhp;
 	}
 
+	getEnergyValue() {
+		let energy = 0;
+		let eqEnergy = 0;
+
+		switch (this.status) {
+		case 'prone':
+			energy -= 0.5;
+			break;
+		case 'banished':
+			energy += 1;
+			break;
+		case 'pressurized':
+			energy -= 1;
+			break;
+		case 'fluctuant':
+			energy =  energy + Math.random() * 4 - 1
+			break;
+		}
+
+		switch (this.battle.field.effectiveTerrain()) {
+			case 'spatialexpansion':
+				energy += 2;
+				break;
+			case 'sudscape':
+				eqEnergy += 0.5;
+				break;
+		}
+
+		switch (this.effectiveWeather()) {
+		case 'nigthtime':
+			energy -= 0.5;
+			break;
+		case 'hot':
+			energy += 1;
+			break;
+		case 'cold':
+			energy -= 1;
+			break;
+		case 'windy':
+			energy -= 0.5;
+			break;
+		case 'yellowish':
+			energy += 0.5;
+			break;
+		case 'underwater':
+			eqEnergy += 1;
+			break;
+		}
+
+		const condArray = this.side.sideConditions;
+		for (const condition in condArray) {
+			switch(condition) {
+			case 'wetfloor':
+				eqEnergy += 0.5;
+				break;
+			case 'hotcoals':
+				energy += 2;
+				break;
+			case 'permafrost':
+				energy -= 2;
+				break;
+			case 'beamfield':
+				energy += 0.5;
+				break;
+			case 'stormcell':
+				energy -= 0.5;
+				break;
+			}
+		}
+
+		const roomArray = this.battle.field.pseudoWeather;
+		for (const room in roomArray) {
+			switch (room) {
+			case 'hadalzone':
+				energy -= 1;
+				break;
+			case 'stickysituation':
+				eqEnergy -= 1;
+				break;
+			case 'rankandfile':
+				energy -= 1;
+				break;
+			}
+		}
+
+		const volStatArray = this.volatiles;
+		for (const volStat in volStatArray) {
+			switch(volStat) {
+			case 'hbond':
+				energy -= 1.5;
+				break;
+			case 'shrinkwrap':
+				energy -= 1;
+				break;
+			case 'fireworks':
+				energy += 2.5;
+				break;
+			case 'fastforward':
+				energy += 1;
+				break;
+			case 'pause':
+				energy -= 1;
+				break;
+			case 'partiallytrapped':
+				energy -= 0.5;
+				break;
+			case 'depthvanish':
+				energy -= 1.5;
+				break;
+			}
+		}
+
+		const slotCondArray = this.side.slotConditions;
+		for (const slotCond in slotCondArray) {
+			switch(slotCond) {
+			case 'accelerate':
+				energy += 1.5;
+				break;
+			}
+		}
+
+		if (eqEnergy) {
+			if (energy > 0) {
+				energy -= eqEnergy;
+			} else {
+				energy += eqEnergy;
+			}
+		}
+
+		return energy;
+	}
+
 	toJSON(): AnyObject {
 		return State.serializePokemon(this);
 	}

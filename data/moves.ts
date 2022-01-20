@@ -1500,7 +1500,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		boosts: {
 			spe: 1,
 		},
-		slotCondition: 'Accelerate',
+		slotCondition: 'accelerate',
 		condition: {
 			duration: 2,
 			onResidualOrder: 4,
@@ -4470,6 +4470,32 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Temperature",
 		contestType: "Cute",
+	},
+	crystallize: {
+		num: -2761,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "Crystallize",
+		pp: 3,
+		priority: 0,
+		flags: {snatch: 1},
+		onPrepareHit(pokemon) {
+			if(pokemon.getEnergyValue() > -1) return false;
+		},
+		onHit(pokemon) {
+			const energy = Math.trunc(pokemon.getEnergyValue());
+
+			if (energy < 0) {
+				this.boost({atk: -energy - 1, def: -energy})
+			}
+		},
+		secondary: null,
+		target: "self",
+		type: "Temperature",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
 	},
 
 	// Time

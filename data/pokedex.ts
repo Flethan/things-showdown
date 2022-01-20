@@ -2742,7 +2742,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Yellowater",
 		evoType: "symbol",
 		evoCondition: "Symbol",
-		muMove: "Ascend",
+		muMove: "Crystallize",
 	},
 	yellomatterliquid: {
 		num: -475,
