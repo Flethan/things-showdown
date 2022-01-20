@@ -2727,9 +2727,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		muMove: "Ascend",
 	},
-	yellomatter: {
+	yellomattersolid: {
 		num: -475,
-		name: "Yellomatter",
+		name: "Yellomatter-Solid",
+		baseSpecies: "Yellomatter",
 		forme: "Mu",
 		types: ["Temperature", "Yellow"],
 		genderRatio: {M: 0.25, F: 0.5},
@@ -2759,9 +2760,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Yellowater",
 		evoType: "symbol",
 		elementTypes: ["Liquid"],
-		requiredAbility: "Phase Shift",
 		evoCondition: "Symbol",
-		battleOnly: "Yellomatter",
 	},
 	yellomattergas: {
 		num: -475,
@@ -2779,8 +2778,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Yellowater",
 		evoType: "symbol",
 		addedType: "Infinity",
-		requiredAbility: "Phase Shift",
-		battleOnly: "Yellomatter",
 	},
 	yellomatterplasma: {
 		num: -475,
@@ -2797,8 +2794,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Yellowater",
 		evoType: "symbol",
-		requiredAbility: "Phase Shift",
-		battleOnly: "Yellomatter",
 	},
 
 	// BASE GAME
