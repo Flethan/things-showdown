@@ -4487,9 +4487,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			const energy = Math.trunc(pokemon.getEnergyValue());
 
-			console.log('crystallize - trunc ');
-			console.log(energy);
-
 			if (energy < -1) {
 				this.boost({atk: -energy - 1, def: -energy});
 			} else if (energy < 0) {
