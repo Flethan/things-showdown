@@ -2548,7 +2548,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (!move || !target) return;
 			if (target !== source && move.category !== 'Status') {
-				const types = source.getTypes();
+				const types = target.getTypes();
 				let success = false;
 				types.forEach(type => { if (source.addElementType(type)) success = true; });
 				if (success) {
@@ -2571,6 +2571,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			);
 			pokemon.foes().forEach(
 				pkmn => {
+					console.log(pkmn.name);
+					console.log(pkmn.elementTypes);
 					if (pkmn.addElementType('Green')) this.add('-start', this.effect, 'elementtypes', pkmn.elementTypes.join('/'));
 				}
 			);
@@ -2642,7 +2644,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.species.name !== forme)	this.actions.runSymbolEvo(pokemon, forme);
 		},
 		isPermanent: true,
-		name: "Water Bringer",
+		name: "Phase Shift",
 		rating: 5,
 		num: 1229,
 	},
