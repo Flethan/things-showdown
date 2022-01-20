@@ -598,6 +598,9 @@ export class Pokemon {
 			}
 		}
 
+		console.log('get energy - ');
+		console.log(energy);
+
 		return energy;
 	}
 

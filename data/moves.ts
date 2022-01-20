@@ -26,6 +26,8 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
+import { consoleips } from "../config/config-example";
+
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
@@ -4487,8 +4489,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			const energy = Math.trunc(pokemon.getEnergyValue());
 
-			if (energy < 0) {
+			console.log('crystallize - trunc ');
+			console.log(energy);
+
+			if (energy < -1) {
 				this.boost({atk: -energy - 1, def: -energy});
+			} else if (energy < 0) {
+				this.boost({def: -energy});
 			}
 		},
 		secondary: null,
