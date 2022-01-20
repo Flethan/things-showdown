@@ -2566,14 +2566,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			pokemon.alliesAndSelf().forEach(
 				pkmn => {
-					if (pkmn.addElementType('Green')) this.add('-start', this.effect, 'elementtypes', pkmn.elementTypes.join('/'));
+					if (pkmn.addElementType('Green')) this.add('-start', pkmn, 'elementtypes', pkmn.elementTypes.join('/'));
 				}
 			);
 			pokemon.foes().forEach(
 				pkmn => {
-					console.log(pkmn.name);
-					console.log(pkmn.elementTypes);
-					if (pkmn.addElementType('Green')) this.add('-start', this.effect, 'elementtypes', pkmn.elementTypes.join('/'));
+					if (pkmn.addElementType('Green')) this.add('-start', pkmn, 'elementtypes', pkmn.elementTypes.join('/'));
 				}
 			);
 		},
@@ -2680,6 +2678,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					case 'Yellomatter-Plasma':
 						this.boost({spa: stat1, spe: stat2}, pokemon);
 						break;
+				}
+			
+				
+				if (pokemon.species.forme === 'Infinite') {
+					pokemon.addType('', true);
+					this.add('-start', pokemon, 'typeadd', '', '[silent]');
+				}
+				if (pokemon.species.forme === 'Element') {
+					pokemon.removeElementType('Liquid');
+					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
 				}
 
 				this.actions.runSymbolEvo(pokemon, forme);

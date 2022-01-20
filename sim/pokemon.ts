@@ -2082,6 +2082,11 @@ export class Pokemon {
 		return true;
 	}
 
+	removeElementType(elementType: string) {
+		this.elementTypes = this.elementTypes.filter(type => type !== elementType);
+		return true;
+	}
+
 	clearElementTypes() {
 		this.elementTypes = [];
 		return true;
