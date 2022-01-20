@@ -2741,6 +2741,8 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		eggGroups: ["Mineral"],
 		prevo: "Yellowater",
+		otherFormes: ["Yellomatter-Liquid", "Yellomatter-Gas", "Yellomatter-Plasma"],
+		formeOrder: ["Yellomatter", "Yellomatter-Liquid", "Yellomatter-Gas", "Yellomatter-Plasma"],
 		evoType: "symbol",
 		muMove: "Crystallize",
 	},
