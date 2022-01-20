@@ -2636,21 +2636,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let forme = '';
 			if (energy >= 3) forme = 'Yellomatter-Plasma';
 			else if (energy >= 1) forme = 'Yellomatter-Gas';
-			else if (energy < -1) forme = 'Yellomatter';
-			else forme = 'Yellomatter-Liquid';
+			else if (energy < -1) forme = 'Yellomatter-Solid';
+			else forme = 'Yellomatter';
 
 			if (pokemon.baseSpecies.baseSpecies === 'Yellomatter' && pokemon.species.name !== forme) {
 				const boosts: SparseBoostsTable = {};
 				let stat1 = 0;
 				let stat2 = 0;
 				switch (pokemon.species.name) {
-				case 'Yellomatter':
+				case 'Yellomatter-Solid':
 					stat1 = pokemon.boosts.def;
 					boosts.def = -pokemon.boosts.def;
 					stat2 = pokemon.boosts.atk;
 					boosts.atk = -pokemon.boosts.atk;
 					break;
-				case 'Yellomatter-Liquid':
+				case 'Yellomatter':
 					stat1 = pokemon.boosts.atk;
 					boosts.atk = -pokemon.boosts.atk;
 					stat2 = pokemon.boosts.spd;
@@ -2671,11 +2671,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 
 				switch (forme) {
-				case 'Yellomatter':
+				case 'Yellomatter-Solid':
 					boosts.def = stat1;
 					boosts.atk = stat2;
 					break;
-				case 'Yellomatter-Liquid':
+				case 'Yellomatter':
 					boosts.atk = stat1;
 					boosts.spd = stat2;
 					break;
