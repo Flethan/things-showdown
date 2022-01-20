@@ -2741,7 +2741,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Yellowater",
 		evoType: "symbol",
-		evoCondition: "Symbol",
 		muMove: "Crystallize",
 	},
 	yellomatterliquid: {
@@ -2761,6 +2760,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		elementTypes: ["Liquid"],
 		requiredAbility: "Phase Shift",
+		evoCondition: "Symbol",
 		battleOnly: "Yellomatter",
 	},
 	yellomattergas: {
