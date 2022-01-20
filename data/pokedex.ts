@@ -538,7 +538,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 29.0,
 		color: "Yellow",
 		prevo: "Yellosnow",
-		evos: ["Yellomatter"],
+		evos: ["Yellomatter-Liquid"],
 		eggGroups: ["Monster"],
 		hasSprite: true,
 	},
