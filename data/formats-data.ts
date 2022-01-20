@@ -764,7 +764,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	yellomatterliquid: {
+	yellomattersolid: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
