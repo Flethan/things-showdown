@@ -1828,17 +1828,17 @@ export class BattleActions {
 			}
 		}
 
-		const hadNickname = (this.dex.species.get(pokemon.set.species).baseSpecies !== pokemon.set.name);
+		// const hadNickname = (this.dex.species.get(pokemon.set.species).baseSpecies !== pokemon.set.name);
 		const oldBaseMaxhp = pokemon.baseMaxhp;
 
 		pokemon.formeChange(speciesid, pokemon.baseSpecies, true, forcedSpeciesId ? 'forced' : 'symbol');
 
-		console.log(hadNickname + 'had nickname');
+		/* console.log(hadNickname + 'had nickname');
 		console.log(pokemon.name);
 		console.log(pokemon.baseSpecies.baseSpecies);
 		if (pokemon.name !== pokemon.baseSpecies.baseSpecies && !hadNickname) {
 			this.battle.add('-name', pokemon, pokemon.baseSpecies.baseSpecies);
-		}
+		} */
 
 		pokemon.baseMaxhp = Math.floor(Math.floor(
 			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
