@@ -2642,45 +2642,44 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.baseSpecies.name === 'Yellomatter' && pokemon.species.name !== forme) {
 				let stat1 = 0;
 				let stat2 = 0;
-				switch(pokemon.species.name) {
+				switch (pokemon.species.name) {
 				case 'Yellomatter':
 					stat1 = pokemon.boosts.def;
 					stat2 = pokemon.boosts.atk;
-					pokemon.setBoost({atk:0, def:0});
+					pokemon.setBoost({atk: 0, def: 0});
 					break;
 				case 'Yellomatter-Liquid':
 					stat1 = pokemon.boosts.atk;
 					stat2 = pokemon.boosts.spd;
-					pokemon.setBoost({atk:0, spd:0});
+					pokemon.setBoost({atk: 0, spd: 0});
 					break;
 				case 'Yellomatter-Gas':
 					stat1 = pokemon.boosts.spd;
 					stat2 = pokemon.boosts.spa;
-					pokemon.setBoost({spa:0, spd:0});
+					pokemon.setBoost({spa: 0, spd: 0});
 					break;
 				case 'Yellomatter-Plasma':
 					stat1 = pokemon.boosts.spa;
 					stat2 = pokemon.boosts.spe;
-					pokemon.setBoost({spa:0, spe:0});
+					pokemon.setBoost({spa: 0, spe: 0});
 					break;
 				}
 
-				switch(forme) {
-					case 'Yellomatter':
-						this.boost({atk: stat2, def: stat1}, pokemon);
-						break;
-					case 'Yellomatter-Liquid':
-						this.boost({atk: stat1, spd: stat2}, pokemon);
-						break;
-					case 'Yellomatter-Gas':
-						this.boost({spa: stat2, spd: stat1}, pokemon);
-						break;
-					case 'Yellomatter-Plasma':
-						this.boost({spa: stat1, spe: stat2}, pokemon);
-						break;
+				switch (forme) {
+				case 'Yellomatter':
+					this.boost({atk: stat2, def: stat1}, pokemon);
+					break;
+				case 'Yellomatter-Liquid':
+					this.boost({atk: stat1, spd: stat2}, pokemon);
+					break;
+				case 'Yellomatter-Gas':
+					this.boost({spa: stat2, spd: stat1}, pokemon);
+					break;
+				case 'Yellomatter-Plasma':
+					this.boost({spa: stat1, spe: stat2}, pokemon);
+					break;
 				}
-			
-				
+
 				if (pokemon.species.forme === 'Infinite') {
 					pokemon.addType('', true);
 					this.add('-start', pokemon, 'typeadd', '', '[silent]');

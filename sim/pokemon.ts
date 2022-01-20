@@ -478,17 +478,17 @@ export class Pokemon {
 			energy -= 1;
 			break;
 		case 'fluctuant':
-			energy =  energy + Math.random() * 4 - 1
+			energy = energy + (this.battle.random() * 4) - 1;
 			break;
 		}
 
 		switch (this.battle.field.effectiveTerrain()) {
-			case 'spatialexpansion':
-				energy += 2;
-				break;
-			case 'sudscape':
-				eqEnergy += 0.5;
-				break;
+		case 'spatialexpansion':
+			energy += 2;
+			break;
+		case 'sudscape':
+			eqEnergy += 0.5;
+			break;
 		}
 
 		switch (this.effectiveWeather()) {
@@ -512,83 +512,89 @@ export class Pokemon {
 			break;
 		}
 
-		const condArray = this.side.sideConditions;
-		for (const condition in condArray) {
-			switch(condition) {
-			case 'wetfloor':
-				eqEnergy += 0.5;
-				break;
-			case 'hotcoals':
-				energy += 2;
-				break;
-			case 'permafrost':
-				energy -= 2;
-				break;
-			case 'beamfield':
-				energy += 0.5;
-				break;
-			case 'stormcell':
-				energy -= 0.5;
-				break;
+		Object.keys(this.side.sideConditions).forEach(
+			sideCondition => {
+				switch (sideCondition) {
+				case 'wetfloor':
+					eqEnergy += 0.5;
+					break;
+				case 'hotcoals':
+					energy += 2;
+					break;
+				case 'permafrost':
+					energy -= 2;
+					break;
+				case 'beamfield':
+					energy += 0.5;
+					break;
+				case 'stormcell':
+					energy -= 0.5;
+					break;
+				}
 			}
-		}
+		);
 
-		const roomArray = this.battle.field.pseudoWeather;
-		for (const room in roomArray) {
-			switch (room) {
-			case 'hadalzone':
-				energy -= 1;
-				break;
-			case 'stickysituation':
-				eqEnergy -= 1;
-				break;
-			case 'rankandfile':
-				energy -= 1;
-				break;
+		Object.keys(this.battle.field.pseudoWeather).forEach(
+			room => {
+				switch (room) {
+				case 'hadalzone':
+					energy -= 1;
+					break;
+				case 'stickysituation':
+					eqEnergy -= 1;
+					break;
+				case 'rankandfile':
+					energy -= 1;
+					break;
+				}
 			}
-		}
+		);
 
-		const volStatArray = this.volatiles;
-		for (const volStat in volStatArray) {
-			switch(volStat) {
-			case 'hbond':
-				energy -= 1.5;
-				break;
-			case 'shrinkwrap':
-				energy -= 1;
-				break;
-			case 'fireworks':
-				energy += 2.5;
-				break;
-			case 'fastforward':
-				energy += 1;
-				break;
-			case 'pause':
-				energy -= 1;
-				break;
-			case 'partiallytrapped':
-				energy -= 0.5;
-				break;
-			case 'depthvanish':
-				energy -= 1.5;
-				break;
+		Object.keys(this.volatiles).forEach(
+			volatile => {
+				switch (volatile) {
+				case 'hbond':
+					energy -= 1.5;
+					break;
+				case 'shrinkwrap':
+					energy -= 1;
+					break;
+				case 'fireworks':
+					energy += 2.5;
+					break;
+				case 'fastforward':
+					energy += 1;
+					break;
+				case 'pause':
+					energy -= 1;
+					break;
+				case 'partiallytrapped':
+					energy -= 0.5;
+					break;
+				case 'depthvanish':
+					energy -= 1.5;
+					break;
+				}
 			}
-		}
+		);
 
-		const slotCondArray = this.side.slotConditions;
-		for (const slotCond in slotCondArray) {
-			switch(slotCond) {
-			case 'accelerate':
-				energy += 1.5;
-				break;
+		Object.keys(this.side.slotConditions[this.position]).forEach(
+			slotCondition => {
+				switch (slotCondition) {
+				case 'accelerate':
+					energy += 1.5;
+					break;
+				}
 			}
-		}
+		);
 
 		if (eqEnergy) {
 			if (energy > 0) {
 				energy -= eqEnergy;
+				if (energy < 0) energy = 0;
 			} else {
 				energy += eqEnergy;
+				if (energy > 0) energy = 0;
 			}
 		}
 
