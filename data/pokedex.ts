@@ -2727,9 +2727,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		muMove: "Ascend",
 	},
-	yellomattersolid: {
+	yellomatter: {
 		num: -475,
-		name: "Yellomatter-Solid",
+		name: "Yellomatter",
 		baseSpecies: "Yellomatter",
 		forme: "Mu",
 		types: ["Temperature", "Yellow"],

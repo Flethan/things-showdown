@@ -2636,7 +2636,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let forme = '';
 			if (energy >= 3) forme = 'Yellomatter-Plasma';
 			else if (energy >= 1) forme = 'Yellomatter-Gas';
-			else if (energy < -1) forme = 'Yellomatter-Solid';
+			else if (energy < -1) forme = 'Yellomatter';
 			else forme = 'Yellomatter-Liquid';
 
 			if (pokemon.baseSpecies.baseSpecies === 'Yellomatter' && pokemon.species.name !== forme) {
@@ -2644,7 +2644,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				let stat1 = 0;
 				let stat2 = 0;
 				switch (pokemon.species.name) {
-				case 'Yellomatter-Solid':
+				case 'Yellomatter':
 					stat1 = pokemon.boosts.def;
 					boosts.def = -pokemon.boosts.def;
 					stat2 = pokemon.boosts.atk;
@@ -2671,7 +2671,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 
 				switch (forme) {
-				case 'Yellomatter-Solid':
+				case 'Yellomatter':
 					boosts.def = stat1;
 					boosts.atk = stat2;
 					break;
