@@ -26,8 +26,6 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
-import { consoleips } from "../config/config-example";
-
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
