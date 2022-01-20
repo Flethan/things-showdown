@@ -2639,7 +2639,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			else if (energy < -1) forme = 'Yellomatter';
 			else forme = 'Yellomatter-Liquid';
 
-			if (pokemon.baseSpecies.name === 'Yellomatter' && pokemon.species.name !== forme) {
+			if (pokemon.baseSpecies.baseSpecies === 'yellomatter' && pokemon.species.name !== forme) {
 				let stat1 = 0;
 				let stat2 = 0;
 				switch (pokemon.species.name) {
@@ -2647,21 +2647,29 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					stat1 = pokemon.boosts.def;
 					stat2 = pokemon.boosts.atk;
 					pokemon.setBoost({atk: 0, def: 0});
+					this.add('-setboost', pokemon, 'def', 0, '[silent]');
+					this.add('-setboost', pokemon, 'atk', 0, '[silent]');
 					break;
 				case 'Yellomatter-Liquid':
 					stat1 = pokemon.boosts.atk;
 					stat2 = pokemon.boosts.spd;
 					pokemon.setBoost({atk: 0, spd: 0});
+					this.add('-setboost', pokemon, 'atk', 0, '[silent]');
+					this.add('-setboost', pokemon, 'spd', 0, '[silent]');
 					break;
 				case 'Yellomatter-Gas':
 					stat1 = pokemon.boosts.spd;
 					stat2 = pokemon.boosts.spa;
 					pokemon.setBoost({spa: 0, spd: 0});
+					this.add('-setboost', pokemon, 'spd', 0, '[silent]');
+					this.add('-setboost', pokemon, 'spa', 0, '[silent]');
 					break;
 				case 'Yellomatter-Plasma':
 					stat1 = pokemon.boosts.spa;
 					stat2 = pokemon.boosts.spe;
 					pokemon.setBoost({spa: 0, spe: 0});
+					this.add('-setboost', pokemon, 'spa', 0, '[silent]');
+					this.add('-setboost', pokemon, 'spe', 0, '[silent]');
 					break;
 				}
 

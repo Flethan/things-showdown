@@ -509,7 +509,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	gun: {
 		name: "Gun",
-		spritenum:802,
+		spritenum: 802,
 		fling: {
 			basePower: 40,
 		},
