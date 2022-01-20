@@ -1833,7 +1833,9 @@ export class BattleActions {
 
 		pokemon.formeChange(speciesid, pokemon.baseSpecies, true, forcedSpeciesId ? 'forced' : 'symbol');
 
-		if (pokemon.name !== pokemon.baseSpecies.name && !hadNickname) this.battle.add('-name', pokemon, pokemon.baseSpecies.name);
+		if (pokemon.name !== pokemon.baseSpecies.name && !hadNickname) {
+			this.battle.add('-name', pokemon, pokemon.baseSpecies.baseSpecies);
+		}
 
 		pokemon.baseMaxhp = Math.floor(Math.floor(
 			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100

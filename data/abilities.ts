@@ -2639,7 +2639,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			else if (energy < -1) forme = 'Yellomatter';
 			else forme = 'Yellomatter-Liquid';
 
-			if (pokemon.baseSpecies.baseSpecies === 'yellomatter' && pokemon.species.name !== forme) {
+			if (pokemon.baseSpecies.baseSpecies === 'Yellomatter' && pokemon.species.name !== forme) {
 				let stat1 = 0;
 				let stat2 = 0;
 				switch (pokemon.species.name) {
