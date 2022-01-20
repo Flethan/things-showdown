@@ -2641,7 +2641,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			else if (energy >= 1) forme = 'Yellomatter-Liquid';
 			else forme = 'Yellomatter';
 
-			if (pokemon.species.name !== forme)	this.actions.runSymbolEvo(pokemon, forme);
+			if (pokemon.species.name !== forme)	{
+				if (pokemon.species.forme === 'Infinite') {
+					pokemon.addType('', true);
+					this.add('-start', pokemon, 'typeadd', '', '[silent]');
+				}
+				if (pokemon.species.forme === 'Element') {
+					pokemon.removeElementType('Liquid');
+					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+				}
+				this.actions.runSymbolEvo(pokemon, forme);
+			}
 		},
 		isPermanent: true,
 		name: "Phase Shift",
