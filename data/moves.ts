@@ -4484,7 +4484,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {snatch: 1},
 		onPrepareHit(pokemon) {
-			if (pokemon.getEnergyValue() > -1) return false;
+			if (pokemon.getEnergyValue() >= -1) return false;
 		},
 		onHit(pokemon) {
 			const energy = Math.trunc(pokemon.getEnergyValue());
