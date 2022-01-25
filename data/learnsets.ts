@@ -3457,6 +3457,24 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fullpowerstrike: ["8L75"],
 		},
 	},
+	stellet: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
+	duveless: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
+	firmamina: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {

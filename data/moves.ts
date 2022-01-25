@@ -2822,6 +2822,65 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {evasion: 1}},
 		contestType: "Beautiful",
 	},
+	stellaromen: {
+		num: 1601,
+		accuracy: 110,
+		basePower: 50,
+		category: "Special",
+		isNonstandard: "ThingInf",
+		name: "Stellar Omen",
+		pp: 3,
+		priority: 0,
+		flags: {},
+		onHit(target) {
+			const nature = target.getNature().name;
+
+			switch(nature) {
+			case('brave'):
+			case('naughty'):
+				break;
+			case('bold'):
+			case('docile'):
+				break;
+			case('quirky'):
+			case('rash'):
+				break;
+			case('modest'):
+			case('timid'):
+				break;
+			case('hasty'):
+			case('lax'):
+				break;
+			case('quiet'):
+			case('careful'):
+			case('serious'):
+				break;
+			case('calm'):
+			case('bashful'):
+				break;
+			case('sassy'):
+			case('lonely'):
+				break;
+			case('impish'):
+			case('jolly'):
+				break;
+			case('adamant'):
+			case('hardy'):
+				break;
+			case('naive'):
+			case('mild'):
+				break;
+			case('relaxed'):
+			case('gentle'):
+				break;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		zMove: {boost: {spa: 1}},
+		contestType: "Clever",
+	},
 
 	// No
 	banish: {

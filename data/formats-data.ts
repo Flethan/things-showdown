@@ -776,6 +776,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	stellet: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	duveless: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	firmamina: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	oraxeed: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	// BASE GAME
 	bulbasaur: {
 		tier: "LC",

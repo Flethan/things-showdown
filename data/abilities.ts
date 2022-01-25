@@ -2708,6 +2708,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 1229,
 	},
+	astralprojection: {
+		isNonstandard: "Thing",
+		onBeforeMove(pokemon, target, move) {
+			if (!move.banishedUsable) {
+				move.banishedUsable = true;
+			}
+		},
+		name: "Astral Projection",
+		rating: 5,
+		num: 1229,
+	},
 
 	// BASE GAME
 	noability: {
