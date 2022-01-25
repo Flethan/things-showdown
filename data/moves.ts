@@ -2832,46 +2832,159 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 3,
 		priority: 0,
 		flags: {},
-		onHit(target) {
+		onUseMoveMessage(pokemon, target, move) {
+			this.hint(`Channelling ${move.channelling}!`);
+		},
+		onHit(target, source, move) {
+			if(!target.hp) return;
 			const nature = target.getNature().name;
 
 			switch(nature) {
 			case('brave'):
 			case('naughty'):
+				move.channelling = 'Aries';
+				this.boost({atk: 6}, target);
+				target.addVolatile('perishsong');
+				target.volatiles['perishsong'].duration = 2;
 				break;
 			case('bold'):
 			case('docile'):
+				move.channelling = 'Taurus';
+				target.cureStatus();
+				target.addVolatile('trapped');
 				break;
 			case('quirky'):
 			case('rash'):
+				move.channelling = 'Gemini';
+			const possibleTypes = [];
+				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
+				for (const type of this.dex.types.names()) {
+					if (skippedTypes.includes(type)) continue;
+					possibleTypes.push(type);
+				}
+				if (!possibleTypes.length) return false;
+				while (possibleTypes.length > 2) {
+					possibleTypes.splice(Math.floor(Math.random() * possibleTypes.length), 1);
+				}
+				this.add('-start', target, 'typechange', possibleTypes.join('/'), '[from] move: Stellar Omen');
+				target.setType(possibleTypes);
+				target.setStatus('fluctuant');
 				break;
 			case('modest'):
 			case('timid'):
+				move.channelling = 'Cancer';
+				if (!target.volatiles['pause'] && !target.volatiles['fastforward']) {
+					const action = this.queue.willMove(target);
+					if (action) {
+						this.queue.cancelMove(target);
+						this.add('-activate', target, 'move: Fast Forward');
+						this.actions.useMove(action.move, target);
+					}
+
+					if (target.volatiles['dynamax']) return false;
+					const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
+					const moves = [];
+					for (const moveSlot of target.moveSlots) {
+						const moveid = moveSlot.id;
+						if (!moveid) continue;
+						const move = this.dex.moves.get(moveid);
+						if (bannedMoves.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+							continue;
+						}
+						moves.push(moveid);
+					}
+
+					for (let i = 0; i < 2; i++) {
+						let randomMove = '';
+						if (moves.length) randomMove = this.sample(moves);
+						if (!randomMove) break;
+						this.actions.useMove(randomMove, target);
+					}
+
+					target.addVolatile('fastforward');
+				}
+				target.setStatus('banished');
 				break;
 			case('hasty'):
 			case('lax'):
+				move.channelling = 'Leo';
+				target.setAbility('Colossal');
+				target.setStatus('prone');
 				break;
 			case('quiet'):
 			case('careful'):
 			case('serious'):
+				move.channelling = 'Virgo';
+				target.side.addSideCondition('voidtrap');
+				target.addVolatile('pause');
+				target.addVolatile('calibration');
 				break;
 			case('calm'):
 			case('bashful'):
+				move.channelling = 'Libra';
+				target.setAbility('Inert');
+				target.clearBoosts();
 				break;
 			case('sassy'):
 			case('lonely'):
+				move.channelling = 'Scorpio';
+				const items = Object.keys(this.dex.data.Items);
+
+				if (!target.item) {
+					if (target.hp <= target.maxhp / 4 || target.maxhp === 1) { // Shedinja clause
+						return false;
+					}
+					this.directDamage(target.maxhp / 4);
+				} else {
+					const old_item = target.getItem();
+					target.setItem('');
+					target.lastItem = old_item.id;
+					target.usedItemThisTurn = true;
+				}
+
+				let item = '';
+				do {
+					item = this.sample(items);
+				} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
+
+				this.add('-item', target, this.dex.items.get(item), '[from] move: Transmute');
+				target.setItem(item);
+				target.addVolatile('pheromonemark');
 				break;
 			case('impish'):
 			case('jolly'):
+				move.channelling = 'Sagittarius';
+				target.setStatus('distanced');
+				this.runEvent('DragOut', source, target, move);
+				target.forceSwitchFlag = true;
 				break;
 			case('adamant'):
 			case('hardy'):
+				move.channelling = 'Capricorn';
+				this.field.setWeather('timedilation');
+				this.field.addPseudoWeather('timeloop');
 				break;
 			case('naive'):
 			case('mild'):
+				move.channelling = 'Aquarius';
+				this.field.setTerrain('sudscape');
+				target.side.addSideCondition('timecapsule');
 				break;
 			case('relaxed'):
 			case('gentle'):
+				move.channelling = 'Pisces';
+				target.addVolatile('hypnoticmelody');
+				let statName = 'atk';
+				let bestStat = 0;
+				let s: StatIDExceptHP;
+				for (s in target.storedStats) {
+					if (target.storedStats[s] > bestStat) {
+						statName = s;
+						bestStat = target.storedStats[s];
+					}
+				}
+				this.boost({[statName]: 1}, target);
+				this.boost({accuracy: -1}, target);
 				break;
 			}
 		},
