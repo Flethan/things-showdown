@@ -2841,6 +2841,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: -479,
 		name: "Oraxeed",
 		types: ["Night", "Far"],
+		forme: "Mu",
 		gender: "N",
 		baseStats: {hp: 99, atk: 44, def: 77, spa: 99, spd: 111, spe: 99},
 		abilities: {0: "No Ability"},
