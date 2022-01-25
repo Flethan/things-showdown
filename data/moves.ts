@@ -2840,21 +2840,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const nature = target.getNature().name;
 
 			switch(nature) {
-			case('brave'):
-			case('naughty'):
+			case('Brave'):
+			case('Naughty'):
 				move.channelling = 'Aries';
 				this.boost({atk: 6}, target);
 				target.addVolatile('perishsong');
 				target.volatiles['perishsong'].duration = 2;
 				break;
-			case('bold'):
-			case('docile'):
+			case('Bold'):
+			case('Docile'):
 				move.channelling = 'Taurus';
 				target.cureStatus();
 				target.addVolatile('trapped');
 				break;
-			case('quirky'):
-			case('rash'):
+			case('Quirky'):
+			case('Rash'):
 				move.channelling = 'Gemini';
 			const possibleTypes = [];
 				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
@@ -2870,8 +2870,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.setType(possibleTypes);
 				target.setStatus('fluctuant');
 				break;
-			case('modest'):
-			case('timid'):
+			case('Modest'):
+			case('Timid'):
 				move.channelling = 'Cancer';
 				if (!target.volatiles['pause'] && !target.volatiles['fastforward']) {
 					const action = this.queue.willMove(target);
@@ -2905,28 +2905,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				target.setStatus('banished');
 				break;
-			case('hasty'):
-			case('lax'):
+			case('Hasty'):
+			case('Lax'):
 				move.channelling = 'Leo';
 				target.setAbility('Colossal');
 				target.setStatus('prone');
 				break;
-			case('quiet'):
-			case('careful'):
-			case('serious'):
+			case('Quiet'):
+			case('Careful'):
+			case('Serious'):
 				move.channelling = 'Virgo';
 				target.side.addSideCondition('voidtrap');
 				target.addVolatile('pause');
 				target.addVolatile('calibration');
 				break;
-			case('calm'):
-			case('bashful'):
+			case('Calm'):
+			case('Bashful'):
 				move.channelling = 'Libra';
 				target.setAbility('Inert');
 				target.clearBoosts();
 				break;
-			case('sassy'):
-			case('lonely'):
+			case('Sassy'):
+			case('Lonely'):
 				move.channelling = 'Scorpio';
 				const items = Object.keys(this.dex.data.Items);
 
@@ -2951,27 +2951,27 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.setItem(item);
 				target.addVolatile('pheromonemark');
 				break;
-			case('impish'):
-			case('jolly'):
+			case('Impish'):
+			case('Jolly'):
 				move.channelling = 'Sagittarius';
 				target.setStatus('distanced');
 				this.runEvent('DragOut', source, target, move);
 				target.forceSwitchFlag = true;
 				break;
-			case('adamant'):
-			case('hardy'):
+			case('Adamant'):
+			case('Hardy'):
 				move.channelling = 'Capricorn';
 				this.field.setWeather('timedilation');
 				this.field.addPseudoWeather('timeloop');
 				break;
-			case('naive'):
-			case('mild'):
+			case('Naive'):
+			case('Mild'):
 				move.channelling = 'Aquarius';
 				this.field.setTerrain('sudscape');
 				target.side.addSideCondition('timecapsule');
 				break;
-			case('relaxed'):
-			case('gentle'):
+			case('Relaxed'):
+			case('Gentle'):
 				move.channelling = 'Pisces';
 				target.addVolatile('hypnoticmelody');
 				let statName = 'atk';
