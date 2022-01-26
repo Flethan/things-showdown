@@ -2992,7 +2992,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				break;
 			case ('Sagittarius'):
 				target.setStatus('distanced');
-				this.runEvent('DragOut', source, target, move);
+				this.runEvent('DragOut', source, target, thisMove);
 				target.forceSwitchFlag = true;
 				break;
 			case ('Capricorn'):
