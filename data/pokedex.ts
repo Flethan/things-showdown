@@ -2844,7 +2844,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		forme: "Mu",
 		gender: "N",
 		baseStats: {hp: 99, atk: 44, def: 77, spa: 99, spd: 111, spe: 99},
-		abilities: {0: "No Ability"},
+		abilities: {0: "Unamenable"},
 		heightm: 99.9,
 		weightkg: 199.9,
 		color: "Black",

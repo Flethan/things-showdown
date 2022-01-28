@@ -1583,7 +1583,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if (ability.isNonstandard !== 'Thing' || ability.name === 'a81117y') continue;
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf') || ability.name === 'a81117y') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
@@ -2716,6 +2716,22 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		name: "Astral Projection",
+		rating: 5,
+		num: 1229,
+	},
+	unamenable: {
+		isNonstandard: "ThingInf",
+		onSetStatus(status, target, source, effect) {
+				this.debug('interrupting setStatus');
+				this.add('-activate', target, 'ability: Unamenable');
+				return null;
+		},
+		onTryAddVolatile(status, target, source, effect) {
+			this.add('-activate', target, 'ability: Unamenable');
+			return null;
+		},
+		isPermanent: true,
+		name: "Unamenable",
 		rating: 5,
 		num: 1229,
 	},
