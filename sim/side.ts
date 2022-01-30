@@ -461,7 +461,7 @@ export class Side {
 				}
 			}
 			if (!targetType && ['', 'symbol'].includes(megaDynaOrZ) && request.muMove) {
-				if (moveid === toID(request.muMove.move)) {
+				if (moveid === toID(request.muMove.id)) {
 					moveid = request.moves[0].id;
 					targetType = request.muMove.target;
 					megaDynaOrZ = 'symbol';
@@ -508,8 +508,8 @@ export class Side {
 
 		// Mu
 		// Is Symbol or will Symbol this turn.
-		const muMove = ((megaDynaOrZ === 'symbol' || pokemon.species.forme === 'Mu') && pokemon.species.muMove && moveid === request.moves[0].id) ?
-			this.battle.dex.moves.get(pokemon.species.muMove) : undefined;
+		const muMove = ((megaDynaOrZ === 'symbol' || pokemon.species.muMove) && request.muMove && moveid === request.moves[0].id) ?
+			this.battle.dex.moves.get(request.muMove.id) : undefined;
 
 		if (muMove) targetType = this.battle.dex.moves.get(muMove).target;
 

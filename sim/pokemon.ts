@@ -1124,6 +1124,18 @@ export class Pokemon {
 		return result;
 	}
 
+	getMuMove() {
+		let muMove: Move | undefined;
+		if (this.species.muMove) {
+			muMove = this.battle.dex.moves.get(this.species.muMove);
+		} else if (this.species.evos) {
+			for (const evo of this.species.evos) {
+				if (this.battle.dex.species.get(evo).muMove) muMove = this.battle.dex.moves.get(this.battle.dex.species.get(evo).muMove);
+			}
+		}
+		return muMove ? {move: muMove.name, id: muMove.id, target: muMove.target, disabled: this.muPP <= 0} : undefined;
+	}
+
 	getMoveRequestData() {
 		let lockedMove = this.getLockedMove();
 
@@ -1143,7 +1155,7 @@ export class Pokemon {
 			trapped?: boolean,
 			maybeTrapped?: boolean,
 			canSymbolEvo?: boolean,
-			muMove?: {move: string, target: MoveTarget, disabled?: boolean},
+			muMove?: {move: string, id: string, target: MoveTarget, disabled?: boolean},
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
 			canZMove?: AnyObject | null,
@@ -1171,10 +1183,7 @@ export class Pokemon {
 
 		if (!lockedMove) {
 			if (this.canSymbolEvo) data.canSymbolEvo = true;
-			if (data.canSymbolEvo || this.species.muMove) {
-				const muMove = this.battle.dex.moves.get(this.species.muMove);
-				data.muMove = {move: muMove.name, target: muMove.target};
-			}
+			if (data.canSymbolEvo || this.species.muMove) data.muMove = this.getMuMove();
 			if (this.canMegaEvo) data.canMegaEvo = true;
 			if (this.canUltraBurst) data.canUltraBurst = true;
 			const canZMove = this.battle.actions.canZMove(this);

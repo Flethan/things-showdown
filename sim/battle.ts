@@ -2441,7 +2441,7 @@ export class Battle {
 			if (!action.pokemon.isActive) return false;
 			if (action.pokemon.fainted) return false;
 			this.actions.runMove(action.move, action.pokemon, action.targetLoc, action.sourceEffect,
-				action.zmove, undefined, action.maxMove, action.originalTarget);
+				action.zmove, undefined, action.maxMove, action.originalTarget, action.muMove);
 			break;
 		case 'symbolEvo':
 			this.actions.runSymbolEvo(action.pokemon);

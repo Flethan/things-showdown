@@ -264,7 +264,7 @@ export class BattleActions {
 		} else if (maxMove) {
 			move = this.getActiveMaxMove(baseMove, pokemon);
 		} else if (muMove) {
-			move = this.getActiveMuMove(baseMove, pokemon);
+			move = this.getActiveMuMove(baseMove, pokemon, muMove);
 		}
 
 		move.isExternal = externalMove;
@@ -302,7 +302,7 @@ export class BattleActions {
 			lockedMove = this.battle.runEvent('LockMove', pokemon);
 			if (lockedMove === true) lockedMove = false;
 			if (!lockedMove) {
-				if (muMove) {
+				if (muMove && (move.id !== 'struggle')) {
 					if (pokemon.muPP <= 0) {
 						this.battle.add('cant', pokemon, 'nopp', move);
 						this.battle.clearActiveMove(true);
@@ -334,7 +334,7 @@ export class BattleActions {
 			this.battle.add('-zpower', pokemon);
 			pokemon.side.zMoveUsed = true;
 		}
-		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove, muMove);
 		this.battle.lastSuccessfulMoveThisTurn = moveDidSomething ? this.battle.activeMove && this.battle.activeMove.id : null;
 		if (this.battle.activeMove) move = this.battle.activeMove;
 		this.battle.singleEvent('AfterMove', move, null, pokemon, target, move);
@@ -381,17 +381,17 @@ export class BattleActions {
 	 */
 	useMove(
 		move: Move | string, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string, maxMove?: string, muMove?: string
 	) {
 		pokemon.moveThisTurnResult = undefined;
 		const oldMoveResult: boolean | null | undefined = pokemon.moveThisTurnResult;
-		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove, maxMove, muMove);
 		if (oldMoveResult === pokemon.moveThisTurnResult) pokemon.moveThisTurnResult = moveResult;
 		return moveResult;
 	}
 	useMoveInner(
 		moveOrMoveName: Move | string, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string, maxMove?: string, muMove?: string
 	) {
 		if (!sourceEffect && this.battle.effect.id) sourceEffect = this.battle.effect;
 		if (sourceEffect && ['instruct', 'custapberry'].includes(sourceEffect.id)) sourceEffect = null;
@@ -414,6 +414,9 @@ export class BattleActions {
 		}
 		if (maxMove || (move.category !== 'Status' && sourceEffect && (sourceEffect as ActiveMove).isMax)) {
 			move = this.getActiveMaxMove(move, pokemon);
+		}
+		if (muMove) {
+			move = this.getActiveMuMove(move, pokemon, muMove);
 		}
 
 		if (this.battle.activeMove) {
@@ -1475,10 +1478,10 @@ export class BattleActions {
 		return maxMove;
 	}
 
-	getActiveMuMove(move: Move, pokemon: Pokemon) {
+	getActiveMuMove(move: Move, pokemon: Pokemon, muMove: string) {
 		if (typeof move === 'string') move = this.dex.getActiveMove(move);
 		if (move.name === 'Struggle') return this.dex.getActiveMove(move);
-		return this.dex.getActiveMove(pokemon.species.muMove!);
+		return this.dex.getActiveMove(muMove);
 	}
 
 	runZPower(move: ActiveMove, pokemon: Pokemon) {
