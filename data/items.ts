@@ -571,6 +571,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart(pokemon) {
 			pokemon.addType('Green');
+			this.add('-start', pokemon, 'typeadd', 'Green', '[from] item: Green Shirt');
 		},
 		onResidual(pokemon) {
 			if (pokemon.addedType !== 'Green') {
@@ -589,6 +590,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onStart(pokemon) {
 			pokemon.addType('Yellow');
+			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] item: Yellow Shirt');
 		},
 		onResidual(pokemon) {
 			if (pokemon.addedType !== 'Yellow') {

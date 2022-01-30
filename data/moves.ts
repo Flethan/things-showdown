@@ -2886,7 +2886,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				move.channelling = 'Pisces';
 				break;
 			default:
-				move.channelling = '';
+				move.channelling = 'Libra';
 			}
 		},
 		onUseMoveMessage(pokemon, target, move) {

@@ -185,6 +185,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (move.category === 'Status')	pokemon.cureStatus();
 			else this.add('-activate', pokemon, 'prone');
 		},
+		onSwitchOut(pokemon) {
+			pokemon.cureStatus();
+		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 	banished: {
@@ -242,7 +245,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy, target, source, move) {
-			if (typeof accuracy === 'number' || source.getItem().name !== 'Eyeball') {
+			if (typeof accuracy === 'number' && source.getItem().name !== 'Eyeball') {
 				return this.chainModify(0.75);
 			}
 		},
