@@ -36,7 +36,7 @@ export interface MoveAction {
 	moveid: ID;
 	/** a move to use (move action only) */
 	move: Move;
-	/** true if evolving into an infinity, element, or nothing evo */
+	/** true if evolving into an mu, infinite, element, or null evo */
 	symbol: boolean | 'done';
 	/** true if megaing or ultra bursting */
 	mega: boolean | 'done';
@@ -44,6 +44,8 @@ export interface MoveAction {
 	zmove?: string;
 	/** if dynamaxed, the name of the max move */
 	maxMove?: string;
+	/** if mu forme, the name of the mu move */
+	muMove?: string;
 	/** effect that called the move (eg Instruct) if any */
 	sourceEffect?: Effect | null;
 }

@@ -62,6 +62,8 @@ export class Pokemon {
 	readonly baseMoveSlots: MoveSlot[];
 	moveSlots: MoveSlot[];
 
+	muPP: number;
+
 	hpType: string;
 	hpPower: number;
 
@@ -335,6 +337,7 @@ export class Pokemon {
 				used: false,
 			});
 		}
+		this.muPP = 3;
 
 		this.position = 0;
 		this.details = this.species.name + (this.level === 100 ? '' : ', L' + this.level) +
@@ -1140,6 +1143,7 @@ export class Pokemon {
 			trapped?: boolean,
 			maybeTrapped?: boolean,
 			canSymbolEvo?: boolean,
+			muMove?: {move: string, target: MoveTarget, disabled?: boolean},
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
 			canZMove?: AnyObject | null,
@@ -1167,6 +1171,10 @@ export class Pokemon {
 
 		if (!lockedMove) {
 			if (this.canSymbolEvo) data.canSymbolEvo = true;
+			if (data.canSymbolEvo || this.species.muMove) {
+				const muMove = this.battle.dex.moves.get(this.species.muMove);
+				data.muMove = {move: muMove.name, target: muMove.target};
+			}
 			if (this.canMegaEvo) data.canMegaEvo = true;
 			if (this.canUltraBurst) data.canUltraBurst = true;
 			const canZMove = this.battle.actions.canZMove(this);
