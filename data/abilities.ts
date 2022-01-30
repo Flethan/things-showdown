@@ -2237,16 +2237,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, target);
+				this.boost({def: -1}, target, target, this.effect, true);
+				this.add('-activate', target, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, target);
+				this.boost({spd: -1}, target, target, this.effect, true);
+				this.add('-activate', target, 'ability: Colossal');
 			}
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, target);
+				this.boost({def: -1}, target, source, this.effect, true);
+				this.add('-activate', source, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, target);
+				this.boost({spd: -1}, target, source, this.effect, true);
+				this.add('-activate', source, 'ability: Colossal');
 			}
 		},
 		onSwitchOut(pokemon) {
