@@ -4127,15 +4127,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 			onFoeRedirectTargetPriority: 2,
 			onFoeRedirectTarget(target, source, source2, move) {
-
-				if (this.gameType === 'multi' || this.gameType === 'freeforall') {
+				if (this.gameType === 'freeforall') {
 				
 				} else {
 					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
 						let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
-						if (positionOffset === positionOffsetFoe) {
+						let positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						if (positionLetter === positionLetterFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
 								return foe;
@@ -4147,15 +4148,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 			onRedirectTargetPriority: 2,
 			onRedirectTarget(target, source, source2, move) {
-				const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
-
-				for (const foe of source.foes()) {
-					if (!foe?.isActive || foe === source) return;
-					let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
-					if (positionOffset === positionOffsetFoe) {
-						if (this.validTarget(foe, source, move.target)) {
-							this.debug("Rank and File redirected target of move");
-							return foe;
+				if (this.gameType === 'freeforall') {
+				
+				} else {
+					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						let positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						if (positionLetter === positionLetterFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
 						}
 					}
 				}
