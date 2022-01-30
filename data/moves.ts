@@ -2954,7 +2954,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.setStatus('banished');
 				break;
 			case ('Leo'):
-				target.setAbility('Colossal');
+				target.setAbility('colossal');
 				target.setStatus('prone');
 				break;
 			case ('Virgo'):
@@ -2963,7 +2963,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.addVolatile('calibration');
 				break;
 			case ('Libra'):
-				target.setAbility('Inert');
+				target.setAbility('inert');
 				target.clearBoosts();
 				break;
 			case ('Scorpio'):

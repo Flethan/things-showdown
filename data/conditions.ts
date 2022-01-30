@@ -242,7 +242,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy, target, source, move) {
-			if (typeof accuracy === 'number') {
+			if (typeof accuracy === 'number' || source.getItem().name !== 'Eyeball') {
 				return this.chainModify(0.75);
 			}
 		},
