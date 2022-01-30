@@ -26,6 +26,8 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
+import { Pokemon } from "../sim";
+
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
@@ -931,13 +933,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.hasType('Green')) return;
+			if (pokemon.hasType('Green') || this.field.getTerrain().id === 'greenground') return;
 			this.add('-fail', pokemon, 'move: Deciduous Blast');
 			this.attrLastMove('[still]');
 			return null;
 		},
 		self: {
 			onHit(pokemon) {
+				if(this.field.getTerrain().id === 'greenground') {
+					this.field.clearTerrain();
+					return;
+				}
 				if (!pokemon.hasType('Green')) return;
 				if (pokemon.addedType === 'Green') {
 					if (!pokemon.addType('')) return false;
@@ -968,7 +974,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
 			let count = pokemon.getTypes(false, true).filter(type => type === 'Green').length;
-			if (this.field.getTerrain().id === 'greenfloor') count++;
+			if (this.field.getTerrain().id === 'greenground') count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -995,7 +1001,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
 			let count = this.getAllActive().reduce((total, active) => total + active.getTypes(false, true).filter(type => type === 'Green').length, 0);
-			if (this.field.getTerrain().id === 'greenfloor') count++;
+			if (this.field.getTerrain().id === 'greenground') count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -1028,6 +1034,51 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Green",
 		contestType: "Cool",
+	},
+	greenground: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Green Ground",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'greenground',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Green' && !defender.isSemiInvulnerable()) {
+					this.debug('greenground boost');
+					return this.chainModify(1.2);
+				}
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Green Ground', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Green Ground');
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Green Ground');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Liquid",
+		zMove: {boost: {spd: 1}},
+		contestType: "Cute",
 	},
 
 	// H
@@ -1693,21 +1744,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, source, target) {
-			if (target.hasType('Green')) {
+			if (target.hasType('Green') || this.field.getTerrain().id === 'greenground') {
 				return this.chainModify(2);
 			}
 		},
 		onHit(pokemon) {
+			if(this.field.getTerrain().id === 'greenground') {
+				this.field.clearTerrain();
+				return;
+			}
 			if (!pokemon.hasType('Green')) return;
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Prune');
 			} else {
 				let types = pokemon.getTypes(true);
 				types.splice(types.indexOf('Green'), 1);
 				if (!types.length) types = ['???'];
 				pokemon.setType(types);
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
 			}
 		},
 		secondary: null,
@@ -4069,6 +4124,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFieldRestart(target, source, effect) {
 				if (this.effectState.duration > 0 || (effect?.effectType === 'Move' && effect.wargamesBoosted)) this.field.removePseudoWeather('rankandfile');
 			},
+
+			onFoeRedirectTargetPriority: 2,
+			onFoeRedirectTarget(target, source, source2, move) {
+
+				if (this.gameType === 'multi' || this.gameType === 'freeforall') {
+				
+				} else {
+					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						if (positionOffset === positionOffsetFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				}
+			},
+
+			onRedirectTargetPriority: 2,
+			onRedirectTarget(target, source, source2, move) {
+				const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+
+				for (const foe of source.foes()) {
+					if (!foe?.isActive || foe === source) return;
+					let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+					if (positionOffset === positionOffsetFoe) {
+						if (this.validTarget(foe, source, move.target)) {
+							this.debug("Rank and File redirected target of move");
+							return foe;
+						}
+					}
+				}
+			},
+
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Rank and File');
 			},
