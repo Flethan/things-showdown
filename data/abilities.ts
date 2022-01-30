@@ -574,9 +574,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		onEnd(pokemon) {
-			if (pokemon.baseSpecies.baseSpecies !== 'Lemon') {
-				pokemon.formeChange(pokemon.baseSpecies);
-			} else if (pokemon.hp && !pokemon.beingCalledBack && !pokemon.switchFlag && !pokemon.forceSwitchFlag) {
+			if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !(pokemon.beingCalledBack || pokemon.switchFlag || pokemon.forceSwitchFlag)) {
 				this.actions.runSymbolEvo(pokemon, '<empty>');
 			}
 		},
@@ -2155,7 +2153,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (move.category === 'Physical') {
 					this.boost({atk: 2});
 				} else if (move.category === 'Special') {
-					this.boost({atk: 2});
+					this.boost({spa: 2});
 				}
 			}
 		},
@@ -2246,9 +2244,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, source);
+				this.boost({def: -1}, target, target);
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, source);
+				this.boost({spd: -1}, target, target);
 			}
 		},
 		onSwitchOut(pokemon) {
@@ -2722,9 +2720,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	unamenable: {
 		isNonstandard: "ThingInf",
 		onSetStatus(status, target, source, effect) {
-				this.debug('interrupting setStatus');
-				this.add('-activate', target, 'ability: Unamenable');
-				return null;
+			this.debug('interrupting setStatus');
+			this.add('-activate', target, 'ability: Unamenable');
+			return null;
 		},
 		onTryAddVolatile(status, target, source, effect) {
 			this.add('-activate', target, 'ability: Unamenable');
