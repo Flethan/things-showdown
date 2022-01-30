@@ -26,8 +26,6 @@ sound: Has no effect on Pokemon with the Soundproof Ability.
 
 */
 
-import { Pokemon } from "../sim";
-
 export const Moves: {[moveid: string]: MoveData} = {
 	// NEW STUFF
 
@@ -940,7 +938,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		self: {
 			onHit(pokemon) {
-				if(this.field.getTerrain().id === 'greenground') {
+				if (this.field.getTerrain().id === 'greenground') {
 					this.field.clearTerrain();
 					return;
 				}
@@ -1749,7 +1747,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit(pokemon) {
-			if(this.field.getTerrain().id === 'greenground') {
+			if (this.field.getTerrain().id === 'greenground') {
 				this.field.clearTerrain();
 				return;
 			}
@@ -4124,18 +4122,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFieldRestart(target, source, effect) {
 				if (this.effectState.duration > 0 || (effect?.effectType === 'Move' && effect.wargamesBoosted)) this.field.removePseudoWeather('rankandfile');
 			},
-
 			onFoeRedirectTargetPriority: 2,
 			onFoeRedirectTarget(target, source, source2, move) {
 				if (this.gameType === 'freeforall') {
-				
 				} else {
 					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
 					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
-						let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
-						let positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						const positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						const positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
 						if (positionLetter === positionLetterFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
@@ -4145,18 +4141,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 			},
-
 			onRedirectTargetPriority: 2,
 			onRedirectTarget(target, source, source2, move) {
 				if (this.gameType === 'freeforall') {
-				
 				} else {
 					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
 					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
-						let positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
-						let positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						const positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						const positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
 						if (positionLetter === positionLetterFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
