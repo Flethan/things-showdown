@@ -125,6 +125,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return false;
 		},
 	},
+	fastforwarding: {
+		name: 'fastforwarding',
+		noCopy: true,
+		duration: 1,
+	},
 	delayedmove: {
 		// this is a slot condition
 		name: 'delayedmove',

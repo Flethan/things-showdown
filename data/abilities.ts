@@ -389,7 +389,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onFoeTryMove(target, source, move) {
 			const targetAllExceptions = ['perishsong', 'flowershield', 'rototiller'];
-			if (move.target === 'foeSide' || (move.target === 'all' && !targetAllExceptions.includes(move.id))) {
+			if (move.target === 'foeSide' || source.volatiles['fastforwarding'] || (move.target === 'all' && !targetAllExceptions.includes(move.id))) {
 				return;
 			}
 			if (['windy'].includes(target.effectiveWeather()) && move.type === 'Weather' && move.priority <= 1.5) return;

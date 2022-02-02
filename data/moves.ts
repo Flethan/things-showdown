@@ -2976,33 +2976,37 @@ export const Moves: {[moveid: string]: MoveData} = {
 			case ('Cancer'):
 				if (!target.volatiles['pause'] && !target.volatiles['fastforward']) {
 					const action = this.queue.willMove(target);
-					if (action) {
-						this.queue.cancelMove(target);
-						this.add('-activate', target, 'move: Fast Forward');
-						this.actions.useMove(action.move, target);
-					}
-
-					if (target.volatiles['dynamax']) return false;
-					const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
-					const moves = [];
-					for (const moveSlot of target.moveSlots) {
-						const moveid = moveSlot.id;
-						if (!moveid) continue;
-						const move = this.dex.moves.get(moveid);
-						if (bannedMoves.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
-							continue;
+					target.addVolatile('fastforwarding');
+					if (target.volatiles['fastforwarding']) {
+						if (action) {
+							this.queue.cancelMove(target);
+							this.add('-activate', target, 'move: Fast Forward');
+							this.actions.useMove(action.move, target);
 						}
-						moves.push(moveid);
-					}
 
-					for (let i = 0; i < 2; i++) {
-						let randomMove = '';
-						if (moves.length) randomMove = this.sample(moves);
-						if (!randomMove) break;
-						this.actions.useMove(randomMove, target);
-					}
+						if (target.volatiles['dynamax']) return false;
+						const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
+						const moves = [];
+						for (const moveSlot of target.moveSlots) {
+							const moveid = moveSlot.id;
+							if (!moveid) continue;
+							const move = this.dex.moves.get(moveid);
+							if (bannedMoves.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+								continue;
+							}
+							moves.push(moveid);
+						}
 
-					target.addVolatile('fastforward');
+						for (let i = 0; i < 2; i++) {
+							let randomMove = '';
+							if (moves.length) randomMove = this.sample(moves);
+							if (!randomMove) break;
+							this.actions.useMove(randomMove, target);
+						}
+
+						target.removeVolatile('fastforwarding');
+						target.addVolatile('fastforward');
+					}
 				}
 				target.setStatus('banished');
 				break;
@@ -5164,6 +5168,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTry(source, target, move) {
 			if (target.volatiles['pause']) return false;
 			if (target.volatiles['fastforward']) return false;
+			target.addVolatile('fastforwarding');
+			if (!target.volatiles['fastforwarding']) return false;
 		},
 		onHit(target, source) {
 			const action = this.queue.willMove(target);
@@ -5193,6 +5199,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.actions.useMove(randomMove, target);
 			}
 
+			target.removeVolatile('fastforwarding');
 			target.addVolatile('fastforward');
 		},
 		secondary: null,
