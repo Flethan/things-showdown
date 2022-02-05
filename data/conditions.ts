@@ -125,6 +125,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return false;
 		},
 	},
+	fastforwarding: {
+		name: 'fastforwarding',
+		noCopy: true,
+		duration: 1,
+	},
 	delayedmove: {
 		// this is a slot condition
 		name: 'delayedmove',
@@ -185,6 +190,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (move.category === 'Status')	pokemon.cureStatus();
 			else this.add('-activate', pokemon, 'prone');
 		},
+		onSwitchOut(pokemon) {
+			pokemon.cureStatus();
+		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 	banished: {
@@ -242,7 +250,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy, target, source, move) {
-			if (typeof accuracy === 'number') {
+			if (typeof accuracy === 'number' && source.getItem().name !== 'Eyeball') {
 				return this.chainModify(0.75);
 			}
 		},
@@ -586,7 +594,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 				this.add('-weather', 'Windy');
 			}
 			this.hint("Stat changes to speed are ignored while it is windy!");
-			// Done in pokemon.js
+		},
+		onAnyModifyBoost(boosts, pokemon) {
+			if (!pokemon.hasAbility('windsurfer')) {
+				boosts['spe'] = 0;
+			}
 		},
 		onModifyPriority(priority, pokemon, target, move) {
 			if (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) return priority + 1;

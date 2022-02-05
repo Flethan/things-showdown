@@ -244,7 +244,7 @@ export class BattleActions {
 	 */
 	runMove(
 		moveOrMoveName: Move | string, pokemon: Pokemon, targetLoc: number, sourceEffect?: Effect | null,
-		zMove?: string, externalMove?: boolean, maxMove?: string, originalTarget?: Pokemon
+		zMove?: string, externalMove?: boolean, maxMove?: string, originalTarget?: Pokemon, muMove?: string
 	) {
 		pokemon.activeMoveActions++;
 		let target = this.battle.getTarget(pokemon, maxMove || zMove || moveOrMoveName, targetLoc, originalTarget);
@@ -263,6 +263,8 @@ export class BattleActions {
 			move = this.getActiveZMove(baseMove, pokemon);
 		} else if (maxMove) {
 			move = this.getActiveMaxMove(baseMove, pokemon);
+		} else if (muMove) {
+			move = this.getActiveMuMove(baseMove, pokemon, muMove);
 		}
 
 		move.isExternal = externalMove;
@@ -300,7 +302,16 @@ export class BattleActions {
 			lockedMove = this.battle.runEvent('LockMove', pokemon);
 			if (lockedMove === true) lockedMove = false;
 			if (!lockedMove) {
-				if (!pokemon.deductPP(baseMove, null, target) && (move.id !== 'struggle')) {
+				if (muMove && (move.id !== 'struggle')) {
+					if (pokemon.muPP <= 0) {
+						this.battle.add('cant', pokemon, 'nopp', move);
+						this.battle.clearActiveMove(true);
+						pokemon.moveThisTurnResult = false;
+						return;
+					} else {
+						pokemon.muPP--;
+					}
+				} else if (!pokemon.deductPP(baseMove, null, target) && (move.id !== 'struggle')) {
 					this.battle.add('cant', pokemon, 'nopp', move);
 					this.battle.clearActiveMove(true);
 					pokemon.moveThisTurnResult = false;
@@ -323,7 +334,7 @@ export class BattleActions {
 			this.battle.add('-zpower', pokemon);
 			pokemon.side.zMoveUsed = true;
 		}
-		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveDidSomething = this.useMove(baseMove, pokemon, target, sourceEffect, zMove, maxMove, muMove);
 		this.battle.lastSuccessfulMoveThisTurn = moveDidSomething ? this.battle.activeMove && this.battle.activeMove.id : null;
 		if (this.battle.activeMove) move = this.battle.activeMove;
 		this.battle.singleEvent('AfterMove', move, null, pokemon, target, move);
@@ -370,17 +381,17 @@ export class BattleActions {
 	 */
 	useMove(
 		move: Move | string, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string, maxMove?: string, muMove?: string
 	) {
 		pokemon.moveThisTurnResult = undefined;
 		const oldMoveResult: boolean | null | undefined = pokemon.moveThisTurnResult;
-		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove, maxMove);
+		const moveResult = this.useMoveInner(move, pokemon, target, sourceEffect, zMove, maxMove, muMove);
 		if (oldMoveResult === pokemon.moveThisTurnResult) pokemon.moveThisTurnResult = moveResult;
 		return moveResult;
 	}
 	useMoveInner(
 		moveOrMoveName: Move | string, pokemon: Pokemon, target?: Pokemon | null,
-		sourceEffect?: Effect | null, zMove?: string, maxMove?: string
+		sourceEffect?: Effect | null, zMove?: string, maxMove?: string, muMove?: string
 	) {
 		if (!sourceEffect && this.battle.effect.id) sourceEffect = this.battle.effect;
 		if (sourceEffect && ['instruct', 'custapberry'].includes(sourceEffect.id)) sourceEffect = null;
@@ -403,6 +414,9 @@ export class BattleActions {
 		}
 		if (maxMove || (move.category !== 'Status' && sourceEffect && (sourceEffect as ActiveMove).isMax)) {
 			move = this.getActiveMaxMove(move, pokemon);
+		}
+		if (muMove) {
+			move = this.getActiveMuMove(move, pokemon, muMove);
 		}
 
 		if (this.battle.activeMove) {
@@ -621,6 +635,9 @@ export class BattleActions {
 				} else {
 					if (!move.spreadHit) this.battle.attrLastMove('[miss]');
 					this.battle.add('-miss', pokemon, target);
+					if (this.battle.field.terrain === 'sudscape') {
+						pokemon.trySetStatus('prone');
+					}
 				}
 			}
 		}
@@ -1461,6 +1478,12 @@ export class BattleActions {
 		return maxMove;
 	}
 
+	getActiveMuMove(move: Move, pokemon: Pokemon, muMove: string) {
+		if (typeof move === 'string') move = this.dex.getActiveMove(move);
+		if (move.name === 'Struggle') return this.dex.getActiveMove(move);
+		return this.dex.getActiveMove(muMove);
+	}
+
 	runZPower(move: ActiveMove, pokemon: Pokemon) {
 		const zPower = this.dex.conditions.get('zpower');
 		if (move.category !== 'Status') {
@@ -1807,15 +1830,15 @@ export class BattleActions {
 		if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
 				const evoCondition = this.dex.species.get(evo).evoCondition;
-				if (evoCondition === 'Infinite' || evoCondition === 'Element' || evoCondition === 'Null' || evoCondition === 'Mu') {
+				if (evoCondition === 'Symbol') {
 					return evo;
 				}
 			}
 		}
 	}
 
-	runSymbolEvo(pokemon: Pokemon) {
-		const speciesid = pokemon.canSymbolEvo;
+	runSymbolEvo(pokemon: Pokemon, forcedSpeciesId?: string | Species) {
+		const speciesid = forcedSpeciesId ?? pokemon.canSymbolEvo;
 		if (!speciesid) return false;
 
 		// Pokémon affected by Sky Drop cannot symbol evolve. Enforce it here for now.
@@ -1825,23 +1848,28 @@ export class BattleActions {
 			}
 		}
 
-		pokemon.formeChange(speciesid, pokemon.baseSpecies, false);
-		pokemon.setAbility(this.dex.species.get(speciesid).abilities['0'], null, true);
+		const hasNickname = (this.dex.species.get(pokemon.set.species).baseSpecies !== pokemon.set.name);
+		const newSpecies = this.dex.species.get(speciesid);
+		if (pokemon.name !== newSpecies.baseSpecies && !hasNickname) {
+			this.battle.add('-name', pokemon, newSpecies.baseSpecies);
+		}
+
+		const oldBaseMaxhp = pokemon.baseMaxhp;
+
+		pokemon.formeChange(speciesid, pokemon.baseSpecies, true, forcedSpeciesId ? 'forced' : 'symbol');
 
 		pokemon.baseMaxhp = Math.floor(Math.floor(
 			2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100
 		) * pokemon.level / 100 + 10);
-		pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
+		if (!forcedSpeciesId) pokemon.hp = pokemon.baseMaxhp - (pokemon.maxhp - pokemon.hp);
+		else pokemon.hp = pokemon.baseMaxhp * (pokemon.hp / oldBaseMaxhp);
+		pokemon.hp = this.battle.clampIntRange(pokemon.hp, 1, pokemon.baseMaxhp);
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		const evoCondition = this.dex.species.get(speciesid).evoCondition;
+		/* const symbolType = this.dex.species.get(speciesid).forme;
 
-		if (evoCondition === 'Null') {
-			pokemon.addType('', true);
-			pokemon.clearElementTypes();
-		}
-		if (evoCondition === 'Mu') {
+		if (symbolType === 'Mu') {
 			const muMove = this.dex.moves.get(pokemon.species.muMove);
 			const newMove = {
 				move: muMove.name,
@@ -1852,14 +1880,23 @@ export class BattleActions {
 				disabled: false,
 				used: false,
 			};
-			pokemon.moveSlots[0] = newMove;
-		}
 
-		// Limit one symbol evolution
-		const wasSymbol = pokemon.canSymbolEvo;
-		for (const ally of pokemon.side.pokemon) {
-			if (wasSymbol) {
-				ally.canSymbolEvo = null;
+			let action = this.battle.queue.willMove(pokemon);
+			if(action && action.moveid === pokemon.moveSlots[0].id) {
+				action.move = this.dex.moves.get(pokemon.species.muMove);
+				action.moveid = newMove.id;
+				this.battle.queue.changeAction(pokemon, action);
+			}
+			pokemon.moveSlots[0] = newMove;
+		} */
+
+		// Limit one symbol evolution, don't count forced evos: Lemon -> Empty, Yellomatter's Phase Change
+		if (!forcedSpeciesId) {
+			const wasSymbol = pokemon.canSymbolEvo;
+			for (const ally of pokemon.side.pokemon) {
+				if (wasSymbol) {
+					ally.canSymbolEvo = null;
+				}
 			}
 		}
 

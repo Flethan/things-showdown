@@ -39,6 +39,7 @@ export interface ChosenAction {
 	mega?: boolean | null; // true if megaing or ultra bursting
 	zmove?: string; // if zmoving, the name of the zmove
 	maxMove?: string; // if dynamaxed, the name of the max move
+	muMove?: string; // if mu symbol, the name of the mu move
 	priority?: number; // priority of the action
 }
 
@@ -459,6 +460,13 @@ export class Side {
 					}
 				}
 			}
+			if (!targetType && ['', 'symbol'].includes(megaDynaOrZ) && request.muMove) {
+				if (moveid === toID(request.muMove.id)) {
+					moveid = request.moves[0].id;
+					targetType = request.muMove.target;
+					megaDynaOrZ = 'symbol';
+				}
+			}
 			if (!targetType) {
 				return this.emitChoiceError(`Can't move: Your ${pokemon.name} doesn't have a move matching ${moveid}`);
 			}
@@ -497,6 +505,13 @@ export class Side {
 		}
 
 		if (maxMove) targetType = this.battle.dex.moves.get(maxMove).target;
+
+		// Mu
+		// Is Symbol or will Symbol this turn.
+		const muMove = ((megaDynaOrZ === 'symbol' || pokemon.species.muMove) && request.muMove && moveid === request.moves[0].id) ?
+			this.battle.dex.moves.get(request.muMove.id) : undefined;
+
+		if (muMove) targetType = this.battle.dex.moves.get(muMove).target;
 
 		// Validate targetting
 
@@ -538,6 +553,11 @@ export class Side {
 			// Dynamaxed; only Taunt and Assault Vest disable Max Guard, but the base move must have PP remaining
 			if (pokemon.maxMoveDisabled(move)) {
 				return this.emitChoiceError(`Can't move: ${pokemon.name}'s ${maxMove.name} is disabled`);
+			}
+		} else if (muMove) {
+			// Has a muMove, checks if pokemon has muPP
+			if (pokemon.muPP <= 0) {
+				return this.emitChoiceError(`Can't move: ${pokemon.name} is out of muPP`);
 			}
 		} else if (!zMove) {
 			// Check for disabled moves
@@ -585,7 +605,7 @@ export class Side {
 		if (symbol && !pokemon.canSymbolEvo) {
 			return this.emitChoiceError(`Can't move: ${pokemon.name} can't symbol evolve`);
 		}
-		if (symbol && this.choice.mega) {
+		if (symbol && this.choice.symbol) {
 			return this.emitChoiceError(`Can't move: You can only symbol-evolve once per battle`);
 		}
 
@@ -630,6 +650,7 @@ export class Side {
 			symbol: symbol,
 			mega: mega || ultra,
 			zmove: zMove,
+			muMove: muMove ? muMove.id : undefined,
 			maxMove: maxMove ? maxMove.id : undefined,
 		});
 

@@ -86,9 +86,9 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Communal",
 		shortDesc: "Allies with Communal have 1.5x attack and special attack.",
 	},
-	compartmentalization: {
-		name: "Compartmentalization",
-		shortDesc: "When this Thing lands an attack, gain the target's types as ∈ types.",
+	compartments: {
+		name: "Compartments",
+		shortDesc: "When this Thing lands an attack, it gains the target's types as ∈ types.",
 	},
 	competitivemirror: {
 		name: "Competitive Mirror",
@@ -102,8 +102,8 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		name: "Connection",
 		shortDesc: "Allies deal 1.2x damage.",
 	},
-	conservationalism: {
-		name: "Conservationalism",
+	composting: {
+		name: "Composting",
 		shortDesc: "On switch-in, all Things gain Green-type as an ∈ type.",
 	},
 	cumulate: {

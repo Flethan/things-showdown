@@ -931,36 +931,27 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.hasType('Green')) return;
+			if (pokemon.hasType('Green') || this.field.getTerrain().id === 'greenground') return;
 			this.add('-fail', pokemon, 'move: Deciduous Blast');
 			this.attrLastMove('[still]');
 			return null;
 		},
 		self: {
 			onHit(pokemon) {
+				if (this.field.getTerrain().id === 'greenground') {
+					this.field.clearTerrain();
+					return;
+				}
 				if (!pokemon.hasType('Green')) return;
 				if (pokemon.addedType === 'Green') {
 					if (!pokemon.addType('')) return false;
-					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+					this.add('-start', pokemon, 'typeadd', '', '[from] move: Deciduous Blast');
 				} else {
 					let types = pokemon.getTypes(true);
-					const newTypes = [];
-					let skip = false;
-					for (const type of types) {
-						if (type === 'Green' && !skip) {
-							skip = true;
-							continue;
-						}
-						newTypes.push(type);
-					}
+					types.splice(types.indexOf('Green'), 1);
 					if (!types.length) types = ['???'];
-					const addedType = pokemon.addedType;
-					pokemon.setType(newTypes);
+					pokemon.setType(types);
 					this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
-					if (addedType) {
-						if (!pokemon.addType(addedType)) return false;
-						this.add('-start', pokemon, 'typeadd', addedType);
-					}
 				}
 			},
 		},
@@ -981,7 +972,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
 			let count = pokemon.getTypes(false, true).filter(type => type === 'Green').length;
-			if (this.field.getTerrain().id === 'greenfloor') count++;
+			if (this.field.getTerrain().id === 'greenground') count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -1008,7 +999,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
 			let count = this.getAllActive().reduce((total, active) => total + active.getTypes(false, true).filter(type => type === 'Green').length, 0);
-			if (this.field.getTerrain().id === 'greenfloor') count++;
+			if (this.field.getTerrain().id === 'greenground') count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -1041,6 +1032,51 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Green",
 		contestType: "Cool",
+	},
+	greenground: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Green Ground",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'greenground',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onBasePowerPriority: 6,
+			onBasePower(basePower, attacker, defender, move) {
+				if (move.type === 'Green' && !defender.isSemiInvulnerable()) {
+					this.debug('greenground boost');
+					return this.chainModify(1.2);
+				}
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Green Ground', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Green Ground');
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Green Ground');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Liquid",
+		zMove: {boost: {spd: 1}},
+		contestType: "Cute",
 	},
 
 	// H
@@ -1513,7 +1549,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		boosts: {
 			spe: 1,
 		},
-		slotCondition: 'Accelerate',
+		slotCondition: 'accelerate',
 		condition: {
 			duration: 2,
 			onResidualOrder: 4,
@@ -1706,34 +1742,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, source, target) {
-			if (target.hasType('Green')) {
+			if (target.hasType('Green') || this.field.getTerrain().id === 'greenground') {
 				return this.chainModify(2);
 			}
 		},
 		onHit(pokemon) {
+			if (this.field.getTerrain().id === 'greenground') {
+				this.field.clearTerrain();
+				return;
+			}
 			if (!pokemon.hasType('Green')) return;
 			if (pokemon.addedType === 'Green') {
 				if (!pokemon.addType('')) return false;
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Prune');
 			} else {
 				let types = pokemon.getTypes(true);
-				const newTypes = [];
-				let skip = false;
-				for (const type of types) {
-					if (type === 'Green' && !skip) {
-						skip = true;
-						continue;
-					}
-					newTypes.push(type);
-				}
+				types.splice(types.indexOf('Green'), 1);
 				if (!types.length) types = ['???'];
-				const addedType = pokemon.addedType;
-				pokemon.setType(newTypes);
-				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Deciduous Blast');
-				if (addedType) {
-					if (!pokemon.addType(addedType)) return false;
-					this.add('-start', pokemon, 'typeadd', addedType);
-				}
+				pokemon.setType(types);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Prune');
 			}
 		},
 		secondary: null,
@@ -2848,6 +2875,213 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {evasion: 1}},
 		contestType: "Beautiful",
 	},
+	stellaromen: {
+		num: 1601,
+		accuracy: 110,
+		basePower: 50,
+		category: "Special",
+		isNonstandard: "ThingInf",
+		name: "Stellar Omen",
+		pp: 3,
+		priority: 0,
+		flags: {},
+		onModifyMove(move, pokemon, target) {
+			const nature = target?.getNature().name;
+
+			switch (nature) {
+			case ('Brave'):
+			case ('Naughty'):
+				move.channelling = 'Aries';
+				break;
+			case ('Bold'):
+			case ('Docile'):
+				move.channelling = 'Taurus';
+				break;
+			case ('Quirky'):
+			case ('Rash'):
+				move.channelling = 'Gemini';
+				break;
+			case ('Modest'):
+			case ('Timid'):
+				move.channelling = 'Cancer';
+				break;
+			case ('Hasty'):
+			case ('Lax'):
+				move.channelling = 'Leo';
+				break;
+			case ('Quiet'):
+			case ('Careful'):
+			case ('Serious'):
+				move.channelling = 'Virgo';
+				break;
+			case ('Calm'):
+			case ('Bashful'):
+				move.channelling = 'Libra';
+				break;
+			case ('Sassy'):
+			case ('Lonely'):
+				move.channelling = 'Scorpio';
+				break;
+			case ('Impish'):
+			case ('Jolly'):
+				move.channelling = 'Sagittarius';
+				break;
+			case ('Adamant'):
+			case ('Hardy'):
+				move.channelling = 'Capricorn';
+				break;
+			case ('Naive'):
+			case ('Mild'):
+				move.channelling = 'Aquarius';
+				break;
+			case ('Relaxed'):
+			case ('Gentle'):
+				move.channelling = 'Pisces';
+				break;
+			default:
+				move.channelling = 'Libra';
+			}
+		},
+		onUseMoveMessage(pokemon, target, move) {
+			this.hint(`Channelling ${move.channelling}!`);
+		},
+		onHit(target, source, thisMove) {
+			if (!target.hp) return;
+
+			switch (thisMove.channelling) {
+			case ('Aries'):
+				this.boost({atk: 6}, target);
+				target.addVolatile('perishsong');
+				target.volatiles['perishsong'].duration = 2;
+				break;
+			case ('Taurus'):
+				target.cureStatus();
+				target.addVolatile('trapped');
+				break;
+			case ('Gemini'):
+				const possibleTypes = [];
+				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
+				for (const type of this.dex.types.names()) {
+					if (skippedTypes.includes(type)) continue;
+					possibleTypes.push(type);
+				}
+				if (!possibleTypes.length) return false;
+				while (possibleTypes.length > 2) {
+					possibleTypes.splice(Math.floor(Math.random() * possibleTypes.length), 1);
+				}
+				this.add('-start', target, 'typechange', possibleTypes.join('/'), '[from] move: Stellar Omen');
+				target.setType(possibleTypes);
+				target.setStatus('fluctuant');
+				break;
+			case ('Cancer'):
+				if (!target.volatiles['pause'] && !target.volatiles['fastforward']) {
+					const action = this.queue.willMove(target);
+					target.addVolatile('fastforwarding');
+					if (target.volatiles['fastforwarding']) {
+						if (action) {
+							this.queue.cancelMove(target);
+							this.add('-activate', target, 'move: Fast Forward');
+							this.actions.useMove(action.move, target);
+						}
+
+						if (target.volatiles['dynamax']) return false;
+						const bannedMoves = ['openturn', 'fastforward', 'pause', 'replay'];
+						const moves = [];
+						for (const moveSlot of target.moveSlots) {
+							const moveid = moveSlot.id;
+							if (!moveid) continue;
+							const move = this.dex.moves.get(moveid);
+							if (bannedMoves.includes(moveid) || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+								continue;
+							}
+							moves.push(moveid);
+						}
+
+						for (let i = 0; i < 2; i++) {
+							let randomMove = '';
+							if (moves.length) randomMove = this.sample(moves);
+							if (!randomMove) break;
+							this.actions.useMove(randomMove, target);
+						}
+
+						target.removeVolatile('fastforwarding');
+						target.addVolatile('fastforward');
+					}
+				}
+				target.setStatus('banished');
+				break;
+			case ('Leo'):
+				target.setAbility('colossal');
+				target.setStatus('prone');
+				break;
+			case ('Virgo'):
+				target.side.addSideCondition('voidtrap');
+				target.addVolatile('pause');
+				target.addVolatile('calibration');
+				break;
+			case ('Libra'):
+				target.setAbility('inert');
+				target.clearBoosts();
+				break;
+			case ('Scorpio'):
+				const items = Object.keys(this.dex.data.Items);
+
+				if (!target.item) {
+					if (target.hp <= target.maxhp / 4 || target.maxhp === 1) { // Shedinja clause
+						return false;
+					}
+					this.directDamage(target.maxhp / 4);
+				} else {
+					const old_item = target.getItem();
+					target.setItem('');
+					target.lastItem = old_item.id;
+					target.usedItemThisTurn = true;
+				}
+
+				let item = '';
+				do {
+					item = this.sample(items);
+				} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
+
+				this.add('-item', target, this.dex.items.get(item), '[from] move: Transmute');
+				target.setItem(item);
+				target.addVolatile('pheromonemark');
+				break;
+			case ('Sagittarius'):
+				target.setStatus('distanced');
+				this.runEvent('DragOut', source, target, thisMove);
+				target.forceSwitchFlag = true;
+				break;
+			case ('Capricorn'):
+				this.field.setWeather('timedilation');
+				this.field.addPseudoWeather('timeloop');
+				break;
+			case ('Aquarius'):
+				this.field.setTerrain('sudscape');
+				target.side.addSideCondition('timecapsule');
+				break;
+			case ('Pisces'):
+				target.addVolatile('hypnoticmelody');
+				let statName = 'atk';
+				let bestStat = 0;
+				let s: StatIDExceptHP;
+				for (s in target.storedStats) {
+					if (target.storedStats[s] > bestStat) {
+						statName = s;
+						bestStat = target.storedStats[s];
+					}
+				}
+				this.boost({[statName]: 1}, target);
+				this.boost({accuracy: -1}, target);
+				break;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		zMove: {boost: {spa: 1}},
+		contestType: "Clever",
+	},
 
 	// No
 	banish: {
@@ -3688,6 +3922,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (attacker.removeVolatile(move.id)) {
 				return;
 			}
+			this.add('-prepare', attacker, move.name);
 			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
 				return;
 			}
@@ -3891,6 +4126,91 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFieldRestart(target, source, effect) {
 				if (this.effectState.duration > 0 || (effect?.effectType === 'Move' && effect.wargamesBoosted)) this.field.removePseudoWeather('rankandfile');
 			},
+			onFoeRedirectTargetPriority: 2,
+			onFoeRedirectTarget(target, source, source2, move) {
+				if (this.gameType === 'freeforall') {
+					const positionIndex = source.side.n > 1;
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionIndexFoe = foe.side.n > 1;
+						if (positionIndex === positionIndexFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				} else if (this.gameType === 'multi') {
+					const positionIndex = source.side.n % 3 > 0;
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionIndexFoe = foe.side.n % 3 > 0;	
+						if (positionIndex === positionIndexFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				} else {
+					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						const positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						if (positionLetter === positionLetterFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				}
+			},
+			onRedirectTargetPriority: 2,
+			onRedirectTarget(target, source, source2, move) {
+				if (this.gameType === 'freeforall') {
+					const positionIndex = source.side.n > 1;
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionIndexFoe = foe.side.n > 1;	
+						if (positionIndex === positionIndexFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				} else if (this.gameType === 'multi') {
+					const positionIndex = source.side.n % 3 > 0;
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionIndexFoe = foe.side.n % 3 > 0;	
+						if (positionIndex === positionIndexFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				} else {
+					const positionOffset = Math.floor(source.side.n / 2) * source.side.active.length;
+					const positionLetter = 'abcdef'.charAt(source.position + positionOffset);
+					for (const foe of source.foes()) {
+						if (!foe?.isActive || foe === source) return;
+						const positionOffsetFoe = Math.floor(foe.side.n / 2) * foe.side.active.length;
+						const positionLetterFoe = 'fedcba'.charAt(6 - foe.side.active.length + foe.position + positionOffsetFoe);
+						if (positionLetter === positionLetterFoe) {
+							if (this.validTarget(foe, source, move.target)) {
+								this.debug("Rank and File redirected target of move");
+								return foe;
+							}
+						}
+					}
+				}
+			},
+
 			onFieldEnd() {
 				this.add('-fieldend', 'move: Rank and File');
 			},
@@ -3931,6 +4251,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cute",
+	},
+	myman: {
+		num: 1241,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "My Man",
+		pp: 3,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1, authentic: 1},
+		secondary: null,
+		onHit(target, source) {
+			const boostSource: SparseBoostsTable = {};
+			const boostTarget: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in source.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				const statDiff = source.boosts[statPlus] - target.boosts[statPlus];
+				if (statDiff < 0) {
+					boostSource[statPlus] = Math.abs(statDiff);
+				} else if (statDiff > 0) {
+					boostTarget[statPlus] = statDiff;
+				}
+			}
+			this.boost(boostSource, source);
+			this.boost(boostTarget, target);
+		},
+		target: "normal",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Tough",
 	},
 
 	// Sword
@@ -4190,7 +4542,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		// },
 		onModifyMove(move, pokemon, target) {
 			if (!move.critRatio) move.critRatio = 0;
-			move.critRatio += pokemon.boosts.atk
+			move.critRatio += pokemon.boosts.atk;
 		},
 		onAfterMoveSecondarySelf(pokemon, target, move) {
 			if (target.getMoveHitData(move).crit) {
@@ -4464,6 +4816,34 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Temperature",
 		contestType: "Cute",
 	},
+	crystallize: {
+		num: -2761,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "Crystallize",
+		pp: 3,
+		priority: 0,
+		flags: {snatch: 1},
+		onPrepareHit(pokemon) {
+			if (pokemon.getEnergyValue() >= -1) return false;
+		},
+		onHit(pokemon) {
+			const energy = Math.trunc(pokemon.getEnergyValue());
+
+			if (energy < -1) {
+				this.boost({atk: -energy - 1, def: -energy});
+			} else if (energy < 0) {
+				this.boost({def: -energy});
+			}
+		},
+		secondary: null,
+		target: "self",
+		type: "Temperature",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// Time
 	gravebite: {
@@ -4643,35 +5023,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			onStart(source) {
 				let success = false;
+				const pendingBoosts: BoostsTable = {...source.boosts};
 				let statName: BoostID;
-				for (statName in source.boosts) {
-					const stage = source.boosts[statName];
-					if (stage !== 0) {
-						success = true;
-					}
+				for (statName in pendingBoosts) {
+					if (pendingBoosts[statName]) success = true;
+					else delete pendingBoosts[statName];
 				}
+
 				if (success) {
-					this.effectState.passedBoosts = {...source.boosts};
+					this.effectState.passedBoosts = {...pendingBoosts};
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
+				} else {
+					source.side.removeSlotCondition(source, 'timecapsule');
 				}
 			},
 			onRestart(target, source) {
-				const boosts: BoostsTable = {...this.effectState.passedBoosts};
 				let success = false;
+				const pendingBoosts: BoostsTable = {...source.boosts};
 				let statName: BoostID;
-				for (statName in source.boosts) {
-					const stage = source.boosts[statName];
+				for (statName in pendingBoosts) {
+					const stage = this.effectState.passedBoosts[statName];
 					if (stage !== 0) {
-						success = true;
-						boosts[statName] += stage;
-						boosts[statName] = Math.min(Math.max(boosts[statName], -6), 6);
+						pendingBoosts[statName] += stage;
+						pendingBoosts[statName] = Math.min(Math.max(pendingBoosts[statName], -6), 6);
 					}
+					if (pendingBoosts[statName] !== stage) {
+						success = true;
+					}
+					if (!pendingBoosts[statName]) delete pendingBoosts[statName];
 				}
 				if (success) {
-					this.effectState.passedBoosts = {...boosts};
+					this.effectState.passedBoosts = {...pendingBoosts};
 					this.add('-clearboost', source, '[from] move: Time Capsule');
 					source.clearBoosts();
+					if (!this.effectState.passedBoosts.keys().length) {
+						source.side.removeSlotCondition(source, 'timecapsule');
+					}
 				}
 			},
 			onSwap(target) {
@@ -4815,7 +5203,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	fastforward: {
 		num: -276,
-		accuracy: true,
+		accuracy: 80,
 		basePower: 0,
 		category: "Status",
 		isNonstandard: "Thing",
@@ -4826,6 +5214,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onTry(source, target, move) {
 			if (target.volatiles['pause']) return false;
 			if (target.volatiles['fastforward']) return false;
+			target.addVolatile('fastforwarding');
+			if (!target.volatiles['fastforwarding']) return false;
 		},
 		onHit(target, source) {
 			const action = this.queue.willMove(target);
@@ -4855,6 +5245,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.actions.useMove(randomMove, target);
 			}
 
+			target.removeVolatile('fastforwarding');
 			target.addVolatile('fastforward');
 		},
 		secondary: null,
@@ -5113,6 +5504,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Tough",
+	},
+	ascend: {
+		num: 1119,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "Ascend",
+		pp: 3,
+		priority: 0,
+		flags: {charge: 1, gravity: 1, distance: 1},
+		onTryMove(attacker, defender, move) {
+			if (attacker.removeVolatile(move.id)) {
+				this.boost({spa: 1, spe: 1}, attacker);
+				return;
+			}
+			// this.add('-prepare', attacker, move.name);
+			if (!this.runEvent('ChargeMove', attacker, defender, move)) {
+				this.boost({spa: 1, spe: 1}, attacker);
+				return;
+			}
+			attacker.addVolatile('twoturnmove', defender);
+			return null;
+		},
+		condition: {
+			duration: 2,
+			onInvulnerability(target, source, move) {
+				if (['gust', 'twister', 'skyuppercut', 'thunder', 'hurricane', 'smackdown', 'thousandarrows'].includes(move.id)) {
+					return;
+				}
+				return false;
+			},
+			onSourceModifyDamage(damage, source, target, move) {
+				if (move.id === 'gust' || move.id === 'twister') {
+					return this.chainModify(2);
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Weather",
+		contestType: "Beautiful",
 	},
 
 	// Yellow

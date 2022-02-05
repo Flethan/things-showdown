@@ -29,7 +29,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	empty: {
-		isNonstandard: "ThingMeme",
+		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
 	triangl3: {
@@ -720,11 +720,11 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	serpeternal: {
+	serpiternal: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	serpextinction: {
+	serpixtinction: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
@@ -745,6 +745,50 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	hubantula: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	handhorse: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	myomolem: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	sudzerial: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	yellomatter: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	yellomattersolid: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	yellomattergas: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	yellomatterplasma: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	stellet: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	duveless: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	firmamina: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	oraxeed: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},

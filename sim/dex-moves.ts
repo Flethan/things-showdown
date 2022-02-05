@@ -316,6 +316,7 @@ export interface ActiveMove extends MutableMove {
 	totalDamage?: number | false;
 	willChangeForme?: boolean;
 	infiltrates?: boolean;
+	channelling?: string;
 
 	/**
 	 * Has this move been boosted by a Z-crystal or used by a Dynamax Pokemon? Usually the same as

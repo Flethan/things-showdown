@@ -509,7 +509,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	gun: {
 		name: "Gun",
-		spritenum:802,
+		spritenum: 802,
 		fling: {
 			basePower: 40,
 		},
@@ -518,6 +518,86 @@ export const Items: {[itemid: string]: ItemData} = {
 			pokemon.useItem();
 		},
 		num: -252,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	pocketradar: {
+		name: "Pocket Radar",
+		spritenum: 803,
+		fling: {
+			basePower: 40,
+		},
+		onAnyModifyBoost(boosts, pokemon) {
+			const user = this.effectState.target;
+			if (user === pokemon) return;
+			if (user === this.activePokemon && pokemon === this.activeTarget) {
+				if (boosts['evasion'] && boosts['evasion'] > 0) boosts['evasion'] = 0;
+			}
+		},
+		num: -253,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	genergy: {
+		name: "G Energy",
+		spritenum: 804,
+		fling: {
+			basePower: 100,
+		},
+		onStart(pokemon) {
+			pokemon.setAbility('colossal');
+			pokemon.useItem();
+		},
+		num: -254,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	eyeball: {
+		name: "Eyeball",
+		spritenum: 805,
+		fling: {
+			basePower: 20,
+		},
+		// handled in conditions.ts
+		num: -255,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	greenshirt: {
+		name: "Green Shirt",
+		spritenum: 806,
+		fling: {
+			basePower: 10,
+		},
+		onStart(pokemon) {
+			pokemon.addType('Green');
+			this.add('-start', pokemon, 'typeadd', 'Green', '[from] item: Green Shirt');
+		},
+		onResidual(pokemon) {
+			if (pokemon.addedType !== 'Green') {
+				pokemon.useItem();
+			}
+		},
+		num: -256,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	yellowshirt: {
+		name: "Yellow Shirt",
+		spritenum: 807,
+		fling: {
+			basePower: 10,
+		},
+		onStart(pokemon) {
+			pokemon.addType('Yellow');
+			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] item: Yellow Shirt');
+		},
+		onResidual(pokemon) {
+			if (pokemon.addedType !== 'Yellow') {
+				pokemon.useItem();
+			}
+		},
+		num: -257,
 		gen: 8,
 		isNonstandard: "Thing",
 	},

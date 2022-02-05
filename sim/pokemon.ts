@@ -62,6 +62,8 @@ export class Pokemon {
 	readonly baseMoveSlots: MoveSlot[];
 	moveSlots: MoveSlot[];
 
+	muPP: number;
+
 	hpType: string;
 	hpPower: number;
 
@@ -335,6 +337,7 @@ export class Pokemon {
 				used: false,
 			});
 		}
+		this.muPP = 3;
 
 		this.position = 0;
 		this.details = this.species.name + (this.level === 100 ? '' : ', L' + this.level) +
@@ -463,6 +466,147 @@ export class Pokemon {
 		this.hp = this.maxhp;
 	}
 
+	getEnergyValue() {
+		let energy = 0;
+		let eqEnergy = 0;
+
+		switch (this.status) {
+		case 'prone':
+			energy -= 0.5;
+			break;
+		case 'banished':
+			energy += 1;
+			break;
+		case 'pressurized':
+			energy -= 1;
+			break;
+		case 'fluctuant':
+			energy = energy + (this.battle.random() * 4) - 1;
+			break;
+		}
+
+		switch (this.battle.field.effectiveTerrain()) {
+		case 'spatialexpansion':
+			energy += 2;
+			break;
+		case 'sudscape':
+			eqEnergy += 0.5;
+			break;
+		}
+
+		switch (this.effectiveWeather()) {
+		case 'nigthtime':
+			energy -= 0.5;
+			break;
+		case 'hot':
+			energy += 1;
+			break;
+		case 'cold':
+			energy -= 1;
+			break;
+		case 'windy':
+			energy -= 0.5;
+			break;
+		case 'yellowish':
+			energy += 0.5;
+			break;
+		case 'underwater':
+			eqEnergy += 1;
+			break;
+		}
+
+		Object.keys(this.side.sideConditions).forEach(
+			sideCondition => {
+				switch (sideCondition) {
+				case 'wetfloor':
+					eqEnergy += 0.5;
+					break;
+				case 'hotcoals':
+					energy += 2;
+					break;
+				case 'permafrost':
+					energy -= 2;
+					break;
+				case 'beamfield':
+					energy += 0.5;
+					break;
+				case 'stormcell':
+					energy -= 0.5;
+					break;
+				}
+			}
+		);
+
+		Object.keys(this.battle.field.pseudoWeather).forEach(
+			room => {
+				switch (room) {
+				case 'hadalzone':
+					energy -= 1;
+					break;
+				case 'stickysituation':
+					eqEnergy -= 1;
+					break;
+				case 'rankandfile':
+					energy -= 1;
+					break;
+				}
+			}
+		);
+
+		Object.keys(this.volatiles).forEach(
+			volatile => {
+				switch (volatile) {
+				case 'hbond':
+					energy -= 1.5;
+					break;
+				case 'shrinkwrap':
+					energy -= 1;
+					break;
+				case 'fireworks':
+					energy += 2.5;
+					break;
+				case 'fastforward':
+					energy += 1;
+					break;
+				case 'pause':
+					energy -= 1;
+					break;
+				case 'partiallytrapped':
+					energy -= 0.5;
+					break;
+				case 'depthvanish':
+					energy -= 1.5;
+					break;
+				}
+			}
+		);
+
+		Object.keys(this.side.slotConditions[this.position]).forEach(
+			slotCondition => {
+				switch (slotCondition) {
+				case 'accelerate':
+					energy += 1.5;
+					break;
+				}
+			}
+		);
+
+		if (eqEnergy) {
+			if (energy > 0) {
+				energy -= eqEnergy;
+				if (energy < 0) energy = 0;
+			} else {
+				energy += eqEnergy;
+				if (energy > 0) energy = 0;
+			}
+		}
+
+		console.log('get energy - ');
+		console.log(energy);
+
+		return energy;
+	}
+
 	toJSON(): AnyObject {
 		return State.serializePokemon(this);
 	}
@@ -527,7 +671,6 @@ export class Pokemon {
 		const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
 		if (boost > 6) boost = 6;
 		if (boost < -6) boost = -6;
-		if (statName === 'spe' && this.battle.field.isWeather(['windy'])) boost = 0;
 		if (boost >= 0) {
 			stat = Math.floor(stat * boostTable[boost]);
 		} else {
@@ -557,7 +700,7 @@ export class Pokemon {
 		}
 
 		// stat boosts
-		if (!unboosted && !(statName === 'spe' && this.battle.field.isWeather(['windy']))) {
+		if (!unboosted) {
 			const boosts = this.battle.runEvent('ModifyBoost', this, null, null, {...this.boosts});
 			let boost = boosts[statName];
 			const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
@@ -981,6 +1124,18 @@ export class Pokemon {
 		return result;
 	}
 
+	getMuMove() {
+		let muMove: Move | undefined;
+		if (this.species.muMove) {
+			muMove = this.battle.dex.moves.get(this.species.muMove);
+		} else if (this.species.evos) {
+			for (const evo of this.species.evos) {
+				if (this.battle.dex.species.get(evo).muMove) muMove = this.battle.dex.moves.get(this.battle.dex.species.get(evo).muMove);
+			}
+		}
+		return muMove ? {move: muMove.name, id: muMove.id, target: muMove.target, disabled: this.muPP <= 0} : undefined;
+	}
+
 	getMoveRequestData() {
 		let lockedMove = this.getLockedMove();
 
@@ -1000,6 +1155,7 @@ export class Pokemon {
 			trapped?: boolean,
 			maybeTrapped?: boolean,
 			canSymbolEvo?: boolean,
+			muMove?: {move: string, id: string, target: MoveTarget, disabled?: boolean},
 			canMegaEvo?: boolean,
 			canUltraBurst?: boolean,
 			canZMove?: AnyObject | null,
@@ -1027,6 +1183,7 @@ export class Pokemon {
 
 		if (!lockedMove) {
 			if (this.canSymbolEvo) data.canSymbolEvo = true;
+			if (data.canSymbolEvo || this.species.muMove) data.muMove = this.getMuMove();
 			if (this.canMegaEvo) data.canMegaEvo = true;
 			if (this.canUltraBurst) data.canUltraBurst = true;
 			const canZMove = this.battle.actions.canZMove(this);
@@ -1254,7 +1411,11 @@ export class Pokemon {
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
 		species.elementTypes?.forEach((type: string) => this.addElementType(type));
-		if (species.addedType) this.addType(species.addedType);
+		if (species.addedType) this.addType(species.addedType, species.forme === 'Infinite');
+		if (species.forme === 'Null') {
+			this.addType('', true);
+			this.clearElementTypes();
+		}
 		this.knownType = true;
 		this.weighthg = species.weighthg;
 		this.heightdm = species.heightdm;
@@ -1307,7 +1468,10 @@ export class Pokemon {
 			this.details = species.name + (this.level === 100 ? '' : ', L' + this.level) +
 				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
 			this.battle.add('detailschange', this, (this.illusion || this).details);
-			if (source.effectType === 'Item') {
+			// Can't use evoCondition in case of Empty or Yellomatter formes
+			if (species.evoType === 'symbol') {
+				this.battle.add('-symbol', this, apparentSpecies, message);
+			} else if (source.effectType === 'Item') {
 				if (source.zMove) {
 					this.battle.add('-burst', this, apparentSpecies, species.requiredItem);
 					this.moveThisTurnResult = true; // Ultra Burst counts as an action for Truant
@@ -1340,6 +1504,14 @@ export class Pokemon {
 			this.setAbility(species.abilities['0'], null, true);
 			this.baseAbility = this.ability;
 		}
+
+		if (species.addedType) this.battle.add('-start', this, 'typeadd', this.addedType, '[silent]');
+		if (species.elementTypes?.length) this.battle.add('-start', this, 'elementtypes', this.elementTypes.join('/'), '[silent]');
+		if (species.forme === 'Null') {
+			this.battle.add('-start', this, 'typeadd', '', '[silent]');
+			this.battle.add('-start', this, 'elementtypes', '', '[silent]');
+		}
+
 		return true;
 	}
 
@@ -1923,7 +2095,7 @@ export class Pokemon {
 
 	/** Removes any types added previously and adds another one. Infinite and Null formes supress type adding. */
 	addType(newType: string, enforce = false) {
-		if (!enforce && ((this.species.forme === 'Infinite' && this.addedType === 'Infinity') || this.species.forme === 'Null')) return false;
+		if (!enforce && (this.species.forme === 'Infinite' || this.species.forme === 'Null')) return false;
 		this.addedType = newType;
 		return true;
 	}
@@ -1933,6 +2105,11 @@ export class Pokemon {
 		if (!enforce && this.species.forme === 'Null') return false;
 		if (this.elementTypes.includes(elementType)) return false;
 		this.elementTypes.push(elementType);
+		return true;
+	}
+
+	removeElementType(elementType: string) {
+		this.elementTypes = this.elementTypes.filter(type => type !== elementType);
 		return true;
 	}
 

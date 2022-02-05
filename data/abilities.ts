@@ -389,7 +389,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onFoeTryMove(target, source, move) {
 			const targetAllExceptions = ['perishsong', 'flowershield', 'rototiller'];
-			if (move.target === 'foeSide' || (move.target === 'all' && !targetAllExceptions.includes(move.id))) {
+			if (move.target === 'foeSide' || target.volatiles['fastforwarding'] || (move.target === 'all' && !targetAllExceptions.includes(move.id))) {
 				return;
 			}
 			if (['windy'].includes(target.effectiveWeather()) && move.type === 'Weather' && move.priority <= 1.5) return;
@@ -570,14 +570,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (pokemon.species.name !== 'Lemon') {
-				pokemon.formeChange('Lemon');
+				pokemon.formeChange('Lemon', this.effect);
 			}
 		},
 		onEnd(pokemon) {
-			if (pokemon.baseSpecies.baseSpecies !== 'Lemon' && pokemon.transformed) {
-				pokemon.formeChange(pokemon.set.species);
-			} else if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !pokemon.beingCalledBack && !pokemon.switchFlag) {
-				pokemon.formeChange('<empty>');
+			if (pokemon.baseSpecies.baseSpecies === 'Lemon' && pokemon.hp && !(pokemon.beingCalledBack || pokemon.switchFlag || pokemon.forceSwitchFlag)) {
+				this.actions.runSymbolEvo(pokemon, '<empty>');
 			}
 		},
 		name: "Lemon",
@@ -825,11 +823,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	windsurfer: {
 		isNonstandard: "Thing",
-		onModifySpe(spe, pokemon) {
-			if (['windy'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(2);
-			}
-		},
+		// Checked in conditions.js: windy.onAnyModifyBoost
 		name: "Wind Surfer",
 		rating: 3,
 		num: -125,
@@ -1075,7 +1069,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onUpdate(pokemon) {
 			if (pokemon.baseSpecies.baseSpecies !== 'Undulux' || pokemon.transformed) return;
-			let forme = null;
+			let forme = '';
 			switch (pokemon.effectiveWeather()) {
 			case 'hot':
 				if (pokemon.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
@@ -1092,7 +1086,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				target.transformed ||
 				['hot', 'cold'].includes(target.effectiveWeather())
 			) return;
-			let forme = null;
+			let forme = '';
 			if (move.category === 'Special' && target.species.id !== 'unduluxoverheated') forme = 'Undulux-Overheated';
 			if (target.isActive && forme) target.formeChange(forme, this.effect, false, '[msg]');
 		},
@@ -1587,7 +1581,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if (ability.isNonstandard !== 'Thing' || ability.name === 'a81117y') continue;
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf') || ability.name === 'a81117y') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
@@ -2159,7 +2153,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (move.category === 'Physical') {
 					this.boost({atk: 2});
 				} else if (move.category === 'Special') {
-					this.boost({atk: 2});
+					this.boost({spa: 2});
 				}
 			}
 		},
@@ -2243,16 +2237,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, target);
+				this.boost({def: -1}, target, target, this.effect, true);
+				this.add('-activate', target, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, target);
+				this.boost({spd: -1}, target, target, this.effect, true);
+				this.add('-activate', target, 'ability: Colossal');
 			}
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
-				this.boost({def: -1}, target, source);
+				this.boost({def: -1}, target, source, this.effect, true);
+				this.add('-activate', source, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, source);
+				this.boost({spd: -1}, target, source, this.effect, true);
+				this.add('-activate', source, 'ability: Colossal');
 			}
 		},
 		onSwitchOut(pokemon) {
@@ -2547,40 +2545,40 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4.5,
 		num: 185,
 	},
-	compartmentalization: {
+	compartments: {
 		isNonstandard: "Thing",
-		// onAfterMoveSecondarySelf(source, target, move) {
-		//	if (!move || !target) return;
-		//	if (target !== source && move.category !== 'Status') {
-		//		const types = source.getTypes();
-		//		if (!yourItem) return;
-		//		if (!source.setItem(yourItem)) {
-		//			target.item = yourItem.id; // bypass setItem so we don't break choicelock or anything
-		//			return;
-		//		}
-		//		this.add('-item', source, yourItem, '[from] ability: Magician', '[of] ' + target);
-		//	}
-		// },
-		// onAfterMoveSecondarySelf(source, target, move) {
-		//	if (source.getTypes().join() === 'Dirt' || !source.setType('Dirt')) {
-		//		return false;
-		//	}
-		//	this.add('-ability', target, 'Black');
-		//	this.add('-start', source, 'typechange', 'Dirt');
-		// },
-		name: "Compartmentalization",
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (!move || !target) return;
+			if (target !== source && move.category !== 'Status') {
+				const types = target.getTypes();
+				let success = false;
+				types.forEach(type => { if (source.addElementType(type)) success = true; });
+				if (success) {
+					this.add('-ability', source, 'Compartments');
+					this.add('-start', source, 'elementtypes', source.elementTypes.join('/'), '[silent]');
+				}
+			}
+		},
+		name: "Compartments",
 		rating: 4.5,
 		num: 185,
 	},
-	conservationalism: {
+	composting: {
 		isNonstandard: "ThingInf",
-		// onModifyDamage(damage, source, target, move) {
-		//	if (move && target.getMoveHitData(move).typeMod <= 0) {
-		//		return this.chainModify(2);
-		//	}
-		// },
+		onResidual(pokemon) {
+			pokemon.alliesAndSelf().forEach(
+				pkmn => {
+					if (pkmn.addElementType('Green')) this.add('-start', pkmn, 'elementtypes', pkmn.elementTypes.join('/'));
+				}
+			);
+			pokemon.foes().forEach(
+				pkmn => {
+					if (pkmn.addElementType('Green')) this.add('-start', pkmn, 'elementtypes', pkmn.elementTypes.join('/'));
+				}
+			);
+		},
 		isPermanent: true,
-		name: "Conservationalism",
+		name: "Composting",
 		rating: 4.5,
 		num: 185,
 	},
@@ -2596,6 +2594,148 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Honing",
 		rating: 4.5,
 		num: 3,
+	},
+	magictouch: {
+		isNonstandard: "ThingInf",
+		onSourceHit(target, source, move) {
+			if (!move) return;
+			if (!move.flags['contact']) return;
+
+			const stats: BoostID[] = [];
+			const boost: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in source.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				if (source.boosts[statPlus] < 6) {
+					stats.push(statPlus);
+				}
+			}
+			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = 1;
+			this.boost(boost, source);
+		},
+		isPermanent: true,
+		name: "Magic Touch",
+		rating: 4,
+		num: 1132,
+	},
+	waterbringer: {
+		isNonstandard: "ThingInf",
+		onAfterMega(source) {
+			this.field.setTerrain('sudscape');
+			this.field.setWeather('windy');
+		},
+		isPermanent: true,
+		name: "Water Bringer",
+		rating: 5,
+		num: 1229,
+	},
+	phaseshift: {
+		isNonstandard: "ThingInf",
+		onResidual(pokemon) {
+			const energy = pokemon.getEnergyValue();
+
+			let forme = '';
+			if (energy >= 3) forme = 'Yellomatter-Plasma';
+			else if (energy >= 1) forme = 'Yellomatter-Gas';
+			else if (energy < -1) forme = 'Yellomatter-Solid';
+			else forme = 'Yellomatter';
+
+			if (pokemon.baseSpecies.baseSpecies === 'Yellomatter' && pokemon.species.name !== forme) {
+				const boosts: SparseBoostsTable = {};
+				let stat1 = 0;
+				let stat2 = 0;
+				switch (pokemon.species.name) {
+				case 'Yellomatter-Solid':
+					stat1 = pokemon.boosts.def;
+					boosts.def = -pokemon.boosts.def;
+					stat2 = pokemon.boosts.atk;
+					boosts.atk = -pokemon.boosts.atk;
+					break;
+				case 'Yellomatter':
+					stat1 = pokemon.boosts.atk;
+					boosts.atk = -pokemon.boosts.atk;
+					stat2 = pokemon.boosts.spd;
+					boosts.spd = -pokemon.boosts.spd;
+					break;
+				case 'Yellomatter-Gas':
+					stat1 = pokemon.boosts.spd;
+					boosts.spd = -pokemon.boosts.spd;
+					stat2 = pokemon.boosts.spa;
+					boosts.spa = -pokemon.boosts.spa;
+					break;
+				case 'Yellomatter-Plasma':
+					stat1 = pokemon.boosts.spa;
+					boosts.spa = -pokemon.boosts.spa;
+					stat2 = pokemon.boosts.spe;
+					boosts.spe = -pokemon.boosts.spe;
+					break;
+				}
+
+				switch (forme) {
+				case 'Yellomatter-Solid':
+					boosts.def = stat1;
+					boosts.atk = stat2;
+					break;
+				case 'Yellomatter':
+					boosts.atk = stat1;
+					boosts.spd = stat2;
+					break;
+				case 'Yellomatter-Gas':
+					boosts.spd = stat1;
+					boosts.spa = stat2;
+					break;
+				case 'Yellomatter-Plasma':
+					boosts.spa = stat1;
+					boosts.spe = stat2;
+					break;
+				}
+
+				this.boost(boosts, pokemon, pokemon, this.effect, false, true);
+
+				if (pokemon.species.forme === 'Infinite') {
+					pokemon.addType('', true);
+					this.add('-start', pokemon, 'typeadd', '', '[silent]');
+				}
+				if (pokemon.species.forme === 'Element') {
+					pokemon.removeElementType('Liquid');
+					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+				}
+
+				this.actions.runSymbolEvo(pokemon, forme);
+			}
+		},
+		isPermanent: true,
+		name: "Phase Shift",
+		rating: 5,
+		num: 1229,
+	},
+	astralprojection: {
+		isNonstandard: "Thing",
+		onBeforeMove(pokemon, target, move) {
+			if (!move.banishedUsable) {
+				move.banishedUsable = true;
+			}
+		},
+		name: "Astral Projection",
+		rating: 5,
+		num: 1229,
+	},
+	unamenable: {
+		isNonstandard: "ThingInf",
+		onSetStatus(status, target, source, effect) {
+			this.debug('interrupting setStatus');
+			this.add('-activate', target, 'ability: Unamenable');
+			return null;
+		},
+		onTryAddVolatile(status, target, source, effect) {
+			this.add('-activate', target, 'ability: Unamenable');
+			return null;
+		},
+		isPermanent: true,
+		name: "Unamenable",
+		rating: 5,
+		num: 1229,
 	},
 
 	// BASE GAME
