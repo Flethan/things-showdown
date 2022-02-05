@@ -128,6 +128,10 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Bug Bomb",
 		desc: "If holder is hit, makes the environment Locust Swarm. Single use.",
 	},
+	antimatter: {
+		name: "Antimatter",
+		desc: "The holder's type matchups are reversed.",
+	},
 
 	// BASE GAME
 	abomasite: {
