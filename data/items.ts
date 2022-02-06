@@ -601,6 +601,31 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	antimatter: {
+		name: "Antimatter",
+		spritenum:808,
+		fling: {
+			basePower: 60,
+		},
+		onNegateImmunity: false,
+		onEffectivenessPriority: 1,
+		onEffectiveness(typeMod, target, type, move) {
+			if (move && !this.dex.getImmunity(move, type)) return 1;
+			return -typeMod;
+		},
+		onModifyMovePriority: -5,
+		onModifyMove(move) {
+			if (!move.ignoreImmunity) move.ignoreImmunity = {};
+			if (move.ignoreImmunity !== true) {
+				for (const type in this.dex.data.TypeChart) {
+					move.ignoreImmunity[type] = true;
+				}
+			}
+		},
+		num: -258,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",

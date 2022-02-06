@@ -395,13 +395,33 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	volumeup: {
 		name: "Volume Up",
-		desc: "Raises the target's Special Attack stat by 2 stages",
-		shortDesc: "Raises the target's Special Attack stat by 2",
+		desc: "Raises the target's Special Attack stat by 2 stages.",
+		shortDesc: "Raises the target's Special Attack stat by 2.",
 	},
 	volumedown: {
 		name: "Volume Down",
-		desc: "Lowers the target's Special Attack stat by 2 stages",
-		shortDesc: "Lowers the target's Special Attack stat by 2",
+		desc: "Lowers the target's Special Attack stat by 2 stages.",
+		shortDesc: "Lowers the target's Special Attack stat by 2.",
+	},
+	major: {
+		name: "Major",
+		desc: "Raises the user's Special Attack by 1 stage and Attack by 1 stage.",
+		shortDesc: "Raises the user's Special Attack and Attack by 1.",
+	},
+	minor: {
+		name: "Major",
+		desc: "Lowers the target's Special Attack by 1 stage and Attack by 1 stage.",
+		shortDesc: "Lowers the target's Special Attack and Attack by 1.",
+	},
+	augment: {
+		name: "Augment",
+		desc: "Raises all of the user's stats by 1 stage. The user cannot attack next turn.",
+		shortDesc: "Raises all of the user's stats by 1. User cannot move next turn.",
+	},
+	diminish: {
+		name: "Diminish",
+		desc: "Lowers all of the targets's stats by 1 stage. The user cannot attack next turn.",
+		shortDesc: "Lowers all of the target's stats by 1. User cannot move next turn.",
 	},
 	// night
 	stealthstrike: {
@@ -466,7 +486,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	poweroff: {
 		name: "Power Off",
-		desc: "Banishes the target.",
+		desc: "Banishes the target. Move may hit first.",
 		shortDesc: "Banishes the target.",
 	},
 	// science
