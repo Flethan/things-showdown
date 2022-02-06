@@ -503,7 +503,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		// This should be applied directly to the stat before any of the other modifiers are chained
 		// So we give it increased priority.
 		onModifySpe(spe, pokemon) {
-			if (pokemon.hasType('Arthropod') && this.field.isWeather('locustswarm')) {
+			if ((pokemon.hasType('Arthropod') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('locustswarm')) {
 				return this.modify(spe, 1.5);
 			}
 		},
@@ -521,6 +521,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Locust Swarm')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
+			if(target.hasAbility('Adaptable')) return;
 			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
 
 			let bonus = 1;
@@ -568,7 +569,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Nighttime')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (target.hasType('Night')) {
+			if (target.hasType('Night') || target.hasAbility('Adaptable')) {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
@@ -645,7 +646,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Hot')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (target.hasType('Temperature')) {
+			if (target.hasType('Temperature') || target.hasAbility('Adaptable')) {
 				this.boost({spe: 1}, target);
 			}
 		},
@@ -667,13 +668,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 		// So we give it increased priority.
 		onModifyDefPriority: 10,
 		onModifyDef(def, pokemon) {
-			if (pokemon.hasType('Temperature') && this.field.isWeather('cold')) {
+			if ((pokemon.hasType('Temperature') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
 				return this.modify(def, 1.5);
 			}
 		},
 		onModifySpDPriority: 10,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.hasType('Temperature') && this.field.isWeather('cold')) {
+			if ((pokemon.hasType('Temperature') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
 				return this.modify(spd, 1.5);
 			}
 		},
@@ -691,7 +692,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (!target.hasType('Temperature') && !target.hasAbility('Chilled')) {
+			if (!target.hasType('Temperature') && !target.hasAbility('Chilled') && !target.hasAbility('Adaptable')) {
 				this.boost({spe: -1}, target);
 			}
 		},
@@ -710,7 +711,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return 5;
 		},
 		onModifySpe(spe, pokemon) {
-			if (!pokemon.hasType('Time')) {
+			if (!pokemon.hasType('Time') &&  !pokemon.hasAbility('Adaptable')) {
 				return this.chainModify(0.25);
 			}
 		},
@@ -777,7 +778,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeather(target) {
 			this.damage(target.baseMaxhp / 16);
-			if (target.hasType('Fish')) {
+			if (target.hasType('Fish') || target.hasAbility('Adaptable')) {
 				this.heal(target.baseMaxhp / 16);
 			}
 			if (target.status === 'prone') {

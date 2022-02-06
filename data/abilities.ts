@@ -2737,6 +2737,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 1229,
 	},
+	adaptable: {
+		isNonstandard: "Thing",
+		onImmunity(type, pokemon) {
+			if (type === 'underwater') return false;
+		},
+		// done in conditions for rest
+		name: "Adaptable",
+		rating: 5,
+		num: 1229,
+	},
 
 	// BASE GAME
 	noability: {
