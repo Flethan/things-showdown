@@ -171,6 +171,39 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 	},
+	equipped: {
+		name: 'equipped',
+		noCopy: true,
+		duration: 1,
+		onFoeRedirectTargetPriority: 1,
+		onFoeRedirectTarget(target, source, source2, move) {
+			let equip = null;
+			for (const ally of this.effectState.target.allies()) {
+				if (!ally?.isActive || ally === source || !ally.volatiles['equip']) continue;
+				equip = ally;
+			}
+			if (!this.effectState.target.isSkyDropped() && equip && this.validTarget(equip, source, move.target)) {
+				if (move.smartTarget) move.smartTarget = false;
+				this.debug("Equip redirected target of move");
+				return this.effectState.target;
+			}
+		},
+
+		onInvulnerability(target, source, move) {
+			if (!move.hitsBanished) {
+				return false;
+			}
+		},
+
+		onEnd(target) {
+			let equip = null;
+			for (const ally of this.effectState.target.allies()) {
+				if (!ally?.isActive || !ally.volatiles['equip']) continue;
+				equip = ally;
+			}
+			if (equip) equip.removeVolatile['equip'];
+		},
+	},
 
 	// Statuses
 	prone: {

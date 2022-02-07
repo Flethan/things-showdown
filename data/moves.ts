@@ -1768,6 +1768,71 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Industrial",
 		contestType: "Clever",
 	},
+	equip: {
+		num: 1511,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Equip",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, authentic: 1},
+		onHit(target, source) {
+			if (target.volatiles['equip'] || target.volatiles['equipped']) return false;
+			target.addVolatile('equip');
+			source.addVolatile('equipped');
+		},
+		onTryHit(source, target, move) {
+			if(source.volatiles['equipped'] && target.volatiles['equip']) {
+				this.attrLastMove('[still]');
+				// Run side-effects normally associated with hitting (e.g., Protean, Libero)
+				this.runEvent('PrepareHit', source, target, move);
+				target.volatiles['equip'].duration ++;
+				source.volatiles['equipped'].duration ++;
+			} else if (source.volatiles['equipped']) {
+				source.removeVolatile('equipped');
+			}
+		},
+		condition: {
+			duration: 1,
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, pokemon, defender, move) {
+				const source =  this.effectState.source;
+				return atk + source.baseStoredStats.atk;
+			},
+			onModifyDefPriority: 5,
+			onModifyDef(def, pokemon, defender, move) {
+				const source =  this.effectState.source;
+				return def + source.baseStoredStats.def;
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(spa, pokemon, defender, move) {
+				const source =  this.effectState.source;
+				return spa + source.baseStoredStats.spa;
+			},
+			onModifySpDPriority: 5,
+			onModifySpD(spd, pokemon, defender, move) {
+				const source =  this.effectState.source;
+				return spd + source.baseStoredStats.spd;
+			},
+			onModifySpe(spe, pokemon) {
+				const source =  this.effectState.source;
+				return spe + source.baseStoredStats.spe;
+			},
+
+			onEnd(target) {
+				let equipped = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equipped']) continue;
+					equipped = ally;
+				}
+				if (equipped) equipped.removeVolatile['equipped'];
+			},
+		},
+		target: "adjacentAlly",
+		type: "Industrial",
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {

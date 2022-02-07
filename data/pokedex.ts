@@ -2854,6 +2854,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		muMove: "Stellar Omen",
 		evoCondition: "Symbol",
 	},
+	shooey: {
+		num: -480,
+		name: "Shooey",
+		types: ["Dirt"],
+		gender: "N",
+		baseStats: {hp: 30, atk: 15, def: 25, spa: 5, spd: 45, spe: 80},
+		abilities: {0: "Low-Lying"},
+		heightm: 0.2,
+		weightkg: 1.6,
+		color: "Brown",
+		evos: ["Yoyooo"],
+		eggGroups: ["Undiscovered"],
+	},
+	yoyooo: {
+		num: -481,
+		name: "Yoyooo",
+		types: ["Industrial"],
+		gender: "N",
+		baseStats: {hp: 150, atk: 45, def: 60, spa: 20, spd: 70, spe: 65},
+		abilities: {0: "Low-Lying"},
+		heightm: 1.4,
+		weightkg: 41,
+		color: "Gray",
+		prevo: "Shooey",
+		eggGroups: ["Mineral"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
