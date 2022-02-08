@@ -2804,6 +2804,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bask: ["8L45"],
 			brilliantfish: ["8L30"],
 			rankandfile: ["8T"],
+			equip: ["8L38"],
 		},
 	},
 	honi: {
