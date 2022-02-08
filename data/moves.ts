@@ -1780,23 +1780,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, authentic: 1},
 		onHit(target, source) {
-			if (target.volatiles['equip'] || target.volatiles['equipped']) return false;
+			if(source.volatiles['equipped'] && target.volatiles['equip']) return;
 			target.addVolatile('equip');
+			this.add('-start', target, 'Equip');
+			if(!target.volatiles['equip']) return false;
 			source.addVolatile('equipped');
+			this.add('-start', source, 'Equipped');
 		},
-		onTryHit(source, target, move) {
+		onTryMove(source, target, move) {
 			if(source.volatiles['equipped'] && target.volatiles['equip']) {
 				this.attrLastMove('[still]');
 				// Run side-effects normally associated with hitting (e.g., Protean, Libero)
 				this.runEvent('PrepareHit', source, target, move);
 				target.volatiles['equip'].duration ++;
 				source.volatiles['equipped'].duration ++;
+				return;
+			} else if (target.volatiles['equip'] || target.volatiles['equipped']) {
+				return false;
 			} else if (source.volatiles['equipped']) {
 				source.removeVolatile('equipped');
 			}
 		},
 		condition: {
-			duration: 1,
+			duration: 2,
 			onModifyAtkPriority: 5,
 			onModifyAtk(atk, pokemon, defender, move) {
 				const source =  this.effectState.source;
@@ -1822,13 +1828,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return spe + source.baseStoredStats.spe;
 			},
 
-			onEnd(target) {
+			onSwitchOut(pokemon) {
+				pokemon.removeVolatile('equip');
 				let equipped = null;
 				for (const ally of this.effectState.target.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equipped']) continue;
 					equipped = ally;
 				}
-				if (equipped) equipped.removeVolatile['equipped'];
+				if (equipped) equipped.removeVolatile('equipped');
+			},
+
+			onFaint(pokemon) {
+				pokemon.removeVolatile('equip');
+				let equipped = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equipped']) continue;
+					equipped = ally;
+				}
+				if (equipped) equipped.removeVolatile('equipped');
+			},
+
+			onEnd(target) {
+				this.add('-end', target, 'move: Equip', '[silent]');
 			},
 		},
 		target: "adjacentAlly",
