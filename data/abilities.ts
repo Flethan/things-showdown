@@ -2747,6 +2747,97 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: 1229,
 	},
+	intrepidhat: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if(pokemon.volatiles['equipped']) {
+				let equip = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equip']) continue;
+					equip = ally;
+				}
+				if(!equip) return;
+				this.boost({atk: 1, spa: 1}, equip);
+			}
+		},
+		name: "Intrepid Hat",
+		rating: 5,
+		num: -122,
+	},
+	protectivehat: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if(pokemon.volatiles['equipped']) {
+				let equip = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equip']) continue;
+					equip = ally;
+				}
+				if(!equip) return;
+				this.boost({def: 1, spd: 1}, equip);
+			}
+		},
+		name: "Protective Hat",
+		rating: 5,
+		num: -122,
+	},
+	nimblehat: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if(pokemon.volatiles['equipped']) {
+				let equip = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equip']) continue;
+					equip = ally;
+				}
+				if(!equip) return;
+				this.boost({spe: 1}, equip);
+			}
+		},
+		name: "Nimble Hat",
+		rating: 5,
+		num: -122,
+	},
+	spiritedhat: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if(pokemon.volatiles['equipped']) {
+				let equip = null;
+				for (const ally of this.effectState.target.allies()) {
+					if (!ally?.isActive || !ally.volatiles['equip']) continue;
+					equip = ally;
+				}
+				if(!equip) return;
+				
+				this.effectState.hatMove = true;
+				const bannedMoves = [''];
+				const moves = [];
+				for (const moveSlot of equip.moveSlots) {
+					const moveid = moveSlot.id;
+					if (!moveid) continue;
+					const move = this.dex.moves.get(moveid);
+					if (bannedMoves.includes(moveid) || move.category === 'Status' || move.flags['charge'] || move.flags['recharge'] || (move.isZ && move.basePower !== 1)) {
+						continue;
+					}
+					moves.push(moveid);
+				}
+				let randomMove = '';
+				if (moves.length) randomMove = this.sample(moves);
+				if (!randomMove) {
+					this.effectState.hatMove = false;
+					return false;
+				}
+				this.actions.useMove(randomMove, equip);
+				this.effectState.hatMove = false;
+			}
+		},
+		onAllyBasePower(basePower, pokemon, target) {
+			if (this.effectState.hatMove) return this.chainModify(0.5);
+		},
+		name: "Spirited Hat",
+		rating: 5,
+		num: -122,
+	},
 
 	// BASE GAME
 	noability: {

@@ -1455,6 +1455,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",
 	},
+	wipeaway: {
+		num: 1344,
+		accuracy: 100,
+		basePower: 50,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Wipe Away",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onHit(target) {
+			this.field.clearWeather();
+		},
+		target: "normal",
+		type: "Hair",
+		contestType: "Clever",
+	},
 
 	// Industrial
 	toxicsmog: {
@@ -1806,26 +1823,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: 5,
 			onModifyAtk(atk, pokemon, defender, move) {
 				const source =  this.effectState.source;
-				return atk + source.baseStoredStats.atk;
+				return atk + source.storedStats.atk;
 			},
 			onModifyDefPriority: 5,
 			onModifyDef(def, pokemon, defender, move) {
 				const source =  this.effectState.source;
-				return def + source.baseStoredStats.def;
+				return def + source.storedStats.def;
 			},
 			onModifySpAPriority: 5,
 			onModifySpA(spa, pokemon, defender, move) {
 				const source =  this.effectState.source;
-				return spa + source.baseStoredStats.spa;
+				return spa + source.storedStats.spa;
 			},
 			onModifySpDPriority: 5,
 			onModifySpD(spd, pokemon, defender, move) {
 				const source =  this.effectState.source;
-				return spd + source.baseStoredStats.spd;
+				return spd + source.storedStats.spd;
 			},
 			onModifySpe(spe, pokemon) {
 				const source =  this.effectState.source;
-				return spe + source.baseStoredStats.spe;
+				return spe + source.storedStats.spe;
 			},
 
 			onSwitchOut(pokemon) {
