@@ -2752,7 +2752,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if(pokemon.volatiles['equipped']) {
 				let equip = null;
-				for (const ally of this.effectState.target.allies()) {
+				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
@@ -2769,7 +2769,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if(pokemon.volatiles['equipped']) {
 				let equip = null;
-				for (const ally of this.effectState.target.allies()) {
+				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
@@ -2786,7 +2786,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if(pokemon.volatiles['equipped']) {
 				let equip = null;
-				for (const ally of this.effectState.target.allies()) {
+				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
@@ -2803,7 +2803,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if(pokemon.volatiles['equipped']) {
 				let equip = null;
-				for (const ally of this.effectState.target.allies()) {
+				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
