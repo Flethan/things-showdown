@@ -2838,6 +2838,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: -122,
 	},
+	amorphoushat: {
+		isNonstandard: "Thing",
+		onAllyModifyType(move, pokemon) {
+			if(pokemon.volatiles['equip']) {
+				move.type = 'Infinity';
+			}
+		},
+		name: "Amorphous Hat",
+		rating: 5,
+		num: -122,
+	},
 
 	// BASE GAME
 	noability: {
