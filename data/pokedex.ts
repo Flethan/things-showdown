@@ -2892,6 +2892,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.7,
 		color: "Brown",
 		eggGroups: ["Mineral"],
+		evos: ["Hattabel"],
 		otherFormes: ["Hatterance-Tophat", "Hatterance-Ballcap", "Hatterance-Pangolin"],
 		formeOrder: ["Hatterance", "Hatterance-Tophat", "Hatterance-Ballcap", "Hatterance-Pangolin"],
 	},
@@ -2908,6 +2909,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.8,
 		color: "Black",
 		eggGroups: ["Mineral"],
+		evos: ["Hattabel"],
 	},
 	hatteranceballcap: {
 		num: -482,
@@ -2922,6 +2924,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.8,
 		color: "Gray",
 		eggGroups: ["Mineral"],
+		evos: ["Hattabel"],
 	},
 	hatterancepangolin: {
 		num: -482,
@@ -2936,6 +2939,23 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 1.3,
 		color: "Brown",
 		eggGroups: ["Mineral"],
+		evos: ["Hattabel"],
+	},
+	hattabel: {
+		num: -483,
+		name: "Hattabel",
+		types: ["H"],
+		forme: "Infinite",
+		gender: "N",
+		baseStats: {hp: 26, atk: 41, def: 41, spa: 41, spd: 41, spe: 41},
+		abilities: {0: "Amorphous Hat"},
+		heightm: 0.2,
+		weightkg: 1.6,
+		color: "White",
+		prevo: "Hatterance",
+		eggGroups: ["Mineral"],
+		evoType: "symbol",
+		evoCondition: "Symbol",
 	},
 
 	// BASE GAME
