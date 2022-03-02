@@ -726,9 +726,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		hasSprite: true,
 	},
-	godbye: {
+	goudbye: {
 		num: -348,
-		name: "Godbye",
+		name: "Goudbye",
 		types: ["No", "Far"],
 		genderRatio: {M: 0.28, F: 0.72},
 		baseStats: {hp: 50, atk: 60, def: 65, spa: 85, spd: 70, spe: 150},
@@ -2880,9 +2880,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Shooey",
 		eggGroups: ["Mineral"],
 	},
-	hatterance: {
+	hatthew: {
 		num: -482,
-		name: "Hatterance",
+		name: "Hatthew",
 		baseForme: "Fedora",
 		types: ["H"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -2893,13 +2893,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
-		otherFormes: ["Hatterance-Tophat", "Hatterance-Ballcap", "Hatterance-Pangolin"],
-		formeOrder: ["Hatterance", "Hatterance-Tophat", "Hatterance-Ballcap", "Hatterance-Pangolin"],
+		otherFormes: ["Hatthew-Tophat", "Hatthew-Ballcap", "Hatthew-Pangolin"],
+		formeOrder: ["Hatthew", "Hatthew-Tophat", "Hatthew-Ballcap", "Hatthew-Pangolin"],
 	},
-	hatterancetophat: {
+	hatthewtophat: {
 		num: -482,
-		name: "Hatterance-Tophat",
-		baseSpecies: "Hatterance",
+		name: "Hatthew-Tophat",
+		baseSpecies: "Hatthew",
 		forme: "Tophat",
 		types: ["H"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -2911,10 +2911,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
 	},
-	hatteranceballcap: {
+	hatthewballcap: {
 		num: -482,
-		name: "Hatterance-Ballcap",
-		baseSpecies: "Hatterance",
+		name: "Hatthew-Ballcap",
+		baseSpecies: "Hatthew",
 		forme: "Ballcap",
 		types: ["H"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -2926,10 +2926,10 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
 	},
-	hatterancepangolin: {
+	hatthewpangolin: {
 		num: -482,
-		name: "Hatterance-Pangolin",
-		baseSpecies: "Hatterance",
+		name: "Hatthew-Pangolin",
+		baseSpecies: "Hatthew",
 		forme: "Pangolin",
 		types: ["H"],
 		genderRatio: {M: 0.5, F: 0.5},
@@ -2952,7 +2952,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.2,
 		weightkg: 1.6,
 		color: "White",
-		prevo: "Hatterance",
+		prevo: "Hatthew",
 		eggGroups: ["Mineral"],
 		evoType: "symbol",
 		evoCondition: "Symbol",

@@ -210,7 +210,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	godbye: {
+	goudbye: {
 		randomBattleMoves: ['voidtrap', 'noescape', 'banish', 'pinch', 'voidpunch', 'winddispersal'],
 		isNonstandard: "Thing",
 		tier: "Thing",
@@ -800,19 +800,19 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	hatterance: {
+	hatthew: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	hatterancetophat: {
+	hatthewtophat: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	hatteranceballcap: {
+	hatthewballcap: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	hatterancepangolin: {
+	hatthewpangolin: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},

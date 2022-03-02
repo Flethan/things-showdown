@@ -909,7 +909,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8T"],
 		},
 	},
-	godbye: {
+	goudbye: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -3566,7 +3566,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 		},
 	},
-	hatterance: {
+	hatthew: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -3589,7 +3589,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L77"],
 		},
 	},
-	hatterancetophat: {
+	hatthewtophat: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -3612,7 +3612,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			autoturret: ["8L77"],
 		},
 	},
-	hatteranceballcap: {
+	hatthewballcap: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -3635,7 +3635,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			shootingstar: ["8L77"],
 		},
 	},
-	hatterancepangolin: {
+	hatthewpangolin: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
