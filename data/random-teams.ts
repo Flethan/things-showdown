@@ -836,16 +836,21 @@ export class RandomTeams {
 			(isNoDynamax && species.randomBattleNoDynamaxMoves) ||
 			species.randomBattleMoves;
 		const movePool = (randMoves || Object.keys(this.dex.data.Learnsets[species.id]!.learnset!)).slice();
-		if (this.format.gameType === 'multi' || this.format.gameType === 'freeforall') {
+		if (this.format.gameType === 'multi' || this.format.gameType === 'freeforall' || this.format.gameType === 'singles') {
 			// Random Multi Battle uses doubles move pools, but Ally Switch fails in multi battles
 			// Random Free-For-All also uses doubles move pools, for now
-			const allySwitch = movePool.indexOf('allyswitch');
-			if (allySwitch > -1) {
+			const horizontalTranslation = movePool.indexOf('horizontaltranslation');
+			if (horizontalTranslation > -1) {
 				if (movePool.length > 4) {
-					this.fastPop(movePool, allySwitch);
-				} else {
-					// Ideally, we'll never get here, but better to have a move that usually does nothing than one that always does
-					movePool[allySwitch] = 'sleeptalk';
+					this.fastPop(movePool, horizontalTranslation);
+				}
+			}
+		}
+		if (this.format.gameType === 'singles') {
+			const rankAndFile = movePool.indexOf('rankandfile');
+			if (rankAndFile > -1) {
+				if (movePool.length > 4) {
+					this.fastPop(movePool, rankAndFile);
 				}
 			}
 		}
