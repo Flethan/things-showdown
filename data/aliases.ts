@@ -3,6 +3,8 @@ export const Aliases: {[alias: string]: string} = {
 	connectorred: "Connector",
 	connectphorered: "Connectphore",
 	connectphorepurple: "Connectphore",
+	omnectivorered: "Omnectivore",
+	omnectivorepurple: "Omnectivore",
 
 	// formats
 	randbats: "[Gen 8] Random Battle",
