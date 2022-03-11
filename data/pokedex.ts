@@ -2957,6 +2957,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 	},
+	rock: {
+		num: -484,
+		name: "Rock",
+		types: ["Dirt"],
+		gender: "N",
+		baseStats: {hp: 100, atk: 100, def: 100, spa: 1, spd: 100, spe: 1},
+		abilities: {0: "Stubborn"},
+		heightm: 0.1,
+		weightkg: 10,
+		color: "Gray",
+		eggGroups: ["Undiscovered"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

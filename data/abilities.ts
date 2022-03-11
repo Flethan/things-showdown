@@ -2849,6 +2849,47 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: -122,
 	},
+	stubborn: {
+		isNonstandard: "Thing",
+		onSetAbility(ability, target, source, effect) {
+			return false;
+		},
+		onBeforeTurn(pokemon) {
+			const action = this.queue.willMove(pokemon);
+			if (action?.moveid === 'stay') return;
+
+			let helper = null;
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon || !ally.isAdjacent(pokemon) ||
+					 (pokemon.volatiles['equipped'] && !ally.volatiles['equip']) || 
+					 (ally.volatiles['equipped'] && !pokemon.volatiles['equip']) ||
+					 ally.hasAbility('stubborn') ||
+					 (helper !== null && this.randomChance(1, 2))) continue;
+				helper = ally;
+			}
+			helper?.addVolatile('helper');
+		},
+		onAllyModifySpe(spe, pokemon) {
+			if (pokemon.volatiles['helper']) {
+				return spe / (1 + 200 / pokemon.getStat('atk'));
+			}
+		},
+		onAllyBeforeMove(source) {
+			if (source.volatiles['helper']) {
+				for (const ally of source.allies()) {
+					if (!ally?.isActive || ally === source || !ally.isAdjacent(source) || !ally.hasAbility('stubborn')) continue;
+					const action = this.queue.willMove(ally);
+					if (action) {
+						this.queue.prioritizeAction(action);
+						this.add('-activate', ally, 'ability: Stubborn');
+					}
+				}
+			}
+		},
+		name: "Stubborn",
+		rating: 5,
+		num: -122,
+	},
 
 	// BASE GAME
 	noability: {

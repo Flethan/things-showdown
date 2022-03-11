@@ -232,6 +232,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-end', target, 'move: Equipped', '[silent]');
 		},
 	},
+	helper: {
+		duration: 1,
+		noCopy: true
+	},
 
 	// Statuses
 	prone: {

@@ -462,6 +462,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Dirt",
 		contestType: "Beautiful",
 	},
+	bludgeon: {
+		num: 1719,
+		accuracy: 90,
+		basePower: 100,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Bludgeon",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 30,
+			status: 'wounded',
+		},
+		target: "normal",
+		type: "Dirt",
+		contestType: "Tough",
+	},
 
 	// Far
 	closein: {
@@ -4388,6 +4406,36 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Tough",
+	},
+	stay: {
+		num: 270,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Stay",
+		pp: 15,
+		priority: 5,
+		flags: {authentic: 1},
+		volatileStatus: 'stay',
+		condition: {
+			duration: 1,
+			onStart(target, source) {
+				this.add('-singleturn', target, 'Stay', '[of] ' + source);
+			},
+			onTrapPokemon(pokemon) {
+				pokemon.tryTrap();
+			},
+			onDragOut(pokemon) {
+				this.add('-activate', pokemon, 'move: Stay');
+				return null;
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
 	},
 
 	// Sword

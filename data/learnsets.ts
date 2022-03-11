@@ -3657,6 +3657,18 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			prune: ["8L77"],
 		},
 	},
+	rock: {
+		learnset: {
+			hit: ["8L1"],
+			hide: ["8T"],
+			stay: ["8T"],
+			shotput: ["8T"],
+			equip: ["8L1"],
+			bludgeon: ["8T"],
+			bask: ["8T"],
+			fossilize: ["8T"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {
