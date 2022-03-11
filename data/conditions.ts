@@ -234,7 +234,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 	},
 	helper: {
 		duration: 1,
-		noCopy: true
+		noCopy: true,
+		onModifyPriority(priority, pokemon, target, move) {
+			return 0;
+		},
 	},
 
 	// Statuses
