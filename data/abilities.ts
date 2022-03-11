@@ -108,14 +108,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, attacker, defender, move) {
-			if (move.type === 'Sword') {
+			if (move?.type === 'Sword') {
 				this.debug('Big Sword boost');
 				return this.chainModify(1.5);
 			}
 		},
 		onModifySpAPriority: 5,
 		onModifySpA(atk, attacker, defender, move) {
-			if (move.type === 'Sword') {
+			if (move?.type === 'Sword') {
 				this.debug('Big Sword boost');
 				return this.chainModify(1.5);
 			}
