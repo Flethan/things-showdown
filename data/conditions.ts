@@ -562,8 +562,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 					this.effectState.inf_mode.push(this.random(1,5));
 				}
 				if (this.random(1,5) < 2) {
-					if(this.effectState.inf_mode.length() > 0)
-						this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length()));
+					if(this.effectState.inf_mode.length > 0)
+						this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
 				}
 
 				console.log('source parameters:');
@@ -637,8 +637,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 				this.effectState.inf_mode.push(this.random(1,5));
 			}
 			if (this.random(1,5) < 2) {
-				if(this.effectState.inf_mode.length() > 0)
-					this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length()));
+				if(this.effectState.inf_mode.length > 0)
+					this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
 			}
 
 			console.log('infected parameters:');
