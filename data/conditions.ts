@@ -562,7 +562,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 					this.effectState.inf_mode.push(this.random(1,5));
 				}
 				if (this.random(1,5) < 2) {
-					if(this.effectState.inf_mode.length > 0)
+					if(this.effectState.inf_mode.length > 1)
 						this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
 				}
 
@@ -574,9 +574,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 			} else {
 				this.add('-status', target, 'infected');
 				// chance spread occurs
-				this.effectState.inf_spread = this.random(10, 60);
+				this.effectState.inf_spread = this.random(20, 60);
 				// chance damage occurs
-				this.effectState.inf_damage = this.random(20,80);
+				this.effectState.inf_damage = this.random(40,80);
 				// amount damaged: loses 1 / x of max hp
 				this.effectState.inf_damage_amount = this.random(2,16);
 				/* modes:
@@ -637,7 +637,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				this.effectState.inf_mode.push(this.random(1,5));
 			}
 			if (this.random(1,5) < 2) {
-				if(this.effectState.inf_mode.length > 0)
+				if(this.effectState.inf_mode.length > 1)
 					this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
 			}
 
