@@ -603,13 +603,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 				for (const foe of pokemon.foes()) {
 					if (!foe?.isActive || foe === pokemon) continue;
 					if (this.random(1,100) < this.effectState.inf_spread) {
-						foe.setStatus('infected', pokemon);
+						foe.trySetStatus('infected', pokemon);
 					}
 				}
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || ally === pokemon) continue;
 					if (this.random(1,100) < this.effectState.inf_spread) {
-						ally.setStatus('infected', pokemon);
+						ally.trySetStatus('infected', pokemon);
 					}
 				}
 			}
@@ -652,7 +652,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
 				this.effectState.inf_mode.includes(2))) {
 				if (this.random(1,100) < this.effectState.inf_spread) {
-					target.setStatus('infected', target);
+					target.trySetStatus('infected', target);
 				}
 			}
 		},
@@ -662,7 +662,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 					((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
 					this.effectState.inf_mode.includes(3))) {
 					if (this.random(1,100) < this.effectState.inf_spread) {
-						target.setStatus('infected', source);
+						target.trySetStatus('infected', source);
 					}
 				}
 			}
@@ -672,13 +672,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 				for (const foe of pokemon.foes()) {
 					if (!foe?.isActive || foe === pokemon) continue;
 					if (this.random(1,100) < this.effectState.inf_spread) {
-						foe.setStatus('infected', pokemon);
+						foe.trySetStatus('infected', pokemon);
 					}
 				}
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || ally === pokemon) continue;
 					if (this.random(1,100) < this.effectState.inf_spread) {
-						ally.setStatus('infected', pokemon);
+						ally.trySetStatus('infected', pokemon);
 					}
 				}
 			}
