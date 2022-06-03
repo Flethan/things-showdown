@@ -276,6 +276,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L30"],
 			pheromonemark: ["8L55"],
 			brilliancy: ["8T"],
+			infect: ["8L70"],
 		},
 	},
 	pescadestrian: {
@@ -1358,6 +1359,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			prune: ["8L25"],
 			hide: ["8M"],
 			rankandfile: ["8T"],
+			infect: ["8L70"],
 		},
 	},
 	cheleaf: {
@@ -2050,6 +2052,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L60"],
 			abilityseeds: ["8L60"],
 			brilliancy: ["8T"],
+			infect: ["8L70"],
 		},
 	},
 	yenoh: {
@@ -2317,6 +2320,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			noescape: ["8L50"],
 			voidpunch: ["8L70"],
 			study: ["8L40"],
+			infect: ["8L17"],
 		},
 	},
 	tacilinks: {
@@ -2996,6 +3000,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			vetoslip: ["8L23"],
 			autumnaloffering: ["8L34"],
 			transmute: ["8L58"],
+			infect: ["8L70"],
 		},
 	},
 	kaijuv: {

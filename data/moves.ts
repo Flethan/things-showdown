@@ -3682,6 +3682,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Science",
 		contestType: "Clever",
 	},
+	infect: {
+		num: 284,
+		accuracy: 95,
+		basePower: 0,
+		isNonstandard: "Thing",
+		category: "Status",
+		name: "Infect",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onHit(pokemon) {
+			pokemon.setStatus('infected');
+		},
+		secondary: null,
+		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
 
 	// Sport
 	fourseamfastball: {

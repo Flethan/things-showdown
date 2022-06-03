@@ -523,6 +523,174 @@ export const Conditions: {[k: string]: ConditionData} = {
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 
+	infected: {
+		name: 'infected',
+		effectType: 'Status',
+		onStart(target, source, sourceEffect) {
+			console.log(source.name);
+			console.log('infecting');
+			console.log(target.name);
+			if (source.statusState && source.statusState.inf_spread) {
+				this.add('-status', target, 'infected');
+				// chance spread occurs
+				this.effectState.inf_spread = {...source.statusState.inf_spread};
+				// chance damage occurs
+				this.effectState.inf_damage = {...source.statusState.inf_damage};
+				// amount damaged: loses 1 / x of max hp
+				this.effectState.inf_damage_amount = {...source.statusState.inf_damage_amount};
+				/* modes:
+						1 - after contact
+						2 - after infected move
+						3 - after infected hit
+						4 - after infected faint
+						5 - end of turn
+						6 - thing enters infected's slot */
+				this.effectState.inf_mode = {...source.statusState.inf_mode};
+
+				// mutate?
+				if (this.random(1,5) < 2) {
+					this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10,10);
+				}
+				if (this.random(1,5) < 2) {
+					this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10,10);
+				}
+				if (this.random(1,5) < 2) {
+					this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3,3);
+					if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
+				}
+				if (this.random(1,5) < 2) {
+					this.effectState.inf_mode.push(this.random(1,5));
+				}
+				if (this.random(1,5) < 2) {
+					if(this.effectState.inf_mode.length() > 0)
+						this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length()));
+				}
+
+				console.log('source parameters:');
+				console.log(source.statusState.inf_spread);
+				console.log(source.statusState.inf_damage);
+				console.log(source.statusState.inf_damage_amount);
+				console.log(source.statusState.inf_mode);
+			} else {
+				this.add('-status', target, 'infected');
+				// chance spread occurs
+				this.effectState.inf_spread = this.random(10, 60);
+				// chance damage occurs
+				this.effectState.inf_damage = this.random(20,80);
+				// amount damaged: loses 1 / x of max hp
+				this.effectState.inf_damage_amount = this.random(2,16);
+				/* modes:
+						1 - after contact
+						2 - after infected move
+						3 - after infected hit
+						4 - after infected faint
+						5 - end of turn
+						6 - thing enters infected's slot */
+				this.effectState.inf_mode = [this.random(1,5)];
+			}
+			console.log('infected parameters:');
+			console.log(this.effectState.inf_spread);
+			console.log(this.effectState.inf_damage);
+			console.log(this.effectState.inf_damage_amount);
+			console.log(this.effectState.inf_mode);
+			
+		},
+		onResidual(pokemon) {
+			// infect if mode has end of turn
+			if (this.effectState.inf_mode.includes(5)) {
+				console.log('random spread');
+				console.log(pokemon.name)
+				for (const foe of pokemon.foes()) {
+					if (!foe?.isActive || foe === pokemon) continue;
+					if (this.random(1,100) < this.effectState.inf_spread) {
+						foe.setStatus('infected', pokemon);
+					}
+				}
+				for (const ally of pokemon.allies()) {
+					if (!ally?.isActive || ally === pokemon) continue;
+					if (this.random(1,100) < this.effectState.inf_spread) {
+						ally.setStatus('infected', pokemon);
+					}
+				}
+			}
+
+			// take damage
+			console.log('roll for damage');
+			console.log(pokemon.name)
+			if(this.random(1,100) < this.effectState.inf_damage) {
+				console.log('take damage');
+				this.damage(pokemon.baseMaxhp / this.effectState.inf_damage_amount);
+			}
+
+			// mutate?
+			if (this.random(1,5) < 2) {
+				this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10,10);
+			}
+			if (this.random(1,5) < 2) {
+				this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10,10);
+			}
+			if (this.random(1,5) < 2) {
+				this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3,3);
+				if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
+			}
+			if (this.random(1,5) < 2) {
+				this.effectState.inf_mode.push(this.random(1,5));
+			}
+			if (this.random(1,5) < 2) {
+				if(this.effectState.inf_mode.length() > 0)
+					this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length()));
+			}
+
+			console.log('infected parameters:');
+			console.log(this.effectState.inf_spread);
+			console.log(this.effectState.inf_damage);
+			console.log(this.effectState.inf_damage_amount);
+			console.log(this.effectState.inf_mode);
+		},
+		onAfterMoveSecondarySelf(source, target, move) {
+			if (source && source !== target && move && 
+				((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
+				this.effectState.inf_mode.includes(2))) {
+				if (this.random(1,100) < this.effectState.inf_spread) {
+					target.setStatus('infected', target);
+				}
+			}
+		},
+		onAfterMoveSecondary(source, target, move) {
+			if (this.effectState.inf_mode.includes(1) && source && source !== target && move && this.checkMoveMakesContact(move, source, target)) {
+				if (source && source !== target && move && 
+					((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
+					this.effectState.inf_mode.includes(3))) {
+					if (this.random(1,100) < this.effectState.inf_spread) {
+						target.setStatus('infected', source);
+					}
+				}
+			}
+		},
+		onFaint(pokemon) {
+			if (this.effectState.inf_mode.includes(4)) {
+				for (const foe of pokemon.foes()) {
+					if (!foe?.isActive || foe === pokemon) continue;
+					if (this.random(1,100) < this.effectState.inf_spread) {
+						foe.setStatus('infected', pokemon);
+					}
+				}
+				for (const ally of pokemon.allies()) {
+					if (!ally?.isActive || ally === pokemon) continue;
+					if (this.random(1,100) < this.effectState.inf_spread) {
+						ally.setStatus('infected', pokemon);
+					}
+				}
+			}
+		},
+		onEnd(pokemon) {
+			this.effectState.inf_spread = null
+			this.effectState.inf_damage = null
+			this.effectState.inf_damage_amount = null
+			this.effectState.inf_mode = null
+		}
+	},
+
 	// Environmental Factors (New Weather)
 	yellowish: {
 		name: 'Yellowish',
