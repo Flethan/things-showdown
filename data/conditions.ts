@@ -559,7 +559,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 					if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
 				}
 				if (this.random(1,5) < 2) {
-					this.effectState.inf_mode.push(this.random(1,5));
+					if (this.effectState.inf_mode) {
+						this.effectState.inf_mode.push(this.random(1,5));
+					} else {
+						this.effectState.inf_mode = [this.random(1,5)];
+					}
 				}
 				if (this.random(1,5) < 2) {
 					if(this.effectState.inf_mode.length > 1)
@@ -634,7 +638,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 				if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
 			}
 			if (this.random(1,5) < 2) {
-				this.effectState.inf_mode.push(this.random(1,5));
+				if (this.effectState.inf_mode) {
+					this.effectState.inf_mode.push(this.random(1,5));
+				} else {
+					this.effectState.inf_mode = this.random(1,5);
+				}
 			}
 			if (this.random(1,5) < 2) {
 				if(this.effectState.inf_mode.length > 1)
