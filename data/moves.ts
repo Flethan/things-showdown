@@ -2271,6 +2271,39 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",
 	},
+	scrub: {
+		num: 682,
+		accuracy: 100,
+		basePower: 55,
+		category: "Physical",
+		name: "Scrub",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1},
+		onBasePower(basePower, source, target) {
+			if (target.hasType('Dirt')) {
+				return this.chainModify(2);
+			}
+		},
+		onHit(pokemon) {
+			if (!pokemon.hasType('Dirt')) return;
+			if (pokemon.addedType === 'Dirt') {
+				if (!pokemon.addType('')) return false;
+				this.add('-start', pokemon, 'typeadd', '', '[from] move: Scrub');
+			} else {
+				let types = pokemon.getTypes(true);
+				types.splice(types.indexOf('Dirt'), 1);
+				if (!types.length) types = ['???'];
+				pokemon.setType(types);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'), '[from] move: Scrub');
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Liquid",
+		contestType: "Clever",
+	},
 
 	// Music
 	earworm: {

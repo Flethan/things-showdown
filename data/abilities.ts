@@ -2890,6 +2890,43 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: -122,
 	},
+	hygienic: {
+		isNonstandard: "Thing",
+		onAllySetStatus(status, target, source) {
+			if (status.id === 'infected') {
+				this.add('-immune', target, '[from] ability: Hygienic');
+				return false;
+			}
+		},
+		name: "Hygienic",
+		rating: 5,
+		num: -122,
+	},
+	cushionedsoil: {
+		isNonstandard: "Thing",
+		onAllyDamage(damage, target, source, effect) {
+			if (effect.id === 'recoil') {
+				if (!this.activeMove) throw new Error("Battle.activeMove is null");
+				if (this.activeMove.id !== 'struggle') return null;
+			}
+		},
+		name: "Cushioned Soil",
+		rating: 3,
+		num: 69,
+	},
+	escalation: {
+		isNonstandard: "ThingInf",
+		onAfterMega(pokemon) {
+			let i: BoostID;
+			for (i in pokemon.boosts) {
+				if (pokemon.boosts[i]>0)
+					pokemon.boosts[i]! *= 2;
+			}
+		},
+		name: "Escalation",
+		rating: 3,
+		num: 69,
+	},
 
 	// BASE GAME
 	noability: {
