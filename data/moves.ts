@@ -648,7 +648,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Far Beam",
 		pp: 10,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {protect: 1, mirror: 1},
 		target: "any",
 		type: "Far",
 		contestType: "Clever",
@@ -3726,7 +3726,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {},
 		onHit(pokemon) {
-			pokemon.setStatus('infected');
+			pokemon.trySetStatus('infected');
 		},
 		secondary: null,
 		target: "normal",
