@@ -1064,7 +1064,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 
 			const targets: Pokemon[] = [];
 				for (const pokemon of field.battle.getAllPokemon()) {
-					if (pokemon.hasItem('yellowsafetyvest')) continue;
+					if (pokemon.hasItem('yellowsafetyvest') || pokemon.hasAbility('Celestial')) continue;
 					targets.push(pokemon);
 				}
 				if (targets.length === 0) return;
