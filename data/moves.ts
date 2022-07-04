@@ -524,6 +524,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 1}},
 		contestType: "Clever",
 	},
+	bury: {
+		num: 609,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Bury",
+		pp: 20,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 100,
+			status: 'banished',
+		},
+		onAfterHit(target, source, move) {
+			if (target.status !== 'banished') return false;
+			target.statusState.time = 1;
+			target.statusState.startTime = 1;
+		},
+		target: "normal",
+		type: "Dirt",
+		contestType: "Tough",
+	},
 
 	// Far
 	closein: {
