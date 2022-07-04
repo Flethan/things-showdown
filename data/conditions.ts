@@ -530,7 +530,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			console.log(source.name);
 			console.log('infecting');
 			console.log(target.name);
-			if (source.statusState && source.statusState.inf_spread) {
+			if (source && source.statusState && source.statusState.inf_spread) {
 				this.add('-status', target, 'infected');
 				// chance spread occurs
 				this.effectState.inf_spread = {...source.statusState.inf_spread};
@@ -675,7 +675,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				}
 			}
 		},
-		onFaint(pokemon) {
+		onBeforeFaint(pokemon) {
 			if (this.effectState.inf_mode.includes(4)) {
 				for (const foe of pokemon.foes()) {
 					if (!foe?.isActive || foe === pokemon) continue;
