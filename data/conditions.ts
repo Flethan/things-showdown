@@ -1033,6 +1033,81 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'none');
 		},
 	},
+	meteorshower: {
+		name: 'Meteor Shower',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source, effect) {
+			if (source?.hasItem('environmentalaccord')) {
+				return 10;
+			}
+			return 5;
+		},
+		// This should be applied directly to the stat before any of the other modifiers are chained
+		// So we give it increased priority.
+		onModifySpe(spe, pokemon) {
+			if ((pokemon.hasType('Arthropod') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('meteorshower')) {
+				return this.modify(spe, 1.5);
+			}
+		},
+		onFieldStart(battle, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				if (this.gen <= 5) this.effectState.duration = 0;
+				this.add('-weather', 'Meteor Shower', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Meteor Shower');
+			}
+		},
+		onFieldResidualOrder: 1,
+		onFieldResidual(field) {
+			this.add('-weather', 'Meteor Shower', '[upkeep]');
+
+			const targets: Pokemon[] = [];
+				for (const pokemon of field.battle.getAllPokemon()) {
+					if (pokemon.hasItem('yellowsafetyvest')) continue;
+					targets.push(pokemon);
+				}
+				if (targets.length === 0) return;
+				const targNum = this.random(0, targets.length);
+				const target = targets[targNum];
+
+			if(target.hasAbility('Adaptable') || target.hasType('Dirt')) {
+				this.heal(target.baseMaxhp / 8);
+				const result = this.random(10);
+				if (result < 8)
+					target.cureStatus();
+			} else {
+				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
+				this.damage(target.maxhp * Math.pow(2, typeMod) / 16);
+				const result = this.random(10);
+					if (result === 0) {
+						target.trySetStatus('prone');
+					} else if (result === 1) {
+						target.trySetStatus('banished');
+					} else if (result === 2) {
+						target.trySetStatus('blinded');
+					} else if (result === 3) {
+						target.trySetStatus('pressurized');
+					} else if (result === 4) {
+						target.trySetStatus('fluctuant');
+					} else if (result === 5) {
+						target.trySetStatus('wounded');
+					} else if (result === 6) {
+						target.trySetStatus('distanced');
+					} else if (result === 7) {
+						target.trySetStatus('infected');
+					}
+			}
+
+			if (this.field.isWeather('Meteor Shower')) this.eachEvent('Weather');
+		},
+		onWeather(pokemon) {
+			
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 
 	// BASE GAME
 	brn: {

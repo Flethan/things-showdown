@@ -480,6 +480,50 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Dirt",
 		contestType: "Tough",
 	},
+	rockshot: {
+		num: 1719,
+		accuracy: 85,
+		basePower: 80,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Rock Shot",
+		pp: 10,
+		priority: 0,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 20,
+			onHit(target, source) {
+				const result = this.random(3);
+				if (result === 0) {
+					target.trySetStatus('blinded', source);
+				} else if (result === 1) {
+					target.trySetStatus('wounded', source);
+				} else {
+					target.trySetStatus('prone', source);
+				}
+			},
+		},
+		target: "normal",
+		type: "Dirt",
+		contestType: "Tough",
+	},
+	callmeteorites: {
+		num: 1499,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Call Meteorites",
+		pp: 5,
+		priority: 0,
+		flags: {},
+		weather: 'Meteor Shower',
+		secondary: null,
+		target: "all",
+		type: "Dirt",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
 
 	// Far
 	closein: {
