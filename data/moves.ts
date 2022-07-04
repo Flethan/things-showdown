@@ -540,12 +540,77 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterHit(target, source, move) {
 			if (target.status !== 'banished') return false;
-			target.statusState.time = 1;
-			target.statusState.startTime = 1;
+			target.statusState.time = 2;
+			target.statusState.startTime = 2;
 		},
 		target: "normal",
 		type: "Dirt",
 		contestType: "Tough",
+	},
+	earthjet: {
+		num: 585,
+		accuracy: 90,
+		basePower: 100,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Earth Jet",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			boosts: {
+				spd: -1,
+			},
+		},
+		target: "normal",
+		type: "Dirt",
+		contestType: "Clever",
+	},
+	richsoil: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Rich Soil",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'richsoil',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Rich Soil', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Rich Soil');
+				}
+			},
+			onResidual(pokemon) {
+				if (pokemon.hasType('Dirt')) {
+					this.heal(pokemon.baseMaxhp / 4, pokemon);
+				} else {
+					this.heal(pokemon.baseMaxhp / 16, pokemon);
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Rich Soil');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Dirt",
+		zMove: {boost: {spd: 1}},
+		contestType: "Clever",
 	},
 
 	// Far
@@ -849,6 +914,84 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "all",
 		type: "Fish",
 		zMove: {boost: {spe: 1}},
+		contestType: "Cool",
+	},
+	fishbite: {
+		num: -277,
+		accuracy: 100,
+		basePower: 75,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Fish Bite",
+		pp: 15,
+		priority: 0,
+		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 30,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Fish",
+		contestType: "Tough",
+	},
+	glidingcharge: {
+		num: 803,
+		accuracy: 90,
+		basePower: 80,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Gliding Charge",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mystery: 1},
+		onModifyPriority(priority, source, target, move) {
+			if (this.field.isWeather('underwater')) {
+				return priority + 1;
+			}
+		},
+		secondary: null,
+		target: "any",
+		type: "Fish",
+		contestType: "Cool",
+	},
+	breachimpact: {
+		num: 803,
+		accuracy: 90,
+		basePower: 0,
+		basePowerCallback(pokemon, target) {
+			const targetWeight = target.getWeight();
+			const pokemonWeight = pokemon.getWeight();
+			if (pokemonWeight > targetWeight * 5) {
+				return 120;
+			}
+			if (pokemonWeight > targetWeight * 4) {
+				return 100;
+			}
+			if (pokemonWeight > targetWeight * 3) {
+				return 80;
+			}
+			if (pokemonWeight > targetWeight * 2) {
+				return 60;
+			}
+			return 40;
+		},
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Breach Impact",
+		pp: 5,
+		priority: 0,
+		recoil: [33, 100],
+		onDamage(damage, target, source, effect) {
+			if (effect.id === 'recoil' && this.field.isWeather('underwater')) {
+				this.field.clearWeather();
+				if (!this.activeMove) throw new Error("Battle.activeMove is null");
+				if (this.activeMove.id !== 'struggle') return null;
+			}
+		},
+		flags: {contact: 1, protect: 1, mystery: 1},
+		secondary: null,
+		target: "any",
+		type: "Fish",
 		contestType: "Cool",
 	},
 
@@ -3496,6 +3639,39 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "No",
 		zMove: {effect: 'clearnegativeboost'},
 	},
+	dematerialize: {
+		num: 329,
+		accuracy: 20,
+		basePower: 0,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Dematerialize",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		ohko: true,
+		target: "normal",
+		type: "No",
+		zMove: {basePower: 180},
+		maxMove: {basePower: 130},
+		contestType: "Beautiful",
+	},
+	clipthrough: {
+		num: 1344,
+		accuracy: 85,
+		basePower: 130,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Clip Through",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		recoil: [33, 100],
+		target: "normal",
+		type: "No",
+		contestType: "Clever",
+	},
 
 	// Science
 	study: {
@@ -4822,6 +4998,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Sword",
+		contestType: "Tough",
+	},
+	multistrike: {
+		num: 1541,
+		accuracy: 95,
+		basePower: 35,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Multi-strike",
+		pp: 20,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onAfterMove(source, target, move) {
+			if (this.randomChance(4, 5)) {
+				this.actions.useMove(move, target);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Sword",
+		zMove: {basePower: 140},
+		maxMove: {basePower: 130},
 		contestType: "Tough",
 	},
 

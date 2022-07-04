@@ -115,6 +115,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			horizontaltranslation: ["8L10"],
 			hit: ["8M"],
 			hide: ["8M"],
+			clipthrough: ["8L60"],
 		},
 	},
 	t3trahedron: {
@@ -130,6 +131,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			horizontaltranslation: ["8L10"],
 			hit: ["8M"],
 			hide: ["8M"],
+			clipthrough: ["8L60"],
 		},
 	},
 	p3ntachoron: {
@@ -150,6 +152,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			voidtrap: ["8L60"],
 			rankandfile: ["8T"],
+			clipthrough: ["8L60"],
+			dematerialize: ["8L80"],
 		},
 	},
 	meltipillar: {
@@ -291,6 +295,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L30"],
 		},
 	},
 	motoriscis: {
@@ -307,6 +312,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L30"],
 		},
 	},
 	aviachthys: {
@@ -328,6 +334,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bluejet: ["8L65"],
 			autoturret: ["8L65"],
 			rankandfile: ["8T"],
+			fishbite: ["8L30"],
+			dematerialize: ["8L80"],
 		},
 	},
 	angrybeehive: {
@@ -366,6 +374,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			fossilize: ["8E"],
+			fishbite: ["8L25"],
+			glidingcharge: ["8L50"],
 		},
 	},
 	anomallamalocarish: {
@@ -387,6 +397,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			fossilize: ["8E"],
+			fishbite: ["8L25"],
+			glidingcharge: ["8L50"],
+			breachimpact: ["8L65"],
 		},
 	},
 	anomallolash: {
@@ -412,6 +425,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			fossilize: ["8E"],
+			fishbite: ["8L25"],
+			glidingcharge: ["8L50"],
+			multistrike: ["8L75"],
 		},
 	},
 	afishal: {
@@ -428,6 +444,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L38"],
 		},
 	},
 	offishal: {
@@ -451,6 +468,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L38"],
 		},
 	},
 	bassozefish: {
@@ -470,6 +488,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L38"],
 		},
 	},
 	clawtheod: {
@@ -594,6 +613,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			nullland: ["8L1"],
 			voidtrap: ["8L38"],
+			clipthrough: ["8L55"],
+			dematerialize: ["8L70"],
 		},
 	},
 	fishish: {
@@ -620,6 +641,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			breachimpact: ["8L60"],
+			glidingcharge: ["8L49"],
 		},
 	},
 	goray: {
@@ -637,6 +660,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L1"],
 		},
 	},
 	congeel: {
@@ -658,6 +682,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L1"],
 		},
 	},
 	sarcopharyn: {
@@ -681,6 +706,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L1"],
 		},
 	},
 	demerfin: {
@@ -699,6 +725,10 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L6"],
+			richsoil: ["8L40"],
+			earthjet: ["8L50"],
+			bury: ["8L35"],
 		},
 	},
 	anglock: {
@@ -939,6 +969,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sendoff: ["8L5"],
 			shove: ["8L60"],
 			brilliancy: ["8T"],
+			dematerialize: ["8L68"],
 		},
 	},
 	harry: {
@@ -1050,6 +1081,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bluejet: ["8L80"],
 			rankandfile: ["8T"],
 			callmeteorites: ["8M"],
+			dematerialize: ["8L85"],
 		},
 	},
 	fsh: {
@@ -1069,6 +1101,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			submerge: ["8M"],
 			hit: ["8M"],
 			hide: ["8M"],
+			fishbite: ["8L17"],
 		},
 	},
 	clanksy: {
@@ -1109,6 +1142,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			rockshot: ["8L1"],
+			richsoil: ["8L1"],
+			earthjet: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	clayke: {
@@ -1123,6 +1159,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			rockshot: ["8L1"],
+			richsoil: ["8L1"],
+			earthjet: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	hwether: {
@@ -1159,6 +1198,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			transmute: ["8L1"],
 			rockshot: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	albeedle: {
@@ -1175,6 +1215,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			transmute: ["8L1"],
 			rockshot: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	citrinity: {
@@ -1193,6 +1234,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmute: ["8L1"],
 			brilliancy: ["8T"],
 			rockshot: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	swordguy: {
@@ -1262,6 +1304,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			tidy: ["8L20"],
 			wipeaway: ["8L15"],
 			rockshot: ["8L50"],
+			bury: ["8L55"],
 		},
 	},
 	manitsa: {
@@ -1315,6 +1358,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			callmeteorites: ["8L1"],
+			richsoil: ["8L1"],
+			earthjet: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	abyssulfo: {
@@ -1333,6 +1379,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			callmeteorites: ["8L1"],
+			richsoil: ["8L1"],
+			earthjet: ["8L1"],
+			bury: ["8L1"],
 		},
 	},
 	dirtle: {
@@ -1346,6 +1395,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			rockshot: ["8L20"],
+			earthjet: ["8L35"],
+			bury: ["8L55"],
 		},
 	},
 	sootortoise: {
@@ -1362,6 +1413,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			prune: ["8L25"],
 			hide: ["8M"],
 			rockshot: ["8L20"],
+			earthjet: ["8L35"],
+			bury: ["8L55"],
 		},
 	},
 	tortesecrate: {
@@ -1383,6 +1436,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 			infect: ["8L70"],
 			rockshot: ["8L20"],
+			earthjet: ["8L35"],
+			bury: ["8L55"],
 		},
 	},
 	cheleaf: {
@@ -1405,6 +1460,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			photosynthesize: ["8L31"],
 			deciduousblast: ["8L60"],
 			rockshot: ["8L20"],
+			earthjet: ["8L35"],
+			richsoil: ["8L1"],
+			bury: ["8L55"],
 		},
 	},
 	pristudine: {
@@ -1432,6 +1490,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greennetwork: ["8L70"],
 			brilliancy: ["8T"],
 			rockshot: ["8L20"],
+			earthjet: ["8L35"],
+			richsoil: ["8L1"],
+			bury: ["8L55"],
 		},
 	},
 	despacio: {
@@ -1591,6 +1652,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			pheromonemark: ["8L55"],
+			bury: ["8L65"],
 		},
 	},
 	soapy: {
@@ -1702,6 +1764,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			bluejet: ["8E"],
 			hsearch: ["8T"],
+			clipthrough: ["8L60"],
 		},
 	},
 	heliquet: {
@@ -1724,6 +1787,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bluejet: ["8E"],
 			hsearch: ["8T"],
 			rankandfile: ["8T"],
+			clipthrough: ["8L60"],
 		},
 	},
 	splattom: {
@@ -1753,6 +1817,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bluejet: ["8E"],
 			hsearch: ["8T"],
 			brilliancy: ["8T"],
+			dematerialize: ["8L70"],
+			clipthrough: ["8L60"],
 		},
 	},
 	sonsprite: {
@@ -1931,6 +1997,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			fossilize: ["8L15"],
 			permafrost: ["8L1"],
+			callmeteorites: ["8M"],
 		},
 	},
 	osteoraptor: {
@@ -1954,6 +2021,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			fossilize: ["8L15"],
 			permafrost: ["8L1"],
+			callmeteorites: ["8M"],
 		},
 	},
 	achrososaur: {
@@ -1983,6 +2051,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			fossilize: ["8L15"],
 			permafrost: ["8L1"],
+			callmeteorites: ["8M"],
+			multistrike: ["8L70"],
 		},
 	},
 	neunluft: {
@@ -2194,6 +2264,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			coagulate: ["8E"],
 			hit: ["8M"],
 			hide: ["8M"],
+			richsoil: ["8E"],
 		},
 	},
 	scramblaa: {
@@ -2214,6 +2285,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hotcoals: ["8L1"],
 			radiate: ["8L50"],
 			bask: ["8L30"],
+			richsoil: ["8L60"],
+			bury: ["8L70"],
 		},
 	},
 	sunnoehoe: {
@@ -2234,6 +2307,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hotcoals: ["8L1"],
 			radiate: ["8L50"],
 			bask: ["8L30"],
+			richsoil: ["8L60"],
+			bury: ["8L70"],
 		},
 	},
 	perpetronome: {
@@ -2329,6 +2404,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			depthvanish: ["8L55"],
 			particlebeam: ["8L68"],
 			spray: ["8L29"],
+			clipthrough: ["8L70"],
+			dematerialize: ["8L60"],
 		},
 	},
 	myomimeo: {
@@ -2670,6 +2747,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			banish: ["8L20"],
 			noescape: ["8L50"],
 			brilliancy: ["8T"],
+			clipthrough: ["8L70"],
 		},
 	},
 	pauerowt: {
@@ -2770,6 +2848,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L10"],
 			photosynthesize: ["8L15"],
 			greennetwork: ["8L20"],
+			richsoil: ["8E"],
 		},
 	},
 	treefurtheraway: {
@@ -2799,6 +2878,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			photosynthesize: ["8L15"],
 			greennetwork: ["8L20"],
 			farbeam: ["8L52"],
+			richsoil: ["8E"],
 		},
 	},
 	mistimink: {
@@ -2821,6 +2901,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			whipcrack: ["8L1"],
 			coagulate: ["8L1"],
+			clipthrough: ["8L1"],
 		},
 	},
 	triathlide: {
@@ -2892,6 +2973,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L1"],
 			brilliantflash: ["8L1"],
 			fireworks: ["8L1"],
+			earthjet: ["8L1"],
 		},
 	},
 	therther: {
@@ -2922,6 +3004,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8L1"],
 			cooldown: ["8L1"],
 			winddispersal: ["8L1"],
+			earthjet: ["8L1"],
 		},
 	},
 	beano: {
@@ -2956,6 +3039,24 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
+			swarm: ["8L1"],
+			cosmicdust: ["8L1"],
+			farbeam: ["8L1"],
+			brilliantfish: ["8L1"],
+			greentackle: ["8L1"],
+			harbinger: ["8L1"],
+			hairycrash: ["8L1"],
+			delayedround: ["8L1"],
+			cascade: ["8L1"],
+			accent: ["8L1"],
+			shootingstar: ["8L1"],
+			voidscream: ["8L1"],
+			particlebeam: ["8L1"],
+			shotput: ["8L1"],
+			swordbeam: ["8L1"],
+			radiate: ["8L1"],
+			bluejet: ["8L1"],
+			staticstrike: ["8L1"],
 		},
 	},
 	searke: {
@@ -3047,6 +3148,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lookup: ["8L30"],
 			gravebite: ["8L40"],
 			callmeteorites: ["8M"],
+			clipthrough: ["8L50"],
 		},
 	},
 	gigaroach: {
@@ -3076,6 +3178,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nullland: ["8L75"],
 			pheromonemark: ["8L1"],
 			callmeteorites: ["8M"],
+			clipthrough: ["8L50"],
+			dematerialize: ["8L80"],
 		},
 	},
 	ouromorose: {
@@ -3089,21 +3193,17 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			stealthstrike: ["8L10"],
 			lookup: ["8L30"],
 			gravebite: ["8L40"],
-			landslide: ["8L50"],
-			nuisancepest: ["8L51"],
-			voidpunch: ["8L52"],
-			summonlocusts: ["8L53"],
-			cheapstrike: ["8L54"],
-			swing: ["8L55"],
-			arthrobite: ["8L56"],
-			dirtypunch: ["8L57"],
-			moonbeam: ["8L58"],
-			suplex: ["8L59"],
-			ecdyse: ["8L60"],
-			bask: ["8L65"],
-			yellowgigahit: ["8L70"],
-			nullland: ["8L75"],
 			callmeteorites: ["8M"],
+			hairycrash: ["8L1"],
+			whipcrack: ["8L1"],
+			wipeaway: ["8L1"],
+			brush: ["8L1"],
+			hairball: ["8L1"],
+			shove: ["8L1"],
+			voidpunch: ["8L1"],
+			nullland: ["8L1"],
+			clipthrough: ["8L50"],
+			dematerialize: ["8L80"],
 		},
 	},
 	molluskeleton: {
@@ -3118,6 +3218,11 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lookup: ["8L30"],
 			gravebite: ["8L40"],
 			callmeteorites: ["8M"],
+			clipthrough: ["8L50"],
+			breachimpact: ["8L70"],
+			fishbite: ["8L45"],
+			dematerialize: ["8L80"],
+			nullland: ["8L1"],
 		},
 	},
 	aerraton: {
@@ -3191,6 +3296,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whipcrack: ["8L40"],
 			callmeteorites: ["8M"],
 			rockshot: ["8L21"],
+			earthjet: ["8L51"],
+			bury: ["8L70"],
+			richsoil: ["8L1"],
 		},
 	},
 	geosonde: {
@@ -3238,6 +3346,10 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalslam: ["8L85"],
 			callmeteorites: ["8L60"],
 			rockshot: ["8L21"],
+			earthjet: ["8L51"],
+			bury: ["8L70"],
+			breachimpact: ["8L80"],
+			richsoil: ["8L1"],
 		},
 	},
 	cululus: {
@@ -3406,6 +3518,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			heatup: ["8M"],
 			bask: ["8L16"],
 			scrub: ["8E"],
+			fishbite: ["8L7"],
 		},
 	},
 	dishwashilisk: {
@@ -3444,6 +3557,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalslam: ["8L78"],
 			promote: ["8T"],
 			scrub: ["8E"],
+			fishbite: ["8L7"],
 		},
 	},
 	hedgepig: {
@@ -3459,6 +3573,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L40"],
 			rockshot: ["8L50"],
 			callmeteorites: ["8L60"],
+			richsoil: ["8L1"],
+			earthjet: ["8L65"],
+			bury: ["8L45"],
 		},
 	},
 	mimunclownfish: {
@@ -3471,6 +3588,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantfish: ["8L20"],
 			submerge: ["8L10"],
 			winddispersal: ["8L30"],
+			fishbite: ["8L10"],
+			glidingcharge: ["8L50"],
 			// advancedforecasting: ["8L40"],
 		},
 	},
@@ -3478,12 +3597,48 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			greentackle: ["8L1"],
+			greenbite: ["8L1"],
+			chartreusebeam: ["8L1"],
+			deciduousblast: ["8L1"],
+			greenify: ["8L1"],
+			greenseeds: ["8L1"],
+			greennetwork: ["8L1"],
+			greenground: ["8L1"],
+			stealthstrike: ["8L1"],
+			landslide: ["8L1"],
+			richsoil: ["8L1"],
+			harbinger: ["8L1"],
+			photosynthesize: ["8L1"],
+			banish: ["8L1"],
+			moonbeam: ["8L1"],
+			yellowgigahit: ["8L1"],
+			autumnaloffering: ["8L1"],
+			voidscream: ["8L1"],
 		},
 	},
 	boxlegend: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			autoturret: ["8L1"],
+			apexcalibration: ["8L1"],
+			shrinkwrap: ["8L1"],
+			tidy: ["8L1"],
+			banish: ["8L1"],
+			voidscream: ["8L1"],
+			poweroff: ["8L1"],
+			nullland: ["8L1"],
+			voidtrap: ["8L1"],
+			study: ["8L1"],
+			horizontaltranslation: ["8L1"],
+			factsandlogic: ["8L1"],
+			particlebeam: ["8L1"],
+			stay: ["8L1"],
 		},
 	},
 	exceller: {
@@ -3509,6 +3664,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			warmup: ["8L15"],
 			prune: ["8L30"],
 			fullpowerstrike: ["8L75"],
+			multistrike: ["8L50"],
+			clipthrough: ["8L65"],
 		},
 	},
 	stellet: {
@@ -3755,6 +3912,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliancy: ["8L100"],
 			promote: ["8L100"],
 			callmeteorites: ["8M"],
+			earthjet: ["8L35"],
+			bury: ["8L73"],
 		},
 	},
 

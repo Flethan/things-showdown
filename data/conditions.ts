@@ -1045,11 +1045,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		// This should be applied directly to the stat before any of the other modifiers are chained
 		// So we give it increased priority.
-		onModifySpe(spe, pokemon) {
-			if ((pokemon.hasType('Arthropod') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('meteorshower')) {
-				return this.modify(spe, 1.5);
-			}
-		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
 				if (this.gen <= 5) this.effectState.duration = 0;
@@ -1063,22 +1058,24 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'Meteor Shower', '[upkeep]');
 
 			const targets: Pokemon[] = [];
-				for (const pokemon of field.battle.getAllPokemon()) {
-					if (pokemon.hasItem('yellowsafetyvest') || pokemon.hasAbility('Celestial')) continue;
-					targets.push(pokemon);
-				}
-				if (targets.length === 0) return;
-				const targNum = this.random(0, targets.length);
-				const target = targets[targNum];
+			for (const pokemon of field.battle.getAllActive()) {
+				if (pokemon.hasItem('yellowsafetyvest') || pokemon.hasAbility('Celestial') || pokemon.status === 'banished') continue;
+				targets.push(pokemon);
+			}
+			if (targets.length === 0) return;
+			const targNum = this.random(0, targets.length);
+			const target = targets[targNum];
+			console.log(target.name);
+
 
 			if(target.hasAbility('Adaptable') || target.hasType('Dirt')) {
-				this.heal(target.baseMaxhp / 8);
+				this.heal(target.baseMaxhp / 8, target);
 				const result = this.random(10);
 				if (result < 8)
 					target.cureStatus();
 			} else {
 				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
-				this.damage(target.maxhp * Math.pow(2, typeMod) / 16);
+				this.damage(target.maxhp * Math.pow(2, typeMod) / 16, target);
 				const result = this.random(10);
 					if (result === 0) {
 						target.trySetStatus('prone');

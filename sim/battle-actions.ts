@@ -704,6 +704,8 @@ export class BattleActions {
 					}
 					if (pokemon.volatiles['ocount3']) {
 						accuracy = true;
+					} else if (move.isNonstandard === 'Thing') {
+						accuracy = this.battle.runEvent('ModifyAccuracy', target, pokemon, move, accuracy);
 					} else if (!target.volatiles['dynamax'] && pokemon.level >= target.level &&
 						(move.ohko === true || !target.hasType(move.ohko))) {
 						accuracy += (pokemon.level - target.level);
