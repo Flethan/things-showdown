@@ -3631,7 +3631,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		name: "Power Off",
 		pp: 5,
-		priority: 0,
+		priority: 1,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		status: 'banished',
 		secondary: null,
