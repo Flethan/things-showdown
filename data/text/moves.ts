@@ -719,6 +719,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Raises the user's Defense by 3 stages, and lowers the user's Speed by 1 stage.",
 		shortDesc: "Raises Defense by 3, lowers Speed by 1.",
 	},
+	infect: {
+		name: "Infect",
+		desc: "Infects the target.",
+		shortDesc: "Infects the target.",
+	},
 	// sport
 	fourseamfastball: {
 		name: "Four-seam Fastball",
