@@ -1302,7 +1302,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "all",
-		type: "Liquid",
+		type: "Green",
 		zMove: {boost: {spd: 1}},
 		contestType: "Cute",
 	},
