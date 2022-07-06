@@ -333,7 +333,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "The user faints.",
 	},
 	prune: {
-		name: "Far Beam",
+		name: "Prune",
 		desc: "Power doubles if the target is Green-type. If this move is successful, the target's Green type becomes typeless as long as it remains active.",
 		shortDesc: "Power doubles if target Green; removes Green.",
 	},
@@ -399,6 +399,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Lava Flow",
 		desc: "This move combines Temperature in its type effectiveness against the target.",
 		shortDesc: "Combines Temperature in its type effectiveness.",
+	},
+	scrub: {
+		name: "Scrub",
+		desc: "Power doubles if the target is Dirt-type. If this move is successful, the target's Dirt type becomes typeless as long as it remains active.",
+		shortDesc: "Power doubles if target Dirt; removes Dirt.",
 	},
 	spill: {
 		name: "Spill",
