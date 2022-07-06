@@ -56,21 +56,46 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, the environment becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Locust Swarm.",
 		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
+	pheromonemark: {
+		name: "Pheromone Mark",
+		desc: "Until the target switches out, Arthropod-type moves used against it have a +2 crit ratio, and it takes 1.5x damage from Locust Swarm.",
+		shortDesc: "Arthropod moves against target have +2 crit ratio.",
+	},
 	// dirt
 	landslide: {
 		name: "Landslide",
-		desc: "Has a 20% chance knock the target prone.",
-		shortDesc: "20% chance knock the target(s) prone.",
+		desc: "Has a 20% chance to knock the target prone.",
+		shortDesc: "20% chance to knock the target(s) prone.",
 	},
 	dirtypunch: {
 		name: "Landslide",
-		desc: "Has a 10% chance blind the target.",
-		shortDesc: "10% chance blind the target.",
+		desc: "Has a 10% chance to blind the target.",
+		shortDesc: "10% chance to blind the target.",
+	},
+	bludgeon: {
+		name: "Bludgeon",
+		desc: "Has a 30% chance to wound the target.",
+		shortDesc: "10% chance to wound the target.",
+	},
+	rockshot: {
+		name: "Rock Shot",
+		desc: "Has a 20% chance to blind, wound, or knock the target prone.",
+		shortDesc: "20% chance to blind, wound, or prone target.",
+	},
+	bury: {
+		name: "Bury",
+		desc: "Banishes the target. The target will always recover from being banished after 1 turn.",
+		shortDesc: "Banish target w/ 1 turn duration.",
 	},
 	cosmicdust: {
 		name: "Cosmic Dust",
 		desc: "Has a 10% chance to raise the user's Special Attack by 1 stage.",
 		shortDesc: "Hits adjacent foes. 10% raise user's Sp. Atk by 1.",
+	},
+	earthjet: {
+		name: "Earth Jet",
+		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
+		shortDesc: "10% chance to lower the target's Sp. Def by 1.",
 	},
 	primordialsmoke: {
 		name: "Primordial Smoke",
@@ -87,17 +112,64 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: "  A dust cloud has been stirred up in front of [TEAM]!",
 		end: "  The dust cloud has disappeared from [TEAM]!",
 	},
+	callmeteorites: {
+		name: "Call Meteorites",
+		desc: "For 5 turns, the environment becomes Meteor Shower. At the end of each turn except the last, a random active Thing is chosen to lose 1/16 of its maximum HP, modified by Dirt type-effectiveness and rounded down, with an 80% chance to receive a random status condition. If the chosen Thing is Dirt-type, it recovers 1/8 of its maximum HP instead, rounded down, with an 80% chance to cure the Thing of any status condition. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Meteor Shower.",
+		shortDesc: "For 5 turns, meteorites strike the field.",
+	},
+	richsoil: {
+		name: "Rich Soil",
+		desc: "For 5 turns, the landscape becomes Rich Soil. At the end of each turn except the last, all active Things recover 1/16 of their maximum HP, rounded down; if they are Dirt-type, they recover 1/4 of their maximum HP instead. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Rich Soil.",
+		shortDesc: "For 5 turns, the ground becomes incredibly fertile.",
+	},
 	// far
+	shove: {
+		name: "Shove",
+		desc: "Has a 100% chance to distance the target.",
+		shortDesc: "100% chance to distance the target.",
+	},
+	farbeam: {
+		name: "Far Beam",
+		desc: "Power doubles if the target is distanced.",
+		shortDesc: "Power doubles if the target is distanced.",
+	},
+	closein: {
+		name: "Close In",
+		desc: "Fails unless the user is a Far type, or is distanced. If this move is successful, the user's Far type becomes typeless as long as it remains active. Any other Things targeting the user this turn flinch.",
+		shortDesc: "Foes targeting user flinch; must be Far or distanced.",
+
+		typeChange: "  [POKEMON] sprung forward!",
+	},
 	changechannel: {
 		name: "Change Channel",
 		desc: "The target is forced to switch out and be replaced with a random unfainted ally. Fails if the target is the last unfainted Pokemon in its party. This attack does not go last in priority.",
 		shortDesc: "Forces the target to switch to a random ally.",
+	},
+	sendoff: {
+		name: "Send Off",
+		desc: "Distances the target.",
+		shortDesc: "Distances the target.",
 	},
 	// fish
 	fishslap: {
 		name: "Fish Slap",
 		desc: "Has a 10% chance to make the target flinch.",
 		shortDesc: "10% chance to make the target flinch.",
+	},
+	glidingcharge: {
+		name: "Gliding Charge",
+		desc: "If the current environment is Underwater, , this move has its priority increased by 1.",
+		shortDesc: "If environment Underwater, +1 priority.",
+	},
+	fishbite: {
+		name: "Fish Bite",
+		desc: "Has a 30% chance to make the target flinch.",
+		shortDesc: "30% chance to make the target flinch.",
+	},
+	breachimpact: {
+		name: "Breach Impact",
+		desc: "The power of this move depends on (user's weight / target's weight), rounded down. Power is equal to 120 if the result is 5 or more, 100 if 4, 80 if 3, 60 if 2, and 40 if 1 or less. If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP. If the current environment is Underwater, the user does not take any recoil damage, and the Underwater ends.",
+		shortDesc: "Power->heavier; 33% recoil, unless Underwater (then ends).",
 	},
 	brilliantfish: {
 		name: "Brilliant Fish",
@@ -139,10 +211,42 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "This move combines Yellow in its type effectiveness against the target.",
 		shortDesc: "Combines Yellow in its type effectiveness.",
 	},
+	deciduousblast: {
+		name: "Deciduous Blast",
+		desc: "Fails unless the user is a Green type. If this move is successful, the user's Green type becomes typeless as long as it remains active.",
+		shortDesc: "User's Green type becomes typeless; must be Green.",
+
+		typeChange: "  [POKEMON] abscised its green!",
+	},
 	greenify: {
 		name: "Greenify",
 		desc: "Adds the Green type to the user. A Thing can only have one added type at a time. Fails if the user already has Green type added.",
 		shortDesc: "Adds Green to the user's type(s).",
+	},
+	greenseeds: {
+		name: "Green Seeds",
+		desc: "Causes the Green type to be added to the target, effectively making it have two or three types. If the target already has an added type, it is replaced.",
+		shortDesc: "Adds Green to the target's type(s).",
+	},
+	abilityseeds: {
+		name: "Ability Seeds",
+		desc: "Causes the target's Ability to become the same as the user's. Fails with certain abilities.",
+		shortDesc: "The target's Ability changes to match the user's.",
+	},
+	photosynthesize: {
+		name: "Photosynthesize",
+		desc: "Heals the user by 1/4 of its maximum HP, multiplied by the number of Green types it has (counting Green Ground terrain as the user having a Green type), rounded down. Fails if the user is not Green type.",
+		shortDesc: "Heals by 25% x user's number of Green type(s).",
+	},
+	greennetwork: {
+		name: "Green Network",
+		desc: "For every Green type on an active Thing (counting Green Ground terrain as 1 Green type), the user has a random stat raised 1 stage.",
+		shortDesc: "Gives random boost for every Green type in play.",
+	},
+	greenground: {
+		name: "Green Ground",
+		desc: "For 5 turns, the landscape becomes Green Ground. During the effect, the power of Green-type moves is multiplied by 1.2. The terrain counts as an addition Green-type for Things when they use a move that counts up or requires a Green type. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Green Ground.",
+		shortDesc: "For 5 turns, the floor turns green.",
 	},
 	// h
 	hostile: {
@@ -174,6 +278,18 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Lowers the target's Defense by 1 stage and evasiveness by 2 stages. Prevents the user and the target from switching out. Fails if the user is already H-Bonded.",
 		shortDesc: "Lowers foe Def 1 and evasion 2. Traps user & foe.",
 	},
+	hide: {
+		name: "Hide",
+		desc: "Raises the user's evasiveness by 1 stage.",
+		shortDesc: "Raises the user's evasiveness by 1.",
+	},
+	hsearch: {
+		name: "H Search",
+		desc: "A random H-type move, or other move that starts with H, is selected for use.",
+		shortDesc: "Picks a random H move.",
+
+		move: "H: [MOVE]!",
+	},
 	// hair
 	whipcrack: {
 		name: "Whipcrack",
@@ -189,6 +305,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Hair Ball",
 		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
 		shortDesc: "10% chance to lower the target's Sp. Def by 1.",
+	},
+	wipeaway: {
+		name: "Wipe Away",
+		desc: "The current environmental factor, if any, ends.",
+		shortDesc: "Ends current environmental factor.",
 	},
 	brush: {
 		name: "Brush",
@@ -210,6 +331,21 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Crash Landing",
 		desc: "The user faints after using this move, even if this move fails for having no target.",
 		shortDesc: "The user faints.",
+	},
+	prune: {
+		name: "Far Beam",
+		desc: "Power doubles if the target is Green-type. If this move is successful, the target's Green type becomes typeless as long as it remains active.",
+		shortDesc: "Power doubles if target Green; removes Green.",
+	},
+	piercinground: {
+		name: "Piercing Round",
+		desc: "Ignores protecting moves like Whistle and Parry. Lowers target's Special Defence by 1 stage.",
+		shortDesc: "Ignores protect. Lowers target's SpD by 1.",
+	},
+	delayedround: {
+		name: "Delayed Round",
+		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
+		shortDesc: "Hits one turn after being used.",
 	},
 	toxicsmog: {
 		name: "Toxic Smog",
@@ -233,16 +369,21 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Raises the user's Speed by 1. On the next turn, raises the Speed of the Thing in the user's position by 1. If this move is already in effect, it will still raise the user's Speed but will not do anything on the next turn.",
 		shortDesc: "Raises user's Spe 1, and recipient's Spe 1 turn 2.",
 	},
-	piercinground: {
-		name: "Piercing Round",
-		desc: "Ignores protecting moves like Whistle and Parry. Lowers target's Special Defence by 1 stage.",
-		shortDesc: "Ignores protect. Lowers target's SpD by 1.",
+	autoturret: {
+		name: "Auto-Turret",
+		desc: "Sets up a Side Condition on the allied side of the field for 5 turns. At the end of each turn except the last, a random opposing Thing is chosen to be the target of the move Shoot (Physical, Industrial-type, power 50); damage is calculated using an Attack stat of 200. Fails if the effect is already active on the user's side.",
+		shortDesc: "Shoots random foe for 5 turns.",
+
+		start: " A turret is actived for [TEAM]!",
+		end: "  [TEAM]'s turret shuts down!",
+		activate: "  [POKEMON] is shot by the turret!",
 	},
-	delayedround: {
-		name: "Delayed Round",
-		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
-		shortDesc: "Hits one turn after being used.",
+	equip: {
+		name: "Equip",
+		desc: "Causes the user to be equipped to the target. While in effect, it increases the target's stats additively by the user's stats, and redirects moves targeting the user to the target. Equip ends when the user uses a non-Equip move, or uses Equip targetting a different ally.",
+		shortDesc: "Adds user's stats to target.",
 	},
+	
 	// liquid
 	soppingslap: {
 		name: "Sopping Slap",
@@ -324,6 +465,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a higher chance for a critical hit.",
 		shortDesc: "High critical hit ratio.",
 	},
+	slammindrumsolo: {
+		name: "Slammin' Drum Solo",
+		desc: "Has a 10% chance to raise the user's Speed by 1 stage. If Mystical Song is in effect, adds the Harmonies to boost Music-type Things' Defense and Speed at the end of each turn.",
+		shortDesc: "10% Spe +1. Harmony: Def+1, Spe+1",
+	},
 	earworm: {
 		name: "Earworm",
 		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move.",
@@ -340,6 +486,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Glissando",
 		desc: "No additional effect.",
 		shortDesc: "No additional effect. Hits adjacent foes.",
+	},
+	jamminbasssolo: {
+		name: "Jammin' Bass Solo",
+		desc: "Has a 10% chance to raise the user's Special Defense by 1 stage. If Mystical Song is in effect, adds the Harmonies to boost Music-type Things' Special Defense and Heal at the end of each turn.",
+		shortDesc: "10% SpD +1. Harmony: SpD+1, Heal",
+	},
+	whamminkeyboardsolo: {
+		name: "Whammin' Keyboard Solo",
+		desc: "Has a 10% chance to raise the user's Special Attack by 1 stage. If Mystical Song is in effect, adds the Harmonies to boost Music-type Things' Attack and Special Attack at the end of each turn.",
+		shortDesc: "10% SpA +1. Harmony: Atk+1, SpA+1",
 	},
 	hypnoticmelody: {
 		name: "Hypnotic Melody",
@@ -370,6 +526,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Lento",
 		desc: "Lowers the target's Speed by 1 stage. If Mystical Song is in effect, adds the Harmony to prevent the use of moves with original or altered priority greater than 0, except those with priority boosted by Windy.",
 		shortDesc: "Lowers foe(s) Spe by 1. Harmony: NoPriority",
+	},
+	keychange: {
+		name: "Key Change",
+		desc: "If Mystical Song is in effect, adds the Harmonies to boost the Attack and Special Attack of Things using Music-type moves by 1.5x.",
+		shortDesc: "Harmony: AtkUp, SpAUp",
 	},
 	mysticalsong: {
 		name: "Mystical	Song",
@@ -460,10 +621,20 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If the target is banished, this move has its power doubled, cannot miss, and cures the target from being banished.",
 		shortDesc: "Hits banished targets for 2x power.",
 	},
+	clipthrough: {
+		name: "Clip Through",
+		desc: "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP.",
+		shortDesc: "Has 33% recoil.",
+	},
 	voidscream: {
 		name: "Void Scream",
 		desc: "Has a 40% chance to make the target flinch. If the user is banished, this move has its power doubled",
 		shortDesc: "40% flinch chance. 2x power if user banished.",
+	},
+	dematerialize: {
+		name: "Dematerialize",
+		desc: "Deals damage to the target equal to the target's maximum HP.",
+		shortDesc: "OHKOs the target.",
 	},
 	banish: {
 		name: "Banish",
@@ -494,6 +665,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Kinetic Energy",
 		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
 		shortDesc: "Uses user's Spe stat as Atk in damage calculation.",
+	},
+	inject: {
+		name: "Inject",
+		desc: "This move's base power is multiplied by the user's remaining HP / 6.",
+		shortDesc: "Base power = user's remaining HP / 6",
 	},
 	factsandlogic: {
 		name: "Facts and Logic",
@@ -533,6 +709,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		start: "  [POKEMON] is being reprogrammed!",
 		end: "  [POKEMON] was reprogrammed!",
 	},
+	fossilize: {
+		name: "Iron Defense",
+		desc: "Raises the user's Defense by 3 stages, and lowers the user's Speed by 1 stage.",
+		shortDesc: "Raises Defense by 3, lowers Speed by 1.",
+	},
 	// sport
 	fourseamfastball: {
 		name: "Four-seam Fastball",
@@ -571,6 +752,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Deals damage to the last opposing Pokemon to hit the user with a physical attack this turn equal to twice the HP lost by the user from that attack, and forces them to switch out. If the user did not lose HP from the attack, this move deals 1 HP of damage instead. If that opposing Pokemon's position is no longer in use and there is another opposing Pokemon on the field, the damage is done to it instead. Only the last hit of a multi-hit attack is counted. Fails if the user was not hit by an opposing Pokemon's physical attack this turn.",
 		shortDesc: "If hit by physical, return 2x damage & force switch.",
 	},
+	cominginhot: {
+		name: "Coming in Hot",
+		shortDesc: "No additional effect.",
+	},
 	fourinarow: {
 		name: "Four-in-a-Row",
 		desc: "Has a 20% chance to lower the target's Special Attack by 1 stage.",
@@ -598,6 +783,21 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Warm Up",
 		desc: "Raises the user's Attack and Speed by 1 stage. If the user is Fjean, makes it change form.",
 		shortDesc: "Raises the user's Attack and Speed by 1.",
+	},
+	springfloor: {
+		name: "Spring Floor",
+		desc: "For 5 turns, the landscape becomes Spring Floor. During the effect, the Attack and Defense of Sport-type Things is multiplied by 1.5, and all Things do not take any recoil damage. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Spring Floor.",
+		shortDesc: "For 5 turns, the ground gets springy.",
+	},
+	cheeron: {
+		name: "Cheer On",
+		desc: "Causes the target's next move this turn to be a critical hit.",
+		shortDesc: "Causes target's next move to crit.",
+	},
+	stay: {
+		name: "Stay",
+		desc: "Prevents the user from being switched out for a turn. If the user's Ability is Stubborn, the ability's effects are disabled for the turn as well.",
+		shortDesc: "Protects user from switches; disables Stubborn.",
 	},
 	// sword
 	sharpslash: {
@@ -629,6 +829,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Cheap Strike",
 		desc: "Has a 50% chance to wound the target.",
 		shortDesc: "50% chance to wound the target.",
+	},
+	fullpowerstrike: {
+		name: "Full Power Strike",
+		desc: "If the user lands a critical hit with this move, the user faints. This move's critical hit ratio is increased by the user's Attack stat boosts.",
+		shortDesc: "Atk boosts increase crit chance; crits faint user.",
+	},
+	multistrike: {
+		name: "Multi-strike",
+		desc: "Has an 80% chance to use this move again.",
+		shortDesc: "80% chance to use again.",
 	},
 	swordbeam: {
 		name: "Sword Beam",
@@ -692,7 +902,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	permafrost: {
 		name: "Permafrost",
-		desc: "Sets up a Side Condition on the allied side of the field, making fluctuant each opposing Thing that switches in. Fails if the effect is already active on the opposing side.",
+		desc: "Sets up a Side Condition on the allied side of the field, making fluctuant each ally Thing that switches in. Fails if the effect is already active on the user's side.",
 		shortDesc: "Makes allies fluctuant on switch-in.",
 
 		start: " A permafrost sets in around [TEAM]!",
@@ -720,6 +930,13 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
 		shortDesc: "User cannot move next turn.",
 	},
+	sandsoftime: {
+		name: "Sands of Time",
+		desc: "Causes damage to the target equal to 1/16 of its maximum HP, modified by Time-type effectiveness and rounded down, at the end of each turn for 5 turns.",
+		shortDesc: "Damages the target for 5 turns.",
+
+		start: "  [POKEMON] is feeling the passage of time!",
+	},
 	replay: {
 		name: "Replay",
 		desc: "The target immediately uses its last used move. Fails if the move is any two-turn move or any recharge move.",
@@ -745,6 +962,21 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "For 5 turns, Things can only use their last-selected move. If this move is used during the effect, the effect ends.",
 		shortDesc: "For 5 turns, all Things repeat their last move.",
 	},
+	pause: {
+		name: "Pause",
+		desc: "Prevents the target from switching or using a move on its next turn.",
+		shortDesc: "The target cannot attack or switch next turn.",
+
+		cant: "  [POKEMON] is frozen in place!",
+	},
+	fastforward: {
+		name: "Fast Forward",
+		desc: "The target immediately uses the move it was going to use this turn, followed by 2 more moves chosen randomly. For the next 2 turns, the target cannot switch or use a move.",
+		shortDesc: "Target attacks thrice, can't switch/attack for 2 turns.",
+
+		activate: "  [TARGET]'s actions were hurried through by [POKEMON]!",
+		cant: "  [POKEMON]'s action was already seen!",
+	},
 	// weather
 	rapidvortex: {
 		name: "Rapid Vortex",
@@ -769,6 +1001,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	bluejet: {
 		name: "Blue Jet",
+		shortDesc: "No additional effect.",
 	},
 	stormcell: {
 		name: "Storm Cell",
