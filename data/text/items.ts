@@ -128,6 +128,30 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Bug Bomb",
 		desc: "If holder is hit, makes the environment Locust Swarm. Single use.",
 	},
+	gun: {
+		name: "Gun",
+		desc: "When holder is sent out, uses Shoots against random opponent. Single use.",
+	},
+	pocketradar: {
+		name: "Pocket Radar",
+		desc: "Holder ignores target evasion boosts when attacking.",
+	},
+	genergy: {
+		name: "G Energy",
+		desc: "When holder is sent out, its ability becomes Colossal. Single use.",
+	},
+	eyeball: {
+		name: "Eyeball",
+		desc: "Holder ignores the accuracy debuff from being Blind.",
+	},
+	greenshirt: {
+		name: "Green Shirt",
+		desc: "Holder gains Green type. If type lost, item consumed.",
+	},
+	yellowshirt: {
+		name: "Yellow Shirt",
+		desc: "Holder gains Yellow type. If type lost, item consumed.",
+	},
 	antimatter: {
 		name: "Antimatter",
 		desc: "The holder's type matchups are reversed.",
