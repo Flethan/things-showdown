@@ -287,6 +287,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliancy: ["8T"],
 			infect: ["8L70"],
 			callmeteorites: ["8L60"],
+			voidscream: ["8L70"],
+			dematerialize: ["8L77"],
+			nullland: ["8L65"],
 		},
 	},
 	pescadestrian: {

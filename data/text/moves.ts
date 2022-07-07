@@ -10,6 +10,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
 		shortDesc: "Same type as user's primary type.",
 	},
+	// function moves
+	shoot: {
+		name: "Shoot",
+		desc: "During damage calculation, uses 200 as the Attack stat instead of the user's Attack.",
+		shortDesc: "Uses 200 as user's Atk.",
+	},
+	ballbounce: {
+		name: "Ball Bounce",
+		shortDesc: "No additional effect.",
+	},
 	// arthropod
 	pinch: {
 		name: "Pinch",
@@ -673,8 +683,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	inject: {
 		name: "Inject",
-		desc: "This move's base power is multiplied by the user's remaining HP / 6.",
-		shortDesc: "Base power = user's remaining HP / 6",
+		desc: "This move's base power is multiplied by the user's remaining HP / 6. Has a 10% chance to infect the target.",
+		shortDesc: "Power = user cur HP / 6; 10% infect",
 	},
 	factsandlogic: {
 		name: "Facts and Logic",
@@ -723,6 +733,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Infect",
 		desc: "Infects the target.",
 		shortDesc: "Infects the target.",
+	},
+	brilliancy: {
+		name: "Brilliancy",
+		desc: "If this thing faints this turn from enemy damage, the thing that replaces it has its Attack and Special Attack maxed. If Rank and File was selected by an ally this turn as well, their move is cancelled, and Brilliancy will max Defense, Special Defense, and Speed instead, if its effect triggers.",
+		shortDesc: "If faint, max next Atk & SpA; effect w/ Rank&File & Promote.",
 	},
 	// sport
 	fourseamfastball: {
@@ -809,6 +824,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Prevents the user from being switched out for a turn. If the user's Ability is Stubborn, the ability's effects are disabled for the turn as well.",
 		shortDesc: "Protects user from switches; disables Stubborn.",
 	},
+	rankandfile: {
+		name: "Rank and File",
+		desc: "For 5 turns, all Things can only target enemies directly across from them. If Promote was selected by an ally this turn as well, only the one moving second will go, setting Rank and File with infinite duration.",
+		shortDesc: "Target opposite for 5 turns; effect w/ Brilliancy & Promote.",
+	},
 	// sword
 	sharpslash: {
 		name: "Sharp Slash",
@@ -859,6 +879,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Parry",
 		desc: "The user is protected from most attacks made by other Things during this turn, and Things trying to attack the user are retaliated against with Riposte if the user knows it. Non-damaging moves go through this protection. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not a protecting move or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
 		shortDesc: "Protects from damaging attacks. Hit: Use Riposte.",
+	},
+	promote: {
+		name: "Promote",
+		desc: "The target ally's Sword-type moves become Infinity-type. If Brilliancy was selected by an ally this turn as well, it has it's move canceled, and the all the target ally's moves become Infinity-type.",
+		shortDesc: "Target Sword moves -> Infinity; effect w/ Rank&File & Brilliancy.",
 	},
 	// temperature
 	thermalpunch: {
@@ -1106,6 +1131,44 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Transmute",
 		desc: "The user loses its current held item, and gains a random new held item. If it is not currently holding an item, it loses 1/4 of its max HP instead, then gains an item. Fails if the user has less than 1/4 of its max HP remaining and is not holding an item.",
 		shortDesc: "User exchanges its held item (or HP) for a new item.",
+	},
+	// mu moves
+	handdownjudgement: {
+		name: "Hand Down Judgement",
+		desc: "Damage is calculated using the target's Attack stat as its Defense, including stat stage changes.",
+		shortDesc: "Uses target's Atk stat as Def in damage calculation.",
+	},
+	truesight: {
+		name: "True Sight",
+		desc: "Ignores the target's positive Defense stat stage changes.",
+		shortDesc: "Ignores target's positive Def stat stage changes.",
+	},
+	outhoteat: {
+		name: "Out Hot Eat",
+		desc: "Fails if the user's last move was not a critical hit. Sets up the Hot Coals side condition on the opposing side of the field, sets the environment to Hot for 5 turns, and heals the user for 1/2 of its max HP, rounded half up.",
+		shortDesc: "Sets Hot Coals, Hot, and heals 50%; fails unless crit prev.",
+	},
+	myman: {
+		name: "My Man",
+		desc: "Both the user and the target have all their stat boost stages increased to match whichever Thing has the highest stage for that stat.",
+		shortDesc: "Boost all user and target stats until same stage.",
+	},
+	ascend: {
+		name: "Ascend",
+		desc: "This attack charges on the first turn and executes on the second. On the first turn, the user avoids all attacks. On the second turn, raises the user's Special Attack and Speed by 1 stage.",
+		shortDesc: "Floats up on first turn, boosts SpA and Spe by 1 on second.",
+
+		prepare: "[POKEMON] floated up high!",
+	},
+	crystallize: {
+		name: "Crystallize",
+		desc: "Raises the user's Defense by the negative of its current Energy level, and its Attack by one less. Energy is calculated based on a variety of factors, including environment, landscape, side conditions, status conditions, etc.",
+		shortDesc: "Raises user's Def by -Energy, Atk by -Energy-1.",
+	},
+	stellaromen: {
+		name: "Stellar Omen",
+		desc: "The effect of this move varies depending on the target's Nature. If Brave or Naughty, it boosts the target's Attack by 6 stages, and sets the Perish volatile on them with 1 turn remaining. If Bold or Docile, it cures any status condition the target has, and traps it. If Quirky or Rash, it changes the target's type(s) to 2 random types, and makes the target fluctuant. If Modest or Timid, it Fast Forwards the target and banishes it. If Hasty or Lax, it sets the target's ability to Colossal, and knocks it prone. If Quiet, Careful, or Serious, it sets Void Trap on the opposing side of the field, and Pauses and Calibrates the target. If Calm or Bashful, it sets the target's ability to Inert, and clears any stat changes it has. If Sassy or Lonely, it Pheromone Marks the target and exchanges the target's item for a random item; if the target has no held item, it also damages the target for 1/4 of its maximum HP, rounded down. If Impish or Jolly, it distances the target and forces it to switch out. If Adamant or Hardy, it sets the Time Dilation environment and Time Loop. If Naive or Mild, it sets the Sudscape landscape, and a Time Capsule for the target. If Relaxed or Gentle, it sets Hypnotic Melody on the target, raises its best stat by 1 stage, and lowers its accuracy by 1 stage.",
+		shortDesc: "Effect varies depending on target Nature.",
 	},
 
 	// BASE GAME
