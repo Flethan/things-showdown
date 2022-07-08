@@ -2972,6 +2972,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		name: "Doomful Descent",
 		onStart(source) {
+			for (const foe of source.foes()) {
+				if (!foe?.isActive || foe === source || foe.volatiles['pheromonemark']) continue;
+				foe.addVolatile('pheromonemark')
+			}
+
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
