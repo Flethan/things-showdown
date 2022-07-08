@@ -836,6 +836,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	ichthronaut: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	gli7: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	
 	// BASE GAME
 	bulbasaur: {

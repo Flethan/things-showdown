@@ -500,7 +500,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
 			pokemon.statusState.time--;
-			if (pokemon.statusState.time <= 0) {
+			if (pokemon.statusState.time <= 0 && !pokemon.hasAbility('Escape Velocity')) {
 				pokemon.cureStatus();
 			} else {
 				this.add('-activate', pokemon, 'distanced');
@@ -518,7 +518,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onResidualOrder: 6,
 		onResidual(pokemon) {
-			if (pokemon.hasType('Far')) this.heal(pokemon.baseMaxhp / 16);
+			if (pokemon.hasType('Far', true)) this.heal(pokemon.baseMaxhp / 16);
 		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
@@ -747,13 +747,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 		// This should be applied directly to the stat before any of the other modifiers are chained
 		// So we give it increased priority.
 		onModifySpe(spe, pokemon) {
-			if ((pokemon.hasType('Arthropod') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('locustswarm')) {
+			if ((pokemon.hasType('Arthropod', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('locustswarm')) {
 				return this.modify(spe, 1.5);
 			}
 		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5 || source.hasAbility('doomfuldescent')) this.effectState.duration = 0;
+				if (this.gen <= 5 || source.hasAbility('Doomful Descent')) this.effectState.duration = 0;
 				this.add('-weather', 'Locust Swarm', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Locust Swarm');
@@ -801,7 +801,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onModifyAccuracyPriority: -1,
 		onModifyAccuracy(accuracy, target) {
 			if (typeof accuracy !== 'number') return;
-			if (target?.hasType('Night')) {
+			if (target?.hasType('Night', true)) {
 				this.debug('Nighttime - decreasing accuracy');
 				return this.chainModify(0.8);
 			}
@@ -820,7 +820,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Nighttime')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (target.hasType('Night') || target.hasAbility('Adaptable')) {
+			if (target.hasType('Night', true) || target.hasAbility('Adaptable')) {
 				this.heal(target.baseMaxhp / 16);
 			}
 		},
@@ -897,7 +897,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Hot')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (target.hasType('Temperature') || target.hasAbility('Adaptable')) {
+			if (target.hasType('Temperature', true) || target.hasAbility('Adaptable')) {
 				this.boost({spe: 1}, target);
 			}
 		},
@@ -919,13 +919,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 		// So we give it increased priority.
 		onModifyDefPriority: 10,
 		onModifyDef(def, pokemon) {
-			if ((pokemon.hasType('Temperature') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
 				return this.modify(def, 1.5);
 			}
 		},
 		onModifySpDPriority: 10,
 		onModifySpD(spd, pokemon) {
-			if ((pokemon.hasType('Temperature') || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
 				return this.modify(spd, 1.5);
 			}
 		},
@@ -943,7 +943,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			if (!target.hasType('Temperature') && !target.hasAbility('Chilled') && !target.hasAbility('Adaptable')) {
+			if (!target.hasType('Temperature', true) && !target.hasAbility('Chilled') && !target.hasAbility('Adaptable')) {
 				this.boost({spe: -1}, target);
 			}
 		},
@@ -962,7 +962,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return 5;
 		},
 		onModifySpe(spe, pokemon) {
-			if (!pokemon.hasType('Time') &&  !pokemon.hasAbility('Adaptable')) {
+			if (!pokemon.hasType('Time', true) &&  !pokemon.hasAbility('Adaptable')) {
 				return this.chainModify(0.25);
 			}
 		},
@@ -1029,7 +1029,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeather(target) {
 			this.damage(target.baseMaxhp / 16);
-			if (target.hasType('Fish') || target.hasAbility('Adaptable')) {
+			if (target.hasType('Fish', true) || target.hasAbility('Adaptable')) {
 				this.heal(target.baseMaxhp / 16);
 			}
 			if (target.status === 'prone') {
@@ -1075,7 +1075,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			console.log(target.name);
 
 
-			if(target.hasAbility('Adaptable') || target.hasType('Dirt')) {
+			if(target.hasAbility('Adaptable') || target.hasType('Dirt', true)) {
 				this.heal(target.baseMaxhp / 8, target);
 				const result = this.random(10);
 				if (result < 8)

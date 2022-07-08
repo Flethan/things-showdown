@@ -312,7 +312,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-start', pokemon, 'Pheromone Mark');
 			},
 			onSourceModifyCritRatio(critRatio, source, target) {
-				if (source.hasType('Arthropod')) return critRatio + 2;
+				if (source.hasType('Arthropod', true)) return critRatio + 2;
 			},
 		},
 		secondary: null,
@@ -594,7 +594,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onResidual(pokemon) {
-				if (pokemon.hasType('Dirt')) {
+				if (pokemon.hasType('Dirt', true)) {
 					this.heal(pokemon.baseMaxhp / 4, pokemon);
 				} else {
 					this.heal(pokemon.baseMaxhp / 16, pokemon);
@@ -2120,7 +2120,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Wet Floor');
 			},
 			onSwitchIn(pokemon) {
-				if (pokemon.hasType('Liquid')) {
+				if (pokemon.hasType('Liquid', true)) {
 					this.add('-sideend', pokemon.side, 'move: Wet Floor', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('wetfloor');
 					return;
@@ -2889,13 +2889,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyDef(def, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('defup')) {
-					if (pokemon.hasType('Music')) {
+					if (pokemon.hasType('Music', true)) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
 				if (this.field.activeFlags.includes('defdown')) {
-					if (!pokemon.hasType('Music')) {
+					if (!pokemon.hasType('Music', true)) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
 					}
@@ -2921,13 +2921,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpD(spd, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('spdup')) {
-					if (pokemon.hasType('Music')) {
+					if (pokemon.hasType('Music', true)) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
 				if (this.field.activeFlags.includes('spddown')) {
-					if (!pokemon.hasType('Music')) {
+					if (!pokemon.hasType('Music', true)) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
 					}
@@ -2936,13 +2936,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpe(spe, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('speup')) {
-					if (pokemon.hasType('Music')) {
+					if (pokemon.hasType('Music', true)) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
 				if (this.field.activeFlags.includes('spedown')) {
-					if (!pokemon.hasType('Music')) {
+					if (!pokemon.hasType('Music', true)) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
 					}
@@ -2953,62 +2953,62 @@ export const Moves: {[moveid: string]: MoveData} = {
 				for (const side of this.sides) {
 					for (const ally of side.active) {
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkboost')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.boost({atk: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('defboost')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.boost({def: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spaboost')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.boost({spa: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdboost')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.boost({spd: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('speboost')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.boost({spe: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkreduce')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.boost({atk: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('defreduce')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.boost({def: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spareduce')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.boost({spa: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdreduce')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.boost({spd: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spereduce')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.boost({spe: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('heal')) {
-							if (ally.hasType('Music')) {
+							if (ally.hasType('Music', true)) {
 								this.heal(ally.baseMaxhp / 8, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('hurt')) {
-							if (!ally.hasType('Music')) {
+							if (!ally.hasType('Music', true)) {
 								this.directDamage(ally.baseMaxhp / 8, ally);
 							}
 						}
@@ -4442,13 +4442,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifyAtkPriority: 10,
 			onModifyAtk(atk, pokemon) {
-				if (pokemon.hasType('Sport')) {
+				if (pokemon.hasType('Sport', true)) {
 					return this.modify(atk, 1.5);
 				}
 			},
 			onModifyDefPriority: 10,
 			onModifyDef(def, pokemon) {
-				if (pokemon.hasType('Sport')) {
+				if (pokemon.hasType('Sport', true)) {
 					return this.modify(def, 1.5);
 				}
 			},
@@ -5131,7 +5131,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Hot Coals');
 			},
 			onSwitchIn(pokemon) {
-				if (pokemon.hasType('Temperature')) {
+				if (pokemon.hasType('Temperature', true)) {
 					this.add('-sideend', pokemon.side, 'move: Hot Coals', '[of] ' + pokemon);
 					pokemon.side.removeSideCondition('hotcoals');
 					return;

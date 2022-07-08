@@ -342,6 +342,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 			fishbite: ["8L30"],
 			dematerialize: ["8L80"],
+			farbeam: ["8L55"],
 		},
 	},
 	angrybeehive: {

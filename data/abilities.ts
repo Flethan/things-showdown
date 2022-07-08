@@ -1599,6 +1599,42 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 1223,
 	},
+	a81117y20: {
+		isNonstandard: "Thing",
+		onAfterMega(target) {
+			let stats: BoostID[] = [];
+			const boost: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in target.boosts) {
+				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				if (target.boosts[statPlus] < 6) {
+					stats.push(statPlus);
+				}
+			}
+			let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = 2;
+
+			const abilities: AbilityData[] = [];
+			for (const id in Abilities) {
+				const ability = Abilities[id];
+				if ((ability.isNonstandard !== 'ThingInf') || ability.name === 'A81117y 2.0') continue;
+				abilities.push(ability);
+			}
+			let randomAbility = '';
+			if (abilities.length) {
+				abilities.sort((a, b) => a.num! - b.num!);
+				randomAbility = this.sample(abilities).name;
+			}
+			if (!randomAbility) {
+				return false;
+			}
+			this.add('A81117y 2.0', this.effectState.target, randomAbility, '[from] ability: A81117y 2.0', '[of] ' + target);
+			target.setAbility(randomAbility);
+		},
+		name: "A81117y 2.0",
+		rating: 0,
+		num: 1223,
+	},
 	noteofintroduction: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
@@ -2937,7 +2973,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		name: "Doomful Descent",
 		onStart(source) {
-			this.field.setWeather('locustswarm');
+			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+			} else 
+				this.field.setWeather('locustswarm');
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
@@ -2956,6 +2996,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		rating: 5,
 		num: -122,
+	},
+	escapevelocity: {
+		isNonstandard: "ThingInf",
+		onAfterMega(pokemon) {
+			if(pokemon.boosts.spe < 2)
+				this.actions.useMove('crashlanding', pokemon);
+			else {
+				pokemon.setStatus('distanced');
+				pokemon.statusState.duration = 0;
+			}
+		},
+		name: "Escape Velocity",
+		rating: 4,
+		num: 2111,
 	},
 
 	// BASE GAME
