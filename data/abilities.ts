@@ -1599,23 +1599,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 1223,
 	},
-	a81117y20: {
-		isNonstandard: "Thing",
+	b92228z: {
+		isNonstandard: "ThingInf",
 		onAfterMega(target) {
 			const boost: SparseBoostsTable = {};
-				let statPlus: BoostID;
-				for (statPlus in target.boosts) {
-					if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-					if (target.boosts[statPlus] < 6) {
-						boost[statPlus] = 2;
-					}
+			let statPlus: BoostID;
+			for (statPlus in target.boosts) {
+				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+				if (target.boosts[statPlus] < 6) {
+					boost[statPlus] = 2;
 				}
-				this.boost(boost);
+			}
+			this.boost(boost);
 
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if ((ability.isNonstandard !== 'ThingInf') || ability.name === 'A81117y 2.0') continue;
+				if (ability.isNonstandard !== 'ThingInf' || ability.name === 'B92228z') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
@@ -1624,12 +1624,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				randomAbility = this.sample(abilities).name;
 			}
 			if (!randomAbility) {
+				console.log("no valid abilities?");
 				return false;
 			}
-			this.add('A81117y 2.0', this.effectState.target, randomAbility, '[from] ability: A81117y 2.0', '[of] ' + target);
+			this.add('B92228z', this.effectState.target, randomAbility, '[from] ability: B92228z', '[of] ' + target);
 			target.setAbility(randomAbility);
 		},
-		name: "A81117y 2.0",
+		name: "B92228z",
 		rating: 0,
 		num: 1223,
 	},
@@ -2968,7 +2969,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -122,
 	},
 	doomfuldescent: {
-		isNonstandard: "Thing",
+		isNonstandard: "ThingInf",
 		name: "Doomful Descent",
 		onStart(source) {
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
