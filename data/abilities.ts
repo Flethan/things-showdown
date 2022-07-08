@@ -3005,6 +3005,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				pokemon.statusState.duration = 0;
 			}
 		},
+		onResidual(pokemon) {
+			if (pokemon.status !== 'distanced')
+				this.actions.useMove('crashlanding', pokemon);
+		},
 		name: "Escape Velocity",
 		rating: 4,
 		num: 2111,
