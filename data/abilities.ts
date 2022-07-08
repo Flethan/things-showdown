@@ -2933,6 +2933,30 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: -122,
 	},
+	doomfuldescent: {
+		isNonstandard: "Thing",
+		name: "Doomful Descent",
+		onStart(source) {
+			this.field.setWeather('locustswarm');
+			// Infinite duration done in conditions.js#hot
+		},
+		onAnySetWeather(target, source, weather) {
+			if (this.field.getWeather().id === 'locustswarm') return false;
+		},
+		onEnd(pokemon) {
+			if (this.field.weatherState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('doomfuldescent')) {
+					this.field.weatherState.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather();
+		},
+		rating: 5,
+		num: -122,
+	},
 
 	// BASE GAME
 	noability: {

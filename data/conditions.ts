@@ -753,7 +753,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
+				if (this.gen <= 5 || source.hasAbility('doomfuldescent')) this.effectState.duration = 0;
 				this.add('-weather', 'Locust Swarm', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Locust Swarm');
@@ -773,7 +773,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 				bonus = 1.5;
 			}
 
-			this.damage(target.maxhp * Math.pow(2, typeMod) * bonus / 16);
+			let damage = this.damage(target.maxhp * Math.pow(2, typeMod) * bonus / 16);
+			if (damage) {
+				for (const pokemon of target.battle.getAllActive()) {
+					if(pokemon.hasAbility('Doomful Descent')) {
+						this.heal(damage, pokemon);
+					}
+				}
+			}
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');

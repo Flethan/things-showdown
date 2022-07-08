@@ -325,6 +325,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 66.0,
 		color: "Black",
 		prevo: "Gryllague",
+		evos: ["Besuetecerca"],
 		eggGroups: ["Monster"],
 	},
 	afishal: {
@@ -2997,6 +2998,23 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		evoType: "symbol",
 		evoCondition: "Symbol",
+	},
+	besuetecerca: {
+		num: -487,
+		name: "Besuetecerca",
+		forme: "Element",
+		types: ["Arthropod", "Weather"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 177, atk: 25, def: 17, spa: 33, spd: 46, spe: 127},
+		abilities: {0: "Doomful Descent"},
+		heightm: 4.5,
+		weightkg: 60,
+		color: "Black",
+		prevo: "Schisteka",
+		eggGroups: ["Monster"],
+		evoType: "symbol",
+		evoCondition: "Symbol",
+		elementTypes: ["No"],
 	},
 
 	// BASE GAME
