@@ -1602,17 +1602,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	a81117y20: {
 		isNonstandard: "Thing",
 		onAfterMega(target) {
-			let stats: BoostID[] = [];
 			const boost: SparseBoostsTable = {};
-			let statPlus: BoostID;
-			for (statPlus in target.boosts) {
-				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-				if (target.boosts[statPlus] < 6) {
-					stats.push(statPlus);
+				let statPlus: BoostID;
+				for (statPlus in target.boosts) {
+					if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (target.boosts[statPlus] < 6) {
+						boost[statPlus] = 2;
+					}
 				}
-			}
-			let randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-			if (randomStat) boost[randomStat] = 2;
+				this.boost(boost);
 
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
