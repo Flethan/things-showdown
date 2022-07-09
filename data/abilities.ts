@@ -3048,6 +3048,36 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2111,
 	},
+	produceturret: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			pokemon.side.addSideCondition('autoturret');
+		},
+		name: "Produce Turret",
+		rating: 0.5,
+		num: -196,
+	},
+	assemblyline: {
+		isNonstandard: "Thing",
+		// Item suppression implemented in Pokemon.ignoringItem() within sim/pokemon.js
+		onResidual(pokemon) {
+			if (!pokemon.item) return;
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon || ally.item) continue;
+				const yourItem = pokemon.getItem();
+				if (!yourItem) {
+					return;
+				}
+				if (!ally.setItem(yourItem)) {
+					return;
+				}
+				this.add('-item', ally, yourItem, '[from] ability: Assembly Line', '[of] ' + pokemon);
+			}
+		},
+		name: "Assembly Line",
+		rating: 0.5,
+		num: -196,
+	},
 
 	// BASE GAME
 	noability: {

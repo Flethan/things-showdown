@@ -369,6 +369,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Afishal",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	clawtheod: {
 		num: -323,
@@ -556,6 +557,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 150.0,
 		color: "Blue",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	sarcopharyn: {
 		num: -336,
@@ -1567,6 +1569,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Gli7[#"],
 		color: "Purple",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	notant: {
 		num: -400,
@@ -1662,6 +1665,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 15,
 		color: "Blue",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	snowworm: {
 		num: -407,
@@ -1952,6 +1956,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 0.1,
 		color: "Black",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	pauerowt: {
 		num: -426,
@@ -2035,6 +2040,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		otherFormes: ["Mistimink-Pessimist", "Mistimink-Optimist"],
 		formeOrder: ["Mistimink", "Mistimink-Pessimist", "Mistimink-Optimist"],
+		hasSprite: true,
 	},
 	mistiminkpessimist: {
 		num: -431,
@@ -2050,6 +2056,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		requiredAbility: "Half-Full",
 		battleOnly: "Mistimink",
+		hasSprite: true,
 	},
 	mistiminkoptimist: {
 		num: -431,
@@ -2065,6 +2072,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		requiredAbility: "Half-Full",
 		battleOnly: "Mistimink",
+		hasSprite: true,
 	},
 	triathlide: {
 		num: -432,
@@ -2359,6 +2367,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 100.0,
 		color: "Gray",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	syrupwgun: {
 		num: -452,
@@ -2425,6 +2434,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		muMove: "Hand Down Judgement",
+		hasSprite: true,
 	},
 	treefurthestaway: {
 		num: -456,
@@ -2663,6 +2673,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Splattom",
 		evoType: "symbol",
 		evoCondition: "Symbol",
+		hasSprite: true,
 	},
 	hubantula: {
 		num: -471,
@@ -2714,6 +2725,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		muMove: "My Man",
+		hasSprite: true,
 	},
 	sudzerial: {
 		num: -474,
@@ -2750,6 +2762,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		otherFormes: ["Yellomatter-Solid", "Yellomatter-Gas", "Yellomatter-Plasma"],
 		formeOrder: ["Yellomatter", "Yellomatter-Solid", "Yellomatter-Gas", "Yellomatter-Plasma"],
+		hasSprite: true,
 	},
 	yellomattersolid: {
 		num: -475,
@@ -2767,6 +2780,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Yellowater",
 		evoType: "symbol",
 		muMove: "Crystallize",
+		hasSprite: true,
 	},
 	yellomattergas: {
 		num: -475,
@@ -2784,6 +2798,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Yellowater",
 		evoType: "symbol",
 		addedType: "Infinity",
+		hasSprite: true,
 	},
 	yellomatterplasma: {
 		num: -475,
@@ -2800,6 +2815,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Yellowater",
 		evoType: "symbol",
+		hasSprite: true,
 	},
 	stellet: {
 		num: -476,
@@ -2884,6 +2900,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		prevo: "Shooey",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	hatthew: {
 		num: -482,
@@ -2973,6 +2990,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
+		hasSprite: true;
 	},
 	washinghandsgolem: {
 		num: -485,
@@ -3037,7 +3055,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		elementTypes: ["Far"],
 	},
 	gli7: {
-		num: -488,
+		num: -489,
 		name: "Gli7[#",
 		forme: "Empty",
 		types: ["???"],
@@ -3053,7 +3071,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 	},
 	syrupwnuclearwarhead: {
-		num: -489,
+		num: -490,
 		name: "Syrup w/ Nuclear Warhead",
 		forme: "Mu",
 		types: ["Liquid", "Industrial"],
@@ -3068,6 +3086,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		muMove: "Launch a Nuclear Warhead",
+	},
+	cyam: {
+		num: -491,
+		name: "Cyam",
+		types: ["Industrial"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 89, atk: 54, def: 101, spa: 54, spd: 62, spe: 14},
+		abilities: {0: "Marksman", H: "With Gun"},
+		heightm: 0.1,
+		weightkg: 1,
+		color: "Gray",
+		evos: ["Clactory"],
+		eggGroups: ["Water 3"],
+	},
+	clactory: {
+		num: -492,
+		name: "Clactory",
+		types: ["Industrial"],
+		gender: "N",
+		baseStats: {hp: 114, atk: 68, def: 121, spa: 68, spd: 92, spe: 24},
+		abilities: {0: "Assembly Line", 1: "Produce Turret", H: "With Gun"},
+		heightm: 10,
+		weightkg: 1000,
+		color: "Gray",
+		prevo: "Cyam",
+		eggGroups: ["Water 3"],
 	},
 
 	// BASE GAME

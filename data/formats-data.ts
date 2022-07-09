@@ -844,6 +844,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	syrupwnuclearwarhead: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	cyam: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	clactory: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	
 	// BASE GAME
 	bulbasaur: {

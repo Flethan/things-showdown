@@ -2101,6 +2101,72 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Industrial",
 		contestType: "Clever",
 	},
+	cyberneticenhancement: {
+		num: 1515,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Cybernetic Enhancement",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {mirror: 1, authentic: 1},
+		boosts: {
+			atk: 2,
+			spa: 2,
+		},
+		onTryHit(source, target) {
+			if (target.hasType('Industrial')) return false;
+		},
+		onHit(target) {
+			if (!target.addType('Industrial')) return false;
+			this.add('-start', target, 'typeadd', 'Industrial', '[from] move: Cybernetic Enhancement');
+		},
+		target: "normal",
+		type: "Industrial",
+		contestType: "Clever",
+	},
+	shiftchange: {
+		num: 1515,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Shift Change",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {mirror: 1, authentic: 1},
+		onHit(pokemon) {
+			this.effectState.switchingIn = false;
+			let announced = false;
+			for (const foe of pokemon.foes()) {
+				if (!foe?.isActive || foe === pokemon ||
+					!this.canSwitch(foe.side) || foe.forceSwitchFlag) continue;
+				if (this.runEvent('DragOut', pokemon, foe)) {
+					if (!announced) {
+						this.add('-move', pokemon, 'Shift Change');
+						announced = true;
+					}
+					foe.forceSwitchFlag = true;
+				}
+			}
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon ||
+					!this.canSwitch(ally.side) || ally.forceSwitchFlag) continue;
+				if (this.runEvent('DragOut', pokemon, ally)) {
+					if (!announced) {
+						this.add('-move', pokemon, 'Shift Change');
+						announced = true;
+					}
+					ally.forceSwitchFlag = true;
+				}
+			}
+		},
+		selfSwitch: true,
+		target: "self",
+		type: "Industrial",
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {
