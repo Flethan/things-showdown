@@ -2130,13 +2130,13 @@ export class Battle {
 		let s: StatIDExceptHP;
 		if (nature.plus) {
 			s = nature.plus;
-			const stat = stats[s];
-			stats[s] = tr(tr(stat * 110, 16) / 100);
+			const stat = this.ruleTable.has('overflowstatmod') ? Math.min(stats[s], 595) : stats[s];
+			stats[s] = tr(tr(stat * 110, 32) / 100);
 		}
 		if (nature.minus) {
 			s = nature.minus;
-			const stat = stats[s];
-			stats[s] = tr(tr(stat * 90, 16) / 100);
+			const stat = this.ruleTable.has('overflowstatmod') ? Math.min(stats[s], 728) : stats[s];
+			stats[s] = tr(tr(stat * 90, 32) / 100);
 		}
 		return stats;
 	}
