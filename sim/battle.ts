@@ -2119,6 +2119,13 @@ export class Battle {
 			const stat = baseStats['hp'];
 			modStats['hp'] = tr(tr(2 * stat + set.ivs['hp'] + tr(set.evs['hp'] / 4) + 100) * set.level / 100 + 10);
 		}
+		try {
+			// Code throwing an exception
+			throw new Error();
+		} catch(e) {
+			console.log(modStats)
+			console.log(e.stack);
+		}
 		return this.natureModify(modStats as StatsTable, set);
 	}
 
