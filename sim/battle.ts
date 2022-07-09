@@ -2119,13 +2119,6 @@ export class Battle {
 			const stat = baseStats['hp'];
 			modStats['hp'] = tr(tr(2 * stat + set.ivs['hp'] + tr(set.evs['hp'] / 4) + 100) * set.level / 100 + 10);
 		}
-		try {
-			// Code throwing an exception
-			throw new Error();
-		} catch(e) {
-			console.log(modStats)
-			console.log(e.stack);
-		}
 		return this.natureModify(modStats as StatsTable, set);
 	}
 
@@ -2144,6 +2137,13 @@ export class Battle {
 			s = nature.minus;
 			const stat = this.ruleTable.has('overflowstatmod') ? Math.min(stats[s], 728) : stats[s];
 			stats[s] = tr(tr(stat * 90, 16) / 100);
+		}
+		try {
+			// Code throwing an exception
+			throw new Error();
+		} catch(e) {
+			console.log(stats)
+			console.log(e.stack);
 		}
 		return stats;
 	}
