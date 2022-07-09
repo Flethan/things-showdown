@@ -3031,23 +3031,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 		},
-		onAfterMoveSecondary(target, source, move) {
-			if (source && source !== target && move?.flags['contact']) {
-				if (target.item || target.switchFlag || target.forceSwitchFlag || source.switchFlag === true) {
-					return;
-				}
-				const yourItem = source.takeItem(target);
-				if (!yourItem) {
-					return;
-				}
-				if (!target.setItem(yourItem)) {
-					source.item = yourItem.id;
-					return;
-				}
-				this.add('-enditem', source, yourItem, '[silent]', '[from] ability: Pickpocket', '[of] ' + source);
-				this.add('-item', target, yourItem, '[from] ability: Pickpocket', '[of] ' + source);
-			}
-		},
 		name: "Playful",
 		rating: 0.5,
 		num: -196,
