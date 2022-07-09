@@ -3026,6 +3026,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.5,
 		num: -196,
 	},
+	weaponoflastresort: {
+		isNonstandard: "ThingInf",
+		onModifyCritRatio(critRatio, source, target, move) {
+			if (move.pp === 1) return 5;
+		},
+		onSourceAfterMove(source, target, move) {
+			if (move.pp === 0) {
+				const boost: SparseBoostsTable = {};
+				let statPlus: BoostID;
+				for (statPlus in source.boosts) {
+					if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (source.boosts[statPlus] > -6) {
+						boost[statPlus] = -2;
+					}
+				}
+				this.boost(boost);
+			}
+		},
+		name: "Weapon of Last Resort",
+		rating: 4,
+		num: 2111,
+	},
 
 	// BASE GAME
 	noability: {
