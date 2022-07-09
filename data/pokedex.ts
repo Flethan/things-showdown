@@ -3093,7 +3093,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Industrial"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 89, atk: 54, def: 101, spa: 54, spd: 62, spe: 14},
-		abilities: {0: "Marksman", H: "With Gun"},
+		abilities: {0: "Marksman", 1: "Aquatic", H: "With Gun"},
 		heightm: 0.1,
 		weightkg: 1,
 		color: "Gray",

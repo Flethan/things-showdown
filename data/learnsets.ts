@@ -3937,6 +3937,28 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L73"],
 		},
 	},
+	cyam: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			apexcalibration: ["8L1"],
+			fishslap: ["8L1"],
+			submerge: ["8M"],
+		},
+	},
+	clactory: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			apexcalibration: ["8L1"],
+			fishslap: ["8L1"],
+			submerge: ["8M"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
