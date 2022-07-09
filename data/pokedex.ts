@@ -2990,7 +2990,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
-		hasSprite: true;
+		hasSprite: true,
 	},
 	washinghandsgolem: {
 		num: -485,
