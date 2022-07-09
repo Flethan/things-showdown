@@ -3732,12 +3732,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		noMetronome: ['Parry', 'Riposte', 'Whistle'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
-			for (const id in Moves) {
-				const move = Moves[id];
-				if (move.realMove) continue;
-				if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
-				if (effect.noMetronome!.includes(move.name) || move.noMetronome?.length) continue;
-				moves.push(move);
+			if (source.hasAbility("B92228z") && this.randomChance(1,2)) {
+				for (const id in Moves) {
+					const move = Moves[id];
+					if (move.realMove) continue;
+					if (move.isZ || move.isMax || move.isNonstandard !== 'ThingInf') continue;
+					if (effect.noMetronome!.includes(move.name) || move.noMetronome?.length) continue;
+					moves.push(move);
+				}
+			} else {
+				for (const id in Moves) {
+					const move = Moves[id];
+					if (move.realMove) continue;
+					if (move.isZ || move.isMax || move.isNonstandard !== 'Thing') continue;
+					if (effect.noMetronome!.includes(move.name) || move.noMetronome?.length) continue;
+					moves.push(move);
+				}
 			}
 			let randomMove = '';
 			if (moves.length) {
@@ -3976,6 +3986,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
+	launchanuclearwarhead: {
+		num: 284,
+		accuracy: true,
+		basePower: 500,
+		isNonstandard: "ThingInf",
+		category: "Special",
+		name: "Launch a Nuclear Warhead",
+		pp: 1,
+		priority: 0,
+		flags: {},
+		secondary: null,
+		target: "any",
 		type: "Science",
 		contestType: "Clever",
 	},

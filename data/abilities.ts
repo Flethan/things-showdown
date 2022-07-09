@@ -1602,16 +1602,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	b92228z: {
 		isNonstandard: "ThingInf",
 		onAfterMega(target) {
-			const boost: SparseBoostsTable = {};
-			let statPlus: BoostID;
-			for (statPlus in target.boosts) {
-				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-				if (target.boosts[statPlus] < 6) {
-					boost[statPlus] = 2;
-				}
-			}
-			this.boost(boost);
-
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
@@ -1630,6 +1620,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('B92228z', this.effectState.target, randomAbility, '[from] ability: B92228z', '[of] ' + target);
 			target.setAbility(randomAbility);
 		},
+		// lookup effect implemented in the move
 		name: "B92228z",
 		rating: 0,
 		num: 1223,
