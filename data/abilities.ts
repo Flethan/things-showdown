@@ -3019,6 +3019,39 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2111,
 	},
+	playful: {
+		isNonstandard: "Thing",
+		onSourceHit(target, source, move) {
+			if (source && source !== target && move?.flags['contact']) {
+				if (target.item && this.randomChance(1,2)) {
+					let item = target.getItem();
+					target.setItem('');
+					target.lastItem = item.id;
+					this.add('-enditem', target, item.name, '[from] ability: Playful');
+				}
+			}
+		},
+		onAfterMoveSecondary(target, source, move) {
+			if (source && source !== target && move?.flags['contact']) {
+				if (target.item || target.switchFlag || target.forceSwitchFlag || source.switchFlag === true) {
+					return;
+				}
+				const yourItem = source.takeItem(target);
+				if (!yourItem) {
+					return;
+				}
+				if (!target.setItem(yourItem)) {
+					source.item = yourItem.id;
+					return;
+				}
+				this.add('-enditem', source, yourItem, '[silent]', '[from] ability: Pickpocket', '[of] ' + source);
+				this.add('-item', target, yourItem, '[from] ability: Pickpocket', '[of] ' + source);
+			}
+		},
+		name: "Playful",
+		rating: 0.5,
+		num: -196,
+	},
 
 	// BASE GAME
 	noability: {
