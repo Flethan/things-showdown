@@ -774,7 +774,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	counterthrow: {
 		name: "Counter Throw",
-		desc: "Deals damage to the last opposing Pokemon to hit the user with a physical attack this turn equal to twice the HP lost by the user from that attack, and forces them to switch out. If the user did not lose HP from the attack, this move deals 1 HP of damage instead. If that opposing Pokemon's position is no longer in use and there is another opposing Pokemon on the field, the damage is done to it instead. Only the last hit of a multi-hit attack is counted. Fails if the user was not hit by an opposing Pokemon's physical attack this turn.",
+		desc: "Deals damage to the last opposing Thing to hit the user with a physical attack this turn equal to twice the HP lost by the user from that attack, and forces them to switch out. If the user did not lose HP from the attack, this move deals 1 HP of damage instead. If that opposing Things's position is no longer in use and there is another opposing Pokemon on the field, the damage is done to it instead. Only the last hit of a multi-hit attack is counted. Fails if the user was not hit by an opposing Thing's physical attack this turn.",
 		shortDesc: "If hit by physical, return 2x damage & force switch.",
 	},
 	cominginhot: {
