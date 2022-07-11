@@ -6563,6 +6563,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Consume",
 		pp: 10,
 		priority: 0,
