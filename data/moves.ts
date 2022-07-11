@@ -2172,6 +2172,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
+		isNonstandard: "Thing",
 		name: "Borrow",
 		pp: 10,
 		priority: 1,
