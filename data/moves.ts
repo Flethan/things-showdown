@@ -2167,6 +2167,92 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Industrial",
 		contestType: "Clever",
 	},
+	borrow: {
+		num: 415,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Borrow",
+		pp: 10,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, mystery: 1},
+		onTryImmunity(target) {
+			return !target.hasAbility('stickyhold');
+		},
+		onHit(target, source, move) {
+			if (source.volatiles['borrow']) return false;
+			const yourItem = target.takeItem(source);
+			const myItem = source.takeItem();
+			if (target.item || source.item || (!yourItem && !myItem)) {
+				if (yourItem) target.item = yourItem.id;
+				if (myItem) source.item = myItem.id;
+				return false;
+			}
+			if (
+				(myItem && !this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem)) ||
+				(yourItem && !this.singleEvent('TakeItem', yourItem, target.itemState, source, target, move, yourItem))
+			) {
+				if (yourItem) target.item = yourItem.id;
+				if (myItem) source.item = myItem.id;
+				return false;
+			}
+			this.add('-activate', source, 'move: Borrow', '[of] ' + target);
+			if (myItem) {
+				target.setItem(myItem);
+				this.add('-item', target, myItem, '[from] move: Borrow');
+			} else {
+				this.add('-enditem', target, yourItem, '[silent]', '[from] move: Borrow');
+			}
+			if (yourItem) {
+				source.setItem(yourItem);
+				this.add('-item', source, yourItem, '[from] move: Borrow');
+			} else {
+				this.add('-enditem', source, myItem, '[silent]', '[from] move: Borrow');
+			}
+			source.addVolatile('borrow');
+			this.effectState.owner = target;
+		},
+		condition: {
+			onAfterMove(source) {
+				const target = this.effectState.owner;
+				if (!target) return null;
+				const yourItem = target.takeItem(source);
+				const myItem = source.takeItem();
+				if (target.item || source.item || (!yourItem && !myItem)) {
+					if (yourItem) target.item = yourItem.id;
+					if (myItem) source.item = myItem.id;
+					return false;
+				}
+				if (
+					(myItem && !this.singleEvent('TakeItem', myItem, source.itemState, target, source, move, myItem)) ||
+					(yourItem && !this.singleEvent('TakeItem', yourItem, target.itemState, source, target, move, yourItem))
+				) {
+					if (yourItem) target.item = yourItem.id;
+					if (myItem) source.item = myItem.id;
+					return false;
+				}
+				this.add('-activate', source, 'move: Borrow', '[of] ' + target);
+				if (myItem) {
+					target.setItem(myItem);
+					this.add('-item', target, myItem, '[from] move: Borrow');
+				} else {
+					this.add('-enditem', target, yourItem, '[silent]', '[from] move: Borrow');
+				}
+				if (yourItem) {
+					source.setItem(yourItem);
+					this.add('-item', source, yourItem, '[from] move: Borrow');
+				} else {
+					this.add('-enditem', source, myItem, '[silent]', '[from] move: Borrow');
+				}
+				source.removeVolatile('borrow');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Industrial",
+		zMove: {boost: {spe: 2}},
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {
@@ -6468,6 +6554,47 @@ export const Moves: {[moveid: string]: MoveData} = {
 		ignorePositiveDefensive: true,
 		secondary: null,
 		target: "any",
+		type: "Yellow",
+		contestType: "Clever",
+	},
+	consume: {
+		num: 374,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Consume",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, mystery: 1},
+		onPrepareHit(target, source, move) {
+			if (source.ignoringItem()) return false;
+			const item = source.getItem();
+			if (!this.singleEvent('TakeItem', item, source.itemState, source, source, move, item)) return false;
+			if (!item.consume) return false;
+		},
+		onHit(pokemon) {
+			const item = pokemon.getItem();
+			if (item.consume?.healPercent) {
+				pokemon.heal(item.consume?.healPercent);
+			}
+			if (item.consume?.damagePercent) {
+				pokemon.damage(item.consume.damagePercent);
+			}
+			pokemon.addVolatile('consume');
+		},
+		condition: {
+			onUpdate(pokemon) {
+				const item = pokemon.getItem();
+				pokemon.setItem('');
+				pokemon.lastItem = item.id;
+				pokemon.usedItemThisTurn = true;
+				this.add('-enditem', pokemon, item.name, '[from] move: Consume');
+				this.runEvent('AfterUseItem', pokemon, null, null, item);
+				pokemon.removeVolatile('consume');
+			},
+		},
+		secondary: null,
+		target: "self",
 		type: "Yellow",
 		contestType: "Clever",
 	},

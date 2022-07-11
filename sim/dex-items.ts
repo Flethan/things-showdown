@@ -7,6 +7,13 @@ interface FlingData {
 	volatileStatus?: string;
 	effect?: CommonHandlers['ResultMove'];
 }
+interface ConsumeData {
+	healPercent?: number;
+	damagePercent?: number;
+	status?: string;
+	volatileStatus?: string;
+	effect?: CommonHandlers['ResultMove'];
+}
 
 export interface ItemData extends Partial<Item>, PokemonEventMethods {
 	name: string;
@@ -28,6 +35,11 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 	 * this item.
 	 */
 	readonly fling?: FlingData;
+	/**
+	 * A Move-like object depicting what happens when Consume is used on
+	 * this item.
+	 */
+	readonly consume?: ConsumeData;
 	/**
 	 * If this is a Drive: The type it turns Techno Blast into.
 	 * undefined, if not a Drive.

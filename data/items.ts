@@ -7,6 +7,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 50,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Arthropod') {
@@ -22,6 +25,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 771,
 		fling: {
 			basePower: 10,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -39,6 +45,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 40,
 		},
+		consume: {
+			healPercent: 50,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Far') {
@@ -54,6 +63,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 773,
 		fling: {
 			basePower: 20,
+		},
+		consume: {
+			healPercent: 20,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -71,6 +83,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 20,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Green') {
@@ -86,6 +101,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 775,
 		fling: {
 			basePower: 40,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -103,6 +121,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Hair') {
@@ -118,6 +139,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 777,
 		fling: {
 			basePower: 30,
+		},
+		consume: {
+			healPercent: 20,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -135,6 +159,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Liquid') {
@@ -150,6 +177,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 779,
 		fling: {
 			basePower: 30,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -167,6 +197,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 20,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Night') {
@@ -182,6 +215,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 781,
 		fling: {
 			basePower: 0,
+		},
+		consume: {
+			
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -199,6 +235,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Science') {
@@ -214,6 +253,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 783,
 		fling: {
 			basePower: 30,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -231,6 +273,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 50,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Sword') {
@@ -246,6 +291,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 785,
 		fling: {
 			basePower: 20,
+		},
+		consume: {
+			healPercent: 20,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -263,6 +311,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 33,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Time') {
@@ -278,6 +329,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 787,
 		fling: {
 			basePower: 20,
+		},
+		consume: {
+			healPercent: 25,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -295,6 +349,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 50,
+		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
 			if (move && move.type === 'Yellow') {
@@ -310,6 +367,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 789,
 		fling: {
 			basePower: 20,
+		},
+		consume: {
+			healPercent: 100,
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -328,6 +388,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 20,
+		},
 		num: -240,
 		gen: 8,
 		isNonstandard: "Thing",
@@ -337,6 +400,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 791,
 		fling: {
 			basePower: 20,
+		},
+		consume: {
+			healPercent: 20,
 		},
 		num: -241,
 		gen: 8,
@@ -348,16 +414,23 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		num: -242,
 		gen: 8,
 		// Hazard Immunity implemented in each hazard
 		isNonstandard: "Thing",
 	},
+
 	nonslipshoes: {
 		name: "Non-Slip Shoes",
 		spritenum: 793,
 		fling: {
 			basePower: 10,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onUpdate(pokemon) {
 			if (pokemon.status === 'prone') {
@@ -375,6 +448,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onStart(pokemon) {
 			pokemon.trySetStatus('blinded', pokemon);
 		},
@@ -387,6 +463,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 795,
 		fling: {
 			basePower: 80,
+		},
+		consume: {
+			healPercent: 40,
 		},
 		onUpdate(pokemon) {
 			if (pokemon.status === 'banished') {
@@ -404,6 +483,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
+		consume: {
+			healPercent: 20,
+		},
 		// Pressurized immunity implemented in hazard
 		num: -246,
 		gen: 8,
@@ -415,6 +497,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 90,
 		},
+		consume: {
+			healPercent: 33,
+		},
 		num: -247,
 		gen: 8,
 		isNonstandard: "Thing",
@@ -425,6 +510,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 120,
 			volatileStatus: 'wounded',
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onModifyMovePriority: -1,
 		onModifyMove(move) {
@@ -443,6 +531,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+
 	rechargeableshoes: {
 		onStart(pokemon) {
 			pokemon.removeVolatile('rechargeableshoes');
@@ -468,6 +557,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 60,
 		},
+		consume: {
+			healPercent: 20,
+		},
 		num: -249,
 		gen: 8,
 		isNonstandard: "Thing",
@@ -487,6 +579,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 40,
 		},
+		consume: {
+			healPercent: 25,
+		},
 		num: -250,
 		gen: 8,
 		isNonstandard: "Thing",
@@ -496,6 +591,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 801,
 		fling: {
 			basePower: 40,
+		},
+		consume: {
+			healPercent: 33,
 		},
 		onDamagingHit(damage, target, source, move) {
 			if (!move.damage && !move.damageCallback) {
@@ -513,6 +611,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 40,
 		},
+		consume: {
+			healPercent: 75,
+		},
 		onStart(pokemon) {
 			this.actions.useMove('shoot', pokemon);
 			pokemon.useItem();
@@ -526,6 +627,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 803,
 		fling: {
 			basePower: 40,
+		},
+		consume: {
+			healPercent: 25,
 		},
 		onAnyModifyBoost(boosts, pokemon) {
 			const user = this.effectState.target;
@@ -544,6 +648,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 100,
 		},
+		consume: {
+			healPercent: 100,
+		},
 		onStart(pokemon) {
 			pokemon.setAbility('colossal');
 			pokemon.useItem();
@@ -558,6 +665,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 20,
 		},
+		consume: {
+			healPercent: 60,
+		},
 		// handled in conditions.ts
 		num: -255,
 		gen: 8,
@@ -568,6 +678,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum: 806,
 		fling: {
 			basePower: 10,
+		},
+		consume: {
+			healPercent: 15,
 		},
 		onStart(pokemon) {
 			pokemon.addType('Green');
@@ -588,6 +701,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		fling: {
 			basePower: 10,
 		},
+		consume: {
+			healPercent: 15,
+		},
 		onStart(pokemon) {
 			pokemon.addType('Yellow');
 			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] item: Yellow Shirt');
@@ -606,6 +722,9 @@ export const Items: {[itemid: string]: ItemData} = {
 		spritenum:808,
 		fling: {
 			basePower: 60,
+		},
+		consume: {
+			damagePercent: 25,
 		},
 		onNegateImmunity: false,
 		onEffectivenessPriority: 1,
