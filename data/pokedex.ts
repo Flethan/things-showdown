@@ -2175,6 +2175,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 110,
 		color: "Blue",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	beanette: {
 		num: -437,
@@ -2187,6 +2188,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 90,
 		color: "Red",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	ronging: {
 		num: -438,
@@ -3054,6 +3056,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["Far"],
+		hasSprite: true,
 	},
 	gli7: {
 		num: -489,
@@ -3126,6 +3129,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Pink",
 		evos: ["Marlance"],
 		eggGroups: ["Water 1"],
+		hasSprite: true,
 	},
 	marlance: {
 		num: -494,
@@ -3139,6 +3143,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Pink",
 		prevo: "Swordfish",
 		eggGroups: ["Water 1"],
+		hasSprite: true,
 	},
 	restant: {
 		num: -495,
