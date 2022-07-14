@@ -239,6 +239,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return 0;
 		},
 	},
+	
 
 	// Statuses
 	prone: {

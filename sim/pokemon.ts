@@ -469,6 +469,7 @@ export class Pokemon {
 	getEnergyValue() {
 		let energy = 0;
 		let eqEnergy = 0;
+		let mulEnergy = 1;
 
 		switch (this.status) {
 		case 'prone':
@@ -481,7 +482,17 @@ export class Pokemon {
 			energy -= 1;
 			break;
 		case 'fluctuant':
-			energy = energy + (this.battle.random() * 4) - 1;
+			energy = energy + (this.battle.random() * 4) - 2;
+			break;
+		case 'wounded':
+			eqEnergy += 0.5;
+			break;
+		case 'distanced':
+			mulEnergy *= 0.5;
+			break;
+		case 'infected':
+			break;
+		case 'blinded':
 			break;
 		}
 
@@ -492,6 +503,19 @@ export class Pokemon {
 		case 'sudscape':
 			eqEnergy += 0.5;
 			break;
+		case 'richsoil':
+			break;
+		case 'greenground':
+			break;
+		case 'mysticalsong':
+			energy += 0.5;
+			break;
+		case 'nullland':
+			mulEnergy *= -1;
+			break;
+		case 'springfloor':
+			energy += 0.5;
+			break;
 		}
 
 		switch (this.effectiveWeather()) {
@@ -499,10 +523,10 @@ export class Pokemon {
 			energy -= 0.5;
 			break;
 		case 'hot':
-			energy += 1;
+			energy += 1.5;
 			break;
 		case 'cold':
-			energy -= 1;
+			energy -= 1.5;
 			break;
 		case 'windy':
 			energy -= 0.5;
@@ -512,6 +536,15 @@ export class Pokemon {
 			break;
 		case 'underwater':
 			eqEnergy += 1;
+			break;
+		case 'timedilation':
+			energy -= 1;
+			break;
+		case 'locustswarm':
+			energy += 0.5;
+			break;
+		case 'meteorshower':
+			energy += 1;
 			break;
 		}
 
@@ -533,6 +566,13 @@ export class Pokemon {
 				case 'stormcell':
 					energy -= 0.5;
 					break;
+				case 'voidtrap':
+					energy -= 1;
+					break;
+				case 'autoturret':
+					break;
+				case 'dustcloud':
+					break;
 				}
 			}
 		);
@@ -544,10 +584,12 @@ export class Pokemon {
 					energy -= 1;
 					break;
 				case 'stickysituation':
-					eqEnergy -= 1;
+					eqEnergy += 1;
 					break;
 				case 'rankandfile':
 					energy -= 1;
+					break;
+				case 'timeloop':
 					break;
 				}
 			}
@@ -562,7 +604,7 @@ export class Pokemon {
 				case 'shrinkwrap':
 					energy -= 1;
 					break;
-				case 'fireworks':
+				case 'fireworked':
 					energy += 2.5;
 					break;
 				case 'fastforward':
@@ -574,8 +616,26 @@ export class Pokemon {
 				case 'partiallytrapped':
 					energy -= 0.5;
 					break;
+				case 'trapped':
+					energy -= 1;
+					break;
 				case 'depthvanish':
 					energy -= 1.5;
+					break;
+				case 'equip':
+					energy -= 1;
+					break;
+				case 'twoturnmove':
+					energy += 1;
+					break;
+				case 'mustrecharge':
+					energy -= 1;
+					break;
+				case 'coagulate':
+					eqEnergy += 1;
+					break;
+				case 'promote':
+					eqEnergy += 1;
 					break;
 				}
 			}
@@ -586,6 +646,11 @@ export class Pokemon {
 				switch (slotCondition) {
 				case 'accelerate':
 					energy += 1.5;
+					break;
+				case 'timecapsule':
+					break;
+				case 'delayedmove':
+					energy += 0.5;
 					break;
 				}
 			}
@@ -600,6 +665,8 @@ export class Pokemon {
 				if (energy > 0) energy = 0;
 			}
 		}
+
+		energy *= mulEnergy;
 
 		console.log('get energy - ');
 		console.log(energy);

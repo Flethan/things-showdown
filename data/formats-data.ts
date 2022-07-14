@@ -856,6 +856,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	swordfish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	marlance: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	
 	// BASE GAME
 	bulbasaur: {

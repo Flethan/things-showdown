@@ -2210,13 +2210,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 			} else {
 				this.add('-enditem', source, myItem, '[silent]', '[from] move: Borrow');
 			}
+			target.addVolatile('borrowed');
 			source.addVolatile('borrow');
-			this.effectState.owner = target;
 		},
 		condition: {
-			onAfterMove(source) {
+			duration: 2,
+			onAfterMove(source, moveTarget, move) {
+				//console.log(this.effectState.owner?.name);
+
+				if (this.effectState.duration === 2) {
+					this.effectState.owner = moveTarget
+					return;
+				}
+
 				const target = this.effectState.owner;
-				if (!target) return null;
+
+				if (!(target?.isActive && target.volatiles['borrowed'] && this.effectState.duration < 2)) {
+					source.removeVolatile('borrow');
+					return false;
+				}
+
 				const yourItem = target.takeItem(source);
 				const myItem = source.takeItem();
 				if (target.item || source.item || (!yourItem && !myItem)) {
@@ -3296,6 +3309,60 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Music",
 		zMove: {boost: {spd: 1}},
+	},
+	augment: {
+		num: 503,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Augment",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1},
+		songFlags: ['hurt'],
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		boosts: {
+			atk: 1,
+			def: 1,
+			spa: 1,
+			spd: 1,
+			spe: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Music",
+		zMove: {boost: {spa: 2}},
+		contestType: "cool",
+	},
+	diminish: {
+		num: 504,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Diminish",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1},
+		songFlags: ['heal'],
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		boosts: {
+			atk: -1,
+			def: -1,
+			spa: -1,
+			spd: -1,
+			spe: -1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Music",
+		zMove: {boost: {spa: 2}},
+		contestType: "Clever",
 	},
 
 	// Night
@@ -5494,6 +5561,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Clever",
 	},
+	energybeam: {
+		num: 8,
+		accuracy: 100,
+		basePower: 50,
+		basePowerCallback(pokemon, target, move) {
+			this.debug("Power modified by energy");
+			return move.basePower * Math.abs(pokemon.getEnergyValue());
+		},
+		category: "Special",
+		name: "Energy Beam",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		target: "normal",
+		type: "Temperature",
+		contestType: "Clever",
+	},
 
 	// Time
 	gravebite: {
@@ -6577,10 +6662,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(pokemon) {
 			const item = pokemon.getItem();
 			if (item.consume?.healPercent) {
-				pokemon.heal(item.consume?.healPercent);
+				this.heal(pokemon.baseMaxhp * item.consume?.healPercent / 100, pokemon);
 			}
 			if (item.consume?.damagePercent) {
-				pokemon.damage(item.consume.damagePercent);
+				this.damage(pokemon.baseMaxhp * item.consume?.damagePercent / 100, pokemon);
 			}
 			pokemon.addVolatile('consume');
 		},
@@ -6642,60 +6727,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spa: 2}},
 		contestType: "Beautiful",
 	},
-	augment: {
-		num: 503,
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
-		isNonstandard: "Thing",
-		name: "Augment",
-		pp: 5,
-		priority: 0,
-		flags: {recharge: 1},
-		songFlags: ['hurt'],
-		self: {
-			volatileStatus: 'mustrecharge',
-		},
-		boosts: {
-			atk: 1,
-			def: 1,
-			spa: 1,
-			spd: 1,
-			spe: 1,
-		},
-		secondary: null,
-		target: "self",
-		type: "Music",
-		zMove: {boost: {spa: 2}},
-		contestType: "cool",
-	},
-	diminish: {
-		num: 504,
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
-		isNonstandard: "Thing",
-		name: "Diminish",
-		pp: 5,
-		priority: 0,
-		flags: {recharge: 1},
-		songFlags: ['heal'],
-		self: {
-			volatileStatus: 'mustrecharge',
-		},
-		boosts: {
-			atk: -1,
-			def: -1,
-			spa: -1,
-			spd: -1,
-			spe: -1,
-		},
-		secondary: null,
-		target: "normal",
-		type: "Music",
-		zMove: {boost: {spa: 2}},
-		contestType: "Clever",
-	},
+	
 
 	// Infinity
 

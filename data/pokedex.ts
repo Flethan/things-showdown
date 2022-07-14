@@ -3113,6 +3113,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Cyam",
 		eggGroups: ["Water 3"],
 	},
+	swordfish: {
+		num: -493,
+		name: "Swordfish",
+		types: ["Sword", "Fish"],
+		genderRatio: {M: 0.3, F: 0.7},
+		baseStats: {hp: 50, atk: 78, def: 62, spa: 43, spd: 51, spe: 73},
+		abilities: {0: "Aquatic"},
+		heightm: 0.7,
+		weightkg: 25,
+		color: "Pink",
+		evos: ["Marlance"],
+		eggGroups: ["Water 1"],
+	},
+	marlance: {
+		num: -494,
+		name: "Marlance",
+		types: ["Sword", "Fish"],
+		genderRatio: {M: 0.3, F: 0.7},
+		baseStats: {hp: 60, atk: 99, def: 99, spa: 67, spd: 75, spe: 157},
+		abilities: {0: "Quick Blade"},
+		heightm: 1.8,
+		weightkg: 75,
+		color: "Pink",
+		prevo: "Swordfish",
+		eggGroups: ["Water 1"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
