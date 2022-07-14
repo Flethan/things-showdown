@@ -2292,8 +2292,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const pokemon = this.effectState.target;
 			let newType;
 			switch (this.field.terrain) {
+			case 'richsoil':
+				newType = 'Dirt';
+				break;
 			case 'spatialexpansion':
 				newType = 'Far';
+				break;
+			case 'greenground':
+				newType = 'Green';
 				break;
 			case 'sudscape':
 				newType = 'Liquid';
@@ -3077,6 +3083,51 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Assembly Line",
 		rating: 0.5,
 		num: -196,
+	},
+	respite: {
+		isNonstandard: "ThingInf",
+		/*onAnySetWeather() {
+			return false;
+		},
+		onAnyTerrain() {
+			return false;
+		},*/		
+		onResidual(target, source) {
+			const env = this.field.getWeather();
+			const land = this.field.getTerrain();
+			const rooms = this.field.pseudoWeather;
+			const allysides = source.side.sideConditions;
+			const foesides = target.side.sideConditions;
+
+			if (env?.duration === 1) env.duration = 2;
+			if (land?.duration === 1) land.duration = 2;
+			for (const roomname in rooms) {
+				const room = this.field.getPseudoWeather(roomname)
+				if (room?.duration === 1) room.duration = 2;
+			}
+			for (const allysidename in allysides) {
+				const allyside = source.side.getSideCondition(allysidename);
+				if (allyside?.duration === 1) allyside.duration = 2;
+			}
+			for (const foesidename in foesides) {
+				const foeside = source.side.getSideCondition(foesidename);
+				if (foeside?.duration === 1) foeside.duration = 2;
+			}
+		},
+		name: "Respite",
+		rating: 0.5,
+		num: -196,
+	},
+	expertswimmer: {
+		isNonstandard: "Thing",
+		onModifySpe(spe, pokemon) {
+			if (['underwater'].includes(pokemon.effectiveWeather())) {
+				return this.chainModify(2);
+			}
+		},
+		name: "Expert Swimmer",
+		rating: 3,
+		num: 33,
 	},
 
 	// BASE GAME

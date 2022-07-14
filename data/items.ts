@@ -745,6 +745,53 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	manacrystals: {
+		name: "Mana Crystals",
+		spritenum: 812,
+		consume: {
+			healPercent: 100,
+		},
+		onUpdate(pokemon) {
+			if (!pokemon.hp) return;
+			if (pokemon.moveSlots.some(move => move.pp === 0)) {
+				const moveSlot = pokemon.moveSlots.find(move => move.pp === 0) ||
+				pokemon.moveSlots.find(move => move.pp < move.maxpp);
+				if (!moveSlot) return;
+				moveSlot.pp = moveSlot.maxpp;
+				this.add('-activate', pokemon, 'item: Mana Crystals', moveSlot.move, '[consumed]');
+
+				pokemon.useItem();
+			}
+		},
+		num: -259,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	expresspass: {
+		name: "Express Pass",
+		spritenum: 810,
+		consume: {
+			healPercent: 15,
+		},
+		// functionality added in battle.ts
+		num: -260,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	bioweapon: {
+		name: "Bioweapon",
+		spritenum: 811,
+		consume: {
+			healPercent: 40,
+		},
+		onSourceAfterHit(source, target, move) {
+			target.trySetStatus('infected');
+			source.useItem();
+		},
+		num: -261,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",

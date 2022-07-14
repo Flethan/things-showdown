@@ -1355,7 +1355,8 @@ export class Battle {
 		for (let i = side.active.length; i < side.pokemon.length; i++) {
 			const pokemon = side.pokemon[i];
 			if (!pokemon.fainted) {
-				canSwitchIn.push(pokemon);
+				if (pokemon.item === 'expresspass') return [pokemon];
+				canSwitchIn.push(pokemon);	
 			}
 		}
 		return canSwitchIn;
