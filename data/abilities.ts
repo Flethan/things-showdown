@@ -3106,7 +3106,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			for (const side of this.sides) {
 				for (const sideCondname in side.sideConditions) {
-					const sideCond = source.side.getSideCondition(sideCondname);
+					const sideCond = side.getSideCondition(sideCondname);
 					if (sideCond?.duration === 1) sideCond.duration = 2;
 				}
 			}
