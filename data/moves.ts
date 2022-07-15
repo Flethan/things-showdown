@@ -2134,7 +2134,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Shift Change",
 		isNonstandard: "Thing",
 		pp: 5,
-		priority: 0,
+		priority: -1,
 		flags: {mirror: 1, authentic: 1},
 		onHit(pokemon) {
 			this.effectState.switchingIn = false;
