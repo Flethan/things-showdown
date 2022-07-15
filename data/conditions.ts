@@ -1085,23 +1085,23 @@ export const Conditions: {[k: string]: ConditionData} = {
 				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
 				this.damage(target.maxhp * Math.pow(2, typeMod) / 16, target);
 				const result = this.random(10);
-					if (result === 0) {
-						target.trySetStatus('prone');
-					} else if (result === 1) {
-						target.trySetStatus('banished');
-					} else if (result === 2) {
-						target.trySetStatus('blinded');
-					} else if (result === 3) {
-						target.trySetStatus('pressurized');
-					} else if (result === 4) {
-						target.trySetStatus('fluctuant');
-					} else if (result === 5) {
-						target.trySetStatus('wounded');
-					} else if (result === 6) {
-						target.trySetStatus('distanced');
-					} else if (result === 7) {
-						target.trySetStatus('infected');
-					}
+				if (result === 0) {
+					target.trySetStatus('prone');
+				} else if (result === 1) {
+					target.trySetStatus('banished');
+				} else if (result === 2) {
+					target.trySetStatus('blinded');
+				} else if (result === 3) {
+					target.trySetStatus('pressurized');
+				} else if (result === 4) {
+					target.trySetStatus('fluctuant');
+				} else if (result === 5) {
+					target.trySetStatus('wounded');
+				} else if (result === 6) {
+					target.trySetStatus('distanced');
+				} else if (result === 7) {
+					target.trySetStatus('infected');
+				}
 			}
 
 			if (this.field.isWeather('Meteor Shower')) this.eachEvent('Weather');
