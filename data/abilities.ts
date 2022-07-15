@@ -3096,7 +3096,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const env = this.field.getWeather();
 			const land = this.field.getTerrain();
 			const rooms = this.field.pseudoWeather;
-		
 
 			if (env?.duration === 1) env.duration = 2;
 			if (land?.duration === 1) land.duration = 2;
