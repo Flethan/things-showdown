@@ -3096,8 +3096,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const env = this.field.getWeather();
 			const land = this.field.getTerrain();
 			const rooms = this.field.pseudoWeather;
-			const allysides = source.side.sideConditions;
-			const foesides = target.side.sideConditions;
+		
 
 			if (env?.duration === 1) env.duration = 2;
 			if (land?.duration === 1) land.duration = 2;
@@ -3105,14 +3104,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const room = this.field.getPseudoWeather(roomname)
 				if (room?.duration === 1) room.duration = 2;
 			}
-			for (const allysidename in allysides) {
-				const allyside = source.side.getSideCondition(allysidename);
-				if (allyside?.duration === 1) allyside.duration = 2;
+			for (const side of this.sides) {
+				for (const sideCondname in side.sideConditions) {
+					const sideCond = source.side.getSideCondition(sideCondname);
+					if (sideCond?.duration === 1) sideCond.duration = 2;
+				}
 			}
-			for (const foesidename in foesides) {
-				const foeside = source.side.getSideCondition(foesidename);
-				if (foeside?.duration === 1) foeside.duration = 2;
-			}
+
 		},
 		name: "Respite",
 		rating: 0.5,
