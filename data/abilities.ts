@@ -3099,20 +3099,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			return false;
 		},*/		
 		onResidual(target, source) {
-			const env = this.field.getWeather();
-			const land = this.field.getTerrain();
+			const env = this.field.weather;
+			const land = this.field.terrain;
 			const rooms = this.field.pseudoWeather;
 
-			if (env?.duration === 1) env.duration = 2;
-			if (land?.duration === 1) land.duration = 2;
-			for (const roomname in rooms) {
-				const room = this.field.getPseudoWeather(roomname)
-				if (room?.duration === 1) room.duration = 2;
+			if (env?.duration === 1) env.duration++;
+			if (land?.duration === 1) land.duration++;
+			for (const i in rooms) {
+				if (rooms[i].duration === 1) rooms[i].duration++;
 			}
 			for (const side of this.sides) {
-				for (const sideCondname in side.sideConditions) {
-					const sideCond = side.getSideCondition(sideCondname);
-					if (sideCond?.duration === 1) sideCond.duration = 2;
+				for (const i in side.sideConditions) {
+					if (side.sideConditions[i].duration === 1) side.sideConditions[i].duration++;
 				}
 			}
 
