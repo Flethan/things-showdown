@@ -393,6 +393,21 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Causes the user to be equipped to the target. While in effect, it increases the target's stats additively by the user's stats, and redirects moves targeting the user to the target. Equip ends when the user uses a non-Equip move, or uses Equip targetting a different ally.",
 		shortDesc: "Adds user's stats to target.",
 	},
+	cyberneticenhancement: {
+		name: "Cybernetic Enhancement",
+		desc: "Causes the Industrial type to be added to the target, effectively making it have two or three types, and raises the target's Attack and Special Attack by 2. If the target already has an added type, it is replaced. Fails if the target is already Industrial-type.",
+		shortDesc: "Target +2 Atk,SpA, & Indust.; fails if Indust.",
+	},
+	shiftchange: {
+		name: "Shift Change",
+		desc: "All other active Things are forced to switch out and be replaced with a random unfainted ally. Then, the user switches out and is replaced immediately by a selected party member.",
+		shortDesc: "Force switch others, then switch self.",
+	},
+	borrow: {
+		name: "Borrow",
+		desc: "The user swaps its held item with the target's held item. After the user's next move, the user and target swap items again.",
+		shortDesc: "Swap items, then swap back next turn.",
+	},
 	
 	// liquid
 	soppingslap: {
@@ -738,6 +753,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Brilliancy",
 		desc: "If this thing faints this turn from enemy damage, the thing that replaces it has its Attack and Special Attack maxed. If Rank and File was selected by an ally this turn as well, their move is cancelled, and Brilliancy will max Defense, Special Defense, and Speed instead, if its effect triggers.",
 		shortDesc: "If faint, max next Atk & SpA; effect w/ Rank&File & Promote.",
+	},
+	launchanuclearwarhead: {
+		name: "Launch a Nuclear Warhead",
+		shortDesc: "No additional effect.",
 	},
 	// sport
 	fourseamfastball: {
@@ -1131,6 +1150,13 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Transmute",
 		desc: "The user loses its current held item, and gains a random new held item. If it is not currently holding an item, it loses 1/4 of its max HP instead, then gains an item. Fails if the user has less than 1/4 of its max HP remaining and is not holding an item.",
 		shortDesc: "User exchanges its held item (or HP) for a new item.",
+	},
+	consume: {
+		name: "Consume",
+		desc: "Heals the user by an amount based on the user's held item. The held item is lost. Fails if the user has no held item, if the held item cannot be consumed, or if the user has the Assembly Line Ability.",
+		shortDesc: "Consumes the user's item to heal. Amount varies.",
+
+		removeItem: "  [POKEMON] consumed its [ITEM]!",
 	},
 	// mu moves
 	handdownjudgement: {

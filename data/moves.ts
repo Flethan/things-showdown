@@ -2138,15 +2138,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {mirror: 1, authentic: 1},
 		onHit(pokemon) {
 			this.effectState.switchingIn = false;
-			let announced = false;
 			for (const foe of pokemon.foes()) {
 				if (!foe?.isActive || foe === pokemon ||
 					!this.canSwitch(foe.side) || foe.forceSwitchFlag) continue;
 				if (this.runEvent('DragOut', pokemon, foe)) {
-					if (!announced) {
-						this.add('-move', pokemon, 'Shift Change');
-						announced = true;
-					}
 					foe.forceSwitchFlag = true;
 				}
 			}
@@ -2154,10 +2149,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (!ally?.isActive || ally === pokemon ||
 					!this.canSwitch(ally.side) || ally.forceSwitchFlag) continue;
 				if (this.runEvent('DragOut', pokemon, ally)) {
-					if (!announced) {
-						this.add('-move', pokemon, 'Shift Change');
-						announced = true;
-					}
 					ally.forceSwitchFlag = true;
 				}
 			}
@@ -5515,15 +5506,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			for (const side of source.side.foeSidesWithConditions()) {
 				side.addSideCondition('hotcoals');
 			}
-			let announced = false;
 			for (const foe of source.foes()) {
 				if (!foe?.isActive || foe === source ||
 					!this.canSwitch(foe.side)) continue;
 				if (this.runEvent('DragOut', source, foe)) {
-					if (!announced) {
-						this.add('-move', source, 'Out Hot Eat');
-						announced = true;
-					}
 					foe.forceSwitchFlag = true;
 				}
 			}
