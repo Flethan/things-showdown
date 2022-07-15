@@ -2115,7 +2115,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			atk: 2,
 			spa: 2,
 		},
-		onTryHit(source, target) {
+		onTryHit(target) {
 			if (target.hasType('Industrial')) return false;
 		},
 		onHit(target) {
