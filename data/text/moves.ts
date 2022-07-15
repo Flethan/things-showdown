@@ -384,7 +384,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Sets up a Side Condition on the allied side of the field for 5 turns. At the end of each turn except the last, a random opposing Thing is chosen to be the target of the move Shoot (Physical, Industrial-type, power 50); damage is calculated using an Attack stat of 200. Fails if the effect is already active on the user's side.",
 		shortDesc: "Shoots random foe for 5 turns.",
 
-		start: " A turret is actived for [TEAM]!",
+		start: " A turret is activated for [TEAM]!",
 		end: "  [TEAM]'s turret shuts down!",
 		activate: "  [POKEMON] is shot by the turret!",
 	},
