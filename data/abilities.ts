@@ -3091,20 +3091,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -196,
 	},
 	respite: {
-		isNonstandard: "ThingInf",
-		/*onAnySetWeather() {
-			return false;
-		},
-		onAnyTerrain() {
-			return false;
-		},*/		
+		isNonstandard: "ThingInf",	
 		onResidual(target, source) {
-			const env = this.field.weather;
-			const land = this.field.terrain;
+			const env = this.field.weatherState;
+			const land = this.field.terrainState;
 			const rooms = this.field.pseudoWeather;
 
-			if (env?.duration === 1) env.duration++;
-			if (land?.duration === 1) land.duration++;
+			if (env.duration === 1) env.duration++;
+			if (land.duration === 1) land.duration++;
 			for (const i in rooms) {
 				if (rooms[i].duration === 1) rooms[i].duration++;
 			}
