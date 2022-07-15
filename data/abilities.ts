@@ -3092,7 +3092,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	respite: {
 		isNonstandard: "ThingInf",	
-		onResidual(target, source) {
+		onResidual() {
 			const env = this.field.weatherState;
 			const land = this.field.terrainState;
 			const rooms = this.field.pseudoWeather;
@@ -3107,7 +3107,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					if (side.sideConditions[i].duration === 1) side.sideConditions[i].duration++;
 				}
 			}
-
 		},
 		name: "Respite",
 		rating: 0.5,
