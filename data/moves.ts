@@ -4410,7 +4410,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				// gain random status
 				// console.log("status");
 					this.damage(pokemon.baseMaxhp / 8);
-					const result = this.random(5);
+					const result = this.random(8);
 					if (result === 0) {
 						pokemon.trySetStatus('prone');
 					} else if (result === 1) {
@@ -4419,8 +4419,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 						pokemon.trySetStatus('blinded');
 					} else if (result === 3) {
 						pokemon.trySetStatus('pressurized');
-					} else {
+					} else if (result === 4) {
 						pokemon.trySetStatus('fluctuant');
+					} else if (result === 5) {
+						pokemon.trySetStatus('wounded');
+					} else if (result === 6) {
+						pokemon.trySetStatus('distanced');
+					} else {
+						pokemon.trySetStatus('infected');
 					}
 				} else {
 				// jackpot
