@@ -5701,20 +5701,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		name: "Ricochet Mirror",
 		pp: 10,
-		priority: 0,
+		priority: -5,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onAfterMoveSecondary(target) {
 			if (!target || !target.hp) return false;
 			const pos = target.position;
 			if (!this.runEvent('DragOut', target)) return false;
-			if (!this.actions.switchIn(target, pos, this.effect, true)) return false;
+			if (!this.actions.switchIn(target, pos, this.effect, true, true)) return false;
 			return true;
 		},
 		onAfterMoveSecondarySelf(source) {
 			if (!source || !source.hp) return false;
 			const pos = source.position;
 			if (!this.runEvent('DragOut', source)) return false;
-			if (!this.actions.switchIn(source, pos, this.effect, true)) return false;
+			if (!this.actions.switchIn(source, pos, this.effect, true, true)) return false;
 			return true;
 		},
 		secondary: null,

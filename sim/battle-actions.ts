@@ -101,8 +101,8 @@ export class BattleActions {
 	// #region SWITCH
 	// ==================================================================
 
-	switchIn(pokemon: Pokemon, pos: number, sourceEffect: Effect | null = null, isDrag?: boolean) {
-		if (!pokemon || pokemon.isActive) {
+	switchIn(pokemon: Pokemon, pos: number, sourceEffect: Effect | null = null, isDrag?: boolean, force?: boolean) {
+		if (!force && (!pokemon || pokemon.isActive)) {
 			this.battle.hint("A switch failed because the Pokémon trying to switch in is already in.");
 			return false;
 		}
