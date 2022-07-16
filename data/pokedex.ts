@@ -2985,6 +2985,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		evoType: "symbol",
 		evoCondition: "Symbol",
+		addedType: "Infinity",
 	},
 	rock: {
 		num: -484,
@@ -3026,6 +3027,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		evoType: "symbol",
 		evoCondition: "Symbol",
+		addedType: "Infinity",
 	},
 	besuetecerca: {
 		num: -487,
