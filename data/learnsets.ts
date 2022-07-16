@@ -4249,6 +4249,12 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			glidingcharge: ["8L55"],
 		},
 	},
+	bettiers: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {

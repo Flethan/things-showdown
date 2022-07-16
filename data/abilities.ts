@@ -3123,6 +3123,42 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 33,
 	},
+	fasion: {
+		isNonstandard: "Thing",
+		onStart() {
+			delete this.effectState.forme;
+		},
+		onModifyDef(_def, pokemon) {
+			if (Object.entries(pokemon.side.sideConditions).length && pokemon.hasItem('yellowsafetyvest')) {
+				return this.chainModify(2);
+			}
+		},
+		onModifySpD(_spd, pokemon) {
+			if (Object.entries(pokemon.side.sideConditions).length && pokemon.hasItem('yellowsafetyvest')) {
+				return this.chainModify(2);
+			}
+		},
+		onModifySpe(_spe, pokemon) {
+			if ((this.field.effectiveWeather() || this.field.effectiveTerrain()) && pokemon.hasItem('cowboyhat')) {
+				return this.chainModify(2);
+			}
+		},
+		onUpdate(pokemon) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'B\u0301ttiers' || pokemon.transformed || !pokemon.hp) return;
+
+			if (pokemon.hasItem('cowboyhat') && pokemon.species.id !== 'bettierscowboy') {
+				pokemon.formeChange('B\u0301ttiers-Cowboy', this.effect, false, '[msg]');
+			} else if (pokemon.hasItem('yellowsafetyvest') && pokemon.species.id !== 'bettiersconstruction') {
+				pokemon.formeChange('B\u0301ttiers-Construction', this.effect, false, '[msg]');
+			} else {
+				pokemon.formeChange('B\u0301ttiers', this.effect, false, '[msg]');
+			}
+		},
+		isBreakable: true,
+		name: "Fas'ion",
+		rating: 3,
+		num: 33,
+	},
 
 	// BASE GAME
 	noability: {
