@@ -523,7 +523,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
-
 	infected: {
 		name: 'infected',
 		effectType: 'Status',
@@ -702,28 +701,25 @@ export const Conditions: {[k: string]: ConditionData} = {
 
 	// Environmental Factors (New Weather)
 	yellowish: {
+		onModifyMovePriority: -5,
+		onModifyMove(move, pokemon) {
+			if (move.type === 'Yellow' && !pokemon.hasItem('cowboyhat')) {
+				move.accuracy = true;
+				move.ignoreImmunity = true;
+			}
+		},
 		name: 'Yellowish',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
 			return 5;
 		},
 		onFieldStart(battle, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Yellowish', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Yellowish');
-			}
-		},
-		onModifyMovePriority: -5,
-		onModifyMove(move) {
-			if (move.type === 'Yellow') {
-				move.accuracy = true;
-				move.ignoreImmunity = true;
 			}
 		},
 		onFieldResidualOrder: 1,
@@ -736,25 +732,50 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 	locustswarm: {
+		onModifySpe(_spe, pokemon) {
+			if ((pokemon.hasType('Arthropod', true) || pokemon.hasAbility('Adaptable'))
+				&& this.field.isWeather('locustswarm')
+				&& !pokemon.hasItem('cowboyhat')) {
+				return this.chainModify(1.5);
+			}
+		},
+		onWeather(target) {
+			if (target.hasAbility('Adaptable') || target.hasItem('cowboyhat') || target.hasType('Arthropod', true)) return;
+
+			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
+
+			let bonus = 1;
+			if (target.volatiles['pheromonemark']) {
+				bonus = 1.5;
+			}
+
+			let damage = 0;
+			if (typeMod > 0) {
+				damage = target.maxhp * ((2 + typeMod) / 2) * bonus / 16;
+			}
+			if (typeMod < 0) {
+				damage = target.maxhp * (2 / (2 - typeMod)) * bonus / 16;
+			}
+			this.damage(damage);
+
+			if (damage) {
+				for (const pokemon of target.battle.getAllActive()) {
+					if (pokemon.hasAbility('Doomful Descent')) {
+						this.heal(damage, pokemon);
+					}
+				}
+			}
+		},
 		name: 'Locust Swarm',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
+		durationCallback(source) {
+			if (source?.hasAbility('Doomful Descent')) return 0;
+			if (source?.hasItem('environmentalaccord')) return 10;
 			return 5;
 		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
-		onModifySpe(spe, pokemon) {
-			if ((pokemon.hasType('Arthropod', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('locustswarm')) {
-				return this.modify(spe, 1.5);
-			}
-		},
-		onFieldStart(battle, source, effect) {
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5 || source.hasAbility('Doomful Descent')) this.effectState.duration = 0;
 				this.add('-weather', 'Locust Swarm', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Locust Swarm');
@@ -765,51 +786,31 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'Locust Swarm', '[upkeep]');
 			if (this.field.isWeather('Locust Swarm')) this.eachEvent('Weather');
 		},
-		onWeather(target) {
-			if(target.hasAbility('Adaptable')) return;
-			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
-
-			let bonus = 1;
-			if (target.volatiles['pheromonemark']) {
-				bonus = 1.5;
-			}
-
-			let damage = this.damage(target.maxhp * Math.pow(2, typeMod) * bonus / 16);
-			if (damage) {
-				for (const pokemon of target.battle.getAllActive()) {
-					if(pokemon.hasAbility('Doomful Descent')) {
-						this.heal(damage, pokemon);
-					}
-				}
-			}
-		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
 	nighttime: {
-		name: 'Nighttime',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
-		onModifyAccuracyPriority: -1,
 		onModifyAccuracy(accuracy, target) {
 			if (typeof accuracy !== 'number') return;
-			if (target?.hasType('Night', true)) {
-				this.debug('Nighttime - decreasing accuracy');
+			if (target?.hasType('Night', true) && !target.hasItem('cowboyhat')) {
 				return this.chainModify(0.8);
 			}
 		},
-		onFieldStart(battle, source, effect) {
+		onWeather(target) {
+			if ((target.hasType('Night', true) || target.hasAbility('Adaptable')) && !target.hasItem('cowboyhat')) {
+				this.heal(target.baseMaxhp / 16);
+			}
+		},
+		name: 'Nighttime',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Nighttime', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Nighttime');
@@ -820,41 +821,37 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'Nighttime', '[upkeep]');
 			if (this.field.isWeather('Nighttime')) this.eachEvent('Weather');
 		},
-		onWeather(target) {
-			if (target.hasType('Night', true) || target.hasAbility('Adaptable')) {
-				this.heal(target.baseMaxhp / 16);
-			}
-		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
 	windy: {
+		onAnyModifyBoost(boosts, pokemon) {
+			if (!pokemon.hasAbility('windsurfer') && !pokemon.hasItem('cowboyhat')) {
+				boosts['spe'] = 0;
+			}
+		},
+		onModifyPriority(priority, pokemon, target, move) {
+			if ((move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather'))
+				&& !pokemon.hasItem('cowboyhat')) {
+				return priority + 1;
+			}
+		},
 		name: 'Windy',
 		effectType: 'Weather',
 		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
+		durationCallback(source) {
+			if (source?.hasAbility('lassihnfliegen')) return 0;
+			if (source?.hasItem('environmentalaccord')) return 10;
 			return 5;
 		},
-		onFieldStart(battle, source, effect) {
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (source.hasAbility('lassihnfliegen')) this.effectState.duration = 0;
 				this.add('-weather', 'Windy', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Windy');
 			}
 			this.hint("Stat changes to speed are ignored while it is windy!");
-		},
-		onAnyModifyBoost(boosts, pokemon) {
-			if (!pokemon.hasAbility('windsurfer')) {
-				boosts['spe'] = 0;
-			}
-		},
-		onModifyPriority(priority, pokemon, target, move) {
-			if (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) return priority + 1;
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
@@ -866,27 +863,37 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 	hot: {
-		name: 'Hot',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
-		onWeatherModifyDamage(damage, attacker, defender, move) {
-			if (defender.hasItem('utilityumbrella')) return;
-			if (move.type === 'Temperature') {
-				this.debug('hot temperature boost');
+		onModifyAtkPriority: 10,
+		onModifyAtk(_atk, pokemon) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
+				&& this.field.isWeather('hot')
+				&& !pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
-		onFieldStart(battle, source, effect) {
+		onModifySpAPriority: 10,
+		onModifySpA(_spa, pokemon) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
+				&& this.field.isWeather('hot')
+				&& !pokemon.hasItem('cowboyhat')) {
+				return this.chainModify(1.5);
+			}
+		},
+		onWeather(target) {
+			if (target.hasType('Temperature', true) || target.hasAbility('Adaptable') && !target.hasItem('cowboyhat')) {
+				this.boost({spe: 1}, target);
+			}
+		},
+		name: 'Hot',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasAbility('ahotone')) return 0;
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5 || source.hasAbility('ahotone')) this.effectState.duration = 0;
 				this.add('-weather', 'Hot', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Hot');
@@ -897,42 +904,44 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'Hot', '[upkeep]');
 			if (this.field.isWeather('Hot')) this.eachEvent('Weather');
 		},
-		onWeather(target) {
-			if (target.hasType('Temperature', true) || target.hasAbility('Adaptable')) {
-				this.boost({spe: 1}, target);
-			}
-		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
 	cold: {
-		name: 'Cold',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
 		onModifyDefPriority: 10,
-		onModifyDef(def, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
-				return this.modify(def, 1.5);
+		onModifyDef(_def, pokemon) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
+				&& this.field.isWeather('cold')
+				&& !pokemon.hasItem('cowboyhat')) {
+				return this.chainModify(1.5);
 			}
 		},
 		onModifySpDPriority: 10,
-		onModifySpD(spd, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) && this.field.isWeather('cold')) {
-				return this.modify(spd, 1.5);
+		onModifySpD(_spd, pokemon) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
+				&& this.field.isWeather('cold')
+				&& !pokemon.hasItem('cowboyhat')) {
+				return this.chainModify(1.5);
 			}
 		},
-		onFieldStart(battle, source, effect) {
+		onWeather(target) {
+			if (!target.hasType('Temperature', true)
+				&& !target.hasAbility('Chilled')
+				&& !target.hasAbility('Adaptable')
+				&& !target.hasItem('cowboyhat')) {
+				this.boost({spe: -1}, target);
+			}
+		},
+		name: 'Cold',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Cold', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Cold');
@@ -943,40 +952,35 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'Cold', '[upkeep]');
 			if (this.field.isWeather('Cold')) this.eachEvent('Weather');
 		},
-		onWeather(target) {
-			if (!target.hasType('Temperature', true) && !target.hasAbility('Chilled') && !target.hasAbility('Adaptable')) {
-				this.boost({spe: -1}, target);
-			}
-		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
 	timedilation: {
-		name: 'Time Dilation',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		onModifySpe(spe, pokemon) {
-			if (!pokemon.hasType('Time', true) &&  !pokemon.hasAbility('Adaptable')) {
+		onModifySpe(_spe, pokemon) {
+			if (!pokemon.hasType('Time', true)
+				&& !pokemon.hasAbility('Adaptable')
+				&& !pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(0.25);
 			}
 		},
-		onWeatherModifyDamage(damage, attacker, defender, move) {
-			if (defender.hasItem('utilityumbrella')) return;
-			if (move.type === 'Time' && (defender.newlySwitched || this.queue.willMove(defender))) {
-				this.debug('time dilation boost');
+		onWeatherModifyDamage(_damage, attacker, defender, move) {
+			if (move.type === 'Time'
+				&& (defender.newlySwitched || this.queue.willMove(defender))
+				&& !attacker.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
-		onFieldStart(battle, source, effect) {
+		name: 'Time Dilation',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasAbility('sinningunapuro')) return 0;
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5 || source.hasAbility('sinningunapuro')) this.effectState.duration = 0;
 				this.add('-weather', 'Time Dilation', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Time Dilation');
@@ -992,127 +996,113 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 	underwater: {
-		name: 'Underwater',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
 		onModifyAccuracyPriority: -1,
-		onModifyAccuracy(accuracy, target, source, move) {
+		onModifyAccuracy(accuracy, target, _source, move) {
 			if (typeof accuracy !== 'number') return;
-			if (move.type === 'Liquid') {
-				this.debug('Underwater - increasing accuracy');
+			if (move.type === 'Liquid' && !target.hasItem('cowboyhat')) {
 				return this.chainModify(1.2);
 			}
 		},
-		onFieldStart(battle, source, effect) {
+		onImmunity(type, pokemon) {
+			if (type === 'prone' && !pokemon.hasItem('cowboyhat')) return false;
+		},
+		onWeather(target) {
+			if (target.hasItem('cowboyhat')) return;
+
+			
+
+			if (target.hasType('Fish', true) || target.hasAbility('Adaptable')) {
+				this.heal(target.baseMaxhp / 16);
+			} else {
+				this.damage(target.baseMaxhp / 16);
+			}
+
+			if (target.status === 'prone') {
+				target.cureStatus();
+			}
+		},
+		name: 'Underwater',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
 			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
 				this.add('-weather', 'Underwater', '[from] ability: ' + effect, '[of] ' + source);
 			} else {
 				this.add('-weather', 'Underwater');
 			}
-		},
-		onImmunity(type, pokemon) {
-			if (pokemon.hasItem('utilityumbrella')) return;
-			if (type === 'prone') return false;
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
 			this.add('-weather', 'Underwater', '[upkeep]');
 			if (this.field.isWeather('Underwater')) this.eachEvent('Weather');
 		},
-		onWeather(target) {
-			this.damage(target.baseMaxhp / 16);
-			if (target.hasType('Fish', true) || target.hasAbility('Adaptable')) {
-				this.heal(target.baseMaxhp / 16);
-			}
-			if (target.status === 'prone') {
-				target.cureStatus();
-			}
-		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
 	meteorshower: {
-		name: 'Meteor Shower',
-		effectType: 'Weather',
-		duration: 5,
-		durationCallback(source, effect) {
-			if (source?.hasItem('environmentalaccord')) {
-				return 10;
-			}
-			return 5;
-		},
-		// This should be applied directly to the stat before any of the other modifiers are chained
-		// So we give it increased priority.
-		onFieldStart(battle, source, effect) {
-			if (effect?.effectType === 'Ability') {
-				if (this.gen <= 5) this.effectState.duration = 0;
-				this.add('-weather', 'Meteor Shower', '[from] ability: ' + effect, '[of] ' + source);
-			} else {
-				this.add('-weather', 'Meteor Shower');
-			}
-		},
 		onFieldResidualOrder: 1,
 		onFieldResidual(field) {
 			this.add('-weather', 'Meteor Shower', '[upkeep]');
 
 			const targets: Pokemon[] = [];
 			for (const pokemon of field.battle.getAllActive()) {
-				if (pokemon.hasItem('yellowsafetyvest') || pokemon.hasAbility('Celestial') || pokemon.status === 'banished') continue;
+				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') || pokemon.status === 'banished') continue;
 				targets.push(pokemon);
 			}
 			if (targets.length === 0) return;
-			const targNum = this.random(0, targets.length);
+			const targNum = this.random(targets.length);
 			const target = targets[targNum];
-			console.log(target.name);
 
+			// Okay, call me cringe but...
+			const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
 
-			if(target.hasAbility('Adaptable') || target.hasType('Dirt', true)) {
+			if (target.hasAbility('Adaptable') || target.hasType('Dirt', true)) {
 				this.heal(target.baseMaxhp / 8, target);
-				const result = this.random(10);
-				if (result < 8)
+				const result = this.random(stati.length + 2);
+				if (result < stati.length) {
 					target.cureStatus();
+				}
 			} else {
 				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
-				this.damage(target.maxhp * Math.pow(2, typeMod) / 16, target);
-				const result = this.random(10);
-				if (result === 0) {
-					target.trySetStatus('prone');
-				} else if (result === 1) {
-					target.trySetStatus('banished');
-				} else if (result === 2) {
-					target.trySetStatus('blinded');
-				} else if (result === 3) {
-					target.trySetStatus('pressurized');
-				} else if (result === 4) {
-					target.trySetStatus('fluctuant');
-				} else if (result === 5) {
-					target.trySetStatus('wounded');
-				} else if (result === 6) {
-					target.trySetStatus('distanced');
-				} else if (result === 7) {
-					target.trySetStatus('infected');
+				let damage = 0;
+				if (typeMod > 0) {
+					damage = target.maxhp * ((2 + typeMod) / 2) / 16;
 				}
+				if (typeMod < 0) {
+					damage = target.maxhp * (2 / (2 - typeMod)) / 16;
+				}
+				this.damage(damage, target);
+				const result = this.random(stati.length + 2);
+				target.trySetStatus(stati[result]);
 			}
 
 			if (this.field.isWeather('Meteor Shower')) this.eachEvent('Weather');
 		},
-		onWeather(pokemon) {
-			
+		name: 'Meteor Shower',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				this.add('-weather', 'Meteor Shower', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Meteor Shower');
+			}
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
 		},
 	},
+
+	// Landscape Factors
 
 	// BASE GAME
 	brn: {
