@@ -2232,8 +2232,8 @@ export class Pokemon {
 	}
 
 	/**
-	 * Like Field.effectiveWeather(), but ignores sun and rain if
-	 * the Utility Umbrella is active for the Pokemon.
+	 * Like Field.effectiveWeather(), but ignores environmental and landscape factors if
+	 * the Cowboy Hat,  is active for the Pokemon.
 	 */
 	effectiveWeather() {
 		const weather = this.battle.field.effectiveWeather();
@@ -2244,6 +2244,24 @@ export class Pokemon {
 		case 'primordialsea':
 			if (this.hasItem('utilityumbrella')) return '';
 		}
+		if (this.hasItem('cowboyhat')) return '';
+		return weather;
+	}
+	
+	/**
+	 * Like Field.effectiveWeather(), but ignores environmental and landscape factors if
+	 * the Cowboy Hat,  is active for the Pokemon.
+	 */
+	effectiveTerrain() {
+		const weather = this.battle.field.effectiveTerrain();
+		switch (weather) {
+		case 'sunnyday':
+		case 'raindance':
+		case 'desolateland':
+		case 'primordialsea':
+			if (this.hasItem('utilityumbrella')) return '';
+		}
+		if (this.hasItem('cowboyhat')) return '';
 		return weather;
 	}
 

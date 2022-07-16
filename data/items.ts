@@ -792,6 +792,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	cowboyhat: {
+		name: "Cowboy Hat",
+		spritenum: 811,
+		consume: {
+			healPercent: 50,
+		},
+		// Implemented elsewhere
+		num: -262,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
