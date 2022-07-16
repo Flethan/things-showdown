@@ -750,7 +750,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 
 			let damage = 0;
-			if (typeMod > 0) {
+			if (typeMod >= 0) {
 				damage = target.maxhp * ((2 + typeMod) / 2) * bonus / 16;
 			}
 			if (typeMod < 0) {
@@ -1070,7 +1070,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			} else {
 				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
 				let damage = 0;
-				if (typeMod > 0) {
+				if (typeMod >= 0) {
 					damage = target.maxhp * ((2 + typeMod) / 2) / 16;
 				}
 				if (typeMod < 0) {
