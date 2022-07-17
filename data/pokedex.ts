@@ -3266,7 +3266,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.7,
 		weightkg: 6.9,
 		color: "Green",
-		prevo: "Water'meleon",
+		evos: ["Ivysaur"],
 		eggGroups: ["Monster", "Grass"],
 	},
 	ivysaur: {
