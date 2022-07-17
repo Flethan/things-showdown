@@ -5256,8 +5256,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onAfterMove(source, target, move) {
+			if(!target.isActive) return;
 			if (this.randomChance(4, 5)) {
-				this.actions.useMove(move, target);
+				this.actions.useMove(move, source, target);
 			}
 		},
 		secondary: null,
