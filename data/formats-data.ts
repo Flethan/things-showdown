@@ -880,6 +880,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	watermeleon: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	watermelon: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	chameleon: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	
 	// BASE GAME
 	bulbasaur: {
