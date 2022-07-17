@@ -2617,7 +2617,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: true,
 	},
 	serpiternal: {
-		num: -466,
+		num: -500,
 		name: "Serpiternal",
 		types: ["Green"],
 		gender: "N",
@@ -3272,6 +3272,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Ditto"],
 		//hasSprite: true,
 	},
+	// serpiternal.num = -500 lol
 
 	// BASE GAME
 	bulbasaur: {

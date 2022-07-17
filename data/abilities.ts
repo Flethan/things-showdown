@@ -3144,14 +3144,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 		},
 		onUpdate(pokemon) {
-			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'B\u0301ttiers' || pokemon.transformed || !pokemon.hp) return;
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Be\u0301ttiers' || pokemon.transformed || !pokemon.hp) return;
 
 			if (pokemon.hasItem('cowboyhat') && pokemon.species.id !== 'bettierscowboy') {
-				pokemon.formeChange('B\u0301ttiers-Cowboy', this.effect, false, '[msg]');
+				pokemon.formeChange('Be\u0301ttiers-Cowboy', this.effect, false, '[msg]');
 			} else if (pokemon.hasItem('yellowsafetyvest') && pokemon.species.id !== 'bettiersconstruction') {
-				pokemon.formeChange('B\u0301ttiers-Construction', this.effect, false, '[msg]');
+				pokemon.formeChange('Be\u0301ttiers-Construction', this.effect, false, '[msg]');
 			} else if (pokemon.species.id === 'bettierscowboy' || pokemon.species.id === 'bettiersconstruction') {
-				pokemon.formeChange('B\u0301ttiers', this.effect, false, '[msg]');
+				pokemon.formeChange('Be\u0301ttiers', this.effect, false, '[msg]');
 			}
 		},
 		isBreakable: true,
