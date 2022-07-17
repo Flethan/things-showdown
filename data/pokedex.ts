@@ -742,6 +742,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 26.5,
 		color: "Purple",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	harry: {
 		num: -349,
@@ -841,6 +842,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Clayke"],
 		eggGroups: ["Amorphous", "Grass"],
+		hasSprite: true,
 	},
 	clayke: {
 		num: -355,
@@ -855,6 +857,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Loamuffin",
 		evoLevel: 22,
 		eggGroups: ["Amorphous", "Grass"],
+		hasSprite: true,
 	},
 	hwether: {
 		num: -356,
@@ -867,6 +870,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 200,
 		color: "Brown",
 		eggGroups: ["Human-Like", "Grass"],
+		hasSprite: true,
 	},
 	nighreto: {
 		num: -357,
@@ -1052,6 +1056,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		evos: ["Abyssulfo"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	abyssulfo: {
 		num: -369,
@@ -1066,6 +1071,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Bathymney",
 		evoLevel: 35,
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	dirtle: {
 		num: -370,
@@ -1314,6 +1320,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 26.5,
 		color: "Black",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	hydrolo: {
 		num: -387,
@@ -1556,6 +1563,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		evos: ["H'Oni"],
 		eggGroups: ["Undiscovered"],
+		hasSprite: true,
 	},
 	hackit: {
 		num: -399,
@@ -2321,6 +2329,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		cosmeticFormes: ["Litheath-Expansion", "Litheath-Green", "Litheath-Null", "Litheath-Soil", "Litheath-Song", "Litheath-Spring", "Litheath-Suds"],
 		formeOrder: ["Litheath", "Litheath-Expansion", "Litheath-Green", "Litheath-Null", "Litheath-Soil", "Litheath-Song", "Litheath-Spring", "Litheath-Suds"],
+		hasSprite: true,
 	},
 	geosonde: {
 		num: -448,
@@ -2336,6 +2345,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		cosmeticFormes: ["Geosonde-Expansion", "Geosonde-Green", "Geosonde-Null", "Geosonde-Soil", "Geosonde-Song", "Geosonde-Spring", "Geosonde-Suds"],
 		formeOrder: ["Geosonde", "Geosonde-Expansion", "Geosonde-Green", "Geosonde-Null", "Geosonde-Soil", "Geosonde-Song", "Geosonde-Spring", "Geosonde-Suds"],
+		hasSprite: true,
 	},
 	cululus: {
 		num: -449,
@@ -2924,6 +2934,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Hattabel"],
 		otherFormes: ["Hatthew-Tophat", "Hatthew-Ballcap", "Hatthew-Pangolin"],
 		formeOrder: ["Hatthew", "Hatthew-Tophat", "Hatthew-Ballcap", "Hatthew-Pangolin"],
+		hasSprite: true,
 	},
 	hatthewtophat: {
 		num: -482,
@@ -2939,6 +2950,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
+		hasSprite: true,
 	},
 	hatthewballcap: {
 		num: -482,
@@ -2954,6 +2966,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
+		hasSprite: true,
 	},
 	hatthewpangolin: {
 		num: -482,
@@ -2969,6 +2982,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		eggGroups: ["Mineral"],
 		evos: ["Hattabel"],
+		hasSprite: true,
 	},
 	hattabel: {
 		num: -483,
@@ -3180,6 +3194,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		otherFormes: ["Be\u0301ttiers-Cowboy", "Be\u0301ttiers-Construction"],
 		formeOrder: ["Be\u0301ttiers", "Be\u0301ttiers-Cowboy", "Be\u0301ttiers-Construction"],
+		hasSprite: true,
 	},
 	bettierscowboy: {
 		num: -496,
@@ -3195,6 +3210,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		eggGroups: ["Field"],
 		battleOnly: "Be\u0301ttiers",
+		hasSprite: true,
 	},
 	bettiersconstruction: {
 		num: -496,
@@ -3211,6 +3227,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		requiredAbility: "Fas'ion",
 		battleOnly: "Be\u0301ttiers",
+		hasSprite: true,
 	},
 	watermeleon: {
 		num: -497,
