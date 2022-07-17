@@ -4255,6 +4255,24 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			deposition: ["8M"],
 		},
 	},
+	watermeleon: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
+	watermelon: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
+	chameleon: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {
