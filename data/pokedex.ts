@@ -3000,6 +3000,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		addedType: "Infinity",
+		hasSprite: true,
 	},
 	rock: {
 		num: -484,
