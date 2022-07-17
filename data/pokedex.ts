@@ -3188,7 +3188,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Hair"],
 		genderRatio: {M: 0.9, F: 0.1},
 		baseStats: {hp: 85, atk: 57, def: 75, spa: 83, spd: 72, spe: 60},
-		abilities: {0: "Fas'ion"},
+		abilities: {0: 'Shed Hair', 1: 'Playful', H: "Fas'ion"},
 		heightm: 0.3,
 		weightkg: 8.5,
 		color: "White",
