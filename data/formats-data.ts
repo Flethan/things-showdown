@@ -792,6 +792,54 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	oraxeedaquarius: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedaries: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedcancer: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedcapricorn: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedgemini: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedleo: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedlibra: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedpisces: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedsagittarius: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedscorpio: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedtaurus: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	oraxeedvirgo: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	shooey: {
 		isNonstandard: "Thing",
 		tier: "Thing",

@@ -3522,6 +3522,74 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onUseMoveMessage(pokemon, target, move) {
 			this.hint(`Channelling ${move.channelling}!`);
 		},
+		onTryMove(pokemon, target, thisMove) {
+			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Oraxeed' || pokemon.transformed) {
+			} else {
+				if (!pokemon.hp) return;
+				switch (thisMove.channelling) {
+				case ('Aries'):
+					if (pokemon.species.id !== 'oraxeedaries') {
+						pokemon.formeChange('Oraxeed-Aries', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Taurus'):
+					if (pokemon.species.id !== 'oraxeedtaurus') {
+						pokemon.formeChange('Oraxeed-Taurus', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Gemini'):
+					if (pokemon.species.id !== 'oraxeedgemini') {
+						pokemon.formeChange('Oraxeed-Gemini', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Cancer'):
+					if (pokemon.species.id !== 'oraxeedcancer') {
+						pokemon.formeChange('Oraxeed-Cancer', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Leo'):
+					if (pokemon.species.id !== 'oraxeedleo') {
+						pokemon.formeChange('Oraxeed-Leo', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Virgo'):
+					if (pokemon.species.id !== 'oraxeedvirgo') {
+						pokemon.formeChange('Oraxeed-Virgo', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Libra'):
+					if (pokemon.species.id !== 'oraxeedlibra') {
+						pokemon.formeChange('Oraxeed-Libra', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Scorpio'):
+					if (pokemon.species.id !== 'oraxeedscorpio') {
+						pokemon.formeChange('Oraxeed-Scorpio', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Sagittarius'):
+					if (pokemon.species.id !== 'oraxeedsagittarius') {
+						pokemon.formeChange('Oraxeed-Sagittarius', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Capricorn'):
+					if (pokemon.species.id !== 'oraxeedcapricorn') {
+						pokemon.formeChange('Oraxeed-Capricorn', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Aquarius'):
+					if (pokemon.species.id !== 'oraxeedaquarius') {
+						pokemon.formeChange('Oraxeed-Aquarius', this.effect, false, '[msg]');
+					}
+					break;
+				case ('Pisces'):
+					if (pokemon.species.id !== 'oraxeedpisces') {
+						pokemon.formeChange('Oraxeed-Pisces', this.effect, false, '[msg]');
+					}
+					break;
+				}
+			}
+		},
 		onHit(target, source, thisMove) {
 			if (!target.hp) return;
 
