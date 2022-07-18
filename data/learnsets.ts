@@ -3915,7 +3915,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L70"],
 			cosmicdust: ["8L60"],
 			callmeteorites: ["8M"],
-			//advancedforecasting: ["8L80"],
+			// advancedforecasting: ["8L80"],
 			borrow: ["8M"],
 			energybeam: ["8T"],
 		},

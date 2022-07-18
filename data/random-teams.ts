@@ -641,9 +641,9 @@ export class RandomTeams {
 
 			// Check if the forme has moves for random battle
 			if (this.format.gameType === 'singles') {
-				//if (!species.randomBattleMoves) continue;
+				// if (!species.randomBattleMoves) continue;
 			} else {
-				//if (!species.randomDoubleBattleMoves) continue;
+				// if (!species.randomDoubleBattleMoves) continue;
 			}
 
 			// Limit to one of each species (Species Clause)
