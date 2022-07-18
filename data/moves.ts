@@ -3524,6 +3524,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onTryMove(pokemon, target, thisMove) {
 			if (!pokemon.isActive || pokemon.baseSpecies.baseSpecies !== 'Oraxeed' || pokemon.transformed) {
+				this.debug('not oraxeed');
 			} else {
 				if (!pokemon.hp) return;
 				switch (thisMove.channelling) {
