@@ -354,7 +354,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	delayedround: {
 		name: "Delayed Round",
-		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Pokemon at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
+		desc: "Deals damage to all adjacent foes one turn after this move is used in addition to its initial damage. At the end of that turn, the damage is calculated at that time and dealt to the Thing at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability.",
 		shortDesc: "Hits one turn after being used.",
 	},
 	toxicsmog: {
