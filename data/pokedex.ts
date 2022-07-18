@@ -3250,7 +3250,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Green", "Industrial"],
 		gender: "M",
 		baseStats: {hp: 84, atk: 74, def: 62, spa: 200, spd: 10, spe: 82},
-		abilities: {0: "No Ability",},
+		abilities: {0: "No Ability"},
 		heightm: 0.25,
 		weightkg: 7.5,
 		color: "Green",
@@ -3270,7 +3270,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Waterm'elon"],
 		eggGroups: ["Ditto"],
-		//hasSprite: true,
+		// hasSprite: true,
 	},
 	// serpiternal.num = -500 lol
 

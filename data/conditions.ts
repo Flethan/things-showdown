@@ -196,7 +196,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				if (!ally?.isActive || !ally.volatiles['equip']) continue;
 				equip = ally;
 			}
-			if(move.name !== 'Equip' || equip !== target) {
+			if (move.name !== 'Equip' || equip !== target) {
 				if (equip) equip.removeVolatile('equip');
 				source.removeVolatile('equipped');
 			}
@@ -239,10 +239,15 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return 0;
 		},
 	},
-	
+
 
 	// Statuses
 	prone: {
+		onBeforeMovePriority: 10,
+		onBeforeMove(pokemon, target, move) {
+			if (move.category === 'Status')	pokemon.cureStatus();
+			else this.add('-activate', pokemon, 'prone');
+		},
 		name: 'prone',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
@@ -253,11 +258,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 			} else {
 				this.add('-status', target, 'prone');
 			}
-		},
-		onBeforeMovePriority: 10,
-		onBeforeMove(pokemon, target, move) {
-			if (move.category === 'Status')	pokemon.cureStatus();
-			else this.add('-activate', pokemon, 'prone');
 		},
 		onSwitchOut(pokemon) {
 			pokemon.cureStatus();
@@ -548,26 +548,25 @@ export const Conditions: {[k: string]: ConditionData} = {
 				this.effectState.inf_mode = {...source.statusState.inf_mode};
 
 				// mutate?
-				if (this.random(1,5) < 2) {
-					this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10,10);
+				if (this.random(1, 5) < 2) {
+					this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10, 10);
 				}
-				if (this.random(1,5) < 2) {
-					this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10,10);
+				if (this.random(1, 5) < 2) {
+					this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10, 10);
 				}
-				if (this.random(1,5) < 2) {
-					this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3,3);
-					if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
+				if (this.random(1, 5) < 2) {
+					this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3, 3);
+					if (this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
 				}
-				if (this.random(1,5) < 2) {
+				if (this.random(1, 5) < 2) {
 					if (this.effectState.inf_mode) {
-						this.effectState.inf_mode.push(this.random(1,5));
+						this.effectState.inf_mode.push(this.random(1, 5));
 					} else {
-						this.effectState.inf_mode = [this.random(1,5)];
+						this.effectState.inf_mode = [this.random(1, 5)];
 					}
 				}
-				if (this.random(1,5) < 2) {
-					if(this.effectState.inf_mode.length > 1)
-						this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
+				if (this.random(1, 5) < 2) {
+					if (this.effectState.inf_mode.length > 1) { this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length)); }
 				}
 
 				console.log('source parameters:');
@@ -580,9 +579,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 				// chance spread occurs
 				this.effectState.inf_spread = this.random(20, 60);
 				// chance damage occurs
-				this.effectState.inf_damage = this.random(40,80);
+				this.effectState.inf_damage = this.random(40, 80);
 				// amount damaged: loses 1 / x of max hp
-				this.effectState.inf_damage_amount = this.random(2,16);
+				this.effectState.inf_damage_amount = this.random(2, 16);
 				/* modes:
 						1 - after contact
 						2 - after infected move
@@ -590,29 +589,28 @@ export const Conditions: {[k: string]: ConditionData} = {
 						4 - after infected faint
 						5 - end of turn
 						6 - thing enters infected's slot */
-				this.effectState.inf_mode = [this.random(1,5)];
+				this.effectState.inf_mode = [this.random(1, 5)];
 			}
 			console.log('infected parameters:');
 			console.log(this.effectState.inf_spread);
 			console.log(this.effectState.inf_damage);
 			console.log(this.effectState.inf_damage_amount);
 			console.log(this.effectState.inf_mode);
-			
 		},
 		onResidual(pokemon) {
 			// infect if mode has end of turn
 			if (this.effectState.inf_mode.includes(5)) {
 				console.log('random spread');
-				console.log(pokemon.name)
+				console.log(pokemon.name);
 				for (const foe of pokemon.foes()) {
 					if (!foe?.isActive || foe === pokemon) continue;
-					if (this.random(1,100) < this.effectState.inf_spread) {
+					if (this.random(1, 100) < this.effectState.inf_spread) {
 						foe.trySetStatus('infected', pokemon);
 					}
 				}
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || ally === pokemon) continue;
-					if (this.random(1,100) < this.effectState.inf_spread) {
+					if (this.random(1, 100) < this.effectState.inf_spread) {
 						ally.trySetStatus('infected', pokemon);
 					}
 				}
@@ -620,33 +618,32 @@ export const Conditions: {[k: string]: ConditionData} = {
 
 			// take damage
 			console.log('roll for damage');
-			console.log(pokemon.name)
-			if(this.random(1,100) < this.effectState.inf_damage) {
+			console.log(pokemon.name);
+			if (this.random(1, 100) < this.effectState.inf_damage) {
 				console.log('take damage');
 				this.damage(pokemon.baseMaxhp / this.effectState.inf_damage_amount);
 			}
 
 			// mutate?
-			if (this.random(1,5) < 2) {
-				this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10,10);
+			if (this.random(1, 5) < 2) {
+				this.effectState.inf_spread = this.effectState.inf_spread + this.random(-10, 10);
 			}
-			if (this.random(1,5) < 2) {
-				this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10,10);
+			if (this.random(1, 5) < 2) {
+				this.effectState.inf_damage = this.effectState.inf_damage + this.random(-10, 10);
 			}
-			if (this.random(1,5) < 2) {
-				this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3,3);
-				if(this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
+			if (this.random(1, 5) < 2) {
+				this.effectState.inf_damage_amount = this.effectState.inf_damage_amount + this.random(-3, 3);
+				if (this.effectState.inf_damage_amount <= 0) this.effectState.inf_damage_amount = 1;
 			}
-			if (this.random(1,5) < 2) {
+			if (this.random(1, 5) < 2) {
 				if (this.effectState.inf_mode) {
-					this.effectState.inf_mode.push(this.random(1,5));
+					this.effectState.inf_mode.push(this.random(1, 5));
 				} else {
-					this.effectState.inf_mode = this.random(1,5);
+					this.effectState.inf_mode = this.random(1, 5);
 				}
 			}
-			if (this.random(1,5) < 2) {
-				if(this.effectState.inf_mode.length > 1)
-					this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length));
+			if (this.random(1, 5) < 2) {
+				if (this.effectState.inf_mode.length > 1) { this.effectState.inf_mode.splice(this.random(0, this.effectState.inf_mode.length)); }
 			}
 
 			console.log('infected parameters:');
@@ -656,20 +653,20 @@ export const Conditions: {[k: string]: ConditionData} = {
 			console.log(this.effectState.inf_mode);
 		},
 		onAfterMoveSecondarySelf(source, target, move) {
-			if (source && source !== target && move && 
+			if (source && source !== target && move &&
 				((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
 				this.effectState.inf_mode.includes(2))) {
-				if (this.random(1,100) < this.effectState.inf_spread) {
+				if (this.random(1, 100) < this.effectState.inf_spread) {
 					target.trySetStatus('infected', target);
 				}
 			}
 		},
 		onAfterMoveSecondary(source, target, move) {
 			if (this.effectState.inf_mode.includes(1) && source && source !== target && move && this.checkMoveMakesContact(move, source, target)) {
-				if (source && source !== target && move && 
+				if (source && source !== target && move &&
 					((this.effectState.inf_mode.includes(1) && this.checkMoveMakesContact(move, source, target)) ||
 					this.effectState.inf_mode.includes(3))) {
-					if (this.random(1,100) < this.effectState.inf_spread) {
+					if (this.random(1, 100) < this.effectState.inf_spread) {
 						target.trySetStatus('infected', source);
 					}
 				}
@@ -679,24 +676,24 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (this.effectState.inf_mode.includes(4)) {
 				for (const foe of pokemon.foes()) {
 					if (!foe?.isActive || foe === pokemon) continue;
-					if (this.random(1,100) < this.effectState.inf_spread) {
+					if (this.random(1, 100) < this.effectState.inf_spread) {
 						foe.trySetStatus('infected', pokemon);
 					}
 				}
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || ally === pokemon) continue;
-					if (this.random(1,100) < this.effectState.inf_spread) {
+					if (this.random(1, 100) < this.effectState.inf_spread) {
 						ally.trySetStatus('infected', pokemon);
 					}
 				}
 			}
 		},
 		onEnd(pokemon) {
-			this.effectState.inf_spread = null
-			this.effectState.inf_damage = null
-			this.effectState.inf_damage_amount = null
-			this.effectState.inf_mode = null
-		}
+			this.effectState.inf_spread = null;
+			this.effectState.inf_damage = null;
+			this.effectState.inf_damage_amount = null;
+			this.effectState.inf_mode = null;
+		},
 	},
 
 	// Environmental Factors (New Weather)
@@ -733,9 +730,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 	},
 	locustswarm: {
 		onModifySpe(_spe, pokemon) {
-			if ((pokemon.hasType('Arthropod', true) || pokemon.hasAbility('Adaptable'))
-				&& this.field.isWeather('locustswarm')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((pokemon.hasType('Arthropod', true) || pokemon.hasAbility('Adaptable')) &&
+				this.field.isWeather('locustswarm') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -832,8 +829,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onModifyPriority(priority, pokemon, target, move) {
-			if ((move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather'))
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) &&
+				!pokemon.hasItem('cowboyhat')) {
 				return priority + 1;
 			}
 		},
@@ -865,17 +862,17 @@ export const Conditions: {[k: string]: ConditionData} = {
 	hot: {
 		onModifyAtkPriority: 10,
 		onModifyAtk(_atk, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
-				&& this.field.isWeather('hot')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+				this.field.isWeather('hot') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
 		onModifySpAPriority: 10,
 		onModifySpA(_spa, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
-				&& this.field.isWeather('hot')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+				this.field.isWeather('hot') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -911,25 +908,25 @@ export const Conditions: {[k: string]: ConditionData} = {
 	cold: {
 		onModifyDefPriority: 10,
 		onModifyDef(_def, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
-				&& this.field.isWeather('cold')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+				this.field.isWeather('cold') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
 		onModifySpDPriority: 10,
 		onModifySpD(_spd, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable'))
-				&& this.field.isWeather('cold')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+				this.field.isWeather('cold') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
 		onWeather(target) {
-			if (!target.hasType('Temperature', true)
-				&& !target.hasAbility('Chilled')
-				&& !target.hasAbility('Adaptable')
-				&& !target.hasItem('cowboyhat')) {
+			if (!target.hasType('Temperature', true) &&
+				!target.hasAbility('Chilled') &&
+				!target.hasAbility('Adaptable') &&
+				!target.hasItem('cowboyhat')) {
 				this.boost({spe: -1}, target);
 			}
 		},
@@ -958,16 +955,16 @@ export const Conditions: {[k: string]: ConditionData} = {
 	},
 	timedilation: {
 		onModifySpe(_spe, pokemon) {
-			if (!pokemon.hasType('Time', true)
-				&& !pokemon.hasAbility('Adaptable')
-				&& !pokemon.hasItem('cowboyhat')) {
+			if (!pokemon.hasType('Time', true) &&
+				!pokemon.hasAbility('Adaptable') &&
+				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(0.25);
 			}
 		},
 		onWeatherModifyDamage(_damage, attacker, defender, move) {
-			if (move.type === 'Time'
-				&& (defender.newlySwitched || this.queue.willMove(defender))
-				&& !attacker.hasItem('cowboyhat')) {
+			if (move.type === 'Time' &&
+				(defender.newlySwitched || this.queue.willMove(defender)) &&
+				!attacker.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
@@ -1009,7 +1006,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onWeather(target) {
 			if (target.hasItem('cowboyhat')) return;
 
-			
 
 			if (target.hasType('Fish', true) || target.hasAbility('Adaptable')) {
 				this.heal(target.baseMaxhp / 16);
