@@ -2788,13 +2788,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	intrepidhat: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			if(pokemon.volatiles['equipped']) {
+			if (pokemon.volatiles['equipped']) {
 				let equip = null;
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
-				if(!equip) return;
+				if (!equip) return;
 				this.boost({atk: 1, spa: 1}, equip);
 			}
 		},
@@ -2805,13 +2805,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	protectivehat: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			if(pokemon.volatiles['equipped']) {
+			if (pokemon.volatiles['equipped']) {
 				let equip = null;
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
-				if(!equip) return;
+				if (!equip) return;
 				this.boost({def: 1, spd: 1}, equip);
 			}
 		},
@@ -2822,13 +2822,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	nimblehat: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			if(pokemon.volatiles['equipped']) {
+			if (pokemon.volatiles['equipped']) {
 				let equip = null;
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
-				if(!equip) return;
+				if (!equip) return;
 				this.boost({spe: 1}, equip);
 			}
 		},
@@ -2839,14 +2839,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	spiritedhat: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			if(pokemon.volatiles['equipped']) {
+			if (pokemon.volatiles['equipped']) {
 				let equip = null;
 				for (const ally of pokemon.allies()) {
 					if (!ally?.isActive || !ally.volatiles['equip']) continue;
 					equip = ally;
 				}
-				if(!equip) return;
-				
+				if (!equip) return;
+
 				this.effectState.hatMove = true;
 				const bannedMoves = [''];
 				const moves = [];
@@ -2879,7 +2879,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	amorphoushat: {
 		isNonstandard: "Thing",
 		onAllyModifyType(move, pokemon) {
-			if(pokemon.volatiles['equip']) {
+			if (pokemon.volatiles['equip']) {
 				move.type = 'Infinity';
 			}
 		},
@@ -2899,7 +2899,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let helper = null;
 			for (const ally of pokemon.allies()) {
 				if (!ally?.isActive || ally === pokemon || !ally.isAdjacent(pokemon) ||
-					 (pokemon.volatiles['equipped'] && !ally.volatiles['equip']) || 
+					 (pokemon.volatiles['equipped'] && !ally.volatiles['equip']) ||
 					 (ally.volatiles['equipped'] && !pokemon.volatiles['equip']) ||
 					 ally.hasAbility('stubborn') ||
 					 (helper !== null && this.randomChance(1, 2))) continue;
@@ -2957,8 +2957,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAfterMega(pokemon) {
 			let i: BoostID;
 			for (i in pokemon.boosts) {
-				if (pokemon.boosts[i]>0)
-					pokemon.boosts[i]! *= 2;
+				if (pokemon.boosts[i] > 0) { pokemon.boosts[i]! *= 2; }
 			}
 		},
 		name: "Escalation",
@@ -2977,14 +2976,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			for (const foe of source.foes()) {
 				if (!foe?.isActive || foe === source || foe.volatiles['pheromonemark']) continue;
-				foe.addVolatile('pheromonemark')
+				foe.addVolatile('pheromonemark');
 			}
 
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
-			} else 
-				this.field.setWeather('locustswarm');
+			} else { this.field.setWeather('locustswarm'); }
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
@@ -3007,16 +3005,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	escapevelocity: {
 		isNonstandard: "ThingInf",
 		onAfterMega(pokemon) {
-			if(pokemon.boosts.spe < 2)
-				this.actions.useMove('crashlanding', pokemon);
-			else {
+			if (pokemon.boosts.spe < 2) { this.actions.useMove('crashlanding', pokemon); } else {
 				pokemon.setStatus('distanced');
 				pokemon.statusState.duration = 0;
 			}
 		},
 		onResidual(pokemon) {
-			if (pokemon.status !== 'distanced')
-				this.actions.useMove('crashlanding', pokemon);
+			if (pokemon.status !== 'distanced') { this.actions.useMove('crashlanding', pokemon); }
 		},
 		name: "Escape Velocity",
 		rating: 4,
@@ -3026,8 +3021,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onSourceHit(target, source, move) {
 			if (source && source !== target && move?.flags['contact']) {
-				if (target.item && this.randomChance(1,2)) {
-					let item = target.getItem();
+				if (target.item && this.randomChance(1, 2)) {
+					const item = target.getItem();
 					target.setItem('');
 					target.lastItem = item.id;
 					this.add('-enditem', target, item.name, '[from] ability: Playful');
@@ -3091,7 +3086,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -196,
 	},
 	respite: {
-		isNonstandard: "ThingInf",	
+		isNonstandard: "ThingInf",
 		onResidual() {
 			const env = this.field.weatherState;
 			const land = this.field.terrainState;

@@ -1015,7 +1015,7 @@ export class Pokemon {
 
 	ignoringItem() {
 		return !!((this.battle.gen >= 5 && !this.isActive) ||
-			(this.hasAbility('klutz') && !this.getItem().ignoreKlutz) || 
+			(this.hasAbility('klutz') && !this.getItem().ignoreKlutz) ||
 			(this.hasAbility('assemblyline') && !this.getItem().ignoreKlutz) ||
 			this.volatiles['embargo'] || this.battle.field.pseudoWeather['magicroom']);
 	}
@@ -2247,7 +2247,7 @@ export class Pokemon {
 		if (this.hasItem('cowboyhat')) return '';
 		return weather;
 	}
-	
+
 	/**
 	 * Like Field.effectiveWeather(), but ignores environmental and landscape factors if
 	 * the Cowboy Hat,  is active for the Pokemon.
