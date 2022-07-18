@@ -528,8 +528,18 @@ export const Conditions: {[k: string]: ConditionData} = {
 		effectType: 'Status',
 		onStart(target, source) {
 			if (source?.statusState?.infection) {
-				this.effectState.infection = {...source.statusState.infection};
+				// Deep copy; Each infection mutates on its own, even it intially came a spread
+				// (Also, I'm doing it in a massively cringe way, please @ me.)
+				this.effectState.infection = {
+					spreadChance: source.statusState.infection.spreadChance,
+					spreadMode: [...source.statusState.infection.spreadMode],
+					damageChance: source.statusState.infection.damageChance,
+					damageFraction: source.statusState.infection.damageFraction,
+				};
+
+				// Shallow copy for easy shorthand
 				const inf = this.effectState.infection;
+				console.log('spread infection (before mutation)');
 				console.log(inf);
 
 				// Each parameter has a 20% chance to 'mutate'
@@ -549,14 +559,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 					inf.spreadMode.splice(this.random(0, inf.spreadMode.length - 1), 1);
 				}
 			} else {
-				console.log('new');
 				this.effectState.infection = {
 					// The % chance a spread occurs
 					spreadChance: this.random(20, 60),
 					/* Spread modes:
 						1 - After Thing makes contact or is made contact with
-						2 - After Thing is hit by another Thing (?)
-						3 - After Thing hits another Thing (?)
+						2 - After Thing is hit by another Thing
+						3 - After Thing hits another Thing
 						4 - After Thing faints for all other active Things
 						5 - End of turn for all other active Things */
 					spreadMode: [this.random(1, 5)],
@@ -565,14 +574,17 @@ export const Conditions: {[k: string]: ConditionData} = {
 					// The amount damaged as 1 / x of max hp
 					damageFraction: this.random(2, 16),
 				};
+				console.log('new infection');
+				console.log(this.effectState.infection);
 			}
 
 			this.add('-status', target, 'infected');
 		},
 		onResidual(source) {
+			// Shallow copy for easy shorthand
 			const inf = this.effectState.infection;
 
-			// Try spread: mode 5
+			// Try spread
 			if (inf.spreadMode.includes(5)) {
 				for (const pokemon of this.getAllActive()) {
 					if (pokemon === source) continue;
@@ -582,7 +594,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				}
 			}
 
-			// Damage
+			// Residual damage
 			if (this.random() * 100 < inf.damageChance) {
 				this.damage(source.baseMaxhp / inf.damageFraction);
 			}
@@ -635,6 +647,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onEnd() {
+			// Not sure if this is necessary
 			delete this.effectState.infection;
 		},
 	},
