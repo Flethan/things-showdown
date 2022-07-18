@@ -2025,20 +2025,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, authentic: 1},
 		onHit(target, source) {
-			if(source.volatiles['equipped'] && target.volatiles['equip']) return;
+			if (source.volatiles['equipped'] && target.volatiles['equip']) return;
 			target.addVolatile('equip');
 			this.add('-start', target, 'Equip');
-			if(!target.volatiles['equip']) return false;
+			if (!target.volatiles['equip']) return false;
 			source.addVolatile('equipped');
 			this.add('-start', source, 'Equipped');
 		},
 		onTryMove(source, target, move) {
-			if(source.volatiles['equipped'] && target.volatiles['equip']) {
+			if (source.volatiles['equipped'] && target.volatiles['equip']) {
 				this.attrLastMove('[still]');
 				// Run side-effects normally associated with hitting (e.g., Protean, Libero)
 				this.runEvent('PrepareHit', source, target, move);
-				target.volatiles['equip'].duration ++;
-				source.volatiles['equipped'].duration ++;
+				target.volatiles['equip'].duration++;
+				source.volatiles['equipped'].duration++;
 				return;
 			} else if (target.volatiles['equip'] || target.volatiles['equipped']) {
 				return false;
@@ -2050,26 +2050,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 2,
 			onModifyAtkPriority: 5,
 			onModifyAtk(atk, pokemon, defender, move) {
-				const source =  this.effectState.source;
+				const source = this.effectState.source;
 				return atk + source.storedStats.atk;
 			},
 			onModifyDefPriority: 5,
 			onModifyDef(def, pokemon, defender, move) {
-				const source =  this.effectState.source;
+				const source = this.effectState.source;
 				return def + source.storedStats.def;
 			},
 			onModifySpAPriority: 5,
 			onModifySpA(spa, pokemon, defender, move) {
-				const source =  this.effectState.source;
+				const source = this.effectState.source;
 				return spa + source.storedStats.spa;
 			},
 			onModifySpDPriority: 5,
 			onModifySpD(spd, pokemon, defender, move) {
-				const source =  this.effectState.source;
+				const source = this.effectState.source;
 				return spd + source.storedStats.spd;
 			},
 			onModifySpe(spe, pokemon) {
-				const source =  this.effectState.source;
+				const source = this.effectState.source;
 				return spe + source.storedStats.spe;
 			},
 
@@ -2207,10 +2207,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 2,
 			onAfterMove(source, moveTarget, move) {
-				//console.log(this.effectState.owner?.name);
+				// console.log(this.effectState.owner?.name);
 
 				if (this.effectState.duration === 2) {
-					this.effectState.owner = moveTarget
+					this.effectState.owner = moveTarget;
 					return;
 				}
 
@@ -3943,7 +3943,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		noMetronome: ['Parry', 'Riposte', 'Whistle'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
-			if (source.hasAbility("B92228z") && this.randomChance(1,2)) {
+			if (source.hasAbility("B92228z") && this.randomChance(1, 2)) {
 				for (const id in Moves) {
 					const move = Moves[id];
 					if (move.realMove) continue;
@@ -4806,7 +4806,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					const positionIndex = source.side.n % 3 > 0;
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
-						const positionIndexFoe = foe.side.n % 3 > 0;	
+						const positionIndexFoe = foe.side.n % 3 > 0;
 						if (positionIndex === positionIndexFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
@@ -4836,7 +4836,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					const positionIndex = source.side.n > 1;
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
-						const positionIndexFoe = foe.side.n > 1;	
+						const positionIndexFoe = foe.side.n > 1;
 						if (positionIndex === positionIndexFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
@@ -4848,7 +4848,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					const positionIndex = source.side.n % 3 > 0;
 					for (const foe of source.foes()) {
 						if (!foe?.isActive || foe === source) return;
-						const positionIndexFoe = foe.side.n % 3 > 0;	
+						const positionIndexFoe = foe.side.n % 3 > 0;
 						if (positionIndex === positionIndexFoe) {
 							if (this.validTarget(foe, source, move.target)) {
 								this.debug("Rank and File redirected target of move");
@@ -5256,7 +5256,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onAfterMove(source, target, move) {
-			if(!target.isActive) return;
+			if (!target.isActive) return;
 			if (this.randomChance(4, 5)) {
 				this.actions.useMove(move, source, target);
 			}
@@ -6749,7 +6749,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spa: 2}},
 		contestType: "Beautiful",
 	},
-	
+
 
 	// Infinity
 

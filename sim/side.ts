@@ -461,7 +461,7 @@ export class Side {
 				}
 			}
 			if (!targetType && ['', 'symbol'].includes(megaDynaOrZ) && request.muMove) {
-				/*if (moveid === toID(request.muMove.id)) {
+				/* if (moveid === toID(request.muMove.id)) {
 					moveid = request.moves[0].id;
 					targetType = request.muMove.target;
 					megaDynaOrZ = 'symbol';
@@ -508,7 +508,7 @@ export class Side {
 
 		// Mu
 		// Is Symbol or will Symbol this turn.
-		/*const muMove = ((megaDynaOrZ === 'symbol' || pokemon.species.muMove) && request.muMove && moveid === request.moves[0].id) ?
+		/* const muMove = ((megaDynaOrZ === 'symbol' || pokemon.species.muMove) && request.muMove && moveid === request.moves[0].id) ?
 			this.battle.dex.moves.get(request.muMove.id) : undefined;
 
 		if (muMove) targetType = this.battle.dex.moves.get(muMove).target;*/
@@ -554,7 +554,7 @@ export class Side {
 			if (pokemon.maxMoveDisabled(move)) {
 				return this.emitChoiceError(`Can't move: ${pokemon.name}'s ${maxMove.name} is disabled`);
 			}
-		/*} else if (muMove) {
+		/* } else if (muMove) {
 			// Has a muMove, checks if pokemon has muPP
 			if (pokemon.muPP <= 0) {
 				return this.emitChoiceError(`Can't move: ${pokemon.name} is out of muPP`);
@@ -650,7 +650,7 @@ export class Side {
 			symbol: symbol,
 			mega: mega || ultra,
 			zmove: zMove,
-			//muMove: muMove ? muMove.id : undefined,
+			// muMove: muMove ? muMove.id : undefined,
 			maxMove: maxMove ? maxMove.id : undefined,
 		});
 
@@ -698,7 +698,7 @@ export class Side {
 			slot = this.active.length;
 			while (this.choice.switchIns.has(slot) || this.pokemon[slot].fainted) slot++;
 		} else {
-			slot = parseInt(slotText!) - 1;
+			slot = parseInt(slotText) - 1;
 		}
 		if (isNaN(slot) || slot < 0) {
 			// maybe it's a name/species id!
