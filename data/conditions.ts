@@ -529,7 +529,13 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onStart(target, source) {
 			if (source?.statusState?.infection) {
 				// Deep copy; Each infection mutates on its own, even it intially came a spread
-				this.effectState.infection = {...source.statusState.infection};
+				// (Also, I'm doing it in a massively cringe way, please @ me.)
+				this.effectState.infection = {
+					spreadChance: source.statusState.infection.spreadChance,
+					spreadMode: [...source.statusState.infection.spreadMode],
+					damageChance: source.statusState.infection.damageChance,
+					damageFraction: source.statusState.infection.damageFraction,
+				};
 
 				// Shallow copy for easy shorthand
 				const inf = this.effectState.infection;
