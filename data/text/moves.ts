@@ -408,7 +408,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The user swaps its held item with the target's held item. After the user's next move, the user and target swap items again.",
 		shortDesc: "Swap items, then swap back next turn.",
 	},
-	
+
 	// liquid
 	soppingslap: {
 		name: "Sopping Slap",

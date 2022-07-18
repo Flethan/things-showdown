@@ -527,10 +527,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'infected',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			console.log(source.name);
-			console.log('infecting');
-			console.log(target.name);
-			// bongus
 			if (source && source.statusState && source.statusState.inf_spread) {
 				this.add('-status', target, 'infected');
 				// chance spread occurs

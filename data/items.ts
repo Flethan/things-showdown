@@ -217,7 +217,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			basePower: 0,
 		},
 		consume: {
-			
+
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -719,7 +719,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	antimatter: {
 		name: "Antimatter",
-		spritenum:808,
+		spritenum: 808,
 		fling: {
 			basePower: 60,
 		},
