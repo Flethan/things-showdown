@@ -2321,6 +2321,46 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				break;
 			}
 			this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
+
+			if (pokemon.isActive && pokemon.baseSpecies.baseSpecies === 'Litheath' && !pokemon.transformed) {
+				switch (this.field.terrain) {
+				case 'richsoil':
+					if (pokemon.species.id !== 'litheathsoil') {
+						pokemon.formeChange('Litheath-Soil', this.effect, false, '[msg]');
+					}
+					break;
+				case 'spatialexpansion':
+					if (pokemon.species.id !== 'litheathexpansion') {
+						pokemon.formeChange('Litheath-Expansion', this.effect, false, '[msg]');
+					}
+					break;
+				case 'greenground':
+					if (pokemon.species.id !== 'litheathgreen') {
+						pokemon.formeChange('Litheath-Green', this.effect, false, '[msg]');
+					}
+					break;
+				case 'sudscape':
+					if (pokemon.species.id !== 'litheathsuds') {
+						pokemon.formeChange('Litheath-Suds', this.effect, false, '[msg]');
+					}
+					break;
+				case 'mysticalsong':
+					if (pokemon.species.id !== 'litheathsong') {
+						pokemon.formeChange('Litheath-Song', this.effect, false, '[msg]');
+					}
+					break;
+				case 'nullland':
+					if (pokemon.species.id !== 'litheathnull') {
+						pokemon.formeChange('Litheath-Null', this.effect, false, '[msg]');
+					}
+					break;
+				case 'springfloor':
+					if (pokemon.species.id !== 'litheathspring') {
+						pokemon.formeChange('Litheath-Spring', this.effect, false, '[msg]');
+					}
+					break;
+				}
+			}
 		},
 		name: "Sedimentary",
 		rating: 1,

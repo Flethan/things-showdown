@@ -369,6 +369,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	fjeanbrawler: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	soapy: {
 		isNonstandard: "Thing",
 		tier: "Thing",
@@ -649,6 +653,34 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	litheath: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathexpansion: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathgreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathnull: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathsoil: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathsong: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathspring: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	litheathsuds: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
