@@ -2320,6 +2320,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				newType = 'Sport';
 				break;
 			}
+			if (!pokemon.addType(newType)) return false;
 			this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
 
 			if (pokemon.isActive && pokemon.baseSpecies.baseSpecies === 'Litheath' && !pokemon.transformed) {

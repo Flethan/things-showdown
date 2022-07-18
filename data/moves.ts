@@ -1159,14 +1159,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryMove(pokemon, target, move) {
-			if (pokemon.hasType('Green') || this.field.getTerrain().id === 'greenground') return;
+			if (pokemon.hasType('Green') || this.field.isTerrain('greenground')) return;
 			this.add('-fail', pokemon, 'move: Deciduous Blast');
 			this.attrLastMove('[still]');
 			return null;
 		},
 		self: {
 			onHit(pokemon) {
-				if (this.field.getTerrain().id === 'greenground') {
+				if (this.field.isTerrain('greenground')) {
 					this.field.clearTerrain();
 					return;
 				}
@@ -1200,7 +1200,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
 			let count = pokemon.getTypes(false, true).filter(type => type === 'Green').length;
-			if (this.field.getTerrain().id === 'greenground') count++;
+			if (this.field.isTerrain('greenground')) count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -1227,7 +1227,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
 			let count = this.getAllActive().reduce((total, active) => total + active.getTypes(false, true).filter(type => type === 'Green').length, 0);
-			if (this.field.getTerrain().id === 'greenground') count++;
+			if (this.field.isTerrain('greenground')) count++;
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -1988,12 +1988,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onBasePower(basePower, source, target) {
-			if (target.hasType('Green') || this.field.getTerrain().id === 'greenground') {
+			if (target.hasType('Green') || this.field.isTerrain('greenground')) {
 				return this.chainModify(2);
 			}
 		},
 		onHit(pokemon) {
-			if (this.field.getTerrain().id === 'greenground') {
+			if (this.field.isTerrain('greenground')) {
 				this.field.clearTerrain();
 				return;
 			}
