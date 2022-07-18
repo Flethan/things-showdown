@@ -3154,6 +3154,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 33,
 	},
+	greasy: {
+		isNonstandard: "Thing",
+		name: "Greasy",
+		rating: 2,
+		num: -4200,
+	},
 
 	// BASE GAME
 	noability: {
