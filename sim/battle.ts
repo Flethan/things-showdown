@@ -1356,7 +1356,7 @@ export class Battle {
 			const pokemon = side.pokemon[i];
 			if (!pokemon.fainted) {
 				if (pokemon.item === 'expresspass') return [pokemon];
-				canSwitchIn.push(pokemon);	
+				canSwitchIn.push(pokemon);
 			}
 		}
 		return canSwitchIn;
@@ -1498,6 +1498,9 @@ export class Battle {
 				sideTrapped = sideTrapped && pokemon.trapped;
 				const staleness = pokemon.volatileStaleness || pokemon.staleness;
 				if (staleness) sideStaleness = sideStaleness === 'external' ? sideStaleness : staleness;
+
+				this.add('-ability', pokemon, this.dex.abilities.getByID(pokemon.ability), '[silent]');
+
 				pokemon.activeTurns++;
 			}
 			trappedBySide.push(sideTrapped);
