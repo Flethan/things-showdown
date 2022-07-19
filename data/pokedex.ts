@@ -3609,7 +3609,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Green", "Industrial"],
 		gender: "M",
 		baseStats: {hp: 84, atk: 74, def: 62, spa: 200, spd: 10, spe: 82},
-		abilities: {0: "No Ability", H: "Greasy"},
+		abilities: {0: "Greasy"},
 		heightm: 0.25,
 		weightkg: 7.5,
 		color: "Green",
