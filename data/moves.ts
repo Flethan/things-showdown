@@ -3917,7 +3917,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onStart(pokemon, source, effect) {
 				this.add('-start', pokemon, 'Naptime');
 			},
-			onBeforeMovePriority: 2,
+			onBeforeMovePriority: 11,
 			onBeforeMove(pokemon, target, move) {
 				this.add('cant', pokemon, 'Naptime');
 				pokemon.removeVolatile('naptime');
