@@ -994,6 +994,41 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Fish",
 		contestType: "Cool",
 	},
+	ineptfish: {
+		num: -277,
+		accuracy: 65,
+		basePower: 100,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Inept Fish",
+		pp: 20,
+		priority: 0,
+		flags: {bite: 1, contact: 1, protect: 1, mirror: 1},
+		target: "normal",
+		type: "Fish",
+		contestType: "Cute",
+	},
+	arghhghg: {
+		num: 28,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Arghhghg",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		boosts: {
+			atk: -1,
+			spa: -1,
+			accuracy: -1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Fish",
+		zMove: {boost: {evasion: 1}},
+		contestType: "Tough",
+	},
 
 	// Green
 	greentackle: {
@@ -3726,6 +3761,230 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Night",
 		zMove: {boost: {spa: 1}},
+		contestType: "Clever",
+	},
+	trample: {
+		num: 1484,
+		accuracy: 85,
+		basePower: 0,
+		basePowerCallback(pokemon, target) {
+			const targetWeight = target.getWeight();
+			const pokemonWeight = pokemon.getWeight();
+			if (pokemonWeight > targetWeight * 5) {
+				return 120;
+			}
+			if (pokemonWeight > targetWeight * 4) {
+				return 100;
+			}
+			if (pokemonWeight > targetWeight * 3) {
+				return 80;
+			}
+			if (pokemonWeight > targetWeight * 2) {
+				return 60;
+			}
+			return 40;
+		},
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Trample",
+		pp: 15,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, nonsky: 1},
+		onTryHit(target, pokemon, move) {
+			if (target.volatiles['dynamax']) {
+				this.add('-fail', pokemon, 'Dynamax');
+				this.attrLastMove('[still]');
+				return null;
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		zMove: {basePower: 160},
+		maxMove: {basePower: 130},
+		contestType: "Tough",
+	},
+	shadowlance: {
+		num: 1502,
+		accuracy: 80,
+		basePower: 100,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Shadow Lance",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		critRatio: 2,
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		contestType: "Tough",
+	},
+	starrywave: {
+		num: -257,
+		accuracy: 110,
+		basePower: 75,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Starry Wave",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			status: 'blinded',
+		},
+		target: "allAdjacentFoes",
+		type: "Night",
+		contestType: "Beautiful",
+	},
+	shadowmark: {
+		num: 193,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Shadow Mark",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
+		volatileStatus: 'shadowmark',
+		onTryHit(target) {
+			if (target.volatiles['shadowmark']) return false;
+		},
+		condition: {
+			noCopy: true,
+			duration: 2,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Shadow Mark');
+			},
+			onSourceModifyDamage(damage, source, target, move) {
+				if (source.hasType('Night', true)) return this.chainModify(2);
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		zMove: {effect: 'crit2'},
+		contestType: "Tough",
+	},
+	pitchblack: {
+		num: 28,
+		accuracy: 90,
+		basePower: 0,
+		category: "Status",
+		name: "Pitch Black",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		boosts: {
+			accuracy: -2,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		zMove: {boost: {evasion: 1}},
+		contestType: "Tough",
+	},
+	naptime: {
+		num: 284,
+		accuracy: 50,
+		basePower: 0,
+		isNonstandard: "Thing",
+		category: "Status",
+		name: "Naptime",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onModifyMove(move, pokemon, target) {
+			if (this.field.isWeather('nighttime') && !target?.hasItem('cowboyhat')) {
+				move.accuracy = 100;
+			}
+		},
+		onTryHit(target) {
+			if (target.volatiles['naptime']) return false;
+		},
+		onHit(pokemon) {
+			pokemon.trySetStatus('prone');
+		},
+		condition: {
+			noCopy: true,
+			duration: 2,
+			onStart(pokemon, source, effect) {
+				this.add('-start', pokemon, 'Naptime');
+			},
+			onBeforeMovePriority: 2,
+			onBeforeMove(pokemon, target, move) {
+				this.add('-activate', pokemon, 'move: Naptime', '[of] ' + this.effectState.source);
+				if (this.randomChance(1, 3)) {
+					this.add('cant', pokemon, 'Naptime');
+					pokemon.removeVolatile('naptime');
+					return false;
+				}
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Naptime', '[silent]');
+			},
+		},
+		volatileStatus: 'naptime',
+		secondary: null,
+		target: "normal",
+		type: "Night",
+		contestType: "Cute",
+	},
+	disorient: {
+		num: 284,
+		accuracy: 80,
+		basePower: 0,
+		isNonstandard: "Thing",
+		category: "Status",
+		name: "Disorient",
+		pp: 5,
+		priority: 5,
+		flags: {},
+		onModifyMove(move, pokemon, target) {
+			if (this.field.isWeather('nighttime') && !target?.hasItem('cowboyhat')) {
+				move.accuracy = true;
+			}
+		},
+		onTryHit(target) {
+			if (target.volatiles['disorient']) return false;
+		},
+		condition: {
+			noCopy: true,
+			duration: 1,
+			onStart(target, source) {
+				this.add('-start', target, 'move: Disorient');
+			},
+			onSourceAccuracy(accuracy, target, source, move) {
+				if (target !== source) return 50;
+				return accuracy;
+			},
+			onRedirectTarget(target, source, source2, move) {
+				const potentialTargets: Pokemon[] = [];
+				for (const foe of source.foes()) {
+					if (this.validTarget(foe, source, move.target)) {
+						potentialTargets.push(foe);
+					}
+				}
+				for (const ally of source.allies()) {
+					if (this.validTarget(ally, source, move.target)) {
+						potentialTargets.push(ally);
+					}
+				}
+				const newTarget: Pokemon | undefined = potentialTargets.length ? this.sample(potentialTargets) : undefined;
+				this.debug("Disorient redirected target of move");
+				return newTarget;
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'move: Disorient', '[silent]');
+			},
+		},
+		volatileStatus: 'disorient',
+		secondary: null,
+		target: "normal",
+		type: "Night",
 		contestType: "Clever",
 	},
 
