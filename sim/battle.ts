@@ -314,6 +314,10 @@ export class Battle {
 		return this.prng.sample(items);
 	}
 
+	weightedSample<T>(items: readonly [weight: number, returnValue: T][]): T {
+		return this.prng.weightedSample(items);
+	}
+
 	/** Note that passing `undefined` resets to the starting seed, but `null` will roll a new seed */
 	resetRNG(seed: PRNGSeed | null = this.prng.startingSeed) {
 		this.prng = new PRNG(seed);

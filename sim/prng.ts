@@ -110,6 +110,42 @@ export class PRNG {
 	}
 
 	/**
+	 * Supply an array of two-item arrays, the first of each item being the weight,
+	 * and the second being the returned value.
+	 *
+	 * This function chooses items in the array with weighted probability.
+	 *
+	 * The array must contain at least one item.
+	 *
+	 * The array must not be sparse.
+	 */
+	weightedSample<T>(items: readonly [weight: number, returnValue: T][]): T {
+		if (items.length === 0) {
+			throw new RangeError(`Cannot sample an empty array`);
+		}
+
+		let totalWeight = 0;
+		for (const i of items) {
+			totalWeight += i[0];
+		}
+		if (!totalWeight) throw new Error(`Cannot sample an array with 0 total weight`);
+
+		let index = 0;
+		let r = this.next() * totalWeight;
+		for (let i = 0; i < items.length; i++) {
+			r -= items[i][0];
+			if (r) continue;
+			index = i;
+		}
+
+		const item = items[index][1];
+		if (item === undefined && !Object.prototype.hasOwnProperty.call(items, index)) {
+			throw new RangeError(`Cannot sample a sparse array`);
+		}
+		return item;
+	}
+
+	/**
 	 * A Fisher-Yates shuffle. This is how the game resolves speed ties.
 	 *
 	 * At least according to V4 in
