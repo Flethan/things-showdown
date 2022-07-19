@@ -3178,7 +3178,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				pokemon.formeChange('Be\u0301ttiers-Construction', this.effect, false, '[msg]');
 			} else if (
 				(pokemon.species.id === 'bettierscowboy' || pokemon.species.id === 'bettiersconstruction') &&
-				!(pokemon.hasItem('cowboyhat') || pokemon.hasItem('cowboyhat'))
+				!(pokemon.hasItem('cowboyhat') || pokemon.hasItem('yellowsafetyvest'))
 			) {
 				pokemon.formeChange('Be\u0301ttiers', this.effect, false, '[msg]');
 			}
