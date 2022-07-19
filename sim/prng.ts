@@ -125,20 +125,20 @@ export class PRNG {
 		}
 
 		let totalWeight = 0;
-		for (const i of items) {
-			totalWeight += i[0];
-		}
-		if (!totalWeight) throw new Error(`Cannot sample an array with 0 total weight`);
+		items.forEach(v => { totalWeight += v[0]; });
 
+		let item = items[0][1];
 		let index = 0;
-		let r = this.next() * totalWeight;
-		for (let i = 0; i < items.length; i++) {
-			r -= items[i][0];
-			if (r) continue;
-			index = i;
-		}
+		let runningWeight = this.next() * totalWeight;
 
-		const item = items[index][1];
+		items.every((v, i) => {
+			runningWeight -= v[0];
+			if (runningWeight > 0) return true;
+
+			item = v[1]; index = i;
+			return false;
+		});
+
 		if (item === undefined && !Object.prototype.hasOwnProperty.call(items, index)) {
 			throw new RangeError(`Cannot sample a sparse array`);
 		}

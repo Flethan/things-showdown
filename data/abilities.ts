@@ -1175,33 +1175,24 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			this.add('-activate', pokemon, 'ability: Big Gamble');
 			const weightedEffects: [weight: number, effect: (this: Battle) => void][] = [
-				[1, () => {
-					// Perish
-					this.damage(pokemon.baseMaxhp);
-				}],
-				[1, () => {
-					// Max all stats
+				[49, () => {
+					// Boost a random stat
+					const stats: BoostID[] = [];
 					const boost: SparseBoostsTable = {};
 					let statPlus: BoostID;
 					for (statPlus in pokemon.boosts) {
-						if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-						boost[statPlus] = 6 - pokemon.boosts[statPlus];
+						if (pokemon.boosts[statPlus] < 6) {
+							stats.push(statPlus);
+						}
+					}
+					if (!stats.length) return;
+					const randomStat: BoostID = this.sample(stats);
+					if (this.random() < 0.2) {
+						if (randomStat) boost[randomStat] = 2;
+					} else {
+						if (randomStat) boost[randomStat] = 1;
 					}
 					this.boost(boost);
-				}],
-				[9, () => {
-					// Take damage, gain a status
-					this.damage(pokemon.baseMaxhp / 8);
-					const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
-					const result = this.sample(stati);
-					pokemon.trySetStatus(result);
-				}],
-				[15, () => {
-					// Heal, cure status
-					this.heal(pokemon.baseMaxhp / 8);
-					if (pokemon.hp && pokemon.status) {
-						pokemon.cureStatus();
-					}
 				}],
 				[25, () => {
 					// Lower a random stat
@@ -1222,28 +1213,37 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					}
 					this.boost(boost);
 				}],
-				[49, () => {
-					// Boost a random stat
-					const stats: BoostID[] = [];
+				[15, () => {
+					// Heal, cure status
+					this.heal(pokemon.baseMaxhp / 8);
+					if (pokemon.hp && pokemon.status) {
+						pokemon.cureStatus();
+					}
+				}],
+				[9, () => {
+					// Take damage, gain a status
+					this.damage(pokemon.baseMaxhp / 8);
+					const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
+					const result = this.sample(stati);
+					pokemon.trySetStatus(result);
+				}],
+				[1, () => {
+					// Max all stats
 					const boost: SparseBoostsTable = {};
 					let statPlus: BoostID;
 					for (statPlus in pokemon.boosts) {
-						if (pokemon.boosts[statPlus] < 6) {
-							stats.push(statPlus);
-						}
-					}
-					if (!stats.length) return;
-					const randomStat: BoostID = this.sample(stats);
-					if (this.random() < 0.2) {
-						if (randomStat) boost[randomStat] = 2;
-					} else {
-						if (randomStat) boost[randomStat] = 1;
+						if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+						boost[statPlus] = 6 - pokemon.boosts[statPlus];
 					}
 					this.boost(boost);
 				}],
+				[1, () => {
+					// Perish
+					this.damage(pokemon.baseMaxhp);
+				}],
 			];
 			const effect = this.weightedSample(weightedEffects);
-			effect.bind(this, pokemon);
+			effect.call(this);
 		},
 
 		name: "Big Gamble",
