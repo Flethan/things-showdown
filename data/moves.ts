@@ -5629,7 +5629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		basePower: 50,
 		basePowerCallback(pokemon, target, move) {
 			this.debug("Power modified by energy");
-			return move.basePower * Math.abs(pokemon.getEnergyValue());
+			return move.basePower * Math.abs(pokemon.getEnergyValue()) + 10;
 		},
 		category: "Special",
 		name: "Energy Beam",
