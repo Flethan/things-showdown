@@ -585,7 +585,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	oven: {
 		isNonstandard: "ThingInf",
 		onModifyCritRatio(critRatio, source, target) {
-			if (target.getHeight() <= 7) {
+			if (target.getHeight() <= 7 && target.getAbility().id !== 'colossal') {
 				this.debug('ovenable');
 				return 5;
 			}
@@ -597,7 +597,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	microwave: {
 		isNonstandard: "Thing",
 		onModifyCritRatio(critRatio, source, target) {
-			if (target.getHeight() <= 4) {
+			if (target.getHeight() <= 4 && target.getAbility().id !== 'colossal') {
 				this.debug('microwaveable');
 				return 5;
 			}
@@ -609,7 +609,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	toaster: {
 		isNonstandard: "Thing",
 		onModifyCritRatio(critRatio, source, target) {
-			if (target.getHeight() <= 1) {
+			if (target.getHeight() <= 1 && target.getAbility().id !== 'colossal') {
 				this.debug('toastable');
 				return 5;
 			}
@@ -2226,7 +2226,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		}, */
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (move.type === 'Hair') {
-				this.field.setWeather('yellowshish');
+				this.field.setWeather('yellowish');
 			}
 		},
 		name: "Shining Hair",
