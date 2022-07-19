@@ -3859,7 +3859,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-start', pokemon, 'Shadow Mark');
 			},
 			onSourceModifyDamage(damage, source, target, move) {
-				if (source.hasType('Night', true)) return this.chainModify(2);;
+				if (source.hasType('Night', true)) return this.chainModify(2);
 			},
 		},
 		secondary: null,
