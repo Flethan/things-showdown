@@ -4273,6 +4273,12 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			deposition: ["8M"],
 		},
 	},
+	nightyknight: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {

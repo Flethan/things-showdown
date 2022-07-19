@@ -350,6 +350,11 @@ export class RandomTeams {
 				);
 			}
 
+			// Give random cosmetic forme if any
+			if (species.cosmeticFormes) {
+				forme = this.sample([species.name].concat(species.cosmeticFormes));
+			}
+
 			// Random legal ability
 			const abilities = Object.values(species.abilities).filter(a => this.dex.abilities.get(a).gen <= this.gen);
 			const ability: string = this.sample(abilities);
@@ -453,7 +458,7 @@ export class RandomTeams {
 	randomNThings(n: number, requiredType?: string, visOnly?: boolean, minSourceGen?: number) {
 		// Pick `n` random things--no repeats, even among formes
 		// Also need to either normalize for formes or select formes at random
-		const last = -500;
+		const last = -600;
 
 		if (requiredType && !this.dex.types.get(requiredType).exists) {
 			throw new Error(`"${requiredType}" is not a valid type.`);

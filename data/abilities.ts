@@ -2269,20 +2269,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
+				this.add('-activate', target, 'ability: Colossal');
 				this.boost({def: -1}, target, target, this.effect, true);
-				this.add('-activate', target, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, target, this.effect, true);
 				this.add('-activate', target, 'ability: Colossal');
+				this.boost({spd: -1}, target, target, this.effect, true);
 			}
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
+				this.add('-activate', source, 'ability: Colossal');
 				this.boost({def: -1}, target, source, this.effect, true);
-				this.add('-activate', source, 'ability: Colossal');
 			} else if (move.category === 'Special') {
-				this.boost({spd: -1}, target, source, this.effect, true);
 				this.add('-activate', source, 'ability: Colossal');
+				this.boost({spd: -1}, target, source, this.effect, true);
 			}
 		},
 		onSwitchOut(pokemon) {
@@ -3201,8 +3201,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	greasy: {
 		isNonstandard: "Thing",
 		name: "Greasy",
+		// implemented in battle-actions.ts
 		rating: 2,
-		num: -4200,
+		num: -420,
+	},
+	sleeptight: {
+		isNonstandard: "Thing",
+		name: "Sleep Tight",
+		onAnyBeforeMove(source, target, move) {
+			if (source.status === 'prone' && move.category !== 'Status') {
+				return false;
+			}
+		},
+		rating: 2,
+		num: -420,
 	},
 
 	// BASE GAME

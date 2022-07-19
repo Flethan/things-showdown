@@ -3632,6 +3632,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		// hasSprite: true,
 	},
 	// serpiternal.num = -500 lol
+	nightyknight: {
+		num: -501,
+		name: "Nightyknight",
+		types: ["Night", "Sword"],
+		gender: "N",
+		baseStats: {hp: 90, atk: 75, def: 120, spa: 56, spd: 102, spe: 90},
+		abilities: {0: "Sleep Tight"},
+		heightm: 2.0,
+		weightkg: 500,
+		color: "Blue",
+		eggGroups: ["Human-Like"],
+	},
 
 	// BASE GAME
 	bulbasaur: {
