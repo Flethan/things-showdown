@@ -3964,12 +3964,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onRedirectTarget(target, source, source2, move) {
 				const potentialTargets: Pokemon[] = [];
 				for (const foe of source.foes()) {
-					if (this.validTarget(foe, source, move.target) {
+					if (this.validTarget(foe, source, move.target)) {
 						potentialTargets.push(foe);
 					}
 				}
 				for (const ally of source.allies()) {
-					if (this.validTarget(ally, source, move.target) {
+					if (this.validTarget(ally, source, move.target)) {
 						potentialTargets.push(ally);
 					}
 				}
