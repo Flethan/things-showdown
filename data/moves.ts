@@ -3861,6 +3861,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onSourceModifyDamage(damage, source, target, move) {
 				if (source.hasType('Night', true)) return this.chainModify(2);
 			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Shadow Mark', '[silent]');
+			},
 		},
 		secondary: null,
 		target: "normal",
@@ -3916,12 +3919,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBeforeMovePriority: 2,
 			onBeforeMove(pokemon, target, move) {
-				this.add('-activate', pokemon, 'move: Naptime', '[of] ' + this.effectState.source);
-				if (this.randomChance(1, 3)) {
-					this.add('cant', pokemon, 'Naptime');
-					pokemon.removeVolatile('naptime');
-					return false;
-				}
+				this.add('cant', pokemon, 'Naptime');
+				pokemon.removeVolatile('naptime');
+				return false;
 			},
 			onEnd(pokemon) {
 				this.add('-end', pokemon, 'Naptime', '[silent]');
