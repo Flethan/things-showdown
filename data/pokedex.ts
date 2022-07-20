@@ -2885,7 +2885,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Yellomatter",
 		symbolForme: "Element",
 		types: ["Temperature", "Yellow"],
-		// baseForme: "Liquid",
+		baseForme: "Liquid",
 		genderRatio: {M: 0.25, F: 0.5},
 		baseStats: {hp: 74, atk: 100, def: 91, spa: 73, spd: 85, spe: 57},
 		abilities: {0: "Phase Shift"},
