@@ -1620,6 +1620,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Notant",
 		eggGroups: ["Bug"],
+		hasSprite: true,
 	},
 	magmegg: {
 		num: -403,
@@ -3505,6 +3506,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		evos: ["Clactory"],
 		eggGroups: ["Water 3"],
+		hasSprite: true,
 	},
 	clactory: {
 		num: -492,
@@ -3518,6 +3520,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		prevo: "Cyam",
 		eggGroups: ["Water 3"],
+		hasSprite: true,
 	},
 	swordfish: {
 		num: -493,
