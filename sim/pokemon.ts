@@ -1479,8 +1479,8 @@ export class Pokemon {
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
 		species.elementTypes?.forEach((type: string) => this.addElementType(type));
-		if (species.addedType) this.addType(species.addedType, species.forme === 'Infinite');
-		if (species.forme === 'Null') {
+		if (species.addedType) this.addType(species.addedType, species.symbolForme === 'Infinity');
+		if (species.symbolForme === 'Null') {
 			this.addType('', true);
 			this.clearElementTypes();
 		}
@@ -1536,7 +1536,7 @@ export class Pokemon {
 			this.details = species.name + (this.level === 100 ? '' : ', L' + this.level) +
 				(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
 			this.battle.add('detailschange', this, (this.illusion || this).details);
-			// Can't use evoCondition in case of Empty or Yellomatter formes
+			// Can't use evoCondition in case of <empty> or Yellomatter formes
 			if (species.evoType === 'symbol') {
 				this.battle.add('-symbol', this, apparentSpecies, message);
 			} else if (source.effectType === 'Item') {
@@ -2144,7 +2144,7 @@ export class Pokemon {
 	setType(newType: string | string[], enforce = false) {
 		// First type of Arceus, Silvally cannot be normally changed
 		if (!enforce) {
-			if (this.species.forme === 'Null') return false;
+			if (this.species.symbolForme === 'Null') return false;
 			if ((this.battle.gen >= 5 && (this.species.num === 493 || this.species.num === 773)) ||
 				(this.battle.gen === 4 && this.hasAbility('multitype'))) {
 				return false;
@@ -2161,9 +2161,9 @@ export class Pokemon {
 		return true;
 	}
 
-	/** Removes any types added previously and adds another one. Infinite and Null formes supress type adding. */
+	/** Removes any types added previously and adds another one. Infinity and Null formes supress type adding. */
 	addType(newType: string, enforce = false) {
-		if (!enforce && (this.species.forme === 'Infinite' || this.species.forme === 'Null')) return false;
+		if (!enforce && (this.species.symbolForme === 'Infinity' || this.species.symbolForme === 'Null')) return false;
 		this.addedType = newType;
 		return true;
 	}

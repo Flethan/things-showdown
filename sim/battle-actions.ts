@@ -1421,7 +1421,9 @@ export class BattleActions {
 	canZMove(pokemon: Pokemon) {
 		if (pokemon.side.zMoveUsed ||
 			(pokemon.transformed &&
-				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra" || pokemon.species.forme === "Infinity" || pokemon.species.forme === "Element" || pokemon.species.forme === "Null" || pokemon.species.forme === "Mu"))
+				(pokemon.species.isMega || pokemon.species.isPrimal || pokemon.species.forme === "Ultra" ||
+					pokemon.species.symbolForme === "Infinity" || pokemon.species.symbolForme === "Element" ||
+					pokemon.species.symbolForme === "Null" || pokemon.species.symbolForme === "Mu"))
 		) return;
 		const item = pokemon.getItem();
 		if (!item.zMove) return;
@@ -1831,7 +1833,7 @@ export class BattleActions {
 	// ==================================================================
 
 	canSymbolEvo(pokemon: Pokemon) {
-		// Infinite, Element, Null, and Mu formes
+		// Infinity, Element, Null, and Mu formes
 		const species = pokemon.baseSpecies;
 		if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
@@ -1873,7 +1875,7 @@ export class BattleActions {
 		pokemon.maxhp = pokemon.baseMaxhp;
 		this.battle.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 
-		const symbolType = this.dex.species.get(speciesid).forme;
+		const symbolType = this.dex.species.get(speciesid).symbolForme;
 
 		if (symbolType === 'Mu') {
 			const muMove = this.dex.moves.get(pokemon.species.muMove);
@@ -1896,7 +1898,7 @@ export class BattleActions {
 			pokemon.moveSlots[4] = newMove;
 		}
 
-		// Limit one symbol evolution, don't count forced evos: Lemon -> Empty, Yellomatter's Phase Change
+		// Limit one symbol evolution, don't count forced evos: Lemon -> <empty>, Yellomatter's Phase Change
 		if (!forcedSpeciesId) {
 			const wasSymbol = pokemon.canSymbolEvo;
 			for (const ally of pokemon.side.pokemon) {

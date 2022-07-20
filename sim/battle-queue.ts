@@ -36,7 +36,7 @@ export interface MoveAction {
 	moveid: ID;
 	/** a move to use (move action only) */
 	move: Move;
-	/** true if evolving into an mu, infinite, element, or null evo */
+	/** true if evolving into an mu, infinity, element, or null evo */
 	symbol: boolean | 'done';
 	/** true if megaing or ultra bursting */
 	mega: boolean | 'done';
