@@ -2762,7 +2762,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 				this.boost(boosts, pokemon, pokemon, this.effect, false, true);
 
-				if (pokemon.species.forme === 'Infinite') {
+				if (pokemon.species.forme === 'Infinity') {
 					pokemon.addType('', true);
 					this.add('-start', pokemon, 'typeadd', '', '[silent]');
 				}

@@ -209,7 +209,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	lemon: {
 		name: "Lemon",
 		shortDesc: "This Thing is a Lemon.",
-		desc: "If this Thing is not Lemon, and gains this Ability, the Thing changes to be Lemon. If this Thing started the battle as Lemon and loses this ability, it becomes Empty.",
+		desc: "If this Thing is not Lemon, and gains this Ability, the Thing changes to be Lemon. If this Thing started the battle as Lemon and loses this ability, it becomes <empty>.",
 	},
 	longgame: {
 		name: "Long Game",

@@ -86,6 +86,10 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 */
 	readonly forme: string;
 	/**
+	 * Wnat symbol forme a Thing is.
+	 */
+	readonly symbolForme: string;
+	/**
 	 * Base forme name (e.g. 'Altered' for Giratina).
 	 */
 	readonly baseForme: string;
@@ -247,6 +251,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.effectType = 'Pokemon';
 		this.baseSpecies = data.baseSpecies || this.name;
 		this.forme = data.forme || '';
+		this.symbolForme = data.symbolForme || '';
 		this.baseForme = data.baseForme || '';
 		this.cosmeticFormes = data.cosmeticFormes || undefined;
 		this.otherFormes = data.otherFormes || undefined;
@@ -286,7 +291,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.unreleasedHidden = data.unreleasedHidden || false;
 		this.maleOnlyHidden = !!data.maleOnlyHidden;
 		this.maxHP = data.maxHP || undefined;
-		this.isSymbol = !!(this.forme && ['Infinity', 'Element', 'Null', 'Mu'].includes(this.forme)) || undefined;
+		this.isSymbol = !!(this.symbolForme && ['Infinity', 'Element', 'Null', 'Mu'].includes(this.symbolForme)) || undefined;
 		this.isMega = !!(this.forme && ['Mega', 'Mega-X', 'Mega-Y'].includes(this.forme)) || undefined;
 		this.canGigantamax = data.canGigantamax || undefined;
 		this.gmaxUnreleased = !!data.gmaxUnreleased;
