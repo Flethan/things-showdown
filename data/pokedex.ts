@@ -2746,6 +2746,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 3.6,
 		weightkg: 500.0,
 		color: "Brown",
+		evos: ["Serpixtinction"],
 		eggGroups: ["Undiscovered"],
 	},
 	serpixtinction: {
