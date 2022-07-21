@@ -2751,7 +2751,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	serpixtinction: {
 		num: -467,
 		name: "Serpixtinction",
-		forme: "Null",
+		symbolForme: "Null",
 		types: ["???"],
 		gender: "N",
 		baseStats: {hp: 110, atk: 75, def: 50, spa: 185, spd: 85, spe: 95},
@@ -2798,7 +2798,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	exallout: {
 		num: -470,
 		name: "Exallout",
-		forme: "Null",
+		symbolForme: "Null",
 		types: ["???"],
 		gender: "N",
 		baseStats: {hp: 10, atk: 100, def: 30, spa: 120, spd: 80, spe: 150},
@@ -3464,7 +3464,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	gli7: {
 		num: -489,
 		name: "Gli7[#",
-		forme: "Null",
+		symbolForme: "Null",
 		types: ["???"],
 		gender: "N",
 		baseStats: {hp: 31, atk: 9, def: 19, spa: 124, spd: 23, spe: 58},
@@ -3553,7 +3553,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	restant: {
 		num: -495,
 		name: "Restant",
-		forme: "Null",
+		symbolForme: "Null",
 		types: ["???"],
 		genderRatio: {M: 0.2, F: 0.8},
 		baseStats: {hp: 60, atk: 60, def: 105, spa: 60, spd: 105, spe: 60},
