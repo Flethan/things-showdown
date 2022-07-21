@@ -3646,7 +3646,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	chameleon: {
 		num: -499,
 		name: "Cha'meleon",
-		types: ["Green", "Industrial"],
+		types: ["Liquid", "Dirt"],
 		genderRatio: {M: 0.25, F: 0.25},
 		baseStats: {hp: 238, atk: 36, def: 32, spa: 84, spd: 26, spe: 96},
 		abilities: {0: "Camouflage"},
