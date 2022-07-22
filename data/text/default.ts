@@ -180,6 +180,23 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		endFromItem: "  [POKEMON]'s [ITEM] closed its wounds!",
 		damage: "  [POKEMON] strained its wounds too much!",
 	},
+	distanced: {
+		start: "  [POKEMON] was distanced!",
+		startFromItem: "  [POKEMON] was distanced by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already distanced!",
+		end: "  [POKEMON]'s distance shortened!",
+		endFromItem: "  [POKEMON]'s [ITEM] shortened its distance!",
+		cant: "[POKEMON]'s distance is too great to reach!",
+		heal: "[POKEMON] is at a comfortable distance",
+	},
+	infected: {
+		start: "  [POKEMON] was infected!",
+		startFromItem: "  [POKEMON] was infected by the [ITEM]!",
+		alreadyStarted: "  [POKEMON] is already infected!",
+		end: "  [POKEMON]'s infection cleared up!",
+		endFromItem: "  [POKEMON]'s [ITEM] cleared its infected!",
+		damage: "  [POKEMON] is suffering from its infection!",
+	},
 
 	// BASE GAME
 	// stats
