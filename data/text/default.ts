@@ -198,6 +198,125 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		damage: "  [POKEMON] is suffering from its infection!",
 	},
 
+	// environment
+	locustswarm: {
+		weatherName: "Locust Swarm",
+		start: "  A swarm of locusts descended!",
+		end: "  The locusts dispersed.",
+		upkeep: "  (The locusts continue to swarm.)",
+		damage: "  [POKEMON] is fed on by the locusts!",
+	},
+	meteorshower: {
+		weatherName: "Meteor Shower",
+		start: "  Meteorites began to fall from the sky!",
+		end: "  The meteors subsided.",
+		upkeep: "  (Meteorites continue to fall.)",
+		damage: "  [POKEMON] is struck by a meteorite!",
+		heal: "  [POKEMON]'s HP was restored.",
+	},
+	underwater: {
+		weatherName: "Underwater",
+		start: "  The battlefield became flooded!",
+		end: "  The water dissipated.",
+		upkeep: "  (The battlefield remains flooded.)",
+		damage: "  [POKEMON] is drowning!",
+		heal: "  [POKEMON]'s HP was restored.",
+	},
+	nighttime: {
+		weatherName: "Nighttime",
+		start: "  Night fell!",
+		end: "  Dawn broke.",
+		upkeep: "  (The night is dark.)",
+		heal: "  [POKEMON]'s HP was restored.",
+	},
+	hot: {
+		weatherName: "Hot",
+		start: "  The temperature started to increase!",
+		end: "  The temperature returned to normal.",
+		upkeep: "  (It is really hot.)",
+		block: "  The heat remains regardless!",
+	},
+	cold: {
+		weatherName: "Cold",
+		start: "  The temperature started to decrease!",
+		end: "  The temperature returned to normal.",
+		upkeep: "  (It is really cold.)",
+	},
+	timedilation: {
+		weatherName: "Time Dilation",
+		start: "  Time began to distort!",
+		end: "  Time returned to normal.",
+		upkeep: "  (Time is distorted.)",
+		block: "  The time remains regardless!",
+	},
+	windy: {
+		weatherName: "Windy",
+		start: "  Strong winds kicked up!",
+		end: "  The winds subsided.",
+		upkeep: "  (The wind is strong.)",
+		block: "  The winds remains regardless!",
+	},
+	yellowish: {
+		weatherName: "Yellowish",
+		start: "  It got yellow!",
+		end: "  It is no longer yellow.",
+		upkeep: "  (It's yellow.)",
+	},
+	// landscape
+	richsoil: {
+		start: "  The soil became incredibly fertile!",
+		end: "  The soil returned to normal.",
+		upkeep: "  (The soil is full of nutrients.)",
+		heal: "  [POKEMON]'s HP was restored.",
+	},
+	spatialexpansion: {
+		start: "  The space on the battlefield grew!",
+		end: "  The distances returned to normal.",
+		upkeep: "  (The battlefield is expansive.)",
+	},
+	greenground: {
+		start: "  The floor got green!",
+		end: "  The floor is no longer green.",
+		upkeep: "  (The floor is green.)",
+	},
+	sudscape: {
+		start: "  Soapsuds flowed across the battlefield!",
+		end: "  The soapsuds disappeared from the battlefield.",
+		upkeep: "  (It's sudsy.)",
+	},
+	mysticalsong: {
+		start: "  A song has started!",
+		end: "  The song has ended.",
+		upkeep: "  (The song continues.)",
+	},
+	nullland: {
+		start: "  The battlefield became inverted!",
+		end: "  The battlefield returned to normal.",
+		upkeep: "  (Everything is inverted.)",
+	},
+	springfloor: {
+		start: "  The battlefield became bouncy!",
+		end: "  The battlefield is no longer bouncy.",
+		upkeep: "  (The floor is bouncy.)",
+	},
+	// rooms
+	hadalzone: {
+		start: "  The battlefield's pressure grew intense!",
+		end: "  The battlefield's pressure normalized.",
+	},
+	timeloop: {
+		start: "  The battlefield was stuck in a time loop!",
+		end: "  The time loop ended.",
+	},
+	stickysituation: {
+		start: "  The battlefield became sticky!",
+		end: "  The stickiness cleared.",
+	},
+	rankandfile: {
+		start: "  The battlefield became ordered!",
+		end: "  The order ended.",
+	},
+
 	// BASE GAME
 	// stats
 	hp: {
