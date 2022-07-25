@@ -4268,7 +4268,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {},
-		noMetronome: ['Parry', 'Riposte', 'Whistle'],
+		noMetronome: ['Parry', 'Riposte', 'Whistle', 'Multi-strike'],
 		onHit(target, source, effect) {
 			const moves: MoveData[] = [];
 			if (source.hasAbility("B92228z") && this.randomChance(1, 2)) {
