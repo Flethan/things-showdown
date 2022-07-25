@@ -3259,6 +3259,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: -121,
 	},
+	boring: {
+		isNonstandard: "Thing",
+		name: "Boring",
+		// implemented in conditions.ts
+		rating: 2,
+		num: -420,
+	},
 
 	// BASE GAME
 	noability: {
