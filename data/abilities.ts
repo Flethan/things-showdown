@@ -3206,6 +3206,59 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -420,
 	},
+	eat: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			if (move.flags['bite']) {
+				source.addVolatile('mustrecharge');
+			}
+		},
+		name: "Eat",
+		rating: 2,
+		num: 27,
+	},
+	steep: {
+		isNonstandard: "Thing",
+		name: "Steep",
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
+				const newType = source.types[0];
+				if (!target.addType(newType)) return false;
+				this.add('-start', target, 'typeadd', newType, '[from] ability: Steep');
+			}
+		},
+		onSourceHit(target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
+				const newType = target.types[0];
+				if (!source.addType(newType)) return false;
+				this.add('-start', source, 'typeadd', newType, '[from] ability: Steep');
+			}
+		},
+		rating: 2,
+		num: 152,
+	},
+	volatilebattery: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.add('-activate', target, 'ability: Volatile Battery');
+				this.field.setWeather("hot");
+				for (const foe of target.foes()) {
+					if (!foe?.isActive || foe === target) continue;
+					foe.addVolatile('perishsong');
+					foe.volatiles['perishsong'].duration = 6;
+				}
+				for (const ally of target.allies()) {
+					if (!ally?.isActive || ally === target) continue;
+					ally.addVolatile('perishsong');
+					ally.volatiles['perishsong'].duration = 6;
+				}
+			}
+		},
+		name: "Volatile Battery",
+		rating: 3,
+		num: -121,
+	},
 
 	// BASE GAME
 	noability: {

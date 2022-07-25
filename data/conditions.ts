@@ -1401,6 +1401,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 	mustrecharge: {
 		name: 'mustrecharge',
 		duration: 2,
+		durationCallback(source) {
+			if (source?.hasAbility('boring')) return 3;
+			return 2;
+		},
 		onBeforeMovePriority: 11,
 		onBeforeMove(pokemon) {
 			this.add('cant', pokemon, 'recharge');
@@ -1410,6 +1414,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onStart(pokemon) {
 			this.add('-mustrecharge', pokemon);
+			if (pokemon.hasAbility('boring')) {
+				for (const foe of pokemon.foes()) {
+					this.boost({spe: -2}, foe);
+				}
+			}
 		},
 		onLockMove: 'recharge',
 	},
