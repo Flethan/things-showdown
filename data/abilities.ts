@@ -3222,7 +3222,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Steep",
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target, !source.isAlly(target))) {
-				const newType = source.types[0];
+				const newType = move.type;
 				if (!target.addType(newType)) return false;
 				this.add('-start', target, 'typeadd', newType, '[from] ability: Steep');
 			}
