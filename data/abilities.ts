@@ -3266,6 +3266,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -420,
 	},
+	/*lingeringgas: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			const hitMove = this.dex.getActiveMove('Gas');
+			if (source !== null && target !== null && target.hp) {
+				this.add('-activate', target, 'ability: Bouncy');
+				this.actions.trySpreadMoveHit([source], target, hitMove, true);
+			}
+		},
+		name: "Lingering Gas",
+		rating: 2.5,
+		num: 154,
+	},*/
 
 	// BASE GAME
 	noability: {
