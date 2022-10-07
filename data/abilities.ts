@@ -3266,7 +3266,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -420,
 	},
-	/*lingeringgas: {
+	/* lingeringgas: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
 			const hitMove = this.dex.getActiveMove('Gas');
@@ -3278,7 +3278,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Lingering Gas",
 		rating: 2.5,
 		num: 154,
-	},*/
+	}, */
 
 	// BASE GAME
 	noability: {
