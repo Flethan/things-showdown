@@ -64,6 +64,8 @@ export class Pokemon {
 
 	muPP: number;
 
+	stamina: number;
+
 	hpType: string;
 	hpPower: number;
 
@@ -226,6 +228,7 @@ export class Pokemon {
 
 	isActive: boolean;
 	activeTurns: number;
+	totalActiveTurns: number;
 	/**
 	 * This is for Fake-Out-likes specifically - it mostly counts how many move
 	 * actions you've had since the last time you switched in, so 1/turn normally,
@@ -339,6 +342,8 @@ export class Pokemon {
 		}
 		this.muPP = 3;
 
+		this.stamina = 10;
+
 		this.position = 0;
 		this.details = this.species.name + (this.level === 100 ? '' : ', L' + this.level) +
 			(this.gender === '' ? '' : ', ' + this.gender) + (this.set.shiny ? ', shiny' : '');
@@ -434,6 +439,7 @@ export class Pokemon {
 
 		this.isActive = false;
 		this.activeTurns = 0;
+		this.totalActiveTurns = 0;
 		this.activeMoveActions = 0;
 		this.previouslySwitchedIn = 0;
 		this.truantTurn = false;
@@ -1033,6 +1039,24 @@ export class Pokemon {
 		if (ppData.pp < 0 && gen > 1) {
 			amount += ppData.pp;
 			ppData.pp = 0;
+		}
+		return amount;
+	}
+
+	deductStamina(move: string | Move, amount?: number | null, target?: Pokemon | null | false) {
+		const gen = this.battle.gen;
+		move = this.battle.dex.moves.get(move);
+		const staminaData = this.getMoveData(move);
+		if (!staminaData) return 0;
+		staminaData.used = true;
+		if (!this.stamina && gen > 1) return 0;
+
+		if (!amount) amount = 10;
+		if (this.stamina < amount) return 0;
+		this.stamina -= amount;
+		if (this.stamina < 0 && gen > 1) {
+			amount += this.stamina;
+			this.stamina = 0;
 		}
 		return amount;
 	}

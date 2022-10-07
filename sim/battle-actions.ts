@@ -311,12 +311,21 @@ export class BattleActions {
 					} else {
 						pokemon.muPP--;
 					}
-				} else*/ if (!pokemon.deductPP(baseMove, null, target) && (move.id !== 'struggle')) {
+				} else*/
+				// STAMINA DEDUCTION
+				if (!pokemon.deductStamina(baseMove, baseMove.stamina, target) && (move.id !== 'struggle')) {
 					this.battle.add('cant', pokemon, 'nopp', move);
 					this.battle.clearActiveMove(true);
 					pokemon.moveThisTurnResult = false;
 					return;
 				}
+				// PP DECUCTION
+				/* if (!pokemon.deductPP(baseMove, null, target) && (move.id !== 'struggle')) {
+					this.battle.add('cant', pokemon, 'nopp', move);
+					this.battle.clearActiveMove(true);
+					pokemon.moveThisTurnResult = false;
+					return;
+				} */
 			} else {
 				sourceEffect = this.dex.conditions.get('lockedmove');
 			}
