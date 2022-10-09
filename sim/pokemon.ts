@@ -1050,8 +1050,8 @@ export class Pokemon {
 		if (!staminaData) return 0;
 		staminaData.used = true;
 		if (!this.stamina && gen > 1) return 0;
-
-		if (!amount) amount = 10;
+		move = this.battle.dex.moves.get(move);
+		if (!amount) amount = Math.ceil(1 / move.pp * 30);
 		if (this.stamina < amount) return 0;
 		this.stamina -= amount;
 		if (this.stamina < 0 && gen > 1) {
