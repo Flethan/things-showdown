@@ -549,6 +549,11 @@ export class Side {
 			// Gen 4 and earlier announce a Pokemon has no moves left before the turn begins, and only to that player's side.
 			if (this.battle.gen <= 4) this.send('-activate', pokemon, 'move: Struggle');
 			moveid = 'struggle';
+		} else if (pokemon.stamina < (move.stamina ? move.stamina : 10)) {
+			// Override action and use Struggle if there are no enabled moves with PP
+			// Gen 4 and earlier announce a Pokemon has no moves left before the turn begins, and only to that player's side.
+			if (this.battle.gen <= 4) this.send('-activate', pokemon, 'move: Struggle');
+			moveid = 'struggle';
 		} else if (maxMove) {
 			// Dynamaxed; only Taunt and Assault Vest disable Max Guard, but the base move must have PP remaining
 			if (pokemon.maxMoveDisabled(move)) {
