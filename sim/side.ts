@@ -549,7 +549,7 @@ export class Side {
 			// Gen 4 and earlier announce a Pokemon has no moves left before the turn begins, and only to that player's side.
 			if (this.battle.gen <= 4) this.send('-activate', pokemon, 'move: Struggle');
 			moveid = 'struggle';
-		} else if (pokemon.stamina < (move.stamina ? move.stamina : 10)) {
+		} else if (pokemon.stamina < (move.stamina ? move.stamina : Math.ceil(1 / move.pp * 30))) {
 			// Override action and use Struggle if there are no enabled moves with PP
 			// Gen 4 and earlier announce a Pokemon has no moves left before the turn begins, and only to that player's side.
 			if (this.battle.gen <= 4) this.send('-activate', pokemon, 'move: Struggle');
