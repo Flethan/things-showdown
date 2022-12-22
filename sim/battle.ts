@@ -1516,7 +1516,6 @@ export class Battle {
 				else if (turns > 0) staminaInc = 5;
 				pokemon.stamina += staminaInc;
 				if (pokemon.stamina > 10) pokemon.stamina = 10;
-				this.hint(pokemon.name + ' stamina: ' + pokemon.stamina);
 				pokemon.activeTurns++;
 				pokemon.totalActiveTurns++;
 			}
