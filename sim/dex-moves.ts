@@ -142,7 +142,6 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	flags: AnyObject;
 	/** Hidden Power */
 	realMove?: string;
-	stamina?: number;
 
 	damage?: number | 'level' | false | null;
 	contestType?: string;
