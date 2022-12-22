@@ -2303,7 +2303,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		name: "Wet Floor",
 		pp: 20,
-		stamina: 3,
 		priority: 0,
 		flags: {reflectable: 1},
 		sideCondition: 'wetfloor',
