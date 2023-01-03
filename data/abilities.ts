@@ -2920,9 +2920,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	stubborn: {
 		isNonstandard: "Thing",
-		onSetAbility(ability, target, source, effect) {
+		/*onSetAbility(ability, target, source, effect) {
 			return false;
-		},
+		},*/
+		isPermanent: true,
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
 			if (action?.moveid === 'stay') return;
@@ -3271,7 +3272,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart() {
 			this.effectState.activated = 0;
 		},
-		onAfterMoveSecondary(source, target, move) {
+		onAfterMoveSecondarySelf(source, target, move) {
 			if (source !== null && move.flags['gas'] && !this.effectState.activated) {
 				this.field.addPseudoWeather('gascloud', source);
 				this.effectState.activated = 1;
@@ -3290,9 +3291,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('invitingsurroundings');
 			this.field.setWeather('friendlyatmosphere');
 		},
-		onSetAbility(ability, target, source, effect) {
+		/*onSetAbility(ability, target, source, effect) {
 			return false;
-		},
+		},*/
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
 			if (action?.moveid === 'stay') return;

@@ -5360,9 +5360,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			duration: 5,
 			durationCallback(source, effect) {
-				/*if (source?.hasItem('landscapingpermit')) {
+				/* if (source?.hasItem('landscapingpermit')) {
 					return 10;
-				}*/
+				} */
 				return 5;
 			},
 			onTrapPokemon(pokemon) {
