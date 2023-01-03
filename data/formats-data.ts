@@ -976,6 +976,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	strunk: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	streekyo: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	partyrock: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

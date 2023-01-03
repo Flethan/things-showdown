@@ -2932,7 +2932,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (!ally?.isActive || ally === pokemon || !ally.isAdjacent(pokemon) ||
 					 (pokemon.volatiles['equipped'] && !ally.volatiles['equip']) ||
 					 (ally.volatiles['equipped'] && !pokemon.volatiles['equip']) ||
-					 ally.hasAbility('stubborn') ||
+					 ally.hasAbility('stubborn') || ally.hasAbility('partyrockis') ||
 					 (helper !== null && this.randomChance(1, 2))) continue;
 				helper = ally;
 			}
@@ -2946,7 +2946,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAllyBeforeMove(source) {
 			if (source.volatiles['helper']) {
 				for (const ally of source.allies()) {
-					if (!ally?.isActive || ally === source || !ally.isAdjacent(source) || !ally.hasAbility('stubborn')) continue;
+					if (!ally?.isActive || ally === source || !ally.isAdjacent(source) || !ally.hasAbility('stubborn') || !ally.hasAbility('partyrockis')) continue;
 					const action = this.queue.willMove(ally);
 					if (action) {
 						this.queue.prioritizeAction(action);
@@ -3266,19 +3266,70 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -420,
 	},
-	/* lingeringgas: {
+	lingeringgas: {
 		isNonstandard: "Thing",
-		onResidual(pokemon) {
-			const hitMove = this.dex.getActiveMove('Gas');
-			if (source !== null && target !== null && target.hp) {
-				this.add('-activate', target, 'ability: Bouncy');
-				this.actions.trySpreadMoveHit([source], target, hitMove, true);
+		onStart() {
+			this.effectState.activated = 0;
+		},
+		onAfterMoveSecondary(source, target, move) {
+			if (source !== null && move.flags['gas'] && !this.effectState.activated) {
+				this.field.addPseudoWeather('gascloud', source);
+				this.effectState.activated = 1;
 			}
+		},
+		onResidual() {
+			this.effectState.activated = 0;
 		},
 		name: "Lingering Gas",
 		rating: 2.5,
 		num: 154,
-	}, */
+	},
+	partyrockis: {
+		isNonstandard: "ThingInf",
+		onAfterMega(source) {
+			this.field.setTerrain('invitingsurroundings');
+			this.field.setWeather('friendlyatmosphere');
+		},
+		onSetAbility(ability, target, source, effect) {
+			return false;
+		},
+		onBeforeTurn(pokemon) {
+			const action = this.queue.willMove(pokemon);
+			if (action?.moveid === 'stay') return;
+
+			let helper = null;
+			for (const ally of pokemon.allies()) {
+				if (!ally?.isActive || ally === pokemon || !ally.isAdjacent(pokemon) ||
+					 (pokemon.volatiles['equipped'] && !ally.volatiles['equip']) ||
+					 (ally.volatiles['equipped'] && !pokemon.volatiles['equip']) ||
+					 ally.hasAbility('stubborn') || ally.hasAbility('partyrockis') ||
+					 (helper !== null && this.randomChance(1, 2))) continue;
+				helper = ally;
+			}
+			helper?.addVolatile('helper');
+		},
+		onAllyModifySpe(spe, pokemon) {
+			if (pokemon.volatiles['helper']) {
+				return spe / (1 + 200 / pokemon.getStat('atk'));
+			}
+		},
+		onAllyBeforeMove(source) {
+			if (source.volatiles['helper']) {
+				for (const ally of source.allies()) {
+					if (!ally?.isActive || ally === source || !ally.isAdjacent(source) || !ally.hasAbility('stubborn') || ally.hasAbility('partyrockis')) continue;
+					const action = this.queue.willMove(ally);
+					if (action) {
+						this.queue.prioritizeAction(action);
+						this.add('-activate', ally, 'ability: Party Rock is');
+					}
+				}
+			}
+		},
+		isPermanent: true,
+		name: "Party Rock is",
+		rating: 2.5,
+		num: 154,
+	},
 
 	// BASE GAME
 	noability: {
