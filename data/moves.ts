@@ -2303,7 +2303,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 		isNonstandard: "Thing",
 		name: "Wet Floor",
 		pp: 20,
-		stamina: 3,
 		priority: 0,
 		flags: {reflectable: 1},
 		sideCondition: 'wetfloor',
@@ -3390,6 +3389,48 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Music",
 		zMove: {boost: {spa: 2}},
 		contestType: "Clever",
+	},
+	major: {
+		num: 501,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Major",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		songFlags: ['speboost'],
+		boosts: {
+			atk: 1,
+			spa: 1,
+		},
+		secondary: null,
+		target: "self",
+		type: "Music",
+		zMove: {boost: {spa: 2}},
+		contestType: "Beautiful",
+	},
+	minor: {
+		num: 502,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Minor",
+		pp: 15,
+		priority: 0,
+		flags: {},
+		songFlags: ['spereduce'],
+		boosts: {
+			atk: -1,
+			spa: -1,
+		},
+		secondary: null,
+		target: "normal",
+		type: "Music",
+		zMove: {boost: {spa: 2}},
+		contestType: "Beautiful",
 	},
 
 	// Night
@@ -5305,6 +5346,45 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cute",
 	},
+	invitingsurroundings: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Inviting Surroundings",
+		pp: 10,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'invitingsurroundings',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				/*if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}*/
+				return 5;
+			},
+			onTrapPokemon(pokemon) {
+				pokemon.tryTrap(true);
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Inviting Surroundings', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Inviting Surroundings');
+				}
+			},
+			onFieldEnd(side) {
+				this.add('-fieldend', 'Inviting Surroundings');
+			},
+		},
+		secondary: null,
+		target: "all",
+		type: "Sport",
+		zMove: {boost: {spd: 1}},
+		contestType: "Cool",
+	},
 
 	// Sword
 	sharpslash: {
@@ -7036,47 +7116,53 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Clever",
 	},
-	major: {
-		num: 501,
+	gascloud: {
+		num: 433,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
 		isNonstandard: "Thing",
-		name: "Major",
-		pp: 15,
+		name: "Gas Cloud",
+		pp: 10,
 		priority: 0,
-		flags: {},
-		songFlags: ['speboost'],
-		boosts: {
-			atk: 1,
-			spa: 1,
+		flags: {gas: 1},
+		pseudoWeather: 'gascloud',
+		condition: {
+			duration: 1,
+			onStart(target, source, effect) {
+				this.add('-fieldstart', 'move: Gas Cloud', '[of] ' + source);
+				this.effectState.source = source;
+			},
+			onResidual(pokemon) {
+				const source = this.effectState.source;
+				if (source !== pokemon) {
+					const hitMove = this.dex.getActiveMove('Gas');
+					this.actions.trySpreadMoveHit([pokemon], source, hitMove, true);
+				}
+			},
+			onEnd() {
+				this.add('-fieldend', 'move: Gas Cloud');
+			},
 		},
 		secondary: null,
-		target: "self",
-		type: "Music",
-		zMove: {boost: {spa: 2}},
-		contestType: "Beautiful",
+		target: "all",
+		type: "Yellow",
+		zMove: {boost: {accuracy: 1}},
+		contestType: "Tough",
 	},
-	minor: {
-		num: 502,
-		accuracy: true,
-		basePower: 0,
-		category: "Status",
+	gas: {
+		num: 1515,
+		accuracy: 100,
+		basePower: 40,
+		category: "Special",
+		name: "Gas",
 		isNonstandard: "Thing",
-		name: "Minor",
-		pp: 15,
+		pp: 30,
 		priority: 0,
-		flags: {},
-		songFlags: ['spereduce'],
-		boosts: {
-			atk: -1,
-			spa: -1,
-		},
-		secondary: null,
+		flags: {authentic: 1, gas: 1},
 		target: "normal",
-		type: "Music",
-		zMove: {boost: {spa: 2}},
-		contestType: "Beautiful",
+		type: "Yellow",
+		contestType: "Tough",
 	},
 
 

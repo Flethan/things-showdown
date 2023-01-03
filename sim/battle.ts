@@ -1505,20 +1505,7 @@ export class Battle {
 
 				this.add('-ability', pokemon, this.dex.abilities.getByID(pokemon.ability), '[silent]');
 
-
-				let staminaInc = 0;
-				const turns = pokemon.totalActiveTurns;
-				if (turns > 15) staminaInc = 0;
-				else if (turns > 12) staminaInc = 1;
-				else if (turns > 9) staminaInc = 2;
-				else if (turns > 6) staminaInc = 3;
-				else if (turns > 3) staminaInc = 4;
-				else if (turns > 0) staminaInc = 5;
-				pokemon.stamina += staminaInc;
-				if (pokemon.stamina > 10) pokemon.stamina = 10;
-				this.hint(pokemon.name + ' stamina: ' + pokemon.stamina);
 				pokemon.activeTurns++;
-				pokemon.totalActiveTurns++;
 			}
 			trappedBySide.push(sideTrapped);
 			stalenessBySide.push(sideStaleness);

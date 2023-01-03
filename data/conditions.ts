@@ -1054,6 +1054,37 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 
+	friendlyatmosphere: {
+		onFieldResidualOrder: 1,
+		onFieldResidual(field) {
+			this.add('-weather', 'Friendly Atmosphere', '[upkeep]');
+		},
+		onDamagePriority: -10,
+		onDamage(damage, target, source, effect) {
+			if (effect?.effectType === 'Move' && damage >= target.hp) {
+				this.add('-activate', target);
+				return target.hp - 1;
+			}
+		},
+		name: 'Friendly Atmosphere',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			// if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				this.add('-weather', 'Friendly Atmosphere', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Friendly Atmosphere');
+			}
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
+
 	// Landscape Factors
 
 	// BASE GAME

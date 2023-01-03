@@ -46,6 +46,9 @@ interface MoveFlags {
 	reflectable?: 1; // Bounced back to the original user by Magic Coat or the Ability Magic Bounce.
 	snatch?: 1; // Can be stolen from the original user and instead used by another Pokemon using Snatch.
 	sound?: 1; // Has no effect on Pokemon with the Ability Soundproof.
+
+	// Things
+	gas?: 1;
 }
 
 export interface HitEffect {
@@ -142,7 +145,6 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	flags: AnyObject;
 	/** Hidden Power */
 	realMove?: string;
-	stamina?: number;
 
 	damage?: number | 'level' | false | null;
 	contestType?: string;
