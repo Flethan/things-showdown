@@ -1016,6 +1016,34 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	corechaete: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetegreen: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetenull: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetesoil: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetesong: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetespring: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	corechaetesuds: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
