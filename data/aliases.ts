@@ -11,14 +11,14 @@ export const Aliases: {[alias: string]: string} = {
 	litheathsoil: "Litheath",
 	litheathsong: "Litheath",
 	litheathspring: "Litheath",
-	litheathsuds: "Litheath", */
+	litheathsuds: "Litheath", 
 	geosondeexpansion: "Geosonde",
 	geosondegreen: "Geosonde",
 	geosondenull: "Geosonde",
 	geosondesoil: "Geosonde",
 	geosondesong: "Geosonde",
 	geosondespring: "Geosonde",
-	geosondesuds: "Geosonde",
+	geosondesuds: "Geosonde", */
 
 	// formats
 	randbats: "[Gen 8] Random Battle",

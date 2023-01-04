@@ -3331,6 +3331,59 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2.5,
 		num: 154,
 	},
+	xenoform: {
+		isNonstandard: "ThingInf",
+		name: "Xenoform",
+		onStart(source) {
+			if (source.baseSpecies.baseSpecies !== 'Corecheate') return;
+			let terrainType = '';
+			switch (source.species.forme) {
+			case "":
+				terrainType = 'spatialexpansion';
+				break;
+			case 'Green':
+				terrainType = 'greenground';
+				break;
+			case 'Null':
+				terrainType = 'nullland';
+				break;
+			case 'Soil':
+				terrainType = 'richsoil';
+				break;
+			case 'Song':
+				terrainType = 'mysticalsong';
+				break;
+			case 'Spring':
+				terrainType = 'springfloor';
+				break;
+			case 'Suds':
+				terrainType = 'sudscape';
+				break;
+			}
+			this.effectState.terrain = terrainType;
+			if (this.field.getTerrain().id === terrainType && this.field.terrainState.duration !== 0) {
+				this.field.terrainState.duration = 0;
+				this.field.terrainState.source = source;
+			} else { this.field.setTerrain(terrainType); }
+		},
+		onAnyTerrainStart(target, source, terrain) {
+			const terrainType = this.effectState.terrain;
+			if (this.field.getTerrain().id === terrainType && !source.hasAbility('xenoform')) return false;
+		},
+		onEnd(pokemon) {
+			if (this.field.terrainState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('xenoform') && target.abilityState.terrain === this.field.getTerrain().id) {
+					this.field.terrainState.source = target;
+					return;
+				}
+			}
+			this.field.clearTerrain();
+		},
+		rating: 5,
+		num: -122,
+	},
 
 	// BASE GAME
 	noability: {
