@@ -2920,9 +2920,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	stubborn: {
 		isNonstandard: "Thing",
-		onSetAbility(ability, target, source, effect) {
+		/*onSetAbility(ability, target, source, effect) {
 			return false;
-		},
+		},*/
+		isPermanent: true,
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
 			if (action?.moveid === 'stay') return;
@@ -3271,7 +3272,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart() {
 			this.effectState.activated = 0;
 		},
-		onAfterMoveSecondary(source, target, move) {
+		onAfterMoveSecondarySelf(source, target, move) {
 			if (source !== null && move.flags['gas'] && !this.effectState.activated) {
 				this.field.addPseudoWeather('gascloud', source);
 				this.effectState.activated = 1;
@@ -3290,9 +3291,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('invitingsurroundings');
 			this.field.setWeather('friendlyatmosphere');
 		},
-		onSetAbility(ability, target, source, effect) {
+		/*onSetAbility(ability, target, source, effect) {
 			return false;
-		},
+		},*/
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
 			if (action?.moveid === 'stay') return;
@@ -3329,6 +3330,59 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Party Rock is",
 		rating: 2.5,
 		num: 154,
+	},
+	xenoform: {
+		isNonstandard: "ThingInf",
+		name: "Xenoform",
+		onStart(source) {
+			if (source.baseSpecies.baseSpecies !== 'Corecheate') return;
+			let terrainType = '';
+			switch (source.species.forme) {
+			case "":
+				terrainType = 'spatialexpansion';
+				break;
+			case 'Green':
+				terrainType = 'greenground';
+				break;
+			case 'Null':
+				terrainType = 'nullland';
+				break;
+			case 'Soil':
+				terrainType = 'richsoil';
+				break;
+			case 'Song':
+				terrainType = 'mysticalsong';
+				break;
+			case 'Spring':
+				terrainType = 'springfloor';
+				break;
+			case 'Suds':
+				terrainType = 'sudscape';
+				break;
+			}
+			this.effectState.terrain = terrainType;
+			if (this.field.getTerrain().id === terrainType && this.field.terrainState.duration !== 0) {
+				this.field.terrainState.duration = 0;
+				this.field.terrainState.source = source;
+			} else { this.field.setTerrain(terrainType); }
+		},
+		onAnyTerrainStart(target, source, terrain) {
+			const terrainType = this.effectState.terrain;
+			if (this.field.getTerrain().id === terrainType && !source.hasAbility('xenoform')) return false;
+		},
+		onEnd(pokemon) {
+			if (this.field.terrainState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('xenoform') && target.abilityState.terrain === this.field.getTerrain().id) {
+					this.field.terrainState.source = target;
+					return;
+				}
+			}
+			this.field.clearTerrain();
+		},
+		rating: 5,
+		num: -122,
 	},
 
 	// BASE GAME

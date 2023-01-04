@@ -688,6 +688,34 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	geosondeexpansion: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondegreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondenull: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondesoil: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondesong: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondespring: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	geosondesuds: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	cululus: {
 		isNonstandard: "Thing",
 		tier: "Thing",
