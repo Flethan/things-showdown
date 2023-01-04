@@ -5299,7 +5299,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const boostSource: SparseBoostsTable = {};
 			const boostTarget: SparseBoostsTable = {};
 			let statPlus: BoostID;
-			for (statPlus in source.boosts) {
+			let stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
+			for (statPlus of stats) {
 				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
 				const statDiff = source.boosts[statPlus] - target.boosts[statPlus];
 				if (statDiff < 0) {

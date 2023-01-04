@@ -2310,6 +2310,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				newType = 'Sport';
 				break;
 			}
+			if (!newType) {
+				return false;
+			}
 			if (!pokemon.addType(newType)) return false;
 			this.add('-start', pokemon, 'typeadd', newType, '[from] ability: Sedimentary');
 
@@ -3337,8 +3340,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			if (source.baseSpecies.baseSpecies !== 'Corecheate') return;
 			let terrainType = '';
+			console.log(source.species.forme);
 			switch (source.species.forme) {
-			case "":
+			case null:
 				terrainType = 'spatialexpansion';
 				break;
 			case 'Green':

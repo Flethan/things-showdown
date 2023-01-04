@@ -1896,6 +1896,7 @@ export class BattleActions {
 				this.battle.queue.changeAction(pokemon, action);
 			}*/
 			pokemon.moveSlots[4] = newMove;
+			pokemon.baseMoveSlots[4] = newMove;
 		}
 
 		// Limit one symbol evolution, don't count forced evos: Lemon -> <empty>, Yellomatter's Phase Change
