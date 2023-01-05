@@ -1046,8 +1046,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongMusics = ['hot', 'timedilation', 'windy'];
-			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen'];
+			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
+			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'hot' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
 		},
 		onEnd(pokemon) {
@@ -1115,8 +1115,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongMusics = ['hot', 'timedilation', 'windy'];
-			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen'];
+			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
+			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'timedilation' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
 		},
 		onEnd(pokemon) {
@@ -1485,8 +1485,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
-			const strongMusics = ['hot', 'timedilation', 'windy'];
-			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen'];
+			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
+			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'windy' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
 		},
 		onEnd(pokemon) {
@@ -3021,7 +3021,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Infinite duration done in conditions.js#hot
 		},
 		onAnySetWeather(target, source, weather) {
-			if (this.field.getWeather().id === 'locustswarm') return false;
+			const strongMusics = ['friendlyatmosphere'];
+			const musicAbilities = ['partyrockis'];
+			if (this.field.getWeather().id === 'locustswarm' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
 		},
 		onEnd(pokemon) {
 			if (this.field.weatherState.source !== pokemon) return;
@@ -3338,11 +3340,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		name: "Xenoform",
 		onStart(source) {
-			if (source.baseSpecies.baseSpecies !== 'Corecheate') return;
+			console.log(source.baseSpecies.baseSpecies);
+			if (source.baseSpecies.baseSpecies !== 'Corechaete') return;
 			let terrainType = '';
 			console.log(source.species.forme);
 			switch (source.species.forme) {
-			case null:
+			case '':
 				terrainType = 'spatialexpansion';
 				break;
 			case 'Green':
@@ -3372,7 +3375,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onAnyTerrainStart(target, source, terrain) {
 			const terrainType = this.effectState.terrain;
-			if (this.field.getTerrain().id === terrainType && !source.hasAbility('xenoform')) return false;
+			if (this.field.getTerrain().id === terrainType && !(source.hasAbility('xenoform') || source.hasAbility('partyrockis'))) return false;
 		},
 		onEnd(pokemon) {
 			if (this.field.terrainState.source !== pokemon) return;
