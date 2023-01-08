@@ -3017,7 +3017,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
-			} else { this.field.setWeather('locustswarm', null, null, true); }
+			} else { 
+				this.field.setWeather('locustswarm', null, null, true); 
+				this.field.weatherState.duration = 0;
+			}
 			// Infinite duration done in conditions.js#hot
 		},
 		/* onAnySetWeather(target, source, weather) {
@@ -3371,7 +3374,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getTerrain().id === terrainType && this.field.terrainState.duration !== 0) {
 				this.field.terrainState.duration = 0;
 				this.field.terrainState.source = source;
-			} else { this.field.setTerrain(terrainType, null, null, true); }
+			} else { 
+				this.field.setTerrain(terrainType, null, null, true);
+				this.field.terrainState.duration = 0;
+			}
 		},
 		/* onAnyTerrainStart(target, source, terrain) {
 			const terrainType = this.effectState.terrain;
