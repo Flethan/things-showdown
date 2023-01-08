@@ -1042,14 +1042,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	ahotone: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('hot');
+			this.field.setWeather('hot', null, null, true);
 			// Infinite duration done in conditions.js#hot
 		},
-		onAnySetWeather(target, source, weather) {
+		/* onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
 			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'hot' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
-		},
+		}, */
 		onEnd(pokemon) {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -1111,14 +1111,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	sinningunapuro: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('timedilation');
+			this.field.setWeather('timedilation', null, null, true);
 			// Infinite duration done in conditions.js#hot
 		},
-		onAnySetWeather(target, source, weather) {
+		/* onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
 			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'timedilation' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
-		},
+		}, */
 		onEnd(pokemon) {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -1481,14 +1481,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	lassihnfliegen: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('windy');
+			this.field.setWeather('windy', null, null, true);
 			// Infinite duration done in conditions.js#hot
 		},
-		onAnySetWeather(target, source, weather) {
+		/* onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
 			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
 			if (this.field.getWeather().id === 'windy' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
-		},
+		}, */
 		onEnd(pokemon) {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -3017,14 +3017,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
-			} else { this.field.setWeather('locustswarm'); }
+			} else { this.field.setWeather('locustswarm', null, null, true); }
 			// Infinite duration done in conditions.js#hot
 		},
-		onAnySetWeather(target, source, weather) {
+		/* onAnySetWeather(target, source, weather) {
 			const strongMusics = ['friendlyatmosphere'];
 			const musicAbilities = ['partyrockis'];
 			if (this.field.getWeather().id === 'locustswarm' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
-		},
+		}, */
 		onEnd(pokemon) {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -3293,8 +3293,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	partyrockis: {
 		isNonstandard: "ThingInf",
 		onAfterMega(source) {
-			this.field.setTerrain('invitingsurroundings');
-			this.field.setWeather('friendlyatmosphere');
+			this.field.setTerrain('invitingsurroundings', null, null, true);
+			this.field.setWeather('friendlyatmosphere', null, null, true);
 		},
 		/*onSetAbility(ability, target, source, effect) {
 			return false;
@@ -3371,12 +3371,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getTerrain().id === terrainType && this.field.terrainState.duration !== 0) {
 				this.field.terrainState.duration = 0;
 				this.field.terrainState.source = source;
-			} else { this.field.setTerrain(terrainType); }
+			} else { this.field.setTerrain(terrainType, null, null, true); }
 		},
-		onAnyTerrainStart(target, source, terrain) {
+		/* onAnyTerrainStart(target, source, terrain) {
 			const terrainType = this.effectState.terrain;
 			if (this.field.getTerrain().id === terrainType && !(source.hasAbility('xenoform') || source.hasAbility('partyrockis'))) return false;
-		},
+		}, */
 		onEnd(pokemon) {
 			if (this.field.terrainState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
