@@ -3343,10 +3343,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		name: "Xenoform",
 		onStart(source) {
-			console.log(source.baseSpecies.baseSpecies);
+			// console.log(source.baseSpecies.baseSpecies);
 			if (source.baseSpecies.baseSpecies !== 'Corechaete') return;
 			let terrainType = '';
-			console.log(source.species.forme);
+			// console.log(source.species.forme);
 			switch (source.species.forme) {
 			case '':
 				terrainType = 'spatialexpansion';
