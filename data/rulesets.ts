@@ -53,6 +53,26 @@ export const Rulesets: {[k: string]: FormatData} = {
 			return [];
 		},
 	},
+	onepatrononly: {
+		effectType: 'ValidatorRule',
+		name: 'One Patron Only',
+		desc: "Only allows one Patron.",
+		onValidateTeam(team, format) {
+			let patronCount = 0;
+			for (const set of team) {
+				const species = this.dex.species.get(set.species || set.name);
+				if (species.isPatron) {
+					if (patronCount > 0) {
+						return [
+							`You cannot have more than one Patron on your team.`,
+						];
+					}
+					patronCount++;
+				}
+			}
+			return [];
+		},
+	},
 	visibleonly: {
 		effectType: 'ValidatorRule',
 		name: 'Visible Only',

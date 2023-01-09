@@ -152,6 +152,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	readonly canHatch: boolean;
 	/** Species has sprite. falsy if eh. */
 	declare readonly hasSprite?: boolean;
+	/** Species is Patron. falsy if eh. */
+	declare readonly isPatron?: boolean;
 	/**
 	 * Gender. M = always male, F = always female, N = always
 	 * genderless, '' = sometimes male sometimes female.

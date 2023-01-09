@@ -1013,6 +1013,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 140,
 		color: "White",
 		eggGroups: ["Undiscovered"],
+		isPatron: true,
 	},
 	undulux: {
 		num: -367,
@@ -1152,6 +1153,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 140,
 		color: "White",
 		eggGroups: ["Undiscovered"],
+		isPatron: true,
 	},
 	crescitten: {
 		num: -376,
@@ -1507,6 +1509,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 140,
 		color: "White",
 		eggGroups: ["Undiscovered"],
+		isPatron: true,
 	},
 	algie: {
 		num: -395,
@@ -1729,6 +1732,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Human-Like"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	myomimeo: {
 		num: -411,
@@ -1912,6 +1916,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Babellinks"],
 		eggGroups: ["Undiscovered"],
+		isPatron: true,
 	},
 	babellinks: {
 		num: -422,
@@ -1929,6 +1934,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		addedType: "Infinity",
+		isPatron: true,
 	},
 	sodike: {
 		num: -423,
@@ -1942,6 +1948,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	epee: {
 		num: -424,
@@ -2211,6 +2218,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	searke: {
 		num: -439,
@@ -2224,6 +2232,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	gorn: {
 		num: -440,
@@ -2237,6 +2246,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	bean: {
 		num: -441,
@@ -2811,6 +2821,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	mimunclownfish: {
 		num: -464,
@@ -2824,6 +2835,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	ofin: {
 		num: -465,
@@ -2854,6 +2866,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	serpiternal: {
 		num: -500,
@@ -2867,6 +2880,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Serpixtinction"],
 		eggGroups: ["Undiscovered"],
+		isPatron: true,
 	},
 	serpixtinction: {
 		num: -467,
@@ -2883,6 +2897,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		evoType: "symbol",
 		evoCondition: "Symbol",
+		isPatron: true,
 	},
 	boxlegend: {
 		num: -468,
@@ -2897,6 +2912,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Planter Legend"],
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
+		isPatron: true,
 	},
 	planterlegend: {
 		num: -469,
@@ -2914,6 +2930,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["Green"],
+		isPatron: true,
 	},
 	exallout: {
 		num: -470,

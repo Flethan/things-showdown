@@ -481,8 +481,16 @@ export class RandomTeams {
 
 		const teamsize = Math.min(n, pool.length);
 		const hasDexNumber: {[k: string]: number} = {};
+		let patronCount = 0;
 		for (let i = 0; i < teamsize; i++) {
 			const num = this.sampleNoReplace(pool);
+			if (this.dex.species.get(num).isPatron) {
+				if (patronCount > 0) {
+					i--;
+					continue;
+				}
+				patronCount++;
+			}
 			hasDexNumber[num] = i;
 		}
 
