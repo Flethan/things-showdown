@@ -20,6 +20,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Ball Bounce",
 		shortDesc: "No additional effect.",
 	},
+	gascloud: {
+		name: "Gas Cloud",
+		shortDesc: "Sets Gas Cloud field condition.",
+	},
 	// arthropod
 	pinch: {
 		name: "Pinch",
@@ -68,8 +72,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	pheromonemark: {
 		name: "Pheromone Mark",
-		desc: "Until the target switches out, Arthropod-type moves used against it have a +2 crit ratio, and it takes 1.5x damage from Locust Swarm.",
-		shortDesc: "Arthropod moves against target have +2 crit ratio.",
+		desc: "Until the target switches out, Arthropod-type Thing's moves used against it have a +2 crit ratio, and it takes 1.5x damage from Locust Swarm.",
+		shortDesc: "Arthropod Things have +2 crit ratio against target.",
 	},
 	// dirt
 	landslide: {
@@ -181,6 +185,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The power of this move depends on (user's weight / target's weight), rounded down. Power is equal to 120 if the result is 5 or more, 100 if 4, 80 if 3, 60 if 2, and 40 if 1 or less. If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP. If the current environment is Underwater, the user does not take any recoil damage, and the Underwater ends.",
 		shortDesc: "Power->heavier; 33% recoil, unless Underwater (then ends).",
 	},
+	ineptfish: {
+		name: "Breach Impact",
+		shortDesc: "No additional effect.",
+	},
 	brilliantfish: {
 		name: "Brilliant Fish",
 		desc: "Has a 50% chance to raise the user's Special Attack by 2 stages.",
@@ -200,6 +208,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Submerge",
 		desc: "For 5 turns, the environment becomes Underwater. At the end of each turn except the last, all active Fish-type Things recover 1/16 of their maximum HP, while Things that aren't Fish or Liquid type lose 1/16 of their maximum HP, rounded down; Things with prone have it removed. During the effect, the accuracy of Liquid-type moves is multiplied by 1.2, pressurized inflicts 2x damage, and the prone condition is prevented. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Underwater.",
 		shortDesc: "For 5 turns, the field sinks underwater.",
+	},
+	arghhghg: {
+		name: "Arghhghg",
+		desc: "Lowers the target's Attack, Special Attack, and Accuracy by 1 stage.",
+		shortDesc: "Lowers the target's Atk, Sp. Atk, and Accuracy by 1.",
 	},
 	// green
 	greentackle: {
@@ -625,10 +638,25 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Damage is calculated using the user's Speed stat as its Attack, including stat stage changes. Other effects that modify the Attack stat are used as normal.",
 		shortDesc: "Uses user's Spe stat as Atk in damage calculation.",
 	},
+	shadowlance: {
+		name: "Shadow Lance",
+		desc: "Has a higher chance for a critical hit.",
+		shortDesc: "High critical hit ratio.",
+	},
+	trample: {
+		name: "Trample",
+		desc: "The power of this move depends on (user's weight / target's weight), rounded down. Power is equal to 120 if the result is 5 or more, 100 if 4, 80 if 3, 60 if 2, and 40 if 1 or less.",
+		shortDesc: "More power the heavier the user than the target.",
+	},
 	moonbeam: {
 		name: "Moonbeam",
 		desc: "Has a 20% chance to lower the target's Special Attack by 1 stage.",
 		shortDesc: "20% chance to lower the target's Sp. Atk by 1.",
+	},
+	starrywave: {
+		name: "Starry Wave",
+		desc: "Has a 10% chance to blind the target.",
+		shortDesc: "Hits adjacent foes, 10% chance to blind.",
 	},
 	nightmode: {
 		name: "Night Mode",
@@ -639,6 +667,30 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Nightfall",
 		desc: "For 5 turns, the environment becomes Nighttime. At the end of each turn except the last, all active Night-type Things recover 1/16 of their maximum HP. During the effect, the accuracy of moves against of Night-type Things is multiplied by 0.8. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Nighttime.",
 		shortDesc: "For 5 turns, it turns to night.",
+	},
+	shadowmark: {
+		name: "Shadow Mark",
+		desc: "Until the end of the next turn, Night-type Thing's moves used against the target deal 2x damage.",
+		shortDesc: "Night Things do 2x damage against target for 1 turn.",
+	},
+	pitchblack: {
+		name: "Pitch Black",
+		desc: "Lowers the target's accuracy by 2 stages.",
+		shortDesc: "Lowers the target's accuracy by 2.",
+	},
+	naptime: {
+		name: "Naptime",
+		desc: "Knocks the target prone, and prevents the target from using a move on its next turn. This move has 100% accuracy if the environment is Nighttime.",
+		shortDesc: "Target prone, can't attack next turn. 100% acc if Nighttime.",
+
+		cant: "  [POKEMON] is sleeping!",
+	},
+	disorient: {
+		name: "Disorient",
+		desc: "Causes the target's move this turn to have 50% accuracy, and changes its target to one selected randomly from valid targets. This move cannot miss if the environment is Nighttime. Fails if the target already moved this turn.",
+		shortDesc: "Foe next move 50% acc, w/ random target. Always hits if Nighttime.",
+
+		cant: "  [POKEMON] is sleeping!",
 	},
 	// no
 	voidpunch: {
@@ -753,10 +805,6 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Brilliancy",
 		desc: "If this thing faints this turn from enemy damage, the thing that replaces it has its Attack and Special Attack maxed. If Rank and File was selected by an ally this turn as well, their move is cancelled, and Brilliancy will max Defense, Special Defense, and Speed instead, if its effect triggers.",
 		shortDesc: "If faint, max next Atk & SpA; effect w/ Rank&File & Promote.",
-	},
-	launchanuclearwarhead: {
-		name: "Launch a Nuclear Warhead",
-		shortDesc: "No additional effect.",
 	},
 	// sport
 	fourseamfastball: {
@@ -1195,6 +1243,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Stellar Omen",
 		desc: "The effect of this move varies depending on the target's Nature. If Brave or Naughty, it boosts the target's Attack by 6 stages, and sets the Perish volatile on them with 1 turn remaining. If Bold or Docile, it cures any status condition the target has, and traps it. If Quirky or Rash, it changes the target's type(s) to 2 random types, and makes the target fluctuant. If Modest or Timid, it Fast Forwards the target and banishes it. If Hasty or Lax, it sets the target's ability to Colossal, and knocks it prone. If Quiet, Careful, or Serious, it sets Void Trap on the opposing side of the field, and Pauses and Calibrates the target. If Calm or Bashful, it sets the target's ability to Inert, and clears any stat changes it has. If Sassy or Lonely, it Pheromone Marks the target and exchanges the target's item for a random item; if the target has no held item, it also damages the target for 1/4 of its maximum HP, rounded down. If Impish or Jolly, it distances the target and forces it to switch out. If Adamant or Hardy, it sets the Time Dilation environment and Time Loop. If Naive or Mild, it sets the Sudscape landscape, and a Time Capsule for the target. If Relaxed or Gentle, it sets Hypnotic Melody on the target, raises its best stat by 1 stage, and lowers its accuracy by 1 stage.",
 		shortDesc: "Effect varies depending on target Nature.",
+	},
+	launchanuclearwarhead: {
+		name: "Launch a Nuclear Warhead",
+		shortDesc: "No additional effect.",
+	},
+	leitmotif: {
+		name: "Leitmotif",
+		desc: "Inherits its type from the user's first move's type. Inherits any Harmonies that the user's other moves have. If the user is Sylphonie-Physical, this move becomes a physical attack. If the landscape is Mystical Song, resets the duration for Mystical Song to last for another 5 turns. Any Harmonies present are still maintained.",
+		shortDesc: "Type, effects, category vary w/ user's moves and forme.",
 	},
 
 	// BASE GAME
