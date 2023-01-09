@@ -1840,6 +1840,10 @@ export class BattleActions {
 				const evoCondition = this.dex.species.get(evo).evoCondition;
 				if (evoCondition === 'Symbol') {
 					return evo;
+				} else if (evoCondition === 'Symbol w/ Atk > SpA' && (pokemon.getStat('atk', true, true) >= (pokemon.getStat('spa', true, true))) {
+					return evo;
+				} else if (evoCondition === 'Symbol w/ SpA > Atk' && ((pokemon.getStat('spa', true, true) >= (pokemon.getStat('atk', true, true))) {
+					return evo;
 				}
 			}
 		}

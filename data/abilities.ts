@@ -3397,6 +3397,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 5,
 		num: -122,
 	},
+	overture: {
+		isNonstandard: "ThingInf",
+		onStart(pokemon) {
+			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
+			if (pokemon.hasType(type) || type === '???') return false;
+			if (!pokemon.addType(type)) return false;
+			this.add('-start', pokemon, 'typeadd', type, '[from] ability: Overture');
+			this.field.setTerrain('mysticalsong');
+		},
+		name: "Overture",
+		rating: 3.5,
+		num: 2112,
+	},
 
 	// BASE GAME
 	noability: {

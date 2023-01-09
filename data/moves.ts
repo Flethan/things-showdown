@@ -3432,6 +3432,43 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spa: 2}},
 		contestType: "Beautiful",
 	},
+	leitmotif: {
+		num: 1538,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		isNonstandard: "ThingInf",
+		name: "Leitmotif",
+		pp: 3,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onModifyType(move, pokemon) {
+			move.type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
+		},
+		onModifyMove(move, pokemon) {
+			let sf: string[] = [];
+			for (let i=0; i<4; i++) {
+				const move = this.dex.moves.get(pokemon.moveSlots[0].id);
+				if (!move.songFlags) continue;
+				for (const flag of move.songFlags) {
+					if (!sf.includes(flag)) sf.push(flag);
+				}
+			}
+			move.songFlags = sf;
+
+			if (pokemon.species.name === 'Sylphonie-Physical') {
+				move.category = 'Physical';
+			}
+		},
+		onHit() {
+			if (this.field.isTerrain('mysticalsong'))
+				this.field.terrainState.duration = 5;
+		},
+		secondary: null,
+		target: "normal",
+		type: "???",
+		contestType: "Beautiful",
+	},
 
 	// Night
 	stealthstrike: {

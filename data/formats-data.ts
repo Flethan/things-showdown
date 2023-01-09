@@ -1044,6 +1044,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	sylphonie: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	sylphoniephysical: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
