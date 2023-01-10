@@ -484,13 +484,21 @@ export class RandomTeams {
 		let patronCount = 0;
 		for (let i = 0; i < teamsize; i++) {
 			const num = this.sampleNoReplace(pool);
-			if (this.dex.species.get(num).isPatron) {
-				if (patronCount > 0) {
-					i--;
-					continue;
+			for (const id in this.dex.data.Pokedex) {
+				if (this.dex.data.Pokedex[id].num === num) {
+					console.log(this.dex.species.get(id).name);
+					if (this.dex.species.get(id).isPatron) {
+						console.log('is patron');
+						if (patronCount > 0) {
+							console.log('already got one');
+							i--;
+							continue;
+						}
+						patronCount++;
+					}
 				}
-				patronCount++;
 			}
+			console.log('adding to team...');
 			hasDexNumber[num] = i;
 		}
 
