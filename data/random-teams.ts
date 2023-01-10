@@ -483,6 +483,7 @@ export class RandomTeams {
 		const hasDexNumber: {[k: string]: number} = {};
 		let patronCount = 0;
 		for (let i = 0; i < teamsize; i++) {
+			let patronSkip = false;
 			const num = this.sampleNoReplace(pool);
 			for (const id in this.dex.data.Pokedex) {
 				if (this.dex.data.Pokedex[id].num === num) {
@@ -492,12 +493,14 @@ export class RandomTeams {
 						if (patronCount > 0) {
 							console.log('already got one');
 							i--;
-							continue;
+							patronSkip = true;
+							break;
 						}
 						patronCount++;
 					}
 				}
 			}
+			if (patronSkip) continue;
 			console.log('adding to team...');
 			hasDexNumber[num] = i;
 		}
