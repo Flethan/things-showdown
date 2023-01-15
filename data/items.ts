@@ -794,7 +794,7 @@ export const Items: {[itemid: string]: ItemData} = {
 	},
 	cowboyhat: {
 		name: "Cowboy Hat",
-		spritenum: 811,
+		spritenum: 814,
 		consume: {
 			healPercent: 50,
 		},
