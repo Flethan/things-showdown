@@ -803,6 +803,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	emptycapsule: {
+		name: "Empty Capsule",
+		spritenum: 813,
+		consume: {
+
+		},
+		// Implemented elsewhere
+		num: -263,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",

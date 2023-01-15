@@ -1835,7 +1835,9 @@ export class BattleActions {
 	canSymbolEvo(pokemon: Pokemon) {
 		// Infinity, Element, Null, and Mu formes
 		const species = pokemon.baseSpecies;
-		if (species.isNonstandard === 'Thing' && species.evos) {
+		if (pokemon.getItem().id === 'emptycapsule') {
+			return 'Empty';
+		} else if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
 				const evoCondition = this.dex.species.get(evo).evoCondition;
 				if (evoCondition === 'Symbol') {
