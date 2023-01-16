@@ -568,7 +568,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (source.hasType('Fish') && !this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
-				// this.add('-activate', pokemon, 'item: Fish Bait');
+				this.add('-activate', this.effectState.target, 'item: Fish Bait');
 				if (move.smartTarget) move.smartTarget = false;
 				this.debug("Fish Bait redirected target of move");
 				return this.effectState.target;
@@ -811,6 +811,71 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		// Implemented elsewhere
 		num: -263,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	funnyjuice: {
+		name: "Funny Juice",
+		spritenum: 815,
+		consume: {
+			randomPercent: true,
+		},
+		onTryHit(target, source, move) {
+			this.effectState.targeted = true;
+		},
+		onResidual(pokemon) {
+			if (!this.effectState.targeted) {
+				this.boost({evasion: 1});
+			}
+			this.effectState.targeted = false;
+		},
+		num: -264,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	enchantedmirror: {
+		name: "Enchanted Mirror",
+		spritenum: 816,
+		consume: {
+			healPercent: 25,
+		},
+		onAfterSetStatus(status, target, source, effect) {
+			for (const foe of target.foes()) {
+				if (!foe?.isActive || foe === target) continue;
+				this.add('-activate', target, 'item: Enchanted Mirror');
+				// Hack to make status-prevention abilities think Synchronize is a status move
+				// and show messages when activating against it.
+				foe.trySetStatus(status, target, {status: status.id, id: 'enchantedmirror'} as Effect);
+			}
+			for (const ally of target.allies()) {
+				if (!ally?.isActive || ally === target) continue;
+				this.add('-activate', target, 'item: Enchanted Mirror');
+				// Hack to make status-prevention abilities think Synchronize is a status move
+				// and show messages when activating against it.
+				ally.trySetStatus(status, target, {status: status.id, id: 'enchantedmirror'} as Effect);
+			}
+		},
+		num: -265,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	trackingdevice: {
+		name: "Tracking Device",
+		spritenum: 817,
+		consume: {
+			healPercent: 20,
+		},
+		onAnyInvulnerabilityPriority: 1,
+		onAnyInvulnerability(target, source, move) {
+			if (move && (target === this.effectState.target)) return 0;
+		},
+		onAnyAccuracy(accuracy, target, source, move) {
+			if (move && (target === this.effectState.target)) {
+				return true;
+			}
+			return accuracy;
+		},
+		num: -266,
 		gen: 8,
 		isNonstandard: "Thing",
 	},

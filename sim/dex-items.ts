@@ -13,6 +13,7 @@ interface ConsumeData {
 	status?: string;
 	volatileStatus?: string;
 	effect?: CommonHandlers['ResultMove'];
+	randomPercent?: boolean;
 }
 
 export interface ItemData extends Partial<Item>, PokemonEventMethods {

@@ -7136,6 +7136,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (item.consume?.damagePercent) {
 				this.damage(pokemon.baseMaxhp * item.consume?.damagePercent / 100, pokemon);
 			}
+			if (item.consume?.randomPercent) {
+				const randP = this.random(-25, 100);
+				if (randP > 0) {
+					this.heal(pokemon.baseMaxhp * randP / 100, pokemon);
+				} else if (randP < 0) {
+					this.damage(-pokemon.baseMaxhp * randP / 100, pokemon);
+				}
+			}
 			pokemon.addVolatile('consume');
 		},
 		condition: {

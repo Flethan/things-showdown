@@ -3410,6 +3410,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 2112,
 	},
+	pianississimo: {
+		isNonstandard: "Thing",
+		name: "Pianississimo",
+		onStart(source) {
+			this.add('-activate', source, 'ability: Pianississimo');
+			this.add('-clearallboost');
+			for (const pokemon of this.getAllActive()) {
+				pokemon.clearBoosts();
+			}
+		},
+		rating: 2,
+		num: -420,
+	},
 
 	// BASE GAME
 	noability: {

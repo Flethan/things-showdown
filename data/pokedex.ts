@@ -4034,6 +4034,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		muMove: "Leitmotif",
 		hasSprite: false,
 	},
+	piano: {
+		num: -507,
+		name: "Pia-no",
+		types: ["No", "Music"],
+		gender: "N",
+		baseStats: {hp: 44, atk: 67, def: 60, spa: 86, spd: 110, spe: 73},
+		abilities: {0: "Pianississimo"},
+		heightm: 1,
+		weightkg: 30,
+		color: "Black",
+		eggGroups: ["Mineral"],
+		hasSprite: true,
+	},
 
 
 	// BASE GAME
