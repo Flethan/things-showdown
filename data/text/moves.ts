@@ -324,6 +324,10 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP.",
 		shortDesc: "Has 33% recoil.",
 	},
+	hairykick: {
+		name: "Hairy Kick",
+		shortDesc: "No additional effect.",
+	},
 	hairball: {
 		name: "Hair Ball",
 		desc: "Has a 10% chance to lower the target's Special Defense by 1 stage.",
@@ -343,6 +347,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Tidy",
 		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides. Heals the user for 25% of its maximum health for each Side Condition removed.",
 		shortDesc: "Clear Side Conditions on both sides, heal 25% each.",
+	},
+	cushion: {
+		name: "Cushion",
+		desc: "The target is protected from most attacks made by other Things during this turn. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the target's last move used is not a protecting move or if it was one of those moves and the target's protection was broken. Fails if the user moves last this turn.",
+		shortDesc: "Prevents moves from affecting the target this turn.",
 	},
 	// industrial
 	vroom: {
