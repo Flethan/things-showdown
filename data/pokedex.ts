@@ -1476,6 +1476,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		evos: ["Osteoraptor"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	osteoraptor: {
 		num: -392,
@@ -1490,6 +1491,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Ossoligo",
 		evos: ["Achrososaur"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	achrososaur: {
 		num: -393,
@@ -1503,6 +1505,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		prevo: "Osteoraptor",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	neunluft: {
 		num: -394,
