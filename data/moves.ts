@@ -1741,7 +1741,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		basePower: 100,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Shot Put",
+		name: "Hairy Kick",
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, kick: 1},
