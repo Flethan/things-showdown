@@ -3423,6 +3423,32 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -420,
 	},
+	stronglegs: {
+		isNonstandard: "Thing",
+		onBasePowerPriority: 19,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['kick']) {
+				return this.chainModify(1.5);
+			}
+		},
+		name: "Strong Legs",
+		rating: 3,
+		num: 178,
+	},
+	comfyseat: {
+		isNonstandard: "Thing",
+		name: "Comfy Seat",
+		onResidualOrder: 5,
+		onResidualSubOrder: 3,
+		onResidual(pokemon) {
+			for (const allyActive of pokemon.adjacentAllies()) {
+				this.add('-activate', pokemon, 'ability: Comfy Seat');
+				this.heal(allyActive.baseMaxhp / 16);
+			}
+		},
+		rating: 0,
+		num: 131,
+	},
 
 	// BASE GAME
 	noability: {

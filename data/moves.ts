@@ -1735,6 +1735,44 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Hair",
 		contestType: "Clever",
 	},
+	hairykick: {
+		num: 1909,
+		accuracy: 80,
+		basePower: 100,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Shot Put",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, kick: 1},
+		target: "normal",
+		type: "Hair",
+		contestType: "Tough",
+	},
+	cushion: {
+		num: 197,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Cushion",
+		pp: 5,
+		priority: 4,
+		flags: {},
+		stallingMove: true,
+		volatileStatus: 'protect',
+		onPrepareHit(pokemon) {
+			return !!this.queue.willAct() && this.runEvent('StallMove', pokemon);
+		},
+		onHit(pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		secondary: null,
+		target: "adjacentAllyOrSelf",
+		type: "Hair",
+		zMove: {boost: {evasion: 1}},
+		contestType: "Cute",
+	},
 
 	// Industrial
 	toxicsmog: {
@@ -4986,7 +5024,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Soaring Axe Kick",
 		pp: 15,
 		priority: 0,
-		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, gravity: 1, distance: 1},
+		flags: {contact: 1, charge: 1, protect: 1, mirror: 1, gravity: 1, distance: 1, kick: 1},
 		onTryMove(attacker, defender, move) {
 			if (attacker.removeVolatile(move.id)) {
 				return;

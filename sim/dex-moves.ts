@@ -49,6 +49,7 @@ interface MoveFlags {
 
 	// Things
 	gas?: 1;
+	kick?: 1;
 }
 
 export interface HitEffect {

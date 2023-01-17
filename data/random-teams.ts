@@ -487,11 +487,11 @@ export class RandomTeams {
 			const num = this.sampleNoReplace(pool);
 			for (const id in this.dex.data.Pokedex) {
 				if (this.dex.data.Pokedex[id].num === num) {
-					console.log(this.dex.species.get(id).name);
+					// console.log(this.dex.species.get(id).name);
 					if (this.dex.species.get(id).isPatron) {
-						console.log('is patron');
+						// console.log('is patron');
 						if (patronCount > 0) {
-							console.log('already got one');
+							// console.log('already got one');
 							i--;
 							patronSkip = true;
 							break;
@@ -501,7 +501,7 @@ export class RandomTeams {
 				}
 			}
 			if (patronSkip) continue;
-			console.log('adding to team...');
+			// console.log('adding to team...');
 			hasDexNumber[num] = i;
 		}
 
