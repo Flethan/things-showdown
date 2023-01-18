@@ -3079,7 +3079,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (move.pp === 1) return 5;
 		},
 		onSourceAfterMove(source, target, move) {
-			if (move.pp === 1) {
+			if (move.pp === 0) {
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in source.boosts) {
