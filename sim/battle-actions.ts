@@ -749,7 +749,7 @@ export class BattleActions {
 				}
 				if (!target.hasAbility('greasy')) {
 					const boosts = this.battle.runEvent('ModifyBoost', target, null, null, {...target.boosts});
-					if (boosts['evasion']) this.battle.boost({evasion: -1}, target);
+					if (boosts['evasion'] && boosts['evasion'] > 0) this.battle.boost({evasion: -1}, target);
 				}
 				if (!move.ohko && pokemon.hasItem('blunderpolicy') && pokemon.useItem()) {
 					this.battle.boost({spe: 2}, pokemon);
