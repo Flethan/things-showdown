@@ -605,7 +605,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Rich Soil');
+				this.add('-fieldend', 'move: Rich Soil');
 			},
 		},
 		secondary: null,
@@ -732,7 +732,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Spatial Expansion');
+				this.add('-fieldend', 'move: Spatial Expansion');
 			},
 		},
 		secondary: null,
@@ -1349,7 +1349,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Green Ground');
+				this.add('-fieldend', 'move: Green Ground');
 			},
 		},
 		secondary: null,
@@ -2530,7 +2530,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (target.status !== 'prone') target.cureStatus();
 			},
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Sudscape');
+				this.add('-fieldend', 'move: Sudscape');
 			},
 		},
 		secondary: null,
@@ -3314,7 +3314,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
 				this.field.activeFlags = [];
-				this.add('-fieldend', 'Mystical Song');
+				this.add('-fieldend', 'move: Mystical Song');
 			},
 		},
 		secondary: null,
@@ -4308,7 +4308,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Null Land');
+				this.add('-fieldend', 'move: Null Land');
 			},
 		},
 		secondary: null,
@@ -5219,7 +5219,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onFieldEnd(side) {
-				this.add('-fieldend', 'Spring Floor');
+				this.add('-fieldend', 'move: Spring Floor');
 			},
 		},
 		secondary: null,
