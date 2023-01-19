@@ -594,10 +594,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onResidual(pokemon) {
-				if (pokemon.hasType('Dirt', true)) {
-					this.heal(pokemon.baseMaxhp / 4, pokemon);
+				if (pokemon.hasType('Dirt', true) || pokemon.hasAbility('Landscape Blessing')) {
+					if (this.blessedLand) this.heal(pokemon.baseMaxhp / 2, pokemon);
+					else this.heal(pokemon.baseMaxhp / 4, pokemon);
 				} else {
-					this.heal(pokemon.baseMaxhp / 16, pokemon);
+					if (this.blessedLand) this.heal(pokemon.baseMaxhp / 8, pokemon);
+					else this.heal(pokemon.baseMaxhp / 16, pokemon);
 				}
 			},
 			onResidualOrder: 21,
@@ -711,6 +713,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				if (move.type !== 'Far' && !defender.isSemiInvulnerable()) {
 					this.debug('spatial expansion drop');
 					return this.chainModify(0.8);
+				}
+			},
+			onBeforeMovePriority: 10,
+			onBeforeMove(pokemon, target, move) {
+				if (this.blessedLand && move.flags['contact'])	{
+					this.add('cant', pokemon, 'spatialexpansion');
+					return false;
 				}
 			},
 			onFieldStart(battle, source, effect) {
@@ -1235,7 +1244,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		onHit(pokemon) {
 			let count = pokemon.getTypes(false, true).filter(type => type === 'Green').length;
-			if (this.field.isTerrain('greenground')) count++;
+			if (this.field.isTerrain('greenground')) {
+				if (this.blessedLand && count > 0) {
+					count = count * 2;
+				} else count++;
+			} 
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -1262,7 +1275,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {recharge: 1, snatch: 1, authentic: 1},
 		onHit(pokemon) {
 			let count = this.getAllActive().reduce((total, active) => total + active.getTypes(false, true).filter(type => type === 'Green').length, 0);
-			if (this.field.isTerrain('greenground')) count++;
+			if (this.field.isTerrain('greenground')) {
+				if (this.blessedLand && count > 0) {
+					count = count * 2;
+				} else count++;
+			} 
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -2039,6 +2056,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-activate', target, 'move: Auto-Turret');
 					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);
 				}
+				this.checkWin();
 			},
 			onSideEnd(side) {
 				this.add('-sideend', side, 'move: Auto-Turret');
@@ -2458,7 +2476,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onSetStatus(status, target, source, effect) {
 				if (target.isSemiInvulnerable()) return;
-				if (status.id === 'prone' || target.ability === 'blind') return;
+				if (target.ability === 'blind') return;
+				if (status.id === 'prone') {
+					if (this.blessedLand) {
+						const stats: BoostID[] = [];
+						const boost: SparseBoostsTable = {};
+						const boost2: SparseBoostsTable = {};
+						let statPlus: BoostID;
+						for (statPlus in source.boosts) {
+						// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+							if (source.boosts[statPlus] < 6) {
+								stats.push(statPlus);
+							}
+						}
+						const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+						if (randomStat) boost[randomStat] = -1;
+						this.boost(boost);
+						const randomStat2: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+						if (randomStat2) boost2[randomStat2] = -1;
+						this.boost(boost2);
+					}
+					return;
+				}
 				if (effect && ((effect as Move).status || effect.id === 'yawn')) {
 					this.add('-activate', target, 'move: Sudscape');
 				}
@@ -3040,6 +3079,16 @@ export const Moves: {[moveid: string]: MoveData} = {
 						this.field.activeFlags.push(flag);
 						this.hint("Mystical Song +: " + flag);
 					}
+					if (this.blessedLand) {
+						const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
+						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+						'hurt', 'heal'];
+						const randomFlag2 = this.sample(sflags);
+						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
+						this.field.activeFlags.push(randomFlag2);
+						this.hint("Mystical Song +: " + randomFlag2);
+					}
 				}
 			},
 			onTryHit(target, source, effect) {
@@ -3083,6 +3132,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
 				}
+				if (status.id === 'distanced' && this.field.activeFlags.includes('nodistanced')) {
+					this.add('-activate', target, 'move: Mystical Song');
+					return false;
+				}
+				if (status.id === 'infected' && this.field.activeFlags.includes('noinfected')) {
+					this.add('-activate', target, 'move: Mystical Song');
+					return false;
+				}
 			},
 			onTryAddVolatile(status, target, source, effect) {
 				if (!this.field.activeFlags.length) return;
@@ -3119,13 +3176,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyDef(def, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('defup')) {
-					if (pokemon.hasType('Music', true)) {
+					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
 				if (this.field.activeFlags.includes('defdown')) {
-					if (!pokemon.hasType('Music', true)) {
+					if (!pokemon.hasType('Music', true) && !pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
 					}
@@ -3151,12 +3208,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpD(spd, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('spdup')) {
-					if (pokemon.hasType('Music', true)) {
+					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
-				if (this.field.activeFlags.includes('spddown')) {
+				if (this.field.activeFlags.includes('spddown') && !pokemon.hasAbility('Landscape Blessing')) {
 					if (!pokemon.hasType('Music', true)) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
@@ -3166,13 +3223,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpe(spe, pokemon) {
 				if (!this.field.activeFlags.length) return;
 				if (this.field.activeFlags.includes('speup')) {
-					if (pokemon.hasType('Music', true)) {
+					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
 						return this.chainModify(1.5);
 					}
 				}
 				if (this.field.activeFlags.includes('spedown')) {
-					if (!pokemon.hasType('Music', true)) {
+					if (!pokemon.hasType('Music', true) && !pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song reduce');
 						return this.chainModify(0.5);
 					}
@@ -3183,62 +3240,62 @@ export const Moves: {[moveid: string]: MoveData} = {
 				for (const side of this.sides) {
 					for (const ally of side.active) {
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkboost')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({atk: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('defboost')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({def: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spaboost')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({spa: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdboost')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({spd: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('speboost')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({spe: 1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkreduce')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.boost({atk: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('defreduce')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.boost({def: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spareduce')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.boost({spa: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdreduce')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.boost({spd: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('spereduce')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.boost({spe: -1}, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('heal')) {
-							if (ally.hasType('Music', true)) {
+							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.heal(ally.baseMaxhp / 8, ally);
 							}
 						}
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('hurt')) {
-							if (!ally.hasType('Music', true)) {
+							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
 								this.directDamage(ally.baseMaxhp / 8, ally);
 							}
 						}
@@ -4209,19 +4266,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				return 5;
 			},
+			onStart() {
+				this.effectState.doubleinversion = false;
+			},
 			onNegateImmunity: false,
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
+				if (this.effectState.doubleinversion) return typeMod;
 				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
 			},
 			onModifyMovePriority: -5,
 			onModifyMove(move) {
+				if (this.effectState.doubleinversion) return;
 				if (!move.ignoreImmunity) move.ignoreImmunity = {};
 				if (move.ignoreImmunity !== true) {
 					for (const type in this.dex.data.TypeChart) {
 						move.ignoreImmunity[type] = true;
 					}
+				}
+			},
+			onAfterMoveSecondary(target, source, move) {
+				if (this.blessedLand && target.runEffectiveness(move) > 0) {
+					this.effectState.doubleinversion = !this.effectState.doubleinversion;
 				}
 			},
 			onBasePowerPriority: 6,
@@ -5129,14 +5196,19 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifyAtkPriority: 10,
 			onModifyAtk(atk, pokemon) {
-				if (pokemon.hasType('Sport', true)) {
+				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
 					return this.modify(atk, 1.5);
 				}
 			},
 			onModifyDefPriority: 10,
 			onModifyDef(def, pokemon) {
-				if (pokemon.hasType('Sport', true)) {
+				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
 					return this.modify(def, 1.5);
+				}
+			},
+			onModifySpe(spe, pokemon) {
+				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
+					return this.modify(spe, 1.5);
 				}
 			},
 			onFieldStart(battle, source, effect) {

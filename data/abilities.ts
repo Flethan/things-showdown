@@ -1625,7 +1625,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
 					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
 					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
 					'hurt', 'heal'];
@@ -1633,11 +1633,17 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
 				this.hint("Note of Introduction: " + randomFlag);
+				if (this.blessedLand) {
+					const randomFlag2 = this.sample(sflags);
+					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
+					this.field.activeFlags.push(randomFlag2);
+					this.hint("Note of Introduction: " + randomFlag2);
+				}
 			}
 		},
 		onAnyTerrainStart() {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
 					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
 					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
 					'hurt', 'heal'];
@@ -1645,6 +1651,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
 				this.hint("Note of Introduction: " + randomFlag);
+				if (this.blessedLand) {
+					const randomFlag2 = this.sample(sflags);
+					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
+					this.field.activeFlags.push(randomFlag2);
+					this.hint("Note of Introduction: " + randomFlag2);
+				}
 			}
 		},
 		name: "Note of Introduction",
@@ -1689,7 +1701,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual() {
 			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
 					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
 					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
 					'hurt', 'heal'];
@@ -1697,6 +1709,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 				this.field.activeFlags.push(randomFlag);
 				this.hint("Conductor: " + randomFlag);
+				if (this.blessedLand) {
+					const randomFlag2 = this.sample(sflags);
+					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
+					this.field.activeFlags.push(randomFlag2);
+					this.hint("Conductor: " + randomFlag2);
+				}
 			}
 		},
 		name: "Conductor",
@@ -1870,7 +1888,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			for (const allyActive of pokemon.allies()) {
 				if (allyActive.hasAbility(['aonetwothree'])) {
 					this.field.setTerrain('mysticalsong');
-					const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'novolatiles',
+					const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
 						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
 						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
 						'hurt', 'heal'];
@@ -1878,6 +1896,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
 					this.field.activeFlags.push(randomFlag);
 					this.hint("A One, Two, Three...: " + randomFlag);
+					if (this.blessedLand) {
+						const randomFlag2 = this.sample(sflags);
+						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
+						this.field.activeFlags.push(randomFlag2);
+						this.hint("Note of Introduction: " + randomFlag2);
+					}
 				}
 			}
 		},
@@ -3444,6 +3468,126 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			for (const allyActive of pokemon.adjacentAllies()) {
 				this.add('-activate', pokemon, 'ability: Comfy Seat');
 				this.heal(allyActive.baseMaxhp / 16);
+			}
+		},
+		rating: 0,
+		num: 131,
+	},
+	environmentalblessing: {
+		isNonstandard: "Thing",
+		name: "Environmental Blessing",
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Environmental Blessing');
+			this.blessedEnv = true;
+
+
+
+		},
+		onEnd(pokemon) {
+			if (!this.blessedEnv) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('environmentalblessing')) {
+					return;
+				}
+			}
+			// this.add('-end', pokemon, 'Environmental Blessing');
+			this.blessedEnv = false;
+		},
+		onAnyWeatherStart() {
+			const pokemon = this.effectState.target;
+			let newType;
+			switch (this.field.weather) {
+			case 'locustswarm':
+				newType = 'Arthropod';
+				break;
+			case 'meteorshower':
+				newType = 'Dirt';
+				break;
+			case 'underwater':
+				newType = 'Fish';
+				break;
+			case 'nighttime':
+				newType = 'Night';
+				break;
+			case 'hot':
+				newType = 'Temperature';
+				break;
+			case 'cold':
+				newType = 'Temperature';
+				break;
+			case 'timedilation':
+				newType = 'Time';
+				break;
+			case 'windy':
+				newType = 'Weather';
+				break;
+			case 'yellowish':
+				newType = 'Yellow';
+				break;
+			}
+			if (!newType) {
+				return false;
+			}
+			let success = false;
+			if (pokemon.addElementType(newType)) success = true;
+			if (success) {
+				this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+			}
+		},
+		rating: 0,
+		num: 131,
+	},
+	landscapeblessing: {
+		isNonstandard: "Thing",
+		name: "Landscape Blessing",
+		onStart(pokemon) {
+			this.add('-ability', pokemon, 'Landscape Blessing');
+			this.blessedLand = true;
+		},
+		onEnd(pokemon) {
+			if (!this.blessedLand) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('landscapeblessing')) {
+					return;
+				}
+			}
+			this.blessedLand = false;
+		},
+		onAnyTerrainStart() {
+			const pokemon = this.effectState.target;
+			let newType;
+			switch (this.field.terrain) {
+			case 'richsoil':
+				newType = 'Dirt';
+				break;
+			case 'spatialexpansion':
+				newType = 'Far';
+				break;
+			case 'greenground':
+				newType = 'Green';
+				break;
+			case 'sudscape':
+				newType = 'Liquid';
+				break;
+			case 'mysticalsong':
+				newType = 'Music';
+				break;
+			case 'nullland':
+				newType = 'No';
+				break;
+			case 'springfloor':
+				newType = 'Sport';
+				break;
+			}
+			if (!newType) {
+				return false;
+			}
+			let success = false;
+			if (pokemon.addElementType(newType)) success = true;
+			if (success) {
+				this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
 			}
 		},
 		rating: 0,

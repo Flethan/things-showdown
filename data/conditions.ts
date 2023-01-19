@@ -661,6 +661,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 				move.ignoreImmunity = true;
 			}
 		},
+		onEffectiveness(typeMod, target, type, move) {
+			if (this.blessedEnv && move.type === 'Yellow' && !this.activePokemon?.hasItem('cowboyhat') && typeMod < 0) return 0;
+		},
 		name: 'Yellowish',
 		effectType: 'Weather',
 		duration: 5,
@@ -693,13 +696,16 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onWeather(target) {
-			if (target.hasAbility('Adaptable') || target.hasItem('cowboyhat') || target.hasType('Arthropod', true)) return;
+			if (target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing') || target.hasItem('cowboyhat') || target.hasType('Arthropod', true)) return;
 
 			const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('arthropodphysical')), -6, 6);
 
 			let bonus = 1;
 			if (target.volatiles['pheromonemark']) {
 				bonus = 1.5;
+			}
+			if (this.blessedEnv) {
+				bonus = bonus * 2;
 			}
 
 			let damage = 0;
@@ -751,8 +757,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onWeather(target) {
-			if ((target.hasType('Night', true) || target.hasAbility('Adaptable')) && !target.hasItem('cowboyhat')) {
+			if ((target.hasType('Night', true) || target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing')) && !target.hasItem('cowboyhat')) {
 				this.heal(target.baseMaxhp / 16);
+				if (this.blessedEnv) this.boost({evasion: 1}, target);
 			}
 		},
 		name: 'Nighttime',
@@ -790,6 +797,22 @@ export const Conditions: {[k: string]: ConditionData} = {
 				return priority + 1;
 			}
 		},
+		onAfterMove(source, target, move) {
+			if (this.blessedEnv && (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && source.types[0] === 'Weather'))) {
+				const stats: BoostID[] = [];
+				const boost: SparseBoostsTable = {};
+				let statPlus: BoostID;
+				for (statPlus in source.boosts) {
+				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+					if (source.boosts[statPlus] < 6) {
+						stats.push(statPlus);
+					}
+				}
+				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+				if (randomStat) boost[randomStat] = 1;
+				this.boost(boost);
+			}
+		},
 		name: 'Windy',
 		effectType: 'Weather',
 		duration: 5,
@@ -818,7 +841,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 	hot: {
 		onModifyAtkPriority: 10,
 		onModifyAtk(_atk, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable') || pokemon.hasAbility('Environmental Blessing')) &&
 				this.field.isWeather('hot') &&
 				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
@@ -826,15 +849,16 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onModifySpAPriority: 10,
 		onModifySpA(_spa, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable') || pokemon.hasAbility('Environmental Blessing')) &&
 				this.field.isWeather('hot') &&
 				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
 			}
 		},
 		onWeather(target) {
-			if (target.hasType('Temperature', true) || target.hasAbility('Adaptable') && !target.hasItem('cowboyhat')) {
-				this.boost({spe: 1}, target);
+			if ((target.hasType('Temperature', true) || target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing')) && !target.hasItem('cowboyhat')) {
+				if (this.blessedEnv) this.boost({spe: 2}, target);
+				else this.boost({spe: 1}, target);
 			}
 		},
 		name: 'Hot',
@@ -864,7 +888,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 	cold: {
 		onModifyDefPriority: 10,
 		onModifyDef(_def, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable') || pokemon.hasAbility('Environmental Blessing')) &&
 				this.field.isWeather('cold') &&
 				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
@@ -872,7 +896,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onModifySpDPriority: 10,
 		onModifySpD(_spd, pokemon) {
-			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable')) &&
+			if ((pokemon.hasType('Temperature', true) || pokemon.hasAbility('Adaptable') || pokemon.hasAbility('Environmental Blessing')) &&
 				this.field.isWeather('cold') &&
 				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
@@ -882,8 +906,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 			if (!target.hasType('Temperature', true) &&
 				!target.hasAbility('Chilled') &&
 				!target.hasAbility('Adaptable') &&
+				!target.hasAbility('Environmental Blessing') &&
 				!target.hasItem('cowboyhat')) {
-				this.boost({spe: -1}, target);
+				if (this.blessedEnv) this.boost({spe: -2}, target);
+				else this.boost({spe: -1}, target);
 			}
 		},
 		name: 'Cold',
@@ -913,6 +939,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onModifySpe(_spe, pokemon) {
 			if (!pokemon.hasType('Time', true) &&
 				!pokemon.hasAbility('Adaptable') &&
+				!pokemon.hasAbility('Environmental Blessing') &&
 				!pokemon.hasItem('cowboyhat')) {
 				return this.chainModify(0.25);
 			}
@@ -922,6 +949,17 @@ export const Conditions: {[k: string]: ConditionData} = {
 				(defender.newlySwitched || this.queue.willMove(defender)) &&
 				!attacker.hasItem('cowboyhat')) {
 				return this.chainModify(1.5);
+			}
+		},
+		onAfterMove(source, target, move) {
+			if (!source.hasItem('cowboyhat') && this.blessedEnv) {
+				for (const pokemon of this.getAllActive()) {
+					if (pokemon === source) continue;
+					const action = this.queue.willMove(pokemon);
+					if (!action) return;
+				}
+				source.addVolatile('timedilationattack');
+				source.volatiles['timedilationattack'].move = move;
 			}
 		},
 		name: 'Time Dilation',
@@ -962,11 +1000,12 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onWeather(target) {
 			if (target.hasItem('cowboyhat')) return;
 
-
-			if (target.hasType('Fish', true) || target.hasAbility('Adaptable')) {
-				this.heal(target.baseMaxhp / 16);
+			if (target.hasType('Fish', true) || target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing')) {
+				if (this.blessedEnv) this.heal(target.baseMaxhp / 8);
+				else this.heal(target.baseMaxhp / 16);
 			} else {
-				this.damage(target.baseMaxhp / 16);
+				if (this.blessedEnv) this.damage(target.baseMaxhp / 8);
+				else this.damage(target.baseMaxhp / 16);
 			}
 
 			if (target.status === 'prone') {
@@ -1013,20 +1052,25 @@ export const Conditions: {[k: string]: ConditionData} = {
 			// Okay, call me cringe but...
 			const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
 
-			if (target.hasAbility('Adaptable') || target.hasType('Dirt', true)) {
-				this.heal(target.baseMaxhp / 8, target);
+			if (target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing') || target.hasType('Dirt', true)) {
+				if (this.blessedEnv) this.heal(target.baseMaxhp / 4, target);
+				else this.heal(target.baseMaxhp / 8, target);
 				const result = this.random(stati.length + 2);
 				if (result < stati.length) {
 					target.cureStatus();
 				}
 			} else {
 				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
+				let bonus = 1;
+				if (this.blessedEnv) {
+					bonus = bonus * 2;
+				}
 				let damage = 0;
 				if (typeMod >= 0) {
-					damage = target.maxhp * ((2 + typeMod) / 2) / 16;
+					damage = target.maxhp * ((2 + typeMod) / 2) * bonus / 16;
 				}
 				if (typeMod < 0) {
-					damage = target.maxhp * (2 / (2 - typeMod)) / 16;
+					damage = target.maxhp * (2 / (2 - typeMod)) * bonus / 16;
 				}
 				this.damage(damage, target);
 				const result = this.random(stati.length + 2);
@@ -1086,6 +1130,20 @@ export const Conditions: {[k: string]: ConditionData} = {
 	},
 
 	// Landscape Factors
+
+	// Other
+	timedilationattack: {
+		name: "timedilationattack",
+		duration: 1,
+		onResidualOrder: 3,
+		onEnd(pokemon) {
+			const move: ActiveMove = this.effectState.move;
+
+			this.actions.useMove(move, pokemon);
+
+			this.checkWin();
+		},
+	},
 
 	// BASE GAME
 	brn: {

@@ -138,6 +138,9 @@ export class Battle {
 	lastDamage: number;
 	abilityOrder: number;
 	quickClawRoll: boolean;
+	// THINGS
+	blessedLand: boolean;
+	blessedEnv: boolean;
 
 	teamGenerator: ReturnType<typeof Teams.getGenerator> | null;
 
@@ -223,6 +226,10 @@ export class Battle {
 		this.lastDamage = 0;
 		this.abilityOrder = 0;
 		this.quickClawRoll = false;
+
+		// THINGS
+		this.blessedEnv = false;
+		this.blessedLand = false;
 
 		this.teamGenerator = null;
 

@@ -4090,6 +4090,32 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Mineral"],
 		prevo: "Sofeet",
 	},
+	caeluvesi: {
+		num: -511,
+		name: "Caeluvesi",
+		types: ["Far", "Weather"],
+		gender: "N",
+		baseStats: {hp: 50, atk: 55, def: 55, spa: 126, spd: 126, spe: 60},
+		abilities: {0: "Environmental Blessing"},
+		heightm: 50,
+		weightkg: 50,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+		isPatron: true,
+	},
+	terracultr: {
+		num: -512,
+		name: "Terracultr",
+		types: ["Dirt", "Sword"],
+		gender: "N",
+		baseStats: {hp: 50, atk: 126, def: 126, spa: 55, spd: 55, spe: 60},
+		abilities: {0: "Landscape Blessing"},
+		heightm: 5,
+		weightkg: 500,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+		isPatron: true,
+	},
 
 
 	// BASE GAME
