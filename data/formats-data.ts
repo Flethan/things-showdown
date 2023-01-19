@@ -1068,6 +1068,15 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	caeluvesi: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	terracultr: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+
 
 	// BASE GAME
 	bulbasaur: {
