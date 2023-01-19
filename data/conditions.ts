@@ -1042,7 +1042,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 
 			const targets: Pokemon[] = [];
 			for (const pokemon of field.battle.getAllActive()) {
-				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') || pokemon.status === 'banished') continue;
+				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') /* || pokemon.status === 'banished' */) continue;
 				targets.push(pokemon);
 			}
 			if (targets.length === 0) return;

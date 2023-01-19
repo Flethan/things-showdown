@@ -2808,6 +2808,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	astralprojection: {
 		isNonstandard: "Thing",
+		onBeforeMovePriority: 15,
 		onBeforeMove(pokemon, target, move) {
 			if (!move.banishedUsable) {
 				move.banishedUsable = true;
@@ -3466,8 +3467,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidualSubOrder: 3,
 		onResidual(pokemon) {
 			for (const allyActive of pokemon.adjacentAllies()) {
+				if (allyActive === pokemon) continue;
 				this.add('-activate', pokemon, 'ability: Comfy Seat');
-				this.heal(allyActive.baseMaxhp / 16);
+				allyActive.heal(allyActive.baseMaxhp / 16);
 			}
 		},
 		rating: 0,

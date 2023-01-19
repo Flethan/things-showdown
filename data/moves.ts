@@ -2301,6 +2301,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				// console.log(this.effectState.owner?.name);
 
 				if (this.effectState.duration === 2) {
+					// fails if lookup since target was self
 					this.effectState.owner = moveTarget;
 					return;
 				}
