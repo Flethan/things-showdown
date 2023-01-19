@@ -4608,7 +4608,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantflash: ["8L70"],
 			beamscatter: ["8L45"],
 			sandsoftime: ["8L62"],
-			ricochetmirror: ["8L77"],
+			// ricochetmirror: ["8L77"],
 			energybeam: ["8L36"],
 			radiate: ["8L80"],
 			bask: ["8L49"],
