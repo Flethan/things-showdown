@@ -191,8 +191,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	brilliantfish: {
 		name: "Brilliant Fish",
-		desc: "Has a 50% chance to raise the user's Special Attack by 2 stages.",
-		shortDesc: "Hits adjacent foes. 50% raise user's Sp. Atk by 2.",
+		desc: "Has a 25% chance to raise the user's Special Attack by 1 stage.",
+		shortDesc: "Hits adjacent foes. 25% raise user's Sp. Atk by 1.",
 	},
 	depthvanish: {
 		name: "Depth Vanish",
