@@ -434,8 +434,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	// liquid
 	soppingslap: {
 		name: "Sopping Slap",
-		desc: "Has a 100% chance to lower the target's Attack by 1 stage.",
-		shortDesc: "100% chance to lower the target's Attack by 1.",
+		desc: "Has a 50% chance to lower the target's Attack by 1 stage.",
+		shortDesc: "50% chance to lower the target's Attack by 1.",
 	},
 	spurt: {
 		name: "Spurt",
