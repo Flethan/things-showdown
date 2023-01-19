@@ -6568,6 +6568,23 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Clever",
 	},
+	temporaladjustment: {
+		num: 500,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Temporal Adjustment",
+		pp: 5,
+		priority: 0,
+		flags: {},
+		weather: 'Time Dilation',
+		secondary: null,
+		target: "all",
+		type: "Time",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// Weather
 	rapidvortex: {
