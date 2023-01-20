@@ -71,8 +71,7 @@ export class Field {
 		const prevWeather = this.weather;
 		const prevWeatherState = this.weatherState;
 		this.weather = status.id;
-		this.weatherState = {id: status.id
-							permanent: permanent};
+		this.weatherState = {id: status.id, permanent: permanent};
 		if (source) {
 			this.weatherState.source = source;
 			this.weatherState.sourceSlot = source.getSlot();

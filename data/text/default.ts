@@ -262,6 +262,12 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		end: "  It is no longer yellow.",
 		upkeep: "  (It's yellow.)",
 	},
+	friendlyatmosphere: {
+		weatherName: "Friendly Atmosphere",
+		start: "  An air of camaraderie appeared!",
+		end: "  Back to the battle.",
+		upkeep: "  (Everyone's having a good time.)",
+	},
 	// landscape
 	richsoil: {
 		start: "  The soil became incredibly fertile!",
@@ -298,6 +304,11 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		start: "  The battlefield became bouncy!",
 		end: "  The battlefield is no longer bouncy.",
 		upkeep: "  (The floor is bouncy.)",
+	},
+	invitingsurroundings: {
+		start: "  It's time for a party!",
+		end: "  The party has ended.",
+		upkeep: "  (Everyone's still at the party.)",
 	},
 	// rooms
 	hadalzone: {
