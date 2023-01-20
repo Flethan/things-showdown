@@ -1020,7 +1020,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Undulux",
 		types: ["Temperature", "Industrial"],
 		baseStats: {hp: 70, atk: 40, def: 100, spa: 110, spd: 50, spe: 120},
-		abilities: {0: "Superconductor"},
+		abilities: {0: "Superconductor", 1: "Cold Boot"},
 		heightm: 0.3,
 		weightkg: 0.8,
 		color: "Gray",

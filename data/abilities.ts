@@ -3441,7 +3441,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(source) {
 			this.add('-activate', source, 'ability: Pianississimo');
 			this.add('-clearallboost');
-			for (const pokemon of this.getAllActive()) {
+			for (const pokemon of source.foes()) {
 				pokemon.clearBoosts();
 			}
 		},
@@ -3594,6 +3594,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		rating: 0,
 		num: 131,
+	},
+	coldboot: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('cold');
+		},
+		name: "Cold Boot",
+		rating: 2,
+		num: -111,
 	},
 
 	// BASE GAME
