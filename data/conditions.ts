@@ -1045,36 +1045,38 @@ export const Conditions: {[k: string]: ConditionData} = {
 				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') /* || pokemon.status === 'banished' */) continue;
 				targets.push(pokemon);
 			}
-			if (targets.length === 0) return;
-			const targNum = this.random(targets.length);
-			const target = targets[targNum];
+			let numMeteors = 1;
+			if (this.blessedEnv) numMeteors++;
+			let i = 0;
+			while (i < numMeteors && targets.length > 0) {
+				const targNum = this.random(targets.length);
+				const target = targets.splice(targNum, 1)[0];
 
-			// Okay, call me cringe but...
-			const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
+				// Okay, call me cringe but...
+				const stati = ['prone', 'banished', 'blinded', 'pressurized', 'fluctuant', 'wounded', 'distanced', 'infected'];
 
-			if (target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing') || target.hasType('Dirt', true)) {
-				if (this.blessedEnv) this.heal(target.baseMaxhp / 4, target);
-				else this.heal(target.baseMaxhp / 8, target);
-				const result = this.random(stati.length + 2);
-				if (result < stati.length) {
-					target.cureStatus();
+				if (target.hasAbility('Adaptable') || target.hasAbility('Environmental Blessing') || target.hasType('Dirt', true)) {
+					this.heal(target.baseMaxhp / 8, target);
+					const result = this.random(stati.length + 2);
+					if (result < stati.length) {
+						target.cureStatus();
+					}
+				} else {
+					const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
+					const bonus = 1;
+					let damage = 0;
+					if (typeMod >= 0) {
+						damage = target.maxhp * ((2 + typeMod) / 2) * bonus / 16;
+					}
+					if (typeMod < 0) {
+						damage = target.maxhp * (2 / (2 - typeMod)) * bonus / 16;
+					}
+					this.damage(damage, target);
+					const result = this.random(stati.length + 2);
+					target.trySetStatus(stati[result]);
 				}
-			} else {
-				const typeMod = this.clampIntRange(target.runEffectiveness(this.dex.getActiveMove('dirtphysical')), -6, 6);
-				let bonus = 1;
-				if (this.blessedEnv) {
-					bonus = bonus * 2;
-				}
-				let damage = 0;
-				if (typeMod >= 0) {
-					damage = target.maxhp * ((2 + typeMod) / 2) * bonus / 16;
-				}
-				if (typeMod < 0) {
-					damage = target.maxhp * (2 / (2 - typeMod)) * bonus / 16;
-				}
-				this.damage(damage, target);
-				const result = this.random(stati.length + 2);
-				target.trySetStatus(stati[result]);
+
+				i++;
 			}
 
 			if (this.field.isWeather('Meteor Shower')) this.eachEvent('Weather');
