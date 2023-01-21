@@ -4273,7 +4273,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onNegateImmunity: false,
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
-				if (this.effectState.doubleinversion) return typeMod;
+				if (this.blessedLand && this.effectState.doubleinversion) return typeMod;
 				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
 			},
