@@ -785,8 +785,12 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 40,
 		},
 		onSourceAfterHit(source, target, move) {
-			target.trySetStatus('infected');
-			source.useItem();
+			if (target.trySetStatus('infected')) {
+				// reroll virulence values, with odds of being stronger
+				target.statusState.infection.damageChance = this.random(50, 100);
+				target.statusState.infection.damageFraction = this.random(2, 8);
+				source.useItem();
+			}
 		},
 		num: -261,
 		gen: 8,
