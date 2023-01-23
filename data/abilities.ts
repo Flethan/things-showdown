@@ -3321,8 +3321,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	partyrockis: {
 		isNonstandard: "ThingInf",
 		onAfterMega(source) {
-			this.field.setTerrain('invitingsurroundings', null, null, true);
-			this.field.setWeather('friendlyatmosphere', null, null, true);
+			this.field.setTerrain('invitingsurroundings', null, null, false, true);
+			this.field.setWeather('friendlyatmosphere', null, null, false, true);
 		},
 		/*onSetAbility(ability, target, source, effect) {
 			return false;
@@ -3425,11 +3425,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	overture: {
 		isNonstandard: "ThingInf",
 		onStart(pokemon) {
+			this.field.setTerrain('mysticalsong');
 			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 			if (pokemon.hasType(type) || type === '???') return false;
 			if (!pokemon.addType(type)) return false;
 			this.add('-start', pokemon, 'typeadd', type, '[from] ability: Overture');
-			this.field.setTerrain('mysticalsong');
 		},
 		name: "Overture",
 		rating: 3.5,
@@ -3601,6 +3601,58 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setWeather('cold');
 		},
 		name: "Cold Boot",
+		rating: 2,
+		num: -111,
+	},
+	cataclysm: {
+		isNonstandard: "ThingInf",
+		name: "Cataclysm",
+		onStart(source) {
+			if (this.field.getWeather().id === 'meteorshower' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+			} else { 
+				this.field.setWeather('meteorshower', null, null, true); 
+				this.field.weatherState.duration = 0;
+			}
+		},
+		onEnd(pokemon) {
+			if (this.field.weatherState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('cataclysm')) {
+					this.field.weatherState.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather();
+		},
+		rating: 5,
+		num: -122,
+	},
+	eventhorizon: {
+		isNonstandard: "ThingInf",
+		onFoeRedirectTargetPriority: 1,
+		onFoeRedirectTarget(target, source, source2, move) {
+			if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+				this.add('-activate', source, 'ability: Event Horizon');
+				if (move.smartTarget) move.smartTarget = false;
+				this.debug("Event Horizon redirected target of move");
+				return this.effectState.target;
+			}
+		},
+		name: "Event Horizon",
+		rating: 2,
+		num: -111,
+	},
+	closingtime: {
+		isNonstandard: "ThingInf",
+		onAnyTryHeal(damage, target, source, effect) {
+			if ((effect?.id === 'zpower') || this.effectState.isZ) return damage;
+			this.add('-activate', source, 'ability: Closing Time');
+			return false;
+		},
+		name: "Closing Time",
 		rating: 2,
 		num: -111,
 	},

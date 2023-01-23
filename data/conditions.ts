@@ -1040,15 +1040,20 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onFieldResidual(field) {
 			this.add('-weather', 'Meteor Shower', '[upkeep]');
 
-			const targets: Pokemon[] = [];
+			let targets: Pokemon[] = [];
 			for (const pokemon of field.battle.getAllActive()) {
-				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') /* || pokemon.status === 'banished' */) continue;
+				if (pokemon.hasItem('cowboyhat') || pokemon.hasAbility('Celestial') || pokemon.hasAbility('Cataclysm')/* || pokemon.status === 'banished' */) continue;
 				targets.push(pokemon);
 			}
+			const allTargets = targets;
 			let numMeteors = 1;
 			if (this.blessedEnv) numMeteors++;
+			for (const pokemon of field.battle.getAllActive()) {
+				if (pokemon.hasAbility('Cataclysm')) numMeteors++;
+			}
 			let i = 0;
-			while (i < numMeteors && targets.length > 0) {
+			while (i < numMeteors && allTargets.length > 0) {
+				if (targets.length === 0) targets = allTargets;
 				const targNum = this.random(targets.length);
 				const target = targets.splice(targNum, 1)[0];
 

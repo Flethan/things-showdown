@@ -1076,7 +1076,18 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-
+	solularity: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	soliath: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	mtmug: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

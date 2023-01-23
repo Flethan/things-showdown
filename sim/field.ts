@@ -38,7 +38,7 @@ export class Field {
 		return State.serializeField(this);
 	}
 
-	setWeather(status: string | Condition, source: Pokemon | 'debug' | null = null, sourceEffect: Effect | null = null, permanent: boolean | null = null) {
+	setWeather(status: string | Condition, source: Pokemon | 'debug' | null = null, sourceEffect: Effect | null = null, permanent: boolean | null = null, overrides: boolean | null = null) {
 		status = this.battle.dex.conditions.get(status);
 		if (!sourceEffect && this.battle.effect) sourceEffect = this.battle.effect;
 		if (!source && this.battle.event && this.battle.event.target) source = this.battle.event.target;
@@ -53,8 +53,8 @@ export class Field {
 				return false;
 			}
 		}
-		// new: check if weather is "permanent" - can't be overridden by regular weather setting, only by other "permanent" effects
-		if (this.weatherState.permanent && !permanent) return false;
+		// new: check if weather is "permanent" - can't be overridden by regular weather setting, only by other "permanent" or "overrides" effects
+		if (this.weatherState.permanent && !(permanent || overrides)) return false;
 		if (source) {
 			const result = this.battle.runEvent('SetWeather', source, source, status);
 			if (!result) {
@@ -129,7 +129,7 @@ export class Field {
 		return this.battle.dex.conditions.getByID(this.weather);
 	}
 
-	setTerrain(status: string | Effect, source: Pokemon | 'debug' | null = null, sourceEffect: Effect | null = null, permanent: boolean | null = null) {
+	setTerrain(status: string | Effect, source: Pokemon | 'debug' | null = null, sourceEffect: Effect | null = null, permanent: boolean | null = null, overrides: boolean | null = null) {
 		status = this.battle.dex.conditions.get(status);
 		if (!sourceEffect && this.battle.effect) sourceEffect = this.battle.effect;
 		if (!source && this.battle.event && this.battle.event.target) source = this.battle.event.target;
@@ -139,8 +139,8 @@ export class Field {
 		if (this.terrain === status.id) return false;
 		const prevTerrain = this.terrain;
 		const prevTerrainState = this.terrainState;
-		// new: check if terrain is "permanent" - can't be overridden by regular terrain setting, only by other "permanent" effects
-		if (prevTerrainState.permanent && !permanent) return false;
+		// new: check if terrain is "permanent" - can't be overridden by regular terrain setting, only by other "permanent" or "overrides" effects
+		if (prevTerrainState.permanent && !(permanent || overrides)) return false;
 		this.terrain = status.id;
 		this.terrainState = {
 			id: status.id,
