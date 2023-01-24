@@ -4807,7 +4807,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	virulencesurge: {
 		num: 1250,
-		accuracy: 120,
+		accuracy: 110,
 		basePower: 40,
 		category: "Special",
 		isNonstandard: "Thing",
@@ -4835,7 +4835,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	transmissionsurge: {
 		num: 1250,
-		accuracy: 120,
+		accuracy: 110,
 		basePower: 40,
 		category: "Special",
 		isNonstandard: "Thing",
