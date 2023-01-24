@@ -321,6 +321,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'crit2'},
 		contestType: "Clever",
 	},
+	chitinbeam: {
+		num: 246,
+		accuracy: 90,
+		basePower: 70,
+		category: "Special",
+		name: "Chitin Beam",
+		isNonstandard: "Thing",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 20,
+			self: {
+				boosts: {
+					def: 1,
+					spd: 1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Arthropod",
+		contestType: "Tough",
+	},
 
 	// Dirt
 	landslide: {
@@ -790,6 +813,42 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
+		target: "any",
+		type: "Far",
+		contestType: "Clever",
+	},
+	distantbarrage: {
+		num: 541,
+		accuracy: 110,
+		basePower: 20,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Distant Barrage",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, bullet: 1},
+		multihit: [3, 5],
+		secondary: null,
+		target: "any",
+		type: "Far",
+		zMove: {basePower: 140},
+		maxMove: {basePower: 130},
+		contestType: "Clever",
+	},
+	lob: {
+		num: 1561,
+		accuracy: 85,
+		basePower: 50,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Lob",
+		pp: 25,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 60,
+			volatileStatus: 'flinch',
+		},
 		target: "any",
 		type: "Far",
 		contestType: "Clever",
@@ -4396,6 +4455,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "No",
 		contestType: "Clever",
 	},
+	whirlwindofbones: {
+		num: 541,
+		accuracy: 90,
+		basePower: 25,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Whirlwind of Bones",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		multihit: [2, 5],
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "No",
+		zMove: {basePower: 140},
+		maxMove: {basePower: 130},
+		contestType: "Tough",
+	},
 
 	// Science
 	study: {
@@ -4725,6 +4802,63 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {},
 		secondary: null,
 		target: "any",
+		type: "Science",
+		contestType: "Clever",
+	},
+	virulencesurge: {
+		num: 1250,
+		accuracy: 120,
+		basePower: 40,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Virulence Surge",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onTry(source, target) {
+			return target.status === 'infected';
+		},
+		onAfterHit(source, target) {
+			if (target.status === 'infected') {
+				const inf = target.statusState.infection
+				// The % chance damage occurs
+				const damageChance = this.clampIntRange(inf.damageChane + this.random(0, 50), 0, 100);
+				// The amount damaged as 1 / x of max hp
+				const damageFraction = this.clampIntRange(inf.damageFraction + this.random(-10, 0), 1, 32);
+				target.statusState.infection.damageChance = damageChance;
+				target.statusState.infection.damageFraction = damageFraction;
+			}
+		},
+		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
+	transmissionsurge: {
+		num: 1250,
+		accuracy: 120,
+		basePower: 40,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Transmission Surge",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onTry(source, target) {
+			return target.status === 'infected';
+		},
+		onAfterHit(source, target) {
+			if (target.status === 'infected') {
+				const inf = target.statusState.infection
+				const spreadChance = this.clampIntRange(inf.spreadChance + this.random(0, 50), 0, 100);
+				const newModes = this.random(0,3);
+				let i = 0;
+				while (i < newModes) {
+					target.statusState.infection.spreadMode.push(this.random(1, 5));
+				}
+				target.statusState.infection.damageChance = spreadChance;
+			}
+		},
+		target: "normal",
 		type: "Science",
 		contestType: "Clever",
 	},

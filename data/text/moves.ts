@@ -55,6 +55,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
 		shortDesc: "User switches out after damaging the target.",
 	},
+	chitinbeam: {
+		name: "Chitin Beam",
+		desc: "Has a 20% chance to raise the user's Defense and Special Defense by 1 stage.",
+		shortDesc: "20% chance to raise Def/SpD by 1.",
+	},
 	scuttle: {
 		name: "Scuttle",
 		desc: "Raises the user's Speed and evasiveness by 1 stage.",
@@ -142,10 +147,20 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 100% chance to distance the target.",
 		shortDesc: "100% chance to distance the target.",
 	},
+	lob: {
+		name: "Lob",
+		desc: "Has a 50% chance to make the target flinch.",
+		shortDesc: "50% chance to make the target flinch.",
+	},
 	farbeam: {
 		name: "Far Beam",
 		desc: "Power doubles if the target is distanced.",
 		shortDesc: "Power doubles if the target is distanced.",
+	},
+	distantbarrage: {
+		name: "Distant Barrage",
+		desc: "Hits three to five times.",
+		shortDesc: "Hits 3-5 times in one turn.",
 	},
 	closein: {
 		name: "Close In",
@@ -722,6 +737,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 40% chance to make the target flinch. If the user is banished, this move has its power doubled",
 		shortDesc: "40% flinch chance. 2x power if user banished.",
 	},
+	whirlwindofbones: {
+		name: "Whirlwind of Bones",
+		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times.",
+		shortDesc: "Hits 2-5 times in one turn. Hits adjacent foes.",
+	},
 	dematerialize: {
 		name: "Dematerialize",
 		desc: "Deals damage to the target equal to the target's maximum HP.",
@@ -772,6 +792,16 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "Charges turn 1. Hits turn 2.",
 
 		prepare: "  [POKEMON] is building up energy!",
+	},
+	virulencesurge: {
+		name: "Virulence Surge",
+		desc: "Fails if the target is not infected. The target's infection is made more virulent. The chance of being damaged by infection increases by 0-50 percentage points, and the denominator of the fraction of maximum HP damage taken decreases by 0-10.",
+		shortDesc: "Makes target infection more virulent.",
+	},
+	transmissionsurge: {
+		name: "Transmission Surge",
+		desc: "Fails if the target is not infected. The target's infection is made more transmissible. The chance of infection spreading increases by 0-50 percentage points, and 0-3 possible transmission modes are added, though duplicates are possible.",
+		shortDesc: "Makes target infection more transmissible.",
 	},
 	study: {
 		name: "Study",
