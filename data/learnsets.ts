@@ -1558,7 +1558,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	sootortoise: {
+	capitle: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1577,7 +1577,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	tortesecrate: {
+	sootortoise: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1601,7 +1601,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	cheleaf: {
+	herble: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1628,7 +1628,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	pristudine: {
+	cheleaf: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

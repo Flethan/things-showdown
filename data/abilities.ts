@@ -2283,19 +2283,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (move.category === 'Physical') {
-				this.add('-activate', target, 'ability: Colossal');
+				this.add('-activate', this.effectState.target, 'ability: Colossal');
 				this.boost({def: -1}, target, target, this.effect, true);
 			} else if (move.category === 'Special') {
-				this.add('-activate', target, 'ability: Colossal');
+				this.add('-activate', this.effectState.target, 'ability: Colossal');
 				this.boost({spd: -1}, target, target, this.effect, true);
 			}
 		},
 		onSourceHit(target, source, move) {
 			if (move.category === 'Physical') {
-				this.add('-activate', source, 'ability: Colossal');
+				this.add('-activate', this.effectState.target, 'ability: Colossal');
 				this.boost({def: -1}, target, source, this.effect, true);
 			} else if (move.category === 'Special') {
-				this.add('-activate', source, 'ability: Colossal');
+				this.add('-activate', this.effectState.target, 'ability: Colossal');
 				this.boost({spd: -1}, target, source, this.effect, true);
 			}
 		},
@@ -3469,7 +3469,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			for (const allyActive of pokemon.adjacentAllies()) {
 				if (allyActive === pokemon) continue;
 				this.add('-activate', pokemon, 'ability: Comfy Seat');
-				allyActive.heal(allyActive.baseMaxhp / 16);
+				this.heal(allyActive.baseMaxhp / 16, allyActive, pokemon);
 			}
 		},
 		rating: 0,
@@ -3481,9 +3481,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Environmental Blessing');
 			this.blessedEnv = true;
-
-
-
 		},
 		onEnd(pokemon) {
 			if (!this.blessedEnv) return;
@@ -3635,7 +3632,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
-				this.add('-activate', source, 'ability: Event Horizon');
+				this.add('-activate', this.effectState.target, 'ability: Event Horizon');
 				if (move.smartTarget) move.smartTarget = false;
 				this.debug("Event Horizon redirected target of move");
 				return this.effectState.target;
@@ -3649,12 +3646,93 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		onAnyTryHeal(damage, target, source, effect) {
 			if ((effect?.id === 'zpower') || this.effectState.isZ) return damage;
-			this.add('-activate', source, 'ability: Closing Time');
+			this.add('-activate', this.effectState.target, 'ability: Closing Time');
 			return false;
 		},
 		name: "Closing Time",
 		rating: 2,
 		num: -111,
+	},
+	conservationarea: {
+		isNonstandard: "ThingInf",
+		onAllyModifyMove(move) {
+			move.stab = 2;
+		},
+		onAllyUpdate(pokemon) {
+			let i = 0;
+			let changetype = false;
+			if (pokemon.types.length !== pokemon.species.types.length) changetype = true;
+			for (const type of pokemon.types) {
+				if (type !== pokemon.species.types[i]) {
+					changetype = true;					
+				}
+				i++;
+			}
+			if (changetype) {
+				pokemon.setType(pokemon.species.types);
+				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'));
+				this.add('-activate', this.effectState.target, 'ability: Conservation Area');
+			}
+			if (pokemon.addedType) {
+				if (!pokemon.addType('')) {
+					this.add('-start', pokemon, 'typeadd', '');
+					this.add('-activate', this.effectState.target, 'ability: Conservation Area');
+				}
+			}
+		},
+		name: "Conservation Area",
+		rating: 4,
+		num: 91,
+	},
+	clearcut: {
+		isNonstandard: "ThingInf",
+		onSourceHit(target, source) {
+			if (target.types[0] !== '???') {
+				const types = target.types;
+				target.setType(['???']);
+				this.add('-start', target, 'typechange', '???');
+				for (const type of types) {
+					switch (type) {
+					case 'Arthropod':
+					case 'Fish':
+					case 'Green':
+						source.heal(source.baseMaxhp / 2)
+						break;
+					case 'Hair':
+					case 'Industrial':
+					case 'Sword':
+						this.boost({atk: 1}, source, source, null, true);
+						break;
+					case 'Dirt':
+					case 'Liquid':
+					case 'Weather':
+						this.boost({def: 1}, source, source, null, true);
+						break;
+					case 'H':
+					case 'No':
+					case 'Science':
+						this.boost({spd: 1}, source, source, null, true);
+						break;
+					case 'Far':
+					case 'Sport':
+					case 'Time':
+						this.boost({spe: 1}, source, source, null, true);
+						break;
+					case 'Night':
+					case 'Temperature':
+						this.boost({accuracy: 1}, source, source, null, true);
+						break;
+					case 'Music':
+					case 'Yellow':
+						this.boost({evasion: 1}, source, source, null, true);
+						break;
+					}
+				}
+			}
+		},
+		name: "Clear Cut",
+		rating: 4,
+		num: 91,
 	},
 
 	// BASE GAME

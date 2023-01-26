@@ -320,11 +320,19 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	capitle: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 	sootortoise: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
 	tortesecrate: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
+	herble: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -333,7 +341,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	pristudine: {
-		isNonstandard: "Thing",
+		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
 	despacio: {

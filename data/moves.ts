@@ -2843,6 +2843,27 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Liquid",
 		contestType: "Clever",
 	},
+	empyreanspring: {
+		num: 1135,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "ThingInf",
+		name: "Empyrean Spring",
+		pp: 3,
+		priority: 0,
+		flags: {snatch: 1, heal: 1},
+		heal: [1, 1],
+		onHit(target) {
+			target.cureStatus();
+			target.clearBoosts();
+		},
+		secondary: null,
+		target: "normal",
+		type: "Liquid",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
+	},
 
 	// Music
 	earworm: {
