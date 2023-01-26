@@ -3669,16 +3669,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				i++;
 			}
 			if (changetype) {
+				this.add('-activate', this.effectState.target, 'ability: Conservation Area');
 				pokemon.setType(pokemon.species.types);
 				this.add('-start', pokemon, 'typechange', pokemon.types.join('/'));
-				this.add('-activate', this.effectState.target, 'ability: Conservation Area');
 			}
-			if (pokemon.addedType) {
+			/* if (pokemon.addedType) {
 				if (!pokemon.addType('')) {
 					this.add('-start', pokemon, 'typeadd', '');
 					this.add('-activate', this.effectState.target, 'ability: Conservation Area');
 				}
-			}
+			} */
 		},
 		name: "Conservation Area",
 		rating: 4,
