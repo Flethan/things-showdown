@@ -1601,7 +1601,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	herble: {
+	florle: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1628,7 +1628,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 		},
 	},
-	cheleaf: {
+	chellush: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

@@ -332,11 +332,11 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	herble: {
+	florle: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	cheleaf: {
+	chellush: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
