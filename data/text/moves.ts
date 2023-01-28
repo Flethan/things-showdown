@@ -72,7 +72,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	summonlocusts: {
 		name: "Summon Locusts",
-		desc: "For 5 turns, the environment becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arhtropod-type Things is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Locust Swarm.",
+		desc: "For 5 turns, the environment becomes Locust Swarm. At the end of each turn except the last, all active Things lose 1/16 of their maximum HP, modified by Arthropod type-effectiveness and rounded down, unless they are an Arthropod type. During the effect, the Speed of Arthropod-type Things is multiplied by 1.5. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Locust Swarm.",
 		shortDesc: "For 5 turns, a plague of locusts descends.",
 	},
 	pheromonemark: {
@@ -991,6 +991,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "The target ally's Sword-type moves become Infinity-type. If Brilliancy was selected by an ally this turn as well, it has it's move canceled, and the all the target ally's moves become Infinity-type.",
 		shortDesc: "Target Sword moves -> Infinity; effect w/ Rank&File & Brilliancy.",
 	},
+	caltrops: {
+		name: "Caltrops",
+		desc: "Sets up a hazard on the opposing side of the field, damaging each opposing Thing that switches in by 1/16 of their maximum HP, factoring Sword-type effectiveness, with a 10% chance to also wound.",
+		shortDesc: "Hurts foes on switch-in, 10% wound. Factors Sword.",
+
+		start: "  Caltrops were scattered around [TEAM]!",
+		end: "  The caltrops disappeared around [TEAM]!",
+		damage: "  [POKEMON] was hurt by the caltrops!",
+	},
 	// temperature
 	thermalpunch: {
 		name: "Thermal Punch",
@@ -1021,6 +1030,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Thermal Explosion",
 		desc: "The user faints after using this move, even if this move fails for having no target.",
 		shortDesc: "Hits adjacent Things. The user faints.",
+	},
+	energybeam: {
+		name: "Energy Beam",
+		desc: "The power of this move depends on the current energy level, equal to [50 * (absolute value of energy level)] + 10. The energy level is calculated using a variety of factors, including the environment, landscape, rooms, and the user's side conditions, status, volatiles, etc.",
+		shortDesc: "Damage scaled by current energy level.",
 	},
 	heatup: {
 		name: "Heat Up",
@@ -1118,6 +1132,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		activate: "  [TARGET]'s actions were hurried through by [POKEMON]!",
 		cant: "  [POKEMON]'s action was already seen!",
 	},
+	temporaladjustment: {
+		name: "Temporal Adjustment",
+		desc: "For 5 turns, the environment becomes Time Dilation. During the effect, the speed of all non-Time-type Things is quartered, and the power of Time-type attacks is multiplied by 1.5 if the user moves before the target. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Time Dilation.",
+		shortDesc: "For 5 turns, time becomes dilated.",
+	},
 	// weather
 	rapidvortex: {
 		name: "Rapid Vortex",
@@ -1208,6 +1227,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 20% chance to blind the target.",
 		shortDesc: "Hits adjacent foes, 20% chance to blind.",
 	},
+	gas: {
+		name: "Gas",
+		shortDesc: "No additional effect.",
+	},
+	gasblast: {
+		name: "Gas Blast",
+		desc: "Has a 20% chance to make the target flinch.",
+		shortDesc: "20% chance to make the target flinch.",
+	},
 	yellowsoak: {
 		name: "Yellow Soak",
 		desc: "Raises the user's Defense and Special Defense by 1 stage. If the environment is Yellowish, this move additionally raises the user's Attack, Special Attack, and Speed by 1 stage.",
@@ -1292,7 +1320,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Inherits its type from the user's first move's type. Inherits any Harmonies that the user's other moves have. If the user is Sylphonie-Physical, this move becomes a physical attack. If the landscape is Mystical Song, resets the duration for Mystical Song to last for another 5 turns. Any Harmonies present are still maintained.",
 		shortDesc: "Type, effects, category vary w/ user's moves and forme.",
 	},
-
+	empyreanspring: {
+		name: "Empyrean Spring",
+		desc: "The target's HP is fully restored along with having any non-volatile status condition cured and all stat stages reset to 0.",
+		shortDesc: "Fully heals, removes status, resets stats",
+	},
 	// BASE GAME
 	"10000000voltthunderbolt": {
 		name: "10,000,000 Volt Thunderbolt",

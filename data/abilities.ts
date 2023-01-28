@@ -1015,7 +1015,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops'
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -2047,11 +2047,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.boost(boost, source, target, null, true);
 				break;
 			case 1:
-				const environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater'];
+				const environmentalfactors = ['locustswarm', 'nighttime', 'windy', 'yellowish', 'hot', 'cold', 'timedilation', 'underwater', 'meteorshower'];
 				this.field.setWeather(this.sample(environmentalfactors));
 				break;
 			case 2:
-				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap'];
+				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops'];
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:
@@ -3686,7 +3686,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	clearcut: {
 		isNonstandard: "ThingInf",
-		onSourceHit(target, source) {
+		onSourceDamagingHit(damage, target, source) {
 			if (target.types[0] !== '???') {
 				const types = target.types;
 				target.setType(['???']);
@@ -3749,6 +3749,35 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			});
 		},
 		name: "Pathogen",
+		rating: 2,
+		num: 143,
+	},
+	donotenter: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops'];
+				const hazard = this.sample(hazards);
+				this.add('-activate', target, 'ability: Do Not Enter');
+				source.side.addSideCondition(hazard);
+			}
+		},
+		name: "Do Not Enter",
+		rating: 2,
+		num: 143,
+	},
+	makeamess: {
+		isNonstandard: "ThingInf",
+		onAfterMega(pokemon) {
+			const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops'];
+			this.add('-activate', pokemon, 'ability: Make a Mess');
+			for (const side of pokemon.side.foeSidesWithConditions()) {
+				for (const hazard of hazards) {
+					side.addSideCondition(hazard);
+				}
+			}
+		},
+		name: "Do Not Enter",
 		rating: 2,
 		num: 143,
 	},
