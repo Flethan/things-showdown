@@ -3734,6 +3734,24 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 91,
 	},
+	pathogen: {
+		isNonstandard: "Thing",
+		// upokecenter says this is implemented as an added secondary effect
+		onModifyMove(move) {
+			if (!move?.flags['contact'] || move.target === 'self') return;
+			if (!move.secondaries) {
+				move.secondaries = [];
+			}
+			move.secondaries.push({
+				chance: 100,
+				status: 'infected',
+				ability: this.dex.abilities.get('pathogen'),
+			});
+		},
+		name: "Pathogen",
+		rating: 2,
+		num: 143,
+	},
 
 	// BASE GAME
 	noability: {
