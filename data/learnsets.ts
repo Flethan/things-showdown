@@ -941,6 +941,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L1"],
 			consume: ["8M"],
 			energybeam: ["8T"],
+			gasblast: ["8T"],
 		},
 	},
 	saxosnowne: {
@@ -994,6 +995,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			energybeam: ["8T"],
 			starrywave: ["8E"],
+			gasblast: ["8E"],
 		},
 	},
 	solor: {
@@ -1018,6 +1020,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			energybeam: ["8T"],
 			starrywave: ["8E"],
+			gasblast: ["8E"],
 		},
 	},
 	sollit: {
@@ -1042,6 +1045,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			energybeam: ["8T"],
 			starrywave: ["8E"],
+			gasblast: ["8E"],
 		},
 	},
 	hellow: {
@@ -4876,6 +4880,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowgigahit: ["8L23"],
 			yellowsoak: ["8L18"],
 			consume: ["8L10"],
+			gasblast: ["8L50"],
 		},
 	},
 	streekyo: {
@@ -4900,6 +4905,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			voidpunch: ["8L47"],
 			voidscream: ["8L55"],
 			noescape: ["8L60"],
+			gasblast: ["8L50"],
 		},
 	},
 	piano: {
