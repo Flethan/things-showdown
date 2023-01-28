@@ -1132,6 +1132,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Dirtle",
 		evos: ["Chellush"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	chellush: {
 		num: -374,
@@ -1146,6 +1147,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Florle",
 		evos: ["Pristudine"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	despacio: {
 		num: -375,
@@ -4188,6 +4190,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		muMove: "Empyrean Spring",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	tortesecrate: {
 		num: -517,
