@@ -3104,7 +3104,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (move.pp === 1) return 5;
 		},
 		onSourceAfterMove(source, target, move) {
+			console.log('used move');
+			if (move.pp === 1) console.log('one pp left');
 			if (move.pp === 0) {
+				console.log('last pp');
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in source.boosts) {
@@ -3785,8 +3788,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onFaint(pokemon) {
 			if (!pokemon.undead) {
+				console.log('undying');
 				pokemon.undead = true;
 				pokemon.fainted = false;
+				pokemon.faintQueued = false;
+				pokemon.subFainted = false;
+				pokemon.status = '';
+				pokemon.hp = 1;
 				pokemon.heal(pokemon.baseMaxhp / 2);
 			}
 		},
