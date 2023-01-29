@@ -123,6 +123,9 @@ export class Pokemon {
 
 	illusion: Pokemon | null;
 	transformed: boolean;
+	
+	// THINGS
+	undead: boolean | null;
 
 	maxhp: number;
 	/** This is the max HP before Dynamaxing; it's updated for Power Construct etc */
@@ -401,6 +404,9 @@ export class Pokemon {
 
 		this.illusion = null;
 		this.transformed = false;
+
+		// THINGS
+		this.undead = false;
 
 		this.fainted = false;
 		this.faintQueued = false;

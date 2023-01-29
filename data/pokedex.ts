@@ -4238,6 +4238,18 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 	},
+	spooky: {
+		num: -520,
+		name: "Spooky",
+		types: ["No", "Time"],
+		genderRatio: {M: 0.5, F: 0.5},
+		baseStats: {hp: 44, atk: 14, def: 54, spa: 84, spd: 66, spe: 130},
+		abilities: {0: "Undead", H: "Astral Projection"},
+		heightm: 0.9,
+		weightkg: 0.01,
+		color: "White",
+		eggGroups: ["Amorphous"],
+	},
 
 	// BASE GAME
 	bulbasaur: {

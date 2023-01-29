@@ -3781,6 +3781,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 143,
 	},
+	undead: {
+		isNonstandard: "Thing",
+		onFaint(pokemon) {
+			if (!pokemon.undead) {
+				pokemon.undead = true;
+				pokemon.heal(pokemon.baseMaxhp / 2);
+			}
+		},
+		name: "Undead",
+		rating: 2,
+		num: 143,
+	},
 
 	// BASE GAME
 	noability: {

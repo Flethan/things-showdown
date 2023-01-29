@@ -5126,10 +5126,33 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantflash: ["8L48"],
 			caltrops: ["8L30"],
 			rankandfile: ["8T"],
-
 		},
 	},
-
+	spooky: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			consume: ["8M"],
+			shadowmark: ["8L30"],
+			pitchblack: ["8L35"],
+			disorient: ["8L55"],
+			noescape: ["8L20"],
+			voidscream: ["8L1"],
+			banish: ["8L25"],
+			dematerialize: ["8L50"],
+			voidtrap: ["8L60"],
+			nullland: ["8L10"],
+			horizontaltranslation: ["8E"],
+			factsandlogic: ["8E"],
+			wager: ["8E"],
+			thermicalcurrent: ["8E"],
+			sandsoftime: ["8E"],
+			coagulate: ["8L40"],
+			timecapsule: ["8L45"],
+		},
+	},
 
 
 	// BASE GAME
