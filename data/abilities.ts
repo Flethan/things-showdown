@@ -3786,6 +3786,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onFaint(pokemon) {
 			if (!pokemon.undead) {
 				pokemon.undead = true;
+				pokemon.fainted = false;
 				pokemon.heal(pokemon.baseMaxhp / 2);
 			}
 		},
