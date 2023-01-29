@@ -3125,14 +3125,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	weaponoflastresort: {
 		isNonstandard: "ThingInf",
 		onModifyCritRatio(critRatio, source, target, move) {
-			if (move.pp === 1) return 5;
+			if (move.pp === 1 && move.id !== 'shoot') return 5;
 		},
 		onAfterMoveSecondarySelf(source, target, move) {
-			console.log('used move');
-			console.log(move.pp);
-			if (move.pp === 1) console.log('one pp left');
-			if (move.pp === 0) {
-				console.log('last pp');
+			if (move.pp === 1) {
 				const boost: SparseBoostsTable = {};
 				let statPlus: BoostID;
 				for (statPlus in source.boosts) {
