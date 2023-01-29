@@ -4244,7 +4244,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["No", "Time"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 44, atk: 14, def: 54, spa: 84, spd: 66, spe: 130},
-		abilities: {0: "Undead", H: "Astral Projection"},
+		abilities: {/* 0: "Undead", H: */ 0: "Astral Projection"},
 		heightm: 0.9,
 		weightkg: 0.01,
 		color: "White",

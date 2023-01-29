@@ -492,7 +492,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Sets up a Side Condition on the opposing side of the field, knocking prone each opposing Thing that switches in. Fails if the effect is already active on the opposing side. Can be removed if a Liquid-type Thing switches in.",
 		shortDesc: "Knocks foes prone on switch-in.",
 
-		start: " Slippery liquid has been spilled on the ground all around [TEAM]!",
+		start: "  Slippery liquid has been spilled on the ground all around [TEAM]!",
 		end: "  The slippery liquid disappeared from the ground around [TEAM]!",
 		activate: "  [POKEMON] slipped and fell!",
 	},
@@ -762,7 +762,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Sets up a Side Condition on the opposing side of the field, making banished the next opposing Thing that switches in. Fails if the effect is already active on the opposing side.",
 		shortDesc: "Makes foe banished on switch-in.",
 
-		start: " A mysterious portal opens on the ground around [TEAM]!",
+		start: "  A mysterious portal opens on the ground around [TEAM]!",
 		end: "  The mysterious portal disappeared from the ground around [TEAM]!",
 		activate: "  [POKEMON] fell into the mysterious portal!",
 	},
@@ -1094,7 +1094,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	replay: {
 		name: "Replay",
-		desc: "The target immediately uses its last used move. Fails if the move is any two-turn move or any recharge move.",
+		desc: "The target immediately uses its last used move. Fails if the move is any two-turn move or any recharge move, or if the move is Replay, Look Up, or Multi-strike.",
 		shortDesc: "The target immediately uses its last used move.",
 
 		activate: "  [TARGET]'s move was replayed by [POKEMON]!",

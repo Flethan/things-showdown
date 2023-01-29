@@ -314,18 +314,28 @@ export const DefaultText: {[k: string]: DefaultText} = {
 	hadalzone: {
 		start: "  The battlefield's pressure grew intense!",
 		end: "  The battlefield's pressure normalized.",
+		upkeep: "  The battlefield's pressure is still intense!",
 	},
 	timeloop: {
 		start: "  The battlefield was stuck in a time loop!",
 		end: "  The time loop ended.",
+		upkeep: "  The battlefield is still in a time loop!",
 	},
 	stickysituation: {
 		start: "  The battlefield became sticky!",
 		end: "  The stickiness cleared.",
+		upkeep: "  The battlefield is still sticky!",
 	},
 	rankandfile: {
 		start: "  The battlefield became ordered!",
 		end: "  The order ended.",
+		upkeep: "  The battlefield is still ordered!",
+	},
+	// side conditions
+	beamfield: {
+		start: "  Yellow beams surround [TEAM]!",
+		end: "  The yellow beams dispersed around [TEAM]!",
+		damage: "  [POKEMON] was grazed by the yellow beams!",
 	},
 
 	// BASE GAME

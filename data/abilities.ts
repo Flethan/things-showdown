@@ -2094,7 +2094,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (move.flags['soda']) {
-				// this.field.setTerrain('stickysituation');
+				this.add('-activate', source, 'ability: Soda Spreader');
+				this.field.addPseudoWeather('stickysituation', source);
 			}
 		},
 		name: "Soda Spreader",
@@ -2261,6 +2262,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		}, */
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (move.type === 'Hair') {
+				this.add('-activate', source, 'ability: Shining Hair');
 				this.field.setWeather('yellowish');
 			}
 		},
@@ -3125,7 +3127,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onModifyCritRatio(critRatio, source, target, move) {
 			if (move.pp === 1) return 5;
 		},
-		onSourceAfterMove(source, target, move) {
+		onAfterMoveSecondarySelf(source, target, move) {
 			console.log('used move');
 			console.log(move.pp);
 			if (move.pp === 1) console.log('one pp left');
@@ -3494,9 +3496,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidualSubOrder: 3,
 		onResidual(pokemon) {
 			for (const allyActive of pokemon.adjacentAllies()) {
-				if (allyActive === pokemon) continue;
-				this.add('-activate', pokemon, 'ability: Comfy Seat');
-				this.heal(allyActive.baseMaxhp / 16, allyActive, pokemon);
+				if (allyActive !== pokemon) {
+					this.add('-activate', pokemon, 'ability: Comfy Seat');
+					this.heal(allyActive.baseMaxhp / 16, allyActive, pokemon);
+				}
 			}
 		},
 		rating: 0,
