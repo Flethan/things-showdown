@@ -3624,7 +3624,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move, pokemon) {
 			let sf: string[] = [];
 			for (let i=0; i<4; i++) {
-				const move = this.dex.moves.get(pokemon.moveSlots[0].id);
+				const move = this.dex.moves.get(pokemon.moveSlots[i].id);
 				if (!move.songFlags) continue;
 				for (const flag of move.songFlags) {
 					if (!sf.includes(flag)) sf.push(flag);
@@ -5969,7 +5969,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		onAfterMove(source, target, move) {
-			if (!target.isActive) return;
+			if (!(source === this.effectState.target) && !target.isActive) return;
 			if (this.randomChance(4, 5)) {
 				this.actions.useMove(move, source, target);
 			}

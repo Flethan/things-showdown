@@ -1042,7 +1042,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	ahotone: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('hot', null, null, true);
+			if (this.field.getWeather().id === 'hot' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
+			} else { 
+				this.field.setWeather('hot', null, null, true); 
+				this.field.weatherState.duration = 0;
+			}
 			// Infinite duration done in conditions.js#hot
 		},
 		/* onAnySetWeather(target, source, weather) {
@@ -1111,7 +1118,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	sinningunapuro: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('timedilation', null, null, true);
+			if (this.field.getWeather().id === 'timedilation' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
+			} else { 
+				this.field.setWeather('timedilation', null, null, true); 
+				this.field.weatherState.duration = 0;
+			}
 			// Infinite duration done in conditions.js#hot
 		},
 		/* onAnySetWeather(target, source, weather) {
@@ -1481,7 +1495,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	lassihnfliegen: {
 		isNonstandard: "Thing",
 		onStart(source) {
-			this.field.setWeather('windy', null, null, true);
+			if (this.field.getWeather().id === 'windy' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
+			} else { 
+				this.field.setWeather('windy', null, null, true); 
+				this.field.weatherState.duration = 0;
+			}
 			// Infinite duration done in conditions.js#hot
 		},
 		/* onAnySetWeather(target, source, weather) {
@@ -2073,7 +2094,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onAfterMoveSecondarySelf(source, target, move) {
 			if (move.flags['soda']) {
-				this.field.setTerrain('stickysituation');
+				// this.field.setTerrain('stickysituation');
 			}
 		},
 		name: "Soda Spreader",
@@ -2789,11 +2810,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 				this.boost(boosts, pokemon, pokemon, this.effect, false, true);
 
-				if (pokemon.species.forme === 'Infinity') {
+				if (pokemon.species.symbolForme === 'Infinity') {
 					pokemon.addType('', true);
 					this.add('-start', pokemon, 'typeadd', '', '[silent]');
 				}
-				if (pokemon.species.forme === 'Element') {
+				if (pokemon.species.symbolForme === 'Element') {
 					pokemon.removeElementType('Liquid');
 					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
 				}
@@ -3042,6 +3063,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getWeather().id === 'locustswarm' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
 			} else { 
 				this.field.setWeather('locustswarm', null, null, true); 
 				this.field.weatherState.duration = 0;
@@ -3105,6 +3127,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onSourceAfterMove(source, target, move) {
 			console.log('used move');
+			console.log(move.pp);
 			if (move.pp === 1) console.log('one pp left');
 			if (move.pp === 0) {
 				console.log('last pp');
@@ -3402,6 +3425,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getTerrain().id === terrainType && this.field.terrainState.duration !== 0) {
 				this.field.terrainState.duration = 0;
 				this.field.terrainState.source = source;
+				this.field.terrainState.permanent = true;
 			} else { 
 				this.field.setTerrain(terrainType, null, null, true);
 				this.field.terrainState.duration = 0;

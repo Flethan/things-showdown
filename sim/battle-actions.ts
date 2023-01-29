@@ -398,6 +398,11 @@ export class BattleActions {
 
 		let move = this.dex.getActiveMove(moveOrMoveName);
 		pokemon.lastMoveUsed = move;
+		// THINGS - if Null form, make moves typeless
+		if (pokemon.species.symbolForme === "Null") {
+			move.type = "???";
+		}
+
 		if (move.id === 'weatherball' && zMove) {
 			// Z-Weather Ball only changes types if it's used directly,
 			// not if it's called by Z-Sleep Talk or something.
