@@ -1108,7 +1108,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	calium: {
+	calcium: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
