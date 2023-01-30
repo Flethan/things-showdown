@@ -2845,7 +2845,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Fish", "Weather"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 80, def: 90, spa: 105, spd: 110, spe: 115},
-		abilities: {0: "No Ability"},
+		abilities: {0: "Supercell"},
 		heightm: 0.4,
 		weightkg: 15.0,
 		color: "Orange",
@@ -4279,6 +4279,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		eggGroups: ["Mineral"],
 	},
+
 	// BASE GAME
 	bulbasaur: {
 		num: 1,

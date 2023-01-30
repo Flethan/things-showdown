@@ -229,7 +229,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = false;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.removeSideCondition(targetCondition)) {
@@ -1768,7 +1768,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops'
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -7068,6 +7068,83 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "self",
 		type: "Weather",
 		contestType: "Beautiful",
+	},
+	lightningstrike: {
+		num: 1515,
+		accuracy: 85,
+		basePower: 70,
+		category: "Special",
+		name: "Lightning Strike",
+		isNonstandard: "Thing",
+		pp: 1,
+		priority: 0,
+		flags: {mirror: 1},
+		onModifyMove(move, pokemon) {
+			pokemon.addVolatile('lightningstrike');
+		},
+		condition: {
+			duration: 1,
+			onModifyAtkPriority: -101,
+			onModifyAtk(atk, pokemon, defender, move) {
+				if (move.id === 'lightningstrike') {
+					return 200;
+				}
+			},
+		},
+		target: "randomNormal",
+		type: "Weather",
+		contestType: "Clever",
+	},
+	lightningstorm: {
+		num: 1446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Lightning Storm",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'lightningstorm',
+		condition: {
+			duration: 5,
+			// this is a side condition
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Lightning Storm');
+				this.effectState.source = source;
+			},
+			onModifyAtkPriority: -101,
+			onModifyAtk(atk, pokemon, defender, move) {
+				if (move.id === 'lightningstrike') {
+					return 200;
+				}
+			},
+			onSideResidual() {
+				const pokemon = this.effectState.source;
+				const foes: Pokemon[] = [];
+				for (const foe of pokemon.foes()) {
+					if (foe.hasItem('yellowsafetyvest')) continue;
+					foes.push(foe);
+				}
+				if (foes.length === 0) return;
+				const foeNum = this.random(0, foes.length);
+				const target = foes[foeNum];
+				const hitMove = this.dex.getActiveMove('Lightning Strike');
+				if (pokemon !== null && target !== null) {
+					this.add('-activate', target, 'move: Lightning Storm');
+					this.actions.trySpreadMoveHit([target], pokemon, hitMove, true);
+				}
+				this.checkWin();
+			},
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Lightning Storm');
+			},
+		},
+		secondary: null,
+		target: "foeSide",
+		type: "Weather",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
 	},
 
 	// Yellow

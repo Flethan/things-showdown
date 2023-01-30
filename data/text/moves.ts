@@ -24,6 +24,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Gas Cloud",
 		shortDesc: "Sets Gas Cloud field condition.",
 	},
+	lightningstrike: {
+		name: "Lightning Strike",
+		desc: "During damage calculation, uses 200 as the Special Attack stat instead of the user's Special Attack.",
+		shortDesc: "Uses 200 as user's SpA.",
+	},
 	// arthropod
 	pinch: {
 		name: "Pinch",
@@ -1182,6 +1187,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Weather Front",
 		desc: "For 5 turns, the environment becomes Windy. During the effect, the priority of Weather-type moves is increased by 1, and stat changes to Speed are ignored. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Windy.",
 		shortDesc: "For 5 turns, the wind picks up.",
+	},
+	lightningstorm: {
+		name: "Lightning Storm",
+		desc: "Sets up a Side Condition on the foe side of the field for 5 turns. At the end of each turn except the last, a random opposing Thing is chosen to be the target of the move Lightning Strike (Special, Weather-type, power 70, accuracy 85); damage is calculated using a Special Attack stat of 200. Fails if the effect is already active on the foe's side.",
+		shortDesc: "Lightning Strikes random foe for 5 turns.",
+
+		start: " An electrical storm is brewing above [TEAM]!",
+		end: "  The storm above [TEAM] subsided!",
+		activate: "  [POKEMON] is struck by lightning!",
 	},
 	// yellow
 	yellowslap: {
