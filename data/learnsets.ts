@@ -5153,6 +5153,27 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L45"],
 		},
 	},
+	calcium: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			stay: ["8L1"],
+			fossilize: ["8L30"],
+			harbinger: ["8L50"],
+			hostile: ["8L50"],
+			particlebeam: ["8L40"],
+			horizontaltranslation: ["8L10"],
+			factsandlogic: ["8L1"],
+			bask: ["8L45"],
+			dustcloud: ["8L5"],
+			richsoil: ["8L35"],
+			beemovee: ["8E"],
+			whirlwindofbones: ["8L70"],
+			gravebite: ["8L60"],
+		},
+	},
 
 
 	// BASE GAME

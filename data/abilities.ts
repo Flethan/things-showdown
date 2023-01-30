@@ -3825,6 +3825,41 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: 143,
 	},
+	thehelveticascenario: {
+		onResidualOrder: 28,
+		onResidualSubOrder: 2,
+		isNonstandard: "ThingInf",
+		onStart(source) {
+			this.add('-activate', source, 'ability: The Helvetica Scenario');
+			for (const thing of this.getAllActive()) {
+				if (thing.fainted || !thing.hp) continue;
+				thing.trySetStatus('blinded', source);
+			}
+		},
+		onResidual(pokemon) {
+			if (!pokemon.hp) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				this.damage(target.baseMaxhp / 8, target, pokemon);
+			}
+		},
+		name: "The Helvetica Scenario",
+		rating: 1.5,
+		num: 123,
+	},
+	calcicimagemisplacement: {
+		isNonstandard: "Thing",
+		onUpdate(pokemon) {
+			if (pokemon.status !== 'distanced') {
+				this.add('-activate', pokemon, 'ability: Calcic Image Misplacement');
+				pokemon.cureStatus();
+				pokemon.trySetStatus('distanced');
+			}
+		},
+		name: "Calcic Image Misplacement",
+		rating: 2,
+		num: -215,
+	},
 
 	// BASE GAME
 	noability: {

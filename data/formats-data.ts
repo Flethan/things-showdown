@@ -1108,6 +1108,14 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	calium: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	thehelveticascenario: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
