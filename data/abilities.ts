@@ -3872,6 +3872,20 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0.5,
 		num: -196,
 	},
+	differentiation: {
+		isNonstandard: "Thing",
+		onPrepareHit(source, target, move) {
+			if (move.hasBounced || move.sourceEffect === 'snatch') return;
+			const type = move.type;
+			if (type && type !== '???' && source.getTypes().join() !== type) {
+				if (!source.addType(type)) return false;
+				this.add('-start', source, 'typeadd', type, '[from] ability: Differentiation');
+			}
+		},
+		name: "Differentiation",
+		rating: 4.5,
+		num: 168,
+	},
 
 	// BASE GAME
 	noability: {
