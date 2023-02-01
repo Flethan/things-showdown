@@ -173,6 +173,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dematerialize: ["8L80"],
 			consume: ["8M"],
 			energybeam: ["8T"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	meltipillar: {
@@ -250,6 +251,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			energybeam: ["8T"],
 			disorient: ["8E"],
 			chitinbeam: ["8M"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	gryllague: {
@@ -285,6 +287,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			energybeam: ["8T"],
 			disorient: ["8E"],
 			chitinbeam: ["8M"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	schisteka: {
@@ -325,6 +328,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			energybeam: ["8T"],
 			disorient: ["8E"],
 			chitinbeam: ["8M"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	pescadestrian: {
@@ -702,6 +706,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L55"],
 			dematerialize: ["8L70"],
 			disorient: ["8L80"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	fishish: {
@@ -1933,6 +1938,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 			consume: ["8M"],
 			borrow: ["8M"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	hydrolo: {
@@ -2462,6 +2468,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8T"],
 			consume: ["8M"],
 			chitinbeam: ["8M"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	magmegg: {
@@ -2538,6 +2545,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			rankandfile: ["8T"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	snowworm: {
@@ -2867,6 +2875,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8L100"],
 			brilliancy: ["8L100"],
 			promote: ["8L100"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	infared: {
@@ -5151,6 +5160,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sandsoftime: ["8E"],
 			coagulate: ["8L40"],
 			timecapsule: ["8L45"],
+			ricochetmirror: ["8L77"],
 		},
 	},
 	calcium: {
