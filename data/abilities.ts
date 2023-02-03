@@ -394,6 +394,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			if (['windy'].includes(target.effectiveWeather()) && move.type === 'Weather' && move.priority <= 1.5) return;
 			const dazzlingHolder = this.effectState.target;
+			if (source.hasAbility('longgame') && move.priority <= 1.5) return;
 			if ((source.side === dazzlingHolder.side || move.target === 'all') && move.priority > 0.5) {
 				this.attrLastMove('[still]');
 				this.add('cant', target, 'ability: False Start', move, '[of] ' + dazzlingHolder);

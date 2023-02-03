@@ -544,8 +544,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	earworm: {
 		name: "Earworm",
-		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move.",
-		shortDesc: "Traps and damages the target for 4-5 turns.",
+		desc: "Prevents the target from switching for four or five turns. Causes damage to the target equal to 1/8 of its maximum HP, rounded down, at the end of each turn during effect. The target can still switch out if it uses Swarm or Back-to-Breast Turn. The effect ends if either the user or the target leaves the field. This effect is not stackable or reset by using this or another binding move. If Mystical Song is in effect, adds the Harmony to damage non-Music-type Things for 1/8 of their maximum HP at the end of each turn.",
+		shortDesc: "Traps, damages target 4-5 turns. Harmony: Hurt.",
 
 		start: "  [POKEMON] got the song stuck in its head!",
 	},

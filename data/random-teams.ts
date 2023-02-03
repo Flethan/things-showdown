@@ -656,7 +656,7 @@ export class RandomTeams {
 		const tierCount: {[k: string]: number} = {};
 		const typeCount: {[k: string]: number} = {};
 		const typeComboCount: {[k: string]: number} = {};
-		const teamDetails: RandomTeamsTypes.TeamDetails = {};
+		const teamDetails: RandomTeamsTypes.ThingTeamDetails = {};
 
 		const pokemonPool = this.getThingPool(type, pokemon, isMonotype);
 		while (pokemonPool.length && pokemon.length < this.maxTeamSize) {
@@ -675,7 +675,7 @@ export class RandomTeams {
 
 			// Adjust rate for species with multiple sets
 			// TODO: investigate automating this by searching for Pokémon with multiple sets
-			switch (species.baseSpecies) {
+			/* switch (species.baseSpecies) {
 			case 'Arceus': case 'Silvally':
 				if (this.randomChance(8, 9) && !isMonotype) continue;
 				break;
@@ -697,17 +697,17 @@ export class RandomTeams {
 			case 'Cinderace':
 				if (this.gen >= 8 && this.randomChance(1, 2)) continue;
 				break;
-			}
+			} */
 
 			// Illusion shouldn't be on the last slot
-			if (species.name === 'Zoroark' && pokemon.length >= (this.maxTeamSize - 1)) continue;
+			// if (species.name === 'Zoroark' && pokemon.length >= (this.maxTeamSize - 1)) continue;
 			// The sixth slot should not be Zacian/Zamazenta/Eternatus if a Zoroark is present
-			if (
+			/* if (
 				pokemon.some(pkmn => pkmn.species === 'Zoroark') &&
 				['Zacian', 'Zacian-Crowned', 'Zamazenta', 'Zamazenta-Crowned', 'Eternatus'].includes(species.name)
 			) {
 				continue;
-			}
+			} */
 
 			const tier = species.tier;
 			const types = species.types;
@@ -754,8 +754,8 @@ export class RandomTeams {
 
 			if (pokemon.length === this.maxTeamSize) {
 				// Set Zoroark's level to be the same as the last Pokemon
-				const illusion = teamDetails.illusion;
-				if (illusion) pokemon[illusion - 1].level = pokemon[this.maxTeamSize - 1].level;
+				// const illusion = teamDetails.illusion;
+				// if (illusion) pokemon[illusion - 1].level = pokemon[this.maxTeamSize - 1].level;
 
 				// Don't bother tracking details for the last Pokemon
 				break;
@@ -786,7 +786,7 @@ export class RandomTeams {
 			}
 
 			// Track what the team has
-			if (set.ability === 'Drizzle' || set.moves.includes('raindance')) teamDetails.rain = 1;
+			/* if (set.ability === 'Plague Bringer' || set.moves.includes('raindance')) teamDetails.rain = 1;
 			if (set.ability === 'Drought' || set.moves.includes('sunnyday')) teamDetails.sun = 1;
 			if (set.ability === 'Sand Stream') teamDetails.sand = 1;
 			if (set.ability === 'Snow Warning') teamDetails.hail = 1;
@@ -798,10 +798,10 @@ export class RandomTeams {
 			if (set.moves.includes('rapidspin')) teamDetails.rapidSpin = 1;
 			if (set.moves.includes('auroraveil') || (set.moves.includes('reflect') && set.moves.includes('lightscreen'))) {
 				teamDetails.screens = 1;
-			}
+			} */
 
 			// For setting Zoroark's level
-			if (set.ability === 'Illusion') teamDetails.illusion = pokemon.length;
+			// if (set.ability === 'Illusion') teamDetails.illusion = pokemon.length;
 		}
 		if (pokemon.length < this.maxTeamSize && pokemon.length < 12) { // large teams sometimes cannot be built
 			throw new Error(`Could not build a random team for ${this.format} (seed=${seed})`);
@@ -834,7 +834,7 @@ export class RandomTeams {
 
 	randomThingSet(
 		species: string | Species,
-		teamDetails: RandomTeamsTypes.TeamDetails = {},
+		teamDetails: RandomTeamsTypes.ThingTeamDetails = {},
 		isLead = false,
 		isDoubles = false,
 		isNoDynamax = false
@@ -855,11 +855,13 @@ export class RandomTeams {
 			gmax = true;
 		}
 
-		const randMoves =
+		const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
+		/* const randMoves =
 			(isDoubles && species.randomDoubleBattleMoves) ||
 			(isNoDynamax && species.randomBattleNoDynamaxMoves) ||
-			species.randomBattleMoves;
-		const movePool = (randMoves || Object.keys(this.dex.data.Learnsets[species.id]!.learnset!)).slice();
+			species.randomBattleMoves; */
+
+		// const movePool = (randMoves || Object.keys(this.dex.data.Learnsets[species.id]!.learnset!)).slice();
 		if (this.format.gameType === 'multi' || this.format.gameType === 'freeforall' || this.format.gameType === 'singles') {
 			// Random Multi Battle uses doubles move pools, but Ally Switch fails in multi battles
 			// Random Free-For-All also uses doubles move pools, for now
@@ -877,6 +879,12 @@ export class RandomTeams {
 					this.fastPop(movePool, rankAndFile);
 				}
 			}
+			const replay = movePool.indexOf('replay');
+			if (replay > -1) {
+				if (movePool.length > 4) {
+					this.fastPop(movePool, rankAndFile);
+				}
+			}
 		}
 		const rejectedPool = [];
 		let ability = '';
@@ -887,7 +895,7 @@ export class RandomTeams {
 
 		const types = new Set(species.types);
 		const abilities = new Set(Object.values(species.abilities));
-		if (species.unreleasedHidden) abilities.delete(species.abilities.H);
+		// if (species.unreleasedHidden) abilities.delete(species.abilities.H);
 
 		const moves = new Set<string>();
 		let counter: MoveCounter;

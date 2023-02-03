@@ -482,6 +482,40 @@ namespace RandomTeamsTypes {
 		illusion?: number;
 		statusCure?: number;
 	}
+	export interface ThingTeamDetails {
+		symbol?: number;
+		locustswarm?: number;
+		meteorshower?: number;
+		underwater?: number;
+		nighttime?: number;
+		hot?: number;
+		cold?: number;
+		timedilation?: number;
+		windy?: number;
+		yellowish?: number;
+		richsoil?: number;
+		spatialexpansion?: number;
+		greenground?: number;
+		sudscape?: number;
+		mysticalsong?: number;
+		nullland?: number;
+		springfloor?: number;
+		dustcloud?: number;
+		autoturret?: number;
+		wetfloor?: number;
+		voidtrap?: number;
+		caltrops?: number;
+		hotcoals?: number;
+		permafrost?: number;
+		stormcell?: number;
+		lightningstorm?: number;
+		beamfield?: number;
+		hadalzone?: number;
+		timeloop?: number;
+		stickysituation?: number;
+		rankandfile?: number;
+		statusCure?: number;
+	}
 	export interface FactoryTeamDetails {
 		megaCount?: number;
 		zCount?: number;
