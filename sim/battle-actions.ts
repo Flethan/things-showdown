@@ -1840,7 +1840,7 @@ export class BattleActions {
 	canSymbolEvo(pokemon: Pokemon) {
 		// Infinity, Element, Null, and Mu formes
 		const species = pokemon.baseSpecies;
-		if (pokemon.getItem().id === 'emptycapsule') {
+		if (pokemon.hasItem('emptycapsule')) {
 			return 'Empty';
 		} else if (species.isNonstandard === 'Thing' && species.evos) {
 			for (const evo of species.evos) {
@@ -1870,6 +1870,7 @@ export class BattleActions {
 		const hasNickname = (this.dex.species.get(pokemon.set.species).baseSpecies !== pokemon.set.name);
 		const newSpecies = this.dex.species.get(speciesid);
 		if (pokemon.name !== newSpecies.baseSpecies && !hasNickname) {
+			pokemon.name = newSpecies.baseSpecies;
 			this.battle.add('-name', pokemon, newSpecies.baseSpecies);
 		}
 

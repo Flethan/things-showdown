@@ -785,7 +785,9 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 40,
 		},
 		onSourceAfterHit(source, target, move) {
+			console.log('bioweapon');
 			if (target.trySetStatus('infected')) {
+				console.log('infecting');
 				// reroll virulence values, with odds of being stronger
 				target.statusState.infection.damageChance = this.random(50, 100);
 				target.statusState.infection.damageFraction = this.random(2, 8);
@@ -880,6 +882,173 @@ export const Items: {[itemid: string]: ItemData} = {
 			return accuracy;
 		},
 		num: -266,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	slowsuit: {
+		name: "Slow Suit",
+		spritenum: 818,
+		consume: {
+			healPercent: 40,
+		},
+		onFractionalPriority: -0.1,
+		num: -267,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	glue: {
+		name: "Glue",
+		spritenum: 819,
+		consume: {
+			healPercent: 20,
+		},
+		onDragOut(pokemon) {
+			this.add('-activate', pokemon, 'item: Glue');
+			return null;
+		},
+		num: -268,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	stuffedanimal: {
+		name: "Stuffed Animal",
+		spritenum: 820,
+		consume: {
+			healPercent: 33,
+		},
+		onTryAddVolatile(status, pokemon) {
+			if (status.id === 'flinch') {
+				this.add('-activate', pokemon, 'item: Stuffed Animal');
+				return null;
+			}
+		},
+		num: -269,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	magicglasses: {
+		name: "Magic Glasses",
+		spritenum: 821,
+		consume: {
+			healPercent: 75,
+		},
+		onAfterBoost(boost, target, source, effect) {
+			if (!boost.accuracy) {
+				this.boost({accuracy: 1}, target, target, null, true);
+			}
+		},
+		num: -270,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	bandage: {
+		name: "Bandage",
+		spritenum: 822,
+		consume: {
+			healPercent: 50,
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status === 'wounded') {
+				pokemon.cureStatus();
+				pokemon.useItem();
+			}
+		},
+		num: -271,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	eyedrops: {
+		name: "Eye Drops",
+		spritenum: 823,
+		consume: {
+			healPercent: 50,
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status === 'blinded') {
+				pokemon.cureStatus();
+				pokemon.useItem();
+			}
+		},
+		num: -272,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	infinitycrystal: {
+		name: "Infinity Crystal",
+		spritenum: 824,
+		consume: {
+			healPercent: 25,
+		},
+		onAfterMega(pokemon) {
+			const symbolType = this.dex.species.get(pokemon.species.id).symbolForme;
+			if (symbolType === 'Infinity') {
+				let statName = 'atk';
+				let bestStat = 0;
+				let s: StatIDExceptHP;
+				for (s in pokemon.storedStats) {
+					if (pokemon.storedStats[s] > bestStat) {
+						statName = s;
+						bestStat = pokemon.storedStats[s];
+					}
+				}
+				this.boost({[statName]: 1}, pokemon);
+			}
+		},
+		num: -273,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	elementcrystal: {
+		name: "Element Crystal",
+		spritenum: 825,
+		consume: {
+			healPercent: 25,
+		},
+		onAfterMega(pokemon) {
+			const pokeData = this.dex.species.get(pokemon.species.id);
+			const symbolType = pokeData.symbolForme;
+			const eleTypes = pokeData.elementTypes;
+			if (symbolType === 'Element' && eleTypes) {
+				if (!pokemon.addType(eleTypes[0])) return false;
+				this.add('-start', pokemon, 'typeadd', eleTypes[0], '[from] item: Element Crystal');
+			}
+		},
+		num: -274,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	mucrystal: {
+		name: "Mu Crystal",
+		spritenum: 826,
+		consume: {
+			healPercent: 25,
+		},
+		onAfterMega(pokemon) {
+			const pokeData = this.dex.species.get(pokemon.species.id);
+			const symbolType = pokeData.symbolForme;
+			if (symbolType === 'Mu' && pokemon.moveSlots[4]) {
+				const muMove = pokemon.moveSlots[4].id;
+				this.actions.useMove(muMove, pokemon);
+			}
+		},
+		num: -275,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	nullcrystal: {
+		name: "Null Crystal",
+		spritenum: 827,
+		consume: {
+			healPercent: 25,
+		},
+		onAfterMega(pokemon) {
+			const pokeData = this.dex.species.get(pokemon.species.id);
+			const symbolType = pokeData.symbolForme;
+			if (symbolType === 'Null') {
+				pokemon.heal(pokemon.maxhp);
+			}
+		},
+		num: -276,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
