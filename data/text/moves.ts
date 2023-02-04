@@ -747,6 +747,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Hits two to five times. Has a 35% chance to hit two or three times and a 15% chance to hit four or five times.",
 		shortDesc: "Hits 2-5 times in one turn. Hits adjacent foes.",
 	},
+	corruption: {
+		name: "Corruption",
+		shortDesc: "No additional effect.",
+	},
+	whispersindarkness: {
+		name: "Whispers in Darkness",
+		desc: "On the next turn, moves used against the target deal 2x damage.",
+		shortDesc: "Things do 2x damage against target on next turn.",
+	},
 	dematerialize: {
 		name: "Dematerialize",
 		desc: "Deals damage to the target equal to the target's maximum HP.",
@@ -849,6 +858,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Brilliancy",
 		desc: "If this thing faints this turn from enemy damage, the thing that replaces it has its Attack and Special Attack maxed. If Rank and File was selected by an ally this turn as well, their move is cancelled, and Brilliancy will max Defense, Special Defense, and Speed instead, if its effect triggers.",
 		shortDesc: "If faint, max next Atk & SpA; effect w/ Rank&File & Promote.",
+	},
+	unlockannihilategene: {
+		name: "Unlock Annihilate Gene",
+		desc: "All infected Things on either team take damage equal to 2 times that of the current virulence, being the fraction of maximum HP damage taken from their infection. Things that are not active will be left at 1 HP if they would have fainted. ",
+		shortDesc: "Damage all infected Things.",
 	},
 	// sport
 	fourseamfastball: {

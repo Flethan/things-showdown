@@ -3193,6 +3193,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			}
 		},
+		onAnySetWeather() {
+			return false;
+		},
+		// preventing setting terrain, rooms, and side conditions implemented elsewhere (field.ts, side.ts)
+		// preventing removal implemented elsewhere (field.ts, side.ts)
 		name: "Respite",
 		rating: 0.5,
 		num: -196,
@@ -3886,6 +3891,32 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Differentiation",
 		rating: 4.5,
 		num: 168,
+	},
+	pathogenresistant: {
+		isNonstandard: "Thing",
+		onUpdate(pokemon) {
+			if (pokemon.status === 'infected') {
+				this.add('-activate', pokemon, 'ability: Pathogen-Resistant');
+				pokemon.cureStatus();
+			}
+		},
+		onSetStatus(status, target, source, effect) {
+			if (status.id !== 'infected') return;
+			if ((effect as Move)?.status) {
+				this.add('-immune', target, '[from] ability: Pathogen-Resistant');
+			}
+			return false;
+		},
+		name: "Pathogen-Resistant",
+		rating: 2,
+		num: -215,
+	},
+	pathogentolerant: {
+		isNonstandard: "Thing",
+		// implemented in conditions.ts
+		name: "Pathogen-Tolerant",
+		rating: 2,
+		num: -215,
 	},
 
 	// BASE GAME

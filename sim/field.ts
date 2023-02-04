@@ -94,6 +94,12 @@ export class Field {
 
 	clearWeather() {
 		if (!this.weather) return false;
+
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
+
 		const prevWeather = this.getWeather();
 		this.battle.singleEvent('FieldEnd', prevWeather, this.weatherState, this);
 		this.weather = '';
@@ -139,6 +145,10 @@ export class Field {
 		if (this.terrain === status.id) return false;
 		const prevTerrain = this.terrain;
 		const prevTerrainState = this.terrainState;
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
 		// new: check if terrain is "permanent" - can't be overridden by regular terrain setting, only by other "permanent" or "overrides" effects
 		if (prevTerrainState.permanent && !(permanent || overrides)) return false;
 		this.terrain = status.id;
@@ -163,6 +173,12 @@ export class Field {
 
 	clearTerrain() {
 		if (!this.terrain) return false;
+
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
+
 		const prevTerrain = this.getTerrain();
 		this.battle.singleEvent('FieldEnd', prevTerrain, this.terrainState, this);
 		this.terrain = '';
@@ -195,6 +211,11 @@ export class Field {
 		if (!source && this.battle.event && this.battle.event.target) source = this.battle.event.target;
 		if (source === 'debug') source = this.battle.sides[0].active[0];
 		status = this.battle.dex.conditions.get(status);
+
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
 
 		let state = this.pseudoWeather[status.id];
 		if (state) {

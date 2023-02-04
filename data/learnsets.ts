@@ -174,6 +174,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			energybeam: ["8T"],
 			ricochetmirror: ["8L77"],
+			corruption: ["8L87"],
+			whispersindarkness: ["8L88"],
 		},
 	},
 	meltipillar: {
@@ -707,6 +709,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dematerialize: ["8L70"],
 			disorient: ["8L80"],
 			ricochetmirror: ["8L77"],
+			corruption: ["8L88"],
+			whispersindarkness: ["8L30"],
 		},
 	},
 	fishish: {
@@ -1107,6 +1111,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			disorient: ["8E"],
 			lob: ["8L5"],
 			farbeam: ["8M"],
+			whispersindarkness: ["8L15"],
 		},
 	},
 	harry: {
@@ -1226,6 +1231,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			borrow: ["8M"],
 			starrywave: ["8L72"],
+			corruption: ["8L88"],
 		},
 	},
 	fsh: {
@@ -1496,6 +1502,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			diminuendo: ["8L40"],
 			lento: ["8L40"],
 			radiate: ["8L60"],
+			mysticalsong: ["8L1"],
 		},
 	},
 	undulux: {
@@ -1688,6 +1695,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			diminuendo: ["8L40"],
 			lento: ["8L40"],
 			timeloop: ["8L55"],
+			mysticalsong: ["8L1"],
 		},
 	},
 	crescitten: {
@@ -2280,6 +2288,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			diminuendo: ["8L40"],
 			lento: ["8L40"],
 			winddispersal: ["8L1"],
+			mysticalsong: ["8L1"],
 		},
 	},
 	algie: {
@@ -2362,6 +2371,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			virulencesurge: ["8L71"],
 			transmissionsurge: ["8L71"],
+			unlockannihilategene: ["8L81"],
 		},
 	},
 	yenoh: {
@@ -2636,6 +2646,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			borrow: ["8M"],
 			energybeam: ["8T"],
+			corruption: ["8L88"],
+			whispersindarkness: ["8L45"],
 		},
 	},
 	myomimeo: {
@@ -2659,6 +2671,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			transmissionsurge: ["8L29"],
 			virulencesurge: ["8L29"],
+			unlockannihilategene: ["8L81"],
 		},
 	},
 	tacilinks: {
@@ -5161,6 +5174,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			coagulate: ["8L40"],
 			timecapsule: ["8L45"],
 			ricochetmirror: ["8L77"],
+			whispersindarkness: ["8L81"],
 		},
 	},
 	calcium: {

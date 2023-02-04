@@ -276,6 +276,11 @@ export class Side {
 		if (!source) throw new Error(`setting sidecond without a source`);
 		if (!source.getSlot) source = (source as any as Side).active[0];
 
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
+
 		status = this.battle.dex.conditions.get(status);
 		if (this.sideConditions[status.id]) {
 			if (!(status as any).onSideRestart) return false;
@@ -312,6 +317,12 @@ export class Side {
 
 	removeSideCondition(status: string | Effect): boolean {
 		status = this.battle.dex.conditions.get(status) as Effect;
+
+		// THINGS - respite check
+		for (const pokemon of this.battle.getAllActive()) {
+			if (pokemon.hasAbility('respite')) return false;
+		}
+
 		if (!this.sideConditions[status.id]) return false;
 		this.battle.singleEvent('SideEnd', status, this.sideConditions[status.id], this);
 		delete this.sideConditions[status.id];

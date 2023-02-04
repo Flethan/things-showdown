@@ -4494,6 +4494,49 @@ export const Moves: {[moveid: string]: MoveData} = {
 		maxMove: {basePower: 130},
 		contestType: "Tough",
 	},
+	corruption: {
+		num: 1344,
+		accuracy: 75,
+		basePower: 120,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Corruption",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		target: "normal",
+		type: "No",
+		contestType: "Tough",
+	},
+	whispersindarkness: {
+		num: 1344,
+		accuracy: 120,
+		basePower: 20,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Whispers in Darkness",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+		banishedUsable: true,
+		volatileStatus: 'whispersindarkness',
+		condition: {
+			noCopy: true,
+			duration: 2,
+			onStart(pokemon) {
+				this.add('-start', pokemon, 'Whispers in Darkness');
+			},
+			onSourceModifyDamage(damage, source, target, move) {
+				if (this.effectState.duration === 1) return this.chainModify(2);
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Whispers in Darkness', '[silent]');
+			},
+		},
+		target: "normal",
+		type: "No",
+		contestType: "Clever",
+	},
 
 	// Science
 	study: {
@@ -4881,6 +4924,35 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		target: "normal",
 		type: "Science",
+		contestType: "Clever",
+	},
+	unlockannihilategene: {
+		num: 215,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Unlock Annihilate Gene",
+		pp: 1,
+		priority: 0,
+		flags: {distance: 1, authentic: 1},
+		onHit(pokemon, source) {
+			this.add('-activate', source, 'move: Unlock Annihilate Gene');
+			let success = false;
+			for (const poke of this.getAllPokemon()) {
+				if (poke.status === 'infected') {
+					success = true;
+					const damageAmt = poke.statusState.damageFraction;
+					let collateral = this.clampIntRange(2 * pokemon.maxhp / damageAmt, 1);
+					if (!poke.isActive && collateral >= pokemon.hp) collateral = pokemon.hp - 1;
+					this.directDamage(collateral, pokemon);
+				}
+			}
+			return success;
+		},
+		target: "all",
+		type: "Science",
+		zMove: {effect: 'heal'},
 		contestType: "Clever",
 	},
 

@@ -595,7 +595,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 
 			// Residual damage
-			if (this.random() * 100 < inf.damageChance) {
+			if (this.random() * 100 < inf.damageChance && !source.hasAbility('pathogentolerant')) {
 				this.damage(source.baseMaxhp / inf.damageFraction);
 			}
 
