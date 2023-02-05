@@ -3918,6 +3918,32 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -215,
 	},
+	insulatinghydroarmor: {
+		isNonstandard: "Thing",
+		onDamage(damage, target, source, effect) {
+			if (effect.effectType !== 'Move') {
+				if (effect.effectType === 'Ability') this.add('-activate', source, 'ability: ' + effect.name);
+				return false;
+			}
+		},
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Liquid') {
+				this.debug('Insulating Hydro-Armor effect');
+				return attacker.getStat('spd', false, false);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Liquid') {
+				this.debug('Insulating Hydro-Armor effect');
+				return attacker.getStat('spd', false, false);
+			}
+		},
+		name: "Insulating Hydro-Armor",
+		rating: 4,
+		num: 98,
+	},
 
 	// BASE GAME
 	noability: {
