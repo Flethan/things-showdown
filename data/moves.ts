@@ -5767,6 +5767,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		basePower: 40,
 		category: "Physical",
 		name: "Double Dribble",
+		isNonstandard: "Thing",
 		pp: 10,
 		priority: 0,
 		flags: {ball: 1, protect: 1, mirror: 1},
