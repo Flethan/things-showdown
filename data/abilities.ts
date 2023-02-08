@@ -3801,11 +3801,18 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	makeamess: {
 		isNonstandard: "ThingInf",
 		onAfterMega(pokemon) {
-			const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm'];
 			this.add('-activate', pokemon, 'ability: Make a Mess');
 			for (const side of pokemon.side.foeSidesWithConditions()) {
-				for (const hazard of hazards) {
+			const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm'];
+				for (const condition in side.sideConditions) {
+					hazards.splice(hazards.indexOf(condition), 1)
+				}
+				let i = 0;
+				while (i < 5) {
+					const hazard = this.sample(hazards);
+					hazards.splice(hazard.indexOf(hazard), 1)
 					side.addSideCondition(hazard);
+					i++;
 				}
 			}
 		},
@@ -3943,6 +3950,34 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Insulating Hydro-Armor",
 		rating: 4,
 		num: 98,
+	},
+	ballaura: {
+		isNonstandard: "Thing",
+		onAllyBasePowerPriority: 22,
+		onAllyBasePower(basePower, attacker, defender, move) {
+			if (move.flags['ball']) {
+				this.debug('Ball Aura boost');
+				return this.chainModify(1.5);
+			}
+		},
+		name: "Ball Aura",
+		rating: 3.5,
+		num: 252,
+	},
+	rebounding: {
+		isNonstandard: "Thing",
+		onAfterMoveSecondarySelf(source, target, move) {
+			const hitMove = this.dex.getActiveMove('Ball Bounce');
+			hitMove.category = move.category;
+			hitMove.basePower = move.basePower / 2;
+			if (source !== null && target !== null && target.hp) {
+				this.add('-activate', target, 'ability: Rebounding');
+				this.actions.trySpreadMoveHit([target], source, hitMove, true);
+			}
+		},
+		name: "Rebounding",
+		rating: 2.5,
+		num: 154,
 	},
 
 	// BASE GAME

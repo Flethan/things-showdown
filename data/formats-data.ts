@@ -1136,6 +1136,22 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	bouncer: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	superballs: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	ballabounce: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	ballboy: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

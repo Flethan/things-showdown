@@ -50,6 +50,7 @@ interface MoveFlags {
 	// Things
 	gas?: 1;
 	kick?: 1;
+	ball?: 1;
 }
 
 export interface HitEffect {

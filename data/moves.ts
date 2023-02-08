@@ -1728,7 +1728,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Hair Ball",
 		pp: 10,
 		priority: 0,
-		flags: {bullet: 1, protect: 1, mirror: 1},
+		flags: {ball: 1, protect: 1, mirror: 1},
 		secondary: {
 			chance: 10,
 			boosts: {
@@ -4966,7 +4966,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Four-seam Fastball",
 		pp: 20,
 		priority: 1,
-		flags: {bullet: 1, protect: 1, mirror: 1},
+		flags: {ball: 1, protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
 		type: "Sport",
@@ -5260,7 +5260,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Shot Put",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1, mirror: 1, bullet: 1},
+		flags: {protect: 1, mirror: 1, ball: 1},
 		secondary: {
 			chance: 10,
 			volatileStatus: 'flinch',
@@ -5465,7 +5465,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Ball Bounce",
 		pp: 1,
 		priority: 1,
-		flags: {bullet: 1, protect: 1, mirror: 1},
+		flags: {ball: 1, protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
 		type: "Sport",
@@ -5760,6 +5760,21 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		zMove: {boost: {spd: 1}},
 		contestType: "Cool",
+	},
+	doubledribble: {
+		num: 814,
+		accuracy: 95,
+		basePower: 40,
+		category: "Physical",
+		name: "Double Dribble",
+		pp: 10,
+		priority: 0,
+		flags: {ball: 1, protect: 1, mirror: 1},
+		multihit: 2,
+		secondary: null,
+		target: "normal",
+		type: "Sport",
+		maxMove: {basePower: 130},
 	},
 
 	// Sword
