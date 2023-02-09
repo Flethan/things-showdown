@@ -906,10 +906,20 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Coming in Hot",
 		shortDesc: "No additional effect.",
 	},
+	doubledribble: {
+		name: "Double Dribble",
+		desc: "Hits twice.",
+		shortDesc: "Hits 2 times in one turn.",
+	},
 	fourinarow: {
 		name: "Four-in-a-Row",
 		desc: "Has a 20% chance to lower the target's Special Attack by 1 stage.",
 		shortDesc: "20% chance to lower the target's Sp. Atk by 1.",
+	},
+	brankle: {
+		name: "Brankle",
+		desc: "Wounds the target, and lowers the target's Speed by 1 stage.",
+		shortDesc: "Wounds & -1 Spe the target.",
 	},
 	whistle: {
 		name: "Whistle",
