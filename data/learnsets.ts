@@ -1737,6 +1737,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			trample: ["8L50"],
 			naptime: ["8L15"],
 			shadowmark: ["8L45"],
+			brankle: ["8E"],
 		},
 	},
 	cramble: {
@@ -3007,6 +3008,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L70"],
 			borrow: ["8M"],
 			caltrops: ["8E"],
+			brankle: ["8L55"],
 		},
 	},
 	pauerowt: {
@@ -3541,6 +3543,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			flashmissle: ["8L70"],
 			rankandfile: ["8T"],
 			borrow: ["8M"],
+			brankle: ["8E"],
 		},
 	},
 	litheath: {

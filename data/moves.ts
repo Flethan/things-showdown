@@ -5777,6 +5777,27 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		maxMove: {basePower: 130},
 	},
+	brankle: {
+		num: 814,
+		accuracy: 85,
+		basePower: 45,
+		category: "Special",
+		name: "Brankle",
+		isNonstandard: "Thing",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 100,
+			status: 'wounded',
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "normal",
+		type: "Sport",
+		maxMove: {basePower: 130},
+	},
 
 	// Sword
 	sharpslash: {
