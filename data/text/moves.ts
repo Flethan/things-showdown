@@ -919,7 +919,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	brankle: {
 		name: "Brankle",
 		desc: "Wounds the target, and lowers the target's Speed by 1 stage.",
-		shortDesc: "Wounds & -1 Spe the target.",
+		shortDesc: "Wounds & lowers target's Spe by 1.",
 	},
 	whistle: {
 		name: "Whistle",
