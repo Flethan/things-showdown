@@ -9,6 +9,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sting: ["8L1"],
 			scuttle: ["8L20"],
 			hsearch: ["8T"],
+			stickattack: ["8E"],
 		},
 	},
 	hubert: {
@@ -31,6 +32,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			borrow: ["8M"],
 			chitinbeam: ["8M"],
+			stickattack: ["8E"],
 		},
 	},
 	swordhubert: {
@@ -54,6 +56,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			chitinbeam: ["8M"],
 			caltrops: ["8L40"],
+			stickattack: ["8E"],
 		},
 	},
 	anemoeba: {
@@ -131,6 +134,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L60"],
 			consume: ["8M"],
 			energybeam: ["8T"],
+			countdown: ["8E"],
 		},
 	},
 	t3trahedron: {
@@ -149,6 +153,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L60"],
 			consume: ["8M"],
 			energybeam: ["8T"],
+			countdown: ["8E"],
 		},
 	},
 	p3ntachoron: {
@@ -176,6 +181,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			ricochetmirror: ["8L77"],
 			corruption: ["8L87"],
 			whispersindarkness: ["8L88"],
+			countdown: ["8E"],
 		},
 	},
 	meltipillar: {
@@ -688,6 +694,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			greenseeds: ["8L1"],
 			abilityseeds: ["8L1"],
+			stickattack: ["8L25"],
 		},
 	},
 	e1: {
@@ -762,6 +769,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			ineptfish: ["8L30"],
 			arghhghg: ["8L25"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8L36"],
 		},
 	},
 	congeel: {
@@ -788,6 +796,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			ineptfish: ["8L30"],
 			arghhghg: ["8L25"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8L36"],
 		},
 	},
 	sarcopharyn: {
@@ -817,6 +826,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			ineptfish: ["8L30"],
 			arghhghg: ["8L25"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8L36"],
+			timesup: ["8L1"],
 		},
 	},
 	demerfin: {
@@ -1305,6 +1316,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L1"],
 			greenground: ["8L1"],
 			consume: ["8M"],
+			stickattack: ["8L25"],
 		},
 	},
 	clayke: {
@@ -1324,6 +1336,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L1"],
 			greenground: ["8L1"],
 			consume: ["8M"],
+			stickattack: ["8L25"],
 		},
 	},
 	hwether: {
@@ -1645,6 +1658,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L55"],
 			greenground: ["8L1"],
 			consume: ["8M"],
+			stickattack: ["8L15"],
 		},
 	},
 	chellush: {
@@ -1677,6 +1691,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L55"],
 			greenground: ["8L1"],
 			consume: ["8M"],
+			stickattack: ["8L15"],
 		},
 	},
 	despacio: {
@@ -1696,6 +1711,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lento: ["8L40"],
 			timeloop: ["8L55"],
 			mysticalsong: ["8L1"],
+			timebomb: ["8L60"],
 		},
 	},
 	crescitten: {
@@ -1948,6 +1964,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			borrow: ["8M"],
 			ricochetmirror: ["8L77"],
+			countdown: ["8L60"],
+			timesup: ["8L60"],
 		},
 	},
 	hydrolo: {
@@ -2027,6 +2045,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dematerialize: ["8L70"],
 			clipthrough: ["8L60"],
 			energybeam: ["8T"],
+			timebomb: ["8L80"],
 		},
 	},
 	sonsprite: {
@@ -2207,6 +2226,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			permafrost: ["8L1"],
 			callmeteorites: ["8M"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8E"],
+			timesup: ["8E"],
 		},
 	},
 	osteoraptor: {
@@ -2232,6 +2253,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			permafrost: ["8L1"],
 			callmeteorites: ["8M"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8E"],
+			timesup: ["8E"],
 		},
 	},
 	achrososaur: {
@@ -2264,6 +2287,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			multistrike: ["8L70"],
 			whirlwindofbones: ["8E"],
+			countdown: ["8E"],
+			timesup: ["8E"],
 		},
 	},
 	neunluft: {
@@ -2336,6 +2361,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greennetwork: ["8L28"],
 			greenground: ["8L35"],
 			consume: ["8M"],
+			stickattack: ["8L20"],
 		},
 	},
 	botanoad: {
@@ -2373,6 +2399,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			virulencesurge: ["8L71"],
 			transmissionsurge: ["8L71"],
 			unlockannihilategene: ["8L81"],
+			stickattack: ["8L20"],
 		},
 	},
 	yenoh: {
@@ -2557,6 +2584,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			rankandfile: ["8T"],
 			ricochetmirror: ["8L77"],
+			countdown: ["8L46"],
 		},
 	},
 	snowworm: {
@@ -2872,6 +2900,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fastforward: ["8L1"],
 			sandsoftime: ["8L1"],
 			hsearch: ["8T"],
+			timesup: ["8E"],
 		},
 	},
 	chronoise: {
@@ -2891,6 +2920,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliancy: ["8L100"],
 			promote: ["8L100"],
 			ricochetmirror: ["8L77"],
+			timesup: ["8E"],
+			timebomb: ["8L50"],
+			countdown: ["8L1"],
 		},
 	},
 	infared: {
@@ -2974,6 +3006,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hurricanewinds: ["8L68"],
 			luminesce: ["8L25"],
 			brilliantflash: ["8L31"],
+			timebomb: ["8L1"],
 		},
 	},
 	epee: {
@@ -3117,6 +3150,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greennetwork: ["8L20"],
 			richsoil: ["8E"],
 			greenground: ["8L31"],
+			stickattack: ["8L25"],
 		},
 	},
 	treefurtheraway: {
@@ -3148,6 +3182,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			farbeam: ["8L52"],
 			richsoil: ["8E"],
 			greenground: ["8L31"],
+			stickattack: ["8L25"],
 		},
 	},
 	mistimink: {
@@ -3417,6 +3452,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmute: ["8L58"],
 			infect: ["8L70"],
 			borrow: ["8M"],
+			stickattack: ["8E"],
 		},
 	},
 	kaijuv: {
@@ -5181,6 +5217,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L45"],
 			ricochetmirror: ["8L77"],
 			whispersindarkness: ["8L81"],
+			timesup: ["8E"],
+			timebomb: ["8L30"],
 		},
 	},
 	calcium: {

@@ -1052,6 +1052,20 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	plainstick: {
+		name: "Plain Stick",
+		spritenum: 828,
+		consume: {
+			healPercent: 10,
+		},
+		onModifyAtkPriority: 1,
+		onModifyAtk(atk, pokemon) {
+			return pokemon.getStat('atk', false, false) + 10;
+		},
+		num: -277,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",

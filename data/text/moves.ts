@@ -1114,12 +1114,30 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
 		shortDesc: "User cannot move next turn.",
 	},
+	timebomb: {
+		name: "Time Bomb",
+		desc: "Deals damage two turns after this move is used. At the end of that turn, the damage is calculated at that time and dealt to the Thing at the position the target had when the move was used. If the user is no longer active at the time, damage is calculated based on the user's natural Special Attack stat, types, and level, with no boosts from its held item or Ability. Fails if this move is already in effect for the target's position.",
+		shortDesc: "Hits two turns after being used.",
+
+		start: "  [POKEMON] sent a bomb through time!",
+		activate: "  A bomb appeared and exploded on [TARGET]!",
+	},
 	sandsoftime: {
 		name: "Sands of Time",
 		desc: "Causes damage to the target equal to 1/16 of its maximum HP, modified by Time-type effectiveness and rounded down, at the end of each turn for 5 turns.",
 		shortDesc: "Damages the target for 5 turns.",
 
 		start: "  [POKEMON] is feeling the passage of time!",
+	},
+	ricochetmirror: {
+		name: "Ricochet Mirror",
+		desc: "If this move is successful, swaps the target and the user out into themselves, causing them to trigger any on switch effects, including encountering entry hazards.",
+		shortDesc: "Swaps user and target into themselves.",
+	},
+	timesup: {
+		name: "Time's Up",
+		desc: "Deals damage to the target equal to the target's maximum HP. If the target has a perish count, this move does not check accuracy.",
+		shortDesc: "OHKOs. Can't miss if perish on target.",
 	},
 	replay: {
 		name: "Replay",
@@ -1165,6 +1183,14 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Temporal Adjustment",
 		desc: "For 5 turns, the environment becomes Time Dilation. During the effect, the speed of all non-Time-type Things is quartered, and the power of Time-type attacks is multiplied by 1.5 if the user moves before the target. Lasts for 10 turns if the user is holding Environmental Accord. Fails if the current environment is Time Dilation.",
 		shortDesc: "For 5 turns, time becomes dilated.",
+	},
+	countdown: {
+		name: "Countdown",
+		desc: "Target receives a perish count of 4 if it doesn't already have a perish count. At the end of each turn including the turn used, the perish count of all active Pokemon lowers by 1 and Things faint if the number reaches 0. The perish count is removed from Things that switch out.",
+		shortDesc: "Target Thing will faint in 3 turns.",
+
+		start: "  [POKEMON] will faint in three turns!",
+		activate: "  [POKEMON]'s perish count fell to [NUMBER].",
 	},
 	// weather
 	rapidvortex: {

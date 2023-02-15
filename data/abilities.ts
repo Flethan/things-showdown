@@ -187,15 +187,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3.5,
 		num: 503,
 	},
-	sticky: {
+	webbed: {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (move.flags['contact']) {
-				this.add('-ability', target, 'Sticky');
+				this.add('-ability', target, 'Webbed');
 				this.boost({spe: -1}, source, target, null, true);
 			}
 		},
-		name: "Sticky",
+		name: "Webbed",
 		rating: 2,
 		num: 504,
 	},
@@ -3978,6 +3978,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Rebounding",
 		rating: 2.5,
 		num: 154,
+	},
+	springintoaction: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('springfloor');
+		},
+		name: "Spring Into Action",
+		rating: 4,
+		num: 1229,
 	},
 
 	// BASE GAME

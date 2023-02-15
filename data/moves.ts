@@ -1417,6 +1417,35 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spd: 1}},
 		contestType: "Cute",
 	},
+	stickattack: {
+		num: 168,
+		accuracy: 90,
+		basePower: 30,
+		category: "Physical",
+		name: "Stick Attack",
+		isNonstandard: "Thing",
+		pp: 25,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 50,
+			onHit(target, source, move) {
+				if (!target.item) {
+					return;
+				} else {
+					const old_item = target.getItem();
+					target.setItem('');
+					target.lastItem = old_item.id;
+				}
+	
+				this.add('-item', target, this.dex.items.get('plainstick'), '[from] move: Stick Attack');
+				target.setItem('plainstick');
+			},
+		},
+		target: "normal",
+		type: "Green",
+		contestType: "Tough",
+	},
 
 	// H
 	hostile: {
@@ -6883,6 +6912,92 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "all",
 		type: "Time",
 		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	countdown: {
+		num: -276,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Countdown",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		onTry(source, target, move) {
+			if (target.volatiles['perishsong']) return false;
+		},
+		onHit(target, source, move) {
+			target.addVolatile('perishsong');
+			this.add('-start', target, 'perish3', '[silent]');
+		},
+		secondary: null,
+		target: "normal",
+		type: "Time",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	timesup: {
+		num: 329,
+		accuracy: 5,
+		basePower: 0,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Time's Up",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		ohko: true,
+		onModifyMove(move, pokemon, target) {
+			if (target?.volatiles['perishsong']) {
+				move.accuracy = true;
+			}
+		},
+		target: "normal",
+		type: "Time",
+		zMove: {basePower: 180},
+		maxMove: {basePower: 130},
+		contestType: "Clever",
+	},
+	timebomb: {
+		num: 248,
+		accuracy: true,
+		basePower: 100,
+		category: "Physical",
+		name: "Time Bomb",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		ignoreImmunity: true,
+		isFutureMove: true,
+		onTry(source, target) {
+			if (!target.side.addSlotCondition(target, 'futuremove')) return false;
+			Object.assign(target.side.slotConditions[target.position]['futuremove'], {
+				duration: 3,
+				move: 'timebomb',
+				source: source,
+				moveData: {
+					id: 'timebomb',
+					name: "Time Bomb",
+					accuracy: true,
+					basePower: 100,
+					category: "Physical",
+					priority: 0,
+					flags: {},
+					ignoreImmunity: false,
+					effectType: 'Move',
+					isFutureMove: true,
+					type: 'Time',
+				},
+			});
+			this.add('-start', source, 'move: Time Bomb');
+			return this.NOT_FAIL;
+		},
+		secondary: null,
+		target: "normal",
+		type: "Time",
 		contestType: "Clever",
 	},
 
