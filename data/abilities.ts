@@ -2446,7 +2446,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		name: "Vindictive",
 		onStart(pokemon) {
-			if (pokemon.hp === 1) {
+			if (pokemon.hp <= pokemon.maxhp / 4) {
 				this.boost({atk: 2, spe: 2}, pokemon, pokemon, null, true);
 			}
 		},

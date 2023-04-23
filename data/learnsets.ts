@@ -3580,6 +3580,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 			borrow: ["8M"],
 			brankle: ["8E"],
+			cyberneticenhancement: ["8E"],
 		},
 	},
 	litheath: {
