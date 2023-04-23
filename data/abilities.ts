@@ -1016,7 +1016,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm'
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -1047,8 +1047,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
 				this.field.weatherState.permanent = true;
-			} else { 
-				this.field.setWeather('hot', null, null, true); 
+			} else {
+				this.field.setWeather('hot', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 			// Infinite duration done in conditions.js#hot
@@ -1123,8 +1123,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
 				this.field.weatherState.permanent = true;
-			} else { 
-				this.field.setWeather('timedilation', null, null, true); 
+			} else {
+				this.field.setWeather('timedilation', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 			// Infinite duration done in conditions.js#hot
@@ -1500,8 +1500,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
 				this.field.weatherState.permanent = true;
-			} else { 
-				this.field.setWeather('windy', null, null, true); 
+			} else {
+				this.field.setWeather('windy', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 			// Infinite duration done in conditions.js#hot
@@ -2972,9 +2972,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	stubborn: {
 		isNonstandard: "Thing",
-		/*onSetAbility(ability, target, source, effect) {
+		/* onSetAbility(ability, target, source, effect) {
 			return false;
-		},*/
+		}, */
 		isPermanent: true,
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
@@ -3067,8 +3067,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
 				this.field.weatherState.permanent = true;
-			} else { 
-				this.field.setWeather('locustswarm', null, null, true); 
+			} else {
+				this.field.setWeather('locustswarm', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 			// Infinite duration done in conditions.js#hot
@@ -3354,9 +3354,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('invitingsurroundings', null, null, false, true);
 			this.field.setWeather('friendlyatmosphere', null, null, false, true);
 		},
-		/*onSetAbility(ability, target, source, effect) {
+		/* onSetAbility(ability, target, source, effect) {
 			return false;
-		},*/
+		}, */
 		onBeforeTurn(pokemon) {
 			const action = this.queue.willMove(pokemon);
 			if (action?.moveid === 'stay') return;
@@ -3430,7 +3430,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.terrainState.duration = 0;
 				this.field.terrainState.source = source;
 				this.field.terrainState.permanent = true;
-			} else { 
+			} else {
 				this.field.setTerrain(terrainType, null, null, true);
 				this.field.terrainState.duration = 0;
 			}
@@ -3640,8 +3640,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.getWeather().id === 'meteorshower' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
-			} else { 
-				this.field.setWeather('meteorshower', null, null, true); 
+			} else {
+				this.field.setWeather('meteorshower', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 		},
@@ -3696,7 +3696,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.types.length !== pokemon.species.types.length) changetype = true;
 			for (const type of pokemon.types) {
 				if (type !== pokemon.species.types[i]) {
-					changetype = true;					
+					changetype = true;
 				}
 				i++;
 			}
@@ -3728,7 +3728,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					case 'Arthropod':
 					case 'Fish':
 					case 'Green':
-						source.heal(source.baseMaxhp / 2)
+						source.heal(source.baseMaxhp / 2);
 						break;
 					case 'Hair':
 					case 'Industrial':
@@ -3803,14 +3803,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAfterMega(pokemon) {
 			this.add('-activate', pokemon, 'ability: Make a Mess');
 			for (const side of pokemon.side.foeSidesWithConditions()) {
-			const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm'];
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm'];
 				for (const condition in side.sideConditions) {
-					hazards.splice(hazards.indexOf(condition), 1)
+					hazards.splice(hazards.indexOf(condition), 1);
 				}
 				let i = 0;
 				while (i < 5) {
 					const hazard = this.sample(hazards);
-					hazards.splice(hazard.indexOf(hazard), 1)
+					hazards.splice(hazard.indexOf(hazard), 1);
 					side.addSideCondition(hazard);
 					i++;
 				}
@@ -4007,7 +4007,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAnySwitchIn(pokemon) {
 			if (this.effectState.source.foes().includes(pokemon)) {
 				for (const ally of this.effectState.source.allies()) {
-					let types = pokemon.getTypes(true);
+					const types = pokemon.getTypes(true);
 					for (const type of types) {
 						if (this.dex.getEffectiveness(type, ally) > 0) {
 							ally.boost({evasion: 1});
