@@ -5539,6 +5539,27 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			shiftchange: ["8L90"],
 		},
 	},
+	lumpdog: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			hairycrash: ["8L1"],
+			hairball: ["8L1"],
+			brush: ["8L1"],
+			vroom: ["8L1"],
+			accelerate: ["8L1"],
+			borrow: ["8L1"],
+			spill: ["8L1"],
+			accent: ["8L1"],
+			stealthstrike: ["8L1"],
+			stay: ["8L1"],
+			warmup: ["8L1"],
+			bask: ["8L1"],
+			updog: ["8L1"],
+		},
+	},
 
 	// BASE GAME
 	missingno: {

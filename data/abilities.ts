@@ -3988,6 +3988,49 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 1229,
 	},
+	sleepy: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if (pokemon.status === 'prone') {
+				this.heal(pokemon.baseMaxhp / 2);
+			}
+		},
+		name: "Sleepy",
+		rating: 4,
+		num: 90,
+	},
+	alert: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.effectState.source = pokemon;
+		},
+		onAnySwitchIn(pokemon) {
+			if (this.effectState.source.foes().includes(pokemon)) {
+				for (const ally of this.effectState.source.allies()) {
+					let types = pokemon.getTypes(true);
+					for (const type of types) {
+						if (this.dex.getEffectiveness(type, ally) > 0) {
+							ally.boost({evasion: 1});
+							return;
+						}
+					}
+				}
+			}
+		},
+		name: "Alert",
+		rating: 4,
+		num: 90,
+	},
+	whatsup: {
+		isNonstandard: "ThingInf",
+		onStart(pokemon) {
+			pokemon.addVolatile('updog', pokemon);
+		},
+		// not fainting implemented in updog condition (moves.ts)
+		name: "What's up?",
+		rating: 4,
+		num: 90,
+	},
 
 	// BASE GAME
 	noability: {

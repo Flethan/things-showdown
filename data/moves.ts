@@ -853,6 +853,42 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Far",
 		contestType: "Clever",
 	},
+	updog: {
+		num: 213,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Updog",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		volatileStatus: 'updog',
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			onStart(pokemon, source, effect) {
+				if (!this.runEvent('Updog', pokemon, source)) {
+					this.debug('Updog event failed');
+					return false;
+				}
+
+				this.add('-start', pokemon, 'Updog');
+			},
+			onResidual(pokemon) {
+				this.boost({evasion: 1});
+				if (pokemon.boosts['evasion'] >= 3) pokemon.trySetStatus('distanced');
+				if (pokemon.boosts['evasion'] >= 6 && !pokemon.hasAbility("What's up?")) pokemon.faint();
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Updog', '[silent]');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "Normal",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// Fish
 	brilliantfish: {
