@@ -2340,6 +2340,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 40.0,
 		color: "Gray",
 		eggGroups: ["Mineral"],
+		evos: ["Generex"],
 		hasSprite: true,
 	},
 	litheath: {
@@ -4448,6 +4449,23 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["Far"],
+	},
+	generex: {
+		num: -534,
+		name: "Generex",
+		symbolForme: "Infinity",
+		types: ["Industrial", "Weather"],
+		gender: "N",
+		baseStats: {hp: 170, atk: 25, def: 98, spa: 63, spd: 112, spe: 34},
+		abilities: {0: "Wind Turbine"},
+		heightm: 75,
+		weightkg: 82.0,
+		color: "Gray",
+		eggGroups: ["Mineral"],
+		prevo: "Aerraton",
+		evoType: "symbol",
+		evoCondition: "Symbol",
+		addedType: "Infinity",
 	},
 
 	// BASE GAME

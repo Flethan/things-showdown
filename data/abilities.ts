@@ -4031,6 +4031,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 90,
 	},
+	windturbine: {
+		isNonstandard: "ThingInf",
+		onBeforeMovePriority: 9,
+		onBeforeMove(pokemon) {
+			if (!this.field.isWeather('windy')) {
+				this.add('cant', pokemon, 'ability: Wind Turbine');
+				return false;
+			}
+		},
+		onAllyDeductPP(target, source) {
+			if (this.field.isWeather('windy') && source.hasType('Industrial')) {
+				return -1;
+			}
+		},
+		onAllyBasePowerPriority: 30,
+		onAllyBasePower(basePower, attacker, defender, move) {
+			if (this.field.isWeather('windy') && attacker.hasType('Industrial')) {
+				this.debug('Wind Turbine boost');
+				return this.chainModify(1.5);
+			}
+		},
+		name: "Wind Turbine",
+		rating: 4,
+		num: 90,
+	},
 
 	// BASE GAME
 	noability: {
