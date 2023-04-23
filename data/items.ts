@@ -1066,6 +1066,28 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	planestick: {
+		name: "Plane Stick",
+		spritenum: 829,
+		consume: {
+			healPercent: 33,
+		},
+		onRedirectTargetPriority: 1,
+		onRedirectTarget(target, source, source2, move) {
+			 if (['normal', 'randomNormal', 'any'].includes(move.target)) {
+				move.target = 'allAdjacentFoes';
+			 }
+		},
+		onBasePowerPriority: 15,
+		onBasePower(basePower, user, target, move) {
+			if (move) {
+				return this.chainModify(0.75);
+			}
+		},
+		num: -278,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
