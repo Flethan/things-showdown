@@ -4005,7 +4005,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.effectState.source = pokemon;
 		},
 		onAnySwitchIn(pokemon) {
-			if (this.effectState.source.foes().includes(pokemon)) {
+			if (this.effectState.source.foes()?.includes(pokemon)) {
 				for (const ally of this.effectState.source.allies()) {
 					const types = pokemon.getTypes(true);
 					for (const type of types) {
