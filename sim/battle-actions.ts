@@ -494,7 +494,7 @@ export class BattleActions {
 					extraPP += ppDrop || 0;
 				}
 			}
-			if (extraPP !== 0) {
+			if (extraPP > 0) {
 				pokemon.deductPP(moveOrMoveName, extraPP);
 			}
 		}

@@ -4040,9 +4040,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return false;
 			}
 		},
-		onAllyDeductPP(target, source) {
+		onAllyAfterMove(source, target, move) {
 			if (this.field.isWeather('windy') && source.hasType('Industrial')) {
-				return -1;
+				const moveSlot = source.moveSlots.find(theMove => theMove.id === move.id);
+				if (!moveSlot) return;
+				moveSlot.pp += 1;
 			}
 		},
 		onAllyBasePowerPriority: 30,
