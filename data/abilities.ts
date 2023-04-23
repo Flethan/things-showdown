@@ -4010,7 +4010,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					const types = pokemon.getTypes(true);
 					for (const type of types) {
 						if (this.dex.getEffectiveness(type, ally) > 0) {
-							ally.boost({evasion: 1});
+							this.boost({evasion: 1}, ally);
 							return;
 						}
 					}
