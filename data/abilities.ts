@@ -4058,6 +4058,28 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 90,
 	},
+	sticky: {
+		isNonstandard: "Thing",
+		onDamagingHit(damage, target, source, move) {
+			if (this.checkMoveMakesContact(move, source, target)) {
+				if (this.randomChance(3, 10)) {
+					if (!target.item) {
+						return;
+					} else {
+						const old_item = target.getItem();
+						target.setItem('');
+						target.lastItem = old_item.id;
+					}
+		
+					this.add('-item', target, this.dex.items.get('plainstick'), '[from] ability: Sticky');
+					target.setItem('plainstick');
+				}
+			}
+		},
+		name: "Sticky",
+		rating: 2,
+		num: 504,
+	},
 
 	// BASE GAME
 	noability: {
