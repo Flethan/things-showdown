@@ -4602,6 +4602,42 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "No",
 		contestType: "Clever",
 	},
+	noticesyourstuff: {
+		num: 168,
+		accuracy: 110,
+		basePower: 90,
+		category: "Special",
+		name: "Notices your stuff",
+		isNonstandard: "ThingInf",
+		pp: 3,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onTryHit(source, target, move) {
+			if (source.item || source.volatiles['gem'] || !target.item) {
+				return false;
+			}
+		},
+		onAfterHit(target, source, move) {
+			if (source.item || source.volatiles['gem']) {
+				return;
+			}
+			const yourItem = target.takeItem(source);
+			if (!yourItem) {
+				return;
+			}
+			if (!this.singleEvent('TakeItem', yourItem, target.itemState, source, target, move, yourItem) ||
+				!source.setItem(yourItem)) {
+				target.item = yourItem.id; // bypass setItem so we don't break choicelock or anything
+				return;
+			}
+			this.add('-enditem', target, yourItem, '[silent]', '[from] move: Notices your stuff', '[of] ' + source);
+			this.add('-item', source, yourItem, '[from] move: Notices your stuff', '[of] ' + target);
+		},
+		secondary: null,
+		target: "normal",
+		type: "No",
+		contestType: "Cute",
+	},
 
 	// Science
 	study: {

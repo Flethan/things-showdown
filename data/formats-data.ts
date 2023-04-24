@@ -1164,6 +1164,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	owo: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {

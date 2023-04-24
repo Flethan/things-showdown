@@ -3098,6 +3098,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.boosts.spe < 2) { this.actions.useMove('crashlanding', pokemon); } else {
 				pokemon.setStatus('distanced');
 				pokemon.statusState.duration = 0;
+				this.boost({evasion: pokemon.boosts.spe});
 			}
 		},
 		onResidual(pokemon) {
@@ -4079,6 +4080,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Sticky",
 		rating: 2,
 		num: 504,
+	},
+	whatsthis: {
+		isNonstandard: "ThingInf",
+		onResidual(pokemon) {
+			if (pokemon.item) { this.actions.useMove('consume', pokemon); }
+		},
+		name: "What's this?",
+		rating: 4,
+		num: 2111,
 	},
 
 	// BASE GAME
