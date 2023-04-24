@@ -229,7 +229,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = false;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.removeSideCondition(targetCondition)) {
@@ -343,6 +343,51 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Arthropod",
 		contestType: "Tough",
+	},
+	styletslurp: {
+		num: 1573,
+		accuracy: 95,
+		basePower: 60,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Stylet Slurp",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1, bite: 1},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Liquid') return 1;
+		},
+		target: "normal",
+		type: "Arthropod",
+		contestType: "Clever",
+	},
+	eggscatter: {
+		num: 446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Egg Scatter",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'eggscatter',
+		condition: {
+			// this is a side condition
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Egg Scatter');
+			},
+			onResidual(pokemon) {
+				if (pokemon.hasItem('yellowsafetyvest')) return;
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(this.dex.getActiveMove('eggscatter')), -6, 6);
+				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 16);
+			},
+		},
+		secondary: null,
+		target: "foeSide",
+		type: "Arthropod",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
 	},
 
 	// Dirt
@@ -844,7 +889,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Lob",
 		pp: 25,
 		priority: 0,
-		flags: {contact: 1, protect: 1, mirror: 1},
+		flags: {bullet: 1, protect: 1, mirror: 1},
 		secondary: {
 			chance: 60,
 			volatileStatus: 'flinch',
@@ -887,6 +932,41 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Normal",
 		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
+	ohio: {
+		num: 329,
+		accuracy: 20,
+		basePower: 0,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Ohio",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		ohko: true,
+		target: "normal",
+		type: "Far",
+		zMove: {basePower: 180},
+		maxMove: {basePower: 130},
+		contestType: "Beautiful",
+	},
+	arrowofupdog: {
+		num: 1561,
+		accuracy: 70,
+		basePower: 50,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Arrow of Updog",
+		pp: 20,
+		priority: 0,
+		flags: {bullet: 1, protect: 1, mirror: 1},
+		onHit(target, source, move) {
+			target.addVolatile('updog');
+		},
+		target: "any",
+		type: "Far",
 		contestType: "Clever",
 	},
 
@@ -1833,7 +1913,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -1910,6 +1990,44 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "adjacentAllyOrSelf",
+		type: "Hair",
+		zMove: {boost: {evasion: 1}},
+		contestType: "Cute",
+	},
+	entangle: {
+		num: 250,
+		accuracy: 95,
+		basePower: 25,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Entangle",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1},
+		volatileStatus: 'partiallytrapped',
+		songFlags: ['hurt'],
+		secondary: null,
+		target: "normal",
+		type: "Hair",
+		contestType: "Cute",
+	},
+	cuddle: {
+		num: 28,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Cuddle",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, contact: 1},
+		boosts: {
+			atk: -1,
+			def: -1,
+			evasion: -1,
+		},
+		secondary: null,
+		target: "normal",
 		type: "Hair",
 		zMove: {boost: {evasion: 1}},
 		contestType: "Cute",
@@ -4637,6 +4755,102 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "No",
 		contestType: "Cute",
+	},
+	nage: {
+		num: 266,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Nage",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 2,
+		flags: {},
+		volatileStatus: 'nage',
+		onTry(source) {
+			return this.activePerHalf > 1;
+		},
+		onHit(target, source, move) {
+			this.boost({spa: -1}, target);
+		},
+		condition: {
+			duration: 1,
+			onStart(target, source, effect) {
+				if (effect?.id === 'zpower') {
+					this.add('-singleturn', target, 'move: Nage', '[zeffect]');
+				} else {
+					this.add('-singleturn', target, 'move: Nage');
+				}
+			},
+			onFoeRedirectTargetPriority: 1,
+			onFoeRedirectTarget(target, source, source2, move) {
+				if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
+					if (move.smartTarget) move.smartTarget = false;
+					this.debug("Follow Me redirected target of move");
+					return this.effectState.target;
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "No",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cute",
+	},
+	nothanks: {
+		num: 266,
+		accuracy: 120,
+		basePower: 0,
+		category: "Status",
+		name: "No Thanks",
+		isNonstandard: "Thing",
+		pp: 10,
+		priority: 0,
+		flags: {},
+		onTry(source) {
+			if (!source.status && !source.boosts && !source.volatiles) return false;
+		},
+		onHit(target, source, move) {
+			if (source.status) {
+				if (target.trySetStatus(source.status)) source.clearStatus();
+			}
+			if (source.volatiles) {
+				for (const i in source.volatiles) {
+					if (this.dex.conditions.getByID(i as ID).noCopy) continue;
+					// shallow clones
+					target.volatiles[i] = {...source.volatiles[i]};
+					if (target.volatiles[i].linkedPokemon) {
+						delete source.volatiles[i].linkedPokemon;
+						delete source.volatiles[i].linkedStatus;
+						for (const linkedPoke of target.volatiles[i].linkedPokemon) {
+							const linkedPokeLinks = linkedPoke.volatiles[target.volatiles[i].linkedStatus].linkedPokemon;
+							linkedPokeLinks[linkedPokeLinks.indexOf(source)] = this;
+						}
+					}
+					source.removeVolatile(i);
+				}
+			}
+			if (source.boosts) {
+				let i: BoostID;
+				for (i in source.boosts) {
+					const stats: BoostID[] = [];
+					const boost: SparseBoostsTable = {};
+					let statPlus: BoostID;
+					for (statPlus in source.boosts) {
+						if (source.boosts[statPlus] !== 0) {
+							boost[statPlus] = source.boosts[statPlus];
+						}
+					}
+					this.boost(boost, target);
+					source.clearBoosts();
+				}
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "No",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
 	},
 
 	// Science

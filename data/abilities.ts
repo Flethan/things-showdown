@@ -1016,7 +1016,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -2073,7 +2073,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.setWeather(this.sample(environmentalfactors));
 				break;
 			case 2:
-				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm'];
+				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:
@@ -3789,7 +3789,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
-				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm'];
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
 				const hazard = this.sample(hazards);
 				this.add('-activate', target, 'ability: Do Not Enter');
 				source.side.addSideCondition(hazard);
@@ -3804,7 +3804,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAfterMega(pokemon) {
 			this.add('-activate', pokemon, 'ability: Make a Mess');
 			for (const side of pokemon.side.foeSidesWithConditions()) {
-				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm'];
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'beamfield', 'caltrops', 'lightningstorm', 'eggscatter'];
 				for (const condition in side.sideConditions) {
 					hazards.splice(hazards.indexOf(condition), 1);
 				}

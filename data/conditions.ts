@@ -483,17 +483,17 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onSourceModifyAccuracyPriority: -1,
 		onSourceModifyAccuracy(accuracy, target, source, move) {
 			if (typeof accuracy === 'number') {
-				if (move.target !== 'any') {
-					return this.chainModify(0.90);
-				}
+				// if (move.target !== 'any') {
+				return this.chainModify(0.90);
+				// }
 			}
 		},
 		onAnyAccuracy(accuracy, target, source, move) {
 			if (move && target === this.effectState.target) {
 				if (typeof accuracy === 'number') {
-					if (move.target !== 'any') {
-						return this.chainModify(0.90);
-					}
+					// if (move.target !== 'any') {
+					return this.chainModify(0.90);
+					// }
 				}
 			}
 			return accuracy;
