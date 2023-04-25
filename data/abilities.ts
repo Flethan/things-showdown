@@ -3726,6 +3726,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				target.setType(['???']);
 				this.add('-start', target, 'typechange', '???');
 				for (const type of types) {
+					this.add('-activate', source, 'ability: Clear Cut');
 					switch (type) {
 					case 'Arthropod':
 					case 'Fish':
