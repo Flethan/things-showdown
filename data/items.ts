@@ -1218,6 +1218,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onTryHit(target, source, move) {
 			if (target !== source && move.type === 'Liquid') {
+				this.add('-activate', target, 'item: Bottle');
 				const old_item = target.getItem();
 				target.setItem('filledbottle');
 				target.lastItem = old_item.id;
