@@ -1072,8 +1072,8 @@ export const Items: {[itemid: string]: ItemData} = {
 		consume: {
 			healPercent: 33,
 		},
-		onRedirectTargetPriority: 1,
-		onRedirectTarget(target, source, source2, move) {
+		onBeforeMovePriority: 1,
+		onBeforeMove(source, target, move) {
 			 if (['normal', 'randomNormal', 'any'].includes(move.target)) {
 				move.target = 'allAdjacentFoes';
 			 }
@@ -1085,6 +1085,23 @@ export const Items: {[itemid: string]: ItemData} = {
 			}
 		},
 		num: -278,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	potionofupdog: {
+		name: "Potion of Updog",
+		spritenum: 830,
+		fling: {
+			basePower: 40,
+		},
+		consume: {
+			healPercent: 100,
+		},
+		onStart(pokemon) {
+			pokemon.addVolatile('updog');
+			pokemon.useItem();
+		},
+		num: -279,
 		gen: 8,
 		isNonstandard: "Thing",
 	},
