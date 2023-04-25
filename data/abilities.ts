@@ -1791,6 +1791,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (['cold'].includes(pokemon.effectiveWeather())) {
 				return this.chainModify(2);
 			}
+			// ignoring drop implemented in condition
 		},
 		name: "Chilled",
 		rating: 3,

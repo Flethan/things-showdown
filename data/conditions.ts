@@ -907,6 +907,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				!target.hasAbility('Chilled') &&
 				!target.hasAbility('Adaptable') &&
 				!target.hasAbility('Environmental Blessing') &&
+				!target.hasItem('parka') &&
 				!target.hasItem('cowboyhat')) {
 				if (this.blessedEnv) this.boost({spe: -2}, target);
 				else this.boost({spe: -1}, target);

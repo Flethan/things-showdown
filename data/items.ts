@@ -1105,6 +1105,170 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	heftyshield: {
+		name: "Hefty Shield",
+		spritenum: 831,
+		consume: {
+			healPercent: 25,
+		},
+		onModifyDefPriority: 1,
+		onModifyDef(def, pokemon) {
+			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+		},
+		num: -280,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	heftycloak: {
+		name: "Hefty Cloak",
+		spritenum: 832,
+		consume: {
+			healPercent: 25,
+		},
+		onModifySpDPriority: 1,
+		onModifySpD(spd, pokemon) {
+			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+		},
+		num: -281,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	heftygloves: {
+		name: "Hefty Gloves",
+		spritenum: 833,
+		consume: {
+			healPercent: 25,
+		},
+		onModifyAtkPriority: 1,
+		onModifyAtk(atk, pokemon) {
+			for (const foe of pokemon.foes()) {
+				if (foe !== pokemon && !foe.moveThisTurn) return;
+			}
+			for (const ally of pokemon.allies()) {
+				if (ally !== pokemon && !ally.moveThisTurn) return;
+			}
+			return this.chainModify(1.5);
+		},
+		num: -282,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	heftygoggles: {
+		name: "Hefty Goggles",
+		spritenum: 834,
+		consume: {
+			healPercent: 25,
+		},
+		onModifySpAPriority: 1,
+		onModifySpA(spa, pokemon) {
+			for (const foe of pokemon.foes()) {
+				if (foe !== pokemon && !foe.moveThisTurn) return;
+			}
+			for (const ally of pokemon.allies()) {
+				if (ally !== pokemon && !ally.moveThisTurn) return;
+			}
+			return this.chainModify(1.5);
+		},
+		num: -283,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	psychoticsandals: {
+		name: "Psychotic Sandals",
+		spritenum: 835,
+		consume: {
+			healPercent: 50,
+		},
+		onBeforeTurn(pokemon) {
+			const action = this.queue.willMove(pokemon);
+			if (action) {
+				const moves = pokemon.moveSlots;
+				const newMove = this.sample(moves);
+
+				action.move = this.dex.moves.get(newMove.move);
+				action.moveid = newMove.id;
+				this.queue.changeAction(pokemon, action);
+			}
+		},
+		onModifySpe(spe, pokemon) {
+			return this.chainModify(2);
+		},
+		num: -284,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	slipshoes: {
+		name: "Slip Shoes",
+		spritenum: 836,
+		consume: {
+			healPercent: 25,
+		},
+		onStart(pokemon) {
+			pokemon.setStatus('prone');
+		},
+		num: -285,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	bottle: {
+		name: "Bottle",
+		spritenum: 837,
+		consume: {
+			healPercent: 10,
+		},
+		onTryHit(target, source, move) {
+			if (target !== source && move.type === 'Liquid') {
+				const old_item = target.getItem();
+				target.setItem('filledbottle');
+				target.lastItem = old_item.id;
+				target.usedItemThisTurn = true;
+				return null;
+			}
+		},
+		num: -286,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	filledbottle: {
+		name: "Filled Bottle",
+		spritenum: 838,
+		consume: {
+			healPercent: 100,
+		},
+		num: -287,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	teleportationdevice: {
+		name: "Teleportation Device",
+		spritenum: 839,
+		fling: {
+			basePower: 10,
+		},
+		consume: {
+			healPercent: 25,
+		},
+		onUpdate(pokemon) {
+			if (pokemon.status === 'distanced') {
+				pokemon.cureStatus();
+				pokemon.useItem();
+			}
+		},
+		num: -288,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	parka: {
+		name: "Parka",
+		spritenum: 840,
+		consume: {
+			healPercent: 40,
+		},
+		// implemented in condition
+		num: -289,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
