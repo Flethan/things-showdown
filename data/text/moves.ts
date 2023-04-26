@@ -50,6 +50,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 40% chance to lower the user's Special Attack by 1 stage.",
 		shortDesc: "40% chance to lower the user's Sp. Atk by 1.",
 	},
+	styletslurp: {
+		name: "Stylet Slurp",
+		desc: "This move's type effectiveness against Liquid is changed to be super effective no matter what this move's type is.",
+		shortDesc: "Super effective on Liquid.",
+	},
 	nuisancepest: {
 		name: "Nuisance Pest",
 		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides.",
@@ -84,6 +89,15 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Pheromone Mark",
 		desc: "Until the target switches out, Arthropod-type Thing's moves used against it have a +2 crit ratio, and it takes 1.5x damage from Locust Swarm.",
 		shortDesc: "Arthropod Things have +2 crit ratio against target.",
+	},
+	eggscatter: {
+		name: "Egg Scatter",
+		desc: "Sets up a hazard on the opposing side of the field, damaging each opposing Thing by 1/16 of their maximum HP each turn, factoring Arthropod-type effectiveness.",
+		shortDesc: "Hurts foes 1/16 each turn. Factors Arthropod.",
+
+		start: "  Eggs were scattered around [TEAM]!",
+		end: "  The eggs disappeared around [TEAM]!",
+		damage: "  [POKEMON] was fed on by the young!",
 	},
 	// dirt
 	landslide: {
