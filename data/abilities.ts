@@ -3515,6 +3515,46 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Environmental Blessing');
 			this.blessedEnv = true;
+			if (this.field.weather) {
+				let newType;
+				switch (this.field.weather) {
+				case 'locustswarm':
+					newType = 'Arthropod';
+					break;
+				case 'meteorshower':
+					newType = 'Dirt';
+					break;
+				case 'underwater':
+					newType = 'Fish';
+					break;
+				case 'nighttime':
+					newType = 'Night';
+					break;
+				case 'hot':
+					newType = 'Temperature';
+					break;
+				case 'cold':
+					newType = 'Temperature';
+					break;
+				case 'timedilation':
+					newType = 'Time';
+					break;
+				case 'windy':
+					newType = 'Weather';
+					break;
+				case 'yellowish':
+					newType = 'Yellow';
+					break;
+				}
+				if (!newType) {
+					return false;
+				}
+				let success = false;
+				if (pokemon.addElementType(newType)) success = true;
+				if (success) {
+					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+				}
+			}
 		},
 		onEnd(pokemon) {
 			if (!this.blessedEnv) return;
@@ -3577,6 +3617,40 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onStart(pokemon) {
 			this.add('-ability', pokemon, 'Landscape Blessing');
 			this.blessedLand = true;
+			if (this.field.terrain) {
+				let newType;
+				switch (this.field.terrain) {
+				case 'richsoil':
+					newType = 'Dirt';
+					break;
+				case 'spatialexpansion':
+					newType = 'Far';
+					break;
+				case 'greenground':
+					newType = 'Green';
+					break;
+				case 'sudscape':
+					newType = 'Liquid';
+					break;
+				case 'mysticalsong':
+					newType = 'Music';
+					break;
+				case 'nullland':
+					newType = 'No';
+					break;
+				case 'springfloor':
+					newType = 'Sport';
+					break;
+				}
+				if (!newType) {
+					return false;
+				}
+				let success = false;
+				if (pokemon.addElementType(newType)) success = true;
+				if (success) {
+					this.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+				}
+			}
 		},
 		onEnd(pokemon) {
 			if (!this.blessedLand) return;
