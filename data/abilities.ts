@@ -3813,7 +3813,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				let i = 0;
 				while (i < 5) {
 					const hazard = this.sample(hazards);
-					hazards.splice(hazard.indexOf(hazard), 1);
+					hazards.splice(hazards.indexOf(hazard), 1);
 					side.addSideCondition(hazard);
 					i++;
 				}
