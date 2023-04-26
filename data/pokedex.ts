@@ -757,6 +757,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 24,
 		color: "Brown",
 		eggGroups: ["Human-Like"],
+		hasSprite: true,
 	},
 	horse: {
 		num: -350,
@@ -2004,6 +2005,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		evos: ["Pauersbak"],
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	pauersbak: {
 		num: -427,
@@ -2018,6 +2020,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Lytpolute"],
 		prevo: "Pauerowt",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	lytpolute: {
 		num: -428,
@@ -2031,6 +2034,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		prevo: "Pauersbak",
 		eggGroups: ["Mineral"],
+		hasSprite: true,
 	},
 	tree: {
 		num: -429,
@@ -2290,6 +2294,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Gigaroach", "Molluskeleton", "Ouromorose"],
 		color: "Black",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	gigaroach: {
 		num: -443,
@@ -2303,6 +2308,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Kaijuv",
 		color: "Orange",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	molluskeleton: {
 		num: -444,
@@ -2316,6 +2322,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Kaijuv",
 		color: "White",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	ouromorose: {
 		num: -445,
