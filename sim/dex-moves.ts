@@ -51,6 +51,7 @@ interface MoveFlags {
 	gas?: 1;
 	kick?: 1;
 	ball?: 1;
+	soda?: 1;
 }
 
 export interface HitEffect {
