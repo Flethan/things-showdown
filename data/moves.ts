@@ -1817,6 +1817,65 @@ export const Moves: {[moveid: string]: MoveData} = {
 		maxMove: {basePower: 130},
 		contestType: "Tough",
 	},
+	hello: {
+		num: 213,
+		accuracy: 95,
+		basePower: 0,
+		category: "Status",
+		name: "Hello",
+		isNonstandard: "Thing",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
+		volatileStatus: 'hello',
+		onHit(target, source, move) {
+			source.addVolatile('hello', target)
+		},
+		condition: {
+			noCopy: true, // doesn't get copied by Baton Pass
+			onStart(pokemon, source, effect) {
+				if (pokemon.volatiles['conversed']) {
+					this.debug('already talked');
+					return false;
+				}
+				if (!source.volatiles['hello']) {
+					if (!source.addVolatile('hello', pokemon)) return false;
+					this.add('-start', source, "Hello");
+				}
+
+				this.add('-start', pokemon, 'Hello');
+				
+				// 1-3 turns
+				this.effectState.startTime = this.random(2, 5);
+				this.effectState.time = this.effectState.startTime;
+			},
+			onUpdate(pokemon) {
+				if (this.effectState.source && !this.effectState.source.isActive && !this.effectState.source.volatiles['hello'] && pokemon.volatiles['hello']) {
+					this.debug('Removing Hello volatile on ' + pokemon);
+					pokemon.removeVolatile('hello');
+				}
+			},
+			onBeforeMovePriority: 10,
+			onBeforeMove(pokemon, target, move) {
+				this.effectState.time--;
+				if (this.effectState.time <= 0) {
+					pokemon.removeVolatile('hello');
+					pokemon.addVolatile('conversed');
+				} else {
+					this.add('cant', pokemon, 'hello');
+					return false;
+				}
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Hello', '[silent]');
+			},
+		},
+		secondary: null,
+		target: "normal",
+		type: "H",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// Hair
 	whipcrack: {
