@@ -11,7 +11,7 @@ export const Aliases: {[alias: string]: string} = {
 	litheathsoil: "Litheath",
 	litheathsong: "Litheath",
 	litheathspring: "Litheath",
-	litheathsuds: "Litheath", 
+	litheathsuds: "Litheath",
 	geosondeexpansion: "Geosonde",
 	geosondegreen: "Geosonde",
 	geosondenull: "Geosonde",
@@ -20,6 +20,8 @@ export const Aliases: {[alias: string]: string} = {
 	geosondespring: "Geosonde",
 	geosondesuds: "Geosonde", */
 
+	thingssingles: "[Things] Singles",
+	thingsdoubles: "[Things] Doubles",
 	// formats
 	randbats: "[Gen 8] Random Battle",
 	uber: "[Gen 8] Ubers",
