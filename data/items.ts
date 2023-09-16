@@ -1114,7 +1114,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		onModifyDefPriority: 1,
 		onModifyDef(def, pokemon) {
 			console.log(pokemon.moveThisTurn);
-			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+			if (this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -280,
 		gen: 8,
@@ -1128,7 +1128,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpDPriority: 1,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+			if (!this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -281,
 		gen: 8,
@@ -1142,13 +1142,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			for (const foe of pokemon.foes()) {
-				if (foe !== pokemon && !foe.moveThisTurn) return;
+			let boosted = true;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (this.queue.willMove(target)) {
+					boosted = false;
+					break;
+				}
 			}
-			for (const ally of pokemon.allies()) {
-				if (ally !== pokemon && !ally.moveThisTurn) return;
+			if (boosted) {
+				this.debug('hefty boost');
+				return this.chainModify(1.5);
 			}
-			return this.chainModify(1.5);
 		},
 		num: -282,
 		gen: 8,
@@ -1162,13 +1167,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			for (const foe of pokemon.foes()) {
-				if (foe !== pokemon && !foe.moveThisTurn) return;
+			let boosted = true;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (this.queue.willMove(target)) {
+					boosted = false;
+					break;
+				}
 			}
-			for (const ally of pokemon.allies()) {
-				if (ally !== pokemon && !ally.moveThisTurn) return;
+			if (boosted) {
+				this.debug('hefty boost');
+				return this.chainModify(1.5);
 			}
-			return this.chainModify(1.5);
 		},
 		num: -283,
 		gen: 8,
