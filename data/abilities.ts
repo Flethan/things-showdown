@@ -3805,7 +3805,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					case 'Arthropod':
 					case 'Fish':
 					case 'Green':
-						source.heal(source.baseMaxhp / 2);
+						this.heal(source.baseMaxhp / 2, source, source);
 						break;
 					case 'Hair':
 					case 'Industrial':
