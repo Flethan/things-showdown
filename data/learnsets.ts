@@ -1107,6 +1107,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8T"],
 			consume: ["8M"],
 			borrow: ["8M"],
+			hello: ["8L100"],
 		},
 	},
 	goudbye: {
@@ -1159,6 +1160,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			hsearch: ["8T"],
 			entangle: ["8L30"],
+			hello: ["8L50"],
 		},
 	},
 	horse: {
@@ -2704,6 +2706,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whispersindarkness: ["8L45"],
 			nage: ["8T"],
 			nothanks: ["8L50"],
+			hello: ["8L5"],
 		},
 	},
 	myomimeo: {
@@ -3237,6 +3240,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L1"],
 			consume: ["8M"],
 			borrow: ["8M"],
+			hello: ["8L10"],
 		},
 	},
 	triathlide: {
@@ -3452,6 +3456,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hairycrash: ["8L80"],
 			consume: ["8M"],
 			entangle: ["8L30"],
+			hello: ["8L50"],
 		},
 	},
 	bean: {
@@ -4569,6 +4574,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hairycrash: ["8L88"],
 			timecapsule: ["8L77"],
 			borrow: ["8M"],
+			hello: ["8L5"],
 		},
 	},
 	hatthewtophat: {
@@ -4593,6 +4599,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			vetoslip: ["8L88"],
 			autoturret: ["8L77"],
 			borrow: ["8M"],
+			hello: ["8L5"],
 		},
 	},
 	hatthewballcap: {
@@ -4617,6 +4624,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			soaringaxekick: ["8L88"],
 			shootingstar: ["8L77"],
 			borrow: ["8M"],
+			hello: ["8L5"],
 		},
 	},
 	hatthewpangolin: {
@@ -4640,6 +4648,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			disarmingstrike: ["8L88"],
 			prune: ["8L77"],
 			borrow: ["8M"],
+			hello: ["8L5"],
 		},
 	},
 	rock: {

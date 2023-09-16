@@ -4166,6 +4166,98 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2111,
 	},
+	hydrophobicaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			this.field.clearWeather();
+		},
+		name: "Hydrophobic Aura",
+		rating: 4,
+		num: 2111,
+	},
+	polaraura: {
+		isNonstandard: "Thing",
+		onStart() {
+			if (this.field.weatherState.duration < 5)
+				this.field.weatherState.duration = 5;
+		},
+		name: "Polar Aura",
+		rating: 4,
+		num: 2111,
+	},
+	positiveaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			this.field.clearTerrain();
+		},
+		name: "Positive Aura",
+		rating: 4,
+		num: 2111,
+	},
+	negativeaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			if (this.field.terrainState.duration < 5)
+				this.field.terrainState.duration = 5;
+		},
+		name: "Negative Aura",
+		rating: 4,
+		num: 2111,
+	},
+	nullify: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('nullland');
+		},
+		name: "Nullify",
+		rating: 2,
+		num: -102,
+	},
+	yellowify: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('yellowish');
+		},
+		name: "Yellowify",
+		rating: 2,
+		num: -102,
+	},
+	greening: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('greenground');
+		},
+		name: "Greening",
+		rating: 2,
+		num: -102,
+	},
+	makeasplash: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('underwater');
+		},
+		name: "Make a Splash",
+		rating: 2,
+		num: -102,
+	},
+	itstime: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('timedilation');
+		},
+		name: "It's Time",
+		rating: 2,
+		num: -102,
+	},
+	/* howdy: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.actions.useMove('hello');
+		},
+		name: "It's Time",
+		rating: 2,
+		num: -102,
+	}, */
 
 	// BASE GAME
 	noability: {

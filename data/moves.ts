@@ -3286,7 +3286,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!this.field.isTerrain('mysticalsong')) return false;
 		},
 		onHit() {
-			this.field.terrainState.duration = 5;
+			if (this.field.terrainState.duration < 5)
+				this.field.terrainState.duration = 5;
 		},
 		target: "self",
 		type: "Music",
