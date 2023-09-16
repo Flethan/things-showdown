@@ -1113,7 +1113,6 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyDefPriority: 1,
 		onModifyDef(def, pokemon) {
-			console.log(pokemon.moveThisTurn);
 			if (this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -280,
