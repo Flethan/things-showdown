@@ -1128,7 +1128,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpDPriority: 1,
 		onModifySpD(spd, pokemon) {
-			if (!this.queue.willMove(pokemon)) return this.chainModify(1.5);
+			if (this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -281,
 		gen: 8,
