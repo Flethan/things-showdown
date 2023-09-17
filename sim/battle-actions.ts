@@ -190,6 +190,9 @@ export class BattleActions {
 			this.battle.queue.insertChoice({choice: 'runSwitch', pokemon});
 		}
 
+		// THINGS
+		if (pokemon.studied) pokemon.addVolatile('study');
+
 		return true;
 	}
 	dragIn(side: Side, pos: number) {

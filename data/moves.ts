@@ -2651,6 +2651,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 2}},
 		contestType: "Clever",
 	},
+	infrastructure: {
+		num: 1446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Infrastructure",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'infrastructure',
+		condition: {
+			// this is a side condition
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Infrastructure');
+				this.effectState.source = source;
+			},
+			onSwitchIn(pokemon) {
+				if (!pokemon.isGrounded()) return;
+				if (pokemon.hasItem('yellowsafetyvest')) return;
+				this.heal(pokemon.maxhp * 1 / 4);
+			},
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Infrastructure');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Industrial",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {
@@ -4928,6 +4960,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Study');
+				pokemon.studied = true;
 			},
 			onEffectivenessPriority: -2,
 			onEffectiveness(typeMod, target, type, move) {

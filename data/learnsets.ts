@@ -1630,6 +1630,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			earthjet: ["8L35"],
 			bury: ["8L55"],
 			consume: ["8M"],
+			infrastructure: ["8L50"],
 		},
 	},
 	sootortoise: {
@@ -1654,6 +1655,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			earthjet: ["8L35"],
 			bury: ["8L55"],
 			consume: ["8M"],
+			infrastructure: ["8L50"],
 		},
 	},
 	florle: {
@@ -3155,6 +3157,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8T"],
 			energybeam: ["8T"],
 			pitchblack: ["8L1"],
+			infrastructure: ["8L1"],
 		},
 	},
 	tree: {
@@ -4774,6 +4777,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			shiftchange: ["8L1"],
 			cyberneticenhancement: ["8L1"],
 			borrow: ["8M"],
+			infrastructure: ["8L1"],
 		},
 	},
 	swordfish: {

@@ -1280,6 +1280,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	energydrink: {
+		name: "Energy Drink",
+		spritenum: 841,
+		consume: {
+			healPercent: 100,
+		},
+		// implemented in energy
+		num: -290,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
