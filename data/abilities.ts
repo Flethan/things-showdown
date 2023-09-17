@@ -4045,6 +4045,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onAfterMoveSecondarySelf(source, target, move) {
 			const hitMove = this.dex.getActiveMove('Ball Bounce');
+			if (hitMove.category === 'Status') return;
 			hitMove.category = move.category;
 			hitMove.basePower = move.basePower / 2;
 			if (source !== null && target !== null && target.hp) {
