@@ -583,6 +583,9 @@ export class Pokemon {
 					break;
 				case 'dustcloud':
 					break;
+				case 'lightningstorm':
+					energy += 1.5;
+					break;
 				}
 			}
 		);

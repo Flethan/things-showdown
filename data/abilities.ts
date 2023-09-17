@@ -1016,7 +1016,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -2074,7 +2074,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.setWeather(this.sample(environmentalfactors));
 				break;
 			case 2:
-				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
+				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure'];
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:
@@ -3865,7 +3865,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
-				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure'];
 				const hazard = this.sample(hazards);
 				this.add('-activate', target, 'ability: Do Not Enter');
 				source.side.addSideCondition(hazard);
@@ -4141,16 +4141,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
 				if (this.randomChance(3, 10)) {
-					if (!target.item) {
+					if (!source.item) {
 						return;
 					} else {
-						const old_item = target.getItem();
-						target.setItem('');
-						target.lastItem = old_item.id;
+						const old_item = source.getItem();
+						source.setItem('');
+						source.lastItem = old_item.id;
 					}
 		
-					this.add('-item', target, this.dex.items.get('plainstick'), '[from] ability: Sticky');
-					target.setItem('plainstick');
+					this.add('-item', source, this.dex.items.get('plainstick'), '[from] ability: Sticky');
+					source.setItem('plainstick');
 				}
 			}
 		},
