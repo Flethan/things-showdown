@@ -1831,6 +1831,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source, move) {
 			source.addVolatile('hello', target)
 		},
+		onTryHit(source, target, move) {
+			if (target.volatiles['conversed']) return false;
+		},
 		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
@@ -1850,7 +1853,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.time = this.effectState.startTime;
 			},
 			onUpdate(pokemon) {
-				if (this.effectState.source && !this.effectState.source.isActive && !this.effectState.source.volatiles['hello'] && pokemon.volatiles['hello']) {
+				if (this.effectState.source && (!this.effectState.source.isActive || !this.effectState.source.volatiles['hello']) && pokemon.volatiles['hello']) {
 					this.debug('Removing Hello volatile on ' + pokemon);
 					pokemon.removeVolatile('hello');
 				}
@@ -1860,13 +1863,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.time--;
 				if (this.effectState.time <= 0) {
 					pokemon.removeVolatile('hello');
-					pokemon.addVolatile('conversed');
 				} else {
 					this.add('cant', pokemon, 'hello');
 					return false;
 				}
 			},
 			onEnd(pokemon) {
+				pokemon.addVolatile('conversed');
 				this.add('-end', pokemon, 'Hello', '[silent]');
 			},
 		},
