@@ -1563,6 +1563,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			borrow: ["8M"],
 			energybeam: ["8T"],
+			npminstalltypescriptsavedev: ["8L50"],
 		},
 	},
 	bathymney: {
@@ -2457,6 +2458,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hide: ["8M"],
 			hsearch: ["8T"],
 			nage: ["8T"],
+			npminstalltypescriptsavedev: ["8L50"],
 		},
 	},
 	notant: {

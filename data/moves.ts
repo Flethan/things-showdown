@@ -5363,6 +5363,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'heal'},
 		contestType: "Clever",
 	},
+	npminstalltypescriptsavedev: {
+		num: 1250,
+		accuracy: true,
+		basePower: 100,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "npm install typescript --save-dev",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, bullet: 1},
+		onTry(source, target) {
+			if (target.volatiles['typescript']) return false;
+		},
+		onHit(target, source, move) {
+			target.addVolatile('typescript')
+		},
+		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
 
 	// Sport
 	fourseamfastball: {
