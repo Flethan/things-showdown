@@ -1214,7 +1214,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 25,
 		},
 		onStart(pokemon) {
-			pokemon.setStatus('prone');
+			pokemon.trySetStatus('prone');
 		},
 		num: -285,
 		gen: 8,
