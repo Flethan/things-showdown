@@ -1562,6 +1562,45 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Green",
 		contestType: "Tough",
 	},
+	greenboom: {
+		num: 1163,
+		accuracy: 95,
+		basePower: 150,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Green Boom",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, protect: 1, mirror: 1},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		contestType: "Tough",
+	},
+	greenbeam: {
+		num: 8,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		name: "Green Beam",
+		isNonstandard: "Thing",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			onHit(target, source, move) {
+				if (!source.addType('Green')) return false;
+				this.add('-start', source, 'typeadd', 'Green', '[from] move: Green Beam');
+			},
+		},
+		target: "normal",
+		type: "Green",
+		contestType: "Beautiful",
+	},
 
 	// H
 	hostile: {
@@ -1831,6 +1870,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target, source, move) {
 			source.addVolatile('hello', target)
 		},
+		onTryHit(source, target, move) {
+			if (target.volatiles['conversed']) return false;
+		},
 		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
 			onStart(pokemon, source, effect) {
@@ -1850,7 +1892,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.time = this.effectState.startTime;
 			},
 			onUpdate(pokemon) {
-				if (this.effectState.source && !this.effectState.source.isActive && !this.effectState.source.volatiles['hello'] && pokemon.volatiles['hello']) {
+				if (this.effectState.source && (!this.effectState.source.isActive || !this.effectState.source.volatiles['hello']) && pokemon.volatiles['hello']) {
 					this.debug('Removing Hello volatile on ' + pokemon);
 					pokemon.removeVolatile('hello');
 				}
@@ -1860,13 +1902,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.time--;
 				if (this.effectState.time <= 0) {
 					pokemon.removeVolatile('hello');
-					pokemon.addVolatile('conversed');
 				} else {
 					this.add('cant', pokemon, 'hello');
 					return false;
 				}
 			},
 			onEnd(pokemon) {
+				pokemon.addVolatile('conversed');
 				this.add('-end', pokemon, 'Hello', '[silent]');
 			},
 		},

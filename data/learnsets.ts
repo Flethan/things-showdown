@@ -115,6 +115,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			energybeam: ["8T"],
 			lightningstorm: ["8L1"],
+			greenboom: ["8L1"],
+			greenbeam: ["8L1"],
 		},
 	},
 	empty: {
@@ -1690,6 +1692,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenground: ["8L1"],
 			consume: ["8M"],
 			stickattack: ["8L15"],
+			greenbeam: ["8L1"],
+			greenboom: ["8L60"],
 		},
 	},
 	chellush: {
@@ -1723,6 +1727,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenground: ["8L1"],
 			consume: ["8M"],
 			stickattack: ["8L15"],
+			greenbeam: ["8L1"],
+			greenboom: ["8L60"],
 		},
 	},
 	despacio: {
@@ -2433,6 +2439,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmissionsurge: ["8L71"],
 			unlockannihilategene: ["8L81"],
 			stickattack: ["8L20"],
+			greenboom: ["8L55"],
+			greenbeam: ["8L27"],
 		},
 	},
 	yenoh: {
@@ -3193,6 +3201,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			richsoil: ["8E"],
 			greenground: ["8L31"],
 			stickattack: ["8L25"],
+			greenbeam: ["8L27"],
 		},
 	},
 	treefurtheraway: {
@@ -3225,6 +3234,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			richsoil: ["8E"],
 			greenground: ["8L31"],
 			stickattack: ["8L25"],
+			greenbeam: ["8L27"],
 		},
 	},
 	mistimink: {
@@ -3498,6 +3508,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infect: ["8L70"],
 			borrow: ["8M"],
 			stickattack: ["8E"],
+			greenbeam: ["8L1"],
 		},
 	},
 	kaijuv: {
@@ -4380,6 +4391,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			autumnaloffering: ["8L1"],
 			voidscream: ["8L1"],
 			consume: ["8M"],
+			greenbeam: ["8L1"],
+			greenboom: ["8L1"],
 		},
 	},
 	boxlegend: {
@@ -4904,6 +4917,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			stealthstrike: ["8L1"],
 			consume: ["8L1"],
 			thermalexplosion: ["8L1"],
+			greenbeam: ["8L1"],
 		},
 	},
 	watermelon: {
@@ -4935,6 +4949,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			farbeam: ["8L1"],
 			dematerialize: ["8L1"],
 			promote: ["8T"],
+			greenboom: ["8L1"],
+			greenbeam: ["8L1"],
 		},
 	},
 	chameleon: {
@@ -4957,6 +4973,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			stealthstrike: ["8L1"],
 			consume: ["8L1"],
 			thermalexplosion: ["8L1"],
+			greenbeam: ["8L1"],
 		},
 	},
 	nightyknight: {

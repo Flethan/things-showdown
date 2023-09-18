@@ -4300,6 +4300,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return false;
 			}
 		},
+		onDisableMove(pokemon) {
+			if (pokemon.species.id !== 'moniturn') return;
+			for (const moveSlot of pokemon.moveSlots) {
+				if (this.dex.moves.get(moveSlot.move).category !== 'Status') {
+					pokemon.disableMove(moveSlot.id);
+				}
+			}
+		},
 		name: "Upgrading",
 		rating: 2,
 		num: -102,
