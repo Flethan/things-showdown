@@ -268,7 +268,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 			}
 		},
-		isPermanent: true,
 		name: "Omega",
 		rating: 3,
 		num: 505,
@@ -342,7 +341,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-heal', pokemon, pokemon.getHealth, '[from] ability: Red');
 			}
 		},
-		isPermanent: true,
 		name: "Red",
 		rating: 5,
 		num: -509,
@@ -2661,7 +2659,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify(2);
 			}
 		},
-		isPermanent: true,
 		name: "Omnicide",
 		rating: 4.5,
 		num: 185,
@@ -2698,7 +2695,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			);
 		},
-		isPermanent: true,
 		name: "Composting",
 		rating: 4.5,
 		num: 185,
@@ -2735,7 +2731,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (randomStat) boost[randomStat] = 1;
 			this.boost(boost, source);
 		},
-		isPermanent: true,
 		name: "Magic Touch",
 		rating: 4,
 		num: 1132,
@@ -2746,7 +2741,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('sudscape');
 			this.field.setWeather('windy');
 		},
-		isPermanent: true,
 		name: "Water Bringer",
 		rating: 5,
 		num: 1229,
@@ -4259,6 +4253,37 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 2,
 		num: -102,
 	}, */
+	upgrading: {
+		isNonstandard: "Thing",
+		isPermanent: true,
+		onUpdate(pokemon) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Moniturn') return;
+			if (pokemon.hp > pokemon.maxhp / 2 && pokemon.species.id === 'moniturn') {
+				this.add('-activate', pokemon, 'ability: Upgrading');
+				pokemon.formeChange('Moniturn-Upgraded', this.effect);
+			} else if (pokemon.hp < pokemon.maxhp / 2 && pokemon.species.id === 'moniturnupgraded') {
+				this.add('-activate', pokemon, 'ability: Upgrading');
+				pokemon.formeChange('Moniturn', this.effect);
+			}
+		},
+		onDamagePriority: -30,
+		onDamage(damage, target, source, effect) {
+			if (target.species.id === 'moniturnupgraded' && damage >= target.hp && effect && effect.effectType === 'Move') {
+				this.add("-ability", target, 'Upgrading');
+				return target.hp - 1;
+			}
+		},
+		onBeforeMovePriority: 9,
+		onBeforeMove(pokemon, target, move) {
+			if (pokemon.species.id === 'moniturn' && move.category !== 'Status') {
+				this.add('cant', pokemon, 'ability: Upgrading');
+				return false;
+			}
+		},
+		name: "Upgrading",
+		rating: 2,
+		num: -102,
+	},
 
 	// BASE GAME
 	noability: {
