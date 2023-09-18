@@ -4142,7 +4142,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						source.setItem('');
 						source.lastItem = old_item.id;
 					}
-		
+
 					this.add('-item', source, this.dex.items.get('plainstick'), '[from] ability: Sticky');
 					source.setItem('plainstick');
 				}
@@ -4173,8 +4173,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	polaraura: {
 		isNonstandard: "Thing",
 		onStart() {
-			if (this.field.weatherState.duration < 5)
-				this.field.weatherState.duration = 5;
+			if (this.field.weatherState.duration < 5) this.field.weatherState.duration = 5;
 		},
 		name: "Polar Aura",
 		rating: 4,
@@ -4192,8 +4191,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	negativeaura: {
 		isNonstandard: "Thing",
 		onStart() {
-			if (this.field.terrainState.duration < 5)
-				this.field.terrainState.duration = 5;
+			if (this.field.terrainState.duration < 5) this.field.terrainState.duration = 5;
 		},
 		name: "Negative Aura",
 		rating: 4,
@@ -4261,9 +4259,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.hp > pokemon.maxhp / 2 && pokemon.species.id === 'moniturn') {
 				this.add('-activate', pokemon, 'ability: Upgrading');
 				pokemon.formeChange('Moniturn-Upgraded', this.effect);
+				const oldBaseMaxhp = pokemon.baseMaxhp;
+				pokemon.baseMaxhp = pokemon.species.maxHP ||
+					Math.floor(
+						Math.floor(2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) *
+						pokemon.level / 100 + 10
+					);
+				pokemon.maxhp = pokemon.baseMaxhp;
+				pokemon.hp = Math.floor(pokemon.hp * pokemon.baseMaxhp / oldBaseMaxhp);
+				pokemon.hp = this.clampIntRange(pokemon.hp, 1, pokemon.maxhp);
+
+				this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 			} else if (pokemon.hp < pokemon.maxhp / 2 && pokemon.species.id === 'moniturnupgraded') {
 				this.add('-activate', pokemon, 'ability: Upgrading');
 				pokemon.formeChange('Moniturn', this.effect);
+				const oldBaseMaxhp = pokemon.baseMaxhp;
+				pokemon.baseMaxhp = pokemon.species.maxHP ||
+					Math.floor(
+						Math.floor(2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) *
+						pokemon.level / 100 + 10
+					);
+				pokemon.maxhp = pokemon.baseMaxhp;
+				pokemon.hp = Math.floor(pokemon.hp * pokemon.baseMaxhp / oldBaseMaxhp);
+				pokemon.hp = this.clampIntRange(pokemon.hp, 1, pokemon.maxhp);
+
+				this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
 			}
 		},
 		onDamagePriority: -30,
