@@ -75,6 +75,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L1"],
 			greenground: ["8E"],
 			energybeam: ["8T"],
+			lightningstorm: ["8L1"],
 		},
 	},
 	kiteolus: {
@@ -92,6 +93,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			blessedrain: ["8L1"],
 			greenground: ["8E"],
 			energybeam: ["8T"],
+			lightningstorm: ["8L1"],
 		},
 	},
 	stratosoar: {
@@ -112,6 +114,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenground: ["8E"],
 			consume: ["8M"],
 			energybeam: ["8T"],
+			lightningstorm: ["8L1"],
 		},
 	},
 	empty: {
@@ -264,6 +267,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			disorient: ["8E"],
 			chitinbeam: ["8M"],
 			ricochetmirror: ["8L77"],
+			lightningstorm: ["8E"],
 		},
 	},
 	gryllague: {
@@ -300,6 +304,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			disorient: ["8E"],
 			chitinbeam: ["8M"],
 			ricochetmirror: ["8L77"],
+			lightningstorm: ["8E"],
 		},
 	},
 	schisteka: {
@@ -343,6 +348,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			ricochetmirror: ["8L77"],
 			eggscatter: ["8L40"],
 			updog: ["8L80"],
+			lightningstorm: ["8E"],
 		},
 	},
 	pescadestrian: {
@@ -1382,6 +1388,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hsearch: ["8T"],
 			callmeteorites: ["8L1"],
 			energybeam: ["8T"],
+			lightningstorm: ["8L1"],
 		},
 	},
 	nighreto: {
@@ -4105,6 +4112,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L1"],
 			bluejet: ["8L1"],
 			blessedrain: ["8L1"],
+			lightningstorm: ["8L1"],			
 		},
 	},
 	cumulunormous: {
@@ -4121,6 +4129,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L1"],
 			bluejet: ["8L1"],
 			blessedrain: ["8L1"],
+			lightningstorm: ["8L1"],
 		},
 	},
 	saniteyser: {
@@ -4341,6 +4350,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			glidingcharge: ["8L50"],
 			// advancedforecasting: ["8L40"],
 			consume: ["8M"],
+			lightningstorm: ["8L35"],
 		},
 	},
 	serpiternal: {
@@ -5240,6 +5250,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brilliantflash: ["8L48"],
 			caltrops: ["8L30"],
 			rankandfile: ["8T"],
+			lightningstorm: ["8L78"],
+			infrastructure: ["8L35"],
 		},
 	},
 	spooky: {
