@@ -1074,12 +1074,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onBeforeMovePriority: 1,
 		onBeforeMove(source, target, move) {
-			 if (['normal', 'randomNormal', 'any'].includes(move.target)) {
+			if (move.category === 'Status') return;
+			if (['normal', 'randomNormal', 'any'].includes(move.target)) {
 				move.target = 'allAdjacentFoes';
 			 }
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
+			if (move) {
+				return this.chainModify(0.75);
+			}
+		},
+		onAccuracy(accuracy, target, source, move) {
 			if (move) {
 				return this.chainModify(0.75);
 			}
