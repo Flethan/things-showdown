@@ -1562,6 +1562,45 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Green",
 		contestType: "Tough",
 	},
+	greenboom: {
+		num: 1163,
+		accuracy: 95,
+		basePower: 150,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Green Boom",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, protect: 1, mirror: 1},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		contestType: "Tough",
+	},
+	greenbeam: {
+		num: 8,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		name: "Green Beam",
+		isNonstandard: "Thing",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			onHit(target, source, move) {
+				if (!source.addType('Green')) return false;
+				this.add('-start', source, 'typeadd', 'Green', '[from] move: Green Beam');
+			},
+		},
+		target: "normal",
+		type: "Green",
+		contestType: "Beautiful",
+	},
 
 	// H
 	hostile: {
