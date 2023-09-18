@@ -1008,7 +1008,7 @@ export const Aliases: {[alias: string]: string} = {
 	cannonade: "G-Max Cannonade",
 	centiferno: "G-Max Centiferno",
 	chistrike: "G-Max Chi Strike",
-	cuddle: "G-Max Cuddle",
+	// cuddle: "G-Max Cuddle",
 	depletion: "G-Max Depletion",
 	drumsolo: "G-Max Drum Solo",
 	finale: "G-Max Finale",
