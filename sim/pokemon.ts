@@ -1019,7 +1019,8 @@ export class Pokemon {
 		}
 
 		return !!(
-			(this.battle.gen >= 5 && !this.isActive) ||
+			(this.battle.gen >= 5 && !this.isActive && !this.getAbility().affectsInactive && !this.fainted) ||
+			(this.fainted && !this.getAbility().affectsFainted) ||
 			((this.volatiles['gastroacid'] || (neutralizinggas && this.ability !== ('neutralizinggas' as ID))) &&
 			!this.getAbility().isPermanent
 			)
@@ -1027,7 +1028,9 @@ export class Pokemon {
 	}
 
 	ignoringItem() {
-		return !!((this.battle.gen >= 5 && !this.isActive) ||
+		return !!(
+			(this.battle.gen >= 5 && !this.isActive && !this.getItem().affectsInactive && !this.fainted) ||
+			(this.fainted && !this.getItem().affectsFainted) ||
 			(this.hasAbility('klutz') && !this.getItem().ignoreKlutz) ||
 			(this.hasAbility('assemblyline') && !this.getItem().ignoreKlutz) ||
 			this.volatiles['embargo'] || this.battle.field.pseudoWeather['magicroom']);
