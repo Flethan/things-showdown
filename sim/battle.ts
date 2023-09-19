@@ -460,6 +460,18 @@ export class Battle {
 				handlers = handlers.concat(this.findSideEventHandlers(side, callbackName, undefined, active));
 				handlers = handlers.concat(this.findFieldEventHandlers(this.field, callbackName, undefined, active));
 			}
+			for (const pokemon of side.pokemon) {
+				if (!pokemon || pokemon.isActive || pokemon.fainted) continue;
+				handlers = handlers.concat(this.findPokemonEventHandlers(pokemon, `onInactive${eventid}`, 'duration'));
+				handlers = handlers.concat(this.findSideEventHandlers(side, `onInactive${eventid}`, undefined, pokemon));
+				handlers = handlers.concat(this.findFieldEventHandlers(this.field, `onInactive${eventid}`, undefined, pokemon));
+			}
+			for (const pokemon of side.pokemon) {
+				if (!pokemon || pokemon.isActive || !pokemon.fainted) continue;
+				handlers = handlers.concat(this.findPokemonEventHandlers(pokemon, `onFainted${eventid}`, 'duration'));
+				handlers = handlers.concat(this.findSideEventHandlers(side, `onFainted${eventid}`, undefined, pokemon));
+				handlers = handlers.concat(this.findFieldEventHandlers(this.field, `onFainted${eventid}`, undefined, pokemon));
+			}
 		}
 		this.speedSort(handlers);
 		while (handlers.length) {
