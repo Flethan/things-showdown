@@ -953,7 +953,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: -362,
 		name: "Guysword",
 		symbolForme: "Element",
-		types: ["Sword"],
+		types: ["Sword", "Sword"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 65, atk: 75, def: 42, spa: 55, spd: 36, spe: 31},
 		abilities: {0: "Really Big Sword"},
