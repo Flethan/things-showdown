@@ -1422,8 +1422,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (this.field.isTerrain('greenground')) {
 				if (this.blessedLand && count > 0) {
 					count = count * 2;
-				} else count++;
-			} 
+				} else { count++; }
+			}
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -1453,8 +1453,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (this.field.isTerrain('greenground')) {
 				if (this.blessedLand && count > 0) {
 					count = count * 2;
-				} else count++;
-			} 
+				} else { count++; }
+			}
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -1553,7 +1553,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					target.setItem('');
 					target.lastItem = old_item.id;
 				}
-	
+
 				this.add('-item', target, this.dex.items.get('plainstick'), '[from] move: Stick Attack');
 				target.setItem('plainstick');
 			},
@@ -1868,7 +1868,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
 		volatileStatus: 'hello',
 		onHit(target, source, move) {
-			source.addVolatile('hello', target)
+			source.addVolatile('hello', target);
 		},
 		onTryHit(source, target, move) {
 			if (target.volatiles['conversed']) return false;
@@ -1886,7 +1886,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 
 				this.add('-start', pokemon, 'Hello');
-				
+
 				// 1-3 turns
 				this.effectState.startTime = this.random(2, 5);
 				this.effectState.time = this.effectState.startTime;
@@ -3360,8 +3360,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!this.field.isTerrain('mysticalsong')) return false;
 		},
 		onHit() {
-			if (this.field.terrainState.duration < 5)
-				this.field.terrainState.duration = 5;
+			if (this.field.terrainState.duration < 5) { this.field.terrainState.duration = 5; }
 		},
 		target: "self",
 		type: "Music",
@@ -3479,9 +3478,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 					if (this.blessedLand) {
 						const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-						'hurt', 'heal'];
+							'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+							'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+							'hurt', 'heal'];
 						const randomFlag2 = this.sample(sflags);
 						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
 						this.field.activeFlags.push(randomFlag2);
@@ -3939,8 +3938,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			move.type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 		},
 		onModifyMove(move, pokemon) {
-			let sf: string[] = [];
-			for (let i=0; i<4; i++) {
+			const sf: string[] = [];
+			for (let i = 0; i < 4; i++) {
 				const move = this.dex.moves.get(pokemon.moveSlots[i].id);
 				if (!move.songFlags) continue;
 				for (const flag of move.songFlags) {
@@ -3954,8 +3953,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit() {
-			if (this.field.isTerrain('mysticalsong'))
-				this.field.terrainState.duration = 5;
+			if (this.field.isTerrain('mysticalsong')) { this.field.terrainState.duration = 5; }
 		},
 		secondary: null,
 		target: "normal",
@@ -5334,7 +5332,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterHit(source, target) {
 			if (target.status === 'infected') {
-				const inf = target.statusState.infection
+				const inf = target.statusState.infection;
 				// The % chance damage occurs
 				const damageChance = this.clampIntRange(inf.damageChane + this.random(0, 50), 0, 100);
 				// The amount damaged as 1 / x of max hp
@@ -5362,10 +5360,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterHit(source, target) {
 			if (target.status === 'infected') {
-				const inf = target.statusState.infection
+				const inf = target.statusState.infection;
 				const spreadChance = this.clampIntRange(inf.spreadChance + this.random(0, 50), 0, 100);
-				const newModes = this.random(0,3);
-				let i = 0;
+				const newModes = this.random(0, 3);
+				const i = 0;
 				while (i < newModes) {
 					target.statusState.infection.spreadMode.push(this.random(1, 5));
 				}
@@ -6144,7 +6142,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const boostSource: SparseBoostsTable = {};
 			const boostTarget: SparseBoostsTable = {};
 			let statPlus: BoostID;
-			let stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
+			const stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
 			for (statPlus of stats) {
 				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
 				const statDiff = source.boosts[statPlus] - target.boosts[statPlus];
@@ -7064,8 +7062,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const lastMove = target.lastMove;
 			const moveIndex = target.moves.indexOf(lastMove.id);
 			const noReplay = [
-				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'copycat', 'dynamaxcannon', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'obstruct', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'struggle', 'thrash', 'transform', 'uproar', 
-				'replay', 'lookup', 'multistrike'
+				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'copycat', 'dynamaxcannon', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'obstruct', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'struggle', 'thrash', 'transform', 'uproar',
+				'replay', 'lookup', 'multistrike',
 			];
 			if (
 				noReplay.includes(lastMove.id) || lastMove.isZ || lastMove.isMax ||
