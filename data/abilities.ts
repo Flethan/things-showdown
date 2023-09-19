@@ -730,7 +730,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.hint("Farewell will switch everyone else out at the end of the next turn!");
 			this.effectState.switchingIn = true;
 		},
-		onResidualOrder: 99,
+		onResidualOrder: 80,
 		onResidual(pokemon) {
 			// Farewell activates at the end of the turn after switching in.
 			if (!this.effectState.switchingIn || !pokemon.activeTurns) return;
@@ -3897,12 +3897,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!pokemon.undead) {
 				console.log('undying');
 				pokemon.undead = true;
-				pokemon.fainted = false;
-				pokemon.faintQueued = false;
-				pokemon.subFainted = false;
-				pokemon.status = '';
-				pokemon.hp = 1;
-				pokemon.heal(pokemon.baseMaxhp / 2);
+				pokemon.addVolatile('undying');
 			}
 		},
 		name: "Undead",
