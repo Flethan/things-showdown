@@ -5419,7 +5419,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (target.volatiles['typescript']) return false;
 		},
 		onHit(target, source, move) {
-			target.addVolatile('typescript')
+			target.addVolatile('typescript');
 		},
 		target: "normal",
 		type: "Science",
