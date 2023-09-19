@@ -302,7 +302,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onResidual(pokemon) {
-			this.damage(pokemon.baseMaxhp / 8);
+			if (pokemon.hasType('No', true)) {
+				this.heal(pokemon.baseMaxhp / 8);
+			} else {
+				this.damage(pokemon.baseMaxhp / 8);
+			}
 		},
 	},
 	blinded: {
