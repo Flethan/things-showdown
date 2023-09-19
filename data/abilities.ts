@@ -3893,7 +3893,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	undead: {
 		isNonstandard: "Thing",
-		onFaint(pokemon) {
+		onBeforeFaint(pokemon, effect) {
 			if (!pokemon.undead) {
 				console.log('undying');
 				pokemon.undead = true;

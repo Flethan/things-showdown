@@ -1159,7 +1159,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 
 	undying: {
 		name: 'undying',
-		duration: 1,
+		// duration: 1,
 		affectsFainted: true,
 		onResidualOrder: 99,
 		onResidual(pokemon) {
@@ -1171,6 +1171,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 			pokemon.status = '';
 			pokemon.hp = 1;
 			pokemon.heal(pokemon.baseMaxhp / 2);
+			pokemon.removeVolatile('undying');
 		},
 	},
 
