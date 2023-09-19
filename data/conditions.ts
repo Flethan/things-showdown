@@ -1163,6 +1163,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 		affectsFainted: true,
 		onResidualOrder: 99,
 		onResidual(pokemon) {
+			console.log('undying in the condition');
+			pokemon.side.pokemonLeft++;
 			pokemon.fainted = false;
 			pokemon.faintQueued = false;
 			pokemon.subFainted = false;
