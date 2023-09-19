@@ -332,7 +332,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'pressurized',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.field.addPseudoWeather('pressurizer');
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
 				this.add('-status', target, 'pressurized', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
@@ -346,40 +345,44 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onSwitchIn() {
 			this.effectState.time = this.effectState.startTime;
 		},
-	},
-	pressurizer: {
-		onFieldResidualOrder: 9,
-		onFieldResidual() {
-			let announced = false;
+		onResidual(pokemon) {
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
-			for (const pokemon of this.getAllPokemon()) {
-				if (pokemon.status !== 'pressurized' ||
-					pokemon.fainted || !pokemon.hp ||
-					pokemon.hasItem('pressurecapsule')
-				) continue;
-				if (pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) {
-					pokemon.statusState.time--;
-					if (pokemon.statusState.time <= 0) {
-						pokemon.cureStatus();
-					}
-					continue;
-				}
-				if (!announced) {
-					this.add('-activate', null, 'pressurizer');
-					announced = true;
-				}
+			if (pokemon.hasItem('pressurecapsule')) return;
+
+			if (this.field.getPseudoWeather('hadalzone')) {
 				if (pokemon.ability === 'highpressure') {
 					this.add('-activate', pokemon, 'ability: High Pressure');
-					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
-					if (collateral >= (pokemon.maxhp - pokemon.hp)) collateral = (pokemon.maxhp - pokemon.hp);
-					this.directHeal(collateral, pokemon);
-					if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
+					this.heal(pokemon.baseMaxhp / 8);
 				} else {
 					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
 					if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
-					this.directDamage(collateral, pokemon);
+					this.damage(collateral);
 					if (pokemon.hp === 1) pokemon.cureStatus();
 				}
+				return;
+			}
+
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+			}
+		},
+		onInactiveResidual(pokemon) {
+			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
+			if (pokemon.hasItem('pressurecapsule')) return;
+
+			if (pokemon.ability === 'highpressure') {
+				this.add('-activate', pokemon, 'ability: High Pressure');
+				let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+				if (collateral >= (pokemon.maxhp - pokemon.hp)) collateral = (pokemon.maxhp - pokemon.hp);
+				this.directHeal(collateral, pokemon);
+				if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
+			} else {
+				this.add('-activate', pokemon, 'pressurized');
+				let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+				if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
+				this.directDamage(collateral, pokemon);
+				if (pokemon.hp === 1) pokemon.cureStatus();
 			}
 		},
 	},
@@ -1154,23 +1157,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.actions.useMove(move, pokemon);
 
 			this.checkWin();
-		},
-	},
-
-	undying: {
-		name: 'undying',
-		duration: 1,
-		affectsFainted: true,
-		onResidualOrder: 99,
-		onResidual(pokemon) {
-			console.log('undying in the condition');
-			pokemon.side.pokemonLeft++;
-			pokemon.fainted = false;
-			pokemon.faintQueued = false;
-			pokemon.subFainted = false;
-			pokemon.status = '';
-			pokemon.hp = 1;
-			pokemon.heal(pokemon.baseMaxhp / 2);
 		},
 	},
 

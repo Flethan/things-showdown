@@ -3893,12 +3893,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	undead: {
 		isNonstandard: "Thing",
-		onFaint(pokemon) {
+		onBeforeFaint(pokemon) {
 			if (!pokemon.undead) {
-				console.log('undying');
+				console.log('undead');
 				pokemon.undead = true;
-				pokemon.addVolatile('undying');
+				pokemon.addVolatile('undead');
 			}
+		},
+		condition: {
+			affectsFainted: true,
+			onFaintedResidualOrder: 90,
+			onFaintedResidual(pokemon) {
+				console.log('undying in the condition');
+				pokemon.side.pokemonLeft++;
+				pokemon.fainted = false;
+				pokemon.faintQueued = false;
+				pokemon.subFainted = false;
+				pokemon.status = '';
+				pokemon.hp = 1;
+				pokemon.heal(pokemon.baseMaxhp / 2);
+				pokemon.removeVolatile('undead');
+			},
 		},
 		name: "Undead",
 		rating: 2,
