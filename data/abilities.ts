@@ -3757,6 +3757,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	conservationarea: {
 		isNonstandard: "ThingInf",
+		onModifyMovePriority: 10,
 		onAllyModifyMove(move) {
 			move.stab = 2;
 		},
@@ -4313,6 +4314,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Upgrading",
 		rating: 2,
 		num: -102,
+	},
+	emptyaura: {
+		isNonstandard: "Thing",
+		onModifyMovePriority: 20,
+		onAnyModifyMove(move) {
+			move.stab = 1;
+		},
+		name: "Empty Aura",
+		rating: 4,
+		num: 2111,
 	},
 
 	// BASE GAME

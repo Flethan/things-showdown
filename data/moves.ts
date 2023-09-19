@@ -1076,7 +1076,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		secondary: {
-			chance: 10,
+			chance: 50,
 			volatileStatus: 'flinch',
 		},
 		target: "normal",
@@ -3940,9 +3940,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onModifyMove(move, pokemon) {
 			const sf: string[] = [];
 			for (let i = 0; i < 4; i++) {
-				const move = this.dex.moves.get(pokemon.moveSlots[i].id);
-				if (!move.songFlags) continue;
-				for (const flag of move.songFlags) {
+				const move_temp = this.dex.moves.get(pokemon.moveSlots[i].id);
+				if (!move_temp.songFlags) continue;
+				for (const flag of move_temp.songFlags) {
 					if (!sf.includes(flag)) sf.push(flag);
 				}
 			}
@@ -5366,6 +5366,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const i = 0;
 				while (i < newModes) {
 					target.statusState.infection.spreadMode.push(this.random(1, 5));
+					i++;
 				}
 				target.statusState.infection.damageChance = spreadChance;
 			}
