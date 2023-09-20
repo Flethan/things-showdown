@@ -487,23 +487,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.effectState.startTime = 3;
 			this.effectState.time = this.effectState.startTime;
 		},
-		onSourceModifyAccuracyPriority: -1,
-		onSourceModifyAccuracy(accuracy, target, source, move) {
-			if (typeof accuracy === 'number') {
-				// if (move.target !== 'any') {
-				return this.chainModify(0.90);
-				// }
-			}
-		},
-		onAnyAccuracy(accuracy, target, source, move) {
-			if (move && target === this.effectState.target) {
-				if (typeof accuracy === 'number') {
-					// if (move.target !== 'any') {
-					return this.chainModify(0.90);
-					// }
-				}
-			}
-			return accuracy;
+		onFractionalPriority(relayVar, source, target, move) {
+			if (!source.hasType('Far')) return -0.1;
 		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
@@ -526,9 +511,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onResidualOrder: 6,
 		onResidual(pokemon) {
-			if (pokemon.hasType('Far', true)) this.heal(pokemon.baseMaxhp / 16);
+			if (pokemon.hasType('Far', true)) {
+				if (this.field.getTerrain().id === 'spatialexpansion') {
+					this.heal(pokemon.baseMaxhp / 8);
+				} else {
+					this.heal(pokemon.baseMaxhp / 16);
+				}
+			}
 		},
-		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 	infected: {
 		name: 'infected',

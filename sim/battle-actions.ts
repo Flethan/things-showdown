@@ -1793,10 +1793,6 @@ export class BattleActions {
 			baseDamage = this.battle.modify(baseDamage, 0.33);
 		}
 
-		if (pokemon.status === 'distanced' || target.status === 'distanced') {
-			baseDamage = this.battle.modify(baseDamage, 0.80);
-		}
-
 		// Generation 5, but nothing later, sets damage to 1 before the final damage modifiers
 		if (this.battle.gen === 5 && !baseDamage) baseDamage = 1;
 
