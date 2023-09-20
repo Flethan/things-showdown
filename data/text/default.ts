@@ -145,6 +145,7 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		endFromItem: "  [POKEMON]'s [ITEM] returned it from its banishment!",
 		endFromMove: "  [POKEMON]'s [MOVE] opened a way back from its banishment!",
 		damage: "  [POKEMON]'s existence is being torn away by its banishment!",
+		heal: "  [POKEMON]'s banishment is causing it to heal!",
 		cant: "[POKEMON] can't reach out from its banishment!",
 	},
 	blinded: {

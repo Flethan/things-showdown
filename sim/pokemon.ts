@@ -123,9 +123,10 @@ export class Pokemon {
 
 	illusion: Pokemon | null;
 	transformed: boolean;
-	
+
 	// THINGS
 	undead: boolean | null;
+	studied: boolean | null;
 
 	maxhp: number;
 	/** This is the max HP before Dynamaxing; it's updated for Power Construct etc */
@@ -407,6 +408,7 @@ export class Pokemon {
 
 		// THINGS
 		this.undead = false;
+		this.studied = false;
 
 		this.fainted = false;
 		this.faintQueued = false;
@@ -476,6 +478,8 @@ export class Pokemon {
 		let energy = 0;
 		let eqEnergy = 0;
 		let mulEnergy = 1;
+
+		if (this.hasItem('energydrink')) mulEnergy *= 2;
 
 		switch (this.status) {
 		case 'prone':
@@ -578,6 +582,9 @@ export class Pokemon {
 				case 'autoturret':
 					break;
 				case 'dustcloud':
+					break;
+				case 'lightningstorm':
+					energy += 1.5;
 					break;
 				}
 			}
@@ -1012,7 +1019,8 @@ export class Pokemon {
 		}
 
 		return !!(
-			(this.battle.gen >= 5 && !this.isActive) ||
+			(this.battle.gen >= 5 && !this.isActive && !this.getAbility().affectsInactive && !this.fainted) ||
+			(this.fainted && !this.getAbility().affectsFainted) ||
 			((this.volatiles['gastroacid'] || (neutralizinggas && this.ability !== ('neutralizinggas' as ID))) &&
 			!this.getAbility().isPermanent
 			)
@@ -1020,7 +1028,9 @@ export class Pokemon {
 	}
 
 	ignoringItem() {
-		return !!((this.battle.gen >= 5 && !this.isActive) ||
+		return !!(
+			(this.battle.gen >= 5 && !this.isActive && !this.getItem().affectsInactive && !this.fainted) ||
+			(this.fainted && !this.getItem().affectsFainted) ||
 			(this.hasAbility('klutz') && !this.getItem().ignoreKlutz) ||
 			(this.hasAbility('assemblyline') && !this.getItem().ignoreKlutz) ||
 			this.volatiles['embargo'] || this.battle.field.pseudoWeather['magicroom']);

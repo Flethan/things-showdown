@@ -190,6 +190,9 @@ export class BattleActions {
 			this.battle.queue.insertChoice({choice: 'runSwitch', pokemon});
 		}
 
+		// THINGS
+		if (pokemon.studied) pokemon.addVolatile('study');
+
 		return true;
 	}
 	dragIn(side: Side, pos: number) {
@@ -1788,10 +1791,6 @@ export class BattleActions {
 
 		if (pokemon.status === 'prone') {
 			baseDamage = this.battle.modify(baseDamage, 0.33);
-		}
-
-		if (pokemon.status === 'distanced' || target.status === 'distanced') {
-			baseDamage = this.battle.modify(baseDamage, 0.80);
 		}
 
 		// Generation 5, but nothing later, sets damage to 1 before the final damage modifiers

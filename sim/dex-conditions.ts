@@ -70,6 +70,8 @@ export interface EventMethods {
 		this: Battle, target: Pokemon, source: Pokemon, source2: Effect, move: ActiveMove
 	) => Pokemon | void;
 	onResidual?: (this: Battle, target: Pokemon, source: Pokemon, effect: Effect) => void;
+	onInactiveResidual?: (this: Battle, target: Pokemon, source: Pokemon, effect: Effect) => void;
+	onFaintedResidual?: (this: Battle, target: Pokemon, source: Pokemon, effect: Effect) => void;
 	onSetAbility?: (this: Battle, ability: string, target: Pokemon, source: Pokemon, effect: Effect) => boolean | void;
 	onSetStatus?: (
 		this: Battle, status: Condition, target: Pokemon, source: Pokemon, effect: Effect
@@ -462,6 +464,12 @@ export interface EventMethods {
 	onResidualOrder?: number;
 	onResidualPriority?: number;
 	onResidualSubOrder?: number;
+	onInactiveResidualOrder?: number;
+	onInactiveResidualPriority?: number;
+	onInactiveResidualSubOrder?: number;
+	onFaintedResidualOrder?: number;
+	onFaintedResidualPriority?: number;
+	onFaintedResidualSubOrder?: number;
 	onSourceBasePowerPriority?: number;
 	onSourceInvulnerabilityPriority?: number;
 	onSourceModifyAccuracyPriority?: number;

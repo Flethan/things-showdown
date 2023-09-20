@@ -229,7 +229,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = false;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure',
 			];
 			for (const targetCondition of removeAll) {
 				if (target.side.removeSideCondition(targetCondition)) {
@@ -1076,7 +1076,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
 		secondary: {
-			chance: 10,
+			chance: 50,
 			volatileStatus: 'flinch',
 		},
 		target: "normal",
@@ -1422,8 +1422,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (this.field.isTerrain('greenground')) {
 				if (this.blessedLand && count > 0) {
 					count = count * 2;
-				} else count++;
-			} 
+				} else { count++; }
+			}
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Photosynthesize');
 				this.attrLastMove('[still]');
@@ -1453,8 +1453,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (this.field.isTerrain('greenground')) {
 				if (this.blessedLand && count > 0) {
 					count = count * 2;
-				} else count++;
-			} 
+				} else { count++; }
+			}
 			if (!count) {
 				this.add('-fail', pokemon, 'move: Green Network');
 				this.attrLastMove('[still]');
@@ -1553,7 +1553,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 					target.setItem('');
 					target.lastItem = old_item.id;
 				}
-	
+
 				this.add('-item', target, this.dex.items.get('plainstick'), '[from] move: Stick Attack');
 				target.setItem('plainstick');
 			},
@@ -1561,6 +1561,45 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "normal",
 		type: "Green",
 		contestType: "Tough",
+	},
+	greenboom: {
+		num: 1163,
+		accuracy: 95,
+		basePower: 150,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Green Boom",
+		pp: 5,
+		priority: 0,
+		flags: {recharge: 1, protect: 1, mirror: 1},
+		self: {
+			volatileStatus: 'mustrecharge',
+		},
+		secondary: null,
+		target: "normal",
+		type: "Green",
+		contestType: "Tough",
+	},
+	greenbeam: {
+		num: 8,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		name: "Green Beam",
+		isNonstandard: "Thing",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			onHit(target, source, move) {
+				if (!source.addType('Green')) return false;
+				this.add('-start', source, 'typeadd', 'Green', '[from] move: Green Beam');
+			},
+		},
+		target: "normal",
+		type: "Green",
+		contestType: "Beautiful",
 	},
 
 	// H
@@ -1829,7 +1868,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {protect: 1, reflectable: 1, mirror: 1, authentic: 1},
 		volatileStatus: 'hello',
 		onHit(target, source, move) {
-			source.addVolatile('hello', target)
+			source.addVolatile('hello', target);
+		},
+		onTryHit(source, target, move) {
+			if (target.volatiles['conversed']) return false;
 		},
 		condition: {
 			noCopy: true, // doesn't get copied by Baton Pass
@@ -1844,13 +1886,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 
 				this.add('-start', pokemon, 'Hello');
-				
+
 				// 1-3 turns
 				this.effectState.startTime = this.random(2, 5);
 				this.effectState.time = this.effectState.startTime;
 			},
 			onUpdate(pokemon) {
-				if (this.effectState.source && !this.effectState.source.isActive && !this.effectState.source.volatiles['hello'] && pokemon.volatiles['hello']) {
+				if (this.effectState.source && (!this.effectState.source.isActive || !this.effectState.source.volatiles['hello']) && pokemon.volatiles['hello']) {
 					this.debug('Removing Hello volatile on ' + pokemon);
 					pokemon.removeVolatile('hello');
 				}
@@ -1860,13 +1902,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.effectState.time--;
 				if (this.effectState.time <= 0) {
 					pokemon.removeVolatile('hello');
-					pokemon.addVolatile('conversed');
 				} else {
 					this.add('cant', pokemon, 'hello');
 					return false;
 				}
 			},
 			onEnd(pokemon) {
+				pokemon.addVolatile('conversed');
 				this.add('-end', pokemon, 'Hello', '[silent]');
 			},
 		},
@@ -1972,7 +2014,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -2651,6 +2693,38 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {boost: {spe: 2}},
 		contestType: "Clever",
 	},
+	infrastructure: {
+		num: 1446,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Infrastructure",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1},
+		sideCondition: 'infrastructure',
+		condition: {
+			// this is a side condition
+			onSideStart(side, source) {
+				this.add('-sidestart', side, 'move: Infrastructure');
+				this.effectState.source = source;
+			},
+			onSwitchIn(pokemon) {
+				if (!pokemon.isGrounded()) return;
+				if (pokemon.hasItem('yellowsafetyvest')) return;
+				this.heal(pokemon.maxhp * 1 / 4);
+			},
+			onSideEnd(side) {
+				this.add('-sideend', side, 'move: Infrastructure');
+			},
+		},
+		secondary: null,
+		target: "allySide",
+		type: "Industrial",
+		zMove: {boost: {def: 1}},
+		contestType: "Clever",
+	},
 
 	// Liquid
 	wetfloor: {
@@ -3286,7 +3360,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!this.field.isTerrain('mysticalsong')) return false;
 		},
 		onHit() {
-			this.field.terrainState.duration = 5;
+			if (this.field.terrainState.duration < 5) { this.field.terrainState.duration = 5; }
 		},
 		target: "self",
 		type: "Music",
@@ -3404,9 +3478,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 					if (this.blessedLand) {
 						const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-						'hurt', 'heal'];
+							'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
+							'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
+							'hurt', 'heal'];
 						const randomFlag2 = this.sample(sflags);
 						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
 						this.field.activeFlags.push(randomFlag2);
@@ -3864,11 +3938,11 @@ export const Moves: {[moveid: string]: MoveData} = {
 			move.type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 		},
 		onModifyMove(move, pokemon) {
-			let sf: string[] = [];
-			for (let i=0; i<4; i++) {
-				const move = this.dex.moves.get(pokemon.moveSlots[i].id);
-				if (!move.songFlags) continue;
-				for (const flag of move.songFlags) {
+			const sf: string[] = [];
+			for (let i = 0; i < 4; i++) {
+				const move_temp = this.dex.moves.get(pokemon.moveSlots[i].id);
+				if (!move_temp.songFlags) continue;
+				for (const flag of move_temp.songFlags) {
 					if (!sf.includes(flag)) sf.push(flag);
 				}
 			}
@@ -3879,8 +3953,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		onHit() {
-			if (this.field.isTerrain('mysticalsong'))
-				this.field.terrainState.duration = 5;
+			if (this.field.isTerrain('mysticalsong')) { this.field.terrainState.duration = 5; }
 		},
 		secondary: null,
 		target: "normal",
@@ -4927,6 +5000,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Study');
+				pokemon.studied = true;
 			},
 			onEffectivenessPriority: -2,
 			onEffectiveness(typeMod, target, type, move) {
@@ -5258,7 +5332,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterHit(source, target) {
 			if (target.status === 'infected') {
-				const inf = target.statusState.infection
+				const inf = target.statusState.infection;
 				// The % chance damage occurs
 				const damageChance = this.clampIntRange(inf.damageChane + this.random(0, 50), 0, 100);
 				// The amount damaged as 1 / x of max hp
@@ -5286,12 +5360,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterHit(source, target) {
 			if (target.status === 'infected') {
-				const inf = target.statusState.infection
+				const inf = target.statusState.infection;
 				const spreadChance = this.clampIntRange(inf.spreadChance + this.random(0, 50), 0, 100);
-				const newModes = this.random(0,3);
-				let i = 0;
+				const newModes = this.random(0, 3);
+				const i = 0;
 				while (i < newModes) {
 					target.statusState.infection.spreadMode.push(this.random(1, 5));
+					i++;
 				}
 				target.statusState.infection.damageChance = spreadChance;
 			}
@@ -5327,6 +5402,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 		target: "all",
 		type: "Science",
 		zMove: {effect: 'heal'},
+		contestType: "Clever",
+	},
+	npminstalltypescriptsavedev: {
+		num: 1250,
+		accuracy: true,
+		basePower: 100,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "npm install typescript --save-dev",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, bullet: 1},
+		onTry(source, target) {
+			if (target.volatiles['typescript']) return false;
+		},
+		onHit(target, source, move) {
+			target.addVolatile('typescript');
+		},
+		target: "normal",
+		type: "Science",
 		contestType: "Clever",
 	},
 
@@ -6048,7 +6143,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const boostSource: SparseBoostsTable = {};
 			const boostTarget: SparseBoostsTable = {};
 			let statPlus: BoostID;
-			let stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
+			const stats: BoostID[] = ["atk", "def", "spa", "spd", "spe", "accuracy", "evasion"];
 			for (statPlus of stats) {
 				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
 				const statDiff = source.boosts[statPlus] - target.boosts[statPlus];
@@ -6968,8 +7063,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			const lastMove = target.lastMove;
 			const moveIndex = target.moves.indexOf(lastMove.id);
 			const noReplay = [
-				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'copycat', 'dynamaxcannon', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'obstruct', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'struggle', 'thrash', 'transform', 'uproar', 
-				'replay', 'lookup', 'multistrike'
+				'assist', 'beakblast', 'belch', 'bide', 'celebrate', 'copycat', 'dynamaxcannon', 'focuspunch', 'iceball', 'instruct', 'kingsshield', 'mefirst', 'metronome', 'mimic', 'mirrormove', 'naturepower', 'obstruct', 'outrage', 'petaldance', 'rollout', 'shelltrap', 'sketch', 'sleeptalk', 'struggle', 'thrash', 'transform', 'uproar',
+				'replay', 'lookup', 'multistrike',
 			];
 			if (
 				noReplay.includes(lastMove.id) || lastMove.isZ || lastMove.isMax ||
@@ -7688,10 +7783,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 					return 200;
 				}
 			},
-			onSideResidual() {
+			onSideResidual(side) {
 				const pokemon = this.effectState.source;
 				const foes: Pokemon[] = [];
-				for (const foe of pokemon.foes()) {
+				for (const foe of side.active) {
 					if (foe.hasItem('yellowsafetyvest')) continue;
 					foes.push(foe);
 				}

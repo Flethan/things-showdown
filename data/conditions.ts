@@ -302,7 +302,11 @@ export const Conditions: {[k: string]: ConditionData} = {
 			}
 		},
 		onResidual(pokemon) {
-			this.damage(pokemon.baseMaxhp / 8);
+			if (pokemon.hasType('No', true)) {
+				this.heal(pokemon.baseMaxhp / 8);
+			} else {
+				this.damage(pokemon.baseMaxhp / 8);
+			}
 		},
 	},
 	blinded: {
@@ -328,7 +332,6 @@ export const Conditions: {[k: string]: ConditionData} = {
 		name: 'pressurized',
 		effectType: 'Status',
 		onStart(target, source, sourceEffect) {
-			this.field.addPseudoWeather('pressurizer');
 			if (sourceEffect && sourceEffect.effectType === 'Item') {
 				this.add('-status', target, 'pressurized', '[from] item: ' + sourceEffect.name);
 			} else if (sourceEffect && sourceEffect.effectType === 'Ability') {
@@ -342,40 +345,44 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onSwitchIn() {
 			this.effectState.time = this.effectState.startTime;
 		},
-	},
-	pressurizer: {
-		onFieldResidualOrder: 9,
-		onFieldResidual() {
-			let announced = false;
+		onResidual(pokemon) {
 			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
-			for (const pokemon of this.getAllPokemon()) {
-				if (pokemon.status !== 'pressurized' ||
-					pokemon.fainted || !pokemon.hp ||
-					pokemon.hasItem('pressurecapsule')
-				) continue;
-				if (pokemon.isActive && !this.field.getPseudoWeather('hadalzone')) {
-					pokemon.statusState.time--;
-					if (pokemon.statusState.time <= 0) {
-						pokemon.cureStatus();
-					}
-					continue;
-				}
-				if (!announced) {
-					this.add('-activate', null, 'pressurizer');
-					announced = true;
-				}
+			if (pokemon.hasItem('pressurecapsule')) return;
+
+			if (this.field.getPseudoWeather('hadalzone')) {
 				if (pokemon.ability === 'highpressure') {
 					this.add('-activate', pokemon, 'ability: High Pressure');
-					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
-					if (collateral >= (pokemon.maxhp - pokemon.hp)) collateral = (pokemon.maxhp - pokemon.hp);
-					this.directHeal(collateral, pokemon);
-					if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
+					this.heal(pokemon.baseMaxhp / 8);
 				} else {
 					let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
 					if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
-					this.directDamage(collateral, pokemon);
+					this.damage(collateral);
 					if (pokemon.hp === 1) pokemon.cureStatus();
 				}
+				return;
+			}
+
+			pokemon.statusState.time--;
+			if (pokemon.statusState.time <= 0) {
+				pokemon.cureStatus();
+			}
+		},
+		onInactiveResidual(pokemon) {
+			const pressureMod = this.field.getWeather().id === 'underwater' ? 2 : 1;
+			if (pokemon.hasItem('pressurecapsule')) return;
+
+			if (pokemon.ability === 'highpressure') {
+				this.add('-activate', pokemon, 'ability: High Pressure');
+				let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+				if (collateral >= (pokemon.maxhp - pokemon.hp)) collateral = (pokemon.maxhp - pokemon.hp);
+				this.directHeal(collateral, pokemon);
+				if (pokemon.hp === pokemon.baseMaxhp) pokemon.cureStatus();
+			} else {
+				this.add('-activate', pokemon, 'pressurized');
+				let collateral = this.clampIntRange(pressureMod * pokemon.maxhp / 8, 1);
+				if (collateral >= pokemon.hp) collateral = pokemon.hp - 1;
+				this.directDamage(collateral, pokemon);
+				if (pokemon.hp === 1) pokemon.cureStatus();
 			}
 		},
 	},
@@ -480,23 +487,8 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.effectState.startTime = 3;
 			this.effectState.time = this.effectState.startTime;
 		},
-		onSourceModifyAccuracyPriority: -1,
-		onSourceModifyAccuracy(accuracy, target, source, move) {
-			if (typeof accuracy === 'number') {
-				// if (move.target !== 'any') {
-				return this.chainModify(0.90);
-				// }
-			}
-		},
-		onAnyAccuracy(accuracy, target, source, move) {
-			if (move && target === this.effectState.target) {
-				if (typeof accuracy === 'number') {
-					// if (move.target !== 'any') {
-					return this.chainModify(0.90);
-					// }
-				}
-			}
-			return accuracy;
+		onFractionalPriority(relayVar, source, target, move) {
+			if (!source.hasType('Far')) return -0.1;
 		},
 		onBeforeMovePriority: 10,
 		onBeforeMove(pokemon, target, move) {
@@ -519,9 +511,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onResidualOrder: 6,
 		onResidual(pokemon) {
-			if (pokemon.hasType('Far', true)) this.heal(pokemon.baseMaxhp / 16);
+			if (pokemon.hasType('Far', true)) {
+				if (this.field.getTerrain().id === 'spatialexpansion') {
+					this.heal(pokemon.baseMaxhp / 8);
+				} else {
+					this.heal(pokemon.baseMaxhp / 16);
+				}
+			}
 		},
-		// Damage reduction is handled directly in the sim/battle-actions.js damage function
 	},
 	infected: {
 		name: 'infected',

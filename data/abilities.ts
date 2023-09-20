@@ -268,7 +268,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				move.accuracy = true;
 			}
 		},
-		isPermanent: true,
 		name: "Omega",
 		rating: 3,
 		num: 505,
@@ -342,7 +341,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.add('-heal', pokemon, pokemon.getHealth, '[from] ability: Red');
 			}
 		},
-		isPermanent: true,
 		name: "Red",
 		rating: 5,
 		num: -509,
@@ -732,7 +730,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.hint("Farewell will switch everyone else out at the end of the next turn!");
 			this.effectState.switchingIn = true;
 		},
-		onResidualOrder: 99,
+		onResidualOrder: 80,
 		onResidual(pokemon) {
 			// Farewell activates at the end of the turn after switching in.
 			if (!this.effectState.switchingIn || !pokemon.activeTurns) return;
@@ -1016,7 +1014,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			let success = 0;
 			const removeAll = [
 				'reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge',
-				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter',
+				'stormcell', 'dustcloud', 'wetfloor', 'beamfield', 'hotcoals', 'permafrost', 'autoturret', 'voidtrap', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure',
 			];
 			for (const targetCondition of removeAll) {
 				if (source.side.foe.removeSideCondition(targetCondition)) {
@@ -2074,7 +2072,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.setWeather(this.sample(environmentalfactors));
 				break;
 			case 2:
-				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
+				const sideconditions = ['duststorm', 'hotcoals', 'permafrost', 'wetfloor', 'beamfield', 'stormcell', 'voidtrap', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure'];
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:
@@ -2661,7 +2659,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				return this.chainModify(2);
 			}
 		},
-		isPermanent: true,
 		name: "Omnicide",
 		rating: 4.5,
 		num: 185,
@@ -2698,7 +2695,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				}
 			);
 		},
-		isPermanent: true,
 		name: "Composting",
 		rating: 4.5,
 		num: 185,
@@ -2735,7 +2731,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (randomStat) boost[randomStat] = 1;
 			this.boost(boost, source);
 		},
-		isPermanent: true,
 		name: "Magic Touch",
 		rating: 4,
 		num: 1132,
@@ -2746,7 +2741,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.field.setTerrain('sudscape');
 			this.field.setWeather('windy');
 		},
-		isPermanent: true,
 		name: "Water Bringer",
 		rating: 5,
 		num: 1229,
@@ -3763,6 +3757,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	conservationarea: {
 		isNonstandard: "ThingInf",
+		onModifyMovePriority: 10,
 		onAllyModifyMove(move) {
 			move.stab = 2;
 		},
@@ -3805,7 +3800,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					case 'Arthropod':
 					case 'Fish':
 					case 'Green':
-						source.heal(source.baseMaxhp / 2);
+						this.heal(source.baseMaxhp / 2, source, source);
 						break;
 					case 'Hair':
 					case 'Industrial':
@@ -3865,7 +3860,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
-				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter'];
+				const hazards = ['wetfloor', 'dustcloud', 'voidtrap', 'hotcoals', 'permafrost', 'beamfield', 'stormcell', 'autoturret', 'caltrops', 'lightningstorm', 'eggscatter', 'infrastructure'];
 				const hazard = this.sample(hazards);
 				this.add('-activate', target, 'ability: Do Not Enter');
 				source.side.addSideCondition(hazard);
@@ -3899,17 +3894,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	undead: {
 		isNonstandard: "Thing",
-		onFaint(pokemon) {
-			if (!pokemon.undead) {
-				console.log('undying');
-				pokemon.undead = true;
-				pokemon.fainted = false;
-				pokemon.faintQueued = false;
-				pokemon.subFainted = false;
-				pokemon.status = '';
-				pokemon.hp = 1;
-				pokemon.heal(pokemon.baseMaxhp / 2);
-			}
+		affectsFainted: true,
+		onFaintedResidualOrder: 90,
+		onFaintedResidual(pokemon) {
+			if (pokemon.undead) return;
+			console.log('undead');
+			pokemon.undead = true;
+			pokemon.side.pokemonLeft++;
+			pokemon.fainted = false;
+			pokemon.faintQueued = false;
+			pokemon.subFainted = false;
+			pokemon.status = '';
+			pokemon.hp = 1;
+			pokemon.heal(pokemon.baseMaxhp / 2);
 		},
 		name: "Undead",
 		rating: 2,
@@ -4045,6 +4042,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onAfterMoveSecondarySelf(source, target, move) {
 			const hitMove = this.dex.getActiveMove('Ball Bounce');
+			if (hitMove.category === 'Status') return;
 			hitMove.category = move.category;
 			hitMove.basePower = move.basePower / 2;
 			if (source !== null && target !== null && target.hp) {
@@ -4140,16 +4138,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onDamagingHit(damage, target, source, move) {
 			if (this.checkMoveMakesContact(move, source, target)) {
 				if (this.randomChance(3, 10)) {
-					if (!target.item) {
+					if (!source.item) {
 						return;
 					} else {
-						const old_item = target.getItem();
-						target.setItem('');
-						target.lastItem = old_item.id;
+						const old_item = source.getItem();
+						source.setItem('');
+						source.lastItem = old_item.id;
 					}
-		
-					this.add('-item', target, this.dex.items.get('plainstick'), '[from] ability: Sticky');
-					target.setItem('plainstick');
+
+					this.add('-item', source, this.dex.items.get('plainstick'), '[from] ability: Sticky');
+					source.setItem('plainstick');
 				}
 			}
 		},
@@ -4163,6 +4161,167 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.item) { this.actions.useMove('consume', pokemon); }
 		},
 		name: "What's this?",
+		rating: 4,
+		num: 2111,
+	},
+	hydrophobicaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			this.field.clearWeather();
+		},
+		name: "Hydrophobic Aura",
+		rating: 4,
+		num: 2111,
+	},
+	polaraura: {
+		isNonstandard: "Thing",
+		onStart() {
+			if (this.field.weatherState.duration < 5) this.field.weatherState.duration = 5;
+		},
+		name: "Polar Aura",
+		rating: 4,
+		num: 2111,
+	},
+	positiveaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			this.field.clearTerrain();
+		},
+		name: "Positive Aura",
+		rating: 4,
+		num: 2111,
+	},
+	negativeaura: {
+		isNonstandard: "Thing",
+		onStart() {
+			if (this.field.terrainState.duration < 5) this.field.terrainState.duration = 5;
+		},
+		name: "Negative Aura",
+		rating: 4,
+		num: 2111,
+	},
+	nullify: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('nullland');
+		},
+		name: "Nullify",
+		rating: 2,
+		num: -102,
+	},
+	yellowify: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('yellowish');
+		},
+		name: "Yellowify",
+		rating: 2,
+		num: -102,
+	},
+	greening: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setTerrain('greenground');
+		},
+		name: "Greening",
+		rating: 2,
+		num: -102,
+	},
+	makeasplash: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('underwater');
+		},
+		name: "Make a Splash",
+		rating: 2,
+		num: -102,
+	},
+	itstime: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.field.setWeather('timedilation');
+		},
+		name: "It's Time",
+		rating: 2,
+		num: -102,
+	},
+	/* howdy: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			this.actions.useMove('hello');
+		},
+		name: "It's Time",
+		rating: 2,
+		num: -102,
+	}, */
+	upgrading: {
+		isNonstandard: "Thing",
+		isPermanent: true,
+		onUpdate(pokemon) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Moniturn') return;
+			if (pokemon.hp > pokemon.maxhp / 2 && pokemon.species.id === 'moniturn') {
+				this.add('-activate', pokemon, 'ability: Upgrading');
+				pokemon.formeChange('Moniturn-Upgraded', this.effect);
+				const oldBaseMaxhp = pokemon.baseMaxhp;
+				pokemon.baseMaxhp = pokemon.species.maxHP ||
+					Math.floor(
+						Math.floor(2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) *
+						pokemon.level / 100 + 10
+					);
+				pokemon.maxhp = pokemon.baseMaxhp;
+				pokemon.hp = Math.floor(pokemon.hp * pokemon.baseMaxhp / oldBaseMaxhp);
+				pokemon.hp = this.clampIntRange(pokemon.hp, 1, pokemon.maxhp);
+
+				this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+			} else if (pokemon.hp < pokemon.maxhp / 2 && pokemon.species.id === 'moniturnupgraded') {
+				this.add('-activate', pokemon, 'ability: Upgrading');
+				pokemon.formeChange('Moniturn', this.effect);
+				const oldBaseMaxhp = pokemon.baseMaxhp;
+				pokemon.baseMaxhp = pokemon.species.maxHP ||
+					Math.floor(
+						Math.floor(2 * pokemon.species.baseStats['hp'] + pokemon.set.ivs['hp'] + Math.floor(pokemon.set.evs['hp'] / 4) + 100) *
+						pokemon.level / 100 + 10
+					);
+				pokemon.maxhp = pokemon.baseMaxhp;
+				pokemon.hp = Math.floor(pokemon.hp * pokemon.baseMaxhp / oldBaseMaxhp);
+				pokemon.hp = this.clampIntRange(pokemon.hp, 1, pokemon.maxhp);
+
+				this.add('-heal', pokemon, pokemon.getHealth, '[silent]');
+			}
+		},
+		onDamagePriority: -30,
+		onDamage(damage, target, source, effect) {
+			if (target.species.id === 'moniturnupgraded' && damage >= target.hp && effect && effect.effectType === 'Move') {
+				this.add("-ability", target, 'Upgrading');
+				return target.hp - 1;
+			}
+		},
+		onBeforeMovePriority: 9,
+		onBeforeMove(pokemon, target, move) {
+			if (pokemon.species.id === 'moniturn' && move.category !== 'Status') {
+				this.add('cant', pokemon, 'ability: Upgrading');
+				return false;
+			}
+		},
+		onDisableMove(pokemon) {
+			if (pokemon.species.id !== 'moniturn') return;
+			for (const moveSlot of pokemon.moveSlots) {
+				if (this.dex.moves.get(moveSlot.move).category !== 'Status') {
+					pokemon.disableMove(moveSlot.id);
+				}
+			}
+		},
+		name: "Upgrading",
+		rating: 2,
+		num: -102,
+	},
+	emptyaura: {
+		isNonstandard: "Thing",
+		onModifyMovePriority: 20,
+		onAnyModifyMove(move) {
+			move.stab = 1;
+		},
+		name: "Empty Aura",
 		rating: 4,
 		num: 2111,
 	},

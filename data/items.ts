@@ -1060,7 +1060,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			return pokemon.getStat('atk', false, false) + 10;
+			return atk + 10;
 		},
 		num: -277,
 		gen: 8,
@@ -1074,12 +1074,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onBeforeMovePriority: 1,
 		onBeforeMove(source, target, move) {
-			 if (['normal', 'randomNormal', 'any'].includes(move.target)) {
+			if (move.category === 'Status') return;
+			if (['normal', 'randomNormal', 'any'].includes(move.target)) {
 				move.target = 'allAdjacentFoes';
 			 }
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
+			if (move) {
+				return this.chainModify(0.75);
+			}
+		},
+		onAccuracy(accuracy, target, source, move) {
 			if (move) {
 				return this.chainModify(0.75);
 			}
@@ -1113,8 +1119,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyDefPriority: 1,
 		onModifyDef(def, pokemon) {
-			console.log(pokemon.moveThisTurn);
-			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+			if (this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -280,
 		gen: 8,
@@ -1128,7 +1133,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpDPriority: 1,
 		onModifySpD(spd, pokemon) {
-			if (pokemon.moveThisTurn) return this.chainModify(1.5);
+			if (this.queue.willMove(pokemon)) return this.chainModify(1.5);
 		},
 		num: -281,
 		gen: 8,
@@ -1142,13 +1147,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifyAtkPriority: 1,
 		onModifyAtk(atk, pokemon) {
-			for (const foe of pokemon.foes()) {
-				if (foe !== pokemon && !foe.moveThisTurn) return;
+			let boosted = true;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (this.queue.willMove(target)) {
+					boosted = false;
+					break;
+				}
 			}
-			for (const ally of pokemon.allies()) {
-				if (ally !== pokemon && !ally.moveThisTurn) return;
+			if (boosted) {
+				this.debug('hefty boost');
+				return this.chainModify(1.5);
 			}
-			return this.chainModify(1.5);
 		},
 		num: -282,
 		gen: 8,
@@ -1162,13 +1172,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		onModifySpAPriority: 1,
 		onModifySpA(spa, pokemon) {
-			for (const foe of pokemon.foes()) {
-				if (foe !== pokemon && !foe.moveThisTurn) return;
+			let boosted = true;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (this.queue.willMove(target)) {
+					boosted = false;
+					break;
+				}
 			}
-			for (const ally of pokemon.allies()) {
-				if (ally !== pokemon && !ally.moveThisTurn) return;
+			if (boosted) {
+				this.debug('hefty boost');
+				return this.chainModify(1.5);
 			}
-			return this.chainModify(1.5);
 		},
 		num: -283,
 		gen: 8,
@@ -1205,7 +1220,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 25,
 		},
 		onStart(pokemon) {
-			pokemon.setStatus('prone');
+			pokemon.trySetStatus('prone');
 		},
 		num: -285,
 		gen: 8,
@@ -1268,6 +1283,17 @@ export const Items: {[itemid: string]: ItemData} = {
 		},
 		// implemented in condition
 		num: -289,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	energydrink: {
+		name: "Energy Drink",
+		spritenum: 841,
+		consume: {
+			healPercent: 100,
+		},
+		// implemented in energy
+		num: -290,
 		gen: 8,
 		isNonstandard: "Thing",
 	},

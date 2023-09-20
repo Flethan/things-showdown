@@ -1168,6 +1168,98 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
+	moniturn: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amio: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiolysine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiothreonine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiophenylalanine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioproline: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiohistidine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiotryptophan: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioglutamine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioaspartate: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioglutamate: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioarginine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioalanine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiocysteine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioselenocysteine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioasparagine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioserine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioglycine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiotyrosine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioisoleucine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amioleucine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiovaline: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	amiomethionine: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
