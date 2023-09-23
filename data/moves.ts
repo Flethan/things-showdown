@@ -7786,8 +7786,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onSideResidual(side) {
 				const pokemon = this.effectState.source;
 				const foes: Pokemon[] = [];
-				for (const foe of pokemon.foes()) {
-					if (foe.hasItem('yellowsafetyvest')) continue;
+				for (const foe of side.active) {
+					if (foe.hasItem('yellowsafetyvest') || foe.fainted) continue;
 					foes.push(foe);
 				}
 				if (foes.length === 0) return;
