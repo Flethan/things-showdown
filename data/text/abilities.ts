@@ -332,6 +332,12 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		activate: "[POKEMON] is in tune with 3!",
 	},
 
+	undead: {
+		name: "Undead",
+		shortDesc: "Once per battle, this Thing revives with half HP.",
+		heal: "The dead return! [POKEMON] was revived!",
+	},
+
 	// BASE GAME
 	noability: {
 		name: "No Ability",

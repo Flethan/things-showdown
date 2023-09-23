@@ -3895,10 +3895,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	undead: {
 		isNonstandard: "Thing",
 		affectsFainted: true,
+		onFaint() {
+			this.effectState.faintedThisTurn = true;
+		},
 		onFaintedResidualOrder: 90,
 		onFaintedResidual(pokemon) {
 			if (pokemon.undead) return;
-			console.log('undead');
+			if (this.effectState.faintedThisTurn) {
+				this.effectState.faintedThisTurn = false;
+				return;
+			}
 			pokemon.undead = true;
 			pokemon.side.pokemonLeft++;
 			pokemon.fainted = false;
@@ -3907,6 +3913,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			pokemon.status = '';
 			pokemon.hp = 1;
 			pokemon.heal(pokemon.baseMaxhp / 2);
+			this.add('-heal', pokemon, pokemon.getHealth, '[from] ability: Undead');
 		},
 		name: "Undead",
 		rating: 2,
