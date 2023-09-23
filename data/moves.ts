@@ -5363,7 +5363,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const inf = target.statusState.infection;
 				const spreadChance = this.clampIntRange(inf.spreadChance + this.random(0, 50), 0, 100);
 				const newModes = this.random(0, 3);
-				const i = 0;
+				let i = 0;
 				while (i < newModes) {
 					target.statusState.infection.spreadMode.push(this.random(1, 5));
 					i++;
@@ -7786,6 +7786,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onSideResidual(side) {
 				const pokemon = this.effectState.source;
 				const foes: Pokemon[] = [];
+				console.log(side.active);
 				for (const foe of side.active) {
 					if (foe.hasItem('yellowsafetyvest')) continue;
 					foes.push(foe);
