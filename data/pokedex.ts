@@ -4857,6 +4857,20 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like"],
 		hasSprite: false,
 	},
+	grog: {
+		num: -538,
+		name: "Grog",
+		types: ["Liquid", "Green"],
+		gender: "N",
+		baseStats: {hp: 150, atk: 150, def: 30, spa: 180, spd: 30, spe: 60},
+		abilities: {0: "No Ability"},
+		heightm: 0.2,
+		weightkg: 5,
+		color: "Green",
+		eggGroups: ["Undiscovered"],
+		hasSprite: true,
+		isPatron: true,
+	},
 
 	// BASE GAME
 	bulbasaur: {

@@ -6255,6 +6255,16 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			radiate: ["8L40"],
 		},
 	},
+	grog: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			consume: ["8M"],
+			
+		},
+	},
 
 	// BASE GAME
 	missingno: {
