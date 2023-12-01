@@ -4861,7 +4861,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		num: -538,
 		name: "Grog",
 		types: ["Liquid", "Green"],
-		gender: "N",
+		gender: "M",
 		baseStats: {hp: 150, atk: 150, def: 30, spa: 180, spd: 30, spe: 60},
 		abilities: {0: "Increase the Population"},
 		heightm: 0.2,
