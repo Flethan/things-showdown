@@ -6262,7 +6262,6 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			consume: ["8M"],
-			
 		},
 	},
 
