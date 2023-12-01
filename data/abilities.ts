@@ -4332,6 +4332,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2111,
 	},
+	increasethepopulation: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if (pokemon.gender === "N") return;
+			for (const foe of pokemon.foes()) {
+				if (foe.gender === "N" || foe.gender === pokemon.gender) return;
+				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
+				if (!juice) return;
+				this.damage(juice, foe, pokemon);
+			}
+			for (const ally of pokemon.allies()) {
+				if (ally.gender === "N" || ally.gender === pokemon.gender) return;
+				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
+				if (!juice) return;
+				this.damage(juice, ally, pokemon);
+			}
+		},
+		name: "Increase the Population",
+		rating: 3,
+		num: 113,
+	},
 
 	// BASE GAME
 	noability: {
