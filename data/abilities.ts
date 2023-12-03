@@ -4338,12 +4338,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (pokemon.gender === "N") return;
 			for (const foe of pokemon.foes()) {
 				if (foe.gender === "N" || foe.gender === pokemon.gender) return;
+				this.add("-ability", pokemon, 'Increase the Population');
 				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
 				if (!juice) return;
 				this.damage(juice, foe, pokemon);
 			}
 			for (const ally of pokemon.allies()) {
 				if (ally.gender === "N" || ally.gender === pokemon.gender) return;
+				this.add("-ability", pokemon, 'Increase the Population');
 				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
 				if (!juice) return;
 				this.damage(juice, ally, pokemon);
