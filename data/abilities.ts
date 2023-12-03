@@ -4335,19 +4335,19 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	increasethepopulation: {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
-			if (pokemon.gender === "N") return;
+			if (pokemon.gender === "") return;
 			for (const foe of pokemon.foes()) {
-				if (foe.gender === "N" || foe.gender === pokemon.gender) return;
+				if (foe.gender === "" || foe.gender === pokemon.gender) continue;
 				this.add("-ability", pokemon, 'Increase the Population');
 				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
-				if (!juice) return;
+				if (!juice) continue;
 				this.damage(juice, foe, pokemon);
 			}
 			for (const ally of pokemon.allies()) {
-				if (ally.gender === "N" || ally.gender === pokemon.gender) return;
+				if (ally.gender === "" || ally.gender === pokemon.gender) continue;
 				this.add("-ability", pokemon, 'Increase the Population');
 				const juice = this.damage(pokemon.baseMaxhp / 8, pokemon, pokemon);
-				if (!juice) return;
+				if (!juice) continue;
 				this.damage(juice, ally, pokemon);
 			}
 		},
