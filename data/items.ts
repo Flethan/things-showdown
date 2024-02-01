@@ -1214,7 +1214,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		isNonstandard: "Thing",
 	},
 	slipshoes: {
-		name: "Slip Shoes",
+		name: "Total-Slip Shoes",
 		spritenum: 836,
 		consume: {
 			healPercent: 25,

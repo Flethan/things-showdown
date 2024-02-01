@@ -97,8 +97,12 @@ export const ItemsText: {[k: string]: ItemText} = {
 		desc: "Holder becomes blinded when sent out. Single use.",
 	},
 	nonslipshoes: {
-		name: "Non Slip Shoes",
+		name: "Non-Slip Shoes",
 		desc: "Holder gets up if prone. Single use.",
+	},
+	totalslipshoes: {
+		name: "Total-Slip Shoes",
+		desc: "Holder is knocked prone on switch-in.",
 	},
 	dimensionaltether: {
 		name: "Yellow Safety Vest",
