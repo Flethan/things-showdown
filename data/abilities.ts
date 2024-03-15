@@ -4355,6 +4355,31 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 3,
 		num: 113,
 	},
+	h: {
+		isNonstandard: "Thing",
+		onStart(target) {
+			const abilities: AbilityData[] = [];
+			for (const id in Abilities) {
+				const ability = Abilities[id];
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf'
+					&& !/^[hH]/.test(ability.name)) || ability.name === 'h') continue;
+				abilities.push(ability);
+			}
+			let randomAbility = '';
+			if (abilities.length) {
+				abilities.sort((a, b) => a.num! - b.num!);
+				randomAbility = this.sample(abilities).name;
+			}
+			if (!randomAbility) {
+				return false;
+			}
+			this.add('H_', this.effectState.target, randomAbility, '[from] ability: H_', '[of] ' + target);
+			target.setAbility(randomAbility);
+		},
+		name: "H_",
+		rating: 0,
+		num: 1223,
+	},
 
 	// BASE GAME
 	noability: {
