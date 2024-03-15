@@ -1192,6 +1192,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			trample: ["8L67"],
 			caltrops: ["8L70"],
 			cuddle: ["8L10"],
+			plinko: ["8L50"],
 		},
 	},
 	horseluigi: {

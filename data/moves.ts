@@ -1925,7 +1925,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Physical",
 		isNonstandard: "Thing",
 		name: "Head Out",
-		pp: 15,
+		pp: 5,
 		priority: 0,
 		flags: {ball: 1, protect: 1, mirror: 1},
 		selfSwitch: true,
@@ -5672,6 +5672,116 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "self",
+		type: "Sport",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
+	},
+	plinko: {
+		num: 1719,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Plinko",
+		pp: 5,
+		priority: 0,
+		flags: {snatch: 1},
+		onHit(pokemon) {
+			let loopNum = 0;
+			do {
+				const randomChance = Math.floor(Math.random() * 100);
+				if (randomChance < 1) {
+				// die
+				// console.log("die");
+					this.damage(pokemon.baseMaxhp);
+					break;
+				} else if (randomChance < 26) {
+				// boost random stat
+				// console.log("boost");
+					const stats: BoostID[] = [];
+					const boost: SparseBoostsTable = {};
+					let statPlus: BoostID;
+					for (statPlus in pokemon.boosts) {
+					// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+						if (pokemon.boosts[statPlus] < 6) {
+							stats.push(statPlus);
+						}
+					}
+					const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+					if (randomChance > 21) {
+						if (randomStat) boost[randomStat] = 2;
+					} else {
+						if (randomStat) boost[randomStat] = 1;
+					}
+					this.boost(boost);
+				} else if (randomChance < 75) {
+				// lower random stat
+				// console.log("negative boost");
+					const stats: BoostID[] = [];
+					const boost: SparseBoostsTable = {};
+					let statPlus: BoostID;
+					for (statPlus in pokemon.boosts) {
+					// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+						if (pokemon.boosts[statPlus] < 6) {
+							stats.push(statPlus);
+						}
+					}
+					const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+					if (randomChance > 65) {
+						if (randomStat) boost[randomStat] = -2;
+					} else {
+						if (randomStat) boost[randomStat] = -1;
+					}
+					this.boost(boost);
+				} else if (randomChance < 89) {
+				// cure status
+				// console.log("heal");
+					this.heal(pokemon.baseMaxhp / 8);
+					if (pokemon.hp && pokemon.status) {
+						this.debug('big gamble');
+						pokemon.cureStatus();
+					}
+				} else if (randomChance < 99) {
+				// gain random status
+				// console.log("status");
+					this.damage(pokemon.baseMaxhp / 8);
+					const result = this.random(8);
+					if (result === 0) {
+						pokemon.trySetStatus('prone');
+					} else if (result === 1) {
+						pokemon.trySetStatus('banished');
+					} else if (result === 2) {
+						pokemon.trySetStatus('blinded');
+					} else if (result === 3) {
+						pokemon.trySetStatus('pressurized');
+					} else if (result === 4) {
+						pokemon.trySetStatus('fluctuant');
+					} else if (result === 5) {
+						pokemon.trySetStatus('wounded');
+					} else if (result === 6) {
+						pokemon.trySetStatus('distanced');
+					} else {
+						pokemon.trySetStatus('infected');
+					}
+				} else {
+				// jackpot
+				// console.log("win big");
+					const boost: SparseBoostsTable = {};
+					let statPlus: BoostID;
+					for (statPlus in pokemon.boosts) {
+						if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
+						if (pokemon.boosts[statPlus] < 6) {
+							boost[statPlus] = 6;
+						}
+					}
+					this.boost(boost);
+					break;
+				}
+				loopNum++;
+			} while (loopNum < 3 && pokemon.hp);
+		},
+		secondary: null,
+		target: "normal",
 		type: "Sport",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cool",
