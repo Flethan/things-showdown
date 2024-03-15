@@ -4361,8 +4361,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf'
-					&& !/^[hH]/.test(ability.name)) || ability.name === 'h') continue;
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf')
+					|| !/^[hH]/.test(ability.name) || ability.name === 'h') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
