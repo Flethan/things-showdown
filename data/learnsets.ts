@@ -1231,6 +1231,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			particlebeam: ["8L50"],
 			hit: ["8M"],
 			hide: ["8M"],
+			plinko: ["8E"],
 		},
 	},
 	connectphore: {
@@ -1247,6 +1248,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			borrow: ["8M"],
+			plinko: ["8E"],
 		},
 	},
 	omnectivore: {
@@ -1275,6 +1277,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			starrywave: ["8L72"],
 			corruption: ["8L88"],
+			plinko: ["8E"],
 		},
 	},
 	fsh: {
@@ -1887,6 +1890,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			borrow: ["8M"],
+			plinko: ["8L80"],
 		},
 	},
 	fjean: {
