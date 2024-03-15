@@ -1918,6 +1918,22 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Clever",
 	},
+	headout: {
+		num: -275,
+		accuracy: 70,
+		basePower: 150,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Head Out",
+		pp: 15,
+		priority: 0,
+		flags: {ball: 1, protect: 1, mirror: 1},
+		selfSwitch: true,
+		secondary: null,
+		target: "any",
+		type: "H",
+		contestType: "Cute",
+	},
 
 	// Hair
 	whipcrack: {

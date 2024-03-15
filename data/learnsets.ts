@@ -3310,6 +3310,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hsearch: ["8T"],
 			consume: ["8M"],
 			borrow: ["8M"],
+			headout: ["8L1"],
 		},
 	},
 	anoano: {
@@ -4688,6 +4689,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bask: ["8T"],
 			fossilize: ["8T"],
 			rockshot: ["8T"],
+			headout: ["8T"],
 		},
 	},
 	washinghandsgolem: {
@@ -4724,6 +4726,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			earthjet: ["8L35"],
 			bury: ["8L73"],
+			headout: ["8L69"]
 		},
 	},
 	cyam: {
