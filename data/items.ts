@@ -1213,7 +1213,7 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	slipshoes: {
+	totalslipshoes: {
 		name: "Total-Slip Shoes",
 		spritenum: 836,
 		consume: {
