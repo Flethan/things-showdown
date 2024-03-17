@@ -5733,7 +5733,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						if (randomStat) boost[randomStat] = -1;
 					}
 					this.boost(boost);
-				} else if (randomChance < 89) {
+				} else if (randomChance < 84) {
 				// cure status
 				// console.log("heal");
 					this.heal(pokemon.baseMaxhp / 8);
