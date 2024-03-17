@@ -4607,6 +4607,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timecapsule: ["8L77"],
 			borrow: ["8M"],
 			hello: ["8L5"],
+			headout: ["8L87"],
 		},
 	},
 	hatthewtophat: {
@@ -4632,6 +4633,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			autoturret: ["8L77"],
 			borrow: ["8M"],
 			hello: ["8L5"],
+			headout: ["8L87"],
 		},
 	},
 	hatthewballcap: {
@@ -4657,6 +4659,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			shootingstar: ["8L77"],
 			borrow: ["8M"],
 			hello: ["8L5"],
+			headout: ["8L87"],
 		},
 	},
 	hatthewpangolin: {
@@ -4681,6 +4684,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			prune: ["8L77"],
 			borrow: ["8M"],
 			hello: ["8L5"],
+			headout: ["8L87"],
 		},
 	},
 	rock: {
