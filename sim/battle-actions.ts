@@ -1910,8 +1910,8 @@ export class BattleActions {
 			pokemon.baseMoveSlots[4] = newMove;
 		}
 
-		// Limit one symbol evolution, don't count forced evos: Lemon -> <empty>, Yellomatter's Phase Change
-		if (!forcedSpeciesId) {
+		// Limit one symbol evolution, don't count forced evos: Lemon -> <empty>, Yellomatter's Phase Chan OR bonus symbol from item
+		if (!forcedSpeciesId && !(pokemon.getItem().id === 'backupsymbolcrystal' && pokemon.itemState.count >= 5)) {
 			const wasSymbol = pokemon.canSymbolEvo;
 			for (const ally of pokemon.side.pokemon) {
 				if (wasSymbol) {
