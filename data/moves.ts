@@ -8416,6 +8416,94 @@ export const Moves: {[moveid: string]: MoveData} = {
 
 
 	// Infinity
+	infinitycycle: {
+		num: 24,
+		accuracy: true,
+		basePower: 7,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Infinity Cycle",
+		pp: 7,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		multihit: 7,
+		secondary: null,
+		onModifyMove(move, pokemon) {
+			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
+		},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Infinity', true)) return;
+			this.add('-fail', pokemon, 'move: Infinity Cycle');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		target: "normal",
+		type: "Infinity",
+		maxMove: {basePower: 80},
+		contestType: "Cool",
+	},
+	infinitydischarge: {
+		num: 24,
+		accuracy: true,
+		basePower: 7,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Infinity Discharge",
+		pp: 7,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: null,
+		onModifyMove(move, pokemon) {
+			if (pokemon.getStat('spa', false, true) > pokemon.getStat('atk', false, true)) move.category = 'Special';
+		},
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Infinity', true) && pokemon.positiveBoosts() > 0) return;
+			this.add('-fail', pokemon, 'move: Infinity Discharge');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		basePowerCallback(pokemon, target, move) {
+			return move.basePower * pokemon.positiveBoosts();
+		},
+		onAfterMove(pokemon) {
+			pokemon.clearBoosts();
+		},
+		target: "normal",
+		type: "Infinity",
+		maxMove: {basePower: 80},
+		contestType: "Tough",
+	},
+	infinitycharge: {
+		num: 1104,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Infinity Charge",
+		pp: 7,
+		priority: -1,
+		flags: {snatch: 1},
+		boosts: {
+			atk: 1,
+			def: 1,
+			spa: 1,
+			spd: 1,
+			spe: 1,
+			accuracy: 1,
+			evasion: 1,
+		},
+		secondary: null,
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Infinity', true)) return;
+			this.add('-fail', pokemon, 'move: Infinity Charge');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		target: "self",
+		type: "Infinity",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Clever",
+	},
 
 	// NEW GENERICS
 	maxbugs: {
@@ -9146,13 +9234,13 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Yellow",
 		contestType: "Cool",
 	},
-	infinitycycle: {
+	infinitycyclez: {
 		num: -239,
 		accuracy: true,
 		basePower: 1,
 		category: "Physical",
 		isNonstandard: "Thing",
-		name: "Infinity Cycle",
+		name: "Infinity Cyclez",
 		pp: 1,
 		priority: 0,
 		flags: {},
