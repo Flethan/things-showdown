@@ -88,7 +88,7 @@ export class BattleActions {
 		Time: "Zero Hour Ending",
 		Weather: "Emperor's Gambit",
 		Yellow: "Yellow Z-Zap",
-		Infinity: "Infinity Cycle",
+		Infinity: "Infinity Cyclez",
 	};
 
 	constructor(battle: Battle) {
