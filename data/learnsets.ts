@@ -189,6 +189,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whispersindarkness: ["8L88"],
 			countdown: ["8E"],
 			nothanks: ["8L40"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	meltipillar: {
@@ -985,6 +988,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			energybeam: ["8T"],
 			gasblast: ["8T"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	saxosnowne: {
@@ -1089,6 +1095,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			energybeam: ["8T"],
 			starrywave: ["8E"],
 			gasblast: ["8E"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	hellow: {
@@ -1278,6 +1287,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			starrywave: ["8L72"],
 			corruption: ["8L88"],
 			plinko: ["8E"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	fsh: {
@@ -1395,6 +1407,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8L1"],
 			energybeam: ["8T"],
 			lightningstorm: ["8L1"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	nighreto: {
@@ -1455,6 +1470,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			borrow: ["8M"],
 			chitinbeam: ["8M"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	swordguy: {
@@ -3059,6 +3077,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			luminesce: ["8L25"],
 			brilliantflash: ["8L31"],
 			timebomb: ["8L1"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	epee: {
@@ -3240,6 +3261,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenground: ["8L31"],
 			stickattack: ["8L25"],
 			greenbeam: ["8L27"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	mistimink: {
@@ -3431,6 +3455,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			radiate: ["8L1"],
 			bluejet: ["8L1"],
 			staticstrike: ["8L1"],
+			infinitycycle: ["8L1"],
+			infinitycharge: ["8L1"],
+			infinitydischarge: ["8L1"],
 		},
 	},
 	searke: {
@@ -3644,6 +3671,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			brankle: ["8E"],
 			cyberneticenhancement: ["8E"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	litheath: {
@@ -4263,6 +4293,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			shove: ["8L41"],
 			fourinarow: ["8L1"],
 			rankandfile: ["8T"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	dishwashersnake: {
@@ -4332,6 +4365,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fishbite: ["8L7"],
 			consume: ["8M"],
 			borrow: ["8M"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	hedgepig: {
@@ -4608,6 +4644,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			hello: ["8L5"],
 			headout: ["8L87"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	hatthewtophat: {
@@ -4634,6 +4673,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			hello: ["8L5"],
 			headout: ["8L87"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	hatthewballcap: {
@@ -4660,6 +4702,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			hello: ["8L5"],
 			headout: ["8L87"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	hatthewpangolin: {
@@ -4685,6 +4730,9 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			borrow: ["8M"],
 			hello: ["8L5"],
 			headout: ["8L87"],
+			infinitycycle: ["8T"],
+			infinitycharge: ["8T"],
+			infinitydischarge: ["8T"],
 		},
 	},
 	rock: {
