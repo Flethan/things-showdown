@@ -1297,6 +1297,27 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	backupsymbolcrystal: {
+		name: "Backup Symbol Crystal",
+		spritenum: 842,
+		consume: {
+			healPercent: 100,
+		},
+		onResidual(pokemon) {
+			if (!this.effectState.count) this.effectState.count = 0;
+			this.effectState.count++;
+			/* if (this.effectState.count < 5) {
+				this.hint(`${pokemon.name}'s Backup Symbol Crystal is charging! (${this.effectState.count}/5)`);
+			}*/
+			if (this.effectState.count === 5) {
+				this.hint(`${pokemon.name}'s Backup Symbol Crystal is fully charged!`);
+			}
+		},
+		// implemented in symbol evo function
+		num: -291,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",
