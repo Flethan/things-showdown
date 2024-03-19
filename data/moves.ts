@@ -8482,7 +8482,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onAfterMove(pokemon) {
 			pokemon.clearBoosts();
 		},
-		target: "normal",
+		target: "allAdjacent",
 		type: "Infinity",
 		maxMove: {basePower: 80},
 		contestType: "Tough",
