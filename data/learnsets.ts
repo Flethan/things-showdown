@@ -2258,6 +2258,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			brush: ["8L20"],
 			hairycrash: ["8L50"],
 			voidscream: ["8L30"],
+			shove: ["8L30"],
+			distantbarrage: ["8L30"],
 			voidpunch: ["8L20"],
 			noescape: ["8L50"],
 			conduct: ["8L55"],
