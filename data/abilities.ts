@@ -3831,7 +3831,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						this.boost({evasion: 1}, source, source, null, true);
 						break;
 					case 'Infinity':
-						this.boost({atk: 1, def: 1, spa: 1, spd: 1, spe: 1}, source, source, null, true);
+						this.boost({atk: 1, def: 1, spd: 1, spe: 1}, source, source, null, true);
 					}
 				}
 			}
