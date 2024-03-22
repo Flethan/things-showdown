@@ -1318,6 +1318,51 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
+	manpill: {
+		name: "Man Pill",
+		spritenum: 843,
+		consume: {
+			healPercent: 50,
+		},
+		onStart(pokemon) {
+			if (pokemon.gender === 'M') return false;
+			pokemon.gender = 'M';
+			pokemon.useItem();
+		},
+		num: -292,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	womanpill: {
+		name: "Woman Pill",
+		spritenum: 844,
+		consume: {
+			healPercent: 50,
+		},
+		onStart(pokemon) {
+			if (pokemon.gender === 'F') return false;
+			pokemon.gender = 'F';
+			pokemon.useItem();
+		},
+		num: -293,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
+	otherpill: {
+		name: "Other Pill",
+		spritenum: 845,
+		consume: {
+			healPercent: 50,
+		},
+		onStart(pokemon) {
+			if (pokemon.gender === 'N') return false;
+			pokemon.gender = 'N';
+			pokemon.useItem();
+		},
+		num: -294,
+		gen: 8,
+		isNonstandard: "Thing",
+	},
 
 	arthropodiumz: {
 		name: "Arthropodium Z",

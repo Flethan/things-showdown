@@ -5446,6 +5446,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Science",
 		contestType: "Clever",
 	},
+	genderbeam: {
+		num: 1250,
+		accuracy: 100,
+		basePower: 100,
+		category: "Special",
+		isNonstandard: "Thing",
+		name: "Gender Beam",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, bullet: 1},
+		onTry(source, target) {
+			if (target.gender === source.gender) return false;
+		},
+		onHit(target, source, move) {
+			target.gender = source.gender;
+		},
+		target: "normal",
+		type: "Science",
+		contestType: "Clever",
+	},
 
 	// Sport
 	fourseamfastball: {

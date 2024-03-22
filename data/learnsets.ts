@@ -2464,6 +2464,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			stickattack: ["8L20"],
 			greenboom: ["8L55"],
 			greenbeam: ["8L27"],
+			genderbeam: ["8M"],
 		},
 	},
 	yenoh: {
@@ -2573,6 +2574,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			chitinbeam: ["8M"],
 			ricochetmirror: ["8L77"],
+			genderbeam: ["8M"],
 		},
 	},
 	magmegg: {
@@ -2771,6 +2773,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			transmissionsurge: ["8L29"],
 			virulencesurge: ["8L29"],
 			unlockannihilategene: ["8L81"],
+			genderbeam: ["8M"],
 		},
 	},
 	tacilinks: {
@@ -3415,6 +3418,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hairycrash: ["8L45"],
 			borrow: ["8M"],
 			doubledribble: ["8E"],
+			genderbeam: ["8M"],
 		},
 	},
 	beanette: {
@@ -3431,6 +3435,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hairycrash: ["8L45"],
 			borrow: ["8M"],
 			doubledribble: ["8E"],
+			genderbeam: ["8M"],
 		},
 	},
 	ronging: {
@@ -5407,6 +5412,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			photosynthesize: ["8L12"],
 			brush: ["8L8"],
 			horizontaltranslation: ["8L13"],
+			genderbeam: ["8M"],
 		},
 	},
 	duocreature: {
@@ -5454,6 +5460,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowgigahit: ["8L63"],
 			limboeclipse: ["8L68"],
 			transmute: ["8L1"],
+			genderbeam: ["8M"],
 		},
 	},
 	triocreature: {
@@ -5501,6 +5508,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowgigahit: ["8L63"],
 			limboeclipse: ["8L68"],
 			transmute: ["8L1"],
+			genderbeam: ["8M"],
 		},
 	},
 	supercreature: {
@@ -5568,6 +5576,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			thermalexplosion: ["8L90"],
 			bluejet: ["8L95"],
 			fireworks: ["8L90"],
+			genderbeam: ["8M"],
 		},
 	},
 	bouncer: {
@@ -5767,6 +5776,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nothanks: ["8L1"],
 			poweroff: ["8L40"],
 			nage: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiolysine: {
@@ -5793,6 +5803,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cuddle: ["8L1"],
 			whipcrack: ["8L40"],
 			entangle: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiothreonine: {
@@ -5819,6 +5830,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			pause: ["8L1"],
 			ricochetmirror: ["8L40"],
 			minutehandslash: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiophenylalanine: {
@@ -5845,6 +5857,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			parry: ["8L1"],
 			multistrike: ["8L40"],
 			swordbeam: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioproline: {
@@ -5871,6 +5884,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			dustcloud: ["8L1"],
 			rockshot: ["8L40"],
 			cosmicdust: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiohistidine: {
@@ -5897,6 +5911,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hsearch: ["8L1"],
 			heckle: ["8L40"],
 			harbinger: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiotryptophan: {
@@ -5923,6 +5938,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			harmoniouschord: ["8L1"],
 			accent: ["8L40"],
 			glissando: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioglutamine: {
@@ -5949,6 +5965,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			// handoff: ["8L1"],
 			brankle: ["8L40"],
 			cominginhot: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioaspartate: {
@@ -5975,6 +5992,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			wetfloor: ["8L1"],
 			spray: ["8L40"],
 			soppingslap: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioglutamate: {
@@ -6001,6 +6019,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			arghhghg: ["8L1"],
 			brilliantfish: ["8L40"],
 			glidingcharge: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioarginine: {
@@ -6027,6 +6046,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			sendoff: ["8L1"],
 			farbeam: ["8L40"],
 			arrowofupdog: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioalanine: {
@@ -6053,6 +6073,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			pheromonemark: ["8L1"],
 			chitinbeam: ["8L40"],
 			sting: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiocysteine: {
@@ -6079,6 +6100,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			// mutualism: ["8L1"],
 			transmissionsurge: ["8L40"],
 			kineticenergy: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioselenocysteine: {
@@ -6105,6 +6127,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8L40"],
 			rankandfile: ["8L40"],
 			brilliancy: ["8L40"],
+			infinitycycle: ["8T"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioasparagine: {
@@ -6131,6 +6155,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L1"],
 			greenbeam: ["8L40"],
 			greentackle: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioserine: {
@@ -6157,6 +6182,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			voidtrap: ["8L1"],
 			whirlwindofbones: ["8L40"],
 			dematerialize: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioglycine: {
@@ -6183,6 +6209,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			yellowsoak: ["8L1"],
 			beamscatter: ["8L40"],
 			flashmissle: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiotyrosine: {
@@ -6209,6 +6236,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			stormcell: ["8L1"],
 			rapidvortex: ["8L40"],
 			bluejet: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioisoleucine: {
@@ -6235,6 +6263,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cyberneticenhancement: ["8L1"],
 			crashlanding: ["8L40"],
 			delayedround: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amioleucine: {
@@ -6261,6 +6290,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			//
 			energybeam: ["8L40"],
 			//
+			genderbeam: ["8M"],
 		},
 	},
 	amiovaline: {
@@ -6287,6 +6317,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nightmode: ["8L1"],
 			starrywave: ["8L40"],
 			shadowlance: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	amiomethionine: {
@@ -6313,6 +6344,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bask: ["8L1"],
 			thermalslam: ["8L40"],
 			radiate: ["8L40"],
+			genderbeam: ["8M"],
 		},
 	},
 	grog: {
@@ -6342,6 +6374,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			feelinglucky: ["8L75"],
 			yellowsoak: ["8L60"],
 			coagulate: ["8L90"],
+			genderbeam: ["8M"],
 		},
 	},
 

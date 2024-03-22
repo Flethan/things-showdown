@@ -50,7 +50,8 @@ export class Pokemon {
 	name: string;
 	readonly fullname: string;
 	readonly level: number;
-	readonly gender: GenderName;
+	// gender is no longer readonly for THINGS
+	gender: GenderName;
 	readonly happiness: number;
 	readonly pokeball: string;
 	readonly gigantamax: boolean;
