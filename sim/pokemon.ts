@@ -557,6 +557,9 @@ export class Pokemon {
 		case 'meteorshower':
 			energy += 1;
 			break;
+		case 'refractingquintessence':
+			mulEnergy *= 2;
+			break;
 		}
 
 		Object.keys(this.side.sideConditions).forEach(
