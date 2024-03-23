@@ -1848,7 +1848,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 3,
 		noPPBoosts: true,
 		priority: 0,
-		useTargetOffensiveAsDefensive: true,
+		defensiveStat: 'atk',
 		flags: {protect: 1, mirror: 1},
 		secondary: null,
 		target: "normal",
@@ -2269,7 +2269,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Vroom",
 		pp: 15,
 		priority: 0,
-		useSourceSpeedAsOffensive: true,
+		offensiveStat: 'spe',
 		flags: {protect: 1, mirror: 1},
 		target: "normal",
 		type: "Industrial",
@@ -4008,7 +4008,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Shooting Star",
 		pp: 15,
 		priority: 0,
-		useSourceSpeedAsOffensive: true,
+		offensiveStat: 'spe',
 		flags: {contact: 1, protect: 1, mirror: 1},
 		target: "normal",
 		type: "Night",
@@ -5103,7 +5103,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Kinetic Energy",
 		pp: 15,
 		priority: 0,
-		useSourceSpeedAsOffensive: true,
+		offensiveStat: 'spe',
 		flags: {contact: 1, protect: 1, mirror: 1},
 		target: "normal",
 		type: "Science",
@@ -7635,6 +7635,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, bullet: 1},
+		onModifyMove(move, pokemon) {
+			const stats = Object.entries(pokemon.boosts)
+				.filter(([id, val]) => (val > 0 && id !== 'accuracy' && id !== 'evasion'))
+				.map(([id, val]) => id) as StatIDExceptHP[];
+			const randomStat: StatIDExceptHP | undefined = stats.length ? this.sample(stats) : undefined;
+			if (!randomStat) return;
+			move.offensiveStat = randomStat;
+		},
+		onBasePower(basePower, source, target, move) {
+			if (move.offensiveStat) this.chainModify(2);
+		},
+		onAfterMoveSecondary(target, source, move) {
+			const boost: StatID | undefined = move.offensiveStat;
+			if (!boost || boost === 'hp' || source.boosts[boost] <= -6) return;
+			const boosts: SparseBoostsTable = {};
+			boosts[boost] = -1;
+			this.boost(boosts, source);
+		},
 		secondary: null,
 		target: "normal",
 		type: "Weather",
@@ -7650,9 +7668,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, contact: 1},
-		// useHP overrides the useSpeed stat but keeps the speed boosts. I'm too lazy to do this better. butillhavetofixitforejectdebris ^
-		useSourceSpeedAsOffensive: true,
-		useSourceHPAsOffensive: true,
+		offensiveStat: 'hp',
+		offensiveBoost: 'spe',
 		recoil: [100, 100],
 		secondary: null,
 		target: "normal",
@@ -11335,7 +11352,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		useSourceDefensiveAsOffensive: true,
+		offensiveStat: 'def',
 		secondary: null,
 		target: "normal",
 		type: "Fighting",
@@ -15569,7 +15586,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1},
-		useTargetOffensive: true,
+		useTargetAsOffensive: true,
 		secondary: null,
 		target: "normal",
 		type: "Dark",

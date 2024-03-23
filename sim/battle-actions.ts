@@ -1648,11 +1648,12 @@ export class BattleActions {
 
 		const level = pokemon.level;
 
-		const attacker = pokemon;
-		const defender = target;
-		let attackStat: StatIDExceptHP = category === 'Physical' ? 'atk' : 'spa';
-		let defenseStat: StatIDExceptHP = defensiveCategory === 'Physical' ? 'def' : 'spd';
-		if (move.useSourceDefensiveAsOffensive) {
+		const attacker = move.useTargetAsOffensive ? target : pokemon;
+		const defender = move.useSourceAsDefensive ? pokemon : target;
+		let attackStat: StatID = move.offensiveStat || (category === 'Physical' ? 'atk' : 'spa');
+		let defenseStat: StatID = move.defensiveStat || (defensiveCategory === 'Physical' ? 'def' : 'spd');
+
+		if ((attackStat === 'def' || attackStat === 'spd') && !move.useTargetAsOffensive) {
 			attackStat = defenseStat;
 			// Body press really wants to use the def stat,
 			// so it switches stats to compensate for Wonder Room.
@@ -1668,14 +1669,16 @@ export class BattleActions {
 				}
 			}
 		}
-		if (move.useSourceSpeedAsOffensive) attackStat = 'spe';
 
-		const statTable = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe'};
-		let attack;
-		let defense;
+		const offensiveBoost: BoostID = move.offensiveBoost ||
+			(move.offensiveStat !== 'hp' ? move.offensiveStat as StatIDExceptHP : undefined) ||
+			(category === 'Physical' ? 'atk' : 'spa');
+		const defensiveBoost: BoostID = move.defensiveBoost ||
+			(move.defensiveStat !== 'hp' ? move.defensiveStat as StatIDExceptHP : undefined) ||
+			(defensiveCategory === 'Physical' ? 'def' : 'spd');
 
-		let atkBoosts = move.useTargetOffensive ? defender.boosts[attackStat] : attacker.boosts[attackStat];
-		let defBoosts = move.useTargetOffensiveAsDefensive ? defender.boosts[attackStat] : defender.boosts[defenseStat];
+		let atkBoosts = attacker.boosts[offensiveBoost];
+		let defBoosts = defender.boosts[defensiveBoost];
 
 		let ignoreNegativeOffensive = !!move.ignoreNegativeOffensive;
 		let ignorePositiveDefensive = !!move.ignorePositiveDefensive;
@@ -1695,15 +1698,20 @@ export class BattleActions {
 			this.battle.debug('Negating (sp)def boost/penalty.');
 			defBoosts = 0;
 		}
+		const statTable = {atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', spe: 'Spe'};
+		let attack;
+		let defense;
 
-		if (move.useSourceHPAsOffensive) {
+		if (attackStat === 'hp') {
 			attack = Math.floor(attacker.maxhp / 2) || 1;
-		} else if (move.useTargetOffensive) {
-			attack = defender.calculateStat(attackStat, atkBoosts);
 		} else {
 			attack = attacker.calculateStat(attackStat, atkBoosts);
 		}
-		defense = defender.calculateStat(defenseStat, defBoosts);
+		if (defenseStat === 'hp') {
+			defense = Math.floor(defender.maxhp / 2) || 1;
+		} else {
+			defense = defender.calculateStat(defenseStat, defBoosts);
+		}
 
 		attackStat = (category === 'Physical' ? 'atk' : 'spa');
 		defenseStat = (defensiveCategory === 'Physical' ? 'def' : 'spd');

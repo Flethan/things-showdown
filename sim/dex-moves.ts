@@ -239,11 +239,12 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	 * situations, rather than just targeting a slot. (Stalwart, Snipe Shot)
 	 */
 	tracksTarget?: boolean;
-	useTargetOffensive?: boolean;
-	useTargetOffensiveAsDefensive?: boolean;
-	useSourceDefensiveAsOffensive?: boolean;
-	useSourceSpeedAsOffensive?: boolean;
-	useSourceHPAsOffensive?: boolean;
+	useTargetAsOffensive?: boolean;
+	useSourceAsDefensive?: boolean;
+	offensiveStat?: StatID;
+	defensiveStat?: StatID;
+	offensiveBoost?: BoostID;
+	defensiveBoost?: BoostID;
 	willCrit?: boolean;
 
 	// Mechanics flags
@@ -378,14 +379,18 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 	 * move damage.
 	 */
 	readonly defensiveCategory?: MoveCategory;
-	/** Uses the target's Atk/SpA as the attacking stat, instead of the user's. */
-	readonly useTargetOffensive: boolean;
-	/** Uses the target's Atk/SpA as the defending stat, instead of Def/SpD. */
-	readonly useTargetOffensiveAsDefensive: boolean;
-	/** Use the user's Def/SpD as the attacking stat, instead of Atk/SpA. */
-	readonly useSourceDefensiveAsOffensive: boolean;
-	/** Use the user's Spe as the attacking stat, instead of Atk/SpA. */
-	readonly useSourceSpeedAsOffensive: boolean;
+	/** Uses the target for the attacking stat, instead of the user. */
+	readonly useTargetAsOffensive: boolean;
+	/** Uses the user for the defending stat, instead of the target. */
+	readonly useSourceAsDefensive: boolean;
+	/** Use as the attacking stat, instead of based on the category of the move. */
+	readonly offensiveStat: StatID;
+	/** Use as the defending stat, instead of based on the category of the move. */
+	readonly defensiveStat: StatID;
+	/** Use as the attacking stat's boosts, instead of based on the attacking stat or category of the move. */
+	readonly offensiveBoost: BoostID;
+	/** Use as the defending stat's boosts, instead of based on the defending stat or category of the move. */
+	readonly defensiveBoost: BoostID;
 	/** Whether or not this move ignores negative attack boosts. */
 	readonly ignoreNegativeOffensive: boolean;
 	/** Whether or not this move ignores positive defense boosts. */
@@ -467,10 +472,12 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 		this.priority = Number(data.priority) || 0;
 		this.category = data.category!;
 		this.defensiveCategory = data.defensiveCategory || undefined;
-		this.useTargetOffensive = !!data.useTargetOffensive;
-		this.useTargetOffensiveAsDefensive = !!data.useTargetOffensiveAsDefensive;
-		this.useSourceDefensiveAsOffensive = !!data.useSourceDefensiveAsOffensive;
-		this.useSourceSpeedAsOffensive = !!data.useSourceSpeedAsOffensive;
+		this.useTargetAsOffensive = !!data.useTargetAsOffensive;
+		this.useSourceAsDefensive = !!data.useSourceAsDefensive;
+		this.offensiveStat = data.offensiveStat;
+		this.defensiveStat = data.defensiveStat;
+		this.offensiveBoost = data.offensiveBoost;
+		this.defensiveBoost = data.defensiveBoost;
 		this.ignoreNegativeOffensive = !!data.ignoreNegativeOffensive;
 		this.ignorePositiveDefensive = !!data.ignorePositiveDefensive;
 		this.ignoreOffensive = !!data.ignoreOffensive;
