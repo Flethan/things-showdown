@@ -966,8 +966,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const typeNum = this.random(possibleTypes.length);
 			const newType = possibleTypes.splice(typeNum, 1)[0];
 			for (const thing of this.getAllActive()) {
-				this.add('-start', thing, 'typechange', newType, '[from] ability: Flicker');
-				thing.setType(newType);
+				if (thing.setType(newType)) this.add('-start', thing, 'typechange', newType, '[from] ability: Flicker');
 			}
 		},
 		/* onAnySetWeather(target, source, weather) {
