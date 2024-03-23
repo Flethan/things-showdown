@@ -66,6 +66,66 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "???",
 		contestType: "Clever",
 	},
+	emptyspace: {
+		num: 581,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Empty Space",
+		pp: 5,
+		priority: 0,
+		flags: {nonsky: 1},
+		terrain: 'emptyspace',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasItem('landscapingpermit')) {
+					return 10;
+				}
+				return 5;
+			},
+			onFieldStart(battle, source, effect) {
+				if (effect?.effectType === 'Ability') {
+					this.add('-fieldstart', 'move: Empty Space', '[from] ability: ' + effect, '[of] ' + source);
+				} else {
+					this.add('-fieldstart', 'move: Empty Space');
+				}
+			},
+			onDisableMove(pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
+				for (const moveSlot of pokemon.moveSlots) {
+					if (this.dex.moves.get(moveSlot.id).isNonstandard === "ThingInf") {
+						pokemon.disableMove(moveSlot.id);
+					}
+				}
+			},
+			onBeforeMovePriority: 6,
+			onBeforeMove(pokemon, target, move) {
+				if (pokemon.hasItem('cowboyhat')) return;
+				if (move.isNonstandard === "ThingInf") {
+					this.add('cant', pokemon, 'move: Empty Space', move);
+					return false;
+				}
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onFieldEnd(side) {
+				this.add('-fieldend', 'move: Empty Space');
+			},
+		},
+		secondary: null,
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('???', true) && pokemon.addedType === '') return;
+			this.add('-fail', pokemon, 'move: Empty Space');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		target: "all",
+		type: "???",
+		zMove: {boost: {spd: 1}},
+		contestType: "Beautiful",
+	},
 
 	// Arthropod
 	beemovee: {
