@@ -1165,9 +1165,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onFieldResidualOrder: 1,
 		onFieldResidual(field) {
 			this.add('-weather', 'Refracting Quintessence', '[upkeep]');
+			if (this.field.isWeather('refractingquintessence')) this.eachEvent('Weather');
 		},
 		onWeather(target) {
-			console.log('aaaaa');
 			if (target.hasItem('cowboyhat')) return;
 			let types = [''];
 			if (target.types[0] !== '???') {
