@@ -2405,7 +2405,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const pokemon = this.effectState.source;
 				const foes: Pokemon[] = [];
 				for (const foe of pokemon.foes()) {
-					if (foe.hasItem('yellowsafetyvest') ) continue;
+					if (foe.hasItem('yellowsafetyvest')) continue;
 					foes.push(foe);
 				}
 				if (foes.length === 0) return;
@@ -4984,19 +4984,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			}
 			if (source.boosts) {
-				let i: BoostID;
-				for (i in source.boosts) {
-					const stats: BoostID[] = [];
-					const boost: SparseBoostsTable = {};
-					let statPlus: BoostID;
-					for (statPlus in source.boosts) {
-						if (source.boosts[statPlus] !== 0) {
-							boost[statPlus] = source.boosts[statPlus];
-						}
+				const boost: SparseBoostsTable = {};
+				let statPlus: BoostID;
+				for (statPlus in source.boosts) {
+					if (source.boosts[statPlus] !== 0) {
+						boost[statPlus] = source.boosts[statPlus];
 					}
-					this.boost(boost, target);
-					source.clearBoosts();
 				}
+				this.boost(boost, target);
+				source.clearBoosts();
 			}
 		},
 		secondary: null,
@@ -7613,6 +7609,56 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Weather",
 		contestType: "Cool",
 	},
+	updraft: {
+		num: 250,
+		accuracy: 90,
+		basePower: 60,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Updraft",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		ignoreEvasion: true,
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Weather",
+		contestType: "Cool",
+	},
+	ejectdebris: {
+		num: 250,
+		accuracy: 80,
+		basePower: 40,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Eject Debris",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, bullet: 1},
+		secondary: null,
+		target: "normal",
+		type: "Weather",
+		contestType: "Cool",
+	},
+	galeslam: {
+		num: 250,
+		accuracy: 70,
+		basePower: 100,
+		category: "Physical",
+		isNonstandard: "Thing",
+		name: "Gale Slam",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, contact: 1},
+		// useHP overrides the useSpeed stat but keeps the speed boosts. I'm too lazy to do this better. butillhavetofixitforejectdebris ^
+		useSourceSpeedAsOffensive: true,
+		useSourceHPAsOffensive: true,
+		recoil: [100, 100],
+		secondary: null,
+		target: "normal",
+		type: "Weather",
+		contestType: "Cool",
+	},
 	winddispersal: {
 		num: 525,
 		accuracy: 90,
@@ -7661,27 +7707,15 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onModifyMove(move, pokemon) {
-			const i = this.random(100);
-			if (i < 20) {
-				move.magnitude = 1;
-				move.basePower = 40;
-			} else if (i < 50) {
-				move.magnitude = 2;
-				move.basePower = 70;
-			} else if (i < 75) {
-				move.magnitude = 3;
-				move.basePower = 90;
-			} else if (i < 95) {
-				move.magnitude = 4;
-				move.basePower = 110;
-			} else {
-				move.magnitude = 5;
-				move.basePower = 150;
-			}
+			this.field.addPseudoWeather('hurricanewatch', pokemon);
+			const hurricanewatch = this.field.getPseudoWeather('hurricanewatch');
+			if (!hurricanewatch) return;
+			const basePowers = [40, 70, 90, 110, 140];
+			move.magnitude = this.field.pseudoWeather['hurricanewatch'].category || 1;
+			move.basePower = basePowers[move.magnitude! - 1];
 		},
 		onUseMoveMessage(pokemon, target, move) {
-			this.hint(`Category ${move.magnitude}!`);
-			// this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
+			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
 		},
 		secondary: null,
 		target: "allAdjacent",
@@ -7697,7 +7731,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Special",
 		isNonstandard: "Thing",
 		name: "Blue Jet",
-		pp: 1,
+		pp: 2,
 		noPPBoosts: true,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, pulse: 1},
@@ -7762,7 +7796,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		category: "Status",
 		isNonstandard: "Thing",
 		name: "Blessed Rain",
-		pp: 0.625,
+		pp: 2,
+		noPPBoosts: true,
 		priority: 0,
 		flags: {snatch: 1},
 		onHitSide(side, source) {
@@ -7776,6 +7811,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 					} else {
 						moveSlot.pp = moveSlot.maxpp;
 					}
+				}
+
+				const stats: BoostID[] = [];
+				let stat: BoostID;
+				for (stat in target.boosts) {
+					if (target.boosts[stat] < 6) {
+						stats.push(stat);
+					}
+				}
+				if (stats.length) {
+					success = true;
+					const boost: SparseBoostsTable = {};
+					const randomStat = this.sample(stats);
+					boost[randomStat] = 1;
+					const stats2 = stats.filter(v => v !== randomStat);
+					if (stats2.length) {
+						const randomStat2 = this.sample(stats2);
+						boost[randomStat2] = 1;
+					}
+					this.boost(boost);
 				}
 			}
 			if (success) {

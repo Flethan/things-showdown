@@ -822,7 +822,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	windsurfer: {
 		isNonstandard: "Thing",
-		// Checked in conditions.js: windy.onAnyModifyBoost
+		// Done in conditions => windy
 		name: "Wind Surfer",
 		rating: 3,
 		num: -125,

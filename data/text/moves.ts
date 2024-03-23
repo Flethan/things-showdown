@@ -1223,8 +1223,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	hurricanewinds: {
 		name: "Hurricane Winds",
-		desc: "The power of this move varies; 20% chance for 40 power, 30% chance for 70 power, 25% chance for 90 power, 20% chance for 110 power, and 5% chance for 150 power.",
-		shortDesc: "Hits adjacent Pokemon. Power varies.",
+		desc: "Hits all adjacent. Selects category 1, 2, or 3 at random. Consecutive turns gain +1 category, with a 40% chance of ending after category 3, 4, or 5. For category 1, power is 40; 2: 70; 3: 90; 4: 110; 5: 140.",
+		shortDesc: "Hits adjacent Pokemon. Power varies, and can increase over turns.",
 
 		activate: "  Category [NUMBER]!",
 	},

@@ -338,6 +338,11 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 		heal: "The dead return! [POKEMON] was revived!",
 	},
 
+	windsurfer: {
+		name: "Wind Surfer",
+		shortDesc: "Cannot lose positive stages to Windy. Always gain Windy boosts, converted to speed.",
+	},
+
 	// BASE GAME
 	noability: {
 		name: "No Ability",

@@ -239,6 +239,21 @@ export const Conditions: {[k: string]: ConditionData} = {
 			return 0;
 		},
 	},
+	hurricanewatch: {
+		duration: 5,
+		onFieldStart(target, source, effect) {
+			this.add('-fieldstart', 'move: Hurricane Watch', '[of] ' + source);
+			this.effectState.category = this.sample([1, 2, 3]);
+		},
+		onFieldResidual() {
+			this.effectState.category++;
+			if (this.effectState.category > 5 || (this.effectState.category > 2 && this.randomChance(2, 5))) this.field.removePseudoWeather('hurricanewatch');
+			this.add('-activate', '', 'Hurricane Watch', this.effectState.category);
+		},
+		onFieldEnd() {
+			this.add('-fieldend', 'move: Hurricane Watch');
+		},
+	},
 
 
 	// Statuses
@@ -783,32 +798,17 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 	},
 	windy: {
-		onAnyModifyBoost(boosts, pokemon) {
-			if (!pokemon.hasAbility('windsurfer') && !pokemon.hasItem('cowboyhat')) {
-				boosts['spe'] = 0;
-			}
-		},
-		onModifyPriority(priority, pokemon, target, move) {
-			if ((move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && pokemon.types[0] === 'Weather')) &&
-				!pokemon.hasItem('cowboyhat')) {
-				return priority + 1;
-			}
-		},
 		onAfterMove(source, target, move) {
-			if (this.blessedEnv && (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && source.types[0] === 'Weather'))) {
-				const stats: BoostID[] = [];
-				const boost: SparseBoostsTable = {};
-				let statPlus: BoostID;
-				for (statPlus in source.boosts) {
-				// if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-					if (source.boosts[statPlus] < 6) {
-						stats.push(statPlus);
-					}
-				}
-				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-				if (randomStat) boost[randomStat] = 1;
-				this.boost(boost);
-			}
+			const applicableMove = (move?.type === 'Weather' || ((move.id === 'deposition' || move.id === 'emanation') && source.types[0] === 'Weather'));
+			if (!applicableMove || !this.blessedEnv || source.hasItem('cowboyhat')) return;
+
+			const stats = Object.entries(source.boosts)
+				.filter(([id, val]) => !(id === 'accuracy' || id === 'evasion' || val >= 6))
+				.map(([id, val]) => id) as BoostID[];
+			const boost: SparseBoostsTable = {};
+			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (randomStat) boost[randomStat] = 1;
+			this.boost(boost);
 		},
 		name: 'Windy',
 		effectType: 'Weather',
@@ -830,6 +830,34 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onFieldResidual() {
 			this.add('-weather', 'Windy', '[upkeep]');
 			if (this.field.isWeather('windy')) this.eachEvent('Weather');
+		},
+		onWeather(target) {
+			if (target.hasItem('cowboyhat')) return;
+			const receivers = this.getAllActive().filter(p => !p.hasItem('cowboyhat'));
+			const surfers = receivers.filter(p => p.hasAbility('Wind Surfer'));
+			const receiver = this.sample(surfers.length ? surfers : receivers);
+			if (!receiver) return;
+
+			let stats: BoostID[] = [];
+			if (target.hasType("Weather", true)) {
+				stats = Object.entries(target.boosts)
+					.filter(([id, val]) => val < 0)
+					.map(([id, val]) => id) as BoostID[];
+			}
+			if (!stats.length && !target.hasAbility("Wind Surfer")) {
+				stats = Object.entries(target.boosts)
+					.filter(([id, val]) => val > 0)
+					.map(([id, val]) => id) as BoostID[];
+			}
+			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+			if (!randomStat) return;
+
+			const lostBoost: SparseBoostsTable = {};
+			const receivedBoost: SparseBoostsTable = {};
+			lostBoost[randomStat] = target.boosts[randomStat] > 0 ? -1 : 1;
+			receivedBoost[receiver.hasAbility('Wind Surfer') ? 'spe' : randomStat] = -lostBoost[randomStat]!;
+			this.boost(lostBoost, target);
+			this.boost(receivedBoost, receiver, target);
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');

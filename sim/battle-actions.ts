@@ -1696,7 +1696,9 @@ export class BattleActions {
 			defBoosts = 0;
 		}
 
-		if (move.useTargetOffensive) {
+		if (move.useSourceHPAsOffensive) {
+			attack = Math.floor(attacker.maxhp / 2) || 1;
+		} else if (move.useTargetOffensive) {
 			attack = defender.calculateStat(attackStat, atkBoosts);
 		} else {
 			attack = attacker.calculateStat(attackStat, atkBoosts);

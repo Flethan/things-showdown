@@ -243,6 +243,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	useTargetOffensiveAsDefensive?: boolean;
 	useSourceDefensiveAsOffensive?: boolean;
 	useSourceSpeedAsOffensive?: boolean;
+	useSourceHPAsOffensive?: boolean;
 	willCrit?: boolean;
 
 	// Mechanics flags

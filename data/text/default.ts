@@ -332,6 +332,11 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		end: "  The order ended.",
 		upkeep: "  The battlefield is still ordered!",
 	},
+	hurricanewatch: {
+		start: "  A hurricane is brewing.",
+		end: "  The hurricane subsided.",
+		upkeep: "  The hurricane reached category [NUMBER]!",
+	},
 	// side conditions
 	beamfield: {
 		start: "  Yellow beams surround [TEAM]!",
