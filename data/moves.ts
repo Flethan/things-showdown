@@ -7830,13 +7830,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 
-				const stats: BoostID[] = [];
-				let stat: BoostID;
-				for (stat in target.boosts) {
-					if (target.boosts[stat] < 6) {
-						stats.push(stat);
-					}
-				}
+				const stats = Object.entries(target.boosts)
+					.filter(([id, val]) => val < 6)
+					.map(([id, val]) => id) as BoostID[];
 				if (stats.length) {
 					success = true;
 					const boost: SparseBoostsTable = {};
@@ -7847,7 +7843,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						const randomStat2 = this.sample(stats2);
 						boost[randomStat2] = 1;
 					}
-					this.boost(boost);
+					this.boost(boost, target);
 				}
 			}
 			if (success) {

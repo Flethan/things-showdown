@@ -872,6 +872,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 3,
 		weightkg: 200,
 		color: "Brown",
+		evos: ["Hwimsical"],
 		eggGroups: ["Human-Like", "Grass"],
 		hasSprite: true,
 	},
