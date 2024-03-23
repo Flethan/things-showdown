@@ -527,6 +527,9 @@ export class Pokemon {
 		case 'springfloor':
 			energy += 0.5;
 			break;
+		case 'emptyspace':
+			mulEnergy *= 0;
+			break;
 		}
 
 		switch (this.effectiveWeather()) {
@@ -2208,8 +2211,8 @@ export class Pokemon {
 
 	getTypes(excludeAdded?: boolean, includeElement?: boolean): string[] {
 		const types = [...this.battle.runEvent('Type', this, null, null, this.types)];
-		if (!excludeAdded && this.addedType) types.push(this.addedType);
-		if (includeElement && this.elementTypes.length) types.push(...this.elementTypes);
+		if (!excludeAdded && this.addedType && (this.effectiveTerrain() !== 'emptyspace')) types.push(this.addedType);
+		if (includeElement && this.elementTypes.length && (this.effectiveTerrain() !== 'emptyspace')) types.push(...this.elementTypes);
 		return types.length ? types : ['???'];
 	}
 

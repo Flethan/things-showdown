@@ -721,6 +721,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenseeds: ["8L1"],
 			abilityseeds: ["8L1"],
 			stickattack: ["8L25"],
+			emptyspace: ["8L70"],
 		},
 	},
 	e1: {
@@ -855,6 +856,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whirlwindofbones: ["8E"],
 			countdown: ["8L36"],
 			timesup: ["8L1"],
+			emptyspace: ["8T"],
 		},
 	},
 	demerfin: {
@@ -996,6 +998,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
 			infinitystorm: ["8T"],
+			emptyspace: ["8T"],
 		},
 	},
 	saxosnowne: {
@@ -1075,6 +1078,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			energybeam: ["8T"],
 			starrywave: ["8E"],
 			gasblast: ["8E"],
+			emptyspace: ["8T"],
 		},
 	},
 	sollit: {
@@ -1520,6 +1524,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hit: ["8M"],
 			hide: ["8M"],
 			hsearch: ["8T"],
+			emptyspace: ["8T"],
 		},
 	},
 	moppit: {
@@ -1696,6 +1701,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L55"],
 			consume: ["8M"],
 			infrastructure: ["8L50"],
+			emptyspace: ["8T"],
 		},
 	},
 	florle: {
@@ -2118,6 +2124,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			clipthrough: ["8L60"],
 			energybeam: ["8T"],
 			timebomb: ["8L80"],
+			emptyspace: ["8T"],
 		},
 	},
 	sonsprite: {
@@ -2503,6 +2510,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			hsearch: ["8T"],
 			nage: ["8T"],
 			npminstalltypescriptsavedev: ["8L50"],
+			emptyspace: ["8T"],
 		},
 	},
 	notant: {
@@ -2551,6 +2559,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			rankandfile: ["8T"],
 			consume: ["8M"],
 			chitinbeam: ["8M"],
+			emptyspace: ["8T"],
 		},
 	},
 	maestreen: {
@@ -3796,6 +3805,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			richsoil: ["8L1"],
 			greenground: ["8L31"],
 			consume: ["8M"],
+			emptyspace: ["8T"],
 		},
 	},
 	geosondesoil: {
@@ -4458,6 +4468,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			consume: ["8M"],
 			greenbeam: ["8L1"],
 			greenboom: ["8L1"],
+			emptyspace: ["8T"],
 		},
 	},
 	boxlegend: {
@@ -5411,6 +5422,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			whirlwindofbones: ["8L70"],
 			gravebite: ["8L60"],
 			nage: ["8T"],
+			emptyspace: ["8T"],
 		},
 	},
 	creature: {
@@ -5799,6 +5811,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			poweroff: ["8L40"],
 			nage: ["8L40"],
 			genderbeam: ["8M"],
+			emptyspace: ["8T"],
 		},
 	},
 	amiolysine: {
