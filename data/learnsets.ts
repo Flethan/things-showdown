@@ -192,6 +192,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	meltipillar: {
@@ -991,6 +992,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	saxosnowne: {
@@ -1098,6 +1100,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	hellow: {
@@ -1290,6 +1293,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	fsh: {
@@ -1410,6 +1414,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	nighreto: {
@@ -1473,6 +1478,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	swordguy: {
@@ -3085,6 +3091,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	epee: {
@@ -3269,6 +3276,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	mistimink: {
@@ -3465,6 +3473,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8L1"],
 			infinitycharge: ["8L1"],
 			infinitydischarge: ["8L1"],
+			infinitystorm: ["8T"],
 		},
 	},
 	searke: {
@@ -3681,6 +3690,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	litheath: {
@@ -4303,6 +4313,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	dishwashersnake: {
@@ -4375,6 +4386,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	hedgepig: {
@@ -4654,6 +4666,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	hatthewtophat: {
@@ -4683,6 +4696,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	hatthewballcap: {
@@ -4712,6 +4726,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	hatthewpangolin: {
@@ -4740,6 +4755,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
+			infinitystorm: ["8T"],
 		},
 	},
 	rock: {

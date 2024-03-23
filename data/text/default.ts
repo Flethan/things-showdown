@@ -269,6 +269,12 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		end: "  Back to the battle.",
 		upkeep: "  (Everyone's having a good time.)",
 	},
+	refractingquintessence: {
+		weatherName: "Refracting Quintessence",
+		start: "  Whoa",
+		end: "  Ok.",
+		upkeep: "  (Oh.)",
+	},
 	// landscape
 	richsoil: {
 		start: "  The soil became incredibly fertile!",

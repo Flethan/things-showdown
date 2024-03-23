@@ -1161,6 +1161,93 @@ export const Conditions: {[k: string]: ConditionData} = {
 			this.add('-weather', 'none');
 		},
 	},
+	refractingquintessence: {
+		onFieldResidualOrder: 1,
+		onFieldResidual(field) {
+			this.add('-weather', 'Refracting Quintessence', '[upkeep]');
+		},
+		onWeather(target) {
+			console.log('aaaaa');
+			if (target.hasItem('cowboyhat')) return;
+			let types = [''];
+			if (target.types[0] !== '???') {
+				types = target.types;
+				target.setType(['???']);
+				this.add('-start', target, 'typechange', '???');
+			}
+			if (target.addedType && target.baseSpecies.symbolForme !== "Infinity") {
+				if (types[0] !== '') {
+					types = types.concat(types, target.addedType);
+				} else {
+					types = [target.addedType];
+				}
+				target.addType('');
+				this.add('-start', target, 'typeadd', '');
+			}
+			if (types[0] !== '') return;
+			for (const type of types) {
+				switch (type) {
+				case 'Arthropod':
+				case 'Fish':
+				case 'Green':
+					this.heal(target.baseMaxhp / 2, target, target);
+					break;
+				case 'Hair':
+				case 'Industrial':
+				case 'Sword':
+					if (target.getStat('atk', true, true) >= target.getStat('spa', true, true)) {
+						this.boost({atk: 1}, target, target, null, true);
+					}
+					if (target.getStat('spa', true, true) >= target.getStat('atk', true, true)) {
+						this.boost({spa: 1}, target, target, null, true);
+					}
+					break;
+				case 'Dirt':
+				case 'Liquid':
+				case 'Weather':
+					this.boost({def: 1}, target, target, null, true);
+					break;
+				case 'H':
+				case 'No':
+				case 'Science':
+					this.boost({spd: 1}, target, target, null, true);
+					break;
+				case 'Far':
+				case 'Sport':
+				case 'Time':
+					this.boost({spe: 1}, target, target, null, true);
+					break;
+				case 'Night':
+				case 'Temperature':
+					this.boost({accuracy: 1}, target, target, null, true);
+					break;
+				case 'Music':
+				case 'Yellow':
+					this.boost({evasion: 1}, target, target, null, true);
+					break;
+				case 'Infinity':
+					this.boost({atk: 1, def: 1, spd: 1, spe: 1}, target, target, null, true);
+				}
+			}
+		},
+		name: 'Refracting Quintessence',
+		effectType: 'Weather',
+		duration: 5,
+		durationCallback(source) {
+			if (source?.hasItem('environmentalaccord')) return 10;
+			return 5;
+		},
+		onFieldStart(_field, source, effect) {
+			if (effect?.effectType === 'Ability') {
+				this.add('-weather', 'Refracting Quintessence', '[from] ability: ' + effect, '[of] ' + source);
+			} else {
+				this.add('-weather', 'Refracting Quintessence');
+			}
+		},
+		onFieldEnd() {
+			this.add('-weather', 'none');
+		},
+	},
 
 	// Landscape Factors
 

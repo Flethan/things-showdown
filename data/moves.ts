@@ -8592,6 +8592,29 @@ export const Moves: {[moveid: string]: MoveData} = {
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Clever",
 	},
+	infinitystorm: {
+		num: 1500,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Infinity Storm",
+		pp: 5,
+		priority: 0,
+		flags: {},
+		weather: 'Refracting Quintessence',
+		secondary: null,
+		onTryMove(pokemon, target, move) {
+			if (pokemon.hasType('Infinity', true)) return;
+			this.add('-fail', pokemon, 'move: Infinity Charge');
+			this.attrLastMove('[still]');
+			return null;
+		},
+		target: "all",
+		type: "Infinity",
+		zMove: {boost: {spe: 1}},
+		contestType: "Clever",
+	},
 
 	// NEW GENERICS
 	maxbugs: {
