@@ -875,6 +875,23 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Human-Like", "Grass"],
 		hasSprite: true,
 	},
+	hwimsical: {
+		num: -539,
+		name: "Hwimsical",
+		symbolForme: "Infinity",
+		types: ["Weather", "H"],
+		genderRatio: {M: 0.25, F: 0.75},
+		baseStats: {hp: 50, atk: 110, def: 73, spa: 135, spd: 90, spe: 22},
+		abilities: {0: "Flicker"},
+		heightm: 3,
+		weightkg: 80,
+		color: "Brown",
+		prevo: "Hweather",
+		eggGroups: ["Human-Like", "Grass"],
+		evoType: "symbol",
+		evoCondition: "Symbol",
+		addedType: "Infinity",
+	},
 	nighreto: {
 		num: -357,
 		name: "Nighreto",
@@ -4871,6 +4888,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: true,
 		isPatron: true,
 	},
+	// num -539 hwimsical
 
 	// BASE GAME
 	bulbasaur: {

@@ -340,7 +340,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 
 	windsurfer: {
 		name: "Wind Surfer",
-		shortDesc: "Cannot lose positive stages to Windy. Always gain Windy boosts, converted to speed.",
+		shortDesc: "Cannot lose positive stages to Windy. Incoming Windy boosts are converted to speed.",
 	},
 
 	// BASE GAME

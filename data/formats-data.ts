@@ -263,6 +263,10 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	hwimsical: {
+		isNonstandard: "ThingInf",
+		tier: "Thing",
+	},
 	nighreto: {
 		isNonstandard: "Thing",
 		tier: "Thing",
