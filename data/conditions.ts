@@ -833,9 +833,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeather(target) {
 			if (target.hasItem('cowboyhat')) return;
-			const receivers = this.getAllActive().filter(p => !p.hasItem('cowboyhat'));
-			const surfers = receivers.filter(p => p.hasAbility('Wind Surfer'));
-			const receiver = this.sample(surfers.length ? surfers : receivers);
+			const targets = this.getAllActive().filter(p => !p.hasItem('cowboyhat'));
+			const bias = targets.filter(p => p.hasType('Weather', true));
+			const receiver = this.sample(bias.length ? bias : targets);
 			if (!receiver) return;
 
 			let stats: BoostID[] = [];
