@@ -941,6 +941,40 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: -133,
 	},
+	flicker: {
+		isNonstandard: "ThingInf",
+		onResidualPriority: 99,
+		onStart(source) {
+			if (this.field.getWeather().id === 'hot' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
+			} else {
+				this.field.setWeather('hot', null, null, true);
+				this.field.weatherState.duration = 0;
+			}
+			// Infinite duration done in conditions.js#hot
+		},
+		/* onAnySetWeather(target, source, weather) {
+			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
+			const musicAbilities = ['ahotone', 'sinningunapuro', 'lassihnfliegen', 'partyrockis'];
+			if (this.field.getWeather().id === 'hot' && !(strongMusics.includes(weather.id) && musicAbilities.includes(source.ability))) return false;
+		}, */
+		onEnd(pokemon) {
+			if (this.field.weatherState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('ahotone')) {
+					this.field.weatherState.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather();
+		},
+		name: "Flicker",
+		rating: 4,
+		num: -133,
+	},
 	shedhair: {
 		isNonstandard: "Thing",
 		onResidualOrder: 5,

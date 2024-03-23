@@ -94,6 +94,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			greenground: ["8E"],
 			energybeam: ["8T"],
 			lightningstorm: ["8L1"],
+			ejectdebris: ["8L1"],
 		},
 	},
 	stratosoar: {
@@ -117,6 +118,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			lightningstorm: ["8L1"],
 			greenboom: ["8L1"],
 			greenbeam: ["8L1"],
+			ejectdebris: ["8L1"],
+			galeslam: ["8L1"],
 		},
 	},
 	empty: {
@@ -1407,6 +1410,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8L1"],
 			energybeam: ["8T"],
 			lightningstorm: ["8L1"],
+			updraft: ["8L1"],
 			infinitycycle: ["8T"],
 			infinitycharge: ["8T"],
 			infinitydischarge: ["8T"],
@@ -4168,7 +4172,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			winddispersal: ["8L1"],
 			bluejet: ["8L1"],
 			blessedrain: ["8L1"],
-			lightningstorm: ["8L1"],			
+			lightningstorm: ["8L1"],
 		},
 	},
 	cumulunormous: {
@@ -4790,7 +4794,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			callmeteorites: ["8M"],
 			earthjet: ["8L35"],
 			bury: ["8L73"],
-			headout: ["8L69"]
+			headout: ["8L69"],
 		},
 	},
 	cyam: {
@@ -5083,7 +5087,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L30"],
 			hairball: ["8L40"],
 			toxicsmog: ["8E"],
-			spray:["8L15"],
+			spray: ["8L15"],
 			trample: ["8L50"],
 			naptime: ["8L20"],
 			bask: ["8L33"],
@@ -5105,7 +5109,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			bury: ["8L30"],
 			hairball: ["8L40"],
 			toxicsmog: ["8E"],
-			spray:["8L15"],
+			spray: ["8L15"],
 			trample: ["8L50"],
 			naptime: ["8L20"],
 			bask: ["8L33"],
