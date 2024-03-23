@@ -1169,66 +1169,75 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onWeather(target) {
 			if (target.hasItem('cowboyhat')) return;
-			let types = [''];
-			if (target.types[0] !== '???') {
-				types = target.types;
-				target.setType(['???']);
-				this.add('-start', target, 'typechange', '???');
+			const ignoreGreen = this.field.isTerrain("Green Ground");
+			let absorbedTypes: string[] = [];
+			const types = target.getTypes(true).filter(t => (t !== '???' && !(t === 'Green' && ignoreGreen)));
+			const keptTypes = target.getTypes(true).filter(t => (t === 'Green' && ignoreGreen));
+			if (types.length && target.setType(keptTypes.length ? keptTypes : '???')) {
+				absorbedTypes = absorbedTypes.concat(types);
+				// This is weird, see reflect type
+				this.add('-start', target, 'typechange', keptTypes.length ? 'Green' : '???');
 			}
-			if (target.addedType && target.baseSpecies.symbolForme !== "Infinity") {
-				if (types[0] !== '') {
-					types = types.concat(types, target.addedType);
-				} else {
-					types = [target.addedType];
-				}
-				target.addType('');
+			const addedType = target.addedType;
+			if (addedType && !(addedType === 'Green' && ignoreGreen) && target.addType('')) {
+				absorbedTypes.push(addedType);
 				this.add('-start', target, 'typeadd', '');
 			}
-			if (types[0] === '') return;
-			for (const type of types) {
+			if (!absorbedTypes.length) return;
+			const boosts: SparseBoostsTable = {};
+			let numberOfHeals = 0;
+			for (const type of absorbedTypes) {
 				switch (type) {
 				case 'Arthropod':
 				case 'Fish':
 				case 'Green':
-					this.heal(target.baseMaxhp / 2, target, target);
+					numberOfHeals++;
 					break;
 				case 'Hair':
 				case 'Industrial':
 				case 'Sword':
 					if (target.getStat('atk', true, true) >= target.getStat('spa', true, true)) {
-						this.boost({atk: 1}, target, target, null, true);
-					}
-					if (target.getStat('spa', true, true) >= target.getStat('atk', true, true)) {
-						this.boost({spa: 1}, target, target, null, true);
+						boosts['atk'] = (boosts['atk'] || 0) + 1;
+					} else {
+						boosts['spa'] = (boosts['spa'] || 0) + 1;
 					}
 					break;
 				case 'Dirt':
 				case 'Liquid':
 				case 'Weather':
-					this.boost({def: 1}, target, target, null, true);
+					boosts['def'] = (boosts['def'] || 0) + 1;
 					break;
 				case 'H':
 				case 'No':
 				case 'Science':
-					this.boost({spd: 1}, target, target, null, true);
+					boosts['spd'] = (boosts['spd'] || 0) + 1;
 					break;
 				case 'Far':
 				case 'Sport':
 				case 'Time':
-					this.boost({spe: 1}, target, target, null, true);
+					boosts['spe'] = (boosts['spe'] || 0) + 1;
 					break;
 				case 'Night':
 				case 'Temperature':
-					this.boost({accuracy: 1}, target, target, null, true);
+					boosts['accuracy'] = (boosts['accuracy'] || 0) + 1;
 					break;
 				case 'Music':
 				case 'Yellow':
-					this.boost({evasion: 1}, target, target, null, true);
+					boosts['evasion'] = (boosts['evasion'] || 0) + 1;
 					break;
 				case 'Infinity':
-					this.boost({atk: 1, def: 1, spd: 1, spe: 1}, target, target, null, true);
+					if (target.getStat('atk', true, true) >= target.getStat('spa', true, true)) {
+						boosts['atk'] = (boosts['atk'] || 0) + 1;
+					} else {
+						boosts['spa'] = (boosts['spa'] || 0) + 1;
+					}
+					boosts['def'] = (boosts['def'] || 0) + 1;
+					boosts['spd'] = (boosts['spd'] || 0) + 1;
+					boosts['spe'] = (boosts['spe'] || 0) + 1;
 				}
 			}
+			this.boost(boosts, target, target, null, true);
+			this.heal(numberOfHeals * target.baseMaxhp / 2, target, target);
 		},
 		name: 'Refracting Quintessence',
 		effectType: 'Weather',
