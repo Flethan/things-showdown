@@ -933,7 +933,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 75,
 		},
 		onAfterBoost(boost, target, source, effect) {
-			if (Object.entries(boost).some(([id, val]) => {id !== 'accuracy' && val > 0})) {
+			if (Object.entries(boost).some(([id, val]) => (id !== 'accuracy' && val > 0))) {
 				this.boost({accuracy: 1}, target, target, null, true);
 			}
 		},
