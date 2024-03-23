@@ -527,6 +527,9 @@ export class Pokemon {
 		case 'springfloor':
 			energy += 0.5;
 			break;
+		case 'emptyspace':
+			mulEnergy *= 0;
+			break;
 		}
 
 		switch (this.effectiveWeather()) {
