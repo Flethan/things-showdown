@@ -945,15 +945,30 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "ThingInf",
 		onResidualPriority: 99,
 		onStart(source) {
-			if (this.field.getWeather().id === 'hot' && this.field.weatherState.duration !== 0) {
+			if (this.field.getWeather().id === 'refractingquintessence' && this.field.weatherState.duration !== 0) {
 				this.field.weatherState.duration = 0;
 				this.field.weatherState.source = source;
 				this.field.weatherState.permanent = true;
 			} else {
-				this.field.setWeather('hot', null, null, true);
+				this.field.setWeather('refractingquintessence', null, null, true);
 				this.field.weatherState.duration = 0;
 			}
 			// Infinite duration done in conditions.js#hot
+		},
+		onResidual(target, source, effect) {
+			if (this.field.getWeather().id !== 'refractingquintessence') return;
+			const possibleTypes = [];
+			const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water'];
+			for (const type of this.dex.types.names()) {
+				if (skippedTypes.includes(type)) continue;
+				possibleTypes.push(type);
+			}
+			const typeNum = this.random(possibleTypes.length);
+			const newType = possibleTypes.splice(typeNum, 1)[0];
+			for (const thing of this.getAllActive()) {
+				this.add('-start', thing, 'typechange', newType, '[from] ability: Flicker');
+				thing.setType(newType);
+			}
 		},
 		/* onAnySetWeather(target, source, weather) {
 			const strongMusics = ['hot', 'timedilation', 'windy', 'friendlyatmosphere'];
@@ -964,7 +979,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;
-				if (target.hasAbility('ahotone')) {
+				if (target.hasAbility('flicker')) {
 					this.field.weatherState.source = target;
 					return;
 				}
