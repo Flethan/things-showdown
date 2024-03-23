@@ -1184,7 +1184,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 				target.addType('');
 				this.add('-start', target, 'typeadd', '');
 			}
-			if (types[0] !== '') return;
+			if (types[0] === '') return;
 			for (const type of types) {
 				switch (type) {
 				case 'Arthropod':
