@@ -824,40 +824,39 @@ export const Conditions: {[k: string]: ConditionData} = {
 			} else {
 				this.add('-weather', 'Windy');
 			}
-			this.hint("Stat changes to speed are ignored while it is windy!");
 		},
 		onFieldResidualOrder: 1,
 		onFieldResidual() {
 			this.add('-weather', 'Windy', '[upkeep]');
-			if (this.field.isWeather('windy')) this.eachEvent('Weather');
-		},
-		onWeather(target) {
-			if (target.hasItem('cowboyhat')) return;
 			const targets = this.getAllActive().filter(p => !p.hasItem('cowboyhat'));
-			const bias = targets.filter(p => p.hasType('Weather', true));
-			const receiver = this.sample(bias.length ? bias : targets);
-			if (!receiver) return;
+			if (targets.length < 2) return;
+			const bias = targets.filter(p => (p.hasType('Weather', true) || p.hasAbility('Wind Surfer')));
 
-			let stats: BoostID[] = [];
-			if (target.hasType("Weather", true)) {
-				stats = Object.entries(target.boosts)
-					.filter(([id, val]) => val < 0)
-					.map(([id, val]) => id) as BoostID[];
-			}
-			if (!stats.length && !target.hasAbility("Wind Surfer")) {
-				stats = Object.entries(target.boosts)
-					.filter(([id, val]) => val > 0)
-					.map(([id, val]) => id) as BoostID[];
-			}
-			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
-			if (!randomStat) return;
+			targets.reduce((result: [SparseBoostsTable, Pokemon][], source): [SparseBoostsTable, Pokemon][] => {
+				const receiver = this.sample(bias.length ? bias : targets);
 
-			const lostBoost: SparseBoostsTable = {};
-			const receivedBoost: SparseBoostsTable = {};
-			lostBoost[randomStat] = target.boosts[randomStat] > 0 ? -1 : 1;
-			receivedBoost[receiver.hasAbility('Wind Surfer') ? 'spe' : randomStat] = -lostBoost[randomStat]!;
-			this.boost(lostBoost, target);
-			this.boost(receivedBoost, receiver, target);
+				let stats: BoostID[] = [];
+				if (source.hasType("Weather", true) || source.hasAbility("Wind Surfer")) {
+					stats = Object.entries(source.boosts)
+						.filter(([id, val]) => val < 0)
+						.map(([id, val]) => id) as BoostID[];
+				}
+				if (!stats.length && !source.hasAbility("Wind Surfer")) {
+					stats = Object.entries(source.boosts)
+						.filter(([id, val]) => val > 0)
+						.map(([id, val]) => id) as BoostID[];
+				}
+				const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
+				if (!randomStat) return result;
+
+				const lostBoost: SparseBoostsTable = {};
+				const receivedBoost: SparseBoostsTable = {};
+				lostBoost[randomStat] = source.boosts[randomStat] > 0 ? -1 : 1;
+				receivedBoost[receiver.hasAbility('Wind Surfer') ? 'spe' : randomStat] = -lostBoost[randomStat]!;
+				result.push([lostBoost, source]);
+				result.push([receivedBoost, receiver]);
+				return result;
+			}, []).forEach(v => this.boost(...v));
 		},
 		onFieldEnd() {
 			this.add('-weather', 'none');
