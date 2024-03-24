@@ -833,7 +833,9 @@ export const Conditions: {[k: string]: ConditionData} = {
 			const bias = targets.filter(p => (p.hasType('Weather', true) || p.hasAbility('Wind Surfer')));
 
 			targets.reduce((result: [SparseBoostsTable, Pokemon][], source): [SparseBoostsTable, Pokemon][] => {
-				const receiver = this.sample(bias.length ? bias : targets);
+				let receivers = bias.filter(p => !Object.is(p, source));
+				if (!receivers.length) receivers = targets.filter(p => !Object.is(p, source));
+				const receiver = this.sample(receivers);
 
 				let stats: BoostID[] = [];
 				if (source.hasType("Weather", true) || source.hasAbility("Wind Surfer")) {
