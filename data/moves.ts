@@ -722,6 +722,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onResidual(pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (pokemon.hasType('Dirt', true) || pokemon.hasAbility('Landscape Blessing')) {
 					if (this.blessedLand) this.heal(pokemon.baseMaxhp / 2, pokemon);
 					else this.heal(pokemon.baseMaxhp / 4, pokemon);
@@ -829,8 +830,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				return 5;
 			},
-			onModifyMove(move) {
+			onModifyMove(move, pokemon) {
 				// redirects all spread moves
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
 					return;
 				}
@@ -838,6 +840,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat')) return;
 				if (move.type !== 'Far' && !defender.isSemiInvulnerable()) {
 					this.debug('spatial expansion drop');
 					return this.chainModify(0.8);
@@ -845,6 +848,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBeforeMovePriority: 10,
 			onBeforeMove(pokemon, target, move) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (this.blessedLand && move.flags['contact'])	{
 					this.add('cant', pokemon, 'spatialexpansion');
 					return false;
@@ -1569,6 +1573,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat')) return;
 				if (move.type === 'Green' && !defender.isSemiInvulnerable()) {
 					this.debug('greenground boost');
 					return this.chainModify(1.2);
@@ -2928,6 +2933,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return 5;
 			},
 			onSetStatus(status, target, source, effect) {
+				if (target.hasItem('cowboyhat')) return;
 				if (target.isSemiInvulnerable()) return;
 				if (target.ability === 'blind') return;
 				if (status.id === 'prone') {
@@ -2957,6 +2963,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return false;
 			},
 			onTryAddVolatile(status, target, source, effect) {
+				if (target.hasItem('cowboyhat')) return;
 				if (target.isSemiInvulnerable()) return;
 				if (status.id === 'confusion') {
 					if (effect.effectType === 'Move' && !effect.secondaries) this.add('-activate', target, 'move: Sudscape');
@@ -2965,6 +2972,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat')) return;
 				if (move.type === 'Liquid' && !defender.isSemiInvulnerable()) {
 					this.debug('sudscape boost');
 					return this.chainModify(1.2);
@@ -2980,6 +2988,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onResidual(target) {
+				if (target.hasItem('cowboyhat')) return;
 				if (target.status !== 'prone') target.cureStatus();
 			},
 			onFieldEnd(side) {
@@ -4748,12 +4757,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onNegateImmunity: false,
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
+				if (target?.hasItem('cowboyhat')) return typeMod;
 				if (this.blessedLand && this.effectState.doubleinversion) return typeMod;
 				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
 			},
 			onModifyMovePriority: -5,
-			onModifyMove(move) {
+			onModifyMove(move, pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (this.effectState.doubleinversion) return;
 				if (!move.ignoreImmunity) move.ignoreImmunity = {};
 				if (move.ignoreImmunity !== true) {
@@ -4763,12 +4774,14 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onAfterMoveSecondary(target, source, move) {
+				if (target.hasItem('cowboyhat')) return;
 				if (this.blessedLand && target.runEffectiveness(move) > 0) {
 					this.effectState.doubleinversion = !this.effectState.doubleinversion;
 				}
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat')) return;
 				if (move.type === 'No' && !defender.isSemiInvulnerable()) {
 					this.debug('null land boost');
 					return this.chainModify(1.2);
