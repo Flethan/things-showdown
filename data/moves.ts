@@ -3577,6 +3577,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onTryHit(target, source, effect) {
 				if (!this.field.activeFlags.length) return;
+				if (source.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('nopriority')) {
 					if (['windy'].includes(target.effectiveWeather()) && effect.type === 'Weather' && effect.priority <= 1.5) return;
 					if (effect && (effect.priority <= 0.5 || effect.target === 'self')) return;
@@ -3588,6 +3589,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onSetStatus(status, target, source, effect) {
 				if (!this.field.activeFlags.length) return;
 				if (target.isSemiInvulnerable()) return;
+				if (target.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('nostatus')) {
 					this.add('-activate', target, 'move: Mystical Song');
 					return false;
@@ -3627,6 +3629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onTryAddVolatile(status, target, source, effect) {
 				if (!this.field.activeFlags.length) return;
+				if (target.hasItem('cowboyhat')) return;
 				if (target.isSemiInvulnerable()) return;
 				if (this.field.activeFlags.includes('novolatiles')) {
 					this.add('-activate', target, 'move: Mystical Song');
@@ -3635,6 +3638,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat')) return;
 				if (move.type === 'Music' && !defender.isSemiInvulnerable()) {
 					this.debug('mystical song boost');
 					return this.chainModify(1.1);
@@ -3643,6 +3647,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyAtkPriority: 9,
 			onModifyAtk(atk, attacker, defender, move) {
 				if (!this.field.activeFlags.length) return;
+				if (attacker.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('atkup')) {
 					if (move.type === 'Music') {
 						this.debug('mystical song boost');
@@ -3659,6 +3664,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyDefPriority: 9,
 			onModifyDef(def, pokemon) {
 				if (!this.field.activeFlags.length) return;
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('defup')) {
 					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
@@ -3675,6 +3681,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpAPriority: 9,
 			onModifySpA(atk, attacker, defender, move) {
 				if (!this.field.activeFlags.length) return;
+				if (attacker.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('spaup')) {
 					if (move.type === 'Music') {
 						this.debug('mystical song boost');
@@ -3691,6 +3698,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifySpDPriority: 9,
 			onModifySpD(spd, pokemon) {
 				if (!this.field.activeFlags.length) return;
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('spdup')) {
 					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
@@ -3706,6 +3714,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifySpe(spe, pokemon) {
 				if (!this.field.activeFlags.length) return;
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (this.field.activeFlags.includes('speup')) {
 					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
 						this.debug('mystical song boost');
@@ -3722,7 +3731,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onFieldResidual() {
 				if (!this.field.activeFlags.length) return;
 				for (const side of this.sides) {
-					for (const ally of side.active) {
+					for (const ally of side.active) {		
+						if (ally.hasItem('cowboyhat')) continue;
 						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkboost')) {
 							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
 								this.boost({atk: 1}, ally);
@@ -4758,14 +4768,28 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onEffectivenessPriority: 1,
 			onEffectiveness(typeMod, target, type, move) {
 				if (target?.hasItem('cowboyhat')) return typeMod;
-				if (this.blessedLand && this.effectState.doubleinversion) return typeMod;
+				// if (this.blessedLand && this.effectState.doubleinversion) return typeMod;
 				if (move && !this.dex.getImmunity(move, type)) return 1;
 				return -typeMod;
+			},
+			onTryHit(target, source, move) {
+				if (!this.blessedLand || target.hasItem('cowboyhat')) return;
+				if (target === source || move.category === 'Status' || move.type === '???' || move.id === 'struggle') return;
+				if (move.id === 'skydrop' && !source.volatiles['skydrop']) return;
+				this.debug('Blessed Null Land immunity: ' + move.id);
+				if (target.runEffectiveness(move) < 0) {
+					if (move.smartTarget) {
+						move.smartTarget = false;
+					} else {
+						this.add('-immune', target, '[from] ability: Null Land');
+					}
+					return null;
+				}
 			},
 			onModifyMovePriority: -5,
 			onModifyMove(move, pokemon) {
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (this.effectState.doubleinversion) return;
+				// if (this.effectState.doubleinversion) return;
 				if (!move.ignoreImmunity) move.ignoreImmunity = {};
 				if (move.ignoreImmunity !== true) {
 					for (const type in this.dex.data.TypeChart) {
@@ -4773,12 +4797,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 					}
 				}
 			},
-			onAfterMoveSecondary(target, source, move) {
+			/* onAfterMoveSecondary(target, source, move) {
 				if (target.hasItem('cowboyhat')) return;
 				if (this.blessedLand && target.runEffectiveness(move) > 0) {
 					this.effectState.doubleinversion = !this.effectState.doubleinversion;
 				}
-			},
+			}, */
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
 				if (attacker.hasItem('cowboyhat')) return;
@@ -6109,23 +6133,26 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onDamage(damage, target, source, effect) {
 				if (effect.id === 'recoil') {
 					if (!this.activeMove) throw new Error("Battle.activeMove is null");
-					if (this.activeMove.id !== 'struggle') return null;
+					if (this.activeMove.id !== 'struggle' && !source.hasItem('cowboyhat')) return null;
 				}
 			},
 			onModifyAtkPriority: 10,
 			onModifyAtk(atk, pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
 					return this.modify(atk, 1.5);
 				}
 			},
 			onModifyDefPriority: 10,
 			onModifyDef(def, pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
 					return this.modify(def, 1.5);
 				}
 			},
 			onModifySpe(spe, pokemon) {
-				if (pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) {
+				if (pokemon.hasItem('cowboyhat')) return;
+				if ((pokemon.hasType('Sport', true) || pokemon.hasAbility('Landscape Blessing')) && this.blessedLand) {
 					return this.modify(spe, 1.5);
 				}
 			},
@@ -6433,6 +6460,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return 5;
 			},
 			onTrapPokemon(pokemon) {
+				if (pokemon.hasItem('cowboyhat')) return;
 				pokemon.tryTrap(true);
 			},
 			onFieldStart(battle, source, effect) {

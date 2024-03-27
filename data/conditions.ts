@@ -1139,6 +1139,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 		},
 		onDamagePriority: -10,
 		onDamage(damage, target, source, effect) {
+			if (target.hasItem('cowboyhat')) return;
 			if (effect?.effectType === 'Move' && damage >= target.hp) {
 				this.add('-activate', target);
 				return target.hp - 1;
