@@ -3677,12 +3677,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 						if (this.field.hasSongFlags('HEAL')) this.heal(p.baseMaxhp / 8, p);
 					} else {
 						this.boost(unboost, p);
-						if (this.field.hasSongFlags('HURT')) this.directDamage(p.baseMaxhp / 8, p);
+						if (this.field.hasSongFlags('HURT')) this.damage(p.baseMaxhp / 8, p);
 					}
 				});
 			},
 			onFieldStart(battle, source, effect) {
-				// this.field.setSongFlags('NONE');
+				// this.field.setSongFlags('NONE'); // TODO: Check if having this line would interfere with effects that set flags on terrain start.
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Mystical Song', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
