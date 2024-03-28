@@ -4411,9 +4411,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				} while (moves.size < 4 && (movePool.length));
 		
 				const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
-		
-					// first abiility
-					ability = this.sample(abilityData).name;
+				ability = this.sample(abilityData).name;
 		
 				let level: number;
 				level = pokemon.level;		
