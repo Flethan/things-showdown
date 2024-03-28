@@ -23,6 +23,10 @@ type ID = '' | string & {__isID: true};
 type PokemonSlot = '' | string & {__isSlot: true};
 interface AnyObject {[k: string]: any}
 
+type TypeNameCommon = 'Arthropod' | 'Dirt' | 'Far' | 'Fish' | 'Green' | 'H' | 'Hair' | 'Industrial' | 'Liquid' | 'Music' | 'Night' | 'No' | 'Science' | 'Sport' | 'Sword' | 'Temperature' | 'Time' | 'Weather' | 'Yellow';
+type TypeName = '???' | 'Infinity' | TypeNameCommon;
+type SongFlagString = keyof typeof import('./field').Field.SONG_FLAGS;
+
 type GenderName = 'M' | 'F' | 'N' | '';
 type StatIDExceptHP = 'atk' | 'def' | 'spa' | 'spd' | 'spe';
 type StatID = 'hp' | StatIDExceptHP;

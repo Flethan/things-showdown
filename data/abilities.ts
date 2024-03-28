@@ -1692,40 +1692,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	noteofintroduction: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
-			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-					'hurt', 'heal'];
-				const randomFlag = this.sample(sflags);
-				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
-				this.field.activeFlags.push(randomFlag);
-				this.hint("Note of Introduction: " + randomFlag);
-				if (this.blessedLand) {
-					const randomFlag2 = this.sample(sflags);
-					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
-					this.field.activeFlags.push(randomFlag2);
-					this.hint("Note of Introduction: " + randomFlag2);
-				}
-			}
+			if (!this.field.isTerrain('mysticalsong')) return;
+
+			this.field.addRandomSongFlags();
+			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
 		},
 		onAnyTerrainStart() {
-			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-					'hurt', 'heal'];
-				const randomFlag = this.sample(sflags);
-				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
-				this.field.activeFlags.push(randomFlag);
-				this.hint("Note of Introduction: " + randomFlag);
-				if (this.blessedLand) {
-					const randomFlag2 = this.sample(sflags);
-					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
-					this.field.activeFlags.push(randomFlag2);
-					this.hint("Note of Introduction: " + randomFlag2);
-				}
-			}
+			if (!this.field.isTerrain('mysticalsong')) return;
+
+			this.field.addRandomSongFlags();
+			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
 		},
 		name: "Note of Introduction",
 		rating: 2,
@@ -1768,22 +1744,10 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	conductor: {
 		isNonstandard: "Thing",
 		onResidual() {
-			if (this.field.isTerrain('mysticalsong')) {
-				const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-					'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-					'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-					'hurt', 'heal'];
-				const randomFlag = this.sample(sflags);
-				if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
-				this.field.activeFlags.push(randomFlag);
-				this.hint("Conductor: " + randomFlag);
-				if (this.blessedLand) {
-					const randomFlag2 = this.sample(sflags);
-					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
-					this.field.activeFlags.push(randomFlag2);
-					this.hint("Conductor: " + randomFlag2);
-				}
-			}
+			if (!this.field.isTerrain('mysticalsong')) return;
+
+			this.field.addRandomSongFlags();
+			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
 		},
 		name: "Conductor",
 		rating: 4,
@@ -1954,24 +1918,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	aonetwothree: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
-			for (const allyActive of pokemon.allies()) {
-				if (allyActive.hasAbility(['aonetwothree'])) {
-					this.field.setTerrain('mysticalsong');
-					const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-						'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-						'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-						'hurt', 'heal'];
-					const randomFlag = this.sample(sflags);
-					if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag)) return;
-					this.field.activeFlags.push(randomFlag);
-					this.hint("A One, Two, Three...: " + randomFlag);
-					if (this.blessedLand) {
-						const randomFlag2 = this.sample(sflags);
-						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
-						this.field.activeFlags.push(randomFlag2);
-						this.hint("Note of Introduction: " + randomFlag2);
-					}
-				}
+			if (this.field.isTerrain('mysticalsong')) return;
+			if (pokemon.allies().filter(p => p.hasAbility('aonetwothree'))) {
+				this.field.setTerrain('mysticalsong');
+				this.field.addRandomSongFlags();
+				this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
 			}
 		},
 		name: "A One, Two, Three...",

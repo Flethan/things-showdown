@@ -253,7 +253,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	isConfusionSelfHit?: boolean;
 	isFutureMove?: boolean;
 	noMetronome?: string[];
-	songFlags?: string[];
+	songFlags?: SongFlagString[];
 	noSketch?: boolean;
 	stallingMove?: boolean;
 	baseMove?: string;

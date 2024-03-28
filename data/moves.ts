@@ -2188,7 +2188,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, contact: 1},
 		volatileStatus: 'partiallytrapped',
-		songFlags: ['hurt'],
+		songFlags: ['HURT'],
 		secondary: null,
 		target: "normal",
 		type: "Hair",
@@ -3280,7 +3280,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		volatileStatus: 'partiallytrapped',
-		songFlags: ['hurt'],
+		songFlags: ['HURT'],
 		secondary: null,
 		target: "normal",
 		type: "Music",
@@ -3359,7 +3359,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		boosts: {
 			spa: 1,
 		},
-		songFlags: ['spaboost'],
+		songFlags: ['SPA_BOOST'],
 		target: "self",
 		type: "Music",
 		contestType: "Clever",
@@ -3378,7 +3378,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			spe: 1,
 		},
 		offensiveStat: 'spe',
-		songFlags: ['speboost'],
+		songFlags: ['SPE_BOOST'],
 		target: "self",
 		type: "Music",
 		contestType: "Clever",
@@ -3397,7 +3397,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			spa: -1,
 		},
 		defensiveStat: 'spa',
-		songFlags: ['spareduce'],
+		songFlags: ['SPA_UNBOOST'],
 		target: "normal",
 		type: "Music",
 		contestType: "Clever",
@@ -3415,7 +3415,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		boosts: {
 			spe: -1,
 		},
-		songFlags: ['nopriority'],
+		songFlags: ['NO_PRIORITY'],
 		target: "allAdjacentFoes",
 		type: "Music",
 		contestType: "Beautiful",
@@ -3430,7 +3430,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {},
-		songFlags: ['atkup', 'spaup'],
+		songFlags: ['ATK_UP', 'SPA_UP'],
 		target: "self",
 		type: "Music",
 		contestType: "Clever",
@@ -3498,7 +3498,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {snatch: 1, heal: 1},
 		heal: [1, 2],
 		secondary: null,
-		songFlags: ['heal'],
+		songFlags: ['HEAL'],
 		target: "normal",
 		type: "Music",
 		zMove: {effect: 'clearnegativeboost'},
@@ -3559,84 +3559,34 @@ export const Moves: {[moveid: string]: MoveData} = {
 				return 5;
 			},
 			onAfterMoveSecondary(target, source, move) {
-				if (move.songFlags) {
-					for (const flag of move.songFlags) {
-						if (this.field.activeFlags.length && this.field.activeFlags.includes(flag)) continue;
-						this.field.activeFlags.push(flag);
-						this.hint("Mystical Song +: " + flag);
-					}
-					if (this.blessedLand) {
-						const sflags = ['nopriority', 'nostatus', 'noprone', 'nobanished', 'noblinded', 'nopressurized', 'nofluctuant', 'nowounded', 'nodistanced', 'noinfected', 'novolatiles',
-							'atkup', 'atkdown', 'defup', 'defdown', 'spaup', 'spadown', 'speup', 'spedown',
-							'atkboost', 'atkreduce', 'defboost', 'defreduce', 'spaboost', 'spareduce', 'spdboost', 'spdreduce', 'speboost', 'spereduce',
-							'hurt', 'heal'];
-						const randomFlag2 = this.sample(sflags);
-						if (this.field.activeFlags.length && this.field.activeFlags.includes(randomFlag2)) return;
-						this.field.activeFlags.push(randomFlag2);
-						this.hint("Mystical Song +: " + randomFlag2);
-					}
-				}
+				if (!move.songFlags) return;
+				this.field.addSongFlags(move.songFlags);
 			},
 			onTryHit(target, source, effect) {
-				if (!this.field.activeFlags.length) return;
-				if (source.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('nopriority')) {
-					if (['windy'].includes(target.effectiveWeather()) && effect.type === 'Weather' && effect.priority <= 1.5) return;
-					if (effect && (effect.priority <= 0.5 || effect.target === 'self')) return;
-					if (target.isSemiInvulnerable() || target.side === source.side) return;
-					this.add('-activate', target, 'move: Mystical Song');
-					return null;
-				}
+				if (!this.field.hasSongFlags('NO_PRIORITY') ||
+					source.hasItem('cowboyhat') ||
+					(effect && (effect.priority <= 0.5 || effect.target === 'self')) ||
+					(target.isSemiInvulnerable() || target.side === source.side)) return;
+
+				this.add('-activate', target, 'move: Mystical Song');
+				return null;
 			},
-			onSetStatus(status, target, source, effect) {
-				if (!this.field.activeFlags.length) return;
-				if (target.isSemiInvulnerable()) return;
-				if (target.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('nostatus')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'prone' && this.field.activeFlags.includes('noprone')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'banished' && this.field.activeFlags.includes('nobanished')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'blinded' && this.field.activeFlags.includes('noblinded')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'pressurized' && this.field.activeFlags.includes('nopressurized')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'fluctuant' && this.field.activeFlags.includes('nofluctuant')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'wounded' && this.field.activeFlags.includes('nowounded')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'distanced' && this.field.activeFlags.includes('nodistanced')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
-				if (status.id === 'infected' && this.field.activeFlags.includes('noinfected')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return false;
-				}
+			onSetStatus(status, target) {
+				const statusID = status.id.toUpperCase();
+				if (!target.isSemiInvulnerable() ||
+					target.hasItem('cowboyhat') ||
+					this.field.hasSongFlags(['NO_STATUS', `NO_${statusID}` as SongFlagString])) return; // TODO: Fix this type error.
+
+				this.add('-activate', target, 'move: Mystical Song');
+				return false;
 			},
-			onTryAddVolatile(status, target, source, effect) {
-				if (!this.field.activeFlags.length) return;
-				if (target.hasItem('cowboyhat')) return;
-				if (target.isSemiInvulnerable()) return;
-				if (this.field.activeFlags.includes('novolatiles')) {
-					this.add('-activate', target, 'move: Mystical Song');
-					return null;
-				}
+			onTryAddVolatile(status, target) {
+				if (!target.isSemiInvulnerable() ||
+					target.hasItem('cowboyhat') ||
+					this.field.hasSongFlags('NO_VOLATILES')) return;
+
+				this.add('-activate', target, 'move: Mystical Song');
+				return null;
 			},
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
@@ -3648,158 +3598,91 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifyAtkPriority: 9,
 			onModifyAtk(atk, attacker, defender, move) {
-				if (!this.field.activeFlags.length) return;
-				if (attacker.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('atkup')) {
-					if (move.type === 'Music') {
-						this.debug('mystical song boost');
-						return this.chainModify(1.5);
-					}
+				if (attacker.hasItem('cowboyhat') || !move) return;
+				if (this.field.hasSongFlags('ATK_UP') && move.type === 'Music') {
+					this.debug('mystical song raise');
+					return this.chainModify(1.5);
 				}
-				if (this.field.activeFlags.includes('atkdown')) {
-					if (move.type !== 'Music') {
-						this.debug('mystical song reduce');
-						return this.chainModify(0.5);
-					}
+				if (this.field.hasSongFlags('ATK_DOWN') && move.type !== 'Music') {
+					this.debug('mystical song reduce');
+					return this.chainModify(0.66);
 				}
 			},
 			onModifyDefPriority: 9,
 			onModifyDef(def, pokemon) {
-				if (!this.field.activeFlags.length) return;
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('defup')) {
-					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
-						this.debug('mystical song boost');
-						return this.chainModify(1.5);
-					}
+				if (this.field.hasSongFlags('DEF_UP') && (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song raise');
+					return this.chainModify(1.5);
 				}
-				if (this.field.activeFlags.includes('defdown')) {
-					if (!pokemon.hasType('Music', true) && !pokemon.hasAbility('Landscape Blessing')) {
-						this.debug('mystical song reduce');
-						return this.chainModify(0.5);
-					}
+				if (this.field.hasSongFlags('DEF_DOWN') && !(pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song reduce');
+					return this.chainModify(0.66);
 				}
 			},
 			onModifySpAPriority: 9,
-			onModifySpA(atk, attacker, defender, move) {
-				if (!this.field.activeFlags.length) return;
-				if (attacker.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('spaup')) {
-					if (move.type === 'Music') {
-						this.debug('mystical song boost');
-						return this.chainModify(1.5);
-					}
+			onModifySpA(spa, attacker, defender, move) {
+				if (attacker.hasItem('cowboyhat') || !move) return;
+				if (this.field.hasSongFlags('SPA_UP') && move.type === 'Music') {
+					this.debug('mystical song raise');
+					return this.chainModify(1.5);
 				}
-				if (this.field.activeFlags.includes('spadown')) {
-					if (move.type !== 'Music') {
-						this.debug('mystical song reduce');
-						return this.chainModify(0.5);
-					}
+				if (this.field.hasSongFlags('SPA_DOWN') && move.type !== 'Music') {
+					this.debug('mystical song reduce');
+					return this.chainModify(0.66);
 				}
 			},
 			onModifySpDPriority: 9,
 			onModifySpD(spd, pokemon) {
-				if (!this.field.activeFlags.length) return;
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('spdup')) {
-					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
-						this.debug('mystical song boost');
-						return this.chainModify(1.5);
-					}
+				if (this.field.hasSongFlags('SPD_UP') && (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song raise');
+					return this.chainModify(1.5);
 				}
-				if (this.field.activeFlags.includes('spddown') && !pokemon.hasAbility('Landscape Blessing')) {
-					if (!pokemon.hasType('Music', true)) {
-						this.debug('mystical song reduce');
-						return this.chainModify(0.5);
-					}
+				if (this.field.hasSongFlags('SPD_DOWN') && !(pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song reduce');
+					return this.chainModify(0.66);
 				}
 			},
 			onModifySpe(spe, pokemon) {
-				if (!this.field.activeFlags.length) return;
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (this.field.activeFlags.includes('speup')) {
-					if (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing')) {
-						this.debug('mystical song boost');
-						return this.chainModify(1.5);
-					}
+				if (this.field.hasSongFlags('SPE_UP') && (pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song raise');
+					return this.chainModify(1.5);
 				}
-				if (this.field.activeFlags.includes('spedown')) {
-					if (!pokemon.hasType('Music', true) && !pokemon.hasAbility('Landscape Blessing')) {
-						this.debug('mystical song reduce');
-						return this.chainModify(0.5);
-					}
+				if (this.field.hasSongFlags('SPE_DOWN') && !(pokemon.hasType('Music', true) || pokemon.hasAbility('Landscape Blessing'))) {
+					this.debug('mystical song reduce');
+					return this.chainModify(0.66);
 				}
 			},
 			onFieldResidual() {
-				if (!this.field.activeFlags.length) return;
-				for (const side of this.sides) {
-					for (const ally of side.active) {		
-						if (ally.hasItem('cowboyhat')) continue;
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkboost')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.boost({atk: 1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('defboost')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.boost({def: 1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('spaboost')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.boost({spa: 1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdboost')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.boost({spd: 1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('speboost')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.boost({spe: 1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('atkreduce')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.boost({atk: -1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('defreduce')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.boost({def: -1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('spareduce')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.boost({spa: -1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('spdreduce')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.boost({spd: -1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('spereduce')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.boost({spe: -1}, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('heal')) {
-							if (ally.hasType('Music', true) || ally.hasAbility('Landscape Blessing')) {
-								this.heal(ally.baseMaxhp / 8, ally);
-							}
-						}
-						if (this.field.activeFlags.length && this.field.activeFlags.includes('hurt')) {
-							if (!ally.hasType('Music', true) && !ally.hasAbility('Landscape Blessing')) {
-								this.directDamage(ally.baseMaxhp / 8, ally);
-							}
-						}
+				const boost: SparseBoostsTable = {
+					atk: this.field.hasSongFlags('ATK_BOOST') ? 1 : 0,
+					def: this.field.hasSongFlags('DEF_BOOST') ? 1 : 0,
+					spa: this.field.hasSongFlags('SPA_BOOST') ? 1 : 0,
+					spd: this.field.hasSongFlags('SPD_BOOST') ? 1 : 0,
+					spe: this.field.hasSongFlags('SPE_BOOST') ? 1 : 0,
+				};
+				const unboost: SparseBoostsTable = {
+					atk: this.field.hasSongFlags('ATK_UNBOOST') ? -1 : 0,
+					def: this.field.hasSongFlags('DEF_UNBOOST') ? -1 : 0,
+					spa: this.field.hasSongFlags('SPA_UNBOOST') ? -1 : 0,
+					spd: this.field.hasSongFlags('SPD_UNBOOST') ? -1 : 0,
+					spe: this.field.hasSongFlags('SPE_UNBOOST') ? -1 : 0,
+				};
+				this.getAllActive().forEach(p => {
+					if (p.hasItem('cowboyhat')) return;
+					if (p.hasType('Music', true) || p.hasAbility('Landscape Blessing')) {
+						this.boost(boost, p);
+						if (this.field.hasSongFlags('HEAL')) this.heal(p.baseMaxhp / 8, p);
+					} else {
+						this.boost(unboost, p);
+						this.directDamage(p.baseMaxhp / 8, p);
 					}
-				}
+				});
 			},
 			onFieldStart(battle, source, effect) {
-				this.field.activeFlags = [];
+				// this.field.setSongFlags('NONE');
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Mystical Song', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
@@ -3809,7 +3692,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onResidualOrder: 21,
 			onResidualSubOrder: 2,
 			onFieldEnd(side) {
-				this.field.activeFlags = [];
+				this.field.setSongFlags('NONE');
 				this.add('-fieldend', 'move: Mystical Song');
 			},
 		},
@@ -3837,7 +3720,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				},
 			},
 		},
-		songFlags: ['spdboost', 'heal'],
+		songFlags: ['SPD_BOOST', 'HEAL'],
 		target: "normal",
 		type: "Music",
 		zMove: {effect: 'clearnegativeboost'},
@@ -3861,7 +3744,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				},
 			},
 		},
-		songFlags: ['speboost', 'defboost'],
+		songFlags: ['DEF_BOOST', 'SPE_BOOST'],
 		target: "normal",
 		type: "Music",
 		zMove: {effect: 'clearnegativeboost'},
@@ -3885,7 +3768,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				},
 			},
 		},
-		songFlags: ['spaboost', 'atkboost'],
+		songFlags: ['ATK_BOOST', 'SPA_BOOST'],
 		target: "normal",
 		type: "Music",
 		zMove: {effect: 'clearnegativeboost'},
@@ -3937,7 +3820,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1},
-		songFlags: ['hurt'],
+		songFlags: ['HURT'],
 		self: {
 			volatileStatus: 'mustrecharge',
 		},
@@ -3964,7 +3847,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 5,
 		priority: 0,
 		flags: {recharge: 1},
-		songFlags: ['heal'],
+		songFlags: ['HEAL'],
 		self: {
 			volatileStatus: 'mustrecharge',
 		},
@@ -3991,7 +3874,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {},
-		songFlags: ['speboost'],
+		songFlags: ['SPE_BOOST'],
 		boosts: {
 			atk: 1,
 			spa: 1,
@@ -4012,7 +3895,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {},
-		songFlags: ['spereduce'],
+		songFlags: ['SPE_UNBOOST'],
 		boosts: {
 			atk: -1,
 			spa: -1,
@@ -4038,22 +3921,20 @@ export const Moves: {[moveid: string]: MoveData} = {
 			move.type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
 		},
 		onModifyMove(move, pokemon) {
-			const sf: string[] = [];
-			for (let i = 0; i < 4; i++) {
-				const move_temp = this.dex.moves.get(pokemon.moveSlots[i].id);
-				if (!move_temp.songFlags) continue;
-				for (const flag of move_temp.songFlags) {
-					if (!sf.includes(flag)) sf.push(flag);
-				}
-			}
-			move.songFlags = sf;
+			const songFlags: SongFlagString[] = [];
+			pokemon.moveSlots.forEach(m => {
+				const dexMove = this.dex.moves.get(m.id);
+				if (dexMove.songFlags) songFlags.push(...dexMove.songFlags);
+			});
+			if (!move.songFlags) move.songFlags = [];
+			move.songFlags.push(...songFlags);
 
 			if (pokemon.species.name === 'Sylphonie-Physical') {
 				move.category = 'Physical';
 			}
 		},
 		onHit() {
-			if (this.field.isTerrain('mysticalsong')) { this.field.terrainState.duration = 5; }
+			if (this.field.isTerrain('mysticalsong')) this.field.terrainState.duration = 5;
 		},
 		secondary: null,
 		target: "normal",
@@ -5409,7 +5290,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		name: "Infect",
 		pp: 10,
 		priority: 0,
-		flags: {protect: 1, mirror: 1,},
+		flags: {protect: 1, mirror: 1},
 		onHit(pokemon) {
 			pokemon.trySetStatus('infected');
 		},
