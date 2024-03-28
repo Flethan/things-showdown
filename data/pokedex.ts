@@ -4889,8 +4889,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: true,
 		isPatron: true,
 	},
+	// num -539 hwimsical
 	weeacria: {
-		num: -539,
+		num: -540,
 		name: "Weeacria",
 		baseForme: "None",
 		types: ["Sport"],
@@ -4907,7 +4908,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriaarthropod: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Arthropod",
 		baseSpecies: "Weeacria",
 		forme: "Arthropod",
@@ -4923,7 +4924,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriadirt: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Dirt",
 		baseSpecies: "Weeacria",
 		forme: "Dirt",
@@ -4939,7 +4940,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriafar: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Far",
 		baseSpecies: "Weeacria",
 		forme: "Far",
@@ -4955,7 +4956,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriafish: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Fish",
 		baseSpecies: "Weeacria",
 		forme: "Fish",
@@ -4971,7 +4972,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriagreen: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Green",
 		baseSpecies: "Weeacria",
 		forme: "Green",
@@ -4987,7 +4988,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriah: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-H",
 		baseSpecies: "Weeacria",
 		forme: "H",
@@ -5003,7 +5004,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriahair: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Hair",
 		baseSpecies: "Weeacria",
 		forme: "Hair",
@@ -5019,7 +5020,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriaindustrial: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Industrial",
 		baseSpecies: "Weeacria",
 		forme: "Industrial",
@@ -5035,7 +5036,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacrialiquid: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Liquid",
 		baseSpecies: "Weeacria",
 		forme: "Liquid",
@@ -5051,7 +5052,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriamusic: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Music",
 		baseSpecies: "Weeacria",
 		forme: "Music",
@@ -5067,7 +5068,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacrianight: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Night",
 		baseSpecies: "Weeacria",
 		forme: "Night",
@@ -5083,7 +5084,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriano: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-No",
 		baseSpecies: "Weeacria",
 		forme: "No",
@@ -5099,7 +5100,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriascience: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Science",
 		baseSpecies: "Weeacria",
 		forme: "Science",
@@ -5115,7 +5116,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriasport: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Sport",
 		baseSpecies: "Weeacria",
 		forme: "Sport",
@@ -5131,7 +5132,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriasword: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Sword",
 		baseSpecies: "Weeacria",
 		forme: "Sword",
@@ -5147,7 +5148,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriatemperature: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Temperature",
 		baseSpecies: "Weeacria",
 		forme: "Temperature",
@@ -5163,7 +5164,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriatime: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Time",
 		baseSpecies: "Weeacria",
 		forme: "Time",
@@ -5179,7 +5180,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriaweather: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Weather",
 		baseSpecies: "Weeacria",
 		forme: "Weather",
@@ -5195,7 +5196,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriayellow: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Yellow",
 		baseSpecies: "Weeacria",
 		forme: "Yellow",
@@ -5211,7 +5212,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	weeacriainfinity: {
-		num: -539,
+		num: -540,
 		name: "Weeacria-Infinity",
 		baseSpecies: "Weeacria",
 		forme: "Infinity",
@@ -5227,7 +5228,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		hasSprite: false,
 	},
 	wackapacka: {
-		num: -540,
+		num: -541,
 		name: "Wackapacka",
 		types: ["Sport", "Hair"],
 		gender: "N",
@@ -5240,7 +5241,6 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		hasSprite: false,
 	},
-	// num -539 hwimsical
 
 	// BASE GAME
 	bulbasaur: {
