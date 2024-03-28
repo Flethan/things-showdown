@@ -32,7 +32,7 @@ Ratings and how they work:
 
 */
 
-import { Pokemon } from "../sim";
+import {Pokemon} from "../sim";
 
 export const Abilities: {[abilityid: string]: AbilityData} = {
 // NEW STUFF
@@ -4381,25 +4381,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
 			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
-			console.log('valid format');
-			if (pokemon.side.active.length < this.activePerHalf) {
-				console.log('open slot');
+			if (pokemon.side.allies().length < this.activePerHalf) {
 				const species = this.dex.species.get('rock');
-				let forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
-				let gmax = false;
+				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
+				const gmax = false;
 
 				const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
-				let item = '';
-		
+				const item = '';
+
 				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
 				const ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
 
 				const natures = Object.keys(this.dex.data.Natures);
 				const nature = this.sample(natures);
 				const abilities = new Set(Object.values(species.abilities));
-		
+
 				const moves = new Set<string>();
-		
+
 				do {
 					// Choose next 4 moves from learnset/viable moves and add them to moves list:
 					const pool = movePool;
@@ -4408,15 +4406,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 						pool.splice(pool.indexOf(moveid), 1);
 						moves.add(moveid);
 					}
-		
 				} while (moves.size < 4 && (movePool.length));
-		
+
 				const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
 				const ability = this.sample(abilityData);
-		
-				let level: number;
-				level = pokemon.level;		
-		
+
+				const level = pokemon.level;
+
 				const finished_pokemon = {
 					name: species.baseSpecies,
 					species: forme,
@@ -4431,10 +4427,13 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					item,
 					nature,
 				};
-
 				pokemon.side.team.push(finished_pokemon);
-				pokemon.side.pokemon.push(new Pokemon(finished_pokemon, pokemon.side));
-				console.log('team adjusted??');
+				const newPokemon = new Pokemon(finished_pokemon, pokemon.side);
+				newPokemon.position = pokemon.side.pokemon.length;
+				newPokemon.canSymbolEvo = null;
+				pokemon.side.pokemon.push(newPokemon);
+				pokemon.side.pokemonLeft++;
+				pokemon.battle.actions.switchIn(newPokemon, pokemon.position ? 0 : 1);
 			}
 		},
 		name: "Surprise Inside",
