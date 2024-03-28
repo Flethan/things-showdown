@@ -32,8 +32,6 @@ Ratings and how they work:
 
 */
 
-import RandomTeams from "./random-teams";
-
 export const Abilities: {[abilityid: string]: AbilityData} = {
 // NEW STUFF
 	sunsailor: {
