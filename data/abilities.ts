@@ -4387,7 +4387,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				const gmax = false;
 
-				const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
+				const movePool = Object.keys(this.dex.data.Learnsets[forme]!.learnset!);
 				const item = '';
 
 				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
@@ -4444,6 +4444,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorarthropod: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Arthropod')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Arthropod', '[from] ability: Flavor: Arthropod');
 		},
 		onDamagingHitOrder: 1,
@@ -4459,6 +4460,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavordirt: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Dirt')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Dirt', '[from] ability: Flavor: Dirt');
 		},
 		onDamagingHitOrder: 1,
@@ -4474,6 +4476,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorfar: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Far')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Far', '[from] ability: Flavor: Far');
 		},
 		onDamagingHitOrder: 1,
@@ -4489,6 +4492,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorfish: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Fish')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Fish', '[from] ability: Flavor: Fish');
 		},
 		onDamagingHitOrder: 1,
@@ -4504,6 +4508,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorgreen: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Green')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Green', '[from] ability: Flavor: Green');
 		},
 		onDamagingHitOrder: 1,
@@ -4519,6 +4524,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorh: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('H')) return false;
 			this.add('-start', pokemon, 'typeadd', 'H', '[from] ability: Flavor: H');
 		},
 		onDamagingHitOrder: 1,
@@ -4534,6 +4540,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorhair: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Hair')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Hair', '[from] ability: Flavor: Hair');
 		},
 		onDamagingHitOrder: 1,
@@ -4553,6 +4560,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorindustrial: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Industrial')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Industrial', '[from] ability: Flavor: Industrial');
 		},
 		onDamagingHitOrder: 1,
@@ -4572,6 +4580,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorliquid: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Liquid')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Liquid', '[from] ability: Flavor: Liquid');
 		},
 		onDamagingHitOrder: 1,
@@ -4587,6 +4596,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavormusic: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Music')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Music', '[from] ability: Flavor: Music');
 		},
 		onDamagingHitOrder: 1,
@@ -4602,6 +4612,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavornight: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Night')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Night', '[from] ability: Flavor: Night');
 		},
 		onDamagingHitOrder: 1,
@@ -4617,6 +4628,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorno: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('No')) return false;
 			this.add('-start', pokemon, 'typeadd', 'No', '[from] ability: Flavor: No');
 		},
 		onDamagingHitOrder: 1,
@@ -4632,6 +4644,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorscience: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Science')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Science', '[from] ability: Flavor: Science');
 		},
 		onDamagingHitOrder: 1,
@@ -4647,6 +4660,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorsport: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Sport')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Sport', '[from] ability: Flavor: Sport');
 		},
 		onDamagingHitOrder: 1,
@@ -4662,6 +4676,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorsword: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Sword')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Sword', '[from] ability: Flavor: Sword');
 		},
 		onDamagingHitOrder: 1,
@@ -4681,6 +4696,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavortemperature: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Temperature')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Temperature', '[from] ability: Flavor: Temperature');
 		},
 		onDamagingHitOrder: 1,
@@ -4696,6 +4712,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavortime: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Time')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Time', '[from] ability: Flavor: Time');
 		},
 		onDamagingHitOrder: 1,
@@ -4711,6 +4728,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorweather: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Weather')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Weather', '[from] ability: Flavor: Weather');
 		},
 		onDamagingHitOrder: 1,
@@ -4726,6 +4744,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavoryellow: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Yellow')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] ability: Flavor: Yellow');
 		},
 		onDamagingHitOrder: 1,
@@ -4741,6 +4760,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	flavorinfinity: {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
+			if (!pokemon.addType('Infinity')) return false;
 			this.add('-start', pokemon, 'typeadd', 'Infinity', '[from] ability: Flavor: Infinity');
 		},
 		onDamagingHitOrder: 1,
