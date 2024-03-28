@@ -4387,7 +4387,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				const gmax = false;
 
-				const movePool = Object.keys(this.dex.data.Learnsets[forme]!.learnset!);
+				const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
 				const item = '';
 
 				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
