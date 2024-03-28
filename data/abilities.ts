@@ -1693,15 +1693,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (!this.field.isTerrain('mysticalsong')) return;
-
-			this.field.addRandomSongFlags();
-			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
+			this.field.addRandomSongFlags(1);
 		},
 		onAnyTerrainStart() {
 			if (!this.field.isTerrain('mysticalsong')) return;
-
-			this.field.addRandomSongFlags();
-			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
+			this.field.addRandomSongFlags(1);
 		},
 		name: "Note of Introduction",
 		rating: 2,
@@ -1745,9 +1741,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual() {
 			if (!this.field.isTerrain('mysticalsong')) return;
-
-			this.field.addRandomSongFlags();
-			this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
+			this.field.addRandomSongFlags(1);
 		},
 		name: "Conductor",
 		rating: 4,
@@ -1921,8 +1915,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.isTerrain('mysticalsong')) return;
 			if (pokemon.allies().filter(p => p.hasAbility('aonetwothree'))) {
 				this.field.setTerrain('mysticalsong');
-				this.field.addRandomSongFlags();
-				this.field.addSongFlags('NONE'); // Trigger blessed. TODO: do this better
+				this.field.addRandomSongFlags(1);
 			}
 		},
 		name: "A One, Two, Three...",
