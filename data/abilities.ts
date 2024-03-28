@@ -32,6 +32,8 @@ Ratings and how they work:
 
 */
 
+import { Pokemon } from "../sim";
+
 export const Abilities: {[abilityid: string]: AbilityData} = {
 // NEW STUFF
 	sunsailor: {
@@ -4386,13 +4388,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onResidual(pokemon) {
 			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
+			console.log('valid format');
 			if (pokemon.side.active.length < this.activePerHalf) {
+				console.log('open slot');
 				const species = this.dex.species.get('rock');
 				let forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				let gmax = false;
 
 				const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
-				let ability = '';
 				let item = '';
 		
 				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
@@ -4400,8 +4403,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 				const natures = Object.keys(this.dex.data.Natures);
 				const nature = this.sample(natures);
-		
-				const types = new Set(species.types);
 				const abilities = new Set(Object.values(species.abilities));
 		
 				const moves = new Set<string>();
@@ -4418,7 +4419,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				} while (moves.size < 4 && (movePool.length));
 		
 				const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
-				ability = this.sample(abilityData).name;
+				const ability = this.sample(abilityData);
 		
 				let level: number;
 				level = pokemon.level;		
@@ -4431,7 +4432,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					gigantamax: gmax,
 					level,
 					moves: Array.from(moves),
-					ability,
+					ability: ability.name,
 					evs,
 					ivs,
 					item,
@@ -4439,6 +4440,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				};
 
 				pokemon.side.team.push(finished_pokemon);
+				pokemon.side.pokemon.push(new Pokemon(finished_pokemon, pokemon.side));
+				console.log('team adjusted??');
 			}
 		},
 		name: "Surprise Inside",
