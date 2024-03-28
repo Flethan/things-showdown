@@ -307,9 +307,13 @@ export class Field {
 	// Add one or more random song flags. Each call also triggers Landscape Blessing
 	addRandomSongFlags(number: number) {
 		if (this.battle.blessedLand) number++;
-		const currentFlags = this.songFlags;
-		while (number) {
-			this.songFlags |= 1 << this.battle.random(30);
+		const flagKeys: SongFlagString[] = ['NO_PRIORITY', 'NO_PRONE', 'NO_BANISHED', 'NO_BLINDED', 'NO_PRESSURIZED', 'NO_FLUCTUANT', 'NO_WOUNDED', 'NO_DISTANCED', 'NO_INFECTED',
+			'HEAL', 'HURT', 'ATK_UP', 'ATK_DOWN', 'DEF_UP', 'DEF_DOWN', 'SPA_UP', 'SPA_DOWN', 'SPD_UP', 'SPD_DOWN', 'SPE_UP', 'SPE_DOWN', 'ATK_BOOST', 'ATK_UNBOOST', 'DEF_BOOST', 'DEF_UNBOOST', 'SPA_BOOST', 'SPA_UNBOOST', 'SPD_BOOST', 'SPD_UNBOOST', 'SPE_BOOST', 'SPE_UNBOOST'];
+		let availableFlags = flagKeys.filter(v => !this.hasSongFlags(v));
+		while (number && availableFlags.length) {
+			const flag = this.battle.sample(availableFlags);
+			availableFlags = availableFlags.filter(v => v !== flag);
+			this.songFlags |= 1 << Field.SONG_FLAGS[flag];
 			number--;
 		}
 	}
