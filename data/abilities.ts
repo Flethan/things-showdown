@@ -4395,7 +4395,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 				const natures = Object.keys(this.dex.data.Natures);
 				const nature = this.sample(natures);
-				const abilities = new Set(Object.values(species.abilities));
+				const abilities = new Set(Object.values(this.dex.species.get(forme).abilities));
 
 				const moves = new Set<string>();
 
