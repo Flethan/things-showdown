@@ -1924,7 +1924,7 @@ export class BattleActions {
 		if (!forcedSpeciesId && !(pokemon.getItem().id === 'backupsymbolcrystal' && pokemon.itemState.count >= 5)) {
 			const wasSymbol = pokemon.canSymbolEvo;
 			for (const ally of pokemon.side.pokemon) {
-				if (wasSymbol) {
+				if (wasSymbol && !(ally.getItem().id === 'backupsymbolcrystal' && ally.itemState.count >= 5)) {
 					ally.canSymbolEvo = null;
 				}
 			}
