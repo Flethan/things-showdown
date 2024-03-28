@@ -4382,6 +4382,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
 			if (pokemon.side.allies().length < this.activePerHalf) {
+				if (this.randomChance(1, 2)) return;
 				const species = this.dex.species.get('weeacria');
 				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				const gmax = false;
@@ -4440,6 +4441,331 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 4,
 		num: 2111,
 	},
+	flavorarthropod: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Arthropod', '[from] ability: Flavor: Arthropod');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.heal(source.baseMaxhp / 2, source, target);
+			}
+		},
+		name: "Flavor: Arthropod",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavordirt: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Dirt', '[from] ability: Flavor: Dirt');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({def: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Dirt",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorfar: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Far', '[from] ability: Flavor: Far');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spe: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Far",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorfish: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Fish', '[from] ability: Flavor: Fish');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.heal(source.baseMaxhp / 2, source, target);
+			}
+		},
+		name: "Flavor: Fish",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorgreen: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Green', '[from] ability: Flavor: Green');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.heal(source.baseMaxhp / 2, source, target);
+			}
+		},
+		name: "Flavor: Green",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorh: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'H', '[from] ability: Flavor: H');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spd: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: H",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorhair: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Hair', '[from] ability: Flavor: Hair');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				if (source.getStat('atk', true, true) >= source.getStat('spa', true, true)) {
+					this.boost({atk: 1}, source, target, null, true);
+				} else {
+					this.boost({spa: 1}, source, target, null, true);
+				}
+			}
+		},
+		name: "Flavor: Hair",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorindustrial: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Industrial', '[from] ability: Flavor: Industrial');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				if (source.getStat('atk', true, true) >= source.getStat('spa', true, true)) {
+					this.boost({atk: 1}, source, target, null, true);
+				} else {
+					this.boost({spa: 1}, source, target, null, true);
+				}
+			}
+		},
+		name: "Flavor: Industrial",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorliquid: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Liquid', '[from] ability: Flavor: Liquid');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({def: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Liquid",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavormusic: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Music', '[from] ability: Flavor: Music');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({evasion: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Music",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavornight: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Night', '[from] ability: Flavor: Night');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({accuracy: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Night",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorno: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'No', '[from] ability: Flavor: No');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spd: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: No",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorscience: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Science', '[from] ability: Flavor: Science');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spd: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Science",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorsport: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Sport', '[from] ability: Flavor: Sport');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spe: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Sport",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorsword: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Sword', '[from] ability: Flavor: Sword');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				if (source.getStat('atk', true, true) >= source.getStat('spa', true, true)) {
+					this.boost({atk: 1}, source, target, null, true);
+				} else {
+					this.boost({spa: 1}, source, target, null, true);
+				}
+			}
+		},
+		name: "Flavor: Sword",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavortemperature: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Temperature', '[from] ability: Flavor: Temperature');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({accuracy: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Temperature",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavortime: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Time', '[from] ability: Flavor: Time');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({spe: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Time",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorweather: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Weather', '[from] ability: Flavor: Weather');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({def: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Weather",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavoryellow: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] ability: Flavor: Yellow');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({evasion: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Yellow",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavorinfinity: {
+		isNonstandard: "Thing",
+		onStart(pokemon) {
+			this.add('-start', pokemon, 'typeadd', 'Infinity', '[from] ability: Flavor: Infinity');
+		},
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.boost({atk: 1, spa: 1, def: 1, spd: 1, spe: 1}, source, target, null, true);
+			}
+		},
+		name: "Flavor: Infinity",
+		rating: 1.5,
+		num: 2112,
+	},
+	flavornone: {
+		isNonstandard: "Thing",
+		onDamagingHitOrder: 1,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.damage(source.baseMaxhp / 8, source, target);
+			}
+		},
+		name: "Flavor: None",
+		rating: 1.5,
+		num: 2112,
+	},
+
 
 	// BASE GAME
 	noability: {
