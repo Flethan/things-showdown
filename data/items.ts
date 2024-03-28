@@ -1309,8 +1309,21 @@ export const Items: {[itemid: string]: ItemData} = {
 			/* if (this.effectState.count < 5) {
 				this.hint(`${pokemon.name}'s Backup Symbol Crystal is charging! (${this.effectState.count}/5)`);
 			}*/
-			if (this.effectState.count === 5) {
+			if (this.effectState.count >= 5) {
 				this.hint(`${pokemon.name}'s Backup Symbol Crystal is fully charged!`);
+				const species = pokemon.baseSpecies;
+				if (species.isNonstandard === 'Thing' && species.evos) {
+					for (const evo of species.evos) {
+						const evoCondition = this.dex.species.get(evo).evoCondition;
+						if (evoCondition === 'Symbol') {
+							pokemon.canSymbolEvo = evo;
+						} else if (evoCondition === 'Symbol w/ Atk > SpA' && (pokemon.getStat('atk', true, true) >= pokemon.getStat('spa', true, true))) {
+							pokemon.canSymbolEvo = evo;
+						} else if (evoCondition === 'Symbol w/ SpA > Atk' && (pokemon.getStat('spa', true, true) >= pokemon.getStat('atk', true, true))) {
+							pokemon.canSymbolEvo = evo;
+						}
+					}
+				}
 			}
 		},
 		// implemented in symbol evo function
