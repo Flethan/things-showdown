@@ -3677,7 +3677,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 						if (this.field.hasSongFlags('HEAL')) this.heal(p.baseMaxhp / 8, p);
 					} else {
 						this.boost(unboost, p);
-						this.directDamage(p.baseMaxhp / 8, p);
+						if (this.field.hasSongFlags('HURT')) this.directDamage(p.baseMaxhp / 8, p);
 					}
 				});
 			},
