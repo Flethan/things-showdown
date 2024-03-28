@@ -4382,7 +4382,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onResidual(pokemon) {
 			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
 			if (pokemon.side.allies().length < this.activePerHalf) {
-				const species = this.dex.species.get('rock');
+				const species = this.dex.species.get('weeacria');
 				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				const gmax = false;
 
