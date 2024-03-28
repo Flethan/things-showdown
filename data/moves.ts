@@ -3575,19 +3575,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 				const statusID = status.id.toUpperCase();
 				if (!target.isSemiInvulnerable() ||
 					target.hasItem('cowboyhat') ||
-					this.field.hasSongFlags(['NO_STATUS', `NO_${statusID}` as SongFlagString])) return; // TODO: Fix this type error.
+					this.field.hasSongFlags(`NO_${statusID}` as SongFlagString)) return; // TODO: Fix this type error.
 
 				this.add('-activate', target, 'move: Mystical Song');
 				return false;
 			},
-			onTryAddVolatile(status, target) {
-				if (!target.isSemiInvulnerable() ||
-					target.hasItem('cowboyhat') ||
-					this.field.hasSongFlags('NO_VOLATILES')) return;
-
-				this.add('-activate', target, 'move: Mystical Song');
-				return null;
-			},
+			//  onTryAddVolatile(status, target) {
+			//  	if (!target.isSemiInvulnerable() ||
+			//  		target.hasItem('cowboyhat') ||
+			//  		this.field.hasSongFlags('NO_VOLATILES')) return;
+			//  	this.add('-activate', target, 'move: Mystical Song');
+			//  	return null;
+			//  },
 			onBasePowerPriority: 6,
 			onBasePower(basePower, attacker, defender, move) {
 				if (attacker.hasItem('cowboyhat')) return;

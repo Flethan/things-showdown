@@ -9,6 +9,41 @@ import {State} from './state';
 import {EffectState} from './pokemon';
 import {toID} from './dex';
 
+
+enum SONG_FLAGS {
+	NONE			= 0,
+	NO_PRIORITY		= 1 << 0,
+	NO_PRONE		= 1 << 1,
+	NO_BANISHED		= 1 << 2,
+	NO_BLINDED		= 1 << 3,
+	NO_PRESSURIZED	= 1 << 4,
+	NO_FLUCTUANT	= 1 << 5,
+	NO_WOUNDED		= 1 << 6,
+	NO_DISTANCED	= 1 << 7,
+	NO_INFECTED		= 1 << 8,
+	HEAL			= 1 << 9,
+	HURT			= 1 << 10,
+	ATK_UP			= 1 << 11,
+	ATK_DOWN		= 1 << 12,
+	DEF_UP			= 1 << 13,
+	DEF_DOWN		= 1 << 14,
+	SPA_UP			= 1 << 15,
+	SPA_DOWN		= 1 << 16,
+	SPD_UP			= 1 << 17,
+	SPD_DOWN		= 1 << 18,
+	SPE_UP			= 1 << 19,
+	SPE_DOWN		= 1 << 20,
+	ATK_BOOST		= 1 << 21,
+	ATK_UNBOOST		= 1 << 22,
+	DEF_BOOST		= 1 << 23,
+	DEF_UNBOOST		= 1 << 24,
+	SPA_BOOST		= 1 << 25,
+	SPA_UNBOOST		= 1 << 26,
+	SPD_BOOST		= 1 << 27,
+	SPD_UNBOOST		= 1 << 28,
+	SPE_BOOST		= 1 << 29,
+	SPE_UNBOOST		= 1 << 30,
+}
 export class Field {
 	readonly battle: Battle;
 	readonly id: ID;
@@ -18,7 +53,8 @@ export class Field {
 	terrain: ID;
 	terrainState: EffectState;
 	pseudoWeather: {[id: string]: EffectState};
-	songFlags: Field.SONG_FLAGS;
+	static SONG_FLAGS = SONG_FLAGS;
+	songFlags: SONG_FLAGS;
 
 	constructor(battle: Battle) {
 		this.battle = battle;
@@ -261,17 +297,19 @@ export class Field {
 		this.songFlags = newFlags;
 	}
 
-	// Add one or more song flags, keeping old ones.
+	// Add one or more song flags, keeping old ones. Each call also triggers Landscape Blessing.
 	addSongFlags(songFlags: SongFlagString | SongFlagString[]) {
 		if (!Array.isArray(songFlags)) songFlags = [songFlags];
 		songFlags.forEach(v => (this.songFlags |= Field.SONG_FLAGS[v]));
-		if (this.battle.blessedLand) this.addRandomSongFlags(1, false);
+		this.addRandomSongFlags(0);
 	}
 
-	// Add one or more random song flags. Can opptionally exclude current ones.
-	addRandomSongFlags(number = 1, onlyNew?: boolean) {
+	// Add one or more random song flags. Each call also triggers Landscape Blessing
+	addRandomSongFlags(number: number) {
+		if (this.battle.blessedLand) number++;
+		const currentFlags = this.songFlags;
 		while (number) {
-			this.songFlags |= 1 << this.battle.random(32);
+			this.songFlags |= 1 << this.battle.random(30);
 			number--;
 		}
 	}
@@ -295,43 +333,5 @@ export class Field {
 
 		// get rid of some possibly-circular references
 		(this as any).battle = null!;
-	}
-}
-export namespace Field {
-	export enum SONG_FLAGS {
-		NONE			= 0,
-		NO_PRIORITY		= 1 << 0,
-		NO_VOLATILES	= 1 << 1,
-		NO_STATUS		= 1 << 2,
-		NO_PRONE		= 1 << 3,
-		NO_BANISHED		= 1 << 4,
-		NO_BLINDED		= 1 << 5,
-		NO_PRESSURIZED	= 1 << 6,
-		NO_FLUCTUANT	= 1 << 7,
-		NO_WOUNDED		= 1 << 8,
-		NO_DISTANCED	= 1 << 9,
-		NO_INFECTED		= 1 << 10,
-		HEAL			= 1 << 11,
-		HURT			= 1 << 12,
-		ATK_UP			= 1 << 13,
-		ATK_DOWN		= 1 << 14,
-		DEF_UP			= 1 << 15,
-		DEF_DOWN		= 1 << 16,
-		SPA_UP			= 1 << 17,
-		SPA_DOWN		= 1 << 18,
-		SPD_UP			= 1 << 19,
-		SPD_DOWN		= 1 << 20,
-		SPE_UP			= 1 << 21,
-		SPE_DOWN		= 1 << 22,
-		ATK_BOOST		= 1 << 23,
-		ATK_UNBOOST		= 1 << 24,
-		DEF_BOOST		= 1 << 25,
-		DEF_UNBOOST		= 1 << 26,
-		SPA_BOOST		= 1 << 27,
-		SPA_UNBOOST		= 1 << 28,
-		SPD_BOOST		= 1 << 29,
-		SPD_UNBOOST		= 1 << 30,
-		SPE_BOOST		= 1 << 31,
-		SPE_UNBOOST		= 1 << 32,
 	}
 }
