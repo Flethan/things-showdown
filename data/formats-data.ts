@@ -1268,6 +1268,94 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
+	weeacria: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriaarthropod: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriadirt: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriafar: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriafish: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriagreen: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriah: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriahair: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriaindustrial: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacrialiquid: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriamusic: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacrianight: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriano: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriascience: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriasport: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriasword: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriatemperature: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriatime: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriaweather: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriayellow: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	weeacriainfinity: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
+	wackapacka: {
+		isNonstandard: "Thing",
+		tier: "Thing",
+	},
 
 	// BASE GAME
 	bulbasaur: {
