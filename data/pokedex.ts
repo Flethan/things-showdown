@@ -4182,6 +4182,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		prevo: "Sollit",
 		evoType: "symbol",
+		addedType: "Infinity",
 		evoCondition: "Symbol",
 		hasSprite: false,
 	},

@@ -242,13 +242,14 @@ export const Conditions: {[k: string]: ConditionData} = {
 	hurricanewatch: {
 		duration: 5,
 		onFieldStart(target, source, effect) {
-			this.add('-fieldstart', 'move: Hurricane Watch', '[of] ' + source);
 			this.effectState.category = this.sample([1, 2, 3]);
+			console.log("start" + this.effectState.category);
 		},
 		onFieldResidual() {
 			this.effectState.category++;
+			console.log("weather" + this.effectState.category);
 			if (this.effectState.category > 5 || (this.effectState.category > 2 && this.randomChance(2, 5))) this.field.removePseudoWeather('hurricanewatch');
-			this.add('-activate', '', 'Hurricane Watch', this.effectState.category);
+			else this.hint(`A category ${this.effectState.category} hurricane is brewing!`);
 		},
 		onFieldEnd() {
 			this.add('-fieldend', 'move: Hurricane Watch');
@@ -829,12 +830,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onFieldResidual() {
 			this.add('-weather', 'Windy', '[upkeep]');
 			const targets = this.getAllActive().filter(p => !p.hasItem('cowboyhat'));
-			if (targets.length < 2) return;
-			const bias = targets.filter(p => (p.hasType('Weather', true) || p.hasAbility('Wind Surfer')));
 
 			targets.reduce((result: [SparseBoostsTable, Pokemon][], source): [SparseBoostsTable, Pokemon][] => {
-				let receivers = bias.filter(p => !Object.is(p, source));
-				if (!receivers.length) receivers = targets.filter(p => !Object.is(p, source));
+				const receivers = source.foes().filter(p => !p.hasItem('cowboyhat'));
+				if (!receivers.length) return result;
 				const receiver = this.sample(receivers);
 
 				let stats: BoostID[] = [];
@@ -842,8 +841,7 @@ export const Conditions: {[k: string]: ConditionData} = {
 					stats = Object.entries(source.boosts)
 						.filter(([id, val]) => val < 0)
 						.map(([id, val]) => id) as BoostID[];
-				}
-				if (!stats.length && !source.hasAbility("Wind Surfer")) {
+				} else {
 					stats = Object.entries(source.boosts)
 						.filter(([id, val]) => val > 0)
 						.map(([id, val]) => id) as BoostID[];
@@ -852,9 +850,10 @@ export const Conditions: {[k: string]: ConditionData} = {
 				if (!randomStat) return result;
 
 				const lostBoost: SparseBoostsTable = {};
-				const receivedBoost: SparseBoostsTable = {};
+				let receivedBoost: SparseBoostsTable = {};
 				lostBoost[randomStat] = source.boosts[randomStat] > 0 ? -1 : 1;
-				receivedBoost[receiver.hasAbility('Wind Surfer') ? 'spe' : randomStat] = -lostBoost[randomStat]!;
+				receivedBoost[randomStat] = -lostBoost[randomStat]!;
+				if (receiver.hasAbility('Wind Surfer')) receivedBoost = {spe: 1};
 				result.push([lostBoost, source]);
 				result.push([receivedBoost, receiver]);
 				return result;

@@ -3655,20 +3655,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 			},
 			onFieldResidual() {
-				const boost: SparseBoostsTable = {
-					atk: this.field.hasSongFlags('ATK_BOOST') ? 1 : 0,
-					def: this.field.hasSongFlags('DEF_BOOST') ? 1 : 0,
-					spa: this.field.hasSongFlags('SPA_BOOST') ? 1 : 0,
-					spd: this.field.hasSongFlags('SPD_BOOST') ? 1 : 0,
-					spe: this.field.hasSongFlags('SPE_BOOST') ? 1 : 0,
-				};
-				const unboost: SparseBoostsTable = {
-					atk: this.field.hasSongFlags('ATK_UNBOOST') ? -1 : 0,
-					def: this.field.hasSongFlags('DEF_UNBOOST') ? -1 : 0,
-					spa: this.field.hasSongFlags('SPA_UNBOOST') ? -1 : 0,
-					spd: this.field.hasSongFlags('SPD_UNBOOST') ? -1 : 0,
-					spe: this.field.hasSongFlags('SPE_UNBOOST') ? -1 : 0,
-				};
+				const boost: SparseBoostsTable = {};
+				if (this.field.hasSongFlags('ATK_BOOST')) boost.atk = 1;
+				if (this.field.hasSongFlags('DEF_BOOST')) boost.def = 1;
+				if (this.field.hasSongFlags('SPA_BOOST')) boost.spa = 1;
+				if (this.field.hasSongFlags('SPD_BOOST')) boost.spd = 1;
+				if (this.field.hasSongFlags('SPE_BOOST')) boost.spe = 1;
+				const unboost: SparseBoostsTable = {};
+				if (this.field.hasSongFlags('ATK_UNBOOST')) boost.atk = 1;
+				if (this.field.hasSongFlags('DEF_UNBOOST')) boost.def = 1;
+				if (this.field.hasSongFlags('SPA_UNBOOST')) boost.spa = 1;
+				if (this.field.hasSongFlags('SPD_UNBOOST')) boost.spd = 1;
+				if (this.field.hasSongFlags('SPE_UNBOOST')) boost.spe = 1;
 				this.getAllActive().forEach(p => {
 					if (p.hasItem('cowboyhat')) return;
 					if (p.hasType('Music', true) || p.hasAbility('Landscape Blessing')) {
@@ -3681,7 +3679,6 @@ export const Moves: {[moveid: string]: MoveData} = {
 				});
 			},
 			onFieldStart(battle, source, effect) {
-				// this.field.setSongFlags('NONE'); // TODO: Check if having this line would interfere with effects that set flags on terrain start.
 				if (effect?.effectType === 'Ability') {
 					this.add('-fieldstart', 'move: Mystical Song', '[from] ability: ' + effect, '[of] ' + source);
 				} else {
@@ -7729,10 +7726,12 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!hurricanewatch) return;
 			const basePowers = [40, 70, 90, 110, 140];
 			move.magnitude = this.field.pseudoWeather['hurricanewatch'].category || 1;
+			console.log(move.magnitude);
 			move.basePower = basePowers[move.magnitude! - 1];
 		},
 		onUseMoveMessage(pokemon, target, move) {
 			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
+			console.log("use" + move.magnitude);
 		},
 		secondary: null,
 		target: "allAdjacent",

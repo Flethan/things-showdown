@@ -1915,7 +1915,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		isNonstandard: "Thing",
 		onStart(pokemon) {
 			if (this.field.isTerrain('mysticalsong')) return;
-			if (pokemon.allies().filter(p => p.hasAbility('aonetwothree'))) {
+			if (pokemon.allies().filter(p => p.hasAbility('aonetwothree')).length) {
 				this.field.setTerrain('mysticalsong');
 				this.field.addRandomSongFlags(1);
 			}
