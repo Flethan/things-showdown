@@ -4375,6 +4375,71 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 0,
 		num: 1223,
 	},
+	surpriseinside: {
+		isNonstandard: "Thing",
+		onResidual(pokemon) {
+			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
+			if (pokemon.side.active.length < this.activePerHalf) {
+				const species = this.dex.species.get('rock');
+				let forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
+				let gmax = false;
+
+				const movePool = Object.keys(this.dex.data.Learnsets[species.id]!.learnset!);
+				let ability = '';
+				let item = '';
+		
+				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
+				const ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
+
+				const natures = Object.keys(this.dex.data.Natures);
+				const nature = this.sample(natures);
+		
+				const types = new Set(species.types);
+				const abilities = new Set(Object.values(species.abilities));
+		
+				const moves = new Set<string>();
+		
+				do {
+					// Choose next 4 moves from learnset/viable moves and add them to moves list:
+					const pool = movePool;
+					while (moves.size < 4 && pool.length) {
+						const moveid = this.sample(pool);
+						pool.splice(pool.indexOf(moveid), 1);
+						moves.add(moveid);
+					}
+		
+				} while (moves.size < 4 && (movePool.length));
+		
+				const abilityData = Array.from(abilities).map(a => this.dex.abilities.get(a));
+		
+					// first abiility
+					ability = this.sample(abilityData).name;
+		
+				let level: number;
+				level = pokemon.level;		
+		
+				const finished_pokemon = {
+					name: species.baseSpecies,
+					species: forme,
+					gender: species.gender,
+					shiny: this.randomChance(1, 1024),
+					gigantamax: gmax,
+					level,
+					moves: Array.from(moves),
+					ability,
+					evs,
+					ivs,
+					item,
+					nature,
+				};
+
+				pokemon.side.team.push(finished_pokemon);
+			}
+		},
+		name: "Surprise Inside",
+		rating: 4,
+		num: 2111,
+	},
 
 	// BASE GAME
 	noability: {
