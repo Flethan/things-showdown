@@ -4383,6 +4383,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.gameType !== 'doubles' && this.gameType !== 'triples') return;
 			if (pokemon.side.allies().length < this.activePerHalf) {
 				if (this.randomChance(1, 2)) return;
+				this.add("-ability", pokemon, 'Surprise Inside');
 				const species = this.dex.species.get('weeacria');
 				const forme = (species.formeOrder ? this.sample(species.formeOrder) : species.name);
 				const gmax = false;
