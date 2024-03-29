@@ -41,30 +41,30 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.3);
+				return this.chainModify(1.2);
 			}
 		},
 		onModifyDefPriority: 5,
 		onModifyDef(def, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.3);
+				return this.chainModify(1.2);
 			}
 		},
 		onModifySpAPriority: 6,
 		onModifySpA(spa, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.3);
+				return this.chainModify(1.2);
 			}
 		},
 		onModifySpDPriority: 6,
 		onModifySpD(spd, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.3);
+				return this.chainModify(1.2);
 			}
 		},
 		onModifySpe(spe, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
-				return this.chainModify(1.3);
+				return this.chainModify(1.2);
 			}
 		},
 		name: "Sun Sailor",
