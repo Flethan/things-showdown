@@ -4387,6 +4387,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		evoType: "symbol",
 		evoCondition: "Symbol",
+		addedType: "Infinity",
 		hasSprite: true,
 	},
 	bouncer: {
