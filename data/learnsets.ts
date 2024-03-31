@@ -7075,7 +7075,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fireworks: ["8L5"],
 		},
 	},
-	wackapacka: {
+	wackapaca: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

@@ -1352,7 +1352,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	wackapacka: {
+	wackapaca: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
