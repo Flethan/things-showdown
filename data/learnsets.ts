@@ -7106,6 +7106,8 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			fireworks: ["8L5"],
 			rankandfile: ["8T"],
 			fourinarow: ["8L100"],
+			hairball: ["8L1"],
+			brush: ["8L1"],
 		},
 	},
 	// BASE GAME

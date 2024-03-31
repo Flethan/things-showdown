@@ -4389,7 +4389,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const gmax = false;
 
 				const movePool = Object.keys(this.dex.data.Learnsets[this.dex.species.get(forme).id]!.learnset!);
-				const item = '';
+				
+				let item = '';
+				const itemPool = Object.keys(this.dex.data.Items);
+				do {
+					item = this.sample(itemPool);
+				} while (this.dex.data.Items[item].isNonstandard !== 'Thing');
 
 				const evs = {hp: 85, atk: 85, def: 85, spa: 85, spd: 85, spe: 85};
 				const ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
@@ -4785,6 +4790,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Flavorless",
 		rating: 1.5,
 		num: 2112,
+	},
+	themstherules: {
+		isNonstandard: "Thing",
+		onFoeRedirectTargetPriority: 1,
+		onFoeRedirectTarget(target, source, source2, move) {
+			if (!this.effectState.target.isSkyDropped() && source.status === 'blinded' && this.validTarget(this.effectState.target, source, move.target)) {
+				this.add('-activate', this.effectState.target, 'ability: Event Horizon');
+				if (move.smartTarget) move.smartTarget = false;
+				this.debug("Event Horizon redirected target of move");
+				return this.effectState.target;
+			}
+		},
+		name: "Them's the rules",
+		rating: 2,
+		num: -111,
 	},
 
 
