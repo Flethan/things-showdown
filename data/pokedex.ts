@@ -56,6 +56,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		evos: ["Kiteolus"],
 		eggGroups: ["Amorphous", "Water 3"],
+		hasSprite: true,
 	},
 	kiteolus: {
 		num: -205,
@@ -71,6 +72,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 16,
 		evos: ["Stratosoar"],
 		eggGroups: ["Amorphous", "Water 3"],
+		hasSprite: true,
 	},
 	stratosoar: {
 		num: -206,
@@ -86,6 +88,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 32,
 		evos: ["Celiorship"],
 		eggGroups: ["Amorphous", "Water 3"],
+		hasSprite: true,
 	},
 	triangl3: {
 		num: -207,
@@ -260,6 +263,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Anomallamalocarish", "Anomallolash"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	anomallamalocarish: {
 		num: -315,
@@ -287,6 +291,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		prevo: "Anomallish",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	djecridid: {
 		num: -317,
@@ -300,6 +305,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Gryllague"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	gryllague: {
 		num: -318,
@@ -314,6 +320,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Djecridid",
 		evos: ["Schisteka"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	schisteka: {
 		num: -319,
@@ -328,6 +335,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Gryllague",
 		evos: ["Besuetecerca"],
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	afishal: {
 		num: -320,
@@ -905,6 +913,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Albeedle"],
 		eggGroups: ["Mineral", "Amorphous"],
+		hasSprite: true,
 	},
 	albeedle: {
 		num: -358,
@@ -920,6 +929,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 42,
 		evos: ["Citrinity"],
 		eggGroups: ["Mineral", "Bug"],
+		hasSprite: true,
 	},
 	citrinity: {
 		num: -359,
@@ -935,6 +945,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoLevel: 54,
 		evos: ["Reuleado"],
 		eggGroups: ["Mineral", "Bug"],
+		hasSprite: true,
 	},
 	reuleado: {
 		num: -360,
@@ -952,6 +963,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		addedType: "Infinity",
+		hasSprite: true,
 	},
 	swordguy: {
 		num: -361,
@@ -2192,6 +2204,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Ye'noh",
 		evoType: "levelFriendship",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	anoano: {
 		num: -434,
@@ -2354,6 +2367,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Kaijuv",
 		color: "Blue",
 		eggGroups: ["Monster"],
+		hasSprite: true,
 	},
 	aerraton: {
 		num: -446,
@@ -2651,6 +2665,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evos: ["Cumulunormous"],
 		color: "White",
 		eggGroups: ["Amorphous"],
+		hasSprite: true,
 	},
 	cumulunormous: {
 		num: -450,
@@ -2664,6 +2679,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		prevo: "Cululus",
 		color: "White",
 		eggGroups: ["Amorphous"],
+		hasSprite: true,
 	},
 	saniteyser: {
 		num: -451,
@@ -2708,6 +2724,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["Yellow"],
+		hasSprite: true,
 	},
 	fiish: {
 		num: -454,
@@ -2975,6 +2992,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		elementTypes: ["Green"],
 		isPatron: true,
+		hasSprite: true,
 	},
 	exallout: {
 		num: -470,
@@ -3624,6 +3642,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["No"],
+		hasSprite: true,
 	},
 	ichthronaut: {
 		num: -488,
@@ -4907,7 +4926,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Field"],
 		otherFormes: ["Weeacria-Arthropod", "Weeacria-Dirt", "Weeacria-Far", "Weeacria-Fish", "Weeacria-Green", "Weeacria-H", "Weeacria-Hair", "Weeacria-Industrial", "Weeacria-Liquid", "Weeacria-Music", "Weeacria-Night", "Weeacria-No", "Weeacria-Science", "Weeacria-Sport", "Weeacria-Sword", "Weeacria-Temperature", "Weeacria-Time", "Weeacria-Weather", "Weeacria-Yellow", "Weeacria-Infinity"],
 		formeOrder: ["Weeacria", "Weeacria-Arthropod", "Weeacria-Dirt", "Weeacria-Far", "Weeacria-Fish", "Weeacria-Green", "Weeacria-H", "Weeacria-Hair", "Weeacria-Industrial", "Weeacria-Liquid", "Weeacria-Music", "Weeacria-Night", "Weeacria-No", "Weeacria-Science", "Weeacria-Sport", "Weeacria-Sword", "Weeacria-Temperature", "Weeacria-Time", "Weeacria-Weather", "Weeacria-Yellow", "Weeacria-Infinity"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriaarthropod: {
 		num: -540,
@@ -4923,7 +4942,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Orange",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriadirt: {
 		num: -540,
@@ -4939,7 +4958,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriafar: {
 		num: -540,
@@ -4955,7 +4974,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriafish: {
 		num: -540,
@@ -4971,7 +4990,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriagreen: {
 		num: -540,
@@ -4987,7 +5006,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriah: {
 		num: -540,
@@ -5003,7 +5022,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriahair: {
 		num: -540,
@@ -5019,7 +5038,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Brown",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriaindustrial: {
 		num: -540,
@@ -5035,7 +5054,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacrialiquid: {
 		num: -540,
@@ -5051,7 +5070,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriamusic: {
 		num: -540,
@@ -5067,7 +5086,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Pink",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacrianight: {
 		num: -540,
@@ -5083,7 +5102,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriano: {
 		num: -540,
@@ -5099,7 +5118,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Black",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriascience: {
 		num: -540,
@@ -5115,7 +5134,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Purple",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriasport: {
 		num: -540,
@@ -5131,7 +5150,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriasword: {
 		num: -540,
@@ -5147,7 +5166,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriatemperature: {
 		num: -540,
@@ -5163,7 +5182,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriatime: {
 		num: -540,
@@ -5179,7 +5198,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Blue",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriaweather: {
 		num: -540,
@@ -5195,7 +5214,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriayellow: {
 		num: -540,
@@ -5211,7 +5230,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Yellow",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	weeacriainfinity: {
 		num: -540,
@@ -5227,7 +5246,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Gray",
 		evos: ["Wackapaca"],
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 	wackapaca: {
 		num: -541,
@@ -5241,7 +5260,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Red",
 		prevo: "Weeacria",
 		eggGroups: ["Field"],
-		hasSprite: false,
+		hasSprite: true,
 	},
 
 	// BASE GAME
