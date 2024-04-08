@@ -5440,6 +5440,24 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 
 	// Sport
+	drawcard: {
+		num: 709,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Draw Card",
+		priority: 0,
+		pp: 20,
+		flags: {mirror: 1},
+		secondary: null,
+		onHit(self) {
+			self.drawCard();
+		},
+		target: "self",
+		type: "Sport",
+		contestType: "Cool",
+	},
 	fourseamfastball: {
 		num: 709,
 		accuracy: 100,
