@@ -112,6 +112,7 @@ export class Pokemon {
 	ability: ID;
 	abilityState: EffectState;
 
+	card: number;
 	item: ID;
 	itemState: EffectState;
 	lastItem: ID;
@@ -394,6 +395,7 @@ export class Pokemon {
 		this.ability = this.baseAbility;
 		this.abilityState = {id: this.ability};
 
+		this.card = 0;
 		this.item = toID(set.item);
 		this.itemState = {id: this.item};
 		this.lastItem = '';
@@ -1992,6 +1994,19 @@ export class Pokemon {
 
 	clearItem() {
 		return this.setItem('');
+	}
+
+	drawCard() {
+		if (this.card) this.discardCard();
+		this.card = this.battle.field.drawCard();
+		this.battle.add('-card', this, this.card);
+	}
+
+	discardCard() {
+		if (!this.card) return;
+		this.battle.field.discardCard(this.card);
+		this.card = 0;
+		this.battle.add('-card', this, this.card);
 	}
 
 	setAbility(ability: string | Ability, source?: Pokemon | null, isFromFormeChange?: boolean) {

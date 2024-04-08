@@ -60,6 +60,8 @@ export const DefaultText: {[k: string]: DefaultText} = {
 		endFieldEffect: "  ([EFFECT] ended!)",
 
 		changeAbility: "  [POKEMON] acquired [ABILITY]!",
+		card: "  [POKEMON] drew a [CARD].",
+		discardCard: "  [POKEMON] discarded its card.",
 		addItem: "  [POKEMON] obtained one [ITEM].", // Trick, Switcheroo
 		takeItem: "  [POKEMON] stole [SOURCE]'s [ITEM]!", // Thief, Covet, Magician, Pickpocket
 		eatItem: "  ([POKEMON] ate its [ITEM]!)",

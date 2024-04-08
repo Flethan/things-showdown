@@ -4389,7 +4389,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				const gmax = false;
 
 				const movePool = Object.keys(this.dex.data.Learnsets[this.dex.species.get(forme).id]!.learnset!);
-				
+
 				let item = '';
 				const itemPool = Object.keys(this.dex.data.Items);
 				do {

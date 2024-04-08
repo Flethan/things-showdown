@@ -55,6 +55,10 @@ export class Field {
 	pseudoWeather: {[id: string]: EffectState};
 	static SONG_FLAGS = SONG_FLAGS;
 	songFlags: SONG_FLAGS;
+	cards: {
+		deck: number[],
+		discard: number[],
+	};
 
 	constructor(battle: Battle) {
 		this.battle = battle;
@@ -68,6 +72,11 @@ export class Field {
 		this.terrainState = {id: ''};
 		this.pseudoWeather = {};
 		this.songFlags = Field.SONG_FLAGS.NONE;
+		this.cards = {
+			deck: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+			discard: [],
+		};
+		// this.shuffleCards();
 	}
 
 	toJSON(): AnyObject {
@@ -330,6 +339,37 @@ export class Field {
 		let queriedFlags = Field.SONG_FLAGS.NONE;
 		songFlags.forEach(v => (queriedFlags |= Field.SONG_FLAGS[v]));
 		return !!(this.songFlags & queriedFlags);
+	}
+
+	drawCard() {
+		if (!this.cards.deck.length) this.shuffleCards(true);
+		return this.cards.deck.shift() as number;
+	}
+
+	discardCard(card: number) {
+		this.cards.discard.unshift(card);
+	}
+
+	shuffleCards(includeDiscard?: boolean) {
+		if (includeDiscard) {
+			this.cards.deck.push(...this.cards.discard);
+			this.cards.discard = [];
+		}
+		for (let i = this.cards.deck.length - 1; i > 0; i--) {
+			const j = Math.floor(this.battle.random() * (i + 1));
+			const temp = this.cards.deck[i];
+			this.cards.deck[i] = this.cards.deck[j];
+			this.cards.deck[j] = temp;
+		}
+	}
+
+	resetCards() {
+		this.battle.getAllPokemon().forEach(p => p.discardCard());
+		this.cards = {
+			deck: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50],
+			discard: [],
+		};
+		this.shuffleCards();
 	}
 
 	destroy() {
