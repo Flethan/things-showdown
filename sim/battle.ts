@@ -1693,6 +1693,7 @@ export class Battle {
 				this.sides[3]!.foe = this.sides[2]!;
 			}
 		}
+		this.field.shuffleCards();
 
 		for (const side of this.sides) {
 			this.add('teamsize', side.id, side.pokemon.length);

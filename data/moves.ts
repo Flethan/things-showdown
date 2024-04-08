@@ -5458,6 +5458,49 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Sport",
 		contestType: "Cool",
 	},
+	cardsinagain: {
+		num: 709,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		isNonstandard: "Thing",
+		name: "Cards in Again",
+		priority: 0,
+		pp: 20,
+		flags: {mirror: 1},
+		secondary: null,
+		onHit(self) {
+			self.drawCard();
+		},
+		target: "all",
+		type: "Sport",
+		contestType: "Cool",
+		pseudoWeather: 'cardsinagain',
+		onTry() {
+			return !this.field.getPseudoWeather('cardsinagain');
+		},
+		condition: {
+			duration: 2,
+			onFieldStart(target, source) {
+				this.add('-fieldstart', 'move: Cards in Again', '[of] ' + source);
+				this.getAllActive().filter(p => !p.card).forEach(p => p.drawCard());
+			},
+			// onFieldResidual() {
+			// 	const card = this.field.drawCard();
+			// 	this.field.cards.mat.push(card);
+			// 	template = ''
+			// 	const suits = ['Solitaries', 'Multiples', 'Links', 'Shards', 'Aberrations'];
+			// 	const num = ((card - 1) % 10);
+			// 	const suit = suits[Math.floor((card - 1) / 5)];
+			// 	template = template.replace('[CARD]', `${num} of ${suit}`);
+			// 	this.hint('A ')
+			// },
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Cards in Again');
+				this.getAllActive().forEach(p => p.discardCard());
+			},
+		},
+	},
 	fourseamfastball: {
 		num: 709,
 		accuracy: 100,
