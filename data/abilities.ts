@@ -3028,10 +3028,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	escalation: {
 		isNonstandard: "ThingInf",
 		onAfterMega(pokemon) {
-			let i: BoostID;
-			for (i in pokemon.boosts) {
-				if (pokemon.boosts[i] > 0) { pokemon.boosts[i]! *= 2; }
+			const boost: SparseBoostsTable = {};
+			let statPlus: BoostID;
+			for (statPlus in pokemon.boosts) {
+				if (pokemon.boosts[statPlus] > 0) {
+					boost[statPlus] = pokemon.boosts[statPlus];
+				}
 			}
+			this.boost(boost);
 		},
 		name: "Escalation",
 		rating: 3,

@@ -8629,6 +8629,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		onAfterMove(pokemon) {
 			pokemon.clearBoosts();
+			this.add('-clearboost', pokemon);
 		},
 		target: "allAdjacent",
 		type: "Infinity",
