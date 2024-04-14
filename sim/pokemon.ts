@@ -734,7 +734,56 @@ export class Pokemon {
 		this.speed = this.getActionSpeed();
 	}
 
-	calculateStat(statName: StatIDExceptHP, boost: number, modifier?: number) {
+	getBoostRatio(statName: StatIDExceptHP, boost: number) {
+		let boosts: SparseBoostsTable = {};
+		let ratio = 1;
+		const boostName = statName as BoostID;
+		boosts[boostName] = boost;
+		boosts = this.battle.runEvent('ModifyBoost', this, null, null, boosts);
+		boost = boosts[boostName]!;
+		const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
+		if (boost > 6) boost = 6;
+		if (boost < -6) boost = -6;
+		if (boost >= 0) {
+			ratio *= boostTable[boost];
+		} else {
+			ratio /= boostTable[-boost];
+		}
+		return ratio;
+	}
+
+	getBoostDelta(statName: 'accuracy' | 'evasion', boost: number) {
+		let boosts: SparseBoostsTable = {};
+		let delta = 0;
+		const boostName = statName as BoostID;
+		boosts[boostName] = boost;
+		boosts = this.battle.runEvent('ModifyBoost', this, null, null, boosts);
+		boost = boosts[boostName]!;
+		const boostTable = [0, 12, 24, 36, 48, 60, 72];
+		if (boost > 6) boost = 6;
+		if (boost < -6) boost = -6;
+		if (boost >= 0) {
+			delta += boostTable[boost];
+		} else {
+			delta -= boostTable[-boost];
+		}
+		return delta;
+	}
+
+	calculateBoostModify(stat: number, boostStat: BoostID, boost: number) {
+		let ratio = 1;
+		let delta = 0;
+		if (boostStat === 'accuracy' || boostStat === 'evasion') {
+			delta = this.getBoostDelta(boostStat, boost);
+		} else {
+			ratio = this.getBoostRatio(boostStat, boost);
+		}
+		stat *= ratio;
+		stat += delta;
+		return Math.floor(stat);
+	}
+
+	calculateStat(statName: StatIDExceptHP, boost: number, modifier?: number, boostStat?: BoostID) {
 		statName = toID(statName) as StatIDExceptHP;
 		// @ts-ignore - type checking prevents 'hp' from being passed, but we're paranoid
 		if (statName === 'hp') throw new Error("Please read `maxhp` directly");
@@ -752,19 +801,7 @@ export class Pokemon {
 		}
 
 		// stat boosts
-		let boosts: SparseBoostsTable = {};
-		const boostName = statName as BoostID;
-		boosts[boostName] = boost;
-		boosts = this.battle.runEvent('ModifyBoost', this, null, null, boosts);
-		boost = boosts[boostName]!;
-		const boostTable = [1, 1.5, 2, 2.5, 3, 3.5, 4];
-		if (boost > 6) boost = 6;
-		if (boost < -6) boost = -6;
-		if (boost >= 0) {
-			stat = Math.floor(stat * boostTable[boost]);
-		} else {
-			stat = Math.floor(stat / boostTable[-boost]);
-		}
+		stat = this.calculateBoostModify(stat, boostStat || statName, boost);
 
 		// stat modifier
 		return this.battle.modify(stat, (modifier || 1));

@@ -1085,7 +1085,7 @@ export const Items: {[itemid: string]: ItemData} = {
 				return this.chainModify(0.75);
 			}
 		},
-		onAccuracy(accuracy, target, source, move) {
+		onModifyAccuracy(accuracy, target, source, move) {
 			if (move) {
 				return this.chainModify(0.75);
 			}

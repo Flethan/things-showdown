@@ -724,22 +724,14 @@ export class BattleActions {
 					}
 				}
 			} else {
+				if (accuracy !== true && !move.ignoreAccuracy) {
+					accuracy += pokemon.getBoostDelta('accuracy', pokemon.boosts['accuracy']);
+					if (accuracy < 0) accuracy = 0;
+				}
 				accuracy = this.battle.runEvent('ModifyAccuracy', target, pokemon, move, accuracy);
-				if (accuracy !== true) {
-					let boost = 0;
-					if (!move.ignoreAccuracy) {
-						const boosts = this.battle.runEvent('ModifyBoost', pokemon, null, null, {...pokemon.boosts});
-						boost = this.battle.clampIntRange(boosts['accuracy'], -6, 6);
-					}
-					if (!move.ignoreEvasion) {
-						const boosts = this.battle.runEvent('ModifyBoost', target, null, null, {...target.boosts});
-						boost = this.battle.clampIntRange(boost - boosts['evasion'], -6, 6);
-					}
-					if (boost > 0) {
-						accuracy = this.battle.trunc(accuracy * (3 + boost) / 3);
-					} else if (boost < 0) {
-						accuracy = this.battle.trunc(accuracy * 3 / (3 - boost));
-					}
+				if (accuracy !== true && !move.ignoreEvasion) {
+					accuracy -= target.getBoostDelta('evasion', target.boosts['evasion']);
+					if (accuracy < 0) accuracy = 0;
 				}
 			}
 			if (move.alwaysHit || (move.id === 'toxic' && this.battle.gen >= 8 && pokemon.hasType('Poison')) ||
@@ -1703,14 +1695,16 @@ export class BattleActions {
 		let defense;
 
 		if (attackStat === 'hp') {
-			attack = Math.floor(attacker.maxhp / 2) || 1;
+			attack = attacker.maxhp / 2;
+			attack = attacker.calculateBoostModify(attack, offensiveBoost, atkBoosts);
 		} else {
-			attack = attacker.calculateStat(attackStat, atkBoosts);
+			attack = attacker.calculateStat(attackStat, atkBoosts, 1, offensiveBoost);
 		}
 		if (defenseStat === 'hp') {
-			defense = Math.floor(defender.maxhp / 2) || 1;
+			defense = defender.maxhp / 2;
+			defense = defender.calculateBoostModify(defense, defensiveBoost, defBoosts);
 		} else {
-			defense = defender.calculateStat(defenseStat, defBoosts);
+			defense = defender.calculateStat(defenseStat, defBoosts, 1, defensiveBoost);
 		}
 
 		attackStat = (category === 'Physical' ? 'atk' : 'spa');
