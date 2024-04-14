@@ -985,7 +985,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		name: "Flicker",
 		rating: 4,
@@ -1115,7 +1115,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		name: "A Hot One",
 		rating: 4.5,
@@ -1191,7 +1191,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		name: "Sin Ningu\u0301n Apuro",
 		rating: 4.5,
@@ -1568,7 +1568,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		name: "Lass' ihn Fliegen",
 		rating: 4.5,
@@ -3076,7 +3076,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		rating: 5,
 		num: -122,
@@ -3718,7 +3718,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 					return;
 				}
 			}
-			this.field.clearWeather();
+			this.field.clearWeather(true);
 		},
 		rating: 5,
 		num: -122,

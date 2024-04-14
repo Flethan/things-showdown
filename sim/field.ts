@@ -139,12 +139,16 @@ export class Field {
 		return true;
 	}
 
-	clearWeather() {
+	clearWeather(overrides: boolean | null = null) {
 		if (!this.weather) return false;
 
 		// THINGS - respite check
 		for (const pokemon of this.battle.getAllActive()) {
 			if (pokemon.hasAbility('respite')) return false;
+		}
+		// "STRONG WEATHER" check
+		if (this.weatherState.permanent && !overrides) {
+			return false;
 		}
 
 		const prevWeather = this.getWeather();
