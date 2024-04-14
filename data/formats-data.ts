@@ -352,11 +352,11 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	crescitten: {
+	crescittem: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	crescent: {
+	crescemt: {
 		randomBattleMoves: ['nightfall', 'hairycrash', 'stealthstrike', 'sharpslash'],
 		isNonstandard: "Thing",
 		tier: "Thing",
@@ -940,7 +940,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	rock: {
+	arok: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
@@ -1024,7 +1024,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	partyrock: {
+	partyrok: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
@@ -1108,15 +1108,15 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},
-	spooky: {
+	respirit: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	calcium: {
+	calxtack: {
 		isNonstandard: "Thing",
 		tier: "Thing",
 	},
-	thehelveticascenario: {
+	queexit: {
 		isNonstandard: "ThingInf",
 		tier: "Thing",
 	},

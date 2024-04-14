@@ -1796,7 +1796,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			timebomb: ["8L60"],
 		},
 	},
-	crescitten: {
+	crescittem: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -1815,7 +1815,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			cuddle: ["8L10"],
 		},
 	},
-	crescent: {
+	crescemt: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -4785,7 +4785,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infinitystorm: ["8T"],
 		},
 	},
-	rock: {
+	arok: {
 		learnset: {
 			hit: ["8L1"],
 			hide: ["8T"],
@@ -5383,7 +5383,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			infrastructure: ["8L35"],
 		},
 	},
-	spooky: {
+	respirit: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],
@@ -5414,7 +5414,7 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			nage: ["8T"],
 		},
 	},
-	calcium: {
+	calxtack: {
 		learnset: {
 			emanation: ["8M"],
 			deposition: ["8M"],

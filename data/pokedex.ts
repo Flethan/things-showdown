@@ -1193,9 +1193,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		isPatron: true,
 	},
-	crescitten: {
+	crescittem: {
 		num: -376,
-		name: "Crescitten",
+		name: "Crescittem",
 		types: ["Night", "Hair"],
 		genderRatio: {M: 0.1, F: 0.9},
 		baseStats: {hp: 40, atk: 40, def: 55, spa: 40, spd: 50, spe: 60},
@@ -1203,13 +1203,13 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.3,
 		weightkg: 25,
 		color: "Black",
-		evos: ["Crescent"],
+		evos: ["Crescemt"],
 		eggGroups: ["Monster"],
 		hasSprite: true,
 	},
-	crescent: {
+	crescemt: {
 		num: -377,
-		name: "Crescent",
+		name: "Crescemt",
 		types: ["Night", "Hair"],
 		genderRatio: {M: 0.1, F: 0.9},
 		baseStats: {hp: 60, atk: 80, def: 65, spa: 50, spd: 70, spe: 107},
@@ -1217,7 +1217,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.3,
 		weightkg: 25,
 		color: "Black",
-		prevo: "Crescitten",
+		prevo: "Crescittem",
 		eggGroups: ["Monster"],
 		hasSprite: true,
 	},
@@ -3583,9 +3583,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		addedType: "Infinity",
 		hasSprite: true,
 	},
-	rock: {
+	arok: {
 		num: -484,
-		name: "Rock",
+		name: "Arok",
 		types: ["Dirt"],
 		gender: "N",
 		baseStats: {hp: 50, atk: 50, def: 50, spa: 1, spd: 50, spe: 1},
@@ -3593,7 +3593,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.1,
 		weightkg: 10,
 		color: "Gray",
-		evos: ["Party Rock"],
+		evos: ["Partyrok"],
 		eggGroups: ["Undiscovered"],
 		hasSprite: true,
 	},
@@ -3899,9 +3899,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 		hasSprite: false,
 	},
-	partyrock: {
+	partyrok: {
 		num: -504,
-		name: "Party Rock",
+		name: "Partyrok",
 		symbolForme: "Element",
 		types: ["Dirt"],
 		gender: "N",
@@ -3911,7 +3911,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 10,
 		color: "Gray",
 		eggGroups: ["Undiscovered"],
-		prevo: "Rock",
+		prevo: "Arok",
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		elementTypes: ["Sport"],
@@ -4289,9 +4289,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		hasSprite: true,
 	},
-	spooky: {
+	respirit: {
 		num: -520,
-		name: "Spooky",
+		name: "Respirit",
 		types: ["No", "Time"],
 		genderRatio: {M: 0.5, F: 0.5},
 		baseStats: {hp: 44, atk: 14, def: 54, spa: 84, spd: 66, spe: 130},
@@ -4302,9 +4302,9 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Amorphous"],
 		hasSprite: true,
 	},
-	calcium: {
+	calxtack: {
 		num: -521,
-		name: "Calcium",
+		name: "Calxtack",
 		types: ["Science"],
 		gender: "N",
 		baseStats: {hp: 100, atk: 25, def: 100, spa: 25, spd: 100, spe: 50},
@@ -4313,12 +4313,12 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 1,
 		color: "White",
 		eggGroups: ["Mineral"],
-		evos: ["The Helvetica Scenario"],
+		evos: ["Queexit"],
 		hasSprite: true,
 	},
-	thehelveticascenario: {
+	queexit: {
 		num: -522,
-		name: "The Helvetica Scenario",
+		name: "Queexit",
 		types: ["???"],
 		symbolForme: "Null",
 		gender: "N",
@@ -4327,7 +4327,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		heightm: 0.2,
 		weightkg: 0.01,
 		color: "White",
-		prevo: "Calcium",
+		prevo: "Calxtack",
 		evoType: "symbol",
 		evoCondition: "Symbol",
 		eggGroups: ["Mineral"],
