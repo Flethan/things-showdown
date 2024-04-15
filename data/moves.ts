@@ -1279,8 +1279,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	vishattack: {
 		num: -277,
-		accuracy: 65,
-		basePower: 100,
+		accuracy: 100,
+		basePower: 0,
 		category: "Status",
 		isNonstandard: "ThingInf",
 		name: "Vish Attack",
