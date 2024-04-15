@@ -1075,9 +1075,12 @@ export const Items: {[itemid: string]: ItemData} = {
 		onBeforeMovePriority: 1,
 		onBeforeMove(source, target, move) {
 			if (move.category === 'Status') return;
-			if (['normal', 'randomNormal', 'any'].includes(move.target)) {
+			if (['normal', 'randomNormal'].includes(move.target)) {
 				move.target = 'allAdjacentFoes';
-			 }
+			}
+			if (['any'].includes(move.target)) {
+				move.target = 'foes';
+			}
 		},
 		onBasePowerPriority: 15,
 		onBasePower(basePower, user, target, move) {
@@ -1327,6 +1330,9 @@ export const Items: {[itemid: string]: ItemData} = {
 					}
 				}
 			}
+		},
+		onAfterMega(pokemon) {
+			pokemon.useItem();
 		},
 		// implemented in symbol evo function
 		num: -291,

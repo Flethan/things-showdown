@@ -2731,7 +2731,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	waterbringer: {
 		isNonstandard: "ThingInf",
-		onAfterMega(source) {
+		onStart(source) {
 			this.field.setTerrain('sudscape');
 			this.field.setWeather('windy');
 		},
@@ -3303,6 +3303,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				this.field.setWeather("hot");
 				for (const foe of target.foes()) {
 					if (!foe?.isActive || foe === target) continue;
+					// fix - check for foe hp? or is fainted?
 					foe.addVolatile('perishsong');
 					foe.volatiles['perishsong'].duration = 6;
 				}
@@ -3894,9 +3895,27 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	undead: {
 		isNonstandard: "Thing",
-		affectsFainted: true,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.add("-ability", target, 'Undead');
+
+				let finished_pokemon = target.set;
+
+				finished_pokemon.ability = 'No Ability';
+
+				target.side.team.push(finished_pokemon);
+				const newPokemon = new Pokemon(finished_pokemon, target.side);
+				newPokemon.hp = newPokemon.maxhp/2
+				newPokemon.position = target.side.pokemon.length;
+				newPokemon.canSymbolEvo = null;
+				target.side.pokemon.push(newPokemon);
+				target.side.pokemonLeft++;
+			}
+		},
+		/*affectsFainted: true,
 		onFaint() {
 			this.effectState.faintedThisTurn = true;
+			
 		},
 		onFaintedResidualOrder: 90,
 		onFaintedResidual(pokemon) {
@@ -3914,7 +3933,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			pokemon.hp = 1;
 			pokemon.heal(pokemon.baseMaxhp / 2);
 			this.add('-heal', pokemon, pokemon.getHealth, '[from] ability: Undead');
-		},
+		},*/
 		name: "Undead",
 		rating: 2,
 		num: 143,
@@ -4809,6 +4828,16 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Them's the rules",
 		rating: 2,
 		num: -111,
+	},
+	abyssalplain: {
+		isNonstandard: "ThingInf",
+		onAfterMega(source) {
+			this.field.setWeather('underwater');
+			this.field.addPseudoWeather('hadalzone');
+		},
+		name: "Abyssal Plain",
+		rating: 1.5,
+		num: 2112,
 	},
 
 
