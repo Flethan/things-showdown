@@ -18,7 +18,7 @@ import {BasicEffect, toID} from './dex-data';
  * randomNormal - The move targets an adjacent foe at random.
  * scripted - The move targets the foe that damaged the user.
  * self - The move affects the user of the move.
- * 
+ *
  * THINGS
  * foes - all foes (including distant in triples)
  */

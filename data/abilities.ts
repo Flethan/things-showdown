@@ -3899,23 +3899,23 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (!target.hp) {
 				this.add("-ability", target, 'Undead');
 
-				let finished_pokemon = target.set;
+				const finished_pokemon = target.set;
 
 				finished_pokemon.ability = 'No Ability';
 
 				target.side.team.push(finished_pokemon);
 				const newPokemon = new Pokemon(finished_pokemon, target.side);
-				newPokemon.hp = newPokemon.maxhp/2
+				newPokemon.hp = newPokemon.maxhp / 2;
 				newPokemon.position = target.side.pokemon.length;
 				newPokemon.canSymbolEvo = null;
 				target.side.pokemon.push(newPokemon);
 				target.side.pokemonLeft++;
 			}
 		},
-		/*affectsFainted: true,
+		/* affectsFainted: true,
 		onFaint() {
 			this.effectState.faintedThisTurn = true;
-			
+
 		},
 		onFaintedResidualOrder: 90,
 		onFaintedResidual(pokemon) {
