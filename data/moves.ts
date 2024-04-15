@@ -7695,18 +7695,18 @@ export const Moves: {[moveid: string]: MoveData} = {
 		flags: {protect: 1, mirror: 1, bullet: 1},
 		onModifyMove(move, pokemon) {
 			const stats = Object.entries(pokemon.boosts)
-				.filter(([id, val]) => (val > 0 && id !== 'accuracy' && id !== 'evasion'))
-				.map(([id, val]) => id) as StatIDExceptHP[];
-			const randomStat: StatIDExceptHP | undefined = stats.length ? this.sample(stats) : undefined;
+				.filter(([id, val]) => (val > 0))
+				.map(([id, val]) => id as BoostID);
+			const randomStat: BoostID | undefined = stats.length ? this.sample(stats) : undefined;
 			if (!randomStat) return;
-			move.offensiveStat = randomStat;
+			move.offensiveBoost = randomStat;
 		},
 		onBasePower(basePower, source, target, move) {
-			if (move.offensiveStat) this.chainModify(2);
+			if (move.offensiveBoost) this.chainModify(2);
 		},
 		onAfterMoveSecondary(target, source, move) {
-			const boost: StatID | undefined = move.offensiveStat;
-			if (!boost || boost === 'hp' || source.boosts[boost] <= -6) return;
+			const boost: BoostID | undefined = move.offensiveBoost;
+			if (!boost || source.boosts[boost] <= -6) return;
 			const boosts: SparseBoostsTable = {};
 			boosts[boost] = -1;
 			this.boost(boosts, source);

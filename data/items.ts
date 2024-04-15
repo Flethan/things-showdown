@@ -1203,6 +1203,8 @@ export const Items: {[itemid: string]: ItemData} = {
 
 				action.move = this.dex.moves.get(newMove.move);
 				action.moveid = newMove.id;
+				const target = this.getRandomTarget(pokemon, action.move);
+				action.targetLoc = target ? pokemon.getLocOf(target) : pokemon.getLocOf(pokemon);
 				this.queue.changeAction(pokemon, action);
 			}
 		},
