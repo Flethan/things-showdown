@@ -1007,6 +1007,9 @@ export class Pokemon {
 		case 'allies':
 			targets = this.alliesAndSelf();
 			break;
+		case 'foes':
+			targets = this.foes();
+			break;
 		default:
 			const selectedTarget = target;
 			if (!target || (target.fainted && !target.isAlly(this)) && this.battle.gameType !== 'freeforall') {

@@ -1236,6 +1236,7 @@ function runMovesearch(target: string, cmd: string, canAll: boolean, message: st
 		randomadjacent: 'randomNormal',
 		scripted: 'scripted',
 		user: 'self',
+		foes: 'foes',
 	};
 	const allTypes: {[k: string]: string} = Object.create(null);
 	for (const type of mod.types.all()) {

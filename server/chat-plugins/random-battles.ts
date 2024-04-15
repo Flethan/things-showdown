@@ -361,6 +361,7 @@ function generateSSBMoveInfo(sigMove: Move, dex: ModdedDex) {
 			scripted: "Chosen Automatically",
 			randomNormal: "Random Adjacent Opposing Pok\u00e9mon",
 			allies: "User and Allies",
+			foes: "All Opponents",
 		};
 		details["Target"] = targetTypes[sigMove.target] || "Unknown";
 		if (sigMove.isNonstandard === 'Unobtainable') {
