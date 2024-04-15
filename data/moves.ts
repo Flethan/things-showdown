@@ -4322,7 +4322,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			}
 		},
 		secondary: null,
-		target: "normal",
+		target: "any",
 		type: "Night",
 		zMove: {boost: {spa: 1}},
 		contestType: "Clever",
