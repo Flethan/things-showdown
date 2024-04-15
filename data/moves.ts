@@ -833,7 +833,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyMove(move, pokemon) {
 				// redirects all spread moves
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
+				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes' && move.target !== 'foes') {
 					return;
 				}
 				move.target = 'randomNormal';
