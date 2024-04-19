@@ -833,7 +833,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onModifyMove(move, pokemon) {
 				// redirects all spread moves
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes') {
+				if (move?.target !== 'allAdjacent' && move.target !== 'allAdjacentFoes' && move.target !== 'foes') {
 					return;
 				}
 				move.target = 'randomNormal';
@@ -1279,8 +1279,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 	},
 	vishattack: {
 		num: -277,
-		accuracy: 65,
-		basePower: 100,
+		accuracy: 100,
+		basePower: 0,
 		category: "Status",
 		isNonstandard: "ThingInf",
 		name: "Vish Attack",

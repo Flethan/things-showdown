@@ -980,7 +980,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;
-				if (target.hasAbility('flicker')) {
+				if (target.hasAbility('flicker') || target.hasAbility('infinitenothing')) {
 					this.field.weatherState.source = target;
 					return;
 				}
@@ -4839,7 +4839,56 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		rating: 1.5,
 		num: 2112,
 	},
+	infinitenothing: {
+		isNonstandard: "Thing",
+		onStart(source) {
+			if (this.field.getWeather().id === 'refractingquintessence' && this.field.weatherState.duration !== 0) {
+				this.field.weatherState.duration = 0;
+				this.field.weatherState.source = source;
+				this.field.weatherState.permanent = true;
+			} else {
+				this.field.setWeather('refractingquintessence', null, null, true);
+				this.field.weatherState.duration = 0;
+			}
 
+			if (this.field.getTerrain().id === 'emptyspace' && this.field.terrainState.duration !== 0) {
+				this.field.terrainState.duration = 0;
+				this.field.terrainState.source = source;
+				this.field.terrainState.permanent = true;
+			} else {
+				this.field.setTerrain('emptyspace', null, null, true);
+				this.field.terrainState.duration = 0;
+			}
+			// Infinite duration done in conditions.js#hot
+		},
+		onEnd(pokemon) {
+			// this is not right yet
+			
+			if (this.field.weatherState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('infinitenothing') || target.hasAbility('flicker')) {
+					this.field.weatherState.source = target;
+					return;
+				}
+			}
+			this.field.clearWeather(true);
+
+			
+			if (this.field.terrainState.source !== pokemon) return;
+			for (const target of this.getAllActive()) {
+				if (target === pokemon) continue;
+				if (target.hasAbility('infinitenothing')) {
+					this.field.terrainState.source = target;
+					return;
+				}
+			}
+			this.field.clearTerrain();
+		},
+		name: "A Hot One",
+		rating: 4.5,
+		num: 190,
+	},
 
 	// BASE GAME
 	noability: {

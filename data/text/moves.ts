@@ -10,6 +10,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Inherits its type from the user's primary type. Changes type if the user changes its type.",
 		shortDesc: "Same type as user's primary type.",
 	},
+	emptyspace: {
+		name: "Empty Space",
+		desc: "For 5 turns, the landscape becomes Empty Space. While in effect, added types and element types are ignored, and Mu moves fail. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Empty Space, or if the user has any types.",
+		shortDesc: "For 5 turns, the ground becomes {}.",
+	},
 	// function moves
 	shoot: {
 		name: "Shoot",
@@ -48,7 +53,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	beemovee: {
 		name: "Bee Move E",
 		desc: "Has a 40% chance to lower the user's Special Attack by 1 stage.",
-		shortDesc: "40% chance to lower the user's Sp. Atk by 1.",
+		shortDesc: "40% to lower user SpAtk by 1. +1 priority.",
 	},
 	styletslurp: {
 		name: "Stylet Slurp",
@@ -57,12 +62,12 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	nuisancepest: {
 		name: "Nuisance Pest",
-		desc: "If this move is successful, the effects of Storm Cell, Dust Cloud, Wet Floor, Beam Field, and Hot Coals end for both sides.",
+		desc: "If this move is successful, the effects of side conditions (Egg Scatter, Dust Cloud, Auto-Turret, Infrastructure, Wet Floor, Void Trap, Publish, Caltrops, Hot Coals, Permafrost, Storm Cell, Lightning Storm, and Beam Field) end for both sides.",
 		shortDesc: "Clears Side Conditions on both sides.",
 	},
 	swarm: {
 		name: "Swarm",
-		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members. If any other Things also chose to use Swarm this turn and have not moved yet, those Things take their turn immediately after the user. When Swarm is used in this way, its base power is doubled.",
 		shortDesc: "User switches out after damaging the target.",
 	},
 	chitinbeam: {
@@ -72,8 +77,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	scuttle: {
 		name: "Scuttle",
-		desc: "Raises the user's Speed and evasiveness by 1 stage.",
-		shortDesc: "Raises the user's Speed and evasiveness by 1.",
+		desc: "Raises the user's Speed and Dodge by 1 stage.",
+		shortDesc: "Raises the user's Speed and Dodge by 1.",
 	},
 	ecdyse: {
 		name: "Ecdyse",
@@ -106,7 +111,7 @@ export const MovesText: {[k: string]: MoveText} = {
 		shortDesc: "20% chance to knock the target(s) prone.",
 	},
 	dirtypunch: {
-		name: "Landslide",
+		name: "Dirty Punch",
 		desc: "Has a 10% chance to blind the target.",
 		shortDesc: "10% chance to blind the target.",
 	},
@@ -137,7 +142,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	primordialsmoke: {
 		name: "Primordial Smoke",
-		desc: "Raises the user's Attack, Special Attack, Defense, Special Defense, and Speed by 2 stages in exchange for the user losing 1/2 of its maximum HP, rounded down. Fails if the user would faint. If there are other allied Things on the field, stat boosts are shared between them. In double battles, both active Things gain 1 stage of boosts. In triple battles, the user does not get the boosts, but the allies do.",
+		desc: "Raises the user's Attack, Special Attack, Defense, Special Defense, and Speed by 2 stages in exchange for the user losing 1/2 of its maximum HP, rounded down. Fails if the user would faint. If there are other allied Things on the field, stat boosts are shared between them. In double battles, both active Things gain 1 stage of boosts. In triple battles, the user does not get the boosts, but the allies do. If this move is successful, the user must recharge on the following turn and cannot select a move.",
 		shortDesc: "User loses 50% max HP. Sharply raises stats, split among allies.",
 
 		boost: "  [POKEMON] cut its own HP and raised its stats!",
@@ -183,7 +188,7 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	closein: {
 		name: "Close In",
-		desc: "Fails unless the user is a Far type, or is distanced. If this move is successful, the user's Far type becomes typeless as long as it remains active. Any other Things targeting the user this turn flinch.",
+		desc: "Fails unless the user is a Far type, or is distanced. If this move is successful, the user loses it's distanced status, or the user's Far type becomes typeless as long as it remains active. Any other Things targeting the user this turn flinch.",
 		shortDesc: "Foes targeting user flinch; must be Far or distanced.",
 
 		typeChange: "  [POKEMON] sprung forward!",
@@ -198,15 +203,37 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Distances the target.",
 		shortDesc: "Distances the target.",
 	},
+	ohio: {
+		name: "Ohio",
+		desc: "Deals damage to the target equal to the target's maximum HP.",
+		shortDesc: "OHKOs the target.",
+	},
+	updog: {
+		name: "Updog",
+		desc: "Gives the target Updog, making it gain Dodge at the end of every turn, and then distances the target if it has 3 or more Dodge stages, or causes the target to faint if it has 6 Dodge stages. Fails if the target already has Updog. The effect ends when the target is no longer active.",
+		shortDesc: "Gives target Updog.",
+
+		start: "  [POKEMON] smells like Updog!",
+	},
+	arrowofupdog: {
+		name: "Arrow of Updog",
+		desc: "Gives the target Updog, making it gain Dodge at the end of every turn, and then distances the target if it has 3 or more Dodge stages, or causes the target to faint if it has 6 Dodge stages. The effect ends when the target is no longer active.",
+		shortDesc: "Gives target Updog.",
+	},
+	spatialexpansion: {
+		name: "Spatial Expansion",
+		desc: "For 5 turns, the landscape becomes Spatial Expansion. During the effect, the damage of attacks that are not Far-type is multiplied by 0.8, and moves that would target multiple opponents instead target a random adjacent opponent. Lasts for 10 turns if the user is holding Landscaping Permit. Fails if the current landscape is Spatial Expansion.",
+		shortDesc: "For 5 turns, the ground becomes incredibly fertile.",
+	},
 	// fish
 	fishslap: {
 		name: "Fish Slap",
-		desc: "Has a 10% chance to make the target flinch.",
-		shortDesc: "10% chance to make the target flinch.",
+		desc: "Has a 50% chance to make the target flinch.",
+		shortDesc: "50% chance to make the target flinch.",
 	},
 	glidingcharge: {
 		name: "Gliding Charge",
-		desc: "If the current environment is Underwater, , this move has its priority increased by 1.",
+		desc: "If the current environment is Underwater, this move has its priority increased by 1.",
 		shortDesc: "If environment Underwater, +1 priority.",
 	},
 	fishbite: {
@@ -230,8 +257,8 @@ export const MovesText: {[k: string]: MoveText} = {
 	},
 	depthvanish: {
 		name: "Depth Vanish",
-		desc: "Raises the user's accuracy by 2 stages and critical hit ratio by 3. Banishes the user for 2 turns.",
-		shortDesc: "Banishes user, boosts accuracy up 2, crit max",
+		desc: "Raises the user's Precision by 2 stages and critical hit ratio by 3. Banishes the user for 2 turns.",
+		shortDesc: "Banishes user, boosts Precision up 2, crit max",
 	},
 	hadalzone: {
 		name: "Hadal Zone",
@@ -256,24 +283,39 @@ export const MovesText: {[k: string]: MoveText} = {
 	greenpunch: {
 		name: "Green Punch",
 		desc: "Has a 10% chance to add the Green type to the target.",
-		shortDesc: "10% chance to add Green the target's type(s).",
+		shortDesc: "10% chance to add Green to target's type(s).",
 	},
 	greenbite: {
 		name: "Green Bite",
 		desc: "Has a 30% chance to make the target flinch.",
 		shortDesc: "30% chance to make the target flinch.",
 	},
+	stickattack: {
+		name: "Stick Attack",
+		desc: "Has a 50% chance to replace the target's item with Plain Stick.",
+		shortDesc: "50% to make target hold Plain Stick.",
+	},
 	chartreusebeam: {
 		name: "Chartreuse Beam",
 		desc: "This move combines Yellow in its type effectiveness against the target.",
 		shortDesc: "Combines Yellow in its type effectiveness.",
 	},
+	greenboom: {
+		name: "Green Boom",
+		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
+		shortDesc: "User cannot move next turn.",
+	},
 	deciduousblast: {
 		name: "Deciduous Blast",
-		desc: "Fails unless the user is a Green type. If this move is successful, the user's Green type becomes typeless as long as it remains active.",
+		desc: "Fails unless the user is a Green type. If this move is successful, the user's Green type becomes typeless as long as it remains active. If the user has multiple Green typings, only one is lost.",
 		shortDesc: "User's Green type becomes typeless; must be Green.",
 
 		typeChange: "  [POKEMON] abscised its green!",
+	},
+	greenbeam: {
+		name: "Green Beam",
+		desc: "Has a 10% chance to add the Green type to the user.",
+		shortDesc: "10% chance to add Green to user's type(s).",
 	},
 	greenify: {
 		name: "Greenify",
@@ -320,6 +362,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		name: "Hit",
 		shortDesc: "No additional effect.",
 	},
+	headout: {
+		name: "Head Out",
+		desc: "If this move is successful and the user has not fainted, the user switches out even if it is trapped and is replaced immediately by a selected party member. The user does not switch out if there are no unfainted party members.",
+		shortDesc: "User switches out after damaging the target.",
+	},
 	hullabaloo: {
 		name: "Hostile",
 		desc: "Has a 10% chance to lower the user's Special Defense by 1 stage.",
@@ -330,15 +377,24 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "If this move is successful, the user must recharge on the following turn and cannot select a move.",
 		shortDesc: "User cannot move next turn.",
 	},
+	hello: {
+		name: "Hello",
+		desc: "Starts a conversation with target, making it and the user have their moves fail for 1-3 subsequent turns. Fails if the target has already had a conversation.",
+		shortDesc: "Target/user can't move 1-3 turns.",
+
+		start: "  [POKEMON] joined the conversation!",
+		end: "  [POKEMON]'s conversation ended!",
+		cant: "[POKEMON] is deep in conversation!",
+	},
 	hbond: {
 		name: "H-Bond",
-		desc: "Lowers the target's Defense by 1 stage and evasiveness by 2 stages. Prevents the user and the target from switching out. Fails if the user is already H-Bonded.",
-		shortDesc: "Lowers foe Def 1 and evasion 2. Traps user & foe.",
+		desc: "Lowers the target's Defense by 1 stage and Dodge by 2 stages. Prevents the user and the target from switching out. Fails if the user is already H-Bonded.",
+		shortDesc: "Lowers foe Def 1 and Dodge 2. Traps user & foe.",
 	},
 	hide: {
 		name: "Hide",
-		desc: "Raises the user's evasiveness by 1 stage.",
-		shortDesc: "Raises the user's evasiveness by 1.",
+		desc: "Raises the user's Dodge by 1 stage.",
+		shortDesc: "Raises the user's Dodge by 1.",
 	},
 	hsearch: {
 		name: "H Search",
