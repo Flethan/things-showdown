@@ -522,7 +522,7 @@ export class QueryProcessManager<T = string, U = string> extends ProcessManager<
 	 */
 	constructor(
 		module: NodeJS.Module, query: (input: T) => U | Promise<U>,
-		timeout = 15 * 60 * 1000, debugCallback?: (message: string) => any
+		timeout = 150 * 60 * 1000, debugCallback?: (message: string) => any
 	) {
 		super(module);
 		this._query = query;
