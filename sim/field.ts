@@ -264,7 +264,7 @@ export class Field {
 		status = this.battle.dex.conditions.get(status);
 
 		// THINGS - respite check
-		for (const pokemon of this.battle.getAllActive()) {
+		for (const pokemon of this.battle?.getAllActive()) {
 			if (pokemon.hasAbility('respite')) return false;
 		}
 
