@@ -3224,7 +3224,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		secondary: null,
 		target: "all",
-		type: "Fish",
+		type: "Liquid",
 		zMove: {boost: {accuracy: 1}},
 		contestType: "Clever",
 	},
