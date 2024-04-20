@@ -3276,6 +3276,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		onHit(target) {
 			target.cureStatus();
 			target.clearBoosts();
+			this.add('-clearboost', target);
 		},
 		secondary: null,
 		target: "normal",
