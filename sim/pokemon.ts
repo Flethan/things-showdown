@@ -128,7 +128,6 @@ export class Pokemon {
 
 	// THINGS
 	undead: boolean | null;
-	studied: boolean | null;
 
 	maxhp: number;
 	/** This is the max HP before Dynamaxing; it's updated for Power Construct etc */
@@ -411,7 +410,6 @@ export class Pokemon {
 
 		// THINGS
 		this.undead = false;
-		this.studied = false;
 
 		this.fainted = false;
 		this.faintQueued = false;

@@ -191,7 +191,9 @@ export class BattleActions {
 		}
 
 		// THINGS
-		if (pokemon.studied) pokemon.addVolatile('study');
+		this.battle.sides.filter(anySide => anySide !== side).forEach(foeSide => {
+			if (foeSide.studied.includes(pokemon.species.id)) pokemon.addVolatile('study');
+		});
 
 		return true;
 	}

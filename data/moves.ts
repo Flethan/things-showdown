@@ -5006,11 +5006,17 @@ export const Moves: {[moveid: string]: MoveData} = {
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
+		onHit(target, source, move) {
+			const species = target.species;
+			source.side.studied.push(species.id);
+			this.getAllActive().filter(p => p.side !== source.side).forEach(p => {
+				if (p.species === species) p.addVolatile('study');
+			});
+		},
 		volatileStatus: 'study',
 		condition: {
 			onStart(pokemon) {
 				this.add('-start', pokemon, 'Study');
-				pokemon.studied = true;
 			},
 			onEffectivenessPriority: -2,
 			onEffectiveness(typeMod, target, type, move) {

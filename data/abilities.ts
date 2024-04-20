@@ -4863,7 +4863,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onEnd(pokemon) {
 			// this is not right yet
-			
+
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;
@@ -4874,7 +4874,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			}
 			this.field.clearWeather(true);
 
-			
 			if (this.field.terrainState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;

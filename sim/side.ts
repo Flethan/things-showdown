@@ -72,6 +72,7 @@ export class Side {
 	team: PokemonSet[];
 	pokemon: Pokemon[];
 	active: Pokemon[];
+	studied: ID[];
 
 	pokemonLeft: number;
 	zMoveUsed: boolean;
@@ -131,6 +132,8 @@ export class Side {
 		default:
 			this.active = [null!];
 		}
+
+		this.studied = [];
 
 		this.pokemonLeft = this.pokemon.length;
 		this.faintedLastTurn = null;
