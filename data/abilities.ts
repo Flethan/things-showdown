@@ -4831,9 +4831,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	abyssalplain: {
 		isNonstandard: "ThingInf",
-		onAfterMega(source) {
+		onStart(source) {
 			this.field.setWeather('underwater');
-			this.field.addPseudoWeather('hadalzone');
+			this.field.addPseudoWeather('hadalzone', source);
 		},
 		name: "Abyssal Plain",
 		rating: 1.5,
