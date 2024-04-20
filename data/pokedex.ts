@@ -5293,6 +5293,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Undiscovered"],
 		isPatron: true,
 	},
+	bandarite: {
+		num: -544,
+		name: "Bandarite",
+		types: ["Night"],
+		gender: "N",
+		baseStats: {hp: 90, atk: 90, def: 90, spa: 90, spd: 90, spe: 150},
+		abilities: {0: "Mind Thief"},
+		heightm: 1,
+		weightkg: 30,
+		color: "Black",
+		eggGroups: ["Undiscovered"],
+		isPatron: true,
+	},
 
 	// BASE GAME
 	bulbasaur: {
