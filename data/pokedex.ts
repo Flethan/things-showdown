@@ -5280,6 +5280,19 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		evoCondition: "Symbol",
 		muMove: "Vish Attack",
 	},
+	medicedes: {
+		num: -543,
+		name: "Medicedes",
+		types: ["???"],
+		gender: "N",
+		baseStats: {hp: 60, atk: 55, def: 126, spa: 55, spd: 126, spe: 50},
+		abilities: {0: "Infinite Nothing"},
+		heightm: 50,
+		weightkg: 500,
+		color: "White",
+		eggGroups: ["Undiscovered"],
+		isPatron: true,
+	},
 
 	// BASE GAME
 	bulbasaur: {

@@ -4863,28 +4863,29 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onEnd(pokemon) {
 			// this is not right yet
-
+			let newWeathSource = false;
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;
 				if (target.hasAbility('infinitenothing') || target.hasAbility('flicker')) {
 					this.field.weatherState.source = target;
-					return;
+					newWeathSource = true;
 				}
 			}
-			this.field.clearWeather(true);
+			if (!newWeathSource) this.field.clearWeather(true);
 
+			let newTerrSource = false;
 			if (this.field.terrainState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
 				if (target === pokemon) continue;
 				if (target.hasAbility('infinitenothing')) {
 					this.field.terrainState.source = target;
-					return;
+					newTerrSource = true;
 				}
 			}
-			this.field.clearTerrain();
+			if (!newTerrSource) this.field.clearTerrain();
 		},
-		name: "A Hot One",
+		name: "Infinite Nothing",
 		rating: 4.5,
 		num: 190,
 	},
