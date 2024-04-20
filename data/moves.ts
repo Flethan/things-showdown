@@ -1280,8 +1280,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 	vishattack: {
 		num: -277,
 		accuracy: 100,
-		basePower: 0,
-		category: "Status",
+		basePower: 50,
+		category: "Physical",
 		isNonstandard: "ThingInf",
 		name: "Vish Attack",
 		pp: 3,
@@ -8056,8 +8056,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 1,
-			onModifyAtkPriority: -101,
-			onModifyAtk(atk, pokemon, defender, move) {
+			onModifySpAPriority: -101,
+			onModifySpA(atk, pokemon, defender, move) {
 				if (move.id === 'lightningstrike') {
 					return 200;
 				}
@@ -8085,8 +8085,8 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Lightning Storm');
 				this.effectState.source = source;
 			},
-			onModifyAtkPriority: -101,
-			onModifyAtk(atk, pokemon, defender, move) {
+			onModifySpAPriority: -101,
+			onModifySpA(atk, pokemon, defender, move) {
 				if (move.id === 'lightningstrike') {
 					return 200;
 				}
