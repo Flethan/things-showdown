@@ -113,7 +113,7 @@ export interface MoveEventMethods {
 	onBasePower?: CommonHandlers['ModifierSourceMove'];
 
 	onEffectiveness?: (
-		this: Battle, typeMod: number, target: Pokemon | null, type: string, move: ActiveMove
+		this: Battle, typeMod: number, target: Pokemon | null, type: TypeName, move: ActiveMove
 	) => number | void;
 	onHit?: CommonHandlers['ResultMove'];
 	onHitField?: CommonHandlers['ResultMove'];
@@ -145,7 +145,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	accuracy: true | number;
 	pp: number;
 	category: 'Physical' | 'Special' | 'Status';
-	type: string;
+	type: TypeName;
 	priority: number;
 	target: MoveTarget;
 	flags: AnyObject;
@@ -182,7 +182,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 
 	// Hit effects
 	// -----------
-	ohko?: boolean | string;
+	ohko?: boolean | TypeName;
 	thawsTarget?: boolean;
 	heal?: number[] | null;
 	forceSwitch?: boolean;
@@ -341,7 +341,7 @@ type MoveCategory = 'Physical' | 'Special' | 'Status';
 export class DataMove extends BasicEffect implements Readonly<BasicEffect & MoveData> {
 	declare readonly effectType: 'Move';
 	/** Move type. */
-	readonly type: string;
+	readonly type: TypeName;
 	/** Move target. */
 	readonly target: MoveTarget;
 	/** Move base power. */
@@ -353,7 +353,7 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 	/** Will this move always or never be a critical hit? */
 	declare readonly willCrit?: boolean;
 	/** Can this move OHKO foes? */
-	declare readonly ohko?: boolean | string;
+	declare readonly ohko?: boolean | TypeName;
 	/**
 	 * Base move type. This is the move type as specified by the games,
 	 * tracked because it often differs from the real move type.
@@ -464,7 +464,7 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 
 		this.fullname = `move: ${this.name}`;
 		this.effectType = 'Move';
-		this.type = Utils.getString(data.type);
+		this.type = Utils.getString(data.type) as TypeName;
 		this.target = data.target;
 		this.basePower = Number(data.basePower!);
 		this.accuracy = data.accuracy!;

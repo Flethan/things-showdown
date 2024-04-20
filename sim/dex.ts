@@ -73,6 +73,8 @@ interface DexTable<T> {
 	[key: string]: T;
 }
 
+type TypeTable<T> = DexTable<T> & { [key in TypeName]: T };
+
 interface DexTableData {
 	Abilities: DexTable<AbilityData>;
 	Aliases: {[id: string]: string};
@@ -85,7 +87,7 @@ interface DexTableData {
 	Pokedex: DexTable<SpeciesData>;
 	Scripts: DexTable<AnyObject>;
 	Conditions: DexTable<EffectData>;
-	TypeChart: DexTable<TypeData>;
+	TypeChart: TypeTable<TypeData>;
 }
 interface TextTableData {
 	Abilities: DexTable<AbilityText>;
@@ -228,12 +230,12 @@ export class ModdedDex {
 	 * Also checks immunity to some statuses.
 	 */
 	getImmunity(
-		source: {type: string} | string,
-		target: {getTypes: () => string[]} | {types: string[]} | string[] | string
+		source: {type: TypeName} | TypeName | string,
+		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | string[] | TypeName | string
 	): boolean {
-		const sourceType: string = typeof source !== 'string' ? source.type : source;
+		const sourceType = typeof source !== 'string' ? source.type : source;
 		// @ts-ignore
-		const targetTyping: string[] | string = target.getTypes?.() || target.types || target;
+		const targetTyping = target.getTypes?.() || target.types || target;
 		if (Array.isArray(targetTyping)) {
 			for (const type of targetTyping) {
 				if (!this.getImmunity(sourceType, type)) return false;
@@ -241,17 +243,17 @@ export class ModdedDex {
 			return true;
 		}
 		const typeData = this.types.get(targetTyping);
-		if (typeData && typeData.damageTaken[sourceType] === 3) return false;
+		if (typeData?.damageTaken[sourceType] === 3) return false;
 		return true;
 	}
 
 	getEffectiveness(
-		source: {type: string} | string,
-		target: {getTypes: () => string[]} | {types: string[]} | string[] | string
+		source: {type: TypeName} | TypeName,
+		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | TypeName
 	): number {
-		const sourceType: string = typeof source !== 'string' ? source.type : source;
+		const sourceType = typeof source !== 'string' ? source.type : source;
 		// @ts-ignore
-		const targetTyping: string[] | string = target.getTypes?.() || target.types || target;
+		const targetTyping = target.getTypes?.() || target.types || target;
 		let totalTypeMod = 0;
 		if (Array.isArray(targetTyping)) {
 			for (const type of targetTyping) {
@@ -429,7 +431,7 @@ export class ModdedDex {
 				throw new TypeError(`${filePath}, if it exists, must export an object whose '${dataType}' property is an Object`);
 			}
 			return dataObject[dataType];
-		} catch (e) {
+		} catch (e: any) {
 			if (e.code !== 'MODULE_NOT_FOUND' && e.code !== 'ENOENT') {
 				throw e;
 			}

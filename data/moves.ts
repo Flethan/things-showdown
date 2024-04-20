@@ -95,7 +95,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onDisableMove(pokemon) {
 				if (pokemon.hasItem('cowboyhat')) return;
 				for (const moveSlot of pokemon.moveSlots) {
-					if (this.dex.moves.get(moveSlot.id).isNonstandard === "ThingInf") {
+					if (this.dex.moves.get(moveSlot.id).isNonstandard === "ThingSymbol") {
 						pokemon.disableMove(moveSlot.id);
 					}
 				}
@@ -103,7 +103,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			onBeforeMovePriority: 6,
 			onBeforeMove(pokemon, target, move) {
 				if (pokemon.hasItem('cowboyhat')) return;
-				if (move.isNonstandard === "ThingInf") {
+				if (move.isNonstandard === "ThingSymbol") {
 					this.add('cant', pokemon, 'move: Empty Space', move);
 					return false;
 				}
@@ -1282,7 +1282,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 50,
 		category: "Physical",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Vish Attack",
 		pp: 3,
 		priority: -6,
@@ -1924,7 +1924,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 70,
 		category: "Physical",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Hand Down Judgement",
 		pp: 3,
 		noPPBoosts: true,
@@ -3266,7 +3266,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Empyrean Spring",
 		pp: 3,
 		noPPBoosts: true,
@@ -3924,7 +3924,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 100,
 		basePower: 75,
 		category: "Special",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Leitmotif",
 		pp: 3,
 		noPPBoosts: true,
@@ -4056,7 +4056,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 110,
 		basePower: 50,
 		category: "Special",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Stellar Omen",
 		pp: 3,
 		noPPBoosts: true,
@@ -4205,18 +4205,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 				target.addVolatile('trapped');
 				break;
 			case ('Gemini'):
-				const possibleTypes = [];
-				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
-				for (const type of this.dex.types.names()) {
-					if (skippedTypes.includes(type)) continue;
-					possibleTypes.push(type);
-				}
-				if (!possibleTypes.length) return false;
-				while (possibleTypes.length > 2) {
-					possibleTypes.splice(Math.floor(Math.random() * possibleTypes.length), 1);
-				}
-				this.add('-start', target, 'typechange', possibleTypes.join('/'), '[from] move: Stellar Omen');
-				target.setType(possibleTypes);
+				const possibleTypes = [...this.dex.types.namesThings()];
+				this.prng.shuffle(possibleTypes);
+				const types = possibleTypes.slice(0, 2);
+				if (target.setType(types)) this.add('-start', target, 'typechange', possibleTypes.join('/'), '[from] move: Stellar Omen');
 				target.setStatus('fluctuant');
 				break;
 			case ('Cancer'):
@@ -4871,7 +4863,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		basePower: 90,
 		category: "Special",
 		name: "Notices your stuff",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		pp: 3,
 		noPPBoosts: true,
 		priority: 0,
@@ -5065,7 +5057,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 				for (const id in Moves) {
 					const move = Moves[id];
 					if (move.realMove) continue;
-					if (move.isZ || move.isMax || move.isNonstandard !== 'ThingInf') continue;
+					if (move.isZ || move.isMax || move.isNonstandard !== 'ThingSymbol') continue;
 					if (effect.noMetronome!.includes(move.name) || move.noMetronome?.length) continue;
 					moves.push(move);
 				}
@@ -5322,7 +5314,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		num: 284,
 		accuracy: true,
 		basePower: 500,
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		category: "Special",
 		name: "Launch a Nuclear Warhead",
 		pp: 1,
@@ -6344,7 +6336,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "My Man",
 		pp: 3,
 		noPPBoosts: true,
@@ -7054,7 +7046,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Out Hot Eat",
 		pp: 3,
 		noPPBoosts: true,
@@ -7087,7 +7079,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Crystallize",
 		pp: 3,
 		noPPBoosts: true,
@@ -7783,6 +7775,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				}
 				this.effectState.passedBoosts = boosts;
 			},
+			onSwitchOut(target) {
+				// TODO
+			},
 			onSwap(target) {
 				if (!target.fainted && this.effectState.success) {
 					this.add('-activate', target, 'move: Wind Dispersal', target);
@@ -8003,7 +7998,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Ascend",
 		pp: 3,
 		noPPBoosts: true,
@@ -8468,7 +8463,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		accuracy: 10,
 		basePower: 100,
 		category: "Special",
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "True Sight",
 		pp: 3,
 		noPPBoosts: true,
@@ -11977,7 +11972,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {snatch: 1},
 		onHit(target) {
-			let newType = 'Normal';
+			let newType: TypeNamePokemon = 'Normal';
 			if (this.field.isTerrain('electricterrain')) {
 				newType = 'Electric';
 			} else if (this.field.isTerrain('grassyterrain')) {
@@ -12481,9 +12476,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!target.lastMoveUsed) {
 				return false;
 			}
-			const possibleTypes = [];
+			const possibleTypes: TypeNamePokemon[] = [];
 			const attackType = target.lastMoveUsed.type;
-			for (const type of this.dex.types.names()) {
+			for (const type of this.dex.types.namesPokemon()) {
 				if (source.hasType(type)) continue;
 				const typeCheck = this.dex.types.get(type).damageTaken[attackType];
 				if (typeCheck === 2 || typeCheck === 3) {

@@ -14,7 +14,7 @@ export interface SpeciesData extends Partial<Species> {
 	/** National Dex number */
 	num: number;
 
-	types: string[];
+	types: TypeName[];
 	abilities: SpeciesAbility;
 	baseStats: StatsTable;
 	eggGroups: string[];
@@ -126,11 +126,11 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	/** Abilities. */
 	readonly abilities: SpeciesAbility;
 	/** Types. */
-	readonly types: string[];
+	readonly types: TypeName[];
 	/** Added type (added by Trick-Or-Treat or Forest's Curse or Infinite formes, but only listed in species by OMs). */
-	readonly addedType?: string;
+	readonly addedType?: TypeName;
 	/** Element type (added by Element formes). */
-	readonly elementTypes?: string[];
+	readonly elementTypes?: TypeName[];
 	/** Pre-evolution. '' if nothing evolves into this Pokemon. */
 	readonly prevo: string;
 	/** Evolutions. Array because many Pokemon have multiple evolutions. */

@@ -46,6 +46,7 @@ export class BattleActions {
 		Time: "Max Relativity",
 		Weather: "Max Storm",
 		Yellow: "Max Yellow",
+		Gold: "Max Gold",
 		Infinity: "Absolute Max",
 	};
 
@@ -88,6 +89,7 @@ export class BattleActions {
 		Time: "Zero Hour Ending",
 		Weather: "Emperor's Gambit",
 		Yellow: "Yellow Z-Zap",
+		Gold: "Auraeteous Smite",
 		Infinity: "Infinity Cyclez",
 	};
 

@@ -204,7 +204,7 @@ export class TypeInfo implements Readonly<TypeData> {
 	 */
 	readonly id: ID;
 	/** Name. e.g. 'Flying' */
-	readonly name: string;
+	readonly name: TypeName;
 	/** Effect type. */
 	readonly effectType: TypeInfoEffectType;
 	/**
@@ -258,7 +258,9 @@ export class DexTypes {
 	readonly dex: ModdedDex;
 	readonly typeCache = new Map<ID, TypeInfo>();
 	allCache: readonly TypeInfo[] | null = null;
-	namesCache: readonly string[] | null = null;
+	namesCachePokemon: readonly TypeNamePokemon[] | null = null;
+	namesCacheThings: readonly TypeNameThings[] | null = null;
+	namesCacheSymbol: readonly TypeNameSymbol[] | null = null;
 
 	constructor(dex: ModdedDex) {
 		this.dex = dex;
@@ -284,12 +286,28 @@ export class DexTypes {
 		return type;
 	}
 
-	names(): readonly string[] {
-		if (this.namesCache) return this.namesCache;
+	namesPokemon() {
+		if (this.namesCachePokemon) return this.namesCachePokemon;
 
-		this.namesCache = this.all().filter(type => !type.isNonstandard).map(type => type.name);
+		this.namesCachePokemon = this.all().filter(type => !type.isNonstandard).map(type => type.name as TypeNamePokemon);
 
-		return this.namesCache;
+		return this.namesCachePokemon;
+	}
+
+	namesThings() {
+		if (this.namesCacheThings) return this.namesCacheThings;
+
+		this.namesCacheThings = this.all().filter(type => type.isNonstandard === "Thing").map(type => type.name as TypeNameThings);
+
+		return this.namesCacheThings;
+	}
+
+	namesSymbol() {
+		if (this.namesCacheSymbol) return this.namesCacheSymbol;
+
+		this.namesCacheSymbol = this.all().filter(type => type.isNonstandard === "ThingSymbol").map(type => type.name as TypeNameSymbol);
+
+		return this.namesCacheSymbol;
 	}
 
 	isName(name: string): boolean {

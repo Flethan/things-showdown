@@ -29,7 +29,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	empty: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	triangl3: {
@@ -46,7 +46,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	l3mniscangl: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	meltipillar: {
@@ -264,7 +264,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	hwimsical: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	nighreto: {
@@ -280,7 +280,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	reuleado: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	swordguy: {
@@ -288,7 +288,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	guysword: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	hmug: {
@@ -333,7 +333,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	tortesecrate: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	florle: {
@@ -345,7 +345,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	pristudine: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	despacio: {
@@ -565,7 +565,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	babellinks: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	sodike: {
@@ -745,19 +745,19 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	celiorship: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	fiish: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	adjudicativebeehive: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	treefurthestaway: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	dabarrel: {
@@ -769,7 +769,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	dabarreldatrandem: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	dishwashersnake: {
@@ -789,7 +789,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	ofin: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	serpiternal: {
@@ -797,7 +797,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	serpixtinction: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	boxlegend: {
@@ -805,7 +805,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	planterlegend: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	exceller: {
@@ -813,39 +813,39 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	exallout: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	hubantula: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	handhorse: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	myomolem: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	sudzerial: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	yellomatter: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	yellomattersolid: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	yellomattergas: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	yellomatterplasma: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	stellet: {
@@ -861,55 +861,55 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	oraxeed: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedaquarius: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedaries: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedcancer: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedcapricorn: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedgemini: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedleo: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedlibra: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedpisces: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedsagittarius: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedscorpio: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedtaurus: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	oraxeedvirgo: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	shooey: {
@@ -937,7 +937,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	hattabel: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	arok: {
@@ -949,23 +949,23 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	omnomnectivore: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	besuetecerca: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	ichthronaut: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	gli7: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	syrupwnuclearwarhead: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	cyam: {
@@ -985,7 +985,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	restant: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	bettiers: {
@@ -1025,43 +1025,43 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	partyrok: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaete: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetegreen: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetenull: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetesoil: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetesong: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetespring: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	corechaetesuds: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	sylphonie: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	sylphoniephysical: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	piano: {
@@ -1089,15 +1089,15 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	solularity: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	soliath: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	mtmug: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	cautiontapefish: {
@@ -1105,7 +1105,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	wetoneselfhoo: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	respirit: {
@@ -1117,7 +1117,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	queexit: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	creature: {
@@ -1137,7 +1137,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	mechawashyrm: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	bouncer: {
@@ -1161,15 +1161,15 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	lupdog: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	generex: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	owo: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	moniturn: {
@@ -1357,7 +1357,7 @@ export const FormatsData: {[k: string]: SpeciesFormatsData} = {
 		tier: "Thing",
 	},
 	vish: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		tier: "Thing",
 	},
 	medicedes: {

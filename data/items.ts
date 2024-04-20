@@ -705,8 +705,7 @@ export const Items: {[itemid: string]: ItemData} = {
 			healPercent: 15,
 		},
 		onStart(pokemon) {
-			pokemon.addType('Yellow');
-			this.add('-start', pokemon, 'typeadd', 'Yellow', '[from] item: Yellow Shirt');
+			if (pokemon.addType('Yellow')) this.add('-start', pokemon, 'typeadd', pokemon.addedType, '[from] item: Yellow Shirt');
 		},
 		onResidual(pokemon) {
 			if (pokemon.addedType !== 'Yellow') {
@@ -1620,6 +1619,18 @@ export const Items: {[itemid: string]: ItemData} = {
 		onTakeItem: false,
 		zMove: true,
 		zMoveType: "Infinity",
+		forcedForme: "Arceus-Water",
+		num: -219,
+		gen: 7,
+		isNonstandard: "Past",
+	},
+	goldiumz: {
+		name: "Goldium Z",
+		spritenum: 769,
+		onPlate: 'Water',
+		onTakeItem: false,
+		zMove: true,
+		zMoveType: "Gold",
 		forcedForme: "Arceus-Water",
 		num: -219,
 		gen: 7,

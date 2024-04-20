@@ -57,7 +57,7 @@ export class Pokemon {
 	readonly gigantamax: boolean;
 
 	/** Transform keeps the original pre-transformed Hidden Power in Gen 2-4. */
-	readonly baseHpType: string;
+	readonly baseHpType: TypeName;
 	readonly baseHpPower: number;
 
 	readonly baseMoveSlots: MoveSlot[];
@@ -65,7 +65,7 @@ export class Pokemon {
 
 	muPP: number;
 
-	hpType: string;
+	hpType: TypeName;
 	hpPower: number;
 
 	/**
@@ -137,9 +137,9 @@ export class Pokemon {
 	faintQueued: boolean;
 	subFainted: boolean | null;
 
-	types: string[];
-	addedType: string;
-	elementTypes: string[];
+	types: TypeName[];
+	addedType: TypeName | '';
+	elementTypes: TypeName[];
 	knownType: boolean;
 	/** Keeps track of what type the client sees for this Pokemon. */
 	apparentType: string;
@@ -1535,13 +1535,13 @@ export class Pokemon {
 	 * Use formChange to handle changes to ability and sending client messages.
 	 */
 	setSpecies(rawSpecies: Species, source: Effect | null = this.battle.effect, isTransform = false) {
-		const species = this.battle.runEvent('ModifySpecies', this, null, source, rawSpecies);
+		const species: Species = this.battle.runEvent('ModifySpecies', this, null, source, rawSpecies);
 		if (!species) return null;
 		this.species = species;
 
 		this.setType(species.types, true);
 		this.apparentType = rawSpecies.types.join('/');
-		species.elementTypes?.forEach((type: string) => this.addElementType(type));
+		species.elementTypes?.forEach((type) => this.addElementType(type));
 		if (species.addedType) this.addType(species.addedType, species.symbolForme === 'Infinity');
 		if (species.symbolForme === 'Null') {
 			this.addType('', true);
@@ -1700,7 +1700,7 @@ export class Pokemon {
 		this.setSpecies(this.baseSpecies);
 	}
 
-	hasType(type: string | string[], includeElement = false) {
+	hasType(type: TypeName | TypeName[], includeElement = false) {
 		const thisTypes = this.getTypes(false, includeElement);
 		if (typeof type === 'string') {
 			return thisTypes.includes(type);
@@ -2217,7 +2217,7 @@ export class Pokemon {
 	 * newType can be an array, but this is for OMs only. The game in
 	 * reality doesn't support setting a type to more than one type.
 	 */
-	setType(newType: string | string[], enforce = false) {
+	setType(newType: TypeName | TypeName[] | '', enforce = false) {
 		// First type of Arceus, Silvally cannot be normally changed
 		if (!enforce) {
 			if (this.species.symbolForme === 'Null') return false;
@@ -2238,21 +2238,22 @@ export class Pokemon {
 	}
 
 	/** Removes any types added previously and adds another one. Infinity and Null formes supress type adding. */
-	addType(newType: string, enforce = false) {
+	addType(newType: TypeName | '', enforce = false) {
 		if (!enforce && (this.species.symbolForme === 'Infinity' || this.species.symbolForme === 'Null')) return false;
+		if (newType === 'Yellow' && this.hasAbility('Gold')) newType = 'Gold';
 		this.addedType = newType;
 		return true;
 	}
 
 	/** Adds a new element type. False if they already have it. Null formes supress element type adding. */
-	addElementType(elementType: string, enforce = false) {
+	addElementType(elementType: TypeName, enforce = false) {
 		if (!enforce && this.species.forme === 'Null') return false;
 		if (this.elementTypes.includes(elementType)) return false;
 		this.elementTypes.push(elementType);
 		return true;
 	}
 
-	removeElementType(elementType: string) {
+	removeElementType(elementType: TypeName) {
 		this.elementTypes = this.elementTypes.filter(type => type !== elementType);
 		return true;
 	}
@@ -2262,7 +2263,7 @@ export class Pokemon {
 		return true;
 	}
 
-	getTypes(excludeAdded?: boolean, includeElement?: boolean): string[] {
+	getTypes(excludeAdded?: boolean, includeElement?: boolean): TypeName[] {
 		const types = [...this.battle.runEvent('Type', this, null, null, this.types)];
 		if (!excludeAdded && this.addedType && (this.effectiveTerrain() !== 'emptyspace')) types.push(this.addedType);
 		if (includeElement && this.elementTypes.length && (this.effectiveTerrain() !== 'emptyspace')) types.push(...this.elementTypes);

@@ -76,7 +76,7 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 	 * Z Move this crystal allows the use of (e.g. Fire)
 	 * undefined, if not a generic Z crystal
 	 */
-	readonly zMoveType?: string;
+	readonly zMoveType?: TypeName;
 	/**
 	 * If this is a species-specific Z crystal: The name
 	 * (e.g. Play Rough) of the move this crystal requires its
@@ -96,7 +96,7 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 	/** Whether or not this item ignores the Klutz ability. */
 	readonly ignoreKlutz: boolean;
 	/** The type the holder will change into if it is an Arceus. */
-	readonly onPlate?: string;
+	readonly onPlate?: TypeNamePokemon;
 	/** Is this item a Gem? */
 	readonly isGem: boolean;
 	/** Is this item a Pokeball? */
@@ -105,7 +105,7 @@ export class Item extends BasicEffect implements Readonly<BasicEffect> {
 	declare readonly condition?: ConditionData;
 	declare readonly forcedForme?: string;
 	declare readonly isChoice?: boolean;
-	declare readonly naturalGift?: {basePower: number, type: string};
+	declare readonly naturalGift?: {basePower: number, type: TypeName};
 	declare readonly spritenum?: number;
 	declare readonly boosts?: SparseBoostsTable | false;
 

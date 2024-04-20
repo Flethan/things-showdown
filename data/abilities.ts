@@ -72,7 +72,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 500,
 	},
 	servantofthesun: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onModifyAtkPriority: 5,
 		onModifyAtk(atk, pokemon) {
 			if (['yellowish'].includes(pokemon.effectiveWeather())) {
@@ -127,7 +127,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 501,
 	},
 	reallybigsword: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onDisableMove(pokemon) {
 			for (const moveSlot of pokemon.moveSlots) {
 				const move = this.dex.moves.get(moveSlot.id);
@@ -242,7 +242,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 505,
 	},
 	omega: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(pokemon) {
 			pokemon.addVolatile('ocount1');
 			this.add('-start', pokemon, 'ability: Omega');
@@ -294,10 +294,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		onAfterMoveSecondary(target, source, move) {
 			if (!target.hp || !target.isActive || move.effectType !== 'Move' || move.category === 'Status' || move.type === 'Infinity' || move.type === '???') return;
 			if (target.runEffectiveness(move) > 0) {
-				const possibleTypes = [];
-				const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water', 'Infinity'];
-				for (const type of this.dex.types.names()) {
-					if (skippedTypes.includes(type)) continue;
+				const possibleTypes: TypeNameThings[] = [];
+				for (const type of this.dex.types.namesThings()) {
 					const typeCheck = this.dex.types.get(type).damageTaken[move.type];
 					if (typeCheck === 0 || typeCheck === 2 || typeCheck === 3) possibleTypes.push(type);
 				}
@@ -333,7 +331,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -508,
 	},
 	red: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidualOrder: 4,
 		onResidualSubOrder: 2,
 		onResidual(pokemon) {
@@ -584,7 +582,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -1000,
 	},
 	oven: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onModifyCritRatio(critRatio, source, target) {
 			if (target.getHeight() <= 7 && target.getAbility().id !== 'colossal') {
 				this.debug('ovenable');
@@ -944,7 +942,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -133,
 	},
 	flicker: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidualPriority: 99,
 		onStart(source) {
 			if (this.field.getWeather().id === 'refractingquintessence' && this.field.weatherState.duration !== 0) {
@@ -959,14 +957,11 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onResidual(target, source, effect) {
 			if (this.field.getWeather().id !== 'refractingquintessence') return;
-			const possibleTypes = [];
-			const skippedTypes = ['Bug', 'Dark', 'Dragon', 'Electric', 'Fairy', 'Fighting', 'Fire', 'Flying', 'Ghost', 'Grass', 'Ground', 'Ice', 'Normal', 'Poison', 'Psychic', 'Rock', 'Steel', 'Water'];
-			for (const type of this.dex.types.names()) {
-				if (skippedTypes.includes(type)) continue;
+			const possibleTypes: TypeNameThings[] = [];
+			for (const type of this.dex.types.namesThings()) {
 				possibleTypes.push(type);
 			}
-			const typeNum = this.random(possibleTypes.length);
-			const newType = possibleTypes.splice(typeNum, 1)[0];
+			const newType = this.sample(possibleTypes);
 			for (const thing of this.getAllActive()) {
 				if (thing.setType(newType)) this.add('-start', thing, 'typechange', newType, '[from] ability: Flicker');
 			}
@@ -1647,7 +1642,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf') || ability.name === 'a81117y') continue;
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingSymbol') || ability.name === 'a81117y') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
@@ -1666,12 +1661,12 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 1223,
 	},
 	b92228z: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(target) {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if (ability.isNonstandard !== 'ThingInf' || ability.name === 'B92228z') continue;
+				if (ability.isNonstandard !== 'ThingSymbol' || ability.name === 'B92228z') continue;
 				abilities.push(ability);
 			}
 			let randomAbility = '';
@@ -2070,8 +2065,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 				source.side.addSideCondition(this.sample(sideconditions));
 				break;
 			case 3:
-				const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
-				const type = this.sample(typePool);
+				const type = this.sample(this.dex.types.namesThings());
 				source.addType(type);
 				this.add('-start', source, 'typeadd', type);
 				break;
@@ -2411,7 +2405,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 2,
 	},
 	disaster: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(pokemon) {
 			for (const foe of pokemon.foes()) {
 				if (!foe?.isActive || foe === pokemon) continue;
@@ -2436,7 +2430,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 2111,
 	},
 	vindictive: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Vindictive",
 		onStart(pokemon) {
 			if (pokemon.hp <= pokemon.maxhp / 4) {
@@ -2447,7 +2441,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 139,
 	},
 	unify: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Unify",
 		onAfterMega(source) {
 			let count = 0;
@@ -2568,7 +2562,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 252,
 	},
 	allseeing: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAnyInvulnerabilityPriority: 1,
 		onAnyInvulnerability(target, source, move) {
 			if (move && (source === this.effectState.target)) return 0;
@@ -2584,7 +2578,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 252,
 	},
 	beeretribution: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(pokemon) {
 			const atkBoost = pokemon.boosts.atk;
 			if (atkBoost < 1) return;
@@ -2599,7 +2593,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 252,
 	},
 	furthestaway: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(source) {
 			this.add('-activate', source, 'ability: Furthest Away');
 			for (const thing of this.getAllActive()) {
@@ -2623,7 +2617,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -128,
 	},
 	double: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onPrepareHit(source, target, move) {
 			if (move.category === 'Status' || move.selfdestruct || move.multihit) return;
 			if (['endeavor', 'fling', 'iceball', 'rollout'].includes(move.id)) return;
@@ -2647,7 +2641,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 185,
 	},
 	omnicide: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onModifyDamage(damage, source, target, move) {
 			if (move && target.getMoveHitData(move).typeMod <= 0) {
 				return this.chainModify(2);
@@ -2676,7 +2670,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 185,
 	},
 	composting: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidual(pokemon) {
 			pokemon.alliesAndSelf().forEach(
 				pkmn => {
@@ -2707,7 +2701,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 3,
 	},
 	magictouch: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onSourceHit(target, source, move) {
 			if (!move) return;
 			if (!move.flags['contact']) return;
@@ -2730,7 +2724,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 1132,
 	},
 	waterbringer: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(source) {
 			this.field.setTerrain('sudscape');
 			this.field.setWeather('windy');
@@ -2740,7 +2734,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 1229,
 	},
 	phaseshift: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidual(pokemon) {
 			const energy = pokemon.getEnergyValue();
 
@@ -2832,7 +2826,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 1229,
 	},
 	unamenable: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onSetStatus(status, target, source, effect) {
 			this.debug('interrupting setStatus');
 			this.add('-activate', target, 'ability: Unamenable');
@@ -3026,7 +3020,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 69,
 	},
 	escalation: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(pokemon) {
 			const boost: SparseBoostsTable = {};
 			let statPlus: BoostID;
@@ -3048,7 +3042,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -122,
 	},
 	doomfuldescent: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Doomful Descent",
 		onStart(source) {
 			for (const foe of source.foes()) {
@@ -3086,7 +3080,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -122,
 	},
 	escapevelocity: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(pokemon) {
 			if (pokemon.boosts.spe < 2) { this.actions.useMove('crashlanding', pokemon); } else {
 				pokemon.setStatus('distanced');
@@ -3118,7 +3112,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -196,
 	},
 	weaponoflastresort: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onModifyCritRatio(critRatio, source, target, move) {
 			if (move.pp === 1 && move.id !== 'shoot') return 5;
 		},
@@ -3170,7 +3164,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -196,
 	},
 	respite: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidual() {
 			const env = this.field.weatherState;
 			const land = this.field.terrainState;
@@ -3344,7 +3338,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 154,
 	},
 	partyrockis: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(source) {
 			this.field.setTerrain('invitingsurroundings', null, null, false, true);
 			this.field.setWeather('friendlyatmosphere', null, null, false, true);
@@ -3390,7 +3384,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 154,
 	},
 	xenoform: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Xenoform",
 		onStart(source) {
 			// console.log(source.baseSpecies.baseSpecies);
@@ -3449,7 +3443,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -122,
 	},
 	overture: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(pokemon) {
 			this.field.setTerrain('mysticalsong');
 			const type = this.dex.moves.get(pokemon.moveSlots[0].id).type;
@@ -3509,7 +3503,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('-ability', pokemon, 'Environmental Blessing');
 			this.blessedEnv = true;
 			if (this.field.weather) {
-				let newType;
+				let newType: TypeNameThings | '' = '';
 				switch (this.field.weather) {
 				case 'locustswarm':
 					newType = 'Arthropod';
@@ -3611,7 +3605,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			this.add('-ability', pokemon, 'Landscape Blessing');
 			this.blessedLand = true;
 			if (this.field.terrain) {
-				let newType;
+				let newType: TypeNameThings | '' = '';
 				switch (this.field.terrain) {
 				case 'richsoil':
 					newType = 'Dirt';
@@ -3703,7 +3697,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -111,
 	},
 	cataclysm: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		name: "Cataclysm",
 		onStart(source) {
 			if (this.field.getWeather().id === 'meteorshower' && this.field.weatherState.duration !== 0) {
@@ -3729,7 +3723,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -122,
 	},
 	eventhorizon: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onFoeRedirectTargetPriority: 1,
 		onFoeRedirectTarget(target, source, source2, move) {
 			if (!this.effectState.target.isSkyDropped() && this.validTarget(this.effectState.target, source, move.target)) {
@@ -3744,7 +3738,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -111,
 	},
 	closingtime: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAnyTryHeal(damage, target, source, effect) {
 			if ((effect?.id === 'zpower') || this.effectState.isZ) return damage;
 			this.add('-activate', this.effectState.target, 'ability: Closing Time');
@@ -3755,7 +3749,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -111,
 	},
 	conservationarea: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onModifyMovePriority: 10,
 		onAllyModifyMove(move) {
 			move.stab = 2;
@@ -3787,7 +3781,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 91,
 	},
 	clearcut: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onSourceDamagingHit(damage, target, source) {
 			if (target.types[0] !== '???') {
 				const types = target.types;
@@ -3872,7 +3866,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 143,
 	},
 	makeamess: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onAfterMega(pokemon) {
 			this.add('-activate', pokemon, 'ability: Make a Mess');
 			for (const side of pokemon.side.foeSidesWithConditions()) {
@@ -3941,7 +3935,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	thehelveticascenario: {
 		onResidualOrder: 28,
 		onResidualSubOrder: 2,
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(source) {
 			this.add('-activate', source, 'ability: The Helvetica Scenario');
 			for (const thing of this.getAllActive()) {
@@ -4123,7 +4117,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 90,
 	},
 	whatsup: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onStart(pokemon) {
 			pokemon.addVolatile('updog', pokemon);
 		},
@@ -4133,7 +4127,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 90,
 	},
 	windturbine: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onBeforeMovePriority: 9,
 		onBeforeMove(pokemon) {
 			if (!this.field.isWeather('windy')) {
@@ -4182,7 +4176,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 504,
 	},
 	whatsthis: {
-		isNonstandard: "ThingInf",
+		isNonstandard: "ThingSymbol",
 		onResidual(pokemon) {
 			if (pokemon.item) { this.actions.useMove('consume', pokemon); }
 		},
@@ -4380,7 +4374,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			const abilities: AbilityData[] = [];
 			for (const id in Abilities) {
 				const ability = Abilities[id];
-				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingInf') ||
+				if ((ability.isNonstandard !== 'Thing' && ability.isNonstandard !== 'ThingSymbol') ||
 					!/^[hH]/.test(ability.name) ||
 					ability.name === 'H_') continue;
 				abilities.push(ability);
@@ -4830,8 +4824,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: -111,
 	},
 	abyssalplain: {
-		isNonstandard: "ThingInf",
-		onStart(source) {
+		isNonstandard: "ThingSymbol",
+		onAfterMega(source) {
 			this.field.setWeather('underwater');
 			this.field.addPseudoWeather('hadalzone', source);
 		},
@@ -6933,7 +6927,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		condition: {
 			onStart(pokemon) {
-				let newType;
+				let newType: TypeName | '' = '';
 				switch (this.field.terrain) {
 				case 'electricterrain':
 					newType = 'Electric';

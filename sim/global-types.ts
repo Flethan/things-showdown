@@ -23,8 +23,10 @@ type ID = '' | string & {__isID: true};
 type PokemonSlot = '' | string & {__isSlot: true};
 interface AnyObject {[k: string]: any}
 
-type TypeNameCommon = 'Arthropod' | 'Dirt' | 'Far' | 'Fish' | 'Green' | 'H' | 'Hair' | 'Industrial' | 'Liquid' | 'Music' | 'Night' | 'No' | 'Science' | 'Sport' | 'Sword' | 'Temperature' | 'Time' | 'Weather' | 'Yellow';
-type TypeName = '???' | 'Infinity' | TypeNameCommon;
+type TypeNamePokemon = 'Normal' | 'Fire' | 'Water' | 'Grass' | 'Flying' | 'Fighting' | 'Poison' | 'Electric' | 'Ground' | 'Rock' | 'Psychic' | 'Ice' | 'Bug' | 'Ghost' | 'Steel' | 'Dragon' | 'Dark' | 'Fairy';
+type TypeNameThings = 'Arthropod' | 'Dirt' | 'Far' | 'Fish' | 'Green' | 'H' | 'Hair' | 'Industrial' | 'Liquid' | 'Music' | 'Night' | 'No' | 'Science' | 'Sport' | 'Sword' | 'Temperature' | 'Time' | 'Weather' | 'Yellow';
+type TypeNameSymbol = 'Infinity' | 'Gold';
+type TypeName = '???' | 'Bird' | TypeNamePokemon | TypeNameThings | TypeNameSymbol;
 type SongFlagString = keyof typeof import('./field').Field.SONG_FLAGS;
 
 type GenderName = 'M' | 'F' | 'N' | '';
@@ -36,7 +38,7 @@ type SparseStatsTable = Partial<StatsTable>;
 type BoostID = StatIDExceptHP | 'accuracy' | 'evasion';
 type BoostsTable = {[boost in BoostID]: number };
 type SparseBoostsTable = Partial<BoostsTable>;
-type Nonstandard = 'Past' | 'Future' | 'Unobtainable' | 'CAP' | 'LGPE' | 'Custom' | 'Gigantamax' | 'Thing' | 'ThingInf' | 'ThingGeneric' | 'ThingMeme';
+type Nonstandard = 'Past' | 'Future' | 'Unobtainable' | 'CAP' | 'LGPE' | 'Custom' | 'Gigantamax' | 'Thing' | 'ThingSymbol' | 'ThingGeneric' | 'ThingMeme';
 
 type PokemonSet = import('./teams').PokemonSet;
 
@@ -68,7 +70,7 @@ namespace TierTypes {
 	export type Singles = "AG" | "Uber" | "(Uber)" | "OU" | "(OU)" | "UUBL" | "UU" | "RUBL" | "RU" | "NUBL" | "NU" |
 	"(NU)" | "PUBL" | "PU" | "(PU)" | "NFE" | "LC";
 	export type Doubles = "DUber" | "(DUber)" | "DOU" | "(DOU)" | "DBL" | "DUU" | "(DUU)" | "NFE" | "LC";
-	export type Other = "Unreleased" | "Illegal" | "CAP" | "CAP NFE" | "CAP LC" | "Thing" | "ThingInf";
+	export type Other = "Unreleased" | "Illegal" | "CAP" | "CAP NFE" | "CAP LC" | "Thing" | "ThingSymbol";
 }
 
 interface EventInfo {
@@ -383,10 +385,11 @@ interface ModdedBattleScriptsData extends Partial<BattleScriptsData> {
 }
 
 interface TypeData {
-	damageTaken: {[attackingTypeNameOrEffectid: string]: number};
+	damageTaken: {[attackingTypeNameOrEffectid in TypeName | string]?: number};
 	HPdvs?: SparseStatsTable;
 	HPivs?: SparseStatsTable;
 	isNonstandard?: Nonstandard | null;
+	// isNonstandard?: k extends TypeNameThings ? Extract<Nonstandard, 'Thing'> : k extends TypeNameSymbol ? Extract<Nonstandard, 'ThingSymbol'> : Exclude<Nonstandard, 'Thing' | 'ThingSymbol'> | null;
 }
 
 type ModdedTypeData = TypeData | Partial<Omit<TypeData, 'name'>> & {inherit: true};
