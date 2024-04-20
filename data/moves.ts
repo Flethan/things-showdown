@@ -2449,7 +2449,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			duration: 1,
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				if (move.id === 'shoot') {
+				if (move?.id === 'shoot') {
 					return 200;
 				}
 			},
@@ -2478,7 +2478,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 			},
 			onModifyAtkPriority: -101,
 			onModifyAtk(atk, pokemon, defender, move) {
-				if (move.id === 'shoot') {
+				if (move?.id === 'shoot') {
 					return 200;
 				}
 			},
@@ -8056,9 +8056,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 		},
 		condition: {
 			duration: 1,
-			onModifyAtkPriority: -101,
-			onModifyAtk(atk, pokemon, defender, move) {
-				if (move.id === 'lightningstrike') {
+			onModifySpAPriority: -101,
+			onModifySpA(atk, pokemon, defender, move) {
+				if (move?.id === 'lightningstrike') {
 					return 200;
 				}
 			},
@@ -8085,9 +8085,9 @@ export const Moves: {[moveid: string]: MoveData} = {
 				this.add('-sidestart', side, 'move: Lightning Storm');
 				this.effectState.source = source;
 			},
-			onModifyAtkPriority: -101,
-			onModifyAtk(atk, pokemon, defender, move) {
-				if (move.id === 'lightningstrike') {
+			onModifySpAPriority: -101,
+			onModifySpA(atk, pokemon, defender, move) {
+				if (move?.id === 'lightningstrike') {
 					return 200;
 				}
 			},
