@@ -264,8 +264,10 @@ export class Field {
 		status = this.battle.dex.conditions.get(status);
 
 		// THINGS - respite check
-		for (const pokemon of this.battle?.getAllActive()) {
-			if (pokemon.hasAbility('respite')) return false;
+		if (this.battle.started) {
+			let respite = false;
+			this.battle.getAllActive().forEach(p => { if (p.hasAbility('respite')) respite = true; });
+			if (respite) return false;
 		}
 
 		let state = this.pseudoWeather[status.id];
