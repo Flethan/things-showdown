@@ -7158,6 +7158,27 @@ export const Learnsets: {[speciesid: string]: LearnsetData} = {
 			promote: ["8T"],
 		},
 	},
+	bandarite: {
+		learnset: {
+			emanation: ["8M"],
+			deposition: ["8M"],
+			hit: ["8M"],
+			hide: ["8M"],
+			stealthstrike: ["8L10"],
+			shootingstar: ["8L30"],
+			moonbeam: ["8L50"],
+			disorient: ["8L1"],
+			nightfall: ["8M"],
+			shadowmark: ["8L35"],
+			nightmode: ["8L50"],
+			pitchblack: ["8L60"],
+			borrow: ["8L4"],
+			whispersindarkness: ["8L68"],
+			noescape: ["8L55"],
+			voidtrap: ["8L24"],
+			dustcloud: ["8L56"],
+		},
+	},
 	// BASE GAME
 	missingno: {
 		learnset: {

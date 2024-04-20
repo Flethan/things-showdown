@@ -4862,7 +4862,6 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			// Infinite duration done in conditions.js#hot
 		},
 		onEnd(pokemon) {
-			// this is not right yet
 			let newWeathSource = false;
 			if (this.field.weatherState.source !== pokemon) return;
 			for (const target of this.getAllActive()) {
@@ -4888,6 +4887,35 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		name: "Infinite Nothing",
 		rating: 4.5,
 		num: 190,
+	},
+	mindthief: {
+		isNonstandard: "Thing",
+		onSourceHit(target, source, move) {
+			if (!move) return;
+			if (!move.flags['contact']) return;
+
+			const allMoves = target.getMoves();
+			const moveOptions = [];
+			for (const some_move of allMoves) {
+				if (some_move.pp && some_move.pp > 0) {
+					moveOptions.push(some_move);
+				}
+			}
+			if (!moveOptions.length) return false;
+			const chosenMove = this.sample(moveOptions);
+			if (!chosenMove) return false;
+
+			this.actions.useMove(chosenMove.id, source);
+
+			const moveSlotSource = source.moveSlots.find(theMove => theMove.id === move.id);
+			if (moveSlotSource) moveSlotSource.pp += 1;
+
+			const moveSlotTarget = target.moveSlots.find(theMove => theMove.id === move.id);
+			if (moveSlotTarget) moveSlotTarget.pp -= 1;
+		},
+		name: "Mind Thief",
+		rating: 4,
+		num: 1132,
 	},
 
 	// BASE GAME
