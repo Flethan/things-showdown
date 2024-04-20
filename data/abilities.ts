@@ -4825,7 +4825,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	abyssalplain: {
 		isNonstandard: "ThingSymbol",
-		onAfterMega(source) {
+		onStart(source) {
 			this.field.setWeather('underwater');
 			this.field.addPseudoWeather('hadalzone', source);
 		},
