@@ -4901,11 +4901,15 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 
 			this.actions.useMove(chosenMove.id, source);
 
-			const moveSlotSource = source.moveSlots.find(theMove => theMove.id === move.id);
+			const moveSlotSource = source.moveSlots.find(theMove => theMove.id === chosenMove.id);
 			if (moveSlotSource) moveSlotSource.pp += 1;
 
-			const moveSlotTarget = target.moveSlots.find(theMove => theMove.id === move.id);
+			const moveSlotTarget = target.moveSlots.find(theMove => theMove.id === chosenMove.id);
 			if (moveSlotTarget) moveSlotTarget.pp -= 1;
+
+			/* const ppDeducted = target.deductPP(move.id, 4);
+			if (!ppDeducted) return false;
+			this.add("-activate", target, 'move: Spite', move.name, ppDeducted); */
 		},
 		name: "Mind Thief",
 		rating: 4,
