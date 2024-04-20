@@ -174,13 +174,6 @@ export class BattleActions {
 		for (const moveSlot of pokemon.moveSlots) {
 			moveSlot.used = false;
 		}
-		const species = pokemon.species;
-		if (species.addedType) this.battle.add('-start', pokemon, 'typeadd', pokemon.addedType, '[silent]');
-		if (species.elementTypes?.length) this.battle.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
-		if (species.forme === 'Null') {
-			this.battle.add('-start', pokemon, 'typeadd', '', '[silent]');
-			this.battle.add('-start', pokemon, 'elementtypes', '', '[silent]');
-		}
 		this.battle.runEvent('BeforeSwitchIn', pokemon);
 		this.battle.add(isDrag ? 'drag' : 'switch', pokemon, pokemon.getDetails);
 		pokemon.abilityOrder = this.battle.abilityOrder++;
@@ -201,6 +194,13 @@ export class BattleActions {
 		this.battle.sides.filter(anySide => anySide !== side).forEach(foeSide => {
 			if (foeSide.studied.includes(pokemon.species.id)) pokemon.addVolatile('study');
 		});
+		const species = pokemon.species;
+		if (species.addedType) this.battle.add('-start', pokemon, 'typeadd', pokemon.addedType, '[silent]');
+		if (species.elementTypes?.length) this.battle.add('-start', pokemon, 'elementtypes', pokemon.elementTypes.join('/'), '[silent]');
+		if (species.forme === 'Null') {
+			this.battle.add('-start', pokemon, 'typeadd', '', '[silent]');
+			this.battle.add('-start', pokemon, 'elementtypes', '', '[silent]');
+		}
 
 		return true;
 	}
