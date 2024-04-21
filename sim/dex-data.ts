@@ -197,13 +197,8 @@ export class DexNatures {
 
 type TypeInfoEffectType = 'Type' | 'EffectType';
 
-export class TypeInfo implements Readonly<TypeData> {
-	/**
-	 * ID. This will be a lowercase version of the name with all the
-	 * non-alphanumeric characters removed. e.g. 'flying'
-	 */
-	readonly id: ID;
-	/** Name. e.g. 'Flying' */
+export class TypeInfo implements Readonly<TypeData<TypeName>> {
+	/** Name. e.g. 'Yellow' */
 	readonly name: TypeName;
 	/** Effect type. */
 	readonly effectType: TypeInfoEffectType;
@@ -225,10 +220,15 @@ export class TypeInfo implements Readonly<TypeData> {
 	 */
 	readonly isNonstandard: Nonstandard | null;
 	/**
-	 * Type chart, attackingTypeName:result, effectid:result
+	 * Type chart, attackingTypeName:result
 	 * result is: 0 = normal, 1 = weakness, 2 = resistance, 3 = immunity
 	 */
-	readonly damageTaken: {[attackingTypeNameOrEffectid: string]: number};
+	readonly damageTaken: {[attackingTypeName in TypeName]?: number};
+	/**
+	 * Type chart, effectid:result
+	 * result is: false = normal, true = immunity
+	 */
+	readonly statusImmunity: {[effectid: string]: boolean};
 	/** The IVs to get this Type Hidden Power (in gen 3 and later) */
 	readonly HPivs: SparseStatsTable;
 	/** The DVs to get this Type Hidden Power (in gen 2). */
@@ -239,12 +239,12 @@ export class TypeInfo implements Readonly<TypeData> {
 		Object.assign(this, data);
 
 		this.name = data.name;
-		this.id = data.id;
 		this.effectType = Utils.getString(data.effectType) as TypeInfoEffectType || 'Type';
-		this.exists = !!(this.exists && this.id);
+		this.exists = !!(this.exists && this.name);
 		this.gen = data.gen || 0;
 		this.isNonstandard = data.isNonstandard || null;
 		this.damageTaken = data.damageTaken || {};
+		this.statusImmunity = data.statusImmunity || {};
 		this.HPivs = data.HPivs || {};
 		this.HPdvs = data.HPdvs || {};
 	}
@@ -256,7 +256,7 @@ export class TypeInfo implements Readonly<TypeData> {
 
 export class DexTypes {
 	readonly dex: ModdedDex;
-	readonly typeCache = new Map<ID, TypeInfo>();
+	readonly typeCache = new Map<TypeName, TypeInfo>();
 	allCache: readonly TypeInfo[] | null = null;
 	namesCachePokemon: readonly TypeNamePokemon[] | null = null;
 	namesCacheThings: readonly TypeNameThings[] | null = null;
@@ -266,23 +266,17 @@ export class DexTypes {
 		this.dex = dex;
 	}
 
-	get(name: string | TypeInfo): TypeInfo {
-		if (name && typeof name !== 'string') return name;
-		return this.getByID(toID(name));
-	}
-
-	getByID(id: ID): TypeInfo {
-		let type = this.typeCache.get(id);
+	get(name: TypeName): TypeInfo {
+		let type = this.typeCache.get(name);
 		if (type) return type;
 
-		const typeName = id.charAt(0).toUpperCase() + id.substr(1);
-		if (typeName && this.dex.data.TypeChart.hasOwnProperty(id)) {
-			type = new TypeInfo({name: typeName, id, ...this.dex.data.TypeChart[id]});
+		if (this.dex.data.TypeChart.hasOwnProperty(name)) {
+			type = new TypeInfo({name, ...this.dex.data.TypeChart[name]});
 		} else {
-			type = new TypeInfo({name: typeName, id, exists: false, effectType: 'EffectType'});
+			throw new Error("Incomplete typechart for " + type);
 		}
 
-		if (type.exists) this.typeCache.set(id, type);
+		if (type.exists) this.typeCache.set(name, type);
 		return type;
 	}
 
@@ -310,17 +304,15 @@ export class DexTypes {
 		return this.namesCacheSymbol;
 	}
 
-	isName(name: string): boolean {
-		const id = name.toLowerCase();
-		const typeName = id.charAt(0).toUpperCase() + id.substr(1);
-		return name === typeName && this.dex.data.TypeChart.hasOwnProperty(id);
+	namesAll(): TypeName[] {
+		return this.all().map(type => type.name);
 	}
 
 	all(): readonly TypeInfo[] {
 		if (this.allCache) return this.allCache;
 		const types = [];
-		for (const id in this.dex.data.TypeChart) {
-			types.push(this.getByID(id as ID));
+		for (const name in this.dex.data.TypeChart) {
+			types.push(this.get(name as TypeName));
 		}
 		this.allCache = types;
 		return this.allCache;

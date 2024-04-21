@@ -1,9 +1,4 @@
-export const TypeChart: {[k in TypeName]: TypeData & {
-	isNonstandard?: k extends TypeNameThings ? Extract<Nonstandard, 'Thing'>
-	: k extends TypeNameSymbol ? Extract<Nonstandard, 'ThingSymbol'>
-	: Exclude<Nonstandard, 'Thing' | 'ThingSymbol'>
-	| null,
-}} = {
+export const TypeChart: {[k in TypeName]: TypeData<TypeName>} = {
 	Bug: {
 		damageTaken: {
 			Bug: 0,
@@ -50,7 +45,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Dark: {
 		damageTaken: {
-			prankster: 3,
 			Bug: 1,
 			Dark: 2,
 			Dragon: 0,
@@ -89,6 +83,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			prankster: true,
 		},
 		HPivs: {},
 	},
@@ -138,7 +135,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Electric: {
 		damageTaken: {
-			par: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -177,6 +173,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			par: true,
 		},
 		HPivs: {spa: 30},
 		HPdvs: {atk: 14},
@@ -269,7 +268,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Fire: {
 		damageTaken: {
-			brn: 3,
 			Bug: 2,
 			Dark: 0,
 			Dragon: 0,
@@ -308,6 +306,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			brn: true,
 		},
 		HPivs: {atk: 30, spa: 30, spe: 30},
 		HPdvs: {atk: 14, def: 12},
@@ -358,7 +359,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Ghost: {
 		damageTaken: {
-			trapped: 3,
 			Bug: 2,
 			Dark: 1,
 			Dragon: 0,
@@ -398,12 +398,14 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 0,
 			Infinity: 1,
 		},
+		statusImmunity: {
+			trapped: true,
+		},
 		HPivs: {def: 30, spd: 30},
 		HPdvs: {atk: 13, def: 14},
 	},
 	Grass: {
 		damageTaken: {
-			powder: 3,
 			Bug: 1,
 			Dark: 0,
 			Dragon: 0,
@@ -443,12 +445,14 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 0,
 			Infinity: 1,
 		},
+		statusImmunity: {
+			powder: true,
+		},
 		HPivs: {atk: 30, spa: 30},
 		HPdvs: {atk: 14, def: 14},
 	},
 	Ground: {
 		damageTaken: {
-			sandstorm: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -488,13 +492,14 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 0,
 			Infinity: 1,
 		},
+		statusImmunity: {
+			sandstorm: true,
+		},
 		HPivs: {spa: 30, spd: 30},
 		HPdvs: {atk: 12},
 	},
 	Ice: {
 		damageTaken: {
-			hail: 3,
-			frz: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -533,6 +538,10 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			hail: true,
+			frz: true,
 		},
 		HPivs: {atk: 30, def: 30},
 		HPdvs: {def: 13},
@@ -581,8 +590,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Poison: {
 		damageTaken: {
-			psn: 3,
-			tox: 3,
 			Bug: 2,
 			Dark: 0,
 			Dragon: 0,
@@ -621,6 +628,10 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			psn: true,
+			tox: true,
 		},
 		HPivs: {def: 30, spa: 30, spd: 30},
 		HPdvs: {atk: 12, def: 14},
@@ -671,7 +682,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Rock: {
 		damageTaken: {
-			sandstorm: 3,
 			Bug: 0,
 			Dark: 0,
 			Dragon: 0,
@@ -711,14 +721,14 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 0,
 			Infinity: 1,
 		},
+		statusImmunity: {
+			sandstorm: true,
+		},
 		HPivs: {def: 30, spd: 30, spe: 30},
 		HPdvs: {atk: 13, def: 12},
 	},
 	Steel: {
 		damageTaken: {
-			psn: 3,
-			tox: 3,
-			sandstorm: 3,
 			Bug: 2,
 			Dark: 0,
 			Dragon: 2,
@@ -757,6 +767,11 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Weather: 0,
 			Yellow: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			psn: true,
+			tox: true,
+			sandstorm: true,
 		},
 		HPivs: {spd: 30},
 		HPdvs: {atk: 13},
@@ -850,7 +865,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Arthropod: {
 		damageTaken: {
-			locustswarm: 3,
 			Arthropod: 0,
 			Dirt: 2,
 			Far: 0,
@@ -872,6 +886,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 0,
 			Gold: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			locustswarm: true,
 		},
 		isNonstandard: "Thing",
 	},
@@ -929,7 +946,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Fish: {
 		damageTaken: {
-			underwater: 3,
 			Arthropod: 2,
 			Dirt: 0,
 			Far: 0,
@@ -951,6 +967,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 2,
 			Gold: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			underwater: true,
 		},
 		isNonstandard: "Thing",
 	},
@@ -1060,7 +1079,6 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 	},
 	Liquid: {
 		damageTaken: {
-			underwater: 3,
 			Arthropod: 2,
 			Dirt: 2,
 			Far: 0,
@@ -1082,6 +1100,9 @@ export const TypeChart: {[k in TypeName]: TypeData & {
 			Yellow: 2,
 			Gold: 0,
 			Infinity: 1,
+		},
+		statusImmunity: {
+			underwater: true,
 		},
 		isNonstandard: "Thing",
 	},

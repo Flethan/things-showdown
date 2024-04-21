@@ -384,15 +384,16 @@ interface ModdedBattleScriptsData extends Partial<BattleScriptsData> {
 	tiebreak?: (this: Battle) => boolean;
 }
 
-interface TypeData {
-	damageTaken: {[attackingTypeNameOrEffectid in TypeName | string]?: number};
+interface TypeData<T> {
+	damageTaken: {[attackingTypeName in TypeName]?: number};
+	statusImmunity?: {[effectid: string]: boolean};
 	HPdvs?: SparseStatsTable;
 	HPivs?: SparseStatsTable;
-	isNonstandard?: Nonstandard | null;
-	// isNonstandard?: k extends TypeNameThings ? Extract<Nonstandard, 'Thing'> : k extends TypeNameSymbol ? Extract<Nonstandard, 'ThingSymbol'> : Exclude<Nonstandard, 'Thing' | 'ThingSymbol'> | null;
+	// isNonstandard?: Nonstandard | null;
+	isNonstandard?: T extends TypeNameThings ? Extract<Nonstandard, 'Thing'> : T extends TypeNameSymbol ? Extract<Nonstandard, 'ThingSymbol'> : Exclude<Nonstandard, 'Thing' | 'ThingSymbol'> | null;
 }
 
-type ModdedTypeData = TypeData | Partial<Omit<TypeData, 'name'>> & {inherit: true};
+// type ModdedTypeData = TypeData | Partial<Omit<TypeData, 'name'>> & {inherit: true};
 
 type TypeInfo = import('./dex-data').TypeInfo;
 

@@ -69,11 +69,8 @@ const DATA_FILES = {
 	TypeChart: 'typechart',
 };
 
-interface DexTable<T> {
-	[key: string]: T;
-}
-
-type TypeTable<T> = DexTable<T> & { [key in TypeName]: T };
+interface DexTable<T> { [key: string]: T }
+type KeyedDexTable<T, S extends string> = { [key in S]: T };
 
 interface DexTableData {
 	Abilities: DexTable<AbilityData>;
@@ -87,7 +84,7 @@ interface DexTableData {
 	Pokedex: DexTable<SpeciesData>;
 	Scripts: DexTable<AnyObject>;
 	Conditions: DexTable<EffectData>;
-	TypeChart: TypeTable<TypeData>;
+	TypeChart: KeyedDexTable<TypeData<TypeName>, TypeName>;
 }
 interface TextTableData {
 	Abilities: DexTable<AbilityText>;
@@ -179,7 +176,9 @@ export class ModdedDex {
 		return dexes[mod || BASE_MOD].includeData();
 	}
 
-	modData(dataType: DataType, id: string) {
+	modData<T extends 'TypeChart', I extends TypeName>(dataType: 'TypeChart', type: TypeName): DexTableData[T][I];
+	modData<T extends Exclude<DataType, 'TypeChart'>, I extends string>(dataType: Exclude<DataType, 'TypeChart'>, id: string): DexTableData[T][I];
+	modData<T extends DataType, I extends string & TypeName>(dataType: T, id: I): DexTableData[T][I] {
 		if (this.isBase) return this.data[dataType][id];
 		if (this.data[dataType][id] !== dexes[this.parentMod].data[dataType][id]) return this.data[dataType][id];
 		return (this.data[dataType][id] = Utils.deepClone(this.data[dataType][id]));
@@ -226,24 +225,36 @@ export class ModdedDex {
 	}
 
 	/**
-	 * Returns false if the target is immune; true otherwise.
-	 * Also checks immunity to some statuses.
+	 * Types only. Returns false if the target is immune; true otherwise.
 	 */
 	getImmunity(
-		source: {type: TypeName} | TypeName | string,
-		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | string[] | TypeName | string
+		source: {type: TypeName} | TypeName,
+		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | TypeName
 	): boolean {
 		const sourceType = typeof source !== 'string' ? source.type : source;
-		// @ts-ignore
-		const targetTyping = target.getTypes?.() || target.types || target;
-		if (Array.isArray(targetTyping)) {
-			for (const type of targetTyping) {
-				if (!this.getImmunity(sourceType, type)) return false;
-			}
-			return true;
+		const targetTyping: TypeName[] = target.hasOwnProperty('getTypes') ? (target as {getTypes: () => TypeName[]})['getTypes']() :
+									   target.hasOwnProperty('types') ? (target as {types: TypeName[]})['types'] :
+									   [...target as TypeName[] | TypeName] as TypeName[];
+		for (const type of targetTyping) {
+			const typeData = this.types.get(type);
+			if (typeData?.damageTaken[sourceType] === 3) return false;
 		}
-		const typeData = this.types.get(targetTyping);
-		if (typeData?.damageTaken[sourceType] === 3) return false;
+		return true;
+	}
+	/**
+	 * For effects. Returns false if the target is immune; true otherwise.
+	 */
+	getStatusImmunity(
+		effectid: string,
+		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | TypeName
+	): boolean {
+		const targetTyping: TypeName[] = target.hasOwnProperty('getTypes') ? (target as {getTypes: () => TypeName[]})['getTypes']() :
+									   target.hasOwnProperty('types') ? (target as {types: TypeName[]})['types'] :
+									   [...target as TypeName[] | TypeName] as TypeName[];
+		for (const type of targetTyping) {
+			const typeData = this.types.get(type);
+			if (typeData?.statusImmunity[effectid] === true) return false;
+		}
 		return true;
 	}
 
