@@ -690,7 +690,7 @@ export class BattleActions {
 	hitStepTryImmunity(targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) {
 		const hitResults = [];
 		for (const [i, target] of targets.entries()) {
-			if (this.battle.gen >= 6 && move.flags['powder'] && target !== pokemon && !this.dex.getImmunity('powder', target)) {
+			if (this.battle.gen >= 6 && move.flags['powder'] && target !== pokemon && !this.dex.getStatusImmunity('powder', target)) {
 				this.battle.debug('natural powder immunity');
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
@@ -698,7 +698,7 @@ export class BattleActions {
 				this.battle.add('-immune', target);
 				hitResults[i] = false;
 			} else if (this.battle.gen >= 7 && move.pranksterBoosted && pokemon.hasAbility('prankster') &&
-				!targets[i].isAlly(pokemon) && !this.dex.getImmunity('prankster', target)) {
+				!targets[i].isAlly(pokemon) && !this.dex.getStatusImmunity('prankster', target)) {
 				this.battle.debug('natural prankster immunity');
 				if (!target.illusion) this.battle.hint("Since gen 7, Dark is immune to Prankster moves.");
 				this.battle.add('-immune', target);

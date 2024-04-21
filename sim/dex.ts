@@ -328,7 +328,7 @@ export class ModdedDex {
 	}
 
 	getHiddenPower(ivs: AnyObject) {
-		const hpTypes = [
+		const hpTypes: TypeNamePokemon[] = [
 			'Fighting', 'Flying', 'Poison', 'Ground', 'Rock', 'Bug', 'Ghost', 'Steel',
 			'Fire', 'Water', 'Grass', 'Electric', 'Psychic', 'Ice', 'Dragon', 'Dark',
 		];

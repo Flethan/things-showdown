@@ -479,10 +479,10 @@ export class TeamValidator {
 		}
 		if (set.hpType) {
 			const type = dex.types.get(set.hpType);
-			if (!type.exists || ['normal', 'fairy'].includes(type.id)) {
+			if (!type.exists || ['Normal', 'Fairy'].includes(type.name)) {
 				problems.push(`${name}'s Hidden Power type (${set.hpType}) is invalid.`);
 			} else {
-				set.hpType = type.name;
+				set.hpType = type.name as TypeNamePokemon;
 			}
 		}
 
@@ -786,7 +786,7 @@ export class TeamValidator {
 			const move = dex.moves.get(moveName);
 			if (move.id === 'hiddenpower' && move.type !== 'Normal') {
 				if (!set.hpType) {
-					set.hpType = move.type;
+					set.hpType = move.type as TypeNamePokemon;
 				} else if (set.hpType !== move.type && ruleTable.has('obtainablemisc')) {
 					problems.push(`${name}'s Hidden Power type ${set.hpType} is incompatible with Hidden Power ${move.type}`);
 				}

@@ -450,13 +450,12 @@ export const Rulesets: {[k: string]: FormatData} = {
 		name: 'Force Monotype',
 		hasValue: true,
 		onValidateRule(value) {
-			if (!this.dex.types.get(value).exists) throw new Error(`Misspelled type "${value}"`);
-			if (!this.dex.types.isName(value)) throw new Error(`Incorrectly capitalized type "${value}"`);
+			if (!this.dex.types.get(value as TypeName)?.exists) throw new Error(`Misspelled type "${value}"`);
 		},
 		onValidateSet(set) {
 			const species = this.dex.species.get(set.species);
 			const type = this.ruleTable.valueRules.get('forcemonotype')!;
-			if (!species.types.includes(type)) {
+			if (!species.types.includes(type as TypeName)) {
 				return [`${set.species} must have type ${type}`];
 			}
 		},
@@ -744,7 +743,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 				if (!hasOrbeetle && species.name === "Orbeetle-Gmax") hasOrbeetle = true;
 				for (const moveid of set.moves) {
 					const move = this.dex.moves.get(moveid);
-					if (move.status && move.status === 'slp' && move.accuracy < 100) hasSleepMove = true;
+					if (move.status && move.status === 'slp' && typeof move.accuracy === 'number' && move.accuracy < 100) hasSleepMove = true;
 				}
 			}
 			if (hasOrbeetle && hasSleepMove) {

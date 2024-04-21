@@ -97,7 +97,7 @@ export interface PokemonSet {
 	 * Hidden Power type. Optional in older gens, but used in Gen 7+
 	 * because `ivs` contain post-Battle-Cap values.
 	 */
-	hpType?: string;
+	hpType?: TypeNamePokemon;
 	gigantamax?: boolean;
 }
 
@@ -309,7 +309,7 @@ export const Teams = new class Teams {
 			}
 			if (misc) {
 				set.happiness = (misc[0] ? Number(misc[0]) : 255);
-				set.hpType = misc[1] || '';
+				set.hpType = misc[1] as TypeNamePokemon || '';
 				set.pokeball = this.unpackName(misc[2] || '', Dex.items);
 				set.gigantamax = !!misc[3];
 			}
@@ -464,7 +464,7 @@ export const Teams = new class Teams {
 			set.pokeball = line;
 		} else if (line.startsWith('Hidden Power: ')) {
 			line = line.slice(14);
-			set.hpType = line;
+			set.hpType = line as TypeNamePokemon;
 		} else if (line === 'Gigantamax: Yes') {
 			set.gigantamax = true;
 		} else if (line.startsWith('EVs: ')) {
@@ -499,9 +499,9 @@ export const Teams = new class Teams {
 		} else if (line.startsWith('-') || line.startsWith('~')) {
 			line = line.slice(line.charAt(1) === ' ' ? 2 : 1);
 			if (line.startsWith('Hidden Power [')) {
-				const hpType = line.slice(14, -1);
+				const hpType = line.slice(14, -1) as TypeNamePokemon;
 				line = 'Hidden Power ' + hpType;
-				if (!set.ivs && Dex.types.isName(hpType)) {
+				if (!set.ivs && Dex.types.get(hpType)) {
 					set.ivs = {hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31};
 					const hpIVs = Dex.types.get(hpType).HPivs || {};
 					for (const statid in hpIVs) {

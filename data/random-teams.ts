@@ -94,7 +94,7 @@ export class RandomTeams {
 	prng: PRNG;
 	noStab: string[];
 	readonly maxTeamSize: number;
-	readonly forceMonotype: string | undefined;
+	readonly forceMonotype: TypeName | undefined;
 
 	/**
 	 * Checkers for move enforcement based on a Pokémon's types or other factors
@@ -313,8 +313,7 @@ export class RandomTeams {
 		// For Monotype NOTE: NotFlethan has hacked in the type pool to exclude the not new types.
 		const ruleTable = this.dex.formats.getRuleTable(this.format);
 		const isMonotype = ruleTable.has('sametypeclause');
-		const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
-		const type = isMonotype ? this.sample(typePool) : this.forceMonotype;
+		const type = isMonotype ? this.sample(this.dex.types.namesThings()) : this.forceMonotype;
 		const visOnly = ruleTable.has('visibleonly');
 
 		const randomN = this.randomNThings(this.maxTeamSize, type, visOnly);
@@ -455,7 +454,7 @@ export class RandomTeams {
 		return team;
 	}
 
-	randomNThings(n: number, requiredType?: string, visOnly?: boolean, minSourceGen?: number) {
+	randomNThings(n: number, requiredType?: TypeName, visOnly?: boolean, minSourceGen?: number) {
 		// Pick `n` random things--no repeats, even among formes
 		// Also need to either normalize for formes or select formes at random
 		const last = -600;
@@ -644,8 +643,7 @@ export class RandomTeams {
 
 		// For Monotype
 		const isMonotype = !!this.forceMonotype || ruleTable.has('sametypeclause');
-		const typePool = ['Arthropod', 'Dirt', 'Far', 'Fish', 'Green', 'H', 'Hair', 'Industrial', 'Liquid', 'Music', 'Night', 'No', 'Science', 'Sport', 'Sword', 'Temperature', 'Time', 'Weather', 'Yellow'];
-		const type = this.forceMonotype || this.sample(typePool);
+		const type = this.forceMonotype || this.sample(this.dex.types.namesThings());
 
 		// PotD stuff
 		// const usePotD = global.Config && Config.potd && ruleTable.has('potd');
@@ -811,7 +809,7 @@ export class RandomTeams {
 	}
 
 	getThingPool(
-		type: string,
+		type: TypeName,
 		pokemonToExclude: RandomTeamsTypes.RandomSet[] = [],
 		isMonotype = false,
 	) {
@@ -1475,7 +1473,7 @@ export class RandomTeams {
 		return team;
 	}
 
-	randomNPokemon(n: number, requiredType?: string, minSourceGen?: number) {
+	randomNPokemon(n: number, requiredType?: TypeName, minSourceGen?: number) {
 		// Picks `n` random pokemon--no repeats, even among formes
 		// Also need to either normalize for formes or select formes at random
 		// Unreleased are okay but no CAP
@@ -1643,7 +1641,7 @@ export class RandomTeams {
 
 	queryMoves(
 		moves: Set<string> | null,
-		types: string[],
+		types: TypeName[],
 		abilities: Set<string> = new Set(),
 		movePool: string[] = []
 	): MoveCounter {
