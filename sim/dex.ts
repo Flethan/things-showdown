@@ -69,8 +69,7 @@ const DATA_FILES = {
 	TypeChart: 'typechart',
 };
 
-interface DexTable<T> { [key: string]: T }
-type KeyedDexTable<T, S extends string> = { [key in S]: T };
+type DexTable<T, S extends string = string> = Record<S, T>;
 
 interface DexTableData {
 	Abilities: DexTable<AbilityData>;
@@ -84,7 +83,7 @@ interface DexTableData {
 	Pokedex: DexTable<SpeciesData>;
 	Scripts: DexTable<AnyObject>;
 	Conditions: DexTable<EffectData>;
-	TypeChart: KeyedDexTable<TypeData<TypeName>, TypeName>;
+	TypeChart: DexTable<TypeData<TypeName>, TypeName>;
 }
 interface TextTableData {
 	Abilities: DexTable<AbilityText>;
@@ -176,8 +175,8 @@ export class ModdedDex {
 		return dexes[mod || BASE_MOD].includeData();
 	}
 
-	modData<T extends 'TypeChart', I extends TypeName>(dataType: 'TypeChart', type: TypeName): DexTableData[T][I];
-	modData<T extends Exclude<DataType, 'TypeChart'>, I extends string>(dataType: Exclude<DataType, 'TypeChart'>, id: string): DexTableData[T][I];
+	modData<T extends 'TypeChart', I extends TypeName>(dataType: T, type: I): DexTableData[T][I];
+	modData<T extends Exclude<DataType, 'TypeChart'>, I extends string>(dataType: T, id: I): DexTableData[T][I];
 	modData<T extends DataType, I extends string & TypeName>(dataType: T, id: I): DexTableData[T][I] {
 		if (this.isBase) return this.data[dataType][id];
 		if (this.data[dataType][id] !== dexes[this.parentMod].data[dataType][id]) return this.data[dataType][id];
@@ -295,7 +294,7 @@ export class ModdedDex {
 			desc: '',
 			shortDesc: '',
 		};
-		for (let i = this.gen; i < dexes['base'].gen; i++) {
+		for (let i = this.gen as IntRange<1, 7>; i < dexes['base'].gen; i++) {
 			const curDesc = entry[`gen${i}`]?.desc;
 			const curShortDesc = entry[`gen${i}`]?.shortDesc;
 			if (!descs.desc && curDesc) {
@@ -418,7 +417,7 @@ export class ModdedDex {
 			for (const j in searchObj) {
 				const ld = Utils.levenshtein(cmpTarget, j, maxLd);
 				if (ld <= maxLd) {
-					const word = searchObj[j].name || searchObj[j].species || j;
+					const word = searchObj[j as keyof typeof searchObj].name || searchObj[j as keyof typeof searchObj].species || j;
 					const results = this.dataSearch(word, searchIn, word);
 					if (results) {
 						searchResults = results;

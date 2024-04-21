@@ -1,4 +1,4 @@
-export const TypeChart: {[k in TypeName]: TypeData<TypeName>} = {
+export const TypeChart: Record<TypeName, TypeData<TypeName>> = {
 	Bug: {
 		damageTaken: {
 			Bug: 0,

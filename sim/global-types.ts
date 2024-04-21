@@ -4,6 +4,12 @@ type Mutable<T> = {
 	-readonly [P in keyof T]: T[P];
 };
 
+type Enumerate<N extends number, Acc extends number[] = []> = Acc['length'] extends N
+	? Acc[number]
+	: Enumerate<N, [...Acc, Acc['length']]>;
+
+type IntRange<F extends number, T extends number> = Exclude<Enumerate<T>, Enumerate<F>>;
+
 type Battle = import('./battle').Battle;
 type BattleQueue = import('./battle-queue').BattleQueue;
 type BattleActions = import('./battle-actions').BattleActions;
@@ -389,7 +395,6 @@ interface TypeData<T> {
 	statusImmunity?: {[effectid: string]: boolean};
 	HPdvs?: SparseStatsTable;
 	HPivs?: SparseStatsTable;
-	// isNonstandard?: Nonstandard | null;
 	isNonstandard?: T extends TypeNameThings ? Extract<Nonstandard, 'Thing'> : T extends TypeNameSymbol ? Extract<Nonstandard, 'ThingSymbol'> : Exclude<Nonstandard, 'Thing' | 'ThingSymbol'> | null;
 }
 
