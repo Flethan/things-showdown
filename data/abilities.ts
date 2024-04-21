@@ -7346,7 +7346,7 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		},
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
-			if (move.flags['powder'] && target !== source && this.dex.getImmunity('powder', target)) {
+			if (move.flags['powder'] && target !== source && this.dex.getStatusImmunity('powder', target)) {
 				this.add('-immune', target, '[from] ability: Overcoat');
 				return null;
 			}
