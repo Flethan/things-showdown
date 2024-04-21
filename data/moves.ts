@@ -7805,12 +7805,10 @@ export const Moves: {[moveid: string]: MoveData} = {
 			if (!hurricanewatch) return;
 			const basePowers = [40, 70, 90, 110, 140];
 			move.magnitude = this.field.pseudoWeather['hurricanewatch'].category || 1;
-			console.log(move.magnitude);
 			move.basePower = basePowers[move.magnitude! - 1];
 		},
 		onUseMoveMessage(pokemon, target, move) {
 			this.add('-activate', pokemon, 'move: Hurricane Winds', move.magnitude);
-			console.log("use" + move.magnitude);
 		},
 		secondary: null,
 		target: "allAdjacent",
@@ -22144,7 +22142,7 @@ export const Moves: {[moveid: string]: MoveData} = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1},
 		onTryImmunity(target) {
-			return this.dex.getImmunity('trapped', target);
+			return this.dex.getStatusImmunity('trapped', target);
 		},
 		volatileStatus: 'octolock',
 		condition: {
