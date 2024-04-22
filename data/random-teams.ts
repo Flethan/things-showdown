@@ -111,7 +111,7 @@ export class RandomTeams {
 
 		const ruleTable = Dex.formats.getRuleTable(format);
 		this.maxTeamSize = ruleTable.maxTeamSize;
-		this.forceMonotype = ruleTable.valueRules.get('forcemonotype');
+		this.forceMonotype = ruleTable.valueRules.get('forcemonotype') as TypeName | undefined;
 
 		this.factoryTier = '';
 		this.format = format;
@@ -3079,7 +3079,7 @@ export class RandomTeams {
 	}
 
 	getPokemonPool(
-		type: string,
+		type: TypeName,
 		pokemonToExclude: RandomTeamsTypes.RandomSet[] = [],
 		isMonotype = false,
 	) {
@@ -3107,7 +3107,7 @@ export class RandomTeams {
 
 		// For Monotype
 		const isMonotype = !!this.forceMonotype || ruleTable.has('sametypeclause');
-		const typePool = this.dex.types.names();
+		const typePool = this.dex.types.namesAll();
 		const type = this.forceMonotype || this.sample(typePool);
 
 		// PotD stuff
@@ -3488,7 +3488,7 @@ export class RandomTeams {
 				}
 			}
 
-			for (const typeName of this.dex.types.names()) {
+			for (const typeName of this.dex.types.namesAll()) {
 				// Cover any major weakness (3+) with at least one resistance
 				if (teamData.resistances[typeName] >= 1) continue;
 				if (resistanceAbilities[abilityState.id]?.includes(typeName) || !this.dex.getImmunity(typeName, types)) {

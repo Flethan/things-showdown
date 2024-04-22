@@ -1029,7 +1029,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 			this.add('rule', 'Same Type Clause: Pokémon in a team must share a type');
 		},
 		onValidateTeam(team) {
-			let typeTable: string[] = [];
+			let typeTable: TypeName[] = [];
 			for (const [i, set] of team.entries()) {
 				let species = this.dex.species.get(set.species);
 				if (!species.types) return [`Invalid pokemon ${set.name || set.species}`];
@@ -1659,7 +1659,7 @@ export const Rulesets: {[k: string]: FormatData} = {
 			if (!target) return; // Chat command
 			if (effect && ['imposter', 'transform'].includes(effect.id)) return;
 			const typesSet = new Set(species.types);
-			const bonusType = this.dex.types.get(target.set.name);
+			const bonusType = this.dex.types.get(target.set.name as TypeName);
 			if (bonusType.exists) typesSet.add(bonusType.name);
 			return {...species, types: [...typesSet]};
 		},
