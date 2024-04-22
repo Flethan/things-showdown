@@ -262,23 +262,16 @@ export class ModdedDex {
 		target: {getTypes: () => TypeName[]} | {types: TypeName[]} | TypeName[] | TypeName
 	): number {
 		const sourceType = typeof source !== 'string' ? source.type : source;
-		// @ts-ignore
-		const targetTyping = target.getTypes?.() || target.types || target;
+		const targetTyping: TypeName[] = target.hasOwnProperty('getTypes') ? (target as {getTypes: () => TypeName[]})['getTypes']() :
+									   target.hasOwnProperty('types') ? (target as {types: TypeName[]})['types'] :
+									   [...target as TypeName[] | TypeName] as TypeName[];
 		let totalTypeMod = 0;
-		if (Array.isArray(targetTyping)) {
-			for (const type of targetTyping) {
-				totalTypeMod += this.getEffectiveness(sourceType, type);
-			}
-			return totalTypeMod;
+		for (const type of targetTyping) {
+			const typeData = this.types.get(type);
+			if (typeData.damageTaken[sourceType] === 1) totalTypeMod++;
+			else if (typeData.damageTaken[sourceType] === 2) totalTypeMod--;
 		}
-		const typeData = this.types.get(targetTyping);
-		if (!typeData) return 0;
-		switch (typeData.damageTaken[sourceType]) {
-		case 1: return 1; // super-effective
-		case 2: return -1; // resist
-		// in case of weird situations like Gravity, immunity is handled elsewhere
-		default: return 0;
-		}
+		return totalTypeMod;
 	}
 
 	getDescs(table: keyof TextTableData, id: ID, dataEntry: AnyObject) {
