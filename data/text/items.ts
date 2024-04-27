@@ -112,9 +112,9 @@ export const ItemsText: {[k: string]: ItemText} = {
 		name: "Pressure Capsule",
 		desc: "Holder is not affected by effects caused by pressurized.",
 	},
-	prngmachine: {
-		name: "pRNG Machine",
-		desc: "Holder raises twice as many stats when fluctuant.",
+	entropyhacker: {
+		name: "Entropy Hacker",
+		desc: "Swaps the number of raised and lowered stats when the holder's stats fluctuate. Fluctuant doesn't cure over time.",
 	},
 	knife: {
 		name: "Knife",

@@ -1231,7 +1231,7 @@ export class RandomTeams {
 			if (ability !== 'Low-Lying') potentialItems.push('Non-Slip Shoes');
 			if (ability !== 'Omnipresent') potentialItems.push('Dimensional Tether');
 			if (ability !== 'High Pressure') potentialItems.push('Pressure Capsule');
-			potentialItems.push('pRNG Machine');
+			potentialItems.push('Entropy Hacker');
 			potentialItems.push('Blindfold');
 		}
 		if (moves.has('summonlocusts') || moves.has('nightfall') || moves.has('heatup') || moves.has('cooldown') ||

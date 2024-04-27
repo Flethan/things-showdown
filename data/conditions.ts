@@ -420,47 +420,30 @@ export const Conditions: {[k: string]: ConditionData} = {
 		onResidual(pokemon) {
 			this.add('-activate', pokemon, 'fluctuant');
 
-			const loops = this.field.isWeather(['hot', 'cold']) ? 2 : 1;
-			const posLoops = pokemon.hasItem('pRNG Machine') ? 2 : 1;
-			const negLoops = 2;
+			let posStats = 1;
+			let negStats = 2;
+			if (pokemon.hasItem('Entropy Hacker')) [posStats, negStats] = [negStats, posStats];
 
-			let stats: BoostID[] = [];
-			let boost: SparseBoostsTable = {};
-			let statPlus: BoostID;
-			for (statPlus in pokemon.boosts) {
-				if (statPlus === 'accuracy' || statPlus === 'evasion') continue;
-				if (pokemon.boosts[statPlus] < 6) {
-					stats.push(statPlus);
-				}
+			const boosts: BoostID[] = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion'];
+			const alreadyBoosted: BoostID[] = [];
+			const boost: SparseBoostsTable = {};
+			for (let i = 0; i < (negStats); i++) {
+				const possibleBoosts = boosts.filter(b => !(alreadyBoosted.includes(b) || pokemon.boosts[b] <= -6));
+				if (!possibleBoosts) break;
+				const stage = this.sample(possibleBoosts);
+				alreadyBoosted.push(stage);
+				boost[stage] = pokemon.effectiveWeather() === 'cold' ? -2 : -1;
 			}
-			for (let i = 0; i < (loops * posLoops); i++) {
-				if (!stats.length) break;
-				const rand = Math.floor(Math.random() * stats.length);
-				const randomStat: BoostID = stats[rand];
-				stats.splice(rand, 1);
-				if (randomStat) boost[randomStat] = 1;
+			for (let i = 0; i < (posStats); i++) {
+				const possibleBoosts = boosts.filter(b => !(alreadyBoosted.includes(b) || pokemon.boosts[b] >= 6));
+				if (!possibleBoosts) break;
+				const stage = this.sample(possibleBoosts);
+				alreadyBoosted.push(stage);
+				boost[stage] = pokemon.effectiveWeather() === 'hot' ? 2 : 1;
 			}
 			this.boost(boost);
 
-			stats = [];
-			boost = {};
-			let statMinus: BoostID;
-			for (statMinus in pokemon.boosts) {
-				if (statMinus === 'accuracy' || statMinus === 'evasion') continue;
-				if (pokemon.boosts[statMinus] > -6) {
-					stats.push(statMinus);
-				}
-			}
-			for (let i = 0; i < (loops * negLoops); i++) {
-				if (!stats.length) break;
-				const rand = Math.floor(Math.random() * stats.length);
-				const randomStat: BoostID = stats[rand];
-				stats.splice(rand, 1);
-				if (randomStat) boost[randomStat] = -1;
-			}
-			this.boost(boost);
-
-			if (!pokemon.hasItem('pRNG Machine')) pokemon.statusState.time--;
+			if (!pokemon.hasItem('Entropy Hacker')) pokemon.statusState.time--;
 			if (pokemon.statusState.time <= 0) {
 				pokemon.cureStatus();
 				return;

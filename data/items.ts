@@ -491,9 +491,10 @@ export const Items: {[itemid: string]: ItemData} = {
 		gen: 8,
 		isNonstandard: "Thing",
 	},
-	prngmachine: {
-		name: "pRNG Machine",
+	entropyhacker: {
+		name: "Entropy Hacker",
 		spritenum: 797,
+		// Effect done in conditions.js
 		fling: {
 			basePower: 90,
 		},
